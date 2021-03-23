@@ -1,5 +1,4 @@
-﻿using System;
-namespace Nitric.Sdk.v1.Exception
+﻿namespace Nitric.Api.Common
 {
     //Exception raised when the requested operation isn't supported by the server.
     public class UnimplementedException : System.Exception

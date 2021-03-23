@@ -16,4 +16,9 @@
     <ProjectReference Include="..\Nitric.Proto\Nitric.Proto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Storage\" />
+    <Folder Include="Kv\" />
+    <Folder Include="Faas\" />
+  </ItemGroup>
 </Project>
