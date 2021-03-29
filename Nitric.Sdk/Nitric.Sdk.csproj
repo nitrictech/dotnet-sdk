@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,5 +20,6 @@
     <Folder Include="Storage\" />
     <Folder Include="Kv\" />
     <Folder Include="Faas\" />
+    <Folder Include="Http\" />
   </ItemGroup>
 </Project>

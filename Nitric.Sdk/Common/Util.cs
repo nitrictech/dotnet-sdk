@@ -2,18 +2,21 @@
 using Struct = Google.Protobuf.WellKnownTypes.Struct;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json;
+using Google.Protobuf;
 
 namespace Nitric.Api.Common
 {
     class Util
     {
-        public static Dictionary<string, string> MessageToDict()
+        /*public static Dictionary<string, string> MessageToDict()
         {
-        }
+
+        }*/
 
         public static Struct ObjectToStruct(Object obj)
         {
-            string json = JsonConvert.SerializeObject(obj);
+            string json = ObjToJson(obj);
             return JsonParser.Default.Parse<Struct>(json);
         }
 
@@ -21,6 +24,20 @@ namespace Nitric.Api.Common
         {
             var envVar = Environment.GetEnvironmentVariable(variable);
             return string.IsNullOrEmpty(envVar) ? defaultValue : envVar;
+        }
+
+        public static string ObjToJson(Object obj)
+        {
+            return JsonConvert.SerializeObject(obj);
+        }
+
+        public static Object JsonToObj(string json)
+        {
+            return JsonConvert.DeserializeObject(json);
+        }
+        public static Object JsonToObj(byte[] json)
+        {
+            return JsonConvert.DeserializeObject(json.ToString());
         }
     }
 }

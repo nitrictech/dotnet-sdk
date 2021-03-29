@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Grpc.Core;
+﻿using System.Collections.Generic;
 using Google.Protobuf.Collections;
-using NitricEvent = Nitric.Proto.Common.v1.NitricEvent;
+using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using ProtoClient = Nitric.Proto.Queue.v1.Queue.QueueClient;
 using Nitric.Proto.Queue.v1;
 using Nitric.Api.Common;
-//using CommonEvent = Nitric.Api.Common.Event;
 
 namespace Nitric.Api.Queue
 {
@@ -22,17 +19,17 @@ namespace Nitric.Api.Queue
 
         public PushResponse SendBatch(string queue, IList<Common.Event> events)
         {
-            RepeatedField<NitricEvent> wireEvents = new RepeatedField<NitricEvent>();
+            RepeatedField<NitricTask> wireEvents = new RepeatedField<NitricTask>();
             foreach(Common.Event se in events)
             {
                 wireEvents.Add(EventToWire(se));
             }
 
             var request = new QueueSendBatchRequest { Queue = queue };
-            request.Events.AddRange(wireEvents);
+            request.Tasks.AddRange(wireEvents);
             var response = client.SendBatch(request);
             List<FailedEvent> failedEvents = new List<FailedEvent>();
-            foreach(Proto.Queue.v1.FailedEvent fe in response.FailedEvents)
+            foreach(FailedTask fe in response.FailedTasks)
             {
                 failedEvents.Add(WireToFailedEvent(fe));
             }
@@ -48,44 +45,44 @@ namespace Nitric.Api.Queue
             var request = new QueueReceiveRequest { Queue = queue, Depth = depth };
             var response = this.client.Receive(request);
             List<QueueItem> items = new List<QueueItem>();
-            foreach (NitricQueueItem nqi in response.Items)
+            foreach (NitricTask nqi in response.Tasks)
             {
                 items.Add(WireToQueueItem(nqi));
             }
             return items;
         }
-        private QueueItem WireToQueueItem(NitricQueueItem nitricQueueItem)
+        private QueueItem WireToQueueItem(NitricTask nitricTask)
         {
             return new QueueItem(new Common.Event(
-                nitricQueueItem.Event.RequestId,
-                nitricQueueItem.Event.PayloadType,
-                nitricQueueItem.Event.Payload
-                ), nitricQueueItem.LeaseId
+                nitricTask.Id,
+                nitricTask.PayloadType,
+                nitricTask.Payload),
+                nitricTask.LeaseId
             );
         }
 
-        private NitricEvent EventToWire(Common.Event sdkEvent)
+        private NitricTask EventToWire(Common.Event sdkEvent)
         {
-            return new NitricEvent {
-                RequestId = sdkEvent.RequestId,
+            return new NitricTask {
+                Id = sdkEvent.RequestId,
                 PayloadType = sdkEvent.PayloadType,
                 Payload = sdkEvent.PayloadStruct
             };
         }
 
-        private FailedEvent WireToFailedEvent(Proto.Queue.v1.FailedEvent protoFailedEvent)
+        private FailedEvent WireToFailedEvent(FailedTask protoFailedEvent)
         {
             return new FailedEvent(new Common.Event(
-                protoFailedEvent.Event.RequestId,
-                protoFailedEvent.Event.PayloadType,
-                protoFailedEvent.Event.Payload
+                protoFailedEvent.Task.Id,
+                protoFailedEvent.Task.PayloadType,
+                protoFailedEvent.Task.Payload
                 ), protoFailedEvent.Message
             );
         }
-        private Common.Event WireToEvent(NitricEvent nitricEvent)
+        private Common.Event WireToEvent(NitricTask nitricEvent)
         {
             return new Common.Event(
-                nitricEvent.RequestId,
+                nitricEvent.Id,
                 nitricEvent.PayloadType,
                 nitricEvent.Payload
             );
