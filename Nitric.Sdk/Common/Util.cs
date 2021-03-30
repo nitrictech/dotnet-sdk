@@ -2,8 +2,9 @@
 using Struct = Google.Protobuf.WellKnownTypes.Struct;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Newtonsoft.Json;
 using Google.Protobuf;
+using System.Collections.Specialized;
+using System.Linq;
 
 namespace Nitric.Api.Common
 {
@@ -38,6 +39,15 @@ namespace Nitric.Api.Common
         public static Object JsonToObj(byte[] json)
         {
             return JsonConvert.DeserializeObject(json.ToString());
+        }
+        public static Dictionary<string, List<string>> NameValueCollecToDict(NameValueCollection col)
+        {
+            Dictionary<string,List<string>> dict = new Dictionary<string, List<string>>();
+            foreach (var k in col.AllKeys)
+            {
+                dict.Add(k, col[k].Split(',').ToList());
+            }
+            return dict;
         }
     }
 }

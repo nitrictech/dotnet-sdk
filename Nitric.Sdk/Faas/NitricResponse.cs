@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Collections.Generic;
-using Nitric.Api.Common;
-using System.Web;
 using System.Text;
 using System.Linq;
 
@@ -12,9 +10,9 @@ namespace Nitric.Api.Faas
     {
         private const string ContentType = "Content-Type";
 
-        public byte[] Body { get; private set; }
-        public HttpStatusCode Status { get; private set; }
-        public Dictionary<string, List<string>> Headers { get; private set; }
+        public readonly byte[] Body;
+        public readonly HttpStatusCode Status;
+        public readonly Dictionary<string, List<string>> Headers;
 
         // Public Methods ------------------------------------------------------------
 
@@ -26,21 +24,7 @@ namespace Nitric.Api.Faas
             Headers = headers; //TODO: Make immutable
             Body = body;
         }
-        /**
-         * Return the named response header or null if not found.
-         * If the header has multiple values the first value will be returned.
-         */
-        public string GetHeader(string name)
-        {
-            var values = Headers[name];
-            return (values != null) ? values[0] : null;
-        }
-        //Gets the body's length, if the body is empty returns -1
-        public int GetBodyLength()
-        {
-            return (Body != null) ? Body.Length : -1;
-        }
-        public string toString()
+        public override string ToString()
         {
             return GetType().Name +
                     "[status=" + Status.ToString() +
@@ -111,6 +95,17 @@ namespace Nitric.Api.Faas
             public Builder Headers(Dictionary<string, List<string>> headers)
             {
                 this.headers = headers;
+                return this;
+            }
+            //Overload that accepts a dictionary of just string, string
+            public Builder Headers(Dictionary<string, string> headers)
+            {
+                Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
+                foreach(KeyValuePair<string, string> entry in headers)
+                {
+                    dict.Add(entry.Key, entry.Value.Split(',').ToList());
+                }
+                this.headers = dict;
                 return this;
             }
 

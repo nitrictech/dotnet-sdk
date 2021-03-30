@@ -29,15 +29,15 @@ namespace Nitric.Api.Http
          */
         public string GetHeader(string name)
         {
-            var values = headers[name];
+            var values = Headers[name];
             return (values != null) ? values[0] : null;
         }
         //Gets the body's length, if the body is empty returns -1
         public int GetBodyLength()
         {
-            return (body != null) ? body.Length : -1;
+            return (Body != null) ? Body.Length : -1;
         }
-        public string toString()
+        public override string ToString()
         {
             return GetType().Name +
                     "[status=" + Status.ToString() +
@@ -49,15 +49,15 @@ namespace Nitric.Api.Http
         {
             return new Builder();
         }
-        public static NitricResponse Build(string body)
+        public static HttpResponse Build(string body)
         {
             return NewBuilder().BodyText(body).Build();
         }
-        public static NitricResponse Build(HttpStatusCode status)
+        public static HttpResponse Build(HttpStatusCode status)
         {
             return NewBuilder().Status(status).Build();
         }
-        public static NitricResponse Build(HttpStatusCode status, string body)
+        public static HttpResponse Build(HttpStatusCode status, string body)
         {
             return NewBuilder().Status(status).BodyText(body).Build();
         }
@@ -139,7 +139,7 @@ namespace Nitric.Api.Http
                         responseHeaders.Add(ContentType, contentType.Split(',').ToList());
                     }
                 }
-                return new HttpResponse(this);
+                return new HttpResponse(this.body, this.status, this.headers);
             }
 
             // Private Methods ------------------------------------------------------------
@@ -174,6 +174,5 @@ namespace Nitric.Api.Http
                 return null;
             }
         }
-    }
     }
 }

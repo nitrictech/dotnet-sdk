@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Web;
 using System.Text;
+using System.Linq;
 
 namespace Nitric.Api.Faas
 {
     public class NitricRequest
     {
-        private const string ContentType = "Content-Type";
-
-        public string Path { get; private set; }
-        public Dictionary<string, List<string>> Headers { get; private set; }
-        public byte[] Body { get; private set; }
-        public Dictionary<string, List<string>> Parameters { get; private set; }
+        public readonly string Path;
+        public readonly Dictionary<string, List<string>> Headers;
+        public readonly byte[] Body;
+        public readonly Dictionary<string, List<string>> Parameters;
 
         // Public Methods ------------------------------------------------------------
 
-        public NitricRequest(string path,
+        private NitricRequest(string path,
                           Dictionary<string, List<string>> headers,
                           byte[] body,
                           Dictionary<string, List<string>> parameters)
@@ -25,7 +24,7 @@ namespace Nitric.Api.Faas
             Body = body;
             Parameters = parameters;
         }
-        public static Builder newBuilder()
+        public static Builder NewBuilder()
         {
             return new Builder();
         }
@@ -47,9 +46,9 @@ namespace Nitric.Api.Faas
             }
             public void Reset()
             {
-                this.method = null;
-                this.path = null;
-                this.query = null;
+                this.method = "";
+                this.path = "";
+                this.query = "";
                 this.headers = new Dictionary<string, List<string>>();
                 this.body = null;
             }
@@ -83,11 +82,26 @@ namespace Nitric.Api.Faas
                 this.headers = headers;
                 return this;
             }
+            public Builder Headers(Dictionary<string, string> headers)
+            {
+                Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
+                foreach(KeyValuePair<string,string> entry in headers)
+                {
+                    dict.Add(entry.Key, entry.Value.Split(',').ToList());
+                }
+                this.headers = dict;
+                return this;
+            }
 
             //Set the request body.
             public Builder Body(byte[] body)
             {
                 this.body = body;
+                return this;
+            }
+            public Builder BodyText(string body)
+            {
+                this.body = Encoding.UTF32.GetBytes(body);
                 return this;
             }
 

@@ -26,7 +26,7 @@ namespace Nitric.Api.Http
             Body = body;
             Parameters = parameters;
         }
-        public String toString()
+        public string toString()
         {
             return GetType().Name +
                     "[method=" + Method +
@@ -48,12 +48,12 @@ namespace Nitric.Api.Http
             private const string ContentType = "Content-Type";
             private const string FormUrlEncoded = "application/x-www-form-urlencoded";
 
-            private string method;
-            private string path;
-            private string query;
-            private Dictionary<string, List<string>> headers;
-            private Dictionary<string, List<string>> parameters;
-            private byte[] body;
+            string method;
+            string path;
+            string query;
+            Dictionary<string, List<string>> headers;
+            Dictionary<string, List<string>> parameters;
+            byte[] body;
 
             public Builder()
             {

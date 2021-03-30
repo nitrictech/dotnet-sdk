@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.809.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nitric.Sdk", "Nitric.Sdk\Nitric.Sdk.csproj", "{847FA635-9AE6-4BE1-B124-18EA422C7165}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nitric.Test", "Nitric.Test\Nitric.Test.csproj", "{933B5994-090A-42DA-8B43-113A9ECE5FBC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nitric.Proto", "Nitric.Proto\Nitric.Proto.csproj", "{C694E83A-004F-40E9-97D6-870CC9222F72}"
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Nitric.Test", "Nitric.Test\Nitric.Test.csproj", "{D06CF461-9126-4C3F-BBA0-9FF5DE687535}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nitric.Test", "Nitric.Test\Nitric.Test.csproj", "{CC3865E3-07DD-43E3-A756-8A68F0106933}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +25,18 @@ Global
 		{847FA635-9AE6-4BE1-B124-18EA422C7165}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{847FA635-9AE6-4BE1-B124-18EA422C7165}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{847FA635-9AE6-4BE1-B124-18EA422C7165}.Release|Any CPU.Build.0 = Release|Any CPU
-		{933B5994-090A-42DA-8B43-113A9ECE5FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{933B5994-090A-42DA-8B43-113A9ECE5FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{933B5994-090A-42DA-8B43-113A9ECE5FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{933B5994-090A-42DA-8B43-113A9ECE5FBC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C694E83A-004F-40E9-97D6-870CC9222F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C694E83A-004F-40E9-97D6-870CC9222F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C694E83A-004F-40E9-97D6-870CC9222F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C694E83A-004F-40E9-97D6-870CC9222F72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D06CF461-9126-4C3F-BBA0-9FF5DE687535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D06CF461-9126-4C3F-BBA0-9FF5DE687535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D06CF461-9126-4C3F-BBA0-9FF5DE687535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D06CF461-9126-4C3F-BBA0-9FF5DE687535}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC3865E3-07DD-43E3-A756-8A68F0106933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC3865E3-07DD-43E3-A756-8A68F0106933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC3865E3-07DD-43E3-A756-8A68F0106933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC3865E3-07DD-43E3-A756-8A68F0106933}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
