@@ -4,14 +4,14 @@ namespace Nitric.Api.Queue
 {
     public class PushResponse
     {
-        private readonly List<FailedEvent> failedEvents;
-        public PushResponse(List<FailedEvent> failedEvents)
+        private readonly List<FailedTask> failedTasks;
+        public PushResponse(List<FailedTask> failedTasks)
         {
-            this.failedEvents = failedEvents;
+            this.failedTasks = failedTasks;
         }
-        public List<FailedEvent> getFailedEvents()
+        public List<FailedTask> getFailedTasks()
         {
-            return failedEvents;
+            return failedTasks;
         }
     }
 }

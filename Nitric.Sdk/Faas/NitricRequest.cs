@@ -11,6 +11,10 @@ namespace Nitric.Api.Faas
         public readonly Dictionary<string, List<string>> Headers;
         public readonly byte[] Body;
         public readonly Dictionary<string, List<string>> Parameters;
+        public string BodyText {
+            get { return Encoding.UTF8.GetString(this.Body); }
+            private set { }
+        }
 
         // Public Methods ------------------------------------------------------------
 
@@ -23,10 +27,6 @@ namespace Nitric.Api.Faas
             Headers = headers;
             Body = body;
             Parameters = parameters;
-        }
-        public static Builder NewBuilder()
-        {
-            return new Builder();
         }
 
         public class Builder
@@ -42,17 +42,12 @@ namespace Nitric.Api.Faas
 
             public Builder()
             {
-                Reset();
+                method = null;
+                path = "";
+                query = null;
+                headers = new Dictionary<string, List<string>>();
+                body = null;
             }
-            public void Reset()
-            {
-                this.method = "";
-                this.path = "";
-                this.query = "";
-                this.headers = new Dictionary<string, List<string>>();
-                this.body = null;
-            }
-
             // Public Methods ------------------------------------------------------------
 
             //Set the request method, for example with HTTP this would be ["GET" | "POST" | "PUT" | "DELETE" ].
@@ -87,7 +82,7 @@ namespace Nitric.Api.Faas
                 Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
                 foreach(KeyValuePair<string,string> entry in headers)
                 {
-                    dict.Add(entry.Key, entry.Value.Split(',').ToList());
+                    dict.Add(entry.Key, entry.Value.Split(new char[] { ',', ';' }).ToList());
                 }
                 this.headers = dict;
                 return this;
@@ -101,7 +96,7 @@ namespace Nitric.Api.Faas
             }
             public Builder BodyText(string body)
             {
-                this.body = Encoding.UTF32.GetBytes(body);
+                this.body = Encoding.UTF8.GetBytes(body);
                 return this;
             }
 
@@ -109,8 +104,8 @@ namespace Nitric.Api.Faas
             public NitricRequest Build()
             {
                 //TODO: Add immutable dictionary if headers != null, otherwise empty dictionary
-                var immutableHeaders = new Dictionary<string, List<string>>();
-
+                var immutableHeaders = headers;
+                this.method = (this.method == null) ? "" : this.method;
                 string urlParameters = null;
                 if ("POST".ToLower() == method.ToLower())
                 {

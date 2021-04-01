@@ -5,6 +5,7 @@ using Nitric.Api.Faas;
 using System.Net;
 using System.IO;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Nitric.Test
 {
@@ -43,8 +44,8 @@ namespace Nitric.Test
         {
             Faas faas = new Faas();
             faas.Port = TestingPort;
-
-            faas.Start(new HelloWorld());
+            Thread faasThread1 = new Thread(() => faas.Start(new HelloWorld()));
+            faasThread1.Start();
             Assert.IsNotNull(faas.Listener);
 
             //Resets the Faas listener
@@ -52,7 +53,8 @@ namespace Nitric.Test
             faas.Listener = null;
 
             //Checks if it can start again
-            faas.Start(new HelloWorld());
+            Thread faasThread2 = new Thread(() => faas.Start(new HelloWorld()));
+            faasThread2.Start();
 
             Assert.IsNotNull(faas.Listener);
             faas.Listener.Close();
@@ -61,15 +63,17 @@ namespace Nitric.Test
         public void TestDoubleStart()
         {
             Faas faas = new Faas();
-            faas.Start(new HelloWorld());
+            Thread faasThread = new Thread(() => faas.Start(new HelloWorld()));
+            faasThread.Start();
             Assert.ThrowsException<ArgumentException>(() => faas.Start(new HelloWorld()));
             faas.Listener.Close();
         }
         [TestMethod]
-        public async Task TestCall()
+        public void TestCall()
         {
             Faas faas = new Faas();
-            faas.Start(new HelloWorld());
+            Thread faasThread = new Thread(() => faas.Start(new HelloWorld()));
+            faasThread.Start();
             var client = new HttpClient();
             var result = client.GetAsync(string.Format("http://{0}:{1}/", "127.0.0.1", 8080));
             Assert.AreEqual("Hello World", result.Result);
@@ -82,7 +86,7 @@ namespace Nitric.Test
         public NitricResponse Handle(NitricRequest request)
         {
             Requests[requestNum++] = request;
-            return NitricResponse.Build("Hello World");
+            return new NitricResponse.Builder().Build("Hello World");
         }
     }
 }

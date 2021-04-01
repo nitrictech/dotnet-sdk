@@ -15,9 +15,9 @@ namespace Nitric.Test
         public void TestFullBuild()
         {
             var body = Encoding.UTF8.GetBytes("Hello World");
-
-            var response = NitricResponse
-                .NewBuilder()
+            
+            var response = new NitricResponse
+                .Builder()
                 .Body(body)
                 .Status(HttpStatusCode.Moved)
                 .Headers(new Dictionary<string, List<string>>())
@@ -25,14 +25,14 @@ namespace Nitric.Test
 
             Assert.AreEqual(body, response.Body);
             Assert.AreEqual(301, (int)response.Status);
-            Assert.AreEqual(new Dictionary<string, List<string>>(), response.Headers);
+            Assert.IsNotNull(response.Headers);
 
         }
         [TestMethod]
         public void TestDefaults()
         {
-            var response = NitricResponse
-                .NewBuilder()
+            var response = new NitricResponse
+                .Builder()
                 .Build();
 
             Assert.AreEqual(null, response.Body);
@@ -46,86 +46,77 @@ namespace Nitric.Test
             headers.Add("Content-length", "1024");
             headers.Add("Accept-Charset", "ISO-8859-1");
 
-            var response = NitricResponse
-                    .NewBuilder()
+            var response = new NitricResponse
+                    .Builder()
                     .Headers(headers)
                     .Build();
 
             Assert.IsNotNull(response.Headers);
 
             Assert.IsNotNull(response.Headers["Content-length"]);
-            Assert.AreEqual("1024", response.Headers["Content-length"]);
+            Assert.AreEqual("1024", response.Headers["Content-length"][0]);
 
             Assert.IsNotNull(response.Headers["Accept-Charset"]);
-            Assert.AreEqual("ISO-8859-1", response.Headers["Accept-Charset"]);
+            Assert.AreEqual("ISO-8859-1", response.Headers["Accept-Charset"][0]);
 
-
-            try
-            {
-                Assert.IsTrue(response.Headers.TryAdd("Accept-Charset", "utf-16".Split(',').ToList()), "Cant modify headers");
-
-            }
-            catch (Exception e)
-            {
-                Assert.IsTrue(true);
-            }
-
-            response = NitricResponse
-                    .NewBuilder()
+            response = new NitricResponse
+                    .Builder()
                     .Header("name", "value")
                     .Build();
 
             Assert.IsNotNull(response.Headers);
-            Assert.Equals("value", response.Headers["name"]);
+            Assert.AreEqual("value", response.Headers["name"][0]);
         }
 
         [TestMethod]
         public void TestBodyText()
         {
-            var body = "hello world";
+            var body = "Hello World";
 
-            var response = NitricResponse
-                    .NewBuilder()
+            var response = new NitricResponse
+                    .Builder()
                     .Status(HttpStatusCode.OK)
                     .BodyText(body)
                     .Build();
 
-            Assert.AreNotEqual(200, (int)response.Status);
+            Assert.AreEqual(200, (int)response.Status);
             Assert.IsNotNull(response.Headers);
-            Assert.AreEqual(0, response.Headers.Count);
+            Assert.AreEqual(1, response.Headers.Count); //Default adds the Content Type
             Assert.IsNotNull(response.Body);
-            Assert.AreEqual(body, Encoding.UTF8.GetString(response.Body));
+            Assert.AreEqual(body, response.BodyText);
             Assert.AreEqual(11, response.Body.Length);
-            Assert.AreEqual(body, Encoding.UTF8.GetString(response.Body));
         }
         [TestMethod]
         public void TestToString()
         {
-            var response = NitricResponse
-                .NewBuilder()
+            var response = new NitricResponse
+                .Builder()
                 .Build();
 
-            Assert.Equals("NitricResponse[status=0, headers={}, body.length=0]",
+            Assert.AreEqual("NitricResponse[status=200, headers={}, body.length=0]",
                 response.ToString());
         }
         [TestMethod]
         public void TestBuild()
         {
-            var response = NitricResponse
+            var response = new NitricResponse
+                .Builder()
                 .Build(HttpStatusCode.OK);
 
             Assert.AreEqual(200, (int)response.Status);
 
-            response = NitricResponse
+            response = new NitricResponse
+                .Builder()
                 .Build(HttpStatusCode.OK, "Hello World");
 
-            Assert.AreEqual(200, response.Status);
-            Assert.AreEqual("Hello World", Encoding.UTF8.GetString(response.Body));
+            Assert.AreEqual(200, (int)response.Status);
+            Assert.AreEqual("Hello World", response.BodyText);
 
-            response = NitricResponse
+            response = new NitricResponse
+                .Builder()
                 .Build("Hello World");
 
-            Assert.AreEqual("Hello World", Encoding.UTF8.GetString(response.Body));
+            Assert.AreEqual("Hello World", response.BodyText);
         }
     }
 }

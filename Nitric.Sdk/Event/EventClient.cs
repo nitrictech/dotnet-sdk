@@ -9,19 +9,19 @@ namespace Nitric.Api.Event
 	public class EventClient : AbstractClient
 	{
 		protected ProtoClient client;
-		
-		public EventClient()
-        {
+
+		private EventClient()
+		{
 			this.client = new ProtoClient(this.GetChannel());
-        }
+		}
 
 		public string Publish(string topic, Object payload, string payloadType, string requestID)
 		{
 			// TODO: Remove once request id generation has been moved to the Nitric Membrane.
 			if (string.IsNullOrEmpty(requestID))
-            {
+			{
 				requestID = Guid.NewGuid().ToString();
-            }
+			}
 
 			var payloadStruct = Util.ObjectToStruct(payload);
 			var evt = new NitricEvent { Id = requestID, PayloadType = payloadType, Payload = payloadStruct };
@@ -31,5 +31,15 @@ namespace Nitric.Api.Event
 
 			return requestID;
 		}
+		public class Builder
+        {
+			//Forces the builder design pattern
+			public Builder()
+			{ }
+			public EventClient Build()
+            {
+				return new EventClient();
+            }
+        }
 	}
 }

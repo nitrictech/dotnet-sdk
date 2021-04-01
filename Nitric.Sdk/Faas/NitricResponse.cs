@@ -13,7 +13,11 @@ namespace Nitric.Api.Faas
         public readonly byte[] Body;
         public readonly HttpStatusCode Status;
         public readonly Dictionary<string, List<string>> Headers;
-
+        public string BodyText
+        {
+            get { return Encoding.UTF8.GetString(this.Body); }
+            private set { }
+        }
         // Public Methods ------------------------------------------------------------
 
         private NitricResponse(HttpStatusCode status,
@@ -24,29 +28,20 @@ namespace Nitric.Api.Faas
             Headers = headers; //TODO: Make immutable
             Body = body;
         }
+        
         public override string ToString()
         {
+            StringBuilder sb = new StringBuilder("{");
+            foreach(KeyValuePair<string, List<string>> entry in Headers)
+            {
+                sb.Append(entry.Key.ToString());
+            }
+            sb.Append("}");
             return GetType().Name +
-                    "[status=" + Status.ToString() +
-                    ", headers=" + Headers +
+                    "[status=" + ((int)Status).ToString() +
+                    ", headers=" + sb.ToString() +
                     ", body.length=" + ((Body != null) ? Body.Length : 0) +
                     "]";
-        }
-        public static Builder NewBuilder()
-        {
-            return new Builder();
-        }
-        public static NitricResponse Build(string body)
-        {
-            return NewBuilder().BodyText(body).Build();
-        }
-        public static NitricResponse Build(HttpStatusCode status)
-        {
-            return NewBuilder().Status(status).Build();
-        }
-        public static NitricResponse Build(HttpStatusCode status, string body)
-        {
-            return NewBuilder().Status(status).BodyText(body).Build();
         }
 
         public class Builder
@@ -57,13 +52,9 @@ namespace Nitric.Api.Faas
 
             public Builder()
             {
-                Reset();
-            }
-            public void Reset()
-            {
-                this.status = HttpStatusCode.OK;
-                this.headers = new Dictionary<string, List<string>>();
-                this.body = null;
+                status = HttpStatusCode.OK;
+                headers = new Dictionary<string, List<string>>();
+                body = null;
             }
             //Set the function response status, e.g. 200 for HTTP OK.
             public Builder Status(HttpStatusCode status)
@@ -133,12 +124,23 @@ namespace Nitric.Api.Faas
                     var contentType = DetectContentType(body);
                     if (contentType != null)
                     {
-                        responseHeaders.Add(ContentType, contentType.Split(',').ToList());
+                        responseHeaders.Add(ContentType, contentType.Split(new char[] { ',', ';' }).ToList());
                     }
                 }
                 return new NitricResponse(status, responseHeaders, body);
             }
-            
+            public NitricResponse Build(string body)
+            {
+                return BodyText(body).Build();
+            }
+            public NitricResponse Build(HttpStatusCode status)
+            {
+                return Status(status).Build();
+            }
+            public NitricResponse Build(HttpStatusCode status, string body)
+            {
+                return Status(status).BodyText(body).Build();
+            }
             // Private Methods ------------------------------------------------------------
 
             private string DetectContentType(byte[] body)
@@ -149,13 +151,13 @@ namespace Nitric.Api.Faas
                     if ((bodyText.StartsWith("{") && bodyText.EndsWith("}"))
                        || (bodyText.StartsWith("[") && bodyText.EndsWith("]")))
                     {
-                        return "text/json; charset=UTF-8";
+                        return "text/json;charset=UTF-8";
                     }
                     if (bodyText.StartsWith("<?xml") && bodyText.EndsWith(">"))
                     {
-                        return "text/xml; charset=UTF-8";
+                        return "text/xml;charset=UTF-8";
                     }
-                    return "text/html; charset=UTF-8";
+                    return "text/html;charset=UTF-8";
                 }
                 return null;
             }

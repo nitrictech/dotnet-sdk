@@ -28,12 +28,12 @@ namespace Nitric.Api.Queue
             var request = new QueueSendBatchRequest { Queue = queue };
             request.Tasks.AddRange(wireEvents);
             var response = client.SendBatch(request);
-            List<FailedEvent> failedEvents = new List<FailedEvent>();
-            foreach(FailedTask fe in response.FailedTasks)
+            List<FailedTask> failedTasks = new List<FailedTask>();
+            foreach(Proto.Queue.v1.FailedTask fe in response.FailedTasks)
             {
-                failedEvents.Add(WireToFailedEvent(fe));
+                failedTasks.Add(WireToFailedEvent(fe));
             }
-            return new PushResponse(failedEvents);
+            return new PushResponse(failedTasks);
         }
 
         public List<QueueItem> Receive(string queue, int depth)
@@ -70,14 +70,14 @@ namespace Nitric.Api.Queue
             };
         }
 
-        private FailedEvent WireToFailedEvent(FailedTask protoFailedEvent)
+        private FailedTask WireToFailedEvent(Proto.Queue.v1.FailedTask protoFailedEvent)
         {
-            return new FailedEvent(new Common.Event(
-                protoFailedEvent.Task.Id,
-                protoFailedEvent.Task.PayloadType,
-                protoFailedEvent.Task.Payload
-                ), protoFailedEvent.Message
-            );
+            return new FailedTask.Builder()
+                .RequestId(protoFailedEvent.Task.Id)
+                .PayloadId(protoFailedEvent.Task.PayloadType)
+                .PayloadStruct(protoFailedEvent.Task.Payload)
+                .Message(protoFailedEvent.Message)
+                .Build();
         }
         private Common.Event WireToEvent(NitricTask nitricEvent)
         {

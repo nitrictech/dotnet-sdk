@@ -3,35 +3,76 @@ using Google.Protobuf.WellKnownTypes;
 using ProtoClient = Nitric.Proto.KeyValue.v1.KeyValue.KeyValueClient;
 using Nitric.Proto.KeyValue.v1;
 using Nitric.Api.Common;
-//using CommonEvent = Nitric.Api.Common.Event;
+using System;
 
 namespace Nitric.Api.KeyValue
 {
-    class KeyValueClient : AbstractClient
+    public class KeyValueClient : AbstractClient
     {
         protected ProtoClient client;
+        public string Collection { get; private set; }
 
-        public KeyValueClient()
+        private KeyValueClient(string collection)
         {
+            this.Collection = collection;
             client = new ProtoClient(GetChannel());
         }
-        public void Put(string collection, string key, Dictionary<string, string> value)
+        public void Put(string key, object value)
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException("key parameter required");
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException("value parameter required");
+            }
             var valueStruct = Util.ObjectToStruct(value);
-            var request = new KeyValuePutRequest { Collection = collection, Key = key, Value = valueStruct };
+            var request = new KeyValuePutRequest { Collection = Collection, Key = key, Value = valueStruct };
             var response = client.Put(request);
         }
-        public string Get(string collection, string key)
+        public string Get(string key)
         {
-            var request = new KeyValueGetRequest { Collection = collection, Key = key };
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException("key parameter required");
+            }
+            var request = new KeyValueGetRequest { Collection = Collection, Key = key };
             var response = client.Get(request);
             var document = response.Value;
             return document.ToString();
         }
-        public void Delete(string collection, string key)
+        public void Delete(string key)
         {
-            var request = new KeyValueDeleteRequest { Collection = collection, Key = key };
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException("key parameter required");
+            }
+            var request = new KeyValueDeleteRequest { Collection = Collection, Key = key };
             var response = client.Delete(request);
+        }
+
+        public class Builder
+        {
+            private string collection;
+
+            public Builder()
+            {
+                this.collection = null;
+            }
+            public Builder Collection(string collection)
+            {
+                this.collection = collection;
+                return this;
+            }
+            public KeyValueClient Build()
+            {
+                return new KeyValueClient(this.collection);
+            }
+            public KeyValueClient Build(string collection)
+            {
+                return new KeyValueClient(collection);
+            }
         }
     }
 }

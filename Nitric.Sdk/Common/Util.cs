@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Nitric.Api.Common
 {
-    class Util
+    public class Util
     {
         /*public static Dictionary<string, string> MessageToDict()
         {

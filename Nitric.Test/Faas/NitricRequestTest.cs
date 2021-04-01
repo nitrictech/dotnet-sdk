@@ -11,16 +11,16 @@ namespace Nitric.Test
         [TestMethod]
         public void TestFullBuild()
         {
-            var request = NitricRequest
-                .NewBuilder()
-                .Body(System.Text.Encoding.UTF8.GetBytes("Hello World"))
+            var request = new NitricRequest
+                .Builder()
+                .BodyText("Hello World")
                 .Method("GET")
                 .Path("127.0.0.1:8080")
                 .Query("POST")
                 .Headers(new Dictionary<string, List<string>>())
                 .Build();
 
-            Assert.AreEqual("Hello World", request.Body);
+            Assert.AreEqual("Hello World", request.BodyText);
             Assert.AreEqual("127.0.0.1:8080", request.Path);
             Assert.IsNotNull(request.Parameters);
             Assert.IsNotNull(request.Headers);
@@ -28,49 +28,39 @@ namespace Nitric.Test
         [TestMethod]
         public void TestBodyText()
         {
-            var request = NitricRequest
-                .NewBuilder()
+            var request = new NitricRequest
+                .Builder()
                 .BodyText("Hello World")
                 .Build();
 
-            Assert.Equals("Hello World", System.Text.Encoding.UTF8.GetString(request.Body));
+            Assert.AreEqual("Hello World", request.BodyText);
         }
         [TestMethod]
         public void TestHeaders()
         {
-            var headers = new Dictionary<string, string>();
+            Dictionary<string, string> headers = new Dictionary<string, string>();
             headers.Add("Content-length", "1024");
             headers.Add("Accept-Charset", "ISO-8859-1");
 
-            var request = NitricRequest
-                    .NewBuilder()
+            var request = new NitricRequest
+                    .Builder()
                     .Headers(headers)
                     .Build();
 
             Assert.IsNotNull(request.Headers);
-
             Assert.IsNotNull(request.Headers["Content-length"]);
-            Assert.AreEqual("1024", request.Headers["Content-length"]);
+            Assert.AreEqual("1024", request.Headers["Content-length"][0]);
 
             Assert.IsNotNull(request.Headers["Accept-Charset"]);
-            Assert.AreEqual("ISO-8859-1", request.Headers["Accept-Charset"]);
+            Assert.AreEqual("ISO-8859-1", request.Headers["Accept-Charset"][0]);
 
-
-            try
-            {
-                Assert.IsTrue(request.Headers.TryAdd("Accept-Charset", "utf-16".Split(',').ToList()), "Cant modify headers");
-
-            }
-            catch (Exception e)
-            {
-                Assert.IsTrue(true);
-            }
+            //Assert.ThrowsException<ArgumentNullException>(() => request.Headers.Add("Accept-Charset", "utf-16".Split(',').ToList()), "Cant modify headers");
         }
         [TestMethod]
         public void TestDefaults()
         {
-            var request = NitricRequest
-                .NewBuilder()
+            var request = new NitricRequest
+                .Builder()
                 .Build();
 
             Assert.AreEqual(null, request.Body);
