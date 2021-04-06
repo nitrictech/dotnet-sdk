@@ -1,36 +1,72 @@
-﻿using Google.Protobuf;
+﻿using System;
+using Google.Protobuf;
 using ProtoClient = Nitric.Proto.Storage.v1.Storage.StorageClient;
 using Nitric.Proto.Storage.v1;
 using Nitric.Api.Common;
-//using CommonEvent = Nitric.Api.Common.Event;
 
 namespace Nitric.Api.Storage
 {
-    class StorageClient : AbstractClient
+    public class StorageClient : AbstractClient
     {
+        public readonly string BucketName;
         protected ProtoClient client;
 
-        public StorageClient()
+        private StorageClient(string bucketName)
         {
+            this.BucketName = bucketName;
             client = new ProtoClient(GetChannel());
         }
-        public void Write(string bucketName, string key, ByteString body)
+        public void Write(string key, byte[] body)
         {
             var request = new StorageWriteRequest {
-                BucketName = bucketName,
+                BucketName = BucketName,
                 Key = key,
-                Body = body
+                Body = ByteString.CopyFrom(body)
             };
-            var response = client.Write(request);
+            client.Write(request);
         }
-        public byte[] Read(string bucketName, string key)
+        public byte[] Read(string key)
         {
             var request = new StorageReadRequest {
-                BucketName = bucketName,
+                BucketName = BucketName,
                 Key = key
             };
             var response = client.Read(request);
             return response.ToByteArray();
+        }
+        public void Delete(string key)
+        {
+            var request = new StorageDeleteRequest
+            {
+                BucketName = BucketName,
+                Key = key
+            };
+            client.Delete(request);
+        }
+        public override string ToString()
+        {
+            return GetType().Name + "[bucket=" + BucketName + "]";
+        }
+        public class Builder
+        {
+            private string bucketName;
+            public Builder()
+            {
+                bucketName = null;
+            }
+            public Builder BucketName(string bucketName)
+            {
+                this.bucketName = bucketName;
+                return this;
+            }
+            public StorageClient Build()
+            {
+                if (string.IsNullOrEmpty(this.bucketName))
+                {
+                    throw new ArgumentNullException("bucketName");
+                }
+                return new StorageClient(bucketName);
+            }
         }
     }
 }

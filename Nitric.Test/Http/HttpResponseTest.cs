@@ -1,22 +1,21 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Nitric.Api.Faas;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text;
 using System.Collections.Generic;
-using System.Linq;
-using System;
 using System.Net;
-
-namespace Nitric.Test.Api.Faas
+using Nitric.Api.Http;
+using System.Linq;
+namespace Nitric.Test.Api.Http
 {
     [TestClass]
-    public class NitricResponseTest
+    public class HttpResponseTest
     {
         [TestMethod]
         public void TestFullBuild()
         {
             var body = Encoding.UTF8.GetBytes("Hello World");
-            
-            var response = new NitricResponse
+
+            var response = new HttpResponse
                 .Builder()
                 .Body(body)
                 .Status(HttpStatusCode.Moved)
@@ -31,7 +30,7 @@ namespace Nitric.Test.Api.Faas
         [TestMethod]
         public void TestDefaults()
         {
-            var response = new NitricResponse
+            var response = new HttpResponse
                 .Builder()
                 .Build();
 
@@ -42,11 +41,11 @@ namespace Nitric.Test.Api.Faas
         [TestMethod]
         public void TestHeaders()
         {
-            var headers = new Dictionary<string, string>();
-            headers.Add("Content-length", "1024");
-            headers.Add("Accept-Charset", "ISO-8859-1");
+            var headers = new Dictionary<string, List<string>>();
+            headers.Add("Content-length", new List<string>() { "1024" });
+            headers.Add("Accept-Charset", new List<string>() { "ISO-8859-1" });
 
-            var response = new NitricResponse
+            var response = new HttpResponse
                     .Builder()
                     .Headers(headers)
                     .Build();
@@ -59,7 +58,7 @@ namespace Nitric.Test.Api.Faas
             Assert.IsNotNull(response.Headers["Accept-Charset"]);
             Assert.AreEqual("ISO-8859-1", response.Headers["Accept-Charset"][0]);
 
-            response = new NitricResponse
+            response = new HttpResponse
                     .Builder()
                     .Header("name", "value")
                     .Build();
@@ -73,7 +72,7 @@ namespace Nitric.Test.Api.Faas
         {
             var body = "Hello World";
 
-            var response = new NitricResponse
+            var response = new HttpResponse
                     .Builder()
                     .Status(HttpStatusCode.OK)
                     .Body(body)
@@ -89,30 +88,30 @@ namespace Nitric.Test.Api.Faas
         [TestMethod]
         public void TestToString()
         {
-            var response = new NitricResponse
+            var response = new HttpResponse
                 .Builder()
                 .Build();
 
-            Assert.AreEqual("NitricResponse[status=200, headers={}, body.length=0]",
+            Assert.AreEqual("HttpResponse[status=200, headers={}, body.length=0]",
                 response.ToString());
         }
         [TestMethod]
         public void TestBuild()
         {
-            var response = new NitricResponse
+            var response = new HttpResponse
                 .Builder()
                 .Build(HttpStatusCode.OK);
 
             Assert.AreEqual(200, (int)response.Status);
 
-            response = new NitricResponse
+            response = new HttpResponse
                 .Builder()
                 .Build(HttpStatusCode.OK, "Hello World");
 
             Assert.AreEqual(200, (int)response.Status);
             Assert.AreEqual("Hello World", response.BodyText);
 
-            response = new NitricResponse
+            response = new HttpResponse
                 .Builder()
                 .Build("Hello World");
 

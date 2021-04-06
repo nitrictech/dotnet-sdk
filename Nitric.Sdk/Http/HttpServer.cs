@@ -6,32 +6,39 @@ namespace Nitric.Api.Http
 {
     public class HttpServer
     {
-        static readonly string DefaultHostname = "127.0.0.1";
+        private static readonly string DefaultHostName = "127.0.0.1";
+        private static readonly int DefaultPort = 8080;
 
-        string hostname = DefaultHostname;
-        int port = 8080;
+        private string hostname = DefaultHostName;
+        public string Hostname
+        {
+            get => hostname;
+            set
+            {
+                hostname = value;
+            }
+        }
+        private int port = DefaultPort;
+        public int Port
+        {
+            get => port;
+            set
+            {
+                port = value;
+            }
+        }
+        public HttpListener Listener { get; private set; }
         readonly Dictionary<string, IHttpHandler> pathFunctions = new Dictionary<string, IHttpHandler>();
-        HttpListener httpListener = new HttpListener();
 
-        public HttpServer Hostname(string hostname)
-        {
-            this.hostname = hostname;
-            return this;
-        }
-        public HttpServer Port(int port)
-        {
-            this.port = port;
-            return this;
-        }
         public HttpServer Register(string path, IHttpHandler function)
         {
             if (path == null)
             {
-                throw new ArgumentNullException("Null path parameter");
+                throw new ArgumentNullException("path");
             }
             if (function == null)
             {
-                throw new ArgumentNullException("Null function parameter");
+                throw new ArgumentNullException("function");
             }
             IHttpHandler checkHandler = null;
             if (pathFunctions.ContainsKey(path))
@@ -50,7 +57,7 @@ namespace Nitric.Api.Http
         }
         public void Start()
         {
-            if (httpListener != null)
+            if (Listener != null)
             {
                 throw new MethodAccessException("listener has already started");
             }
@@ -59,25 +66,25 @@ namespace Nitric.Api.Http
             var childAddress = Environment.GetEnvironmentVariable("CHILD_ADDRESS");
             if (!string.IsNullOrEmpty(childAddress))
             {
-                hostname = childAddress;
+                Hostname = childAddress;
             }
             foreach (string s in pathFunctions.Keys)
             {
                 var function = pathFunctions[s];
-                httpListener.Prefixes.Add(string.Format("{0}{1}", s, pathFunctions[s].ToString()));
+                Listener.Prefixes.Add(string.Format("http://{0}:{1}/{2}/", Hostname, Port, s));
             }
 
 
-            httpListener.Start();
+            Listener.Start();
 
             var builder = new StringBuilder().Append(GetType().Name);
-            if (DefaultHostname == hostname)
+            if (Hostname == DefaultHostName)
             {
-                builder.Append(" listening on port ").Append(port);
+                builder.Append(" listening on port ").Append(Port);
             }
             else
             {
-                builder.Append(" listening on ").Append(hostname).Append(":").Append(port);
+                builder.Append(" listening on ").Append(Hostname).Append(":").Append(Port);
             }
 
             if (pathFunctions.Count == 0)

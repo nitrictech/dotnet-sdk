@@ -23,5 +23,8 @@
     <Folder Include="Api\Event\" />
     <Folder Include="Api\Common\" />
     <Folder Include="Api\Kv\" />
+    <Folder Include="Api\Storage\" />
+    <Folder Include="Api\Queue\" />
+    <Folder Include="Http\" />
   </ItemGroup>
 </Project>

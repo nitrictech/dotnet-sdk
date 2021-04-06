@@ -10,13 +10,12 @@ namespace Nitric.Api.Faas
     {
         private const string ContentType = "Content-Type";
 
-        public readonly byte[] Body;
-        public readonly HttpStatusCode Status;
-        public readonly Dictionary<string, List<string>> Headers;
+        public byte[] Body { get; }
+        public HttpStatusCode Status { get; }
+        public Dictionary<string, List<string>> Headers { get; }
         public string BodyText
         {
             get { return Encoding.UTF8.GetString(this.Body); }
-            private set { }
         }
         // Public Methods ------------------------------------------------------------
 
@@ -68,11 +67,11 @@ namespace Nitric.Api.Faas
             {
                 if (name == null)
                 {
-                    throw new ArgumentNullException("header name is required");
+                    throw new ArgumentNullException("header");
                 }
                 if (value == null)
                 {
-                    throw new ArgumentNullException("header value is required");
+                    throw new ArgumentNullException("header");
                 }
                 if (headers == null)
                 {
@@ -108,9 +107,9 @@ namespace Nitric.Api.Faas
             }
             
             //Set the function response body text (UTF-8) encoded.
-            public Builder BodyText(string body)
+            public Builder Body(string body)
             {
-                this.body = (body != null) ? Encoding.UTF8.GetBytes(body.ToCharArray()) : null;
+                this.body = (body != null) ? Encoding.UTF8.GetBytes(body) : null;
                 return this;
             }
 
@@ -131,7 +130,7 @@ namespace Nitric.Api.Faas
             }
             public NitricResponse Build(string body)
             {
-                return BodyText(body).Build();
+                return Body(body).Build();
             }
             public NitricResponse Build(HttpStatusCode status)
             {
@@ -139,7 +138,7 @@ namespace Nitric.Api.Faas
             }
             public NitricResponse Build(HttpStatusCode status, string body)
             {
-                return Status(status).BodyText(body).Build();
+                return Status(status).Body(body).Build();
             }
             // Private Methods ------------------------------------------------------------
 

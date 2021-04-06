@@ -10,34 +10,43 @@ namespace Nitric.Api.KeyValue
     public class KeyValueClient : AbstractClient
     {
         protected ProtoClient client;
+        public System.Type Type { get; private set; }
         public string Collection { get; private set; }
 
-        private KeyValueClient(string collection)
+        private KeyValueClient(string collection, System.Type type)
         {
             this.Collection = collection;
+            this.Type = type;
             client = new ProtoClient(GetChannel());
         }
         public void Put(string key, object value)
         {
             if (string.IsNullOrEmpty(key))
             {
-                throw new ArgumentNullException("key parameter required");
+                throw new ArgumentNullException("key");
             }
             if (value == null)
             {
-                throw new ArgumentNullException("value parameter required");
+                throw new ArgumentNullException("value");
             }
             var valueStruct = Util.ObjectToStruct(value);
-            var request = new KeyValuePutRequest { Collection = Collection, Key = key, Value = valueStruct };
-            var response = client.Put(request);
+            var request = new KeyValuePutRequest {
+                Collection = Collection,
+                Key = key,
+                Value = valueStruct
+            };
+            client.Put(request);
         }
         public string Get(string key)
         {
             if (string.IsNullOrEmpty(key))
             {
-                throw new ArgumentNullException("key parameter required");
+                throw new ArgumentNullException("key");
             }
-            var request = new KeyValueGetRequest { Collection = Collection, Key = key };
+            var request = new KeyValueGetRequest {
+                Collection = Collection,
+                Key = key
+            };
             var response = client.Get(request);
             var document = response.Value;
             return document.ToString();
@@ -46,16 +55,26 @@ namespace Nitric.Api.KeyValue
         {
             if (string.IsNullOrEmpty(key))
             {
-                throw new ArgumentNullException("key parameter required");
+                throw new ArgumentNullException("key");
             }
-            var request = new KeyValueDeleteRequest { Collection = Collection, Key = key };
-            var response = client.Delete(request);
+            var request = new KeyValueDeleteRequest {
+                Collection = Collection,
+                Key = key
+            };
+            client.Delete(request);
+        }
+        public override string ToString()
+        {
+            return GetType().Name
+                    + "[collection=" + Collection
+                    + ", type=" + Collection.GetType().Name
+                    + "]";
         }
 
         public class Builder
         {
             private string collection;
-
+            private System.Type type;
             public Builder()
             {
                 this.collection = null;
@@ -65,13 +84,30 @@ namespace Nitric.Api.KeyValue
                 this.collection = collection;
                 return this;
             }
+            public Builder Type(System.Type type)
+            {
+                this.type = type;
+                return this;
+            }
             public KeyValueClient Build()
             {
-                return new KeyValueClient(this.collection);
+                if (string.IsNullOrEmpty(collection))
+                {
+                    throw new ArgumentNullException("collection");
+                }
+                if (type == null)
+                {
+                    throw new ArgumentNullException("type");
+                }
+                return new KeyValueClient(this.collection, this.type);
             }
             public KeyValueClient Build(string collection)
             {
-                return new KeyValueClient(collection);
+                return new Builder().Collection(collection).Build();
+            }
+            public KeyValueClient Build(string collection, System.Type type)
+            {
+                return new Builder().Collection(collection).Type(type).Build();
             }
         }
     }

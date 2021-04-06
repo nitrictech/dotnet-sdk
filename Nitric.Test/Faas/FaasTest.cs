@@ -1,13 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Net.Http;
-using Nitric.Api.Faas;
-using System.Net;
-using System.IO;
-using System.Threading.Tasks;
 using System.Threading;
+using Nitric.Api.Faas;
 
-namespace Nitric.Test
+namespace Nitric.Test.Api.Faas
 {
     //[TestClass]
     public class FaasTest
@@ -16,33 +13,33 @@ namespace Nitric.Test
         [TestMethod]
         public void TestPort()
         {
-            Faas faas = new Faas();
+            Nitric.Api.Faas.Faas faas = new Nitric.Api.Faas.Faas();
             Assert.AreEqual(faas.Port, 8080);
         }
         [TestMethod]
         public void TestHostName()
         {
-            Faas faas = new Faas();
-            Assert.AreEqual(faas.HostName, "127.0.0.1");
+            Nitric.Api.Faas.Faas faas = new Nitric.Api.Faas.Faas();
+            Assert.AreEqual(faas.Hostname, "127.0.0.1");
         }
         [TestMethod]
         public void TestNewHostName()
         {
-            Faas faas = new Faas();
-            faas.HostName = "localhost";
-            Assert.AreEqual(faas.HostName, "localhost");
+            Nitric.Api.Faas.Faas faas = new Nitric.Api.Faas.Faas();
+            faas.Hostname = "localhost";
+            Assert.AreEqual(faas.Hostname, "localhost");
         }
         [TestMethod]
         public void TestNewPort()
         {
-            Faas faas = new Faas();
+            Nitric.Api.Faas.Faas faas = new Nitric.Api.Faas.Faas();
             faas.Port = TestingPort;
             Assert.AreEqual(TestingPort, faas.Port);
         }
         [TestMethod]
         public void TestStart()
         {
-            Faas faas = new Faas();
+            Nitric.Api.Faas.Faas faas = new Nitric.Api.Faas.Faas();
             faas.Port = TestingPort;
             Thread faasThread1 = new Thread(() => faas.Start(new HelloWorld()));
             faasThread1.Start();
@@ -62,7 +59,7 @@ namespace Nitric.Test
         [TestMethod]
         public void TestDoubleStart()
         {
-            Faas faas = new Faas();
+            Nitric.Api.Faas.Faas faas = new Nitric.Api.Faas.Faas();
             Thread faasThread = new Thread(() => faas.Start(new HelloWorld()));
             faasThread.Start();
             Assert.ThrowsException<ArgumentException>(() => faas.Start(new HelloWorld()));
@@ -71,7 +68,7 @@ namespace Nitric.Test
         [TestMethod]
         public void TestCall()
         {
-            Faas faas = new Faas();
+            Nitric.Api.Faas.Faas faas = new Nitric.Api.Faas.Faas();
             Thread faasThread = new Thread(() => faas.Start(new HelloWorld()));
             faasThread.Start();
             var client = new HttpClient();

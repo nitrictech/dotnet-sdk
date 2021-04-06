@@ -5,35 +5,36 @@ namespace Nitric.Api.Queue
     public class FailedTask
     {
         public string Message { get; private set; }
-        public string RequestId { get; private set; }
-        public string PayloadType { get; private set; }
-        public Struct PayloadStruct { get; private set; }
+        public Common.Event Event { get; private set; }
         private FailedTask(
             string requestId,
             string payloadType,
-            Struct payloadStruct,
+            Struct payload,
             string message)
         {
+            this.Event = new Common.Event.Builder()
+                .RequestId(requestId)
+                .PayloadType(payloadType)
+                .Payload(payload)
+                .Build();
             this.Message = message;
-            this.RequestId = requestId;
-            this.PayloadType = payloadType;
-            this.PayloadStruct = (payloadStruct == null) ?
-                Common.Util.ObjectToStruct(new Dictionary<string,string>()) :
-                payloadStruct;
         }
-
+        public override string ToString()
+        {
+            return GetType().Name + "[event=" + Event + ", message=" + Message + "]";
+        }
         public class Builder
         {
             private string requestId;
-            private string payloadId;
-            private Struct payloadStruct;
+            private string payloadType;
+            private Struct payload; 
             private string message;
             //Defines the defaults
             public Builder()
             {
                 this.requestId = null;
-                this.payloadId = null;
-                this.payloadStruct = null;
+                this.payloadType = null;
+                this.payload = Common.Util.ObjectToStruct(new Dictionary<string, string>());
                 this.message = null;
             }
             public Builder RequestId(string requestId)
@@ -41,14 +42,14 @@ namespace Nitric.Api.Queue
                 this.requestId = requestId;
                 return this;
             }
-            public Builder PayloadId(string payloadId)
+            public Builder PayloadType(string payloadType)
             {
-                this.payloadId = payloadId;
+                this.payloadType = payloadType;
                 return this;
             }
-            public Builder PayloadStruct(Struct payloadStruct)
+            public Builder Payload(Struct payload)
             {
-                this.payloadStruct = payloadStruct;
+                this.payload = payload;
                 return this;
             }
             public Builder Message(string message)
@@ -58,7 +59,7 @@ namespace Nitric.Api.Queue
             }
             public FailedTask Build()
             {
-                return new FailedTask(requestId, payloadId, payloadStruct, message);
+                return new FailedTask(requestId, payloadType, payload, message);
             }
         }
     }

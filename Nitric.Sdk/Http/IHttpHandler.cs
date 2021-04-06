@@ -3,6 +3,6 @@ namespace Nitric.Api.Http
 {
     public interface IHttpHandler
     {
-        HttpResponse handle(HttpRequest request);
+        HttpResponse Handle(HttpRequest request);
     }
 }

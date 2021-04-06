@@ -1,17 +1,17 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Nitric.Api.Faas;
+using Nitric.Api.Http;
 using System.Collections.Generic;
 using System.Linq;
-namespace Nitric.Test.Api.Faas
+namespace Nitric.Test.Api.Http
 {
     [TestClass]
-    public class NitricRequestTest
+    public class HttpRequestTest
     {
         [TestMethod]
         public void TestFullBuild()
         {
-            var request = new NitricRequest
+            var request = new HttpRequest
                 .Builder()
                 .Body("Hello World")
                 .Method("GET")
@@ -22,13 +22,15 @@ namespace Nitric.Test.Api.Faas
 
             Assert.AreEqual("Hello World", request.BodyText);
             Assert.AreEqual("127.0.0.1:8080", request.Path);
+            Assert.AreEqual("GET", request.Method);
+            Assert.AreEqual("POST", request.Query);
             Assert.IsNotNull(request.Parameters);
             Assert.IsNotNull(request.Headers);
         }
         [TestMethod]
         public void TestBodyText()
         {
-            var request = new NitricRequest
+            var request = new HttpRequest
                 .Builder()
                 .Body("Hello World")
                 .Build();
@@ -38,11 +40,11 @@ namespace Nitric.Test.Api.Faas
         [TestMethod]
         public void TestHeaders()
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("Content-length", "1024");
-            headers.Add("Accept-Charset", "ISO-8859-1");
+            Dictionary<string, List<string>> headers = new Dictionary<string, List<string>>();
+            headers.Add("Content-length", new List<string>() { "1024"});
+            headers.Add("Accept-Charset", new List<string>() { "ISO-8859-1" });
 
-            var request = new NitricRequest
+            var request = new HttpRequest
                     .Builder()
                     .Headers(headers)
                     .Build();
@@ -59,12 +61,14 @@ namespace Nitric.Test.Api.Faas
         [TestMethod]
         public void TestDefaults()
         {
-            var request = new NitricRequest
+            var request = new HttpRequest
                 .Builder()
                 .Build();
 
             Assert.AreEqual(null, request.Body);
             Assert.AreEqual("", request.Path);
+            Assert.AreEqual("", request.Method);
+            Assert.AreEqual("", request.Query);
             Assert.IsNotNull(request.Headers);
             Assert.IsNotNull(request.Parameters);
         }

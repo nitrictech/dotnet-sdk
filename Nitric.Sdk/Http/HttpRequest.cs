@@ -11,6 +11,11 @@ namespace Nitric.Api.Http
         public string Query { get; }
         public Dictionary<string, List<string>> Headers { get; }
         public byte[] Body { get; }
+        public string BodyText
+        {
+            get { return Encoding.UTF8.GetString(this.Body); }
+            private set { }
+        }
         public Dictionary<string, List<string>> Parameters { get; }
         public HttpRequest(string method,
                            string path,
@@ -57,15 +62,11 @@ namespace Nitric.Api.Http
 
             public Builder()
             {
-                this.Reset();
-            }
-            public void Reset()
-            {
-                this.method = null;
-                this.path = null;
-                this.query = null;
-                this.headers = null;
-                this.parameters = null;
+                this.method = "";
+                this.path = "";
+                this.query = "";
+                this.headers = new Dictionary<string, List<string>>();
+                this.parameters = new Dictionary<string, List<string>>();
                 this.body = null;
             }
             //Set the request method, for example with HTTP this would be ["GET" | "POST" | "PUT" | "DELETE" ].
@@ -104,12 +105,17 @@ namespace Nitric.Api.Http
                 this.body = body;
                 return this;
             }
+            public Builder Body(string body)
+            {
+                this.body = (body != null) ? Encoding.UTF8.GetBytes(body) : null;
+                return this;
+            }
             //returns a new Http request.
             public HttpRequest Build()
             {
                 //TODO: Add immutable dictionary if headers != null, otherwise empty dictionary
                 var immutableHeaders = new Dictionary<string, List<string>>();
-
+                this.method = (method == null) ? "" : this.method;
                 string urlParameters = null;
                 if ("POST".ToLower() == method.ToLower())
                 {

@@ -10,10 +10,13 @@ namespace Nitric.Api.Http
     {
         private static readonly string ContentType = "Content-Type";
 
-        public byte[] Body { get; private set; }
-        public HttpStatusCode Status { get; private set; }
-        public Dictionary<string, List<string>> Headers { get; private set; }
-
+        public byte[] Body { get; }
+        public HttpStatusCode Status { get; }
+        public Dictionary<string, List<string>> Headers { get; }
+        public string BodyText
+        {
+            get { return Encoding.UTF8.GetString(this.Body); }
+        }
         /*
          * Package Private constructor to enforce response builder pattern.
          */
@@ -39,28 +42,19 @@ namespace Nitric.Api.Http
         }
         public override string ToString()
         {
+            StringBuilder sb = new StringBuilder("{");
+            foreach (KeyValuePair<string, List<string>> entry in Headers)
+            {
+                sb.Append(entry.Key.ToString());
+            }
+            sb.Append("}");
             return GetType().Name +
-                    "[status=" + Status.ToString() +
-                    ", headers=" + Headers +
+                    "[status=" + ((int)Status).ToString() +
+                    ", headers=" + sb.ToString() +
                     ", body.length=" + ((Body != null) ? Body.Length : 0) +
                     "]";
         }
-        public static Builder NewBuilder()
-        {
-            return new Builder();
-        }
-        public static HttpResponse Build(string body)
-        {
-            return NewBuilder().BodyText(body).Build();
-        }
-        public static HttpResponse Build(HttpStatusCode status)
-        {
-            return NewBuilder().Status(status).Build();
-        }
-        public static HttpResponse Build(HttpStatusCode status, string body)
-        {
-            return NewBuilder().Status(status).BodyText(body).Build();
-        }
+
         public class Builder
         {
             private const string ContentType = "Content-Type";
@@ -70,10 +64,6 @@ namespace Nitric.Api.Http
             private byte[] body;
 
             public Builder()
-            {
-                Reset();
-            }
-            public void Reset()
             {
                 this.status = HttpStatusCode.OK;
                 this.headers = new Dictionary<string, List<string>>();
@@ -120,7 +110,7 @@ namespace Nitric.Api.Http
             }
 
             //Set the function response body text (UTF-8) encoded.
-            public Builder BodyText(string body)
+            public Builder Body(string body)
             {
                 this.body = (body != null) ? Encoding.UTF8.GetBytes(body.ToCharArray()) : null;
                 return this;
@@ -140,6 +130,18 @@ namespace Nitric.Api.Http
                     }
                 }
                 return new HttpResponse(this.body, this.status, this.headers);
+            }
+            public HttpResponse Build(string body)
+            {
+                return Body(body).Build();
+            }
+            public HttpResponse Build(HttpStatusCode status)
+            {
+                return Status(status).Build();
+            }
+            public HttpResponse Build(HttpStatusCode status, string body)
+            {
+                return Status(status).Body(body).Build();
             }
 
             // Private Methods ------------------------------------------------------------

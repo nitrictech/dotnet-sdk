@@ -12,8 +12,11 @@ namespace Nitric.Api.Faas
      */
     public class Faas
     {
-        string hostname = "127.0.0.1";
-        public string HostName
+        private static readonly string DefaultHostName = "127.0.0.1";
+        private static readonly int DefaultPort = 8080;
+
+        private string hostname = DefaultHostName;
+        public string Hostname
         {
             get => hostname;
             set
@@ -21,7 +24,7 @@ namespace Nitric.Api.Faas
                 hostname = value;
             }
         }
-        int port = 8080;
+        private int port = DefaultPort;
         public int Port
         {
             get => port;
@@ -30,21 +33,16 @@ namespace Nitric.Api.Faas
                 port = value;
             }
         }
-        HttpListener listener;
-        public HttpListener Listener
-        {
-            get => listener;
-            set { listener = value; }
-        }
+        public HttpListener Listener { get; set; }
         INitricFunction function;
 
         public void Start(INitricFunction function)
         {
             if (function == null)
             {
-                throw new ArgumentNullException("null function parameter");
+                throw new ArgumentNullException("function");
             }
-            if (listener != null)
+            if (Listener != null)
             {
                 throw new ArgumentException("listener has already started");
             }
@@ -54,16 +52,16 @@ namespace Nitric.Api.Faas
             var childAddress = Environment.GetEnvironmentVariable("CHILD_ADDRESS");
             if (!string.IsNullOrEmpty(childAddress))
             {
-                hostname = childAddress;
+                Hostname = childAddress;
             }
-            Console.WriteLine(string.Format("Starting Faas Function {0} at:\nhttp://{1}:{2}/*/", function.GetType().Name, hostname, port));
-            this.listener = new HttpListener();
-            listener.Prefixes.Add(string.Format("http://{0}:{1}/",hostname,port));
-            listener.Start();
+            Console.WriteLine(string.Format("Starting Faas Function {0} at:\nhttp://{1}:{2}/*/", function.GetType().Name, Hostname, Port));
+            this.Listener = new HttpListener();
+            Listener.Prefixes.Add(string.Format("http://{0}:{1}/",Hostname,Port));
+            Listener.Start();
             var builder = new StringBuilder()
             .Append(GetType().ToString())
             .Append(" listening on port ")
-            .Append(port)
+            .Append(Port)
             .Append(" with function: ");
 
             if (!string.IsNullOrEmpty(function.GetType().Name))
@@ -78,7 +76,7 @@ namespace Nitric.Api.Faas
             while (true)
             {
                 // Will wait here until we hear from a connection
-                Task<HttpListenerContext> taskContext = Task.Run(async () => await listener.GetContextAsync());
+                Task<HttpListenerContext> taskContext = Task.Run(async () => await Listener.GetContextAsync());
                 OnContext(taskContext.Result);
             }
         }

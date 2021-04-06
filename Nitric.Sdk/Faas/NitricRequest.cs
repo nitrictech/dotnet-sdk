@@ -7,13 +7,12 @@ namespace Nitric.Api.Faas
 {
     public class NitricRequest
     {
-        public readonly string Path;
-        public readonly Dictionary<string, List<string>> Headers;
-        public readonly byte[] Body;
-        public readonly Dictionary<string, List<string>> Parameters;
+        public string Path { get; }
+        public Dictionary<string, List<string>> Headers { get; }
+        public byte[] Body { get; }
+        public Dictionary<string, List<string>> Parameters { get; }
         public string BodyText {
             get { return Encoding.UTF8.GetString(this.Body); }
-            private set { }
         }
 
         // Public Methods ------------------------------------------------------------
@@ -29,6 +28,16 @@ namespace Nitric.Api.Faas
             Parameters = parameters;
         }
 
+        public override string ToString()
+        {
+            return GetType().Name +
+                    "[path=" + Path +
+                    ", headers=" + Headers +
+                    ", parameters=" + Parameters +
+                    ", body.length=" + ((Body != null) ? Body.Length : 0) +
+                    "]";
+        }
+
         public class Builder
         {
             private const string ContentType = "Content-Type";
@@ -42,7 +51,7 @@ namespace Nitric.Api.Faas
 
             public Builder()
             {
-                method = null;
+                method = "";
                 path = "";
                 query = null;
                 headers = new Dictionary<string, List<string>>();
@@ -94,9 +103,9 @@ namespace Nitric.Api.Faas
                 this.body = body;
                 return this;
             }
-            public Builder BodyText(string body)
+            public Builder Body(string body)
             {
-                this.body = Encoding.UTF8.GetBytes(body);
+                this.body = (body != null) ? Encoding.UTF8.GetBytes(body) : null;
                 return this;
             }
 

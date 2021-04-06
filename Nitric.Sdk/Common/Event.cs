@@ -6,10 +6,10 @@ namespace Nitric.Api.Common
     {
         public string RequestId { get; protected set; }
         public string PayloadType { get; protected set; }
-        public Struct PayloadStruct { get; protected set; }
-        private Event(string requestId, string payloadType, Struct payloadStruct)
+        public Struct Payload { get; protected set; }
+        private Event(string requestId, string payloadType, Struct payload)
         {
-            PayloadStruct = payloadStruct;
+            Payload = payload;
             RequestId = requestId;
             PayloadType = payloadType;
         }
@@ -18,20 +18,20 @@ namespace Nitric.Api.Common
             return GetType().Name+
                     "[id=" + RequestId
                     + ", payloadType=" + PayloadType
-                    + ", payload=" + PayloadStruct
+                    + ", payload=" + Payload
                     + "]";
         }
         public class Builder
         {
             private string requestId;
             private string payloadType;
-            private Struct payloadStruct;
+            private Struct payload;
 
             public Builder()
             {
                 this.requestId = "";
                 this.payloadType = "";
-                this.payloadStruct = Common.Util.ObjectToStruct(new Dictionary<string,string>());
+                this.payload = Util.ObjectToStruct(new Dictionary<string,string>());
             }
             public Builder RequestId(string requestId)
             {
@@ -43,14 +43,14 @@ namespace Nitric.Api.Common
                 this.payloadType = payloadType;
                 return this;
             }
-            public Builder PayloadStruct(Struct payloadStruct)
+            public Builder Payload(Struct payload)
             {
-                this.payloadStruct = payloadStruct;
+                this.payload = payload;
                 return this;
             }
             public Event Build()
             {
-                return new Event(requestId, payloadType, payloadStruct);
+                return new Event(requestId, payloadType, payload);
             }
         }
     }

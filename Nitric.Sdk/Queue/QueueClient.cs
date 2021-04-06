@@ -8,11 +8,11 @@ using Nitric.Api.Common;
 namespace Nitric.Api.Queue
 {
     
-    class QueueClient : AbstractClient
+    public class QueueClient : AbstractClient
     {
         protected ProtoClient client;
 
-        public QueueClient()
+        private QueueClient()
         {
             this.client = new ProtoClient(this.GetChannel());
         }
@@ -53,12 +53,13 @@ namespace Nitric.Api.Queue
         }
         private QueueItem WireToQueueItem(NitricTask nitricTask)
         {
-            return new QueueItem(new Common.Event(
-                nitricTask.Id,
-                nitricTask.PayloadType,
-                nitricTask.Payload),
-                nitricTask.LeaseId
-            );
+            return new QueueItem
+                .Builder()
+                .RequestID(nitricTask.Id)
+                .PayloadType(nitricTask.PayloadType)
+                .Payload(nitricTask.Payload)
+                .LeaseID(nitricTask.LeaseId)
+                .Build();
         }
 
         private NitricTask EventToWire(Common.Event sdkEvent)
@@ -66,7 +67,7 @@ namespace Nitric.Api.Queue
             return new NitricTask {
                 Id = sdkEvent.RequestId,
                 PayloadType = sdkEvent.PayloadType,
-                Payload = sdkEvent.PayloadStruct
+                Payload = sdkEvent.Payload
             };
         }
 
@@ -74,18 +75,28 @@ namespace Nitric.Api.Queue
         {
             return new FailedTask.Builder()
                 .RequestId(protoFailedEvent.Task.Id)
-                .PayloadId(protoFailedEvent.Task.PayloadType)
-                .PayloadStruct(protoFailedEvent.Task.Payload)
+                .PayloadType(protoFailedEvent.Task.PayloadType)
+                .Payload(protoFailedEvent.Task.Payload)
                 .Message(protoFailedEvent.Message)
                 .Build();
         }
-        private Common.Event WireToEvent(NitricTask nitricEvent)
+        private Common.Event WireToEvent(NitricTask nitricTask)
         {
-            return new Common.Event(
-                nitricEvent.Id,
-                nitricEvent.PayloadType,
-                nitricEvent.Payload
-            );
+            return new Common.Event
+                .Builder()
+                .RequestId(nitricTask.Id)
+                .PayloadType(nitricTask.PayloadType)
+                .Payload(nitricTask.Payload)
+                .Build();
+        }
+        public class Builder
+        {
+            public Builder()
+            {}
+            public QueueClient Build()
+            {
+                return new QueueClient();
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Nitric.Sdk.Faas
+﻿namespace Nitric.Api.Faas
 {
     public class SourceType
     {

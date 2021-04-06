@@ -10,9 +10,9 @@ namespace Nitric.Api.Event
 	{
 		protected ProtoClient client;
 
-		private EventClient()
+		private EventClient(ProtoClient client=null)
 		{
-			this.client = new ProtoClient(this.GetChannel());
+			this.client = (client == null) ? new ProtoClient(this.GetChannel()) : client;
 		}
 
 		public string Publish(string topic, Object payload, string payloadType, string requestID)
@@ -27,19 +27,26 @@ namespace Nitric.Api.Event
 			var evt = new NitricEvent { Id = requestID, PayloadType = payloadType, Payload = payloadStruct };
 			var request = new EventPublishRequest { Topic = topic, Event = evt };
 
-			this.client.Publish(request);
+			var response = this.client.Publish(request);
 
 			return requestID;
 		}
 		public class Builder
         {
+			private ProtoClient client;
 			//Forces the builder design pattern
 			public Builder()
 			{ }
+			public Builder Client(ProtoClient client)
+            {
+				this.client = client;
+				return this;
+            }
 			public EventClient Build()
             {
-				return new EventClient();
+				return new EventClient(this.client);
             }
+
         }
 	}
 }
