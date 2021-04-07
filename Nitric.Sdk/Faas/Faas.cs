@@ -54,25 +54,10 @@ namespace Nitric.Api.Faas
             {
                 Hostname = childAddress;
             }
-            Console.WriteLine(string.Format("Starting Faas Function {0} at:\nhttp://{1}:{2}/*/", function.GetType().Name, Hostname, Port));
+            Console.WriteLine(string.Format("Faas listening on port {0} with function: {1}",port, function.GetType().Name));
             this.Listener = new HttpListener();
             Listener.Prefixes.Add(string.Format("http://{0}:{1}/",Hostname,Port));
             Listener.Start();
-            var builder = new StringBuilder()
-            .Append(GetType().ToString())
-            .Append(" listening on port ")
-            .Append(Port)
-            .Append(" with function: ");
-
-            if (!string.IsNullOrEmpty(function.GetType().Name))
-            {
-                builder.Append(function.GetType().Name);
-            }
-            else
-            {
-                builder.Append(function.GetType().FullName);
-            }
-            Console.WriteLine(builder);
             while (true)
             {
                 // Will wait here until we hear from a connection
