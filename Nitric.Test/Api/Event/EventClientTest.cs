@@ -35,7 +35,7 @@ namespace Nitric.Test.Api.Event
                 .Client(ec.Object)
                 .Build();
 
-            eventClient.Publish("topic", new Dictionary<string, string>(), "payloadType", "1");
+            var response = eventClient.Publish("topic", new Dictionary<string, string>(), "payloadType", "1");
 
             ec.Verify(t => t.Publish(It.IsAny<EventPublishRequest>(), null,null,It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }

@@ -11,10 +11,10 @@ namespace Nitric.Api.Storage
         public readonly string BucketName;
         protected ProtoClient client;
 
-        private StorageClient(string bucketName)
+        private StorageClient(string bucketName, ProtoClient client)
         {
             this.BucketName = bucketName;
-            client = new ProtoClient(GetChannel());
+            this.client = (client == null) ? new ProtoClient(GetChannel()) : client;
         }
         public void Write(string key, byte[] body)
         {
@@ -32,7 +32,7 @@ namespace Nitric.Api.Storage
                 Key = key
             };
             var response = client.Read(request);
-            return response.ToByteArray();
+            return response.Body.ToByteArray();
         }
         public void Delete(string key)
         {
@@ -49,10 +49,17 @@ namespace Nitric.Api.Storage
         }
         public class Builder
         {
+            private ProtoClient client;
             private string bucketName;
             public Builder()
             {
-                bucketName = null;
+                this.client = null;
+                this.bucketName = null;
+            }
+            public Builder Client(ProtoClient client)
+            {
+                this.client = client;
+                return this;
             }
             public Builder BucketName(string bucketName)
             {
@@ -65,7 +72,7 @@ namespace Nitric.Api.Storage
                 {
                     throw new ArgumentNullException("bucketName");
                 }
-                return new StorageClient(bucketName);
+                return new StorageClient(bucketName,client);
             }
         }
     }

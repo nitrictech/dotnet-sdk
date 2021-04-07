@@ -13,11 +13,11 @@ namespace Nitric.Api.KeyValue
         public System.Type Type { get; private set; }
         public string Collection { get; private set; }
 
-        private KeyValueClient(string collection, System.Type type)
+        private KeyValueClient(string collection, System.Type type, ProtoClient client)
         {
             this.Collection = collection;
             this.Type = type;
-            client = new ProtoClient(GetChannel());
+            this.client = (client == null) ? new ProtoClient(GetChannel()) : client;
         }
         public void Put(string key, object value)
         {
@@ -73,11 +73,19 @@ namespace Nitric.Api.KeyValue
 
         public class Builder
         {
+            private ProtoClient client;
             private string collection;
             private System.Type type;
             public Builder()
             {
                 this.collection = null;
+                this.type = null;
+                this.client = null;
+            }
+            public Builder Client(ProtoClient client)
+            {
+                this.client = client;
+                return this;
             }
             public Builder Collection(string collection)
             {
@@ -99,7 +107,7 @@ namespace Nitric.Api.KeyValue
                 {
                     throw new ArgumentNullException("type");
                 }
-                return new KeyValueClient(this.collection, this.type);
+                return new KeyValueClient(this.collection, this.type, this.client);
             }
             public KeyValueClient Build(string collection)
             {

@@ -6,7 +6,7 @@ using Nitric.Api.Faas;
 
 namespace Nitric.Test.Api.Faas
 {
-    //[TestClass]
+    [TestClass]
     public class FaasTest
     {
         const int TestingPort = 8081;

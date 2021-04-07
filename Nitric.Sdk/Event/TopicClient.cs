@@ -9,9 +9,9 @@ namespace Nitric.Api.Event
     public class TopicClient : AbstractClient
     {
 		protected ProtoClient client;
-        private TopicClient()
+        private TopicClient(ProtoClient client)
         {
-            this.client = new ProtoClient(this.GetChannel());
+            this.client = (client == null) ? new ProtoClient(this.GetChannel()) : client;
         }
 		public List<Topic> List()
         {
@@ -22,20 +22,28 @@ namespace Nitric.Api.Event
             List<Topic> topics = new List<Topic>();
 			foreach (NitricTopic r in response.Topics)
             {
-                new Topic
+                topics.Add(new Topic
                     .Builder()
-                    .Build(r.Name);
+                    .Build(r.Name));
             }
             return topics;
 		}
         public class Builder
         {
+            private ProtoClient client;
             //Forces the builder design pattern
             public Builder()
-            { }
+            {
+                this.client = null;
+            }
+            public Builder Client(ProtoClient client)
+            {
+                this.client = client;
+                return this;
+            }
             public TopicClient Build()
             {
-                return new TopicClient();
+                return new TopicClient(client);
             }
         }
     }

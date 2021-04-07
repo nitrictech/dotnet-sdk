@@ -5,6 +5,7 @@ using Google.Protobuf.WellKnownTypes;
 using Nitric.Api.KeyValue;
 using Moq;
 using Nitric.Proto.KeyValue.v1;
+using Grpc.Core;
 namespace Nitric.Test.Api.Kv
 {
     [TestClass]
@@ -32,57 +33,123 @@ namespace Nitric.Test.Api.Kv
                 new KeyValueClient.Builder().Build(null, KnownDict.GetType());
                 Assert.IsTrue(false);
             } catch (ArgumentNullException ane) {
-                    Assert.AreEqual("Value cannot be null. (Parameter 'collection')", ane.Message);
+                Assert.AreEqual("Value cannot be null. (Parameter 'collection')", ane.Message);
             }
 
             try
             {
                 new KeyValueClient.Builder().Build("collection", null);
                 Assert.IsTrue(false);
-            }
-            catch (ArgumentNullException ane)
+            } catch (ArgumentNullException ane)
             {
                 Assert.AreEqual("Value cannot be null. (Parameter 'type')", ane.Message);
             }
         }
 
         [TestMethod]
-        public void TestGet()
+        public void TestGetNonExistingKey()
         {
-            var request = new KeyValueGetRequest { Collection = "customers", Key = KnownKey};
+            Mock<KeyValue.KeyValueClient> ec = new Mock<KeyValue.KeyValueClient>();
+            ec.Setup(e => e.Get(It.IsAny<KeyValueGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
+                .Verifiable();
 
-            Mock<KeyValue.KeyValueClient> ec = new Mock<KeyValue.KeyValueClient>()
-            { CallBase = true };
-            ec.Setup(e => e.Get(request, It.IsAny<Grpc.Core.CallOptions>()))
-                .Returns(new KeyValueGetResponse());
+            var kvClient = new KeyValueClient.Builder()
+                .Collection("customers")
+                .Type(typeof(string))
+                .Client(ec.Object)
+                .Build();
 
-            ec.Verify(t => t.Get(request, It.IsAny<Grpc.Core.CallOptions>()), Times.Once);
+            try
+            {
+                kvClient.Get("key");
+                Assert.IsTrue(false);
+            } catch (RpcException re){
+                Assert.AreEqual("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", re.Message);
+            }
+
+            ec.Verify(t => t.Get(It.IsAny<KeyValueGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [TestMethod]
+        public void TestGetExistingKey()
+        {
+            Mock<KeyValue.KeyValueClient> ec = new Mock<KeyValue.KeyValueClient>();
+            ec.Setup(e => e.Get(It.IsAny<KeyValueGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(new KeyValueGetResponse { Value = KnownStruct})
+                .Verifiable();
+
+            var kvClient = new KeyValueClient.Builder()
+                .Collection("customers")
+                .Type(typeof(string))
+                .Client(ec.Object)
+                .Build();
+
+            var response = kvClient.Get("key");
+
+            Assert.AreEqual(KnownStruct.ToString(), response);
+
+            ec.Verify(t => t.Get(It.IsAny<KeyValueGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
 
         [TestMethod]
         public void TestPut()
         {
-            var request = new KeyValuePutRequest { Collection = "customers", Key = KnownKey, Value = KnownStruct };
+            Mock<KeyValue.KeyValueClient> ec = new Mock<KeyValue.KeyValueClient>();
+            ec.Setup(e => e.Put(It.IsAny<KeyValuePutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(new KeyValuePutResponse())
+                .Verifiable();
 
-            Mock<KeyValue.KeyValueClient> ec = new Mock<KeyValue.KeyValueClient>()
-            { CallBase = true };
-            ec.Setup(e => e.Put(request, It.IsAny<Grpc.Core.CallOptions>()))
-                .Returns(new KeyValuePutResponse());
+            var kvClient = new KeyValueClient.Builder()
+                .Collection("customers")
+                .Type(typeof(string))
+                .Client(ec.Object)
+                .Build();
 
-            ec.Verify(t => t.Put(request, It.IsAny<Grpc.Core.CallOptions>()), Times.Once);
+            kvClient.Put("customers", KnownStruct);
+
+            ec.Verify(t => t.Put(It.IsAny<KeyValuePutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
 
         [TestMethod]
-        public void TestDelete()
+        public void TestDeleteExistingKey()
         {
-            var request = new KeyValueDeleteRequest { Collection = "customers", Key = KnownKey };
+            Mock<KeyValue.KeyValueClient> ec = new Mock<KeyValue.KeyValueClient>();
+            ec.Setup(e => e.Delete(It.IsAny<KeyValueDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(new KeyValueDeleteResponse())
+                .Verifiable();
 
-            Mock<KeyValue.KeyValueClient> ec = new Mock<KeyValue.KeyValueClient>()
-            { CallBase = true };
-            ec.Setup(e => e.Delete(request, It.IsAny<Grpc.Core.CallOptions>()))
-                .Returns(new KeyValueDeleteResponse());
+            var kvClient = new KeyValueClient.Builder()
+                .Collection("customers")
+                .Type(typeof(string))
+                .Client(ec.Object)
+                .Build();
 
-            ec.Verify(t => t.Delete(request, It.IsAny<Grpc.Core.CallOptions>()), Times.Once);
+            kvClient.Delete("john smith");
+
+            ec.Verify(t => t.Delete(It.IsAny<KeyValueDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [TestMethod]
+        public void TestDeleteNonExistingKey()
+        {
+            Mock<KeyValue.KeyValueClient> ec = new Mock<KeyValue.KeyValueClient>();
+            ec.Setup(e => e.Delete(It.IsAny<KeyValueDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
+                .Verifiable();
+
+            var kvClient = new KeyValueClient.Builder()
+                .Collection("customers")
+                .Type(typeof(string))
+                .Client(ec.Object)
+                .Build();
+
+            try
+            {
+                kvClient.Delete("key");
+                Assert.IsTrue(false);
+            } catch (RpcException re) {
+                Assert.AreEqual("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", re.Message);
+            }
+            ec.Verify(t => t.Delete(It.IsAny<KeyValueDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }
 }

@@ -12,9 +12,9 @@ namespace Nitric.Api.Queue
     {
         protected ProtoClient client;
 
-        private QueueClient()
+        private QueueClient(ProtoClient client)
         {
-            this.client = new ProtoClient(this.GetChannel());
+            this.client = (client == null) ? new ProtoClient(this.GetChannel()) : client;
         }
 
         public PushResponse SendBatch(string queue, IList<Common.Event> events)
@@ -91,11 +91,19 @@ namespace Nitric.Api.Queue
         }
         public class Builder
         {
+            private ProtoClient client;
             public Builder()
-            {}
+            {
+                client = null;
+            }
+            public Builder Client(ProtoClient client)
+            {
+                this.client = client;
+                return this;
+            }
             public QueueClient Build()
             {
-                return new QueueClient();
+                return new QueueClient(client);
             }
         }
     }

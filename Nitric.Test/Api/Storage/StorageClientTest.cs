@@ -1,7 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nitric.Proto.Storage.v1;
+using Nitric.Api.Storage;
 using Moq;
+using Grpc.Core;
+
 namespace Nitric.Test.Api.Storage
 {
     [TestClass]
@@ -10,7 +13,7 @@ namespace Nitric.Test.Api.Storage
         [TestMethod]
         public void TestBuild()
         {
-            var storage = new Nitric.Api.Storage.StorageClient
+            var storage = new StorageClient
                 .Builder()
                 .BucketName("bucket")
                 .Build();
@@ -20,7 +23,7 @@ namespace Nitric.Test.Api.Storage
 
             try
             {
-                storage = new Nitric.Api.Storage.StorageClient
+                storage = new StorageClient
                     .Builder()
                     .Build();
                 Assert.IsTrue(false);
@@ -41,41 +44,102 @@ namespace Nitric.Test.Api.Storage
             };
 
             Mock<Proto.Storage.v1.Storage.StorageClient> ec = new Mock<Proto.Storage.v1.Storage.StorageClient>();
-            ec.Setup(e => e.Write(request, default))
+            ec.Setup(e => e.Write(It.IsAny<StorageWriteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new StorageWriteResponse())
                 .Verifiable();
 
-            ec.Verify(t => t.Write(request, default), Times.Once);
+            var storageClient = new StorageClient.Builder()
+                .Client(ec.Object)
+                .BucketName("Customers")
+                .Build();
+
+            storageClient.Write("john smith", System.Text.Encoding.UTF8.GetBytes("Hello World"));
+
+            ec.Verify(t => t.Write(It.IsAny<StorageWriteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [TestMethod]
-        public void TestRead()
+        public void TestReadExistingKey()
         {
-            var request = new StorageReadRequest
-            {
-                BucketName = "bucket",
-                Key = "key"
-            };
+            var storageResponse = new StorageReadResponse();
+            storageResponse.Body = Google.Protobuf.ByteString.CopyFrom(System.Text.Encoding.UTF8.GetBytes("Hello World"));
+
             Mock<Proto.Storage.v1.Storage.StorageClient> ec = new Mock<Proto.Storage.v1.Storage.StorageClient>();
-            ec.Setup(e => e.Read(request, default))
-                .Returns(new StorageReadResponse())
+            ec.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(storageResponse)
                 .Verifiable();
 
-            ec.Verify(t => t.Read(request, default), Times.Once);
+            var storageClient = new StorageClient.Builder()
+                .Client(ec.Object)
+                .BucketName("Customers")
+                .Build();
+
+            var response = storageClient.Read("john smith");
+
+            Assert.AreEqual("Hello World", System.Text.Encoding.UTF8.GetString(response));
+
+            ec.Verify(t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [TestMethod]
-        public void TestDelete()
+        public void TestReadNonExistingKey()
         {
-            var request = new StorageDeleteRequest
-            {
-                BucketName = "bucket",
-                Key = "key"
-            };
             Mock<Proto.Storage.v1.Storage.StorageClient> ec = new Mock<Proto.Storage.v1.Storage.StorageClient>();
-            ec.Setup(e => e.Delete(request, default))
+            ec.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
+                .Verifiable();
+
+            var storageClient = new StorageClient.Builder()
+                .Client(ec.Object)
+                .BucketName("Customers")
+                .Build();
+
+            try
+            {
+                storageClient.Read("john smith");
+                Assert.IsTrue(false);
+            } catch (RpcException re) {
+                Assert.AreEqual("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", re.Message);
+            }
+
+            ec.Verify(t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [TestMethod]
+        public void TestDeleteExistingKey()
+        {
+            Mock<Proto.Storage.v1.Storage.StorageClient> ec = new Mock<Proto.Storage.v1.Storage.StorageClient>();
+            ec.Setup(e => e.Delete(It.IsAny<StorageDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new StorageDeleteResponse())
                 .Verifiable();
 
-            ec.Verify(t => t.Delete(request, default), Times.Once);
+            var storageClient = new StorageClient.Builder()
+                .Client(ec.Object)
+                .BucketName("Customers")
+                .Build();
+
+            storageClient.Delete("john smith");
+
+            ec.Verify(t => t.Delete(It.IsAny<StorageDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [TestMethod]
+        public void TestDeleteNonExistinghKey()
+        {
+            Mock<Proto.Storage.v1.Storage.StorageClient> ec = new Mock<Proto.Storage.v1.Storage.StorageClient>();
+            ec.Setup(e => e.Delete(It.IsAny<StorageDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
+                .Verifiable();
+
+            var storageClient = new StorageClient.Builder()
+                .Client(ec.Object)
+                .BucketName("Customers")
+                .Build();
+
+            try
+            {
+                storageClient.Delete("john smith");
+                Assert.IsTrue(false);
+            } catch (RpcException re) {
+                Assert.AreEqual("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", re.Message);
+            }
+            ec.Verify(t => t.Delete(It.IsAny<StorageDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }
 }

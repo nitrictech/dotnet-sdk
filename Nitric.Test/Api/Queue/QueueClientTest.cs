@@ -5,6 +5,7 @@ using Google.Protobuf.Collections;
 using System.Collections.Generic;
 using Moq;
 using Google.Protobuf.WellKnownTypes;
+using Nitric.Api.Queue;
 namespace Nitric.Test.Api.Queue
 {
     [TestClass]
@@ -13,140 +14,112 @@ namespace Nitric.Test.Api.Queue
         [TestMethod]
         public void TestBuild()
         {
-            var queueClient = new Nitric.Api.Queue.QueueClient
+            var queueClient = new QueueClient
                 .Builder()
                 .Build();
 
             Assert.IsNotNull(queueClient);
         }
         [TestMethod]
-        public void TestSendBatch()
+        public void TestSendBatchWithFailedTasks()
         {
-            var request = new QueueSendBatchRequest { Queue = "queue" };
-            request.Tasks.AddRange(new RepeatedField<NitricTask>());
+            //Setting up failed tasks to then return later
+            NitricTask failedTaskTask = new NitricTask();
+            failedTaskTask.Id = "0";
+            failedTaskTask.LeaseId = "1";
+            failedTaskTask.Payload = Nitric.Api.Common.Util.ObjectToStruct(new Dictionary<string, string>());
+            failedTaskTask.PayloadType = "Dictionary";
+
+            Proto.Queue.v1.FailedTask failedTask = new Proto.Queue.v1.FailedTask();
+            failedTask.Message = "I am a failed task... I failed my task";
+            failedTask.Task = failedTaskTask;
+
+            List<Proto.Queue.v1.FailedTask> failedTasks = new List<Proto.Queue.v1.FailedTask>();
+            failedTasks.Add(failedTask);
+
+            var queueBatchResponse = new QueueSendBatchResponse();
+            queueBatchResponse.FailedTasks.AddRange(failedTasks);
 
             Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
-            ec.Setup(e => e.SendBatch(request, default))
+            ec.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(queueBatchResponse)
+                .Verifiable();
+
+            var queueClient = new QueueClient.Builder()
+                .Client(ec.Object)
+                .Build();
+
+            var response = queueClient.SendBatch("queue", new List<Nitric.Api.Common.Event>());
+
+            Assert.AreEqual("I am a failed task... I failed my task", response.getFailedTasks()[0].Message);
+
+            ec.Verify(t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [TestMethod]
+        public void TestSendBatchWithNoFailedTasks()
+        {
+            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            ec.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new QueueSendBatchResponse())
                 .Verifiable();
 
-            ec.Verify(t => t.SendBatch(request, default), Times.Once);
+            var queueClient = new QueueClient.Builder()
+                .Client(ec.Object)
+                .Build();
+
+            var response = queueClient.SendBatch("queue", new List<Nitric.Api.Common.Event>());
+
+            Assert.AreEqual(0, response.getFailedTasks().Count);
+
+            ec.Verify(t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [TestMethod]
-        public void TestRecieve()
+        public void TestReceiveTasks()
         {
-            var request = new QueueReceiveRequest { Queue = "queue", Depth = 2 };
+            NitricTask taskToReturn = new NitricTask();
+            taskToReturn.Id = "32";
+            taskToReturn.LeaseId = "1";
+            taskToReturn.Payload = Nitric.Api.Common.Util.ObjectToStruct(new Dictionary<string, string>());
+            taskToReturn.PayloadType = "Dictionary";
+
+            RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();
+            tasks.Add(taskToReturn);
+
+            var queueReceieveResponse = new QueueReceiveResponse();
+            queueReceieveResponse.Tasks.AddRange(tasks);
 
             Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
-            ec.Setup(e => e.Receive(request, default))
+            ec.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(queueReceieveResponse)
+                .Verifiable();
+
+            var queueClient = new QueueClient.Builder()
+                .Client(ec.Object)
+                .Build();
+
+            var response = queueClient.Receive("queue", 3);
+
+            Assert.AreEqual("32", response[0].Event.RequestId);
+
+            ec.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [TestMethod]
+        public void TestReceiveNoTasks()
+        {
+            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            ec.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new QueueReceiveResponse())
                 .Verifiable();
 
-            ec.Verify(t => t.Receive(request, default), Times.Once);
-        }
-        [TestMethod]
-        public void TestWireToQueueItem()
-        {
-            Dictionary<string, string> payload = new Dictionary<string, string>();
-            Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
-            NitricTask nitricTask = new NitricTask();
-            nitricTask.LeaseId = "1";
-            nitricTask.Id = "2";
-            nitricTask.Payload = payloadStruct;
-            nitricTask.PayloadType = "payload type";
-
-            var queueItem = new Nitric.Api.Queue.QueueItem
-                .Builder()
-                .RequestID(nitricTask.Id)
-                .PayloadType(nitricTask.PayloadType)
-                .Payload(nitricTask.Payload)
-                .LeaseID(nitricTask.LeaseId)
+            var queueClient = new QueueClient.Builder()
+                .Client(ec.Object)
                 .Build();
 
-            Assert.IsNotNull(queueItem);
-            Assert.AreEqual("2", queueItem.Event.RequestId);
-            Assert.AreEqual(payloadStruct, queueItem.Event.Payload);
-            Assert.AreEqual("payload type", queueItem.Event.PayloadType);
-            Assert.AreEqual("1", queueItem.LeaseID);
-        }
+            var response = queueClient.Receive("queue", 3);
 
-        [TestMethod]
-        public void TestEventToWire()
-        {
-            Dictionary<string, string> payload = new Dictionary<string, string>();
-            Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
-            var sdkEvent = new Nitric.Api.Common.Event
-                .Builder()
-                .RequestId("1")
-                .Payload(payloadStruct)
-                .PayloadType("payload type")
-                .Build();
+            Assert.AreEqual(0, response.Count);
 
-            var nitricTask = new NitricTask
-            {
-                Id = sdkEvent.RequestId,
-                PayloadType = sdkEvent.PayloadType,
-                Payload = sdkEvent.Payload
-            };
-
-            Assert.IsNotNull(nitricTask);
-            Assert.AreEqual("1", nitricTask.Id);
-            Assert.AreEqual("payload type", nitricTask.PayloadType);
-            Assert.AreEqual(payloadStruct, nitricTask.Payload);
-        }
-
-        [TestMethod]
-        public void TestWireToFailedEvent()
-        {
-            Dictionary<string, string> payload = new Dictionary<string, string>();
-            Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
-            var protoFailedTask = new FailedTask
-            {
-                Message = "message",
-                Task = new NitricTask
-                {
-                    Id = "1",
-                    PayloadType = "payload type",
-                    Payload = payloadStruct
-                }
-            };
-
-            var failedTask = new Nitric.Api.Queue.FailedTask.Builder()
-                .RequestId(protoFailedTask.Task.Id)
-                .PayloadType(protoFailedTask.Task.PayloadType)
-                .Payload(protoFailedTask.Task.Payload)
-                .Message(protoFailedTask.Message)
-                .Build();
-
-            Assert.IsNotNull(failedTask);
-            Assert.AreEqual("message", failedTask.Message);
-            Assert.AreEqual("1", failedTask.Event.RequestId);
-            Assert.AreEqual("payload type", failedTask.Event.PayloadType);
-            Assert.AreEqual(payloadStruct, failedTask.Event.Payload);
-        }
-
-        [TestMethod]
-        public void TestWireToEvent()
-        {
-            Dictionary<string, string> payload = new Dictionary<string, string>();
-            Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
-            NitricTask nitricTask = new NitricTask();
-            nitricTask.LeaseId = "1";
-            nitricTask.Id = "2";
-            nitricTask.Payload = payloadStruct;
-            nitricTask.PayloadType = "payload type";
-
-            var sdkEvent = new Nitric.Api.Common.Event
-                .Builder()
-                .RequestId(nitricTask.Id)
-                .PayloadType(nitricTask.PayloadType)
-                .Payload(nitricTask.Payload)
-                .Build();
-
-            Assert.IsNotNull(sdkEvent);
-            Assert.AreEqual("2", sdkEvent.RequestId);
-            Assert.AreEqual(payloadStruct, sdkEvent.Payload);
-            Assert.AreEqual("payload type", sdkEvent.PayloadType);
+            ec.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }
 }

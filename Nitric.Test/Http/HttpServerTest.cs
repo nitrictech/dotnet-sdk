@@ -3,10 +3,11 @@ using System;
 using System.Net.Http;
 using System.Threading;
 using Nitric.Api.Http;
+using System.Threading.Tasks;
 
 namespace Nitric.Test.Api.Http
 {
-    //[TestClass]
+    [TestClass]
     public class HttpServerTest
     {
         const int TestingPort = 8081;
@@ -36,29 +37,66 @@ namespace Nitric.Test.Api.Http
             httpServer.Port = TestingPort;
             Assert.AreEqual(TestingPort, httpServer.Port);
         }
-        /*[TestMethod]
+        [TestMethod]
         public void TestRegister()
         {
             HttpServer httpServer = new HttpServer();
-
             try
             {
                 httpServer.Register(null, new HelloWorld());
                 Assert.IsTrue(false);
-            } catch (ArgumentExceptionNull)
+            } catch (ArgumentNullException ane)
+            {
+                Assert.AreEqual("Value cannot be null. (Parameter 'path')", ane.Message);
+            }
+            try
+            {
+                httpServer.Register("path", null);
+                Assert.IsTrue(false);
+            } catch (ArgumentNullException ane)
+            {
+                Assert.AreEqual("Value cannot be null. (Parameter 'function')", ane.Message);
+            }
+            httpServer.Register("path", new HelloWorld());
+            Assert.IsTrue(true); //The above shouldn't throw an error
         }
         [TestMethod]
         public void TestStart()
         {
+            HttpServer httpServer = new HttpServer();
+            httpServer.Port = TestingPort;
+
+            Thread httpServerThread = new Thread(() => httpServer.Start(new HelloWorld()));
+            httpServerThread.Start();
+            Assert.IsNotNull(httpServer.Listener);
+            httpServer.Shutdown = true;
+
+            //Resets the Http Listener listener
+            httpServer.Listener = null;
+
+            httpServerThread.Start();
+            Assert.IsNotNull(httpServer.Listener);
+            httpServer.Shutdown = true;
         }
         [TestMethod]
         public void TestDoubleStart()
         {
+            HttpServer httpServer = new HttpServer();
+            Thread httpServerThread = new Thread(() => httpServer.Start(new HelloWorld()));
+            httpServerThread.Start();
+            Assert.ThrowsException<ArgumentException>(() => httpServer.Start(new HelloWorld()));
+            httpServer.Listener.Close();
         }
         [TestMethod]
         public void TestCall()
         {
-        }*/
+            HttpServer httpServer = new HttpServer();
+            Thread httpServerThread = new Thread(() => httpServer.Start(new HelloWorld()));
+            httpServerThread.Start();
+            var client = new HttpClient();
+            var result = client.GetAsync(string.Format("http://{0}:{1}/", "127.0.0.1", 8080));
+            Assert.AreEqual("Hello World", result.Result);
+        }
     }
     public class HelloWorld : IHttpHandler
     {
