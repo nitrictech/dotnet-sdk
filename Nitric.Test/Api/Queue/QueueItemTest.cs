@@ -13,7 +13,7 @@ namespace Nitric.Test.Api.Queue
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
             Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
-            var queueItem = new Nitric.Api.Queue.QueueItem
+            var queueItem = new Nitric.Api.Queue.Task
                 .Builder()
                 .LeaseID("1")
                 .RequestID("2")
@@ -33,7 +33,7 @@ namespace Nitric.Test.Api.Queue
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
             Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
-            var queueItem = new Nitric.Api.Queue.QueueItem
+            var queueItem = new Nitric.Api.Queue.Task
                 .Builder()
                 .LeaseID("1")
                 .RequestID("2")

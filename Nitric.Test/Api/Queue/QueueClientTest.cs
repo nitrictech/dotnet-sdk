@@ -47,9 +47,10 @@ namespace Nitric.Test.Api.Queue
 
             var queueClient = new QueueClient.Builder()
                 .Client(ec.Object)
+                .Queue("queue")
                 .Build();
 
-            var response = queueClient.SendBatch("queue", new List<Nitric.Api.Common.Event>());
+            var response = queueClient.SendBatch(new List<Task>());
 
             Assert.AreEqual("I am a failed task... I failed my task", response.getFailedTasks()[0].Message);
 
@@ -65,9 +66,10 @@ namespace Nitric.Test.Api.Queue
 
             var queueClient = new QueueClient.Builder()
                 .Client(ec.Object)
+                .Queue("queue")
                 .Build();
 
-            var response = queueClient.SendBatch("queue", new List<Nitric.Api.Common.Event>());
+            var response = queueClient.SendBatch(new List<Task>());
 
             Assert.AreEqual(0, response.getFailedTasks().Count);
 
@@ -95,9 +97,10 @@ namespace Nitric.Test.Api.Queue
 
             var queueClient = new QueueClient.Builder()
                 .Client(ec.Object)
+                .Queue("queue")
                 .Build();
 
-            var response = queueClient.Receive("queue", 3);
+            var response = queueClient.Receive(3);
 
             Assert.AreEqual("32", response[0].Event.RequestId);
 
@@ -113,13 +116,52 @@ namespace Nitric.Test.Api.Queue
 
             var queueClient = new QueueClient.Builder()
                 .Client(ec.Object)
+                .Queue("queue")
                 .Build();
 
-            var response = queueClient.Receive("queue", 3);
+            var response = queueClient.Receive(3);
 
             Assert.AreEqual(0, response.Count);
 
             ec.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [TestMethod]
+        public void TestSend()
+        {
+            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            ec.Setup(e => e.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Verifiable();
+
+            var queueClient = new QueueClient.Builder()
+                .Client(ec.Object)
+                .Queue("queue")
+                .Build();
+
+            queueClient.Send(new Task.Builder()
+                .LeaseID("leaseId")
+                .RequestID("0")
+                .Payload(new Struct())
+                .PayloadType("JSON")
+                .Build()
+            );
+
+            ec.Verify(t => t.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [TestMethod]
+        public void TestComplete()
+        {
+            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            ec.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Verifiable();
+
+            var queueClient = new QueueClient.Builder()
+                .Client(ec.Object)
+                .Queue("queue")
+                .Build();
+
+            queueClient.Complete("leaseId");
+
+            ec.Verify(t => t.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once); 
         }
     }
 }

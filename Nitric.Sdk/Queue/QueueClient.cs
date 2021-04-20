@@ -4,56 +4,85 @@ using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using ProtoClient = Nitric.Proto.Queue.v1.Queue.QueueClient;
 using Nitric.Proto.Queue.v1;
 using Nitric.Api.Common;
+using System;
 
 namespace Nitric.Api.Queue
 {
-    
+
     public class QueueClient : AbstractClient
     {
         protected ProtoClient client;
-
-        private QueueClient(ProtoClient client)
+        public string Queue { get; private set; }
+        private QueueClient(ProtoClient client, string queue)
         {
+            this.Queue = queue;
             this.client = (client == null) ? new ProtoClient(this.GetChannel()) : client;
         }
 
-        public PushResponse SendBatch(string queue, IList<Common.Event> events)
+        public void Send(Task task)
+        {
+            if (task == null)
+            {
+                throw new ArgumentNullException("task");
+            }
+            var request = new QueueSendRequest
+            {
+                Queue = this.Queue,
+                Task = EventToWire(task)
+            };
+            client.Send(request);
+        }
+        public PushResponse SendBatch(IList<Task> tasks)
         {
             RepeatedField<NitricTask> wireEvents = new RepeatedField<NitricTask>();
-            foreach(Common.Event se in events)
+            foreach (Task task in tasks)
             {
-                wireEvents.Add(EventToWire(se));
+                wireEvents.Add(EventToWire(task));
             }
 
-            var request = new QueueSendBatchRequest { Queue = queue };
+            var request = new QueueSendBatchRequest { Queue = this.Queue };
             request.Tasks.AddRange(wireEvents);
             var response = client.SendBatch(request);
             List<FailedTask> failedTasks = new List<FailedTask>();
-            foreach(Proto.Queue.v1.FailedTask fe in response.FailedTasks)
+            foreach (Proto.Queue.v1.FailedTask fe in response.FailedTasks)
             {
                 failedTasks.Add(WireToFailedEvent(fe));
             }
             return new PushResponse(failedTasks);
         }
 
-        public List<QueueItem> Receive(string queue, int depth)
+        public List<Task> Receive(int depth)
         {
             if (depth < 1)
             {
                 depth = 1;
             }
-            var request = new QueueReceiveRequest { Queue = queue, Depth = depth };
+            var request = new QueueReceiveRequest { Queue = this.Queue, Depth = depth };
             var response = this.client.Receive(request);
-            List<QueueItem> items = new List<QueueItem>();
+            List<Task> items = new List<Task>();
             foreach (NitricTask nqi in response.Tasks)
             {
                 items.Add(WireToQueueItem(nqi));
             }
             return items;
         }
-        private QueueItem WireToQueueItem(NitricTask nitricTask)
+
+        public void Complete(string leaseId)
         {
-            return new QueueItem
+            if (string.IsNullOrEmpty(leaseId))
+            {
+                throw new ArgumentNullException("leaseId");
+            }
+            var request = new QueueCompleteRequest
+            {
+                Queue = this.Queue,
+                LeaseId = leaseId
+            };
+            client.Complete(request);
+        }
+        private Task WireToQueueItem(NitricTask nitricTask)
+        {
+            return new Task
                 .Builder()
                 .RequestID(nitricTask.Id)
                 .PayloadType(nitricTask.PayloadType)
@@ -62,12 +91,13 @@ namespace Nitric.Api.Queue
                 .Build();
         }
 
-        private NitricTask EventToWire(Common.Event sdkEvent)
+        private NitricTask EventToWire(Task task)
         {
-            return new NitricTask {
-                Id = sdkEvent.RequestId,
-                PayloadType = sdkEvent.PayloadType,
-                Payload = sdkEvent.Payload
+            return new NitricTask
+            {
+                Id = task.Event.RequestId,
+                PayloadType = task.Event.PayloadType,
+                Payload = task.Event.Payload
             };
         }
 
@@ -80,30 +110,28 @@ namespace Nitric.Api.Queue
                 .Message(protoFailedEvent.Message)
                 .Build();
         }
-        private Common.Event WireToEvent(NitricTask nitricTask)
-        {
-            return new Common.Event
-                .Builder()
-                .RequestId(nitricTask.Id)
-                .PayloadType(nitricTask.PayloadType)
-                .Payload(nitricTask.Payload)
-                .Build();
-        }
         public class Builder
         {
+            private string queue;
             private ProtoClient client;
             public Builder()
             {
                 client = null;
+                queue = "";
             }
             public Builder Client(ProtoClient client)
             {
                 this.client = client;
                 return this;
             }
+            public Builder Queue(string queue)
+            {
+                this.queue = queue;
+                return this;
+            }
             public QueueClient Build()
             {
-                return new QueueClient(client);
+                return new QueueClient(client, queue);
             }
         }
     }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 namespace Nitric.Api.Queue
 {
-    public class QueueItem
+    public class Task
     {
         public Common.Event Event { get; private set; }
         public string LeaseID { get; private set; }
-        private QueueItem(string requestId,
+        private Task(string requestId,
                           string payloadType,
                           Struct payload, 
                           string leaseID)
@@ -55,9 +55,9 @@ namespace Nitric.Api.Queue
                 this.leaseID = leaseID;
                 return this;
             }
-            public QueueItem Build()
+            public Task Build()
             {
-                return new QueueItem(requestId,payloadType,payload,leaseID);
+                return new Task(requestId,payloadType,payload,leaseID);
             }
         }
     }
