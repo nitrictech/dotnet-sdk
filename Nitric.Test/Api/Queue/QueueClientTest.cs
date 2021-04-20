@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nitric.Proto.Queue.v1;
 using Google.Protobuf.Collections;
@@ -161,7 +161,7 @@ namespace Nitric.Test.Api.Queue
 
             queueClient.Complete("leaseId");
 
-            ec.Verify(t => t.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once); 
+            ec.Verify(t => t.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }
 }

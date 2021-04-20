@@ -1,4 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
+using Google.Protobuf.WellKnownTypes;
 using System.Collections.Generic;
 namespace Nitric.Api.Queue
 {
@@ -8,7 +8,7 @@ namespace Nitric.Api.Queue
         public string LeaseID { get; private set; }
         private Task(string requestId,
                           string payloadType,
-                          Struct payload, 
+                          Struct payload,
                           string leaseID)
         {
             Event = new Common.Event.Builder()
@@ -57,7 +57,7 @@ namespace Nitric.Api.Queue
             }
             public Task Build()
             {
-                return new Task(requestId,payloadType,payload,leaseID);
+                return new Task(requestId, payloadType, payload, leaseID);
             }
         }
     }

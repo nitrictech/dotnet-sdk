@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#Select files to format
+FILES=$(git diff --staged --name-only --diff-filter=ACM "*.cs")
+[ -z "$FILES" ] && exit 0
+
+#Format all selected Files
+echo "Running dotnet format for staged files"
+dotnet format --include $FILES
+
+# Add back the modified files to staging
+echo "$FILES" | xargs git add
+
+echo "dotnet format done"

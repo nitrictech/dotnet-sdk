@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Net.Http;
 using System.Threading;
@@ -45,7 +45,8 @@ namespace Nitric.Test.Api.Http
             {
                 httpServer.Register(null, new HelloWorld());
                 Assert.IsTrue(false);
-            } catch (ArgumentNullException ane)
+            }
+            catch (ArgumentNullException ane)
             {
                 Assert.AreEqual("Value cannot be null. (Parameter 'path')", ane.Message);
             }
@@ -53,7 +54,8 @@ namespace Nitric.Test.Api.Http
             {
                 httpServer.Register("path", null);
                 Assert.IsTrue(false);
-            } catch (ArgumentNullException ane)
+            }
+            catch (ArgumentNullException ane)
             {
                 Assert.AreEqual("Value cannot be null. (Parameter 'function')", ane.Message);
             }
