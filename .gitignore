@@ -75,12 +75,9 @@ $RECYCLE.BIN/
 x64/
 x86/
 bld/
-Nitric.Test/[Dd]ebug/
-Nitric.Test/[Oo]bj/
-Nitric.Test/[Bb]in/
-Nitric.Sdk/[Dd]ebug/
-Nitric.Sdk/[Oo]bj/
-Nitric.Sdk/[Bb]in/
+[Dd]ebug/
+[Oo]bj/
+[Bb]in/
 [Ll]og/
 # Visual Studio 2015/2017 cache/options directory
 .vs/
