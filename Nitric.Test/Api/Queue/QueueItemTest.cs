@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,7 +33,7 @@ namespace Nitric.Test.Api.Queue
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
             Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
-            var queueItem = new Nitric.Api.Queue.Task
+            var task = new Nitric.Api.Queue.Task
                 .Builder()
                 .LeaseID("1")
                 .RequestID("2")
@@ -41,10 +41,10 @@ namespace Nitric.Test.Api.Queue
                 .PayloadType("payload type")
                 .Build();
 
-            Assert.AreEqual("QueueItem[event=Event[id=2, " +
+            Assert.AreEqual("Task[event=Event[id=2, " +
                 "payloadType=payload type, " +
                 "payload={ \"name\": \"value\" }], " +
-                "leaseId=1]", queueItem.ToString());
+                "leaseId=1]", task.ToString());
         }
     }
 }

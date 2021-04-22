@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nitric.Test.Api.Http
 {
-    [TestClass]
+    //[TestClass]
     public class HttpServerTest
     {
         const int TestingPort = 8081;
