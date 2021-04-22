@@ -1,0 +1,3 @@
+obj/Debug/netstandard2.0/event/v1/Event.cs \
+obj/Debug/netstandard2.0/event/v1/EventGrpc.cs: /Users/ryan/.nuget/packages/grpc.tools/2.36.4/build/native/include/google/protobuf/struct.proto\
+ contracts/proto/event/v1/event.proto
