@@ -1,0 +1,8 @@
+/Users/ryan/Documents/Code/dotnet-sdk/Nitric.Proto/bin/Debug/netstandard2.0/Nitric.Proto.deps.json
+/Users/ryan/Documents/Code/dotnet-sdk/Nitric.Proto/bin/Debug/netstandard2.0/Nitric.Proto.dll
+/Users/ryan/Documents/Code/dotnet-sdk/Nitric.Proto/bin/Debug/netstandard2.0/Nitric.Proto.pdb
+/Users/ryan/Documents/Code/dotnet-sdk/Nitric.Proto/obj/Debug/netstandard2.0/Nitric.Proto.AssemblyInfoInputs.cache
+/Users/ryan/Documents/Code/dotnet-sdk/Nitric.Proto/obj/Debug/netstandard2.0/Nitric.Proto.AssemblyInfo.cs
+/Users/ryan/Documents/Code/dotnet-sdk/Nitric.Proto/obj/Debug/netstandard2.0/Nitric.Proto.csproj.CoreCompileInputs.cache
+/Users/ryan/Documents/Code/dotnet-sdk/Nitric.Proto/obj/Debug/netstandard2.0/Nitric.Proto.dll
+/Users/ryan/Documents/Code/dotnet-sdk/Nitric.Proto/obj/Debug/netstandard2.0/Nitric.Proto.pdb

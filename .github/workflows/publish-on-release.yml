@@ -1,0 +1,31 @@
+name: Publish on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        source-url: https://api.nuget.org/v3/index.json
+        dotnet-version: 5.0.x
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
+    - name: Install Dependencies
+      run: dotnet restore
+    - name: Exclude Test Project
+      run: dotnet sln remove Nitric.Test/**
+    - name: Restore Dependencies
+      run: dotnet restore
+    - name: Publish
+      run: |
+        mkdir __out
+        dotnet pack -c Release -o __out --no-restore
+        dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
+        rm -rf __out
