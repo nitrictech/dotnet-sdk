@@ -12,3 +12,7 @@ dotnet format --include $FILES
 echo "$FILES" | xargs git add
 
 echo "dotnet format done"
+
+echo "Adding Apache License"
+docker build -t dotnet-sdk-license ./tools/license
+docker run --rm -v $(pwd):/data dotnet-sdk-license

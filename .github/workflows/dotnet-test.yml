@@ -3,9 +3,20 @@ name: dotnet Build and Test
 on: pull_request
 
 jobs:
+  check-license:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        token: ${{secrets.SUB_MODULE_PAT}}
+        submodules: recursive
+    - name: Install License Checker
+      run: npm install -g license-check-and-add
+    - name: Check License Headers
+      run: license-check-and-add check -f ./tools/license/licenseconfig.json
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
