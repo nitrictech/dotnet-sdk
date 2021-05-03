@@ -1,0 +1,37 @@
+{
+  "ignoreFile": ".gitignore",
+  "ignore": [
+    ".github/",
+    ".vs/",
+    "Scripts/",
+    "tools/",
+    ".*",
+    "Nitric.Proto/contracts/**/*",
+    "**/*.config.*",
+    "**/.gitignore",
+    "**/bin/*",
+    "**/bin/**/*",
+    "**/obj/*",
+    "**/obj/**/*",
+    "**/*.md",
+    "**/*.sln",
+    "**/*.csproj",
+    "**/*.protodep",
+    "**/*.config",
+    "*.html"
+  ],
+  "license": "./tools/license/license_header.txt",
+  "licenseFormats": {
+    "js|ts|cs": {
+      "eachLine": {
+        "prepend": "// "
+      }
+    },
+    "dotfile|^Dockerfile": {
+      "eachLine": {
+        "prepend": "# "
+      }
+    }
+  },
+  "trailingWhitespace": "TRIM"
+}
