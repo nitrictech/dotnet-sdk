@@ -30,5 +30,4 @@ jobs:
         dotnet-project-licenses -i Nitric.Sdk --allowed-license-types licenses.json
         rm licenses.json
         dotnet tool uninstall --global dotnet-project-licenses
-      shell: zsh
 
