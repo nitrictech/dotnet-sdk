@@ -23,3 +23,12 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Check Dependency Licensing
+      run: |
+        dotnet tool install --global dotnet-project-licenses
+        echo "["","MIT","Apache-2.0","BSD-3-Clause"]" > licenses.json
+        dotnet-project-licenses -i Nitric.Sdk --allowed-license-types licenses.json
+        rm licenses.json
+        dotnet tool uninstall --global dotnet-project-licenses
+      shell: zsh
+
