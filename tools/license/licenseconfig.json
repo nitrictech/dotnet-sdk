@@ -6,6 +6,7 @@
     "Scripts/",
     "tools/",
     ".*",
+    "Nitric.Proto/contracts/**/*",
     "**/*.config.*",
     "**/.gitignore",
     "**/bin/*",
