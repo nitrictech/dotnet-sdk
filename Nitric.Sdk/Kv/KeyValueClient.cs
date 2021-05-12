@@ -84,6 +84,10 @@ namespace Nitric.Api.KeyValue
                     + "]";
         }
 
+        public static Builder NewBuilder() {
+            return new Builder();
+        }
+
         public class Builder
         {
             private ProtoClient client;

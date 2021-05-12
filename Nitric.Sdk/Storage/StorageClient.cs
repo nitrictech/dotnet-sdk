@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System;
+using System;
 using Google.Protobuf;
 using ProtoClient = Nitric.Proto.Storage.v1.Storage.StorageClient;
 using Nitric.Proto.Storage.v1;
@@ -31,7 +31,8 @@ namespace Nitric.Api.Storage
         }
         public void Write(string key, byte[] body)
         {
-            var request = new StorageWriteRequest {
+            var request = new StorageWriteRequest
+            {
                 BucketName = BucketName,
                 Key = key,
                 Body = ByteString.CopyFrom(body)
@@ -40,7 +41,8 @@ namespace Nitric.Api.Storage
         }
         public byte[] Read(string key)
         {
-            var request = new StorageReadRequest {
+            var request = new StorageReadRequest
+            {
                 BucketName = BucketName,
                 Key = key
             };
@@ -60,6 +62,12 @@ namespace Nitric.Api.Storage
         {
             return GetType().Name + "[bucket=" + BucketName + "]";
         }
+
+        public static Builder NewBuilder()
+        {
+            return new Builder();
+        }
+
         public class Builder
         {
             private ProtoClient client;
@@ -85,7 +93,7 @@ namespace Nitric.Api.Storage
                 {
                     throw new ArgumentNullException("bucketName");
                 }
-                return new StorageClient(bucketName,client);
+                return new StorageClient(bucketName, client);
             }
         }
     }

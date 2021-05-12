@@ -35,6 +35,11 @@ namespace Nitric.Api.Queue
         {
             return GetType().Name + "[event=" + Event + ", leaseId=" + LeaseID + "]";
         }
+
+        public static Builder NewBuilder() {
+            return new Builder();
+        }
+
         public class Builder
         {
             private string requestId;
