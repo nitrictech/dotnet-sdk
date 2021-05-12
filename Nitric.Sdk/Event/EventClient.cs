@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
 using Nitric.Api.Common;
 using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using Nitric.Proto.Event.v1;
@@ -28,15 +27,15 @@ namespace Nitric.Api.Event
             this.client = (client == null) ? new ProtoClient(this.GetChannel()) : client;
         }
 
-        public string Publish(string topic, Object payload, string payloadType, string requestID)
+        public string Publish(string topic, Event evt)
         {
-            var payloadStruct = Util.ObjectToStruct(payload);
-            var evt = new NitricEvent { Id = requestID, PayloadType = payloadType, Payload = payloadStruct };
-            var request = new EventPublishRequest { Topic = topic, Event = evt };
+            var payloadStruct = Util.ObjectToStruct(evt.Payload);
+            var nEvt = new NitricEvent { Id = evt.Id, PayloadType = evt.PayloadType, Payload = payloadStruct };
+            var request = new EventPublishRequest { Topic = topic, Event = nEvt };
 
             var response = this.client.Publish(request);
 
-            return requestID;
+            return response.Id;
         }
 
         public static Builder NewBuilder()

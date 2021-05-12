@@ -26,38 +26,19 @@ namespace Nitric.Test.Api.Queue
             Dictionary<string, string> payload = new Dictionary<string, string>();
             payload.Add("name", "value");
             Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
-            var failedTask = new Nitric.Api.Queue.FailedTask
-                .Builder()
-                .RequestId("1")
+            var failedTask = Nitric.Api.Queue.FailedTask
+                .NewBuilder()
+                .Id("1")
                 .PayloadType("payload type")
                 .Payload(payloadStruct)
                 .Message("message")
                 .Build();
 
             Assert.IsNotNull(failedTask);
-            Assert.AreEqual("1", failedTask.Event.RequestId);
-            Assert.AreEqual("payload type", failedTask.Event.PayloadType);
-            Assert.AreEqual(payloadStruct, failedTask.Event.Payload);
+            Assert.AreEqual("1", failedTask.Task.ID);
+            Assert.AreEqual("payload type", failedTask.Task.PayloadType);
+            Assert.AreEqual(payloadStruct, failedTask.Task.Payload);
             Assert.AreEqual("message", failedTask.Message);
-        }
-        [TestMethod]
-        public void TestToString()
-        {
-            Dictionary<string, string> payload = new Dictionary<string, string>();
-            payload.Add("name", "value");
-            Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
-            var failedTask = new Nitric.Api.Queue.FailedTask
-                .Builder()
-                .RequestId("1")
-                .PayloadType("payload type")
-                .Payload(payloadStruct)
-                .Message("message")
-                .Build();
-
-            Assert.AreEqual("FailedTask[event=Event[id=1, " +
-                "payloadType=payload type, " +
-                "payload={ \"name\": \"value\" }], " +
-                "message=message]", failedTask.ToString());
         }
     }
 }

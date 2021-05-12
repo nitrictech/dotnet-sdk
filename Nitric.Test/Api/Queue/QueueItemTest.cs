@@ -26,7 +26,7 @@ namespace Nitric.Test.Api.Queue
             var queueItem = new Nitric.Api.Queue.Task
                 .Builder()
                 .LeaseID("1")
-                .RequestID("2")
+                .Id("2")
                 .Payload(payload)
                 .PayloadType("payload type")
                 .Build();

@@ -18,15 +18,15 @@ namespace Nitric.Api.Queue
     public class FailedTask
     {
         public string Message { get; private set; }
-        public Common.Event Event { get; private set; }
+        public Task Task { get; private set; }
         private FailedTask(
-            string requestId,
+            string Id,
             string payloadType,
             Struct payload,
             string message)
         {
-            this.Event = new Common.Event.Builder()
-                .RequestId(requestId)
+            this.Task = Task.NewBuilder()
+                .Id(Id)
                 .PayloadType(payloadType)
                 .Payload(payload)
                 .Build();
@@ -34,7 +34,7 @@ namespace Nitric.Api.Queue
         }
         public override string ToString()
         {
-            return GetType().Name + "[event=" + Event + ", message=" + Message + "]";
+            return GetType().Name + "[task=" + Task + ", message=" + Message + "]";
         }
 
         public static Builder NewBuilder() {
@@ -43,21 +43,21 @@ namespace Nitric.Api.Queue
 
         public class Builder
         {
-            private string requestId;
+            private string ID;
             private string payloadType;
             private Struct payload; 
             private string message;
             //Defines the defaults
             public Builder()
             {
-                this.requestId = null;
+                this.ID = null;
                 this.payloadType = null;
                 this.payload = Common.Util.ObjectToStruct(new Dictionary<string, string>());
                 this.message = null;
             }
-            public Builder RequestId(string requestId)
+            public Builder Id(string Id)
             {
-                this.requestId = requestId;
+                this.ID = Id;
                 return this;
             }
             public Builder PayloadType(string payloadType)
@@ -77,7 +77,7 @@ namespace Nitric.Api.Queue
             }
             public FailedTask Build()
             {
-                return new FailedTask(requestId, payloadType, payload, message);
+                return new FailedTask(ID, payloadType, payload, message);
             }
         }
     }

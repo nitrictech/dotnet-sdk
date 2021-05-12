@@ -96,7 +96,7 @@ namespace Nitric.Api.Queue
         {
             return Task
                 .NewBuilder()
-                .RequestID(nitricTask.Id)
+                .Id(nitricTask.Id)
                 .PayloadType(nitricTask.PayloadType)
                 .Payload(nitricTask.Payload)
                 .LeaseID(nitricTask.LeaseId)
@@ -115,8 +115,8 @@ namespace Nitric.Api.Queue
 
         private FailedTask WireToFailedEvent(Proto.Queue.v1.FailedTask protoFailedEvent)
         {
-            return new FailedTask.Builder()
-                .RequestId(protoFailedEvent.Task.Id)
+            return FailedTask.NewBuilder()
+                .Id(protoFailedEvent.Task.Id)
                 .PayloadType(protoFailedEvent.Task.PayloadType)
                 .Payload(protoFailedEvent.Task.Payload)
                 .Message(protoFailedEvent.Message)

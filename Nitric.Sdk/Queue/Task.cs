@@ -54,7 +54,7 @@ namespace Nitric.Api.Queue
                 this.payload = Common.Util.ObjectToStruct(new Dictionary<string, string>());
                 this.leaseID = null;
             }
-            public Builder RequestID(string id)
+            public Builder Id(string id)
             {
                 this.id = id;
                 return this;

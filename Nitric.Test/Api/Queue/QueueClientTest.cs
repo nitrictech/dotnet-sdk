@@ -152,7 +152,7 @@ namespace Nitric.Test.Api.Queue
 
             queueClient.Send(new Task.Builder()
                 .LeaseID("leaseId")
-                .RequestID("0")
+                .Id("0")
                 .Payload(new Struct())
                 .PayloadType("JSON")
                 .Build()
