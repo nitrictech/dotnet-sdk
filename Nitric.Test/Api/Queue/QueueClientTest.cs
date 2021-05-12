@@ -115,7 +115,7 @@ namespace Nitric.Test.Api.Queue
 
             var response = queueClient.Receive(3);
 
-            Assert.AreEqual("32", response[0].Event.RequestId);
+            Assert.AreEqual("32", response[0].ID);
 
             ec.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
