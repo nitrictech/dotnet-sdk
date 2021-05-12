@@ -41,6 +41,11 @@ namespace Nitric.Api.Event
             }
             return topics;
 		}
+
+        public static Builder NewBuilder() {
+            return new Builder();
+        }
+
         public class Builder
         {
             private ProtoClient client;

@@ -38,6 +38,10 @@ namespace Nitric.Api.Event
 
 			return requestID;
 		}
+
+		public static Builder NewBuilder() {
+			return new Builder();
+		}
 		public class Builder
         {
 			private ProtoClient client;

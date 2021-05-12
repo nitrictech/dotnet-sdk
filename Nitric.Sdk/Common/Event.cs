@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using Google.Protobuf.WellKnownTypes;
+using Google.Protobuf.WellKnownTypes;
 using System.Collections.Generic;
 namespace Nitric.Api.Common
 {
@@ -28,12 +28,18 @@ namespace Nitric.Api.Common
         }
         public override string ToString()
         {
-            return GetType().Name+
+            return GetType().Name +
                     "[id=" + RequestId
                     + ", payloadType=" + PayloadType
                     + ", payload=" + Payload
                     + "]";
         }
+
+        public static Builder NewBuilder()
+        {
+            return new Builder();
+        }
+
         public class Builder
         {
             private string requestId;
@@ -44,7 +50,7 @@ namespace Nitric.Api.Common
             {
                 this.requestId = "";
                 this.payloadType = "";
-                this.payload = Util.ObjectToStruct(new Dictionary<string,string>());
+                this.payload = Util.ObjectToStruct(new Dictionary<string, string>());
             }
             public Builder RequestId(string requestId)
             {
