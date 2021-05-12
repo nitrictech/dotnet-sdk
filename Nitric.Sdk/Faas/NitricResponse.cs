@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace Nitric.Api.Faas
+namespace Nitric.Faas
 {
     public class NitricResponse
     {

@@ -24,5 +24,7 @@
     <Folder Include="Kv\" />
     <Folder Include="Faas\" />
     <Folder Include="Http\" />
+    <Folder Include="Queue\" />
+     <Folder Include="Event\" />
   </ItemGroup>
 </Project>

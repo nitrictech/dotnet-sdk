@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Nitric.Api.Faas;
+using Nitric.Faas;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Net;
 
-namespace Nitric.Test.Api.Faas
+namespace Nitric.Test.Faas
 {
     [TestClass]
     public class NitricResponseTest

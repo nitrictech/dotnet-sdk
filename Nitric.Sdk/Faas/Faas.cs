@@ -18,7 +18,7 @@ using Nitric.Api.Common;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
-namespace Nitric.Api.Faas
+namespace Nitric.Faas
 {
     /**
      * <summary>Contains all the helper functions for Faas</summary>

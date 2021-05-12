@@ -16,7 +16,7 @@ using System.Web;
 using System.Text;
 using System.Linq;
 
-namespace Nitric.Api.Faas
+namespace Nitric.Faas
 {
     public class NitricRequest
     {
