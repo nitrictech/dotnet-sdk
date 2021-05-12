@@ -14,7 +14,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Web;
 using System.Text;
 using System.Linq;
 namespace Nitric.Api.Http

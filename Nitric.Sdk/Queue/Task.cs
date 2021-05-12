@@ -12,9 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using Google.Protobuf.WellKnownTypes;
 using System.Collections.Generic;
-using Nitric.Api.Common;
 namespace Nitric.Api.Queue
 {
     public class Task
