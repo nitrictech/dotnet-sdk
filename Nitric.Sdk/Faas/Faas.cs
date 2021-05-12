@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System;
+using System;
 using System.Net;
 using System.IO;
 using Nitric.Api.Common;
@@ -28,48 +28,37 @@ namespace Nitric.Faas
         private static readonly string DefaultHostName = "127.0.0.1";
         private static readonly int DefaultPort = 8080;
 
-        private string hostname = DefaultHostName;
-        public string Hostname
+        public string Host { get; private set; }
+
+        private Faas(INitricFunction function, string host)
         {
-            get => hostname;
-            set
-            {
-                hostname = value;
-            }
+            this.function = function;
+            this.Host = host;
         }
-        private int port = DefaultPort;
-        public int Port
-        {
-            get => port;
-            set
-            {
-                port = value;
-            }
-        }
+
         public HttpListener Listener { get; set; }
         INitricFunction function;
 
-        public void Start(INitricFunction function)
+        public static void Start(INitricFunction function)
         {
-            if (function == null)
-            {
-                throw new ArgumentNullException("function");
-            }
+            Faas
+                .NewBuilder()
+                .Function(function)
+                .Build()
+                .Start();
+        }
+
+        public void Start()
+        {
             if (Listener != null)
             {
                 throw new ArgumentException("listener has already started");
             }
-            this.function = function;
             long time = DateTime.Now.Millisecond;
 
-            var childAddress = Environment.GetEnvironmentVariable("CHILD_ADDRESS");
-            if (!string.IsNullOrEmpty(childAddress))
-            {
-                Hostname = childAddress;
-            }
-            Console.WriteLine(string.Format("Faas listening on port {0} with function: {1}",port, function.GetType().Name));
+            Console.WriteLine(string.Format("Faas listening on {0} with function: {1}", this.Host, function.GetType().Name));
             this.Listener = new HttpListener();
-            Listener.Prefixes.Add(string.Format("http://{0}:{1}/",Hostname,Port));
+            Listener.Prefixes.Add(string.Format("http://{0}/", this.Host));
             Listener.Start();
             while (true)
             {
@@ -98,14 +87,65 @@ namespace Nitric.Faas
             //Calls the user's NitricFunction handler, parsing in the request and returns the response
             var functionResponse = function.Handle(request);
             //Converts the NitricResponse object into a HttpResponse 
-            foreach(KeyValuePair<string, List<string>> entry in functionResponse.Headers)
+            foreach (KeyValuePair<string, List<string>> entry in functionResponse.Headers)
             {
                 ctx.Response.AddHeader(entry.Key, entry.Value.ToString());
-            }            
+            }
             ctx.Response.StatusCode = (int)functionResponse.Status;
             ctx.Response.OutputStream.Write(functionResponse.Body, 0, functionResponse.Body.Length);
             ctx.Response.Close();
             Console.WriteLine(DateTime.UtcNow.ToString("HH:mm:ss.fff") + " completed");
+        }
+
+        public static Builder NewBuilder()
+        {
+            return new Builder();
+        }
+
+        public class Builder
+        {
+            private INitricFunction function;
+            private int? port;
+            private String hostName;
+
+            public Builder Function(INitricFunction function)
+            {
+                this.function = function;
+                return this;
+            }
+
+            public Builder Port(Int16 port)
+            {
+                this.port = port;
+                return this;
+            }
+
+            public Builder HostName(string hostName)
+            {
+                this.hostName = hostName;
+                return this;
+            }
+
+            public Builder() { }
+
+            public Faas Build()
+            {
+                if (function == null)
+                {
+                    throw new ArgumentNullException("function");
+                }
+
+                var childAddress = Environment.GetEnvironmentVariable("CHILD_ADDRESS");
+                if (!string.IsNullOrEmpty(childAddress))
+                {
+                    var hostn = hostName == null ? DefaultHostName : hostName;
+                    var p = this.port == null ? DefaultPort : port;
+
+                    childAddress = string.Format("{0}:{1}", hostn, p);
+                }
+
+                return new Faas(function, childAddress);
+            }
         }
     }
 }
