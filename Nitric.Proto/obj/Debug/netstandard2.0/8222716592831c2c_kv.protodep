@@ -1,3 +1,0 @@
-obj/Debug/netstandard2.0/kv/v1/Kv.cs \
-obj/Debug/netstandard2.0/kv/v1/KvGrpc.cs: /Users/ryan/.nuget/packages/grpc.tools/2.36.4/build/native/include/google/protobuf/struct.proto\
- contracts/proto/kv/v1/kv.proto
