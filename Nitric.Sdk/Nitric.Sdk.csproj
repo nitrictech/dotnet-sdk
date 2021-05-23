@@ -10,7 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.15.6" />
     <PackageReference Include="Grpc" Version="2.36.4" />
-    <PackageReference Include="Grpc.Tools" Version="2.36.4" PrivateAssets="All" />
+    <PackageReference Include="Grpc.Tools" Version="2.36.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.json" Version="13.0.1" />
   </ItemGroup>
 
@@ -24,5 +27,7 @@
     <Folder Include="Kv\" />
     <Folder Include="Faas\" />
     <Folder Include="Http\" />
+    <Folder Include="Queue\" />
+    <Folder Include="Event\" />
   </ItemGroup>
 </Project>

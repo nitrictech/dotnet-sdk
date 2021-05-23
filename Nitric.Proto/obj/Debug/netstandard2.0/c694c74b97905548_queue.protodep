@@ -1,3 +1,0 @@
-obj/Debug/netstandard2.0/queue/v1/Queue.cs \
-obj/Debug/netstandard2.0/queue/v1/QueueGrpc.cs: /Users/ryan/.nuget/packages/grpc.tools/2.36.4/build/native/include/google/protobuf/struct.proto\
- contracts/proto/queue/v1/queue.proto

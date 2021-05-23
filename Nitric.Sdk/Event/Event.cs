@@ -11,44 +11,50 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using Google.Protobuf.WellKnownTypes;
-using System.Collections.Generic;
-namespace Nitric.Api.Common
+using System;
+
+namespace Nitric.Api.Event
 {
     public class Event
     {
-        public string RequestId { get; protected set; }
+        public string Id { get; protected set; }
         public string PayloadType { get; protected set; }
-        public Struct Payload { get; protected set; }
-        private Event(string requestId, string payloadType, Struct payload)
+        public Object Payload { get; protected set; }
+        private Event(string Id, string payloadType, Object payload)
         {
-            Payload = payload;
-            RequestId = requestId;
-            PayloadType = payloadType;
+            this.Payload = payload;
+            this.Id = Id;
+            this.PayloadType = payloadType;
         }
         public override string ToString()
         {
-            return GetType().Name+
-                    "[id=" + RequestId
+            return GetType().Name +
+                    "[id=" + Id
                     + ", payloadType=" + PayloadType
                     + ", payload=" + Payload
                     + "]";
         }
+
+        public static Builder NewBuilder()
+        {
+            return new Builder();
+        }
+
         public class Builder
         {
-            private string requestId;
+            private string ID;
             private string payloadType;
-            private Struct payload;
+            private Object payload;
 
             public Builder()
             {
-                this.requestId = "";
+                this.ID = "";
                 this.payloadType = "";
-                this.payload = Util.ObjectToStruct(new Dictionary<string,string>());
+                this.payload = null;
             }
-            public Builder RequestId(string requestId)
+            public Builder Id(string Id)
             {
-                this.requestId = requestId;
+                this.ID = Id;
                 return this;
             }
             public Builder PayloadType(string payloadType)
@@ -56,14 +62,14 @@ namespace Nitric.Api.Common
                 this.payloadType = payloadType;
                 return this;
             }
-            public Builder Payload(Struct payload)
+            public Builder Payload(Object payload)
             {
                 this.payload = payload;
                 return this;
             }
             public Event Build()
             {
-                return new Event(requestId, payloadType, payload);
+                return new Event(ID, payloadType, payload);
             }
         }
     }

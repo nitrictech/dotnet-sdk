@@ -15,7 +15,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Nitric.Test.Api.Common
+namespace Nitric.Test.Api.Event
 {
     [TestClass]
     public class EventTest
@@ -26,14 +26,14 @@ namespace Nitric.Test.Api.Common
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
 
-            var eventTest = new Nitric.Api.Common.Event.Builder()
-                .RequestId("id")
+            var eventTest = Nitric.Api.Event.Event.NewBuilder()
+                .Id("id")
                 .PayloadType("payloadType")
                 .Payload(Nitric.Api.Common.Util.ObjectToStruct(payload))
                 .Build();
                 
             Assert.IsNotNull(eventTest);
-            Assert.AreEqual("id", eventTest.RequestId);
+            Assert.AreEqual("id", eventTest.Id);
             Assert.AreEqual("payloadType", eventTest.PayloadType);
             Assert.AreEqual(Nitric.Api.Common.Util.ObjectToStruct(payload), eventTest.Payload);
         }
@@ -43,8 +43,8 @@ namespace Nitric.Test.Api.Common
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
 
-            var eventTest = new Nitric.Api.Common.Event.Builder()
-                .RequestId("id")
+            var eventTest = Nitric.Api.Event.Event.NewBuilder()
+                .Id("id")
                 .PayloadType("payloadType")
                 .Payload(Nitric.Api.Common.Util.ObjectToStruct(payload))
                 .Build();

@@ -1,2 +1,0 @@
-obj/Debug/netstandard2.0/auth/v1/Auth.cs \
-obj/Debug/netstandard2.0/auth/v1/AuthGrpc.cs: contracts/proto/auth/v1/auth.proto

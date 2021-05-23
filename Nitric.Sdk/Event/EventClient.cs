@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System;
 using Nitric.Api.Common;
 using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using Nitric.Proto.Event.v1;
@@ -19,41 +18,46 @@ using ProtoClient = Nitric.Proto.Event.v1.Event.EventClient;
 
 namespace Nitric.Api.Event
 {
-	public class EventClient : AbstractClient
-	{
-		protected ProtoClient client;
+    public class EventClient : AbstractClient
+    {
+        protected ProtoClient client;
 
-		private EventClient(ProtoClient client=null)
-		{
-			this.client = (client == null) ? new ProtoClient(this.GetChannel()) : client;
-		}
-
-		public string Publish(string topic, Object payload, string payloadType, string requestID)
-		{
-			var payloadStruct = Util.ObjectToStruct(payload);
-			var evt = new NitricEvent { Id = requestID, PayloadType = payloadType, Payload = payloadStruct };
-			var request = new EventPublishRequest { Topic = topic, Event = evt };
-
-			var response = this.client.Publish(request);
-
-			return requestID;
-		}
-		public class Builder
+        private EventClient(ProtoClient client = null)
         {
-			private ProtoClient client;
-			//Forces the builder design pattern
-			public Builder()
-			{ }
-			public Builder Client(ProtoClient client)
+            this.client = (client == null) ? new ProtoClient(this.GetChannel()) : client;
+        }
+
+        public string Publish(string topic, Event evt)
+        {
+            var payloadStruct = Util.ObjectToStruct(evt.Payload);
+            var nEvt = new NitricEvent { Id = evt.Id, PayloadType = evt.PayloadType, Payload = payloadStruct };
+            var request = new EventPublishRequest { Topic = topic, Event = nEvt };
+
+            var response = this.client.Publish(request);
+
+            return response.Id;
+        }
+
+        public static Builder NewBuilder()
+        {
+            return new Builder();
+        }
+        public class Builder
+        {
+            private ProtoClient client;
+            //Forces the builder design pattern
+            public Builder()
+            { }
+            public Builder Client(ProtoClient client)
             {
-				this.client = client;
-				return this;
+                this.client = client;
+                return this;
             }
-			public EventClient Build()
+            public EventClient Build()
             {
-				return new EventClient(this.client);
+                return new EventClient(this.client);
             }
 
         }
-	}
+    }
 }

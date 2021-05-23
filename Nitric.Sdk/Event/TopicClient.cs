@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System;
 using Nitric.Api.Common;
 using NitricTopic = Nitric.Proto.Event.v1.NitricTopic;
 using Nitric.Proto.Event.v1;
@@ -41,6 +40,11 @@ namespace Nitric.Api.Event
             }
             return topics;
 		}
+
+        public static Builder NewBuilder() {
+            return new Builder();
+        }
+
         public class Builder
         {
             private ProtoClient client;

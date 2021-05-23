@@ -25,6 +25,11 @@ namespace Nitric.Api.Event
         {
             return GetType().Name + "[name=" + Name + "]";
         }
+
+        public static Builder NewBuilder() {
+            return new Builder();
+        }
+
         public class Builder
         {
             string name;

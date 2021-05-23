@@ -11,9 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nitric.Api.Event;
+using EventModel = Nitric.Api.Event.Event;
 using System.Collections.Generic;
 using Nitric.Proto.Event.v1;
 using Moq;
@@ -48,7 +48,14 @@ namespace Nitric.Test.Api.Event
                 .Client(ec.Object)
                 .Build();
 
-            var response = eventClient.Publish("topic", new Dictionary<string, string>(), "payloadType", "1");
+            var evtToSend = EventModel
+                .NewBuilder()
+                .Id("1")
+                .PayloadType("payloadType")
+                .Payload(new Dictionary<string, string>())
+                .Build();
+
+            var response = eventClient.Publish("topic", evtToSend);
 
             ec.Verify(t => t.Publish(It.IsAny<EventPublishRequest>(), null,null,It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }

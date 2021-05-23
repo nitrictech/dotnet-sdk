@@ -324,3 +324,6 @@ ASALocalRun/
 .mfractor/
 # Local History for Visual Studio
 .localhistory/
+
+**/obj/
+**/bin/

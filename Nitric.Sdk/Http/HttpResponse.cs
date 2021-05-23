@@ -14,15 +14,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Web;
 using System.Text;
 using System.Linq;
 namespace Nitric.Api.Http
 {
     public class HttpResponse
     {
-        private static readonly string ContentType = "Content-Type";
-
         public byte[] Body { get; }
         public HttpStatusCode Status { get; }
         public Dictionary<string, List<string>> Headers { get; }

@@ -11,9 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Google.Protobuf.Collections;
-using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using ProtoClient = Nitric.Proto.Queue.v1.Queue.QueueClient;
 using Nitric.Proto.Queue.v1;
 using Nitric.Api.Common;
@@ -95,9 +94,9 @@ namespace Nitric.Api.Queue
         }
         private Task WireToQueueItem(NitricTask nitricTask)
         {
-            return new Task
-                .Builder()
-                .RequestID(nitricTask.Id)
+            return Task
+                .NewBuilder()
+                .Id(nitricTask.Id)
                 .PayloadType(nitricTask.PayloadType)
                 .Payload(nitricTask.Payload)
                 .LeaseID(nitricTask.LeaseId)
@@ -108,21 +107,26 @@ namespace Nitric.Api.Queue
         {
             return new NitricTask
             {
-                Id = task.Event.RequestId,
-                PayloadType = task.Event.PayloadType,
-                Payload = task.Event.Payload
+                Id = task.ID,
+                PayloadType = task.PayloadType,
+                Payload = Util.ObjectToStruct(task.Payload)
             };
         }
 
         private FailedTask WireToFailedEvent(Proto.Queue.v1.FailedTask protoFailedEvent)
         {
-            return new FailedTask.Builder()
-                .RequestId(protoFailedEvent.Task.Id)
+            return FailedTask.NewBuilder()
+                .Id(protoFailedEvent.Task.Id)
                 .PayloadType(protoFailedEvent.Task.PayloadType)
                 .Payload(protoFailedEvent.Task.Payload)
                 .Message(protoFailedEvent.Message)
                 .Build();
         }
+
+        public static Builder NewBuilder() {
+            return new Builder();
+        }
+
         public class Builder
         {
             private string queue;

@@ -115,7 +115,7 @@ namespace Nitric.Test.Api.Queue
 
             var response = queueClient.Receive(3);
 
-            Assert.AreEqual("32", response[0].Event.RequestId);
+            Assert.AreEqual("32", response[0].ID);
 
             ec.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
@@ -152,7 +152,7 @@ namespace Nitric.Test.Api.Queue
 
             queueClient.Send(new Task.Builder()
                 .LeaseID("leaseId")
-                .RequestID("0")
+                .Id("0")
                 .Payload(new Struct())
                 .PayloadType("JSON")
                 .Build()
