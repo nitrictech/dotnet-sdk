@@ -24,7 +24,6 @@ namespace Nitric.Test.Api.Kv
     [TestClass]
     public class KeyValueClientTest
     {
-        static readonly string KnownKey = "john.smith@gmail.com";
         static readonly Dictionary<string, object> KnownDict = new Dictionary<string, object>
         { {"name", "John Smith" } };
         static readonly Struct KnownStruct = Nitric.Api.Common.Util.ObjectToStruct(KnownDict);

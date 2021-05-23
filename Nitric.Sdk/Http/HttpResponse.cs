@@ -20,8 +20,6 @@ namespace Nitric.Api.Http
 {
     public class HttpResponse
     {
-        private static readonly string ContentType = "Content-Type";
-
         public byte[] Body { get; }
         public HttpStatusCode Status { get; }
         public Dictionary<string, List<string>> Headers { get; }
