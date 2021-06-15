@@ -23,12 +23,7 @@ namespace Nitric.Api.Common
 {
     public class Util
     {
-        /*public static Dictionary<string, string> MessageToDict()
-        {
-
-        }*/
-
-        public static Struct ObjectToStruct(Object obj)
+        public static Struct ObjectToStruct(object obj)
         {
             string json = ObjToJson(obj);
             return JsonParser.Default.Parse<Struct>(json);
@@ -40,22 +35,29 @@ namespace Nitric.Api.Common
             return string.IsNullOrEmpty(envVar) ? defaultValue : envVar;
         }
 
-        public static string ObjToJson(Object obj)
+        public static string ObjToJson(object obj)
         {
             return JsonConvert.SerializeObject(obj);
         }
 
-        public static Object JsonToObj(string json)
+        public static object JsonToObj(string json)
         {
             return JsonConvert.DeserializeObject(json);
         }
-        public static Object JsonToObj(byte[] json)
+
+        public static object JsonToObj(byte[] json)
         {
             return JsonConvert.DeserializeObject(json.ToString());
         }
+
+        public static Dictionary<string, object> ObjToDict(object obj)
+        {
+            return (Dictionary<string, object>) JsonToObj(ObjToJson(obj));
+        }
+
         public static Dictionary<string, List<string>> NameValueCollecToDict(NameValueCollection col)
         {
-            Dictionary<string,List<string>> dict = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
             foreach (var k in col.AllKeys)
             {
                 dict.Add(k, col[k].Split(',').ToList());

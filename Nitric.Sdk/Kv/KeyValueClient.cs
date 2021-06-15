@@ -15,10 +15,11 @@ using ProtoClient = Nitric.Proto.KeyValue.v1.KeyValue.KeyValueClient;
 using Nitric.Proto.KeyValue.v1;
 using Nitric.Api.Common;
 using System;
+using System.Collections.Generic;
 
 namespace Nitric.Api.KeyValue
 {
-    public class KeyValueClient : AbstractClient
+    public class KeyValueClient<T> : AbstractClient
     {
         protected ProtoClient client;
         public System.Type Type { get; private set; }
@@ -74,6 +75,11 @@ namespace Nitric.Api.KeyValue
             };
             client.Delete(request);
         }
+        public Query<T> Query()
+        {
+            return new Query<T>(NewBuilder(this.Type));
+        }
+
         public override string ToString()
         {
             return GetType().Name
@@ -82,37 +88,35 @@ namespace Nitric.Api.KeyValue
                     + "]";
         }
 
-        public static Builder NewBuilder() {
-            return new Builder();
+        public static Builder<T> NewBuilder(Type type) {
+            if (type.IsEquivalentTo(null))
+            {
+                throw new ArgumentNullException(type.Name);
+            }
+            return new Builder<T>(type);
         }
 
-        public class Builder
+        public class Builder<K>
         {
-            private ProtoClient client;
-            private string collection;
-            private System.Type type;
-            public Builder()
+            public ProtoClient client { get; private set; }
+            public string collection { get; private set; }
+            public Type type { get; private set; }
+
+            public Builder(Type type)
             {
-                this.collection = null;
-                this.type = null;
-                this.client = null;
+                this.type = type;
             }
-            public Builder Client(ProtoClient client)
+            public Builder<K> Client(ProtoClient client)
             {
                 this.client = client;
                 return this;
             }
-            public Builder Collection(string collection)
+            public Builder<K> Collection(string collection)
             {
                 this.collection = collection;
                 return this;
             }
-            public Builder Type(System.Type type)
-            {
-                this.type = type;
-                return this;
-            }
-            public KeyValueClient Build()
+            public KeyValueClient<K> Build()
             {
                 if (string.IsNullOrEmpty(collection))
                 {
@@ -122,15 +126,7 @@ namespace Nitric.Api.KeyValue
                 {
                     throw new ArgumentNullException("type");
                 }
-                return new KeyValueClient(this.collection, this.type, this.client);
-            }
-            public KeyValueClient Build(string collection)
-            {
-                return new Builder().Collection(collection).Build();
-            }
-            public KeyValueClient Build(string collection, System.Type type)
-            {
-                return new Builder().Collection(collection).Type(type).Build();
+                return new KeyValueClient<K>(this.collection, this.type, this.client);
             }
         }
     }
