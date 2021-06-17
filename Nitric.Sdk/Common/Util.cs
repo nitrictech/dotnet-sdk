@@ -23,7 +23,7 @@ namespace Nitric.Api.Common
 {
     public class Util
     {
-        public static Struct ObjectToStruct(object obj)
+        public static Struct ObjToStruct(object obj)
         {
             string json = ObjToJson(obj);
             return JsonParser.Default.Parse<Struct>(json);

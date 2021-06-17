@@ -109,7 +109,7 @@ namespace Nitric.Api.Queue
             {
                 Id = task.ID,
                 PayloadType = task.PayloadType,
-                Payload = Util.ObjectToStruct(task.Payload)
+                Payload = Util.ObjToStruct(task.Payload)
             };
         }
 

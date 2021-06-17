@@ -41,7 +41,7 @@ namespace Nitric.Api.KeyValue
             {
                 throw new ArgumentNullException("value");
             }
-            var valueStruct = Util.ObjectToStruct(value);
+            var valueStruct = Util.ObjToStruct(value);
             var request = new KeyValuePutRequest {
                 Collection = Collection,
                 Key = key,

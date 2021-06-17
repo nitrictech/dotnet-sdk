@@ -40,7 +40,7 @@ namespace Nitric.Test.Api.Queue
             NitricTask failedTaskTask = new NitricTask();
             failedTaskTask.Id = "0";
             failedTaskTask.LeaseId = "1";
-            failedTaskTask.Payload = Nitric.Api.Common.Util.ObjectToStruct(new Dictionary<string, string>());
+            failedTaskTask.Payload = Nitric.Api.Common.Util.ObjToStruct(new Dictionary<string, string>());
             failedTaskTask.PayloadType = "Dictionary";
 
             Proto.Queue.v1.FailedTask failedTask = new Proto.Queue.v1.FailedTask();
@@ -94,7 +94,7 @@ namespace Nitric.Test.Api.Queue
             NitricTask taskToReturn = new NitricTask();
             taskToReturn.Id = "32";
             taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = Nitric.Api.Common.Util.ObjectToStruct(new Dictionary<string, string>());
+            taskToReturn.Payload = Nitric.Api.Common.Util.ObjToStruct(new Dictionary<string, string>());
             taskToReturn.PayloadType = "Dictionary";
 
             RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();

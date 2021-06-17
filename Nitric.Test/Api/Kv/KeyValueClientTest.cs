@@ -26,7 +26,7 @@ namespace Nitric.Test.Api.Kv
     {
         static readonly Dictionary<string, object> KnownDict = new Dictionary<string, object>
         { {"name", "John Smith" } };
-        static readonly Struct KnownStruct = Nitric.Api.Common.Util.ObjectToStruct(KnownDict);
+        static readonly Struct KnownStruct = Nitric.Api.Common.Util.ObjToStruct(KnownDict);
 
         [TestMethod]
         public void TestBuild()
