@@ -21,6 +21,15 @@ namespace Nitric.Faas
             }
             return null;
         }
+
+        public TopicTriggerContext AsTopic()
+        {
+            if (this.IsTopic())
+            {
+                return this as TopicTriggerContext;
+            }
+            return null;
+        }
         public static TriggerContext FromGrpcTriggerRequest(TriggerRequestProto trigger)
         {
             switch (trigger.ContextCase){

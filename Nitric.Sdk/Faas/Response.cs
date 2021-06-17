@@ -16,7 +16,7 @@ namespace Nitric.Faas
             this.Data = data;
             this.Context = context;
         }
-        public TriggerResponse toGrpcTriggerResponse()
+        public TriggerResponse ToGrpcTriggerResponse()
         {
             if (this.Context.IsHttp())
             {

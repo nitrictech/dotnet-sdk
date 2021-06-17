@@ -107,7 +107,7 @@ namespace Nitric.Faas
                     response.Context.AsHttp().AddHeader("Content-Type", "text/plain");
                 }
             }
-            var triggerResponse = response.toGrpcTriggerResponse();
+            var triggerResponse = response.ToGrpcTriggerResponse();
             var jsonResponse =
                 new JsonFormatter(
                     new JsonFormatter.Settings(false)
