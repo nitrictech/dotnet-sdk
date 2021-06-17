@@ -15,7 +15,6 @@ using ProtoClient = Nitric.Proto.KeyValue.v1.KeyValue.KeyValueClient;
 using Nitric.Proto.KeyValue.v1;
 using Nitric.Api.Common;
 using System;
-using System.Collections.Generic;
 
 namespace Nitric.Api.KeyValue
 {
@@ -74,10 +73,6 @@ namespace Nitric.Api.KeyValue
                 Key = key
             };
             client.Delete(request);
-        }
-        public Query<T> Query()
-        {
-            return new Query<T>(NewBuilder(this.Type));
         }
 
         public override string ToString()
