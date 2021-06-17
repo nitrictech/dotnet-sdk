@@ -22,6 +22,7 @@ using Nitric.Api.Http;
 using TriggerRequest = Nitric.Proto.Faas.v1.TriggerRequest;
 using TriggerResponse = Nitric.Proto.Faas.v1.TriggerResponse;
 using JsonFormatter = Google.Protobuf.JsonFormatter;
+using JsonParser = Google.Protobuf.JsonParser;
 using MessageParser = Google.Protobuf.MessageParser;
 
 namespace Nitric.Faas
@@ -82,10 +83,11 @@ namespace Nitric.Faas
             var requestBody = requestStreamReader.ReadToEnd();
             requestStreamReader.Close();
 
-            JsonFormatter formatter = new JsonFormatter(new JsonFormatter.Settings(false));
-            var formattedBody = formatter.Format(requestBody);
+            JsonParser formatter = new JsonParser(new JsonParser.Settings(100));
 
-            var triggerRequest = new TriggerRequest();
+            // TODO: Add error case if we fail to do this
+            var triggerRequest = formatter.Parse<TriggerRequest>(requestBody);
+
             //Add json to properties of trigger request
             var trigger = Trigger.FromGrpcTriggerRequest(triggerRequest);
             Response response = null;

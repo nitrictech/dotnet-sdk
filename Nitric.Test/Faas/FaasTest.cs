@@ -13,6 +13,7 @@
 // limitations under the License.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Text;
 using System.Net.Http;
 using System.Threading;
 using Nitric.Faas;
@@ -49,11 +50,13 @@ namespace Nitric.Test.Faas
     public class HelloWorld : INitricFunction
     {
         public int requestNum = 0;
-        public NitricRequest[] Requests { get; private set; }
-        public NitricResponse Handle(NitricRequest request)
+        public Trigger[] triggers { get; private set; }
+        public Response Handle(Trigger request)
         {
-            Requests[requestNum++] = request;
-            return new NitricResponse.Builder().Build("Hello World");
+            triggers[requestNum++] = request;
+            
+
+            return request.DefaultResponse(Encoding.UTF8.GetBytes("Hello World"));
         }
     }
 }

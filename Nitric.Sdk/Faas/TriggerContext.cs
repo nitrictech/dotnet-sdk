@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Nitric.Api.Common;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
 

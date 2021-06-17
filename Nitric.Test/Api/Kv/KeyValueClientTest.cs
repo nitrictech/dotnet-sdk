@@ -31,30 +31,21 @@ namespace Nitric.Test.Api.Kv
         [TestMethod]
         public void TestBuild()
         {
-            var client = new KeyValueClient
-                .Builder()
+            var successfulClient = KeyValueClient<Dictionary<string, object>>
+                .NewBuilder()
                 .Collection("customers")
-                .Type(KnownDict.GetType())
                 .Build();
 
-            Assert.IsNotNull(client);
-            Assert.AreEqual("customers", client.Collection);
+            Assert.IsNotNull(successfulClient);
 
             try
             {
-                new KeyValueClient.Builder().Build(null, KnownDict.GetType());
+                 var unsuccessfulClient = KeyValueClient<Dictionary<string, object>>
+                    .NewBuilder()
+                    .Build();
                 Assert.IsTrue(false);
             } catch (ArgumentNullException ane) {
                 Assert.AreEqual("Value cannot be null. (Parameter 'collection')", ane.Message);
-            }
-
-            try
-            {
-                new KeyValueClient.Builder().Build("collection", null);
-                Assert.IsTrue(false);
-            } catch (ArgumentNullException ane)
-            {
-                Assert.AreEqual("Value cannot be null. (Parameter 'type')", ane.Message);
             }
         }
 
@@ -66,9 +57,8 @@ namespace Nitric.Test.Api.Kv
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var kvClient = new KeyValueClient.Builder()
+            var kvClient = KeyValueClient<string>.NewBuilder()
                 .Collection("customers")
-                .Type(typeof(string))
                 .Client(ec.Object)
                 .Build();
 
@@ -90,9 +80,8 @@ namespace Nitric.Test.Api.Kv
                 .Returns(new KeyValueGetResponse { Value = KnownStruct})
                 .Verifiable();
 
-            var kvClient = new KeyValueClient.Builder()
+            var kvClient = KeyValueClient<String>.NewBuilder()
                 .Collection("customers")
-                .Type(typeof(string))
                 .Client(ec.Object)
                 .Build();
 
@@ -111,9 +100,8 @@ namespace Nitric.Test.Api.Kv
                 .Returns(new KeyValuePutResponse())
                 .Verifiable();
 
-            var kvClient = new KeyValueClient.Builder()
+            var kvClient = KeyValueClient<string>.NewBuilder()
                 .Collection("customers")
-                .Type(typeof(string))
                 .Client(ec.Object)
                 .Build();
 
@@ -130,9 +118,8 @@ namespace Nitric.Test.Api.Kv
                 .Returns(new KeyValueDeleteResponse())
                 .Verifiable();
 
-            var kvClient = new KeyValueClient.Builder()
+            var kvClient = KeyValueClient<string>.NewBuilder()
                 .Collection("customers")
-                .Type(typeof(string))
                 .Client(ec.Object)
                 .Build();
 
@@ -148,9 +135,8 @@ namespace Nitric.Test.Api.Kv
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var kvClient = new KeyValueClient.Builder()
+            var kvClient = KeyValueClient<string>.NewBuilder()
                 .Collection("customers")
-                .Type(typeof(string))
                 .Client(ec.Object)
                 .Build();
 
