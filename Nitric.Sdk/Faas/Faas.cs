@@ -18,6 +18,12 @@ using Nitric.Api.Common;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
+using Nitric.Api.Http;
+using TriggerRequest = Nitric.Proto.Faas.v1.TriggerRequest;
+using TriggerResponse = Nitric.Proto.Faas.v1.TriggerResponse;
+using JsonFormatter = Google.Protobuf.JsonFormatter;
+using MessageParser = Google.Protobuf.MessageParser;
+
 namespace Nitric.Faas
 {
     /**
@@ -41,8 +47,7 @@ namespace Nitric.Faas
 
         public static void Start(INitricFunction function)
         {
-            Faas
-                .NewBuilder()
+            NewBuilder()
                 .Function(function)
                 .Build()
                 .Start();
@@ -76,23 +81,39 @@ namespace Nitric.Faas
             var requestStreamReader = new StreamReader(ctx.Request.InputStream, ctx.Request.ContentEncoding);
             var requestBody = requestStreamReader.ReadToEnd();
             requestStreamReader.Close();
-            //Builds a new NitricRequest based on the HttpContextRequest
-            NitricRequest request = new NitricRequest.Builder()
-                .Path(ctx.Request.RawUrl)
-                .Headers(Util.NameValueCollecToDict(ctx.Request.Headers))
-                .Query(ctx.Request.QueryString.ToString())
-                .Method(ctx.Request.HttpMethod)
-                .Body(Encoding.UTF8.GetBytes(requestBody.ToString().ToCharArray()))
-                .Build();
-            //Calls the user's NitricFunction handler, parsing in the request and returns the response
-            var functionResponse = function.Handle(request);
-            //Converts the NitricResponse object into a HttpResponse 
-            foreach (KeyValuePair<string, List<string>> entry in functionResponse.Headers)
+
+            JsonFormatter formatter = new JsonFormatter(new JsonFormatter.Settings(false));
+            var formattedBody = formatter.Format(requestBody);
+
+            var triggerRequest = new TriggerRequest();
+            //Add json to properties of trigger request
+            var trigger = Trigger.FromGrpcTriggerRequest(triggerRequest);
+            Response response = null;
+
+            try
             {
-                ctx.Response.AddHeader(entry.Key, entry.Value.ToString());
+                response = function.Handle(trigger);
             }
-            ctx.Response.StatusCode = (int)functionResponse.Status;
-            ctx.Response.OutputStream.Write(functionResponse.Body, 0, functionResponse.Body.Length);
+            catch (Exception e)
+            {
+                response = trigger.DefaultResponse(
+                    Encoding.UTF8.GetBytes("An error occured, please see logs for details.\n")
+                );
+                if (response.Context.IsHttp())
+                {
+                    response.Context.AsHttp().SetStatus(500);
+                    response.Context.AsHttp().AddHeader("Content-Type", "text/plain");
+                }
+            }
+            var triggerResponse = response.toGrpcTriggerResponse();
+            var jsonResponse =
+                new JsonFormatter(
+                    new JsonFormatter.Settings(false)
+                ).Format(triggerResponse);
+
+            ctx.Response.Headers.Add("Content-Type", "application/json");
+            ctx.Response.OutputStream.Write(Encoding.UTF8.GetBytes(jsonResponse), 0, jsonResponse.Length);
+
             ctx.Response.Close();
             Console.WriteLine(DateTime.UtcNow.ToString("HH:mm:ss.fff") + " completed");
         }
