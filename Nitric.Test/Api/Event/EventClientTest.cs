@@ -34,7 +34,7 @@ namespace Nitric.Test.Api.Event
         [TestMethod]
         public void TestPublish()
         {
-            var payloadStruct = Util.ObjectToStruct(new Dictionary<string,string>());
+            var payloadStruct = Util.ObjToStruct(new Dictionary<string,string>());
             var evt = new NitricEvent { Id = "1", PayloadType = "payloadType", Payload = payloadStruct };
             var request = new EventPublishRequest { Topic = "topic", Event = evt };
 

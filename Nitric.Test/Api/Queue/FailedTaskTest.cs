@@ -25,7 +25,7 @@ namespace Nitric.Test.Api.Queue
         {
             Dictionary<string, string> payload = new Dictionary<string, string>();
             payload.Add("name", "value");
-            Struct payloadStruct = Nitric.Api.Common.Util.ObjectToStruct(payload);
+            Struct payloadStruct = Nitric.Api.Common.Util.ObjToStruct(payload);
             var failedTask = Nitric.Api.Queue.FailedTask
                 .NewBuilder()
                 .Id("1")

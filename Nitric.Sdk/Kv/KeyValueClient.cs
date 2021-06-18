@@ -18,16 +18,14 @@ using System;
 
 namespace Nitric.Api.KeyValue
 {
-    public class KeyValueClient : AbstractClient
+    public class KeyValueClient<T> : AbstractClient
     {
         protected ProtoClient client;
-        public System.Type Type { get; private set; }
         public string Collection { get; private set; }
 
-        private KeyValueClient(string collection, System.Type type, ProtoClient client)
+        private KeyValueClient(string collection, ProtoClient client)
         {
             this.Collection = collection;
-            this.Type = type;
             this.client = (client == null) ? new ProtoClient(GetChannel()) : client;
         }
         public void Put(string key, object value)
@@ -40,7 +38,7 @@ namespace Nitric.Api.KeyValue
             {
                 throw new ArgumentNullException("value");
             }
-            var valueStruct = Util.ObjectToStruct(value);
+            var valueStruct = Util.ObjToStruct(value);
             var request = new KeyValuePutRequest {
                 Collection = Collection,
                 Key = key,
@@ -74,6 +72,7 @@ namespace Nitric.Api.KeyValue
             };
             client.Delete(request);
         }
+
         public override string ToString()
         {
             return GetType().Name
@@ -82,55 +81,32 @@ namespace Nitric.Api.KeyValue
                     + "]";
         }
 
-        public static Builder NewBuilder() {
-            return new Builder();
+        public static Builder<T> NewBuilder() {
+            return new Builder<T>();
         }
 
-        public class Builder
+        public class Builder<K>
         {
-            private ProtoClient client;
-            private string collection;
-            private System.Type type;
-            public Builder()
-            {
-                this.collection = null;
-                this.type = null;
-                this.client = null;
-            }
-            public Builder Client(ProtoClient client)
+            public ProtoClient client { get; private set; }
+            public string collection { get; private set; }
+
+            public Builder<K> Client(ProtoClient client)
             {
                 this.client = client;
                 return this;
             }
-            public Builder Collection(string collection)
+            public Builder<K> Collection(string collection)
             {
                 this.collection = collection;
                 return this;
             }
-            public Builder Type(System.Type type)
-            {
-                this.type = type;
-                return this;
-            }
-            public KeyValueClient Build()
+            public KeyValueClient<K> Build()
             {
                 if (string.IsNullOrEmpty(collection))
                 {
                     throw new ArgumentNullException("collection");
                 }
-                if (type == null)
-                {
-                    throw new ArgumentNullException("type");
-                }
-                return new KeyValueClient(this.collection, this.type, this.client);
-            }
-            public KeyValueClient Build(string collection)
-            {
-                return new Builder().Collection(collection).Build();
-            }
-            public KeyValueClient Build(string collection, System.Type type)
-            {
-                return new Builder().Collection(collection).Type(type).Build();
+                return new KeyValueClient<K>(this.collection, this.client);
             }
         }
     }

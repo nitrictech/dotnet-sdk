@@ -11,25 +11,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System;
+
 namespace Nitric.Faas
 {
-    public class RequestParameter
+    public class TopicResponseContext : ResponseContext
     {
-        public Object Path { get; set; }
-        public Object Query { get; set; }
-        public RequestParameter(Object path = null, Object query = null)
+        public bool Success { get; set; }
+
+        public TopicResponseContext SetSuccess(bool success)
         {
-            if (path == null)
-            {
-                path = new Object();
-            }
-            if (query == null)
-            {
-                query = new Object();
-            }
-            Path = path;
-            Query = query;
+            this.Success = Success;
+            return this;
         }
     }
 }

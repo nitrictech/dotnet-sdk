@@ -11,12 +11,15 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿namespace Nitric.Faas
+
+namespace Nitric.Faas
 {
-    public class SourceType
+    public class TopicTriggerContext : TriggerContext
     {
-        public static string SUBSCRIPTION { get { return "subscription"; } }
-        public static string REQUEST { get { return "request"; } }
-        public static string UNKNOWN { get { return "unknown"; } }
+        public string Topic { get; private set; }
+        public TopicTriggerContext(string topic)
+        {
+            this.Topic = topic;
+        }
     }
 }

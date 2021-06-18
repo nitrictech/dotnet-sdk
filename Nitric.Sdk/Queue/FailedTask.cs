@@ -52,7 +52,7 @@ namespace Nitric.Api.Queue
             {
                 this.ID = null;
                 this.payloadType = null;
-                this.payload = Common.Util.ObjectToStruct(new Dictionary<string, string>());
+                this.payload = Common.Util.ObjToStruct(new Dictionary<string, string>());
                 this.message = null;
             }
             public Builder Id(string Id)

@@ -29,13 +29,13 @@ namespace Nitric.Test.Api.Event
             var eventTest = Nitric.Api.Event.Event.NewBuilder()
                 .Id("id")
                 .PayloadType("payloadType")
-                .Payload(Nitric.Api.Common.Util.ObjectToStruct(payload))
+                .Payload(Nitric.Api.Common.Util.ObjToStruct(payload))
                 .Build();
                 
             Assert.IsNotNull(eventTest);
             Assert.AreEqual("id", eventTest.Id);
             Assert.AreEqual("payloadType", eventTest.PayloadType);
-            Assert.AreEqual(Nitric.Api.Common.Util.ObjectToStruct(payload), eventTest.Payload);
+            Assert.AreEqual(Nitric.Api.Common.Util.ObjToStruct(payload), eventTest.Payload);
         }
         [TestMethod]
         public void TestToString()
@@ -46,7 +46,7 @@ namespace Nitric.Test.Api.Event
             var eventTest = Nitric.Api.Event.Event.NewBuilder()
                 .Id("id")
                 .PayloadType("payloadType")
-                .Payload(Nitric.Api.Common.Util.ObjectToStruct(payload))
+                .Payload(Nitric.Api.Common.Util.ObjToStruct(payload))
                 .Build();
             Assert.AreEqual("Event[id=id, payloadType=payloadType, payload={ \"name\": \"value\" }]", eventTest.ToString());
         }

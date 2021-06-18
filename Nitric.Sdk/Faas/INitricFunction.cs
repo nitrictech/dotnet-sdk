@@ -16,6 +16,6 @@ namespace Nitric.Faas
     public interface INitricFunction
     {
         //Handle the function request.
-        NitricResponse Handle(NitricRequest request);
+        Response Handle(Trigger trigger);
     }
 }

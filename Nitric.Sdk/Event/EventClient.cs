@@ -29,7 +29,7 @@ namespace Nitric.Api.Event
 
         public string Publish(string topic, Event evt)
         {
-            var payloadStruct = Util.ObjectToStruct(evt.Payload);
+            var payloadStruct = Util.ObjToStruct(evt.Payload);
             var nEvt = new NitricEvent { Id = evt.Id, PayloadType = evt.PayloadType, Payload = payloadStruct };
             var request = new EventPublishRequest { Topic = topic, Event = nEvt };
 
