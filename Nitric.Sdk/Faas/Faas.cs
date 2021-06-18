@@ -14,16 +14,11 @@
 using System;
 using System.Net;
 using System.IO;
-using Nitric.Api.Common;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Text;
-using Nitric.Api.Http;
 using TriggerRequest = Nitric.Proto.Faas.v1.TriggerRequest;
-using TriggerResponse = Nitric.Proto.Faas.v1.TriggerResponse;
 using JsonFormatter = Google.Protobuf.JsonFormatter;
 using JsonParser = Google.Protobuf.JsonParser;
-using MessageParser = Google.Protobuf.MessageParser;
 
 namespace Nitric.Faas
 {
