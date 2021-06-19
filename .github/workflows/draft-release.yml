@@ -22,14 +22,14 @@ jobs:
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
     - name: Install Versionize
-      run: dotnet tool install --global Versionize
+      run: dotnet tool install --global Versionize --version 1.5.1
 
     - name: Install Dependencies
       run: dotnet restore
     
     - name: Version Bump and tag
       run: |
-        versionize -w ./Nitric.Proto
+        versionize --skip-commit -w  ./Nitric.Proto
         versionize -w ./Nitric.Sdk
       shell: bash
 
@@ -38,6 +38,7 @@ jobs:
         git fetch
         git checkout main
         git push origin main --follow-tags
+
     - name: Create Draft Release
       id: create_release
       uses: actions/create-release@v1
