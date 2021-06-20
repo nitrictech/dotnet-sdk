@@ -8,24 +8,21 @@ on:
 
 jobs:
   version:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet: [ '3.1.x', '5.0.x']
+    runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Setup Dotnet
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ matrix.dotnet }}
+        dotnet-version: 5.0.x
     - name: Git Identity
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
     - name: Install Versionize
-      run: dotnet tool install --global Versionize --version 1.5.1
+      run: dotnet tool install --global Versionize --version 1.6.2
 
     - name: Install Dependencies
       run: dotnet restore
