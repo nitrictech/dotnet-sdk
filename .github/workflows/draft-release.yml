@@ -39,14 +39,19 @@ jobs:
         git checkout main
         git push origin main --follow-tags
 
+    - name: Get latest tag
+      run: |
+        echo "::set-output name=TAG_REF::`git describe --abbrev=0`"
+      id: latest_tag
+      
     - name: Create Draft Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.bump_tag.outputs.TAG_REF }}
-        release_name: Release ${{ steps.bump_tag.outputs.TAG_REF }}
+        tag_name: ${{ steps.latest_tag.outputs.TAG_REF }}
+        release_name: Release ${{ steps.latest_tag.outputs.TAG_REF }}
         body: See CHANGELOG.md for changes
         draft: true
         prerelease: false
