@@ -11,21 +11,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-nuget@v1
       with:
-        source-url: https://api.nuget.org/v3/index.json
-        dotnet-version: 5.0.x
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
+        nuget-api-key: ${{ secrets.NUGET_TOKEN }}
+        nuget-version: '5.x'
     - name: Install Dependencies
-      run: dotnet restore
-    - name: Exclude Test Project
-      run: dotnet sln remove Nitric.Test/**
-    - name: Restore Dependencies
-      run: dotnet restore
+      run: nuget restore Nitric.Sdk.csproj
     - name: Publish
       run: |
+        cd Nitric.Sdk
         mkdir __out
-        dotnet pack -c Release -o __out --no-restore
-        dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
+        nuget pack Nitric.Sdk.csproj -c Release -o __out --no-restore -IncludeReferencedProjects
+        nuget setApiKey ${{ secrets.NUGET_TOKEN }}
+        nuget push "./__out/*.nupkg" -Source https://api.nuget.org/v3/index.json
         rm -rf __out
