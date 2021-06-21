@@ -16,7 +16,7 @@ jobs:
         source-url: https://api.nuget.org/v3/index.json
         dotnet-version: 5.0.x
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
     - name: Install Dependencies
       run: dotnet restore
     - name: Exclude Test Project
