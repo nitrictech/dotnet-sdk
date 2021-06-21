@@ -29,8 +29,7 @@ jobs:
     
     - name: Version Bump and tag
       run: |
-        versionize --skip-commit -w  ./Nitric.Proto
-        versionize -w ./Nitric.Sdk
+        versionize
       shell: bash
 
     - name: Push version bump & tags
