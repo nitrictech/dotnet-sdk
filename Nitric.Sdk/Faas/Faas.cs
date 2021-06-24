@@ -154,7 +154,7 @@ namespace Nitric.Faas
                 }
 
                 var childAddress = Environment.GetEnvironmentVariable("CHILD_ADDRESS");
-                if (!string.IsNullOrEmpty(childAddress))
+                if (string.IsNullOrEmpty(childAddress))
                 {
                     var hostn = hostName == null ? DefaultHostName : hostName;
                     var p = this.port == null ? DefaultPort : port;
