@@ -5,15 +5,17 @@
     <Version>${VERSION}</Version>
     <PackageId>Nitric.Proto</PackageId>
     <Company>Nitric Pty Ltd</Company>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.15.6" />
     <PackageReference Include="Grpc" Version="2.36.4" />
-    <PackageReference Include="Grpc.Tools" Version="2.36.4" PrivateAssets="All" />
+    <PackageReference Include="Grpc.Tools" Version="2.36.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="LICENSE" Pack="true" PackagePath="" />
     <Protobuf Include="**/*.proto" ProtoRoot="contracts/proto/" />
   </ItemGroup>
 
