@@ -47,11 +47,6 @@ jobs:
         git checkout main
         git push origin main --follow-tags
 
-    - name: Get latest tag
-      run: |
-        echo "::set-output name=TAG_REF::`git describe --abbrev=0`"
-      id: latest_tag
-      
     - name: Create Draft Release
       id: create_release
       uses: actions/create-release@v1
