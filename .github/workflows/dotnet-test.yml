@@ -25,7 +25,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-
+    - name: Find and Replace Version templates
+      run: |
+        sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Sdk/Nitric.Sdk.csproj
+        sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Proto/Nitric.Proto.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
