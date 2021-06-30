@@ -17,12 +17,6 @@ jobs:
         dotnet-version: 5.0.x
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
-    - name: Install Dependencies
-      run: dotnet restore
-    - name: Exclude Test Project
-      run: dotnet sln remove Nitric.Test/**
-    - name: Restore Dependencies
-      run: dotnet restore
     - name: Normalize version string
       run: |
         version="${{ github.event.release.tag_name }}"
@@ -32,6 +26,10 @@ jobs:
       run: |
         sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Sdk/Nitric.Sdk.csproj
         sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Proto/Nitric.Proto.csproj
+    - name: Install Dependencies
+      run: dotnet restore
+    - name: Exclude Test Project
+      run: dotnet sln remove Nitric.Test/**
     - name: Publish
       run: |
         mkdir __out
