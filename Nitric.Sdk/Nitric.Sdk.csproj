@@ -17,7 +17,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.json" Version="13.0.1" />
-    <PackageReference Include="Nitric.Proto" Version="${VERSION}" />
   </ItemGroup>
 
   <ItemGroup>
