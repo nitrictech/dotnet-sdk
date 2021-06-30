@@ -35,11 +35,6 @@ jobs:
         sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Proto/Nitric.Proto.csproj
     - name: Install Dependencies
       run: dotnet restore
-    
-    - name: Version Bump and tag
-      run: |
-        versionize
-      shell: bash
 
     - name: Push version bump & tags
       run: |
