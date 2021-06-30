@@ -13,12 +13,13 @@
 // limitations under the License.
 using System;
 using System.Net;
-using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Text;
-using TriggerRequest = Nitric.Proto.Faas.v1.TriggerRequest;
-using JsonFormatter = Google.Protobuf.JsonFormatter;
-using JsonParser = Google.Protobuf.JsonParser;
+using System.Collections.Generic;
+using Grpc.Core;
+using Grpc.Net.Client;
+using Util = Nitric.Api.Common.Util;
+using Nitric.Proto.Faas.v1;
 
 namespace Nitric.Faas
 {
@@ -28,91 +29,66 @@ namespace Nitric.Faas
     public class Faas
     {
         private static readonly string DefaultHostName = "127.0.0.1";
-        private static readonly int DefaultPort = 8080;
+        private static readonly int DefaultPort = 50051;
 
         public string Host { get; private set; }
+        public Nitric.Proto.Faas.v1.Faas.FaasClient Client { get; private set; }
+        INitricFunction function;
 
-        private Faas(INitricFunction function, string host)
+        private Faas(INitricFunction function, string host, Nitric.Proto.Faas.v1.Faas.FaasClient client)
         {
             this.function = function;
             this.Host = host;
+            this.Client = client;
         }
 
-        public HttpListener Listener { get; set; }
-        INitricFunction function;
-
-        public static void Start(INitricFunction function)
+        public static void StartFunction(INitricFunction function)
         {
             NewBuilder()
                 .Function(function)
                 .Build()
-                .Start();
+                .StartFunction();
         }
 
-        public void Start()
+        public void StartFunction()
         {
-            if (Listener != null)
-            {
-                throw new ArgumentException("listener has already started");
-            }
-            long time = DateTime.Now.Millisecond;
-
-            Console.WriteLine(string.Format("Faas listening on {0} with function: {1}", this.Host, function.GetType().Name));
-            this.Listener = new HttpListener();
-            Listener.Prefixes.Add(string.Format("http://{0}/", this.Host));
-            Listener.Start();
-            while (true)
-            {
-                // Will wait here until we hear from a connection
-                Task<HttpListenerContext> taskContext = Task.Run(async () => await Listener.GetContextAsync());
-                OnContext(taskContext.Result);
-            }
+            CallFunction().Wait();
         }
-        private void OnContext(HttpListenerContext ctx)
+        private async Task CallFunction()
         {
-            Console.WriteLine(DateTime.UtcNow.ToString("HH:mm:ss.fff") + " Handling request");
-            ctx.Response.ContentType = "text/plain";
-
-            //Reads the request input stream
-            var requestStreamReader = new StreamReader(ctx.Request.InputStream, ctx.Request.ContentEncoding);
-            var requestBody = requestStreamReader.ReadToEnd();
-            requestStreamReader.Close();
-
-            JsonParser formatter = new JsonParser(new JsonParser.Settings(100));
-
-            // TODO: Add error case if we fail to do this
-            var triggerRequest = formatter.Parse<TriggerRequest>(requestBody);
-
-            //Add json to properties of trigger request
-            var trigger = Trigger.FromGrpcTriggerRequest(triggerRequest);
-            Response response = null;
-
-            try
-            {
-                response = function.Handle(trigger);
-            }
-            catch (Exception e)
-            {
-                response = trigger.DefaultResponse(
-                    Encoding.UTF8.GetBytes("An error occured, please see logs for details.\n")
-                );
-                if (response.Context.IsHttp())
-                {
-                    response.Context.AsHttp().SetStatus(500);
-                    response.Context.AsHttp().AddHeader("Content-Type", "text/plain");
+            using (var call = this.Client.TriggerStream()){
+                try {
+                    while (await call.ResponseStream.MoveNext())
+                    {
+                        var response = call.ResponseStream.Current;
+                        switch (response.ContentCase)
+                        {
+                            case ServerMessage.ContentOneofCase.InitResponse:
+                                break;
+                            case ServerMessage.ContentOneofCase.TriggerRequest:
+                                var trigger = Trigger.FromGrpcTriggerRequest(response.TriggerRequest);
+                                //Call the function
+                                var membraneMessage = function.Handle(trigger);
+                                var grpcMessage = membraneMessage.ToGrpcTriggerResponse();
+                                //Write back the response to the server
+                                await call.RequestStream.WriteAsync(
+                                    new ClientMessage
+                                    {
+                                        Id = response.Id,
+                                        TriggerResponse = grpcMessage
+                                    }
+                                );
+                                break;
+                            default:
+                                //add error case
+                                break;
+                        }
+                    }
+                    await call.RequestStream.CompleteAsync();
+                } catch (RpcException e){
+                    Console.WriteLine(e.Message + "\n" + e.StackTrace);
                 }
             }
-            var triggerResponse = response.ToGrpcTriggerResponse();
-            var jsonResponse =
-                new JsonFormatter(
-                    new JsonFormatter.Settings(false)
-                ).Format(triggerResponse);
-
-            ctx.Response.Headers.Add("Content-Type", "application/json");
-            ctx.Response.OutputStream.Write(Encoding.UTF8.GetBytes(jsonResponse), 0, jsonResponse.Length);
-
-            ctx.Response.Close();
-            Console.WriteLine(DateTime.UtcNow.ToString("HH:mm:ss.fff") + " completed");
         }
 
         public static Builder NewBuilder()
@@ -143,7 +119,6 @@ namespace Nitric.Faas
                 this.hostName = hostName;
                 return this;
             }
-
             public Builder() { }
 
             public Faas Build()
@@ -152,6 +127,13 @@ namespace Nitric.Faas
                 {
                     throw new ArgumentNullException("function");
                 }
+                var address = Util.GetEnvVar("SERVICE_ADDRESS");
+                if (string.IsNullOrEmpty(address))
+                {
+                    address = string.Format(@"http://{0}:{1}", DefaultHostName, DefaultPort);
+                }
+                var channel = GrpcChannel.ForAddress(address);
+                var client = new Proto.Faas.v1.Faas.FaasClient(channel);
 
                 var childAddress = Environment.GetEnvironmentVariable("CHILD_ADDRESS");
                 if (string.IsNullOrEmpty(childAddress))
@@ -162,7 +144,7 @@ namespace Nitric.Faas
                     childAddress = string.Format("{0}:{1}", hostn, p);
                 }
 
-                return new Faas(function, childAddress);
+                return new Faas(this.function, childAddress, client);
             }
         }
     }
