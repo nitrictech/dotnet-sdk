@@ -24,8 +24,10 @@ jobs:
       id: normalize_version
     - name: Find and Replace Version templates
       run: |
-        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Sdk/Nitric.Sdk.csproj
-        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Proto/Nitric.Proto.csproj
+        mv Nitric.Sdk/Nitric.Sdk.csproj Nitric.Sdk.in.csproj
+        mv Nitric.Proto/Nitric.Proto.csproj Nitric.Proto.in.csproj
+        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Sdk/Nitric.Sdk.in.csproj > Nitric.Sdk/Nitric.Sdk.csproj
+        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Proto/Nitric.Proto.in.csproj > Nitric.Proto/Nitric.Proto.csproj
     - name: Install Dependencies
       run: dotnet restore
     - name: Exclude Test Project
