@@ -17,8 +17,6 @@ jobs:
         dotnet-version: 5.0.x
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
-<<<<<<< HEAD
-=======
     - name: Normalize version string
       run: |
         version="${{ github.event.release.tag_name }}"
@@ -30,7 +28,6 @@ jobs:
         sed -i.bak 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/g' Nitric.Proto/Nitric.Proto.csproj
         rm Nitric.Sdk/Nitric.Sdk.csproj.bak
         rm Nitric.Proto/Nitric.Proto.csproj.bak
->>>>>>> 7dedd24... chore: Fix find and replace step
     - name: Install Dependencies
       run: dotnet restore
     - name: Exclude Test Project
