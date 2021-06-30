@@ -25,19 +25,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Get latest tag
-      run: |
-        echo "::set-output name=TAG_REF::`git describe --abbrev=0`"
-      id: latest_tag
-    - name: Normalize version string
-      run: |
-        version="${{ steps.latest_tag.outputs.TAG_REF }}"
-        echo "::set-output name=VERSION::`echo ${version:1}`"
-      id: normalize_version
     - name: Find and Replace Version templates
       run: |
-        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Sdk/Nitric.Sdk.csproj
-        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Proto/Nitric.Proto.csproj
+        sed -n 's/${VERSION}/0.0.1/gp' Nitric.Sdk/Nitric.Sdk.csproj
+        sed -n 's/${VERSION}/0.0.1/gp' Nitric.Proto/Nitric.Proto.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build

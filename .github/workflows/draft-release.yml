@@ -20,19 +20,19 @@ jobs:
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v5.5
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Get latest tag
       run: |
         echo "::set-output name=TAG_REF::`git describe --abbrev=0`"
       id: latest_tag
-    - name: Normalize version string
-      run: |
-        version="${{ steps.latest_tag.outputs.TAG_REF }}"
-        echo "::set-output name=VERSION::`echo ${version:1}`"
-      id: normalize_version
     - name: Find and Replace Version templates
       run: |
-        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Sdk/Nitric.Sdk.csproj
-        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Proto/Nitric.Proto.csproj
+        sed -n 's/${VERSION}/0.0.1/gp' Nitric.Sdk/Nitric.Sdk.csproj
+        sed -n 's/${VERSION}/0.0.1/gp' Nitric.Proto/Nitric.Proto.csproj
     - name: Install Dependencies
       run: dotnet restore
     - name: Push version bump & tags
