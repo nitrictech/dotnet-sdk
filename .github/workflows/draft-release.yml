@@ -25,22 +25,6 @@ jobs:
       uses: mathieudutour/github-tag-action@v5.5
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Get latest tag
-      run: |
-        echo "::set-output name=TAG_REF::`git describe --abbrev=0`"
-      id: latest_tag
-    - name: Find and Replace Version templates
-      run: |
-        sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Sdk/Nitric.Sdk.csproj
-        sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Proto/Nitric.Proto.csproj
-    - name: Install Dependencies
-      run: dotnet restore
-
-    - name: Push version bump & tags
-      run: |
-        git fetch
-        git checkout main
-        git push origin main --follow-tags
 
     - name: Create Draft Release
       id: create_release
@@ -48,8 +32,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.latest_tag.outputs.TAG_REF }}
-        release_name: Release ${{ steps.latest_tag.outputs.TAG_REF }}
+        tag_name: ${{ steps.tag_version.outputs.new_tag }}
+        release_name: Release ${{ steps.tag_version.outputs.new_tag }}
         body: See CHANGELOG.md for changes
         draft: true
         prerelease: false
