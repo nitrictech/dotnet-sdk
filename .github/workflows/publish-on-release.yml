@@ -23,6 +23,15 @@ jobs:
       run: dotnet sln remove Nitric.Test/**
     - name: Restore Dependencies
       run: dotnet restore
+    - name: Normalize version string
+      run: |
+        version="${{ github.event.release.tag_name }}"
+        echo "::set-output name=VERSION::`echo ${version:1}`"
+      id: normalize_version
+    - name: Find and Replace Version templates
+      run: |
+        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Sdk/Nitric.Sdk.csproj
+        sed -n 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/gp' Nitric.Proto/Nitric.Proto.csproj
     - name: Publish
       run: |
         mkdir __out

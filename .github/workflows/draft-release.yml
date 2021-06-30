@@ -21,12 +21,14 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-    - name: Install Versionize
-      run: dotnet tool install --global Versionize --version 1.6.2
-
     - name: Install Dependencies
       run: dotnet restore
     
+    - name: Get latest tag
+      run: |
+        echo "::set-output name=TAG_REF::`git describe --abbrev=0`"
+      id: latest_tag
+
     - name: Version Bump and tag
       run: |
         versionize
@@ -37,11 +39,6 @@ jobs:
         git fetch
         git checkout main
         git push origin main --follow-tags
-
-    - name: Get latest tag
-      run: |
-        echo "::set-output name=TAG_REF::`git describe --abbrev=0`"
-      id: latest_tag
       
     - name: Create Draft Release
       id: create_release

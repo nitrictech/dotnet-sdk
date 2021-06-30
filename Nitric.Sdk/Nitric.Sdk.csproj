@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.1.1</Version>
+    <Version>${VERSION}</Version>
     <PackageId>Nitric.Sdk</PackageId>
     <Company>Nitric Pty Ltd</Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -16,7 +16,7 @@
     <PackageReference Include="Grpc" Version="2.36.4" />
     <PackageReference Include="Grpc.Tools" Version="2.36.4" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
     <PackageReference Include="Newtonsoft.json" Version="13.0.1" />
-    <PackageReference Include="Nitric.Proto" Version="0.1.0" />
+    <PackageReference Include="Nitric.Proto" Version="${VERSION}" />
     <PackageReference Include="Grpc.Net.Client" Version="2.38.0" />
   </ItemGroup>
 
