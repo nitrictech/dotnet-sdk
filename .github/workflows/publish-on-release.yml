@@ -26,8 +26,8 @@ jobs:
       id: normalize_version
     - name: Find and Replace Version templates
       run: |
-        sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Sdk/Nitric.Sdk.csproj
-        sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Proto/Nitric.Proto.csproj
+        sed -i.bak 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/g' Nitric.Sdk/Nitric.Sdk.csproj
+        sed -i.bak 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/g' Nitric.Proto/Nitric.Proto.csproj
         rm Nitric.Sdk/Nitric.Sdk.csproj.bak
         rm Nitric.Proto/Nitric.Proto.csproj.bak
 >>>>>>> 7dedd24... chore: Fix find and replace step
