@@ -36,8 +36,9 @@ jobs:
       run: |
         dotnet tool install --global dotnet-project-licenses
         echo "['MIT','Apache-2.0','BSD-3-Clause']" > licenses.json
-        echo "['Google.Protobuf','Nitric.Sdk','Nitric.Proto']" > filter.json
-        dotnet-project-licenses -i Nitric.Sdk --allowed-license-types licenses.json --packages-filter filter.json
+        echo "['Google.Protobuf']" > filter.json
+        echo "['Nitric.Sdk.csproj','Nitric.Proto.csproj']" > projectFilter.json
+        dotnet-project-licenses -i Nitric.Sdk --allowed-license-types licenses.json --projects-filter projectFilter.json --packages-filter filter.json
         rm licenses.json
         rm filter.json
         dotnet tool uninstall --global dotnet-project-licenses
