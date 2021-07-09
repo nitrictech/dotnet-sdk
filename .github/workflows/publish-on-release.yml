@@ -28,10 +28,8 @@ jobs:
         sed -i.bak 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/g' Nitric.Proto/Nitric.Proto.csproj
         rm Nitric.Sdk/Nitric.Sdk.csproj.bak
         rm Nitric.Proto/Nitric.Proto.csproj.bak
-    - name: Install Dependencies
-      run: dotnet restore
     - name: Exclude Test Project
-      run: dotnet sln remove Nitric.Test/**
+      run: dotnet sln remove Nitric.Test
     - name: Restore Dependencies
       run: dotnet restore
     - name: Publish
