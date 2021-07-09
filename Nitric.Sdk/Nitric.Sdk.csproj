@@ -12,11 +12,11 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.15.6" />
-    <PackageReference Include="Grpc" Version="2.36.4" />
-    <PackageReference Include="Grpc.Tools" Version="2.36.4" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="Google.Protobuf" Version="3.17.3" />
+    <PackageReference Include="Grpc" Version="2.38.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.38.1" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
     <PackageReference Include="Newtonsoft.json" Version="13.0.1" />
-    <PackageReference Include="Nitric.Proto" Version="0.1.0" />
+    <PackageReference Include="Nitric.Proto" Version="0.1.1" />
     <PackageReference Include="Grpc.Net.Client" Version="2.38.0" />
   </ItemGroup>
 
