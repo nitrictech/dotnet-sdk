@@ -20,6 +20,7 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using Util = Nitric.Api.Common.Util;
 using Nitric.Proto.Faas.v1;
+using ProtoClient = Nitric.Proto.Faas.v1.Faas.FaasClient;
 
 namespace Nitric.Faas
 {
@@ -32,12 +33,12 @@ namespace Nitric.Faas
         private static readonly int DefaultPort = 50051;
 
         public string Host { get; private set; }
-        public Nitric.Proto.Faas.v1.Faas.FaasClient Client { get; private set; }
-        INitricFunction function;
+        public ProtoClient Client { get; private set; }
+        private INitricFunction Function;
 
-        private Faas(INitricFunction function, string host, Nitric.Proto.Faas.v1.Faas.FaasClient client)
+        private Faas(INitricFunction function, string host, ProtoClient client)
         {
-            this.function = function;
+            this.Function = function;
             this.Host = host;
             this.Client = client;
         }
@@ -49,15 +50,16 @@ namespace Nitric.Faas
                 .Build()
                 .StartFunction();
         }
-
         public void StartFunction()
         {
             CallFunction().Wait();
         }
         private async Task CallFunction()
         {
-            using (var call = this.Client.TriggerStream()){
-                try {
+            using (var call = this.Client.TriggerStream())
+            {
+                try
+                {
                     while (await call.ResponseStream.MoveNext())
                     {
                         var response = call.ResponseStream.Current;
@@ -68,7 +70,7 @@ namespace Nitric.Faas
                             case ServerMessage.ContentOneofCase.TriggerRequest:
                                 var trigger = Trigger.FromGrpcTriggerRequest(response.TriggerRequest);
                                 //Call the function
-                                var membraneMessage = function.Handle(trigger);
+                                var membraneMessage = Function.Handle(trigger);
                                 var grpcMessage = membraneMessage.ToGrpcTriggerResponse();
                                 //Write back the response to the server
                                 await call.RequestStream.WriteAsync(
@@ -85,7 +87,9 @@ namespace Nitric.Faas
                         }
                     }
                     await call.RequestStream.CompleteAsync();
-                } catch (RpcException e){
+                }
+                catch (RpcException e)
+                {
                     Console.WriteLine(e.Message + "\n" + e.StackTrace);
                 }
             }
@@ -95,7 +99,6 @@ namespace Nitric.Faas
         {
             return new Builder();
         }
-
         public class Builder
         {
             private INitricFunction function;
@@ -130,10 +133,10 @@ namespace Nitric.Faas
                 var address = Util.GetEnvVar("SERVICE_ADDRESS");
                 if (string.IsNullOrEmpty(address))
                 {
-                    address = string.Format(@"http://{0}:{1}", DefaultHostName, DefaultPort);
+                    address = string.Format("http://{0}:{1}", DefaultHostName, DefaultPort);
                 }
                 var channel = GrpcChannel.ForAddress(address);
-                var client = new Proto.Faas.v1.Faas.FaasClient(channel);
+                var client = new ProtoClient(channel);
 
                 var childAddress = Environment.GetEnvironmentVariable("CHILD_ADDRESS");
                 if (string.IsNullOrEmpty(childAddress))
