@@ -20,7 +20,7 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using Util = Nitric.Api.Common.Util;
 using Nitric.Proto.Faas.v1;
-using ProtoClient = Nitric.Proto.Faas.v1.Faas.FaasClient;
+using GrpcClient = Nitric.Proto.Faas.v1.Faas.FaasClient;
 
 namespace Nitric.Faas
 {
@@ -33,10 +33,10 @@ namespace Nitric.Faas
         private static readonly int DefaultPort = 50051;
 
         public string Host { get; private set; }
-        public ProtoClient Client { get; private set; }
+        public GrpcClient Client { get; private set; }
         private INitricFunction Function;
 
-        private Faas(INitricFunction function, string host, ProtoClient client)
+        private Faas(INitricFunction function, string host, GrpcClient client)
         {
             this.Function = function;
             this.Host = host;
@@ -136,7 +136,7 @@ namespace Nitric.Faas
                     address = string.Format("http://{0}:{1}", DefaultHostName, DefaultPort);
                 }
                 var channel = GrpcChannel.ForAddress(address);
-                var client = new ProtoClient(channel);
+                var client = new GrpcClient(channel);
 
                 var childAddress = Environment.GetEnvironmentVariable("CHILD_ADDRESS");
                 if (string.IsNullOrEmpty(childAddress))

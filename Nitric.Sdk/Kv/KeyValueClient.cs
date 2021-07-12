@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using ProtoClient = Nitric.Proto.KeyValue.v1.KeyValue.KeyValueClient;
+using GrpcClient = Nitric.Proto.KeyValue.v1.KeyValue.KeyValueClient;
 using Nitric.Proto.KeyValue.v1;
 using Nitric.Api.Common;
 using System;
@@ -20,13 +20,13 @@ namespace Nitric.Api.KeyValue
 {
     public class KeyValueClient<T> : AbstractClient
     {
-        protected ProtoClient client;
+        protected GrpcClient client;
         public string Collection { get; private set; }
 
-        private KeyValueClient(string collection, ProtoClient client)
+        private KeyValueClient(string collection, GrpcClient client)
         {
             this.Collection = collection;
-            this.client = (client == null) ? new ProtoClient(GetChannel()) : client;
+            this.client = (client == null) ? new GrpcClient(GetChannel()) : client;
         }
         public void Put(string key, object value)
         {
@@ -87,10 +87,10 @@ namespace Nitric.Api.KeyValue
 
         public class Builder<K>
         {
-            public ProtoClient client { get; private set; }
+            public GrpcClient client { get; private set; }
             public string collection { get; private set; }
 
-            public Builder<K> Client(ProtoClient client)
+            public Builder<K> Client(GrpcClient client)
             {
                 this.client = client;
                 return this;
