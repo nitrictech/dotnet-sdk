@@ -15,7 +15,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Nitric.Test.Api.Event
+namespace Nitric.Test.Api.EventClient
 {
     [TestClass]
     public class EventTest
