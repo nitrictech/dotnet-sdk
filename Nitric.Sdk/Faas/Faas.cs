@@ -15,10 +15,12 @@ using System;
 using System.Net;
 using System.IO;
 using System.Threading.Tasks;
-using System.Text;
-using TriggerRequest = Nitric.Proto.Faas.v1.TriggerRequest;
-using JsonFormatter = Google.Protobuf.JsonFormatter;
-using JsonParser = Google.Protobuf.JsonParser;
+using System.Collections.Generic;
+using Grpc.Core;
+using Grpc.Net.Client;
+using Util = Nitric.Api.Common.Util;
+using Nitric.Proto.Faas.v1;
+using GrpcClient = Nitric.Proto.Faas.v1.Faas.FaasClient;
 
 namespace Nitric.Faas
 {
@@ -31,8 +33,10 @@ namespace Nitric.Faas
         private static readonly int DefaultPort = 8080;
 
         public string Host { get; private set; }
+        public GrpcClient Client { get; private set; }
+        private INitricFunction Function;
 
-        private Faas(INitricFunction function, string host)
+        private Faas(INitricFunction function, string host, GrpcClient client)
         {
             this.function = function;
             this.Host = host;
@@ -152,6 +156,13 @@ namespace Nitric.Faas
                 {
                     throw new ArgumentNullException("function");
                 }
+                var address = Util.GetEnvVar("SERVICE_ADDRESS");
+                if (string.IsNullOrEmpty(address))
+                {
+                    address = string.Format("http://{0}:{1}", DefaultHostName, DefaultPort);
+                }
+                var channel = GrpcChannel.ForAddress(address);
+                var client = new GrpcClient(channel);
 
                 var childAddress = Environment.GetEnvironmentVariable("CHILD_ADDRESS");
                 if (string.IsNullOrEmpty(childAddress))

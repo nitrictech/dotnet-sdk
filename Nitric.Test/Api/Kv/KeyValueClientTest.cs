@@ -19,7 +19,8 @@ using Nitric.Api.KeyValue;
 using Moq;
 using Nitric.Proto.KeyValue.v1;
 using Grpc.Core;
-namespace Nitric.Test.Api.Kv
+
+namespace Nitric.Test.Api.KvClient
 {
     [TestClass]
     public class KeyValueClientTest
