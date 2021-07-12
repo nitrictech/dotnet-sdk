@@ -13,27 +13,47 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using Nitric.Proto.Queue.v1;
+
 namespace Nitric.Api.Queue
 {
     public class Task
     {
-        public String ID { get; private set; }
-        public String PayloadType { get; private set; }
-        public Object Payload { get; private set; }
+        public string ID { get; private set; }
+        public string PayloadType { get; private set; }
+        public object Payload { get; private set; }
         public string LeaseID { get; private set; }
+        public Queue Queue { get; private set; }
+
         private Task(string Id,
-                          string payloadType,
-                          Object payload,
-                          string leaseID)
+                     string payloadType,
+                     object payload,
+                     string leaseID,
+                     Queue queue)
         {
             this.ID = Id;
             this.Payload = payload;
             this.PayloadType = payloadType;
             this.LeaseID = leaseID;
+            this.Queue = queue;
         }
         public override string ToString()
         {
             return GetType().Name + "[ID=" + this.ID + ", leaseId=" + this.LeaseID + "]";
+        }
+
+        public void Complete()
+        {
+            if (string.IsNullOrEmpty(this.LeaseID))
+            {
+                throw new ArgumentNullException("leaseId");
+            }
+            var request = new QueueCompleteRequest
+            {
+                Queue = this.Queue.Name,
+                LeaseId = this.LeaseID,
+            };
+            Queue.Queues.Client.Complete(request);
         }
 
         public static Builder NewBuilder()
@@ -47,12 +67,14 @@ namespace Nitric.Api.Queue
             private string payloadType;
             private Object payload;
             private string leaseID;
+            private Queue queue;
             public Builder()
             {
                 this.id = null;
                 this.payloadType = null;
                 this.payload = Common.Util.ObjToStruct(new Dictionary<string, string>());
                 this.leaseID = null;
+                this.queue = null;
             }
             public Builder Id(string id)
             {
@@ -74,10 +96,14 @@ namespace Nitric.Api.Queue
                 this.leaseID = leaseID;
                 return this;
             }
+            public Builder Queue(Queue queue)
+            {
+                this.queue = queue;
+                return this;
+            }
             public Task Build()
             {
-
-                return new Task(id, payloadType, payload, leaseID);
+                return new Task(id, payloadType, payload, leaseID, queue);
             }
         }
     }

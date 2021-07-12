@@ -74,7 +74,7 @@ namespace Nitric.Api.Queue
             List<FailedTask> failedTasks = new List<FailedTask>();
             foreach (Proto.Queue.v1.FailedTask fe in response.FailedTasks)
             {
-                failedTasks.Add(WireToFailedEvent(fe));
+                failedTasks.Add(WireToFailedTask(fe));
             }
             return new PushResponse(failedTasks);
         }
@@ -94,20 +94,6 @@ namespace Nitric.Api.Queue
             }
             return items;
         }
-
-        public void Complete(string leaseId)
-        {
-            if (string.IsNullOrEmpty(leaseId))
-            {
-                throw new ArgumentNullException("leaseId");
-            }
-            var request = new QueueCompleteRequest
-            {
-                Queue = this.Name,
-                LeaseId = leaseId
-            };
-            Queues.Client.Complete(request);
-        }
         private Task WireToQueueItem(NitricTask nitricTask)
         {
             return Task
@@ -116,6 +102,7 @@ namespace Nitric.Api.Queue
                 .PayloadType(nitricTask.PayloadType)
                 .Payload(nitricTask.Payload)
                 .LeaseID(nitricTask.LeaseId)
+                .Queue(this)
                 .Build();
         }
 
@@ -129,7 +116,7 @@ namespace Nitric.Api.Queue
             };
         }
 
-        private FailedTask WireToFailedEvent(Proto.Queue.v1.FailedTask protoFailedEvent)
+        private FailedTask WireToFailedTask(Proto.Queue.v1.FailedTask protoFailedEvent)
         {
             return FailedTask.NewBuilder()
                 .Id(protoFailedEvent.Task.Id)

@@ -166,9 +166,11 @@ namespace Nitric.Test.Api.QueueClient
             qc.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
-            var queue = new Queues(qc.Object).Queue("test-queue");
+            var task = new Task.Builder()
+                .Queue(new Queues(qc.Object).Queue("test-queue"))
+                .Build();
 
-            queue.Complete("leaseId");
+            task.Complete();
 
             qc.Verify(t => t.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
