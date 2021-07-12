@@ -13,7 +13,7 @@
 // limitations under the License.
 using System.Collections.Generic;
 using Google.Protobuf.Collections;
-using ProtoClient = Nitric.Proto.Queue.v1.Queue.QueueClient;
+using GrpcClient = Nitric.Proto.Queue.v1.Queue.QueueClient;
 using Nitric.Proto.Queue.v1;
 using Nitric.Api.Common;
 using System;
@@ -21,16 +21,32 @@ using System;
 namespace Nitric.Api.Queue
 {
 
-    public class QueueClient : AbstractClient
+    public class Queues : AbstractClient
     {
-        protected ProtoClient client;
-        public string Queue { get; private set; }
-        private QueueClient(ProtoClient client, string queue)
+        internal GrpcClient Client { get; private set; }
+        public Queues(GrpcClient client = null)
         {
-            this.Queue = queue;
-            this.client = (client == null) ? new ProtoClient(this.GetChannel()) : client;
+            this.Client = (client == null) ? new GrpcClient(this.GetChannel()) : client;
         }
+        public Queue Queue(string queueName)
+        {
+            if (string.IsNullOrEmpty(queueName))
+            {
+                throw new ArgumentNullException(queueName);
+            }
+            return new Queue(this, queueName);
+        }
+    }
+    public class Queue
+    {
+        public string Name { get; private set; }
+        internal Queues Queues;
 
+        internal Queue(Queues queues, string name)
+        {
+            this.Name = name;
+            this.Queues = queues;
+        }
         public void Send(Task task)
         {
             if (task == null)
@@ -39,10 +55,10 @@ namespace Nitric.Api.Queue
             }
             var request = new QueueSendRequest
             {
-                Queue = this.Queue,
+                Queue = this.Name,
                 Task = EventToWire(task)
             };
-            client.Send(request);
+            Queues.Client.Send(request);
         }
         public PushResponse SendBatch(IList<Task> tasks)
         {
@@ -52,9 +68,9 @@ namespace Nitric.Api.Queue
                 wireEvents.Add(EventToWire(task));
             }
 
-            var request = new QueueSendBatchRequest { Queue = this.Queue };
+            var request = new QueueSendBatchRequest { Queue = this.Name };
             request.Tasks.AddRange(wireEvents);
-            var response = client.SendBatch(request);
+            var response = Queues.Client.SendBatch(request);
             List<FailedTask> failedTasks = new List<FailedTask>();
             foreach (Proto.Queue.v1.FailedTask fe in response.FailedTasks)
             {
@@ -69,8 +85,8 @@ namespace Nitric.Api.Queue
             {
                 depth = 1;
             }
-            var request = new QueueReceiveRequest { Queue = this.Queue, Depth = depth };
-            var response = this.client.Receive(request);
+            var request = new QueueReceiveRequest { Queue = this.Name, Depth = depth };
+            var response = this.Queues.Client.Receive(request);
             List<Task> items = new List<Task>();
             foreach (NitricTask nqi in response.Tasks)
             {
@@ -87,10 +103,10 @@ namespace Nitric.Api.Queue
             }
             var request = new QueueCompleteRequest
             {
-                Queue = this.Queue,
+                Queue = this.Name,
                 LeaseId = leaseId
             };
-            client.Complete(request);
+            Queues.Client.Complete(request);
         }
         private Task WireToQueueItem(NitricTask nitricTask)
         {
@@ -121,35 +137,6 @@ namespace Nitric.Api.Queue
                 .Payload(protoFailedEvent.Task.Payload)
                 .Message(protoFailedEvent.Message)
                 .Build();
-        }
-
-        public static Builder NewBuilder() {
-            return new Builder();
-        }
-
-        public class Builder
-        {
-            private string queue;
-            private ProtoClient client;
-            public Builder()
-            {
-                client = null;
-                queue = "";
-            }
-            public Builder Client(ProtoClient client)
-            {
-                this.client = client;
-                return this;
-            }
-            public Builder Queue(string queue)
-            {
-                this.queue = queue;
-                return this;
-            }
-            public QueueClient Build()
-            {
-                return new QueueClient(client, queue);
-            }
         }
     }
 }

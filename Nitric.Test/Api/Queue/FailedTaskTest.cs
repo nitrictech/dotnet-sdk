@@ -15,7 +15,8 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Google.Protobuf.WellKnownTypes;
-namespace Nitric.Test.Api.Queue
+
+namespace Nitric.Test.Api.QueueClient
 {
     [TestClass]
     public class FailedTaskTest
