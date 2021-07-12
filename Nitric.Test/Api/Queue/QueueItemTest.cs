@@ -13,7 +13,8 @@
 // limitations under the License.
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-namespace Nitric.Test.Api.Queue
+
+namespace Nitric.Test.Api.QueueClient
 {
     [TestClass]
     public class QueueItemTest
