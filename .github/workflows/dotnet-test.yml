@@ -28,7 +28,6 @@ jobs:
     - name: Find and Replace Version templates
       run: |
         sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Sdk/Nitric.Sdk.csproj
-        sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Proto/Nitric.Proto.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -40,7 +39,7 @@ jobs:
         dotnet tool install --global dotnet-project-licenses
         echo "['MIT','Apache-2.0','BSD-3-Clause']" > licenses.json
         echo "['Google.Protobuf']" > filter.json
-        echo "['Nitric.Sdk.csproj','Nitric.Proto.csproj']" > packageFilter.json
+        echo "['Nitric.Sdk.csproj']" > packageFilter.json
         dotnet-project-licenses -i Nitric.Sdk --allowed-license-types licenses.json --projects-filter packageFilter.json --packages-filter filter.json
         rm licenses.json
         rm filter.json
