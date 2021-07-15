@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <None Include="LICENSE" Pack="true" PackagePath="" />
+    <ProjectReference Include="..\Nitric.Proto\Nitric.Proto.csproj" />
   </ItemGroup>
 
   <ItemGroup>
