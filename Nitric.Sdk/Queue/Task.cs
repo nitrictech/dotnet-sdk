@@ -19,27 +19,79 @@ namespace Nitric.Api.Queue
 {
     public class Task
     {
-        public string ID { get; private set; }
-        public string PayloadType { get; private set; }
-        public object Payload { get; private set; }
-        public string LeaseID { get; private set; }
-        public Queue Queue { get; private set; }
+        public string ID { get; protected set; }
+        public string PayloadType { get; protected set; }
+        public object Payload { get; protected set; }
+
+        //Default constructor for derived class
+        protected Task() { }
 
         private Task(string Id,
                      string payloadType,
-                     object payload,
-                     string leaseID,
-                     Queue queue)
+                     object payload)
         {
             this.ID = Id;
             this.Payload = payload;
             this.PayloadType = payloadType;
-            this.LeaseID = leaseID;
-            this.Queue = queue;
         }
         public override string ToString()
         {
-            return GetType().Name + "[ID=" + this.ID + ", leaseId=" + this.LeaseID + "]";
+            return GetType().Name + "[ID=" + this.ID + "]";
+        }
+
+        public static Builder NewBuilder()
+        {
+            return new Builder();
+        }
+
+        public class Builder
+        {
+            private string id;
+            private string payloadType;
+            private object payload;
+            public Builder()
+            {
+                this.id = null;
+                this.payloadType = null;
+                this.payload = Common.Util.ObjToStruct(new Dictionary<string, string>());
+            }
+            public Builder Id(string id)
+            {
+                this.id = id;
+                return this;
+            }
+            public Builder PayloadType(string payloadType)
+            {
+                this.payloadType = payloadType;
+                return this;
+            }
+            public Builder Payload(object payload)
+            {
+                this.payload = payload;
+                return this;
+            }
+            public Task Build()
+            {
+                return new Task(id, payloadType, payload);
+            }
+        }
+    }
+    public class ReceivedTask : Task
+    {
+        public Queue Queue { get; private set; }
+        public string LeaseID { get; private set; }
+
+        private ReceivedTask(string id,
+                             string payloadType,
+                             object payload,
+                             string leaseId,
+                             Queue queue)
+        {
+            this.ID = id;
+            this.PayloadType = payloadType;
+            this.Payload = payload;
+            this.LeaseID = leaseId;
+            this.Queue = queue;
         }
 
         public void Complete()
@@ -60,20 +112,20 @@ namespace Nitric.Api.Queue
         {
             return new Builder();
         }
-
         public class Builder
         {
             private string id;
             private string payloadType;
-            private Object payload;
-            private string leaseID;
+            private object payload;
+            private string leaseId;
             private Queue queue;
+
             public Builder()
             {
-                this.id = null;
-                this.payloadType = null;
-                this.payload = Common.Util.ObjToStruct(new Dictionary<string, string>());
-                this.leaseID = null;
+                this.id = "";
+                this.payloadType = "";
+                this.payload = null;
+                this.leaseId = "";
                 this.queue = null;
             }
             public Builder Id(string id)
@@ -86,14 +138,14 @@ namespace Nitric.Api.Queue
                 this.payloadType = payloadType;
                 return this;
             }
-            public Builder Payload(Object payload)
+            public Builder Payload(object payload)
             {
                 this.payload = payload;
                 return this;
             }
-            public Builder LeaseID(string leaseID)
+            public Builder LeaseId(string leaseId)
             {
-                this.leaseID = leaseID;
+                this.leaseId = leaseId;
                 return this;
             }
             public Builder Queue(Queue queue)
@@ -101,9 +153,13 @@ namespace Nitric.Api.Queue
                 this.queue = queue;
                 return this;
             }
-            public Task Build()
+            public ReceivedTask Build()
             {
-                return new Task(id, payloadType, payload, leaseID, queue);
+                return new ReceivedTask(this.id,
+                                        this.payloadType,
+                                        this.payload,
+                                        this.leaseId,
+                                        this.queue);
             }
         }
     }

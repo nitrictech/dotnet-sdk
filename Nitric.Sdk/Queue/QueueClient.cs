@@ -79,7 +79,7 @@ namespace Nitric.Api.Queue
             return new PushResponse(failedTasks);
         }
 
-        public List<Task> Receive(int depth)
+        public List<ReceivedTask> Receive(int depth)
         {
             if (depth < 1)
             {
@@ -87,21 +87,21 @@ namespace Nitric.Api.Queue
             }
             var request = new QueueReceiveRequest { Queue = this.Name, Depth = depth };
             var response = this.Queues.Client.Receive(request);
-            List<Task> items = new List<Task>();
+            List<ReceivedTask> items = new List<ReceivedTask>();
             foreach (NitricTask nqi in response.Tasks)
             {
                 items.Add(WireToQueueItem(nqi));
             }
             return items;
         }
-        private Task WireToQueueItem(NitricTask nitricTask)
+        private ReceivedTask WireToQueueItem(NitricTask nitricTask)
         {
-            return Task
+            return ReceivedTask
                 .NewBuilder()
                 .Id(nitricTask.Id)
                 .PayloadType(nitricTask.PayloadType)
                 .Payload(nitricTask.Payload)
-                .LeaseID(nitricTask.LeaseId)
+                .LeaseId(nitricTask.LeaseId)
                 .Queue(this)
                 .Build();
         }
