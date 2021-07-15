@@ -73,7 +73,7 @@ namespace Nitric.Test.Api.StorageClient
                     System.Text.Encoding.UTF8.GetBytes("Body"))
             };
 
-            Mock<Proto.Storage.v1.Storage.StorageClient> bc = new Mock<Proto.Storage.v1.Storage.StorageClient>();
+            Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
             bc.Setup(e => e.Write(It.IsAny<StorageWriteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new StorageWriteResponse())
                 .Verifiable();
@@ -90,7 +90,7 @@ namespace Nitric.Test.Api.StorageClient
             var storageResponse = new StorageReadResponse();
             storageResponse.Body = Google.Protobuf.ByteString.CopyFrom(System.Text.Encoding.UTF8.GetBytes("Hello World"));
 
-            Mock<Proto.Storage.v1.Storage.StorageClient> bc = new Mock<Proto.Storage.v1.Storage.StorageClient>();
+            Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
             bc.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(storageResponse)
                 .Verifiable();
@@ -106,7 +106,7 @@ namespace Nitric.Test.Api.StorageClient
         [TestMethod]
         public void TestReadNonExistingKey()
         {
-            Mock<Proto.Storage.v1.Storage.StorageClient> bc = new Mock<Proto.Storage.v1.Storage.StorageClient>();
+            Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
             bc.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
@@ -126,7 +126,7 @@ namespace Nitric.Test.Api.StorageClient
         [TestMethod]
         public void TestDeleteExistingKey()
         {
-            Mock<Proto.Storage.v1.Storage.StorageClient> bc = new Mock<Proto.Storage.v1.Storage.StorageClient>();
+            Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
             bc.Setup(e => e.Delete(It.IsAny<StorageDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new StorageDeleteResponse())
                 .Verifiable();

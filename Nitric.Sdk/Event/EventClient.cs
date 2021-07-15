@@ -16,8 +16,8 @@ using System.Collections.Generic;
 using Nitric.Api.Common;
 using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using Nitric.Proto.Event.v1;
-using GrpcClient = Nitric.Proto.Event.v1.Event.EventClient;
-using TopicClient = Nitric.Proto.Event.v1.Topic.TopicClient;
+using GrpcClient = Nitric.Proto.Event.v1.EventService.EventServiceClient;
+using TopicClient = Nitric.Proto.Event.v1.TopicService.TopicServiceClient;
 
 namespace Nitric.Api.Event
 {

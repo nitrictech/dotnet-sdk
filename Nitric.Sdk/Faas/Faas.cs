@@ -20,7 +20,7 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using Util = Nitric.Api.Common.Util;
 using Nitric.Proto.Faas.v1;
-using ProtoClient = Nitric.Proto.Faas.v1.Faas.FaasClient;
+using ProtoClient = Nitric.Proto.Faas.v1.FaasService.FaasServiceClient;
 
 namespace Nitric.Faas
 {

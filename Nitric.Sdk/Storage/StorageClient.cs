@@ -13,7 +13,7 @@
 // limitations under the License.
 using System;
 using Google.Protobuf;
-using GrpcClient = Nitric.Proto.Storage.v1.Storage.StorageClient;
+using GrpcClient = Nitric.Proto.Storage.v1.StorageService.StorageServiceClient;
 using Nitric.Proto.Storage.v1;
 using Nitric.Api.Common;
 

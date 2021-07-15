@@ -13,7 +13,7 @@
 // limitations under the License.
 using System.Collections.Generic;
 using Google.Protobuf.Collections;
-using GrpcClient = Nitric.Proto.Queue.v1.Queue.QueueClient;
+using GrpcClient = Nitric.Proto.Queue.v1.QueueService.QueueServiceClient;
 using Nitric.Proto.Queue.v1;
 using Nitric.Api.Common;
 using System;

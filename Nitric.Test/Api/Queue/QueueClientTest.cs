@@ -67,7 +67,7 @@ namespace Nitric.Test.Api.QueueClient
             var queueBatchResponse = new QueueSendBatchResponse();
             queueBatchResponse.FailedTasks.AddRange(failedTasks);
 
-            Mock<Proto.Queue.v1.Queue.QueueClient> qc = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
             qc.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queueBatchResponse)
                 .Verifiable();
@@ -83,7 +83,7 @@ namespace Nitric.Test.Api.QueueClient
         [TestMethod]
         public void TestSendBatchWithNoFailedTasks()
         {
-            Mock<Proto.Queue.v1.Queue.QueueClient> qc = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
             qc.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new QueueSendBatchResponse())
                 .Verifiable();
@@ -111,7 +111,7 @@ namespace Nitric.Test.Api.QueueClient
             var queueReceieveResponse = new QueueReceiveResponse();
             queueReceieveResponse.Tasks.AddRange(tasks);
 
-            Mock<Proto.Queue.v1.Queue.QueueClient> qc = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
             qc.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queueReceieveResponse)
                 .Verifiable();
@@ -127,7 +127,7 @@ namespace Nitric.Test.Api.QueueClient
         [TestMethod]
         public void TestReceiveNoTasks()
         {
-            Mock<Proto.Queue.v1.Queue.QueueClient> qc = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
             qc.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new QueueReceiveResponse())
                 .Verifiable();
@@ -143,7 +143,7 @@ namespace Nitric.Test.Api.QueueClient
         [TestMethod]
         public void TestSend()
         {
-            Mock<Proto.Queue.v1.Queue.QueueClient> qc = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
             qc.Setup(e => e.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
@@ -180,12 +180,12 @@ namespace Nitric.Test.Api.QueueClient
             var queueReceieveResponse = new QueueReceiveResponse();
             queueReceieveResponse.Tasks.AddRange(tasks);
 
-            Mock<Proto.Queue.v1.Queue.QueueClient> qc = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
             qc.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queueReceieveResponse)
                 .Verifiable();
 
-            Mock<Proto.Queue.v1.Queue.QueueClient> qcr = new Mock<Proto.Queue.v1.Queue.QueueClient>();
+            Mock<QueueService.QueueServiceClient> qcr = new Mock<QueueService.QueueServiceClient>();
             qc.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 

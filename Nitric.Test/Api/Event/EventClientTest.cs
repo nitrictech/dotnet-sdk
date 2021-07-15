@@ -55,7 +55,7 @@ namespace Nitric.Test.Api.EventClient
             var evt = new NitricEvent { Id = "1", PayloadType = "payloadType", Payload = payloadStruct };
             var request = new EventPublishRequest { Topic = "test-topic", Event = evt };
 
-            Mock<Proto.Event.v1.Event.EventClient> ec = new Mock<Proto.Event.v1.Event.EventClient>();
+            Mock<Proto.Event.v1.EventService.EventServiceClient> ec = new Mock<Proto.Event.v1.EventService.EventServiceClient>();
 
             ec.Setup(e => e.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new EventPublishResponse())
