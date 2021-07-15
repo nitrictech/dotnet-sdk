@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Storage\" />
-    <Folder Include="Kv\" />
     <Folder Include="Faas\" />
     <Folder Include="Http\" />
     <Folder Include="Queue\" />
