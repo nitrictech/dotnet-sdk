@@ -14,9 +14,9 @@
 using System;
 using System.Net;
 using System.IO;
+using System.Text;
+using Google.Protobuf;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Grpc.Core;
 using Grpc.Net.Client;
 using Util = Nitric.Api.Common.Util;
 using Nitric.Proto.Faas.v1;
@@ -36,7 +36,7 @@ namespace Nitric.Faas
         public GrpcClient Client { get; private set; }
         private INitricFunction Function;
 
-        private Faas(INitricFunction function, string host, GrpcClient client)
+        private Faas(INitricFunction function, string host, GrpcClient client=null)
         {
             this.function = function;
             this.Host = host;
