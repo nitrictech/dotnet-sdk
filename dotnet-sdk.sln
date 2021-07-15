@@ -1,46 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.809.2
+VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nitric.Sdk", "Nitric.Sdk\Nitric.Sdk.csproj", "{847FA635-9AE6-4BE1-B124-18EA422C7165}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nitric.Proto", "Nitric.Proto\Nitric.Proto.csproj", "{C694E83A-004F-40E9-97D6-870CC9222F72}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nitric.Test", "Nitric.Test\Nitric.Test.csproj", "{3B933F40-5BEE-4AD2-8A8C-E0E3F0C2C01B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04838EB0-7695-49F5-829D-249D480B1DFB}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nitric.Sdk", "Nitric.Sdk\Nitric.Sdk.csproj", "{77551A6A-4CA5-4518-9B33-AAA1E7201995}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D6821D20-6A47-483D-BDA1-C8CE597539ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6821D20-6A47-483D-BDA1-C8CE597539ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6821D20-6A47-483D-BDA1-C8CE597539ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6821D20-6A47-483D-BDA1-C8CE597539ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{847FA635-9AE6-4BE1-B124-18EA422C7165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{847FA635-9AE6-4BE1-B124-18EA422C7165}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{847FA635-9AE6-4BE1-B124-18EA422C7165}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{847FA635-9AE6-4BE1-B124-18EA422C7165}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C694E83A-004F-40E9-97D6-870CC9222F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C694E83A-004F-40E9-97D6-870CC9222F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C694E83A-004F-40E9-97D6-870CC9222F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C694E83A-004F-40E9-97D6-870CC9222F72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B933F40-5BEE-4AD2-8A8C-E0E3F0C2C01B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B933F40-5BEE-4AD2-8A8C-E0E3F0C2C01B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B933F40-5BEE-4AD2-8A8C-E0E3F0C2C01B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B933F40-5BEE-4AD2-8A8C-E0E3F0C2C01B}.Release|Any CPU.Build.0 = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E2A89B66-EF5B-4FF0-8D3C-641DDBA50F3A}
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Debug|x64.Build.0 = Debug|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Debug|x86.Build.0 = Debug|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Release|x64.ActiveCfg = Release|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Release|x64.Build.0 = Release|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Release|x86.ActiveCfg = Release|Any CPU
+		{77551A6A-4CA5-4518-9B33-AAA1E7201995}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
