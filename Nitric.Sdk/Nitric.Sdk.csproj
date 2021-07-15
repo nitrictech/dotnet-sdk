@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <None Include="LICENSE" Pack="true" PackagePath="" />
-    <ProjectReference Include="..\Nitric.Proto\Nitric.Proto.csproj" />
+    <Protobuf Include="**/*.proto" ProtoRoot="contracts/proto/" />
   </ItemGroup>
 
   <ItemGroup>
