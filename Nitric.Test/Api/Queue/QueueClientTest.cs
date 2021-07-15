@@ -19,19 +19,33 @@ using System.Collections.Generic;
 using Moq;
 using Google.Protobuf.WellKnownTypes;
 using Nitric.Api.Queue;
-namespace Nitric.Test.Api.Queue
+
+namespace Nitric.Test.Api.QueueClient
 {
     [TestClass]
     public class QueueClientTest
     {
         [TestMethod]
-        public void TestBuild()
+        public void TestBuildQueues()
         {
-            var queueClient = new QueueClient
-                .Builder()
-                .Build();
-
-            Assert.IsNotNull(queueClient);
+            var queues = new Queues();
+            Assert.IsNotNull(queues);
+        }
+        [TestMethod]
+        public void TestBuildQueueWithName()
+        {
+            var queue = new Queues().Queue("test-queue");
+            Assert.IsNotNull(queue);
+            Assert.AreEqual("test-queue", queue.Name);
+        }
+        public void TestBuildQueueWithoutName()
+        {
+            Assert.ThrowsException<ArgumentNullException>(
+                () => new Queues().Queue("")
+            );
+            Assert.ThrowsException<ArgumentNullException>(
+                () => new Queues().Queue(null)
+            );
         }
         [TestMethod]
         public void TestSendBatchWithFailedTasks()
@@ -53,40 +67,34 @@ namespace Nitric.Test.Api.Queue
             var queueBatchResponse = new QueueSendBatchResponse();
             queueBatchResponse.FailedTasks.AddRange(failedTasks);
 
-            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
-            ec.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
+            qc.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queueBatchResponse)
                 .Verifiable();
 
-            var queueClient = new QueueClient.Builder()
-                .Client(ec.Object)
-                .Queue("queue")
-                .Build();
+            var queue = new Queues(qc.Object).Queue("test-queue");
 
-            var response = queueClient.SendBatch(new List<Task>());
+            var response = queue.SendBatch(new List<Task>());
 
             Assert.AreEqual("I am a failed task... I failed my task", response.getFailedTasks()[0].Message);
 
-            ec.Verify(t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            qc.Verify(t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [TestMethod]
         public void TestSendBatchWithNoFailedTasks()
         {
-            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
-            ec.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
+            qc.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new QueueSendBatchResponse())
                 .Verifiable();
 
-            var queueClient = new QueueClient.Builder()
-                .Client(ec.Object)
-                .Queue("queue")
-                .Build();
+            var queue = new Queues(qc.Object).Queue("test-queue");
 
-            var response = queueClient.SendBatch(new List<Task>());
+            var response = queue.SendBatch(new List<Task>());
 
             Assert.AreEqual(0, response.getFailedTasks().Count);
 
-            ec.Verify(t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            qc.Verify(t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [TestMethod]
         public void TestReceiveTasks()
@@ -103,78 +111,91 @@ namespace Nitric.Test.Api.Queue
             var queueReceieveResponse = new QueueReceiveResponse();
             queueReceieveResponse.Tasks.AddRange(tasks);
 
-            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
-            ec.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
+            qc.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queueReceieveResponse)
                 .Verifiable();
 
-            var queueClient = new QueueClient.Builder()
-                .Client(ec.Object)
-                .Queue("queue")
-                .Build();
+            var queue = new Queues(qc.Object).Queue("test-queue");
 
-            var response = queueClient.Receive(3);
+            var response = queue.Receive(3);
 
             Assert.AreEqual("32", response[0].ID);
 
-            ec.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            qc.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [TestMethod]
         public void TestReceiveNoTasks()
         {
-            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
-            ec.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
+            qc.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new QueueReceiveResponse())
                 .Verifiable();
 
-            var queueClient = new QueueClient.Builder()
-                .Client(ec.Object)
-                .Queue("queue")
-                .Build();
+            var queue = new Queues(qc.Object).Queue("test-queue");
 
-            var response = queueClient.Receive(3);
+            var response = queue.Receive(3);
 
             Assert.AreEqual(0, response.Count);
 
-            ec.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            qc.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [TestMethod]
         public void TestSend()
         {
-            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
-            ec.Setup(e => e.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
+            qc.Setup(e => e.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
-            var queueClient = new QueueClient.Builder()
-                .Client(ec.Object)
-                .Queue("queue")
-                .Build();
+            var queue = new Queues(qc.Object).Queue("test-queue");
 
-            queueClient.Send(new Task.Builder()
-                .LeaseID("leaseId")
+            queue.Send(new Task.Builder()
                 .Id("0")
                 .Payload(new Struct())
                 .PayloadType("JSON")
                 .Build()
             );
 
-            ec.Verify(t => t.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            qc.Verify(t => t.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [TestMethod]
         public void TestComplete()
         {
-            Mock<Proto.Queue.v1.Queue.QueueClient> ec = new Mock<Proto.Queue.v1.Queue.QueueClient>();
-            ec.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            var receivedTask = ReceivedTask.NewBuilder()
+                                           .Id("32")
+                                           .LeaseId("1")
+                                           .PayloadType("Dictionary")
+                                           .Payload(new Dictionary<string, string>())
+                                           .Build();
+
+            NitricTask taskToReturn = new NitricTask();
+            taskToReturn.Id = "32";
+            taskToReturn.LeaseId = "1";
+            taskToReturn.Payload = Nitric.Api.Common.Util.ObjToStruct(new Dictionary<string, string>());
+            taskToReturn.PayloadType = "Dictionary";
+
+            RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();
+            tasks.Add(taskToReturn);
+
+            var queueReceieveResponse = new QueueReceiveResponse();
+            queueReceieveResponse.Tasks.AddRange(tasks);
+
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
+            qc.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(queueReceieveResponse)
                 .Verifiable();
 
-            var queueClient = new QueueClient.Builder()
-                .Client(ec.Object)
-                .Queue("queue")
-                .Build();
+            Mock<QueueService.QueueServiceClient> qcr = new Mock<QueueService.QueueServiceClient>();
+            qc.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Verifiable();
 
-            queueClient.Complete("leaseId");
+            var queue = new Queues(qc.Object).Queue("test-queue");
 
-            ec.Verify(t => t.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            var response = queue.Receive(3);
+
+            response[0].Complete();
+
+            qc.Verify(t => t.Complete(It.IsAny<QueueCompleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }
 }

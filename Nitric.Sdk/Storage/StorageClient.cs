@@ -13,88 +13,92 @@
 // limitations under the License.
 using System;
 using Google.Protobuf;
-using ProtoClient = Nitric.Proto.Storage.v1.Storage.StorageClient;
+using GrpcClient = Nitric.Proto.Storage.v1.StorageService.StorageServiceClient;
 using Nitric.Proto.Storage.v1;
 using Nitric.Api.Common;
 
 namespace Nitric.Api.Storage
 {
-    public class StorageClient : AbstractClient
+    public class Storage : AbstractClient
     {
-        public readonly string BucketName;
-        protected ProtoClient client;
+        internal GrpcClient Client;
 
-        private StorageClient(string bucketName, ProtoClient client)
+        public Storage(GrpcClient client = null)
         {
-            this.BucketName = bucketName;
-            this.client = (client == null) ? new ProtoClient(GetChannel()) : client;
+            this.Client = (client == null) ? new GrpcClient(GetChannel()) : client;
         }
-        public void Write(string key, byte[] body)
+        public Bucket Bucket(string bucketName)
+        {
+            if (string.IsNullOrEmpty(bucketName))
+            {
+                throw new ArgumentNullException(bucketName);
+            }
+            return new Bucket(this, bucketName);
+        }
+    }
+    public class Bucket
+    {
+        internal Storage Storage;
+        public string Name { get; private set; }
+
+        internal Bucket(Storage storage, string name)
+        {
+            this.Storage = storage;
+            this.Name = name;
+        }
+        public File File(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(key);
+            }
+            return new File(Storage, this, key);
+        }
+    }
+    public class File
+    {
+        internal Storage Storage;
+        internal Bucket Bucket;
+        public string Key { get; private set; }
+
+        internal File(Storage storage, Bucket bucket, string key)
+        {
+            this.Storage = storage;
+            this.Bucket = bucket;
+            this.Key = key;
+        }
+        public void Write(byte[] body)
         {
             var request = new StorageWriteRequest
             {
-                BucketName = BucketName,
-                Key = key,
+                BucketName = Bucket.Name,
+                Key = this.Key,
                 Body = ByteString.CopyFrom(body)
             };
-            client.Write(request);
+            Storage.Client.Write(request);
         }
-        public byte[] Read(string key)
+        public byte[] Read()
         {
             var request = new StorageReadRequest
             {
-                BucketName = BucketName,
-                Key = key
+                BucketName = Bucket.Name,
+                Key = this.Key
             };
-            var response = client.Read(request);
+            var response = Storage.Client.Read(request);
             return response.Body.ToByteArray();
         }
-        public void Delete(string key)
+        public void Delete()
         {
             var request = new StorageDeleteRequest
             {
-                BucketName = BucketName,
-                Key = key
+                BucketName = Bucket.Name,
+                Key = this.Key
             };
-            client.Delete(request);
+            Storage.Client.Delete(request);
         }
         public override string ToString()
         {
-            return GetType().Name + "[bucket=" + BucketName + "]";
-        }
-
-        public static Builder NewBuilder()
-        {
-            return new Builder();
-        }
-
-        public class Builder
-        {
-            private ProtoClient client;
-            private string bucketName;
-            public Builder()
-            {
-                this.client = null;
-                this.bucketName = null;
-            }
-            public Builder Client(ProtoClient client)
-            {
-                this.client = client;
-                return this;
-            }
-            public Builder BucketName(string bucketName)
-            {
-                this.bucketName = bucketName;
-                return this;
-            }
-            public StorageClient Build()
-            {
-                if (string.IsNullOrEmpty(this.bucketName))
-                {
-                    throw new ArgumentNullException("bucketName");
-                }
-                return new StorageClient(bucketName, client);
-            }
+            return GetType().Name + "[key=" + Key + "\nbucket=" + Bucket.Name + "]";
         }
     }
 }

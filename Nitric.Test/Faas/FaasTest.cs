@@ -17,6 +17,7 @@ using System.Text;
 using System.Net.Http;
 using System.Threading;
 using Nitric.Faas;
+using Grpc.Core;
 
 namespace Nitric.Test.Faas
 {
@@ -27,12 +28,11 @@ namespace Nitric.Test.Faas
         public void TestDoubleStart()
         {
             Nitric.Faas.Faas faas = Nitric.Faas.Faas.NewBuilder()
-            .Function(new HelloWorld())
-            .Build();
-            Thread faasThread = new Thread(() => faas.Start());
+                .Function(new HelloWorld())
+                .Build();
+            Thread faasThread = new Thread(() => faas.StartFunction());
             faasThread.Start();
-            Assert.ThrowsException<ArgumentException>(() => faas.Start());
-            faas.Listener.Close();
+            Assert.ThrowsException<RpcException>(() => faas.StartFunction());
         }
         [TestMethod]
         public void TestCall()
@@ -40,7 +40,7 @@ namespace Nitric.Test.Faas
             Nitric.Faas.Faas faas = Nitric.Faas.Faas.NewBuilder()
                 .Function(new HelloWorld())
                 .Build();
-            Thread faasThread = new Thread(() => faas.Start());
+            Thread faasThread = new Thread(() => faas.StartFunction());
             faasThread.Start();
             var client = new HttpClient();
             var result = client.GetAsync(string.Format("http://{0}:{1}/", "127.0.0.1", 8080));
@@ -50,12 +50,8 @@ namespace Nitric.Test.Faas
     public class HelloWorld : INitricFunction
     {
         public int requestNum = 0;
-        public Trigger[] triggers { get; private set; }
         public Response Handle(Trigger request)
         {
-            triggers[requestNum++] = request;
-            
-
             return request.DefaultResponse(Encoding.UTF8.GetBytes("Hello World"));
         }
     }

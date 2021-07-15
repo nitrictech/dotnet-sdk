@@ -13,27 +13,30 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using Nitric.Proto.Queue.v1;
+
 namespace Nitric.Api.Queue
 {
     public class Task
     {
-        public String ID { get; private set; }
-        public String PayloadType { get; private set; }
-        public Object Payload { get; private set; }
-        public string LeaseID { get; private set; }
+        public string ID { get; protected set; }
+        public string PayloadType { get; protected set; }
+        public object Payload { get; protected set; }
+
+        //Default constructor for derived class
+        protected Task() { }
+
         private Task(string Id,
-                          string payloadType,
-                          Object payload,
-                          string leaseID)
+                     string payloadType,
+                     object payload)
         {
             this.ID = Id;
             this.Payload = payload;
             this.PayloadType = payloadType;
-            this.LeaseID = leaseID;
         }
         public override string ToString()
         {
-            return GetType().Name + "[ID=" + this.ID + ", leaseId=" + this.LeaseID + "]";
+            return GetType().Name + "[ID=" + this.ID + "]";
         }
 
         public static Builder NewBuilder()
@@ -45,14 +48,12 @@ namespace Nitric.Api.Queue
         {
             private string id;
             private string payloadType;
-            private Object payload;
-            private string leaseID;
+            private object payload;
             public Builder()
             {
                 this.id = null;
                 this.payloadType = null;
                 this.payload = Common.Util.ObjToStruct(new Dictionary<string, string>());
-                this.leaseID = null;
             }
             public Builder Id(string id)
             {
@@ -64,20 +65,101 @@ namespace Nitric.Api.Queue
                 this.payloadType = payloadType;
                 return this;
             }
-            public Builder Payload(Object payload)
+            public Builder Payload(object payload)
             {
                 this.payload = payload;
                 return this;
             }
-            public Builder LeaseID(string leaseID)
-            {
-                this.leaseID = leaseID;
-                return this;
-            }
             public Task Build()
             {
+                return new Task(id, payloadType, payload);
+            }
+        }
+    }
+    public class ReceivedTask : Task
+    {
+        public Queue Queue { get; private set; }
+        public string LeaseID { get; private set; }
 
-                return new Task(id, payloadType, payload, leaseID);
+        private ReceivedTask(string id,
+                             string payloadType,
+                             object payload,
+                             string leaseId,
+                             Queue queue)
+        {
+            this.ID = id;
+            this.PayloadType = payloadType;
+            this.Payload = payload;
+            this.LeaseID = leaseId;
+            this.Queue = queue;
+        }
+
+        public void Complete()
+        {
+            if (string.IsNullOrEmpty(this.LeaseID))
+            {
+                throw new ArgumentNullException("leaseId");
+            }
+            var request = new QueueCompleteRequest
+            {
+                Queue = this.Queue.Name,
+                LeaseId = this.LeaseID,
+            };
+            Queue.Queues.Client.Complete(request);
+        }
+
+        public static Builder NewBuilder()
+        {
+            return new Builder();
+        }
+        public class Builder
+        {
+            private string id;
+            private string payloadType;
+            private object payload;
+            private string leaseId;
+            private Queue queue;
+
+            public Builder()
+            {
+                this.id = "";
+                this.payloadType = "";
+                this.payload = null;
+                this.leaseId = "";
+                this.queue = null;
+            }
+            public Builder Id(string id)
+            {
+                this.id = id;
+                return this;
+            }
+            public Builder PayloadType(string payloadType)
+            {
+                this.payloadType = payloadType;
+                return this;
+            }
+            public Builder Payload(object payload)
+            {
+                this.payload = payload;
+                return this;
+            }
+            public Builder LeaseId(string leaseId)
+            {
+                this.leaseId = leaseId;
+                return this;
+            }
+            public Builder Queue(Queue queue)
+            {
+                this.queue = queue;
+                return this;
+            }
+            public ReceivedTask Build()
+            {
+                return new ReceivedTask(this.id,
+                                        this.payloadType,
+                                        this.payload,
+                                        this.leaseId,
+                                        this.queue);
             }
         }
     }

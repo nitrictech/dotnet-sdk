@@ -18,6 +18,7 @@ namespace Nitric.Api.Common
 {
     public abstract class AbstractClient
     {
+        string DefaultHostName = "127.0.0.1:50051";
         public AbstractClient()
         {
             GetChannel();
@@ -26,6 +27,10 @@ namespace Nitric.Api.Common
         {
             // TODO: Pull from settings
             string serviceBind = Util.GetEnvVar("SERVICE_BIND");
+            if (string.IsNullOrEmpty(serviceBind))
+            {
+                serviceBind = DefaultHostName;
+            }
             return new Channel(serviceBind, ChannelCredentials.Insecure); ;
         }
     }

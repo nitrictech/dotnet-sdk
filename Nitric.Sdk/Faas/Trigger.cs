@@ -54,7 +54,7 @@ namespace Nitric.Faas
                 responseCtx = new TopicResponseContext();
             }
 
-            return new Response(Data, responseCtx);
+            return new Response(data, responseCtx);
         }
     }
 }

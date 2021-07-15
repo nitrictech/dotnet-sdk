@@ -11,53 +11,68 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+using System;
+using System.Collections.Generic;
 using Nitric.Api.Common;
 using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using Nitric.Proto.Event.v1;
-using ProtoClient = Nitric.Proto.Event.v1.Event.EventClient;
+using GrpcClient = Nitric.Proto.Event.v1.EventService.EventServiceClient;
+using TopicClient = Nitric.Proto.Event.v1.TopicService.TopicServiceClient;
 
 namespace Nitric.Api.Event
 {
-    public class EventClient : AbstractClient
+    public class Events : AbstractClient
     {
-        protected ProtoClient client;
+        internal GrpcClient EventClient;
+        internal TopicClient TopicClient;
 
-        private EventClient(ProtoClient client = null)
+        public Events(GrpcClient client = null, TopicClient topic = null)
         {
-            this.client = (client == null) ? new ProtoClient(this.GetChannel()) : client;
+            this.EventClient = (client == null) ? new GrpcClient(this.GetChannel()) : client;
+            this.TopicClient = (topic == null) ? new TopicClient(this.GetChannel()) : topic;
         }
 
-        public string Publish(string topic, Event evt)
+        public Topic Topic(string topicName)
+        {
+            if (string.IsNullOrEmpty(topicName))
+            {
+                throw new ArgumentNullException(topicName);
+            }
+            return new Topic(this, topicName);
+        }
+        public List<Topic> List()
+        {
+            var request = new TopicListRequest { };
+
+            var response = TopicClient.List(request);
+
+            List<Topic> topics = new List<Topic>();
+            foreach (NitricTopic topic in response.Topics)
+            {
+                topics.Add(new Topic(this, topic.Name));
+            }
+            return topics;
+        }
+    }
+    public class Topic : AbstractClient
+    {
+        internal Events Events;
+        public string Name { get; private set; }
+
+        internal Topic(Events events, string name, TopicClient topic = null)
+        {
+            this.Events = events;
+            this.Name = name;
+        }
+        public string Publish(Event evt)
         {
             var payloadStruct = Util.ObjToStruct(evt.Payload);
             var nEvt = new NitricEvent { Id = evt.Id, PayloadType = evt.PayloadType, Payload = payloadStruct };
-            var request = new EventPublishRequest { Topic = topic, Event = nEvt };
+            var request = new EventPublishRequest { Topic = this.Name, Event = nEvt };
 
-            var response = this.client.Publish(request);
+            var response = this.Events.EventClient.Publish(request);
 
             return response.Id;
-        }
-
-        public static Builder NewBuilder()
-        {
-            return new Builder();
-        }
-        public class Builder
-        {
-            private ProtoClient client;
-            //Forces the builder design pattern
-            public Builder()
-            { }
-            public Builder Client(ProtoClient client)
-            {
-                this.client = client;
-                return this;
-            }
-            public EventClient Build()
-            {
-                return new EventClient(this.client);
-            }
-
         }
     }
 }

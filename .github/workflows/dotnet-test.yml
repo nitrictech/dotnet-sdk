@@ -25,7 +25,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-
+    - name: Find and Replace Version templates
+      run: |
+        sed -i.bak 's/${VERSION}/0.0.1/g' Nitric.Sdk/Nitric.Sdk.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -37,7 +39,8 @@ jobs:
         dotnet tool install --global dotnet-project-licenses
         echo "['MIT','Apache-2.0','BSD-3-Clause']" > licenses.json
         echo "['Google.Protobuf']" > filter.json
-        dotnet-project-licenses -i Nitric.Sdk --allowed-license-types licenses.json --packages-filter filter.json
+        echo "['Nitric.Sdk.csproj']" > packageFilter.json
+        dotnet-project-licenses -i Nitric.Sdk --allowed-license-types licenses.json --projects-filter packageFilter.json --packages-filter filter.json
         rm licenses.json
         rm filter.json
         dotnet tool uninstall --global dotnet-project-licenses
