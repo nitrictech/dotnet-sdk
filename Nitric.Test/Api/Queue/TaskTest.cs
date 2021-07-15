@@ -26,14 +26,12 @@ namespace Nitric.Test.Api.QueueClient
             payload.Add("name", "value");
             var queueItem = new Nitric.Api.Queue.Task
                 .Builder()
-                .LeaseID("1")
                 .Id("2")
                 .Payload(payload)
                 .PayloadType("payload type")
                 .Build();
 
             Assert.IsNotNull(queueItem);
-            Assert.AreEqual("1", queueItem.LeaseID);
             Assert.AreEqual("2", queueItem.ID);
             Assert.AreEqual("payload type", queueItem.PayloadType);
             Assert.AreEqual(payload, queueItem.Payload);
