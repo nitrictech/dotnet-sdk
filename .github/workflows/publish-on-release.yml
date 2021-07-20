@@ -9,7 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        token: ${{secrets.SUB_MODULE_PAT}}
+        submodules: recursive    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
