@@ -1,8 +1,9 @@
 name: Publish on Release
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - 'fix/publish-action'
 
 jobs:
   publish:
@@ -28,11 +29,9 @@ jobs:
         rm Nitric.Sdk/Nitric.Sdk.csproj.bak
     - name: Exclude Test Project
       run: dotnet sln remove Nitric.Test
-    - name: Restore Dependencies
-      run: dotnet restore
     - name: Publish
       run: |
         mkdir __out
-        dotnet pack -c Release -o __out --no-restore
-        dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
+        dotnet pack -c Release -o __out
+#       dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
         rm -rf __out
