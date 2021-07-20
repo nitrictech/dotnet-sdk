@@ -10,7 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        token: ${{secrets.SUB_MODULE_PAT}}
+        submodules: recursive    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -28,7 +32,6 @@ jobs:
         sed -i.bak 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/g' Nitric.Sdk/Nitric.Sdk.csproj
     - name: Publish
       run: |
-        dotnet build
         mkdir __out
         dotnet pack -c Release -o __out
         rm -rf __out
