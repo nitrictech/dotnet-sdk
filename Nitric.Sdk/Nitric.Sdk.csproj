@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="LICENSE" Pack="true" PackagePath="" />
     <Protobuf Include="**/*.proto" ProtoRoot="contracts/proto/" />
   </ItemGroup>
 
