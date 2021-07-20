@@ -43,8 +43,7 @@ namespace Nitric.Api.Document
             DocumentGetRequest request = new DocumentGetRequest();
             request.Key = this.Key.ToKey();
 
-            DocumentGetResponse response = null;
-            response = this.documentClient.Get(request);
+            var response = this.documentClient.Get(request);
 
             return new Document<T>(
                 this,

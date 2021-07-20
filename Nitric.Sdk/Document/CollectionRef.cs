@@ -26,6 +26,7 @@ namespace Nitric.Api.Document
 
         internal CollectionRef(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
         {
+            this.documentClient = documentClient;
             this.name = name;
             this.ParentKey = parentKey;
         }
