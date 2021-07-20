@@ -26,8 +26,6 @@ jobs:
     - name: Find and Replace Version templates
       run: |
         sed -i.bak 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/g' Nitric.Sdk/Nitric.Sdk.csproj
-    - name: Exclude Test Project
-      run: dotnet sln remove Nitric.Test
     - name: Publish
       run: |
         mkdir __out
