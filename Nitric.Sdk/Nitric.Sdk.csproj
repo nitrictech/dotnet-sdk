@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>${VERSION}</Version>
+    <Version>0.0.0-test</Version>
     <PackageId>Nitric.Sdk</PackageId>
     <Company>Nitric Pty Ltd</Company>
   </PropertyGroup>
@@ -21,16 +21,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="**/*.proto" ProtoRoot="contracts/proto/" />
+    <Protobuf Include="**/*.proto" ProtoRoot="contracts/proto/" OutputDir="Proto" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Storage\" />
-    <Folder Include="Kv\" />
     <Folder Include="Faas\" />
     <Folder Include="Http\" />
     <Folder Include="Queue\" />
     <Folder Include="Event\" />
     <Folder Include="Document\" />
+    <Folder Include="Proto\" />
   </ItemGroup>
 </Project>
