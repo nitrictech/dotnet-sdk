@@ -33,6 +33,6 @@ jobs:
     - name: Publish
       run: |
         mkdir __out
-        dotnet pack -c Release -o __out --no-restore
+        dotnet pack -c Release -o __out
         dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
         rm -rf __out
