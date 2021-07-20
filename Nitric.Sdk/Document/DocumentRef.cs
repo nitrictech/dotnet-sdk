@@ -25,28 +25,31 @@ namespace Nitric.Api.Document
         const int DEPTH_LIMIT = 1;
 
         private readonly DocumentServiceClient documentClient;
-        private readonly GrpcKey key;
-        private readonly Collection collection;
+        public readonly Key<T> Key;
+        private readonly CollectionRef<T> collection;
 
         internal DocumentRef(
             DocumentServiceClient documentClient,
-            Collection collection,
+            CollectionRef<T> collection,
             string documentId)
         {
             this.documentClient = documentClient;
-            this.key = new Key(collection, documentId).ToKey();
+            this.Key = new Key<T>(collection, documentId);
             this.collection = collection;
         }
 
-        public T Get()
+        public Document<T> Get()
         {
             DocumentGetRequest request = new DocumentGetRequest();
-            request.Key = this.key;
+            request.Key = this.Key.ToKey();
 
             DocumentGetResponse response = null;
             response = this.documentClient.Get(request);
 
-            return DocumentToGeneric(response.Document.Content);
+            return new Document<T>(
+                this,
+                DocumentToGeneric(response.Document.Content)
+            );
         }
         public void Set(T value)
         {
@@ -56,7 +59,7 @@ namespace Nitric.Api.Document
             }
             var request = new DocumentSetRequest
             {
-                Key = this.key,
+                Key = this.Key.ToKey(),
                 Content = Util.ObjToStruct(value),
             };
             this.documentClient.Set(request);
@@ -66,7 +69,7 @@ namespace Nitric.Api.Document
         {
             var request = new DocumentDeleteRequest
             {
-                Key = this.key,
+                Key = this.Key.ToKey(),
             };
             this.documentClient.Delete(request);
         }
@@ -83,11 +86,11 @@ namespace Nitric.Api.Document
             {
                 throw new ArgumentNullException(name);
             }
-            if (Depth(0, this.collection) >= DEPTH_LIMIT)
+            if (Depth(0, this.collection.ToGrpcCollection()) >= DEPTH_LIMIT)
             {
                 throw new NotSupportedException("Currently subcollection are only able to be nested " + DEPTH_LIMIT + "deep");
             }
-            return new CollectionRef<T>(this.documentClient, name, this.key);
+            return new CollectionRef<T>(this.documentClient, name, this.Key);
         }
 
         //Utility function to convert a struct document to its generic counterpart

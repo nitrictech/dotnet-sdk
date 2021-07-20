@@ -20,22 +20,14 @@ namespace Nitric.Api.Document
 {
     public class CollectionRef<T> where T : IDictionary<string, object>, new()
     {
-        private Collection collection;
+        private string name;
+        public readonly Key<T> ParentKey;
         private DocumentServiceClient documentClient;
 
-        internal CollectionRef(DocumentServiceClient documentClient, string name, GrpcKey parentKey = null)
+        internal CollectionRef(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
         {
-            this.documentClient = documentClient;
-
-            var collection = new Collection()
-            {
-                Name = name,
-            };
-            if (parentKey != null)
-            {
-                collection.Parent = parentKey;
-            }
-            this.collection = collection;
+            this.name = name;
+            this.ParentKey = parentKey;
         }
         public DocumentRef<T> Doc(string documentId)
         {
@@ -45,12 +37,24 @@ namespace Nitric.Api.Document
             }
             return new DocumentRef<T>(
                 this.documentClient,
-                this.collection,
+                this,
                 documentId);
         }
         public Query<T> Query()
         {
-            return new Query<T>(this.documentClient, this.collection);
+            return new Query<T>(this.documentClient, this);
+        }
+        internal Collection ToGrpcCollection()
+        {
+            var collection = new Collection()
+            {
+                Name = this.name,
+            };
+            if (this.ParentKey != null)
+            {
+                collection.Parent = this.ParentKey.ToKey();
+            }
+            return collection;
         }
     }
 }

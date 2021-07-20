@@ -105,7 +105,9 @@ namespace Nitric.Test.Api.Document
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
             var response = documentRef.Get();
-            Assert.AreEqual(response["test"], "document");
+
+            Assert.AreEqual(response.Content["test"], "document");
+            Assert.AreEqual(response.Ref, documentRef);
 
             dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
@@ -138,7 +140,8 @@ namespace Nitric.Test.Api.Document
                 .Collection<SortedDictionary<string, object>>("test-collection")
                 .Doc("test-document");
             var response = documentRef.Get();
-            Assert.AreEqual(response["test"], "document");
+            Assert.AreEqual(response.Content["test"], "document");
+            Assert.AreEqual(response.Ref, documentRef);
 
             dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
@@ -444,7 +447,7 @@ namespace Nitric.Test.Api.Document
             {
                 var response = query.Fetch();
                 Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0], "document");
+                Assert.AreEqual(response.QueryData[0].Content["test"], "document");
                 Assert.AreEqual(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -488,7 +491,7 @@ namespace Nitric.Test.Api.Document
                     .Limit(1)
                     .Fetch();
                 Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0], "document");
+                Assert.AreEqual(response.QueryData[0].Content["test"], "document");
                 Assert.AreEqual(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -533,7 +536,7 @@ namespace Nitric.Test.Api.Document
                     .Where("last_name", "==", "smith")
                     .Fetch();
                 Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0], "document");
+                Assert.AreEqual(response.QueryData[0].Content["test"], "document");
                 Assert.AreEqual(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -580,7 +583,7 @@ namespace Nitric.Test.Api.Document
                     .PagingFrom(pagingToken)
                     .Fetch();
                 Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0], "document");
+                Assert.AreEqual(response.QueryData[0].Content["test"], "document");
                 Assert.AreEqual(response.PagingToken, updatedPagingToken);
             }
             catch (Exception)
@@ -623,8 +626,8 @@ namespace Nitric.Test.Api.Document
             {
                 var response = query.FetchAll();
                 Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0], "john smith");
-                Assert.AreEqual(response.QueryData[1], "jane doe");
+                Assert.AreEqual(response.QueryData[0].Content["0"], "john smith");
+                Assert.AreEqual(response.QueryData[1].Content["1"], "jane doe");
                 Assert.AreEqual(response.PagingToken, pagingToken);
             }
             catch (Exception)

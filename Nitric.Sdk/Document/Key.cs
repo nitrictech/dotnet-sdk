@@ -12,17 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
+using System.Collections.Generic;
 using Collection = Nitric.Proto.Document.v1.Collection;
 using GrpcKey = Nitric.Proto.Document.v1.Key;
 
 namespace Nitric.Api.Document
 {
-    public class Key
+    public class Key<T> where T : IDictionary<string, object>, new()
     {
-        Collection collection;
-        string id;
+        public readonly CollectionRef<T> collection;
+        public readonly string id;
 
-        public Key(Collection collection, string id = null)
+        public Key(CollectionRef<T> collection, string id = null)
         {
             if (collection == null)
             {
@@ -35,7 +36,7 @@ namespace Nitric.Api.Document
         {
             return new GrpcKey
             {
-                Collection = this.collection,
+                Collection = this.collection.ToGrpcCollection(),
                 Id = this.id,
             };
         }

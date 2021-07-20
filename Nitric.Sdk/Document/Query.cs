@@ -25,12 +25,12 @@ namespace Nitric.Api.Document
     public class Query<T> where T : IDictionary<string, object>, new()
     {
         internal DocumentServiceClient documentClient;
-        internal Collection collection;
+        internal CollectionRef<T> collection;
         internal List<Expression> expressions;
         internal object pagingToken;
         internal int limit;
 
-        internal Query(DocumentServiceClient documentClient, Collection collection)
+        internal Query(DocumentServiceClient documentClient, CollectionRef<T> collection)
         {
             this.documentClient = documentClient;
             this.collection = collection;
@@ -93,7 +93,7 @@ namespace Nitric.Api.Document
         internal readonly Query<T> query;
         internal readonly bool paginateAll;
         public object PagingToken { get; private set; }
-        public List<T> QueryData { get; private set; }
+        public List<Document<T>> QueryData { get; private set; }
 
         internal QueryResult(Query<T> query, bool paginateAll)
         {
@@ -110,7 +110,7 @@ namespace Nitric.Api.Document
         internal DocumentQueryRequest BuildDocQueryRequest(List<Expression> expressions)
         {
             var request = new DocumentQueryRequest();
-            request.Collection = this.query.collection;
+            request.Collection = this.query.collection.ToGrpcCollection();
 
             foreach (Expression expression in expressions)
             {
@@ -133,19 +133,33 @@ namespace Nitric.Api.Document
 
         internal void LoadPageData(DocumentQueryResponse response)
         {
-            QueryData = new List<T>(response.Documents.Count);
-
+            QueryData = new List<Document<T>>(response.Documents.Count);
+            var collection = this.query.collection.ToGrpcCollection();
             foreach (var doc in response.Documents)
             {
                 var dict = Util.ObjToDict(doc.Content);
 
                 if (typeof(T).IsAssignableFrom(dict.GetType()))
                 {
-                    QueryData.Add((T)Util.DictToCollection<T>(dict));
+                    QueryData.Add(new Document<T>(
+                        new DocumentRef<T>(
+                            this.query.documentClient,
+                            this.query.collection,
+                            this.query.collection.ParentKey.id
+                        ),
+                        (T)Util.DictToCollection<T>(dict))
+                    );
                 }
                 else
                 {
-                    QueryData.Add((T)Util.DictToCollection<T>(Util.ObjToDict(dict)));
+                    QueryData.Add(new Document<T>(
+                        new DocumentRef<T>(
+                            this.query.documentClient,
+                            this.query.collection,
+                            this.query.collection.ParentKey.id
+                        ),
+                        (T)Util.DictToCollection<T>(Util.ObjToDict(dict)))
+                    );
                 }
             }
             this.PagingToken = Util.CollectionToDict(response.PagingToken);
