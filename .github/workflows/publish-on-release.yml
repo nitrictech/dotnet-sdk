@@ -28,6 +28,7 @@ jobs:
         sed -i.bak 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/g' Nitric.Sdk/Nitric.Sdk.csproj
     - name: Publish
       run: |
+        dotnet build
         mkdir __out
         dotnet pack -c Release -o __out
         rm -rf __out
