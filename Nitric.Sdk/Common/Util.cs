@@ -28,7 +28,6 @@ namespace Nitric.Api.Common
             string json = ObjToJson(obj);
             return JsonParser.Default.Parse<Struct>(json);
         }
-
         public static string GetEnvVar(string variable, string defaultValue = "")
         {
             var envVar = Environment.GetEnvironmentVariable(variable);
@@ -52,7 +51,7 @@ namespace Nitric.Api.Common
 
         public static Dictionary<string, object> ObjToDict(object obj)
         {
-            return (Dictionary<string, object>) JsonToObj(ObjToJson(obj));
+            return (Dictionary<string, object>)JsonToObj(ObjToJson(obj));
         }
 
         public static Dictionary<string, List<string>> NameValueCollecToDict(NameValueCollection col)
@@ -72,6 +71,15 @@ namespace Nitric.Api.Common
                 newDict.Add(kv.Key, kv.Value);
             }
             return newDict;
+        }
+        public static IDictionary<string, object> DictToCollection<T>(Dictionary<string, object> dictionary) where T : IDictionary<string, object>, new()
+        {
+            IDictionary<string, object> dict = new T();
+            foreach (KeyValuePair<string, object> kv in dictionary)
+            {
+                dict.Add(kv);
+            }
+            return dict;
         }
     }
 }

@@ -30,5 +30,6 @@
     <Folder Include="Http\" />
     <Folder Include="Queue\" />
     <Folder Include="Event\" />
+    <Folder Include="Document\" />
   </ItemGroup>
 </Project>
