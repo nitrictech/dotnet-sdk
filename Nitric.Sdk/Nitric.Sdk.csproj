@@ -2,21 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>${VERSION}</Version>
+    <Version>0.0.0-test</Version>
     <PackageId>Nitric.Sdk</PackageId>
     <Company>Nitric Pty Ltd</Company>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
   </PropertyGroup>
-  
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.17.3" />
-    <PackageReference Include="Grpc" Version="2.38.1" />
-    <PackageReference Include="Grpc.Tools" Version="2.38.1" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="Google.Protobuf" Version="3.15.6" />
+    <PackageReference Include="Grpc" Version="2.36.4" />
+    <PackageReference Include="Grpc.Tools" Version="2.36.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.json" Version="13.0.1" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.38.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="Storage\" />
+    <Folder Include="Kv\" />
     <Folder Include="Faas\" />
     <Folder Include="Http\" />
     <Folder Include="Queue\" />
