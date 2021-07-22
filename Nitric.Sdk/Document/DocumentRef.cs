@@ -28,6 +28,7 @@ namespace Nitric.Api.Document
         public readonly Key<T> Key;
         private readonly CollectionRef<T> collection;
 
+        protected DocumentRef() { }
         internal DocumentRef(
             DocumentServiceClient documentClient,
             CollectionRef<T> collection,
@@ -93,34 +94,44 @@ namespace Nitric.Api.Document
         }
 
         //Utility function to convert a struct document to its generic counterpart
-        private T DocumentToGeneric(Struct content)
+        protected T DocumentToGeneric(Struct content)
         {
             T doc = new T();
             foreach (var kv in content.Fields)
             {
-                switch (kv.Value.KindCase)
-                {
-                    case Value.KindOneofCase.StringValue:
-                        doc.Add(kv.Key, kv.Value.StringValue);
-                        break;
-                    case Value.KindOneofCase.BoolValue:
-                        doc.Add(kv.Key, kv.Value.BoolValue);
-                        break;
-                    case Value.KindOneofCase.ListValue:
-                        doc.Add(kv.Key, kv.Value.ListValue);
-                        break;
-                    case Value.KindOneofCase.NumberValue:
-                        doc.Add(kv.Key, kv.Value.NumberValue);
-                        break;
-                    case Value.KindOneofCase.StructValue:
-                        doc.Add(kv.Key, kv.Value.StructValue);
-                        break;
-                    case Value.KindOneofCase.NullValue:
-                        doc.Add(kv.Key, kv.Value.NullValue);
-                        break;
-                }
+                doc.Add(kv.Key, UnwrapValue(kv.Value));
             }
             return doc;
+        }
+        private object UnwrapValue(Value value)
+        {
+            switch (value.KindCase)
+            {
+                case Value.KindOneofCase.StringValue:
+                    return value.StringValue;
+                case Value.KindOneofCase.BoolValue:
+                    return value.BoolValue;
+                case Value.KindOneofCase.NumberValue:
+                    return value.NumberValue;
+                case Value.KindOneofCase.NullValue:
+                    return null;
+                case Value.KindOneofCase.StructValue:
+                    Dictionary<string, object> unwrappedStruct = new Dictionary<string, object>();
+                    foreach (var kv in value.StructValue.Fields)
+                    {
+                        unwrappedStruct.Add(kv.Key, UnwrapValue(kv.Value));
+                    }
+                    return unwrappedStruct;
+                case Value.KindOneofCase.ListValue:
+                    List<object> unwrappedList = new List<object>();
+                    foreach (Value v in value.ListValue.Values)
+                    {
+                        unwrappedList.Add(UnwrapValue(v));
+                    }
+                    return unwrappedList;
+                default:
+                    throw new ArgumentException("Provide proto-value");
+            }
         }
     }
 }
