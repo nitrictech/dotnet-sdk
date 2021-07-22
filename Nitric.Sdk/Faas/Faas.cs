@@ -43,14 +43,14 @@ namespace Nitric.Faas
             this.Client = client;
         }
 
-        public static void StartFunction(INitricFunction function)
+        public static void Start(INitricFunction function)
         {
             NewBuilder()
                 .Function(function)
                 .Build()
-                .StartFunction();
+                .Start();
         }
-        public void StartFunction()
+        public void Start()
         {
             CallFunction().Wait();
         }

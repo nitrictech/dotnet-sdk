@@ -30,9 +30,9 @@ namespace Nitric.Test.Faas
             Nitric.Faas.Faas faas = Nitric.Faas.Faas.NewBuilder()
                 .Function(new HelloWorld())
                 .Build();
-            Thread faasThread = new Thread(() => faas.StartFunction());
+            Thread faasThread = new Thread(() => faas.Start());
             faasThread.Start();
-            Assert.ThrowsException<RpcException>(() => faas.StartFunction());
+            Assert.ThrowsException<RpcException>(() => faas.Start());
         }
         [TestMethod]
         public void TestCall()
@@ -40,7 +40,7 @@ namespace Nitric.Test.Faas
             Nitric.Faas.Faas faas = Nitric.Faas.Faas.NewBuilder()
                 .Function(new HelloWorld())
                 .Build();
-            Thread faasThread = new Thread(() => faas.StartFunction());
+            Thread faasThread = new Thread(() => faas.Start());
             faasThread.Start();
             var client = new HttpClient();
             var result = client.GetAsync(string.Format("http://{0}:{1}/", "127.0.0.1", 8080));

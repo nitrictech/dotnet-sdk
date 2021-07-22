@@ -20,8 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="LICENSE" Pack="true" PackagePath="" />
-    <Protobuf Include="**/*.proto" ProtoRoot="contracts/proto/" />
+    <Protobuf Include="**/*.proto" ProtoRoot="contracts/proto/" OutputDir="Proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,5 +29,7 @@
     <Folder Include="Http\" />
     <Folder Include="Queue\" />
     <Folder Include="Event\" />
+    <Folder Include="Document\" />
+    <Folder Include="Proto\" />
   </ItemGroup>
 </Project>

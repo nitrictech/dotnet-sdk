@@ -25,5 +25,6 @@
     <Folder Include="Api\Storage\" />
     <Folder Include="Api\Queue\" />
     <Folder Include="Http\" />
+    <Folder Include="Api\Document\" />
   </ItemGroup>
 </Project>
