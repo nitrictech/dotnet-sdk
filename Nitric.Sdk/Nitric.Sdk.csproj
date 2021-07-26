@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>${VERSION}</Version>
+    <Version>0.1.1</Version>
     <PackageId>Nitric.Sdk</PackageId>
     <Company>Nitric Pty Ltd</Company>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -21,6 +21,9 @@
 
   <ItemGroup>
     <Protobuf Include="**/*.proto" ProtoRoot="contracts/proto/" OutputDir="Proto" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
   </ItemGroup>
 
   <ItemGroup>
