@@ -13,7 +13,6 @@
 // limitations under the License.
 using System;
 using Nitric.Proto.Secret.v1;
-using System.Text;
 namespace Nitric.Api.Secret
 {
     public class SecretVersion
@@ -21,7 +20,7 @@ namespace Nitric.Api.Secret
         public readonly Secret Secret;
         public readonly string Version;
 
-        public SecretVersion(Secret secret, string version)
+        internal SecretVersion(Secret secret, string version)
         {
             if (secret == null || string.IsNullOrEmpty(secret.Name))
             {
@@ -34,7 +33,7 @@ namespace Nitric.Api.Secret
             this.Secret = secret;
             this.Version = version;
         }
-        public byte[] Access()
+        public SecretValue Access()
         {
             var secret = new SecretAccessRequest
             {
@@ -45,11 +44,12 @@ namespace Nitric.Api.Secret
                 }
             };
             var response = this.Secret.client.Access(secret);
-            return response.Value.ToByteArray();
-        }
-        public string AccessText()
-        {
-            return Encoding.UTF8.GetString(Access());
+            var value = response.Value.ToByteArray();
+            //Return a new secret value with a reference to this secret version
+            return new SecretValue(
+                this,
+                (value != null && value.Length > 0) ? value : new byte[0]
+            );
         }
         public override string ToString()
         {

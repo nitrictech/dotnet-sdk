@@ -171,7 +171,7 @@ namespace Nitric.Test.Api.Secret
         }
         //Testing Secret Version Methods
         [TestMethod]
-        public void TestGetValueBytes()
+        public void TestAccess()
         {
             var secretPutResponse = new SecretAccessResponse
             {
@@ -190,39 +190,16 @@ namespace Nitric.Test.Api.Secret
                 .Returns(secretPutResponse)
                 .Verifiable();
 
-            var secret = new Secrets(sc.Object)
-                .Secret("test-secret");
-            var response = secret.Version("test-version").Access();
-            var responseString = Encoding.UTF8.GetString(response);
-            Assert.AreEqual("Super secret message", responseString);
+            var version = new Secrets(sc.Object)
+                .Secret("test-secret")
+                .Version("test-version");
+            var response = version.Access();
 
-            sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-        [TestMethod]
-        public void TestGetValueString()
-        {
-            var secretPutResponse = new SecretAccessResponse
-            {
-                SecretVersion = new Proto.Secret.v1.SecretVersion
-                {
-                    Secret = new Proto.Secret.v1.Secret
-                    {
-                        Name = "test-secret",
-                    },
-                    Version = "test-version",
-                },
-                Value = Google.Protobuf.ByteString.CopyFromUtf8("Super secret message"),
-            };
-            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
-            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(secretPutResponse)
-                .Verifiable();
-
-            var secret = new Secrets(sc.Object)
-                .Secret("test-secret");
-            var response = secret.Version("test-version").AccessText();
-
-            Assert.AreEqual("Super secret message", response);
+            var responseString = Encoding.UTF8.GetString(response.Value);
+            Assert.AreEqual("test-version", response.SecretVersion.Version);
+            Assert.AreEqual("test-secret", response.SecretVersion.Secret.Name);
+            Assert.AreEqual("Super secret message", Encoding.UTF8.GetString(response.Value));
+            Assert.AreEqual("Super secret message", response.ValueText);
 
             sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
@@ -234,6 +211,36 @@ namespace Nitric.Test.Api.Secret
                 .Version("test-version")
                 .ToString();
             Assert.AreEqual("SecretVersion[secret=[name=test-secret], version=test-version]", secretVersionString);
+        }
+        [TestMethod]
+        public void TestSecretValueToString()
+        {
+            var secretPutResponse = new SecretAccessResponse
+            {
+                SecretVersion = new Proto.Secret.v1.SecretVersion
+                {
+                    Secret = new Proto.Secret.v1.Secret
+                    {
+                        Name = "test-secret",
+                    },
+                    Version = "test-version",
+                },
+                Value = Google.Protobuf.ByteString.CopyFromUtf8("Super secret message"),
+            };
+            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
+            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(secretPutResponse)
+                .Verifiable();
+
+            var version = new Secrets(sc.Object)
+                .Secret("test-secret")
+                .Version("test-version");
+
+            var response = version.Access();
+
+            Assert.AreEqual("SecretValue[secretVersion=SecretVersion[secret=[name=test-secret], version=test-version], value.length=20]", response.ToString());
+
+            sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }
 }

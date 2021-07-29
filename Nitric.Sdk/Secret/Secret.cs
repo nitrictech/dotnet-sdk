@@ -13,7 +13,6 @@
 // limitations under the License.
 using System;
 using System.Text;
-using Google.Protobuf.WellKnownTypes;
 using Nitric.Proto.Secret.v1;
 using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
 namespace Nitric.Api.Secret
@@ -25,7 +24,7 @@ namespace Nitric.Api.Secret
         internal GrpcClient client;
         public string Name { get; private set; }
 
-        public Secret(GrpcClient client, string name)
+        internal Secret(GrpcClient client, string name)
         {
             this.client = client;
             this.Name = name;
