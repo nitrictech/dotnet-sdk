@@ -22,7 +22,7 @@ namespace Nitric.Api.Secret
         public readonly static string LATEST = "latest";
 
         internal GrpcClient client;
-        public string Name { get; private set; }
+        public readonly string Name;
 
         internal Secret(GrpcClient client, string name)
         {
