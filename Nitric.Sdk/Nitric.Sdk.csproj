@@ -34,5 +34,6 @@
     <Folder Include="Event\" />
     <Folder Include="Document\" />
     <Folder Include="Proto\" />
+    <Folder Include="Secret\" />
   </ItemGroup>
 </Project>
