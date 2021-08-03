@@ -36,6 +36,10 @@ jobs:
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Find and Replace Version templates
+        shell: powershell
+        run: |
+          (Get-Content -p Nitric.Sdk/Nitric.Sdk.csproj -Raw) -replace '$VERSION','0.0.1'
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -43,5 +47,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"nitrictech_dotnet-sdk" /o:"nitrictech" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          <insert_your_build_command>
+          dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
