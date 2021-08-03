@@ -39,7 +39,7 @@ jobs:
       - name: Find and Replace Version templates
         shell: powershell
         run: |
-          (Get-Content -Path Nitric.Sdk/Nitric.Sdk.csproj -Raw) -replace '$VERSION','0.0.1'
+          ((Get-Content -Path Nitric.Sdk/Nitric.Sdk.csproj -Raw) -replace '${VERSION}','0.0.1') | Set-Content -Path Nitric.Sdk/Nitric.Sdk.csproj 
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
