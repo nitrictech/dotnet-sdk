@@ -18,7 +18,8 @@
     "**/*.csproj",
     "**/*.protodep",
     "**/*.config",
-    "*.html"
+    "*.html",
+    "examples/"
   ],
   "license": "./tools/license/license_header.txt",
   "licenseFormats": {
