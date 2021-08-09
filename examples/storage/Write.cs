@@ -14,7 +14,7 @@ namespace Examples
 
             var bucket = new Storage().Bucket("my-bucket");
             bucket.File("/path/to/file").Write(data);
-            // [END snipppet]
+            // [END snippet]
         }
     }
 }

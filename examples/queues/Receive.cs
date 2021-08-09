@@ -20,7 +20,7 @@ namespace Examples
                 // Complete the task
                 task.Complete();
             }
-            // [END [snippet]]
+            // [END snippet]
         }
     }
 }

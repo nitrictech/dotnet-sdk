@@ -16,7 +16,7 @@ namespace Examples
                 .Build();
 
             queue.Send(task);
-            // [END [snippet]]
+            // [END snippet]
         }
     }
 }
