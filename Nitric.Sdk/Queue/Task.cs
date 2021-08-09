@@ -51,8 +51,8 @@ namespace Nitric.Api.Queue
             private object payload;
             public Builder()
             {
-                this.id = null;
-                this.payloadType = null;
+                this.id = "";
+                this.payloadType = "";
                 this.payload = Common.Util.ObjToStruct(new Dictionary<string, string>());
             }
             public Builder Id(string id)
