@@ -81,7 +81,7 @@ namespace Nitric.Api.Storage
             }
             catch (Grpc.Core.RpcException re)
             {
-                throw NitricException.Exceptions[re.StatusCode](re.Message);
+                throw NitricException.FromRpcException(re);
             }
         }
         public byte[] Read()
@@ -98,7 +98,7 @@ namespace Nitric.Api.Storage
             }
             catch (Grpc.Core.RpcException re)
             {
-                throw NitricException.Exceptions[re.StatusCode](re.Message);
+                throw NitricException.FromRpcException(re);
             }
         }
         public void Delete()
@@ -114,7 +114,7 @@ namespace Nitric.Api.Storage
             }
             catch (Grpc.Core.RpcException re)
             {
-                throw NitricException.Exceptions[re.StatusCode](re.Message);
+                throw NitricException.FromRpcException(re);
             }
         }
         public override string ToString()

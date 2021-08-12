@@ -57,7 +57,7 @@ namespace Nitric.Api.Document
             }
             catch (RpcException re)
             {
-                throw NitricException.Exceptions[re.StatusCode](re.Message);
+                throw NitricException.FromRpcException(re);
             }
         }
         public void Set(T value)
@@ -77,7 +77,7 @@ namespace Nitric.Api.Document
             }
             catch (RpcException re)
             {
-                throw NitricException.Exceptions[re.StatusCode](re.Message);
+                throw NitricException.FromRpcException(re);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Nitric.Api.Document
             }
             catch (RpcException re)
             {
-                throw NitricException.Exceptions[re.StatusCode](re.Message);
+                throw NitricException.FromRpcException(re);
             }
         }
 

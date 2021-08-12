@@ -56,7 +56,7 @@ namespace Nitric.Api.Event
             }
             catch (Grpc.Core.RpcException re)
             {
-                throw NitricException.Exceptions[re.StatusCode](re.Message);
+                throw NitricException.FromRpcException(re);
             }
         }
     }
@@ -83,7 +83,7 @@ namespace Nitric.Api.Event
             }
             catch (Grpc.Core.RpcException re)
             {
-                throw NitricException.Exceptions[re.StatusCode](re.Message);
+                throw NitricException.FromRpcException(re);
             }
         }
     }

@@ -110,7 +110,7 @@ namespace Nitric.Api.Document
             }
             catch (Grpc.Core.RpcException re)
             {
-                throw Common.NitricException.Exceptions[re.StatusCode](re.Message);
+                throw Common.NitricException.FromRpcException(re);
             }
         }
 

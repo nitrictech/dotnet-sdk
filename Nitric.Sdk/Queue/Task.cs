@@ -105,7 +105,14 @@ namespace Nitric.Api.Queue
                 Queue = this.Queue.Name,
                 LeaseId = this.LeaseID,
             };
-            Queue.Queues.Client.Complete(request);
+            try
+            {
+                Queue.Queues.Client.Complete(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw Common.NitricException.FromRpcException(re);
+            }
         }
 
         public static Builder NewBuilder()

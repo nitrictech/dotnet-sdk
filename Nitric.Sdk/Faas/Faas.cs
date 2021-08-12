@@ -90,7 +90,7 @@ namespace Nitric.Faas
                 }
                 catch (RpcException re)
                 {
-                    throw Api.Common.NitricException.Exceptions[re.StatusCode](re.Message);
+                    throw Api.Common.NitricException.FromRpcException(re);
                 }
             }
         }

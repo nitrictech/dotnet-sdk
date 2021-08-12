@@ -13,35 +13,40 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-using RpcStatusCode = Grpc.Core.StatusCode;
+using Grpc.Core;
 
 ﻿namespace Nitric.Api.Common
 {
     public abstract class NitricException : Exception
     {
-        public static Dictionary<RpcStatusCode, Func<string, NitricException>> Exceptions = new Dictionary<RpcStatusCode, Func<string, NitricException>>
+        private static readonly Dictionary<StatusCode, Func<string, NitricException>> Exceptions = new Dictionary<StatusCode, Func<string, NitricException>>
         {
-            { RpcStatusCode.Cancelled, (message) => new CancelledException(message) },
-            { RpcStatusCode.Unknown, (message) => new UnknownException(message) },
-            { RpcStatusCode.InvalidArgument, (message) => new InvalidArgumentException(message) },
-            { RpcStatusCode.DeadlineExceeded, (message) => new DeadlineExceededException(message) },
-            { RpcStatusCode.NotFound, (message) => new NotFoundException(message) },
-            { RpcStatusCode.AlreadyExists, (message) => new AlreadyExistsException(message) },
-            { RpcStatusCode.PermissionDenied, (message) => new PermissionDeniedException(message) },
-            { RpcStatusCode.ResourceExhausted, (message) => new ResourceExhaustedException(message) },
-            { RpcStatusCode.FailedPrecondition, (message) => new FailedPreconditionException(message) },
-            { RpcStatusCode.Aborted, (message) => new AbortedException(message) },
-            { RpcStatusCode.OutOfRange, (message) => new OutOfRangeException(message) },
-            { RpcStatusCode.Unimplemented, (message) => new UnimplementedException(message) },
-            { RpcStatusCode.Internal, (message) => new InternalException(message) },
-            { RpcStatusCode.Unavailable, (message) => new UnavailableException(message) },
-            { RpcStatusCode.DataLoss, (message) => new DataLossException(message) },
-            { RpcStatusCode.Unauthenticated,(message) => new UnauthenticatedException(message) },
+            { StatusCode.Cancelled, (message) => new CancelledException(message) },
+            { StatusCode.Unknown, (message) => new UnknownException(message) },
+            { StatusCode.InvalidArgument, (message) => new InvalidArgumentException(message) },
+            { StatusCode.DeadlineExceeded, (message) => new DeadlineExceededException(message) },
+            { StatusCode.NotFound, (message) => new NotFoundException(message) },
+            { StatusCode.AlreadyExists, (message) => new AlreadyExistsException(message) },
+            { StatusCode.PermissionDenied, (message) => new PermissionDeniedException(message) },
+            { StatusCode.ResourceExhausted, (message) => new ResourceExhaustedException(message) },
+            { StatusCode.FailedPrecondition, (message) => new FailedPreconditionException(message) },
+            { StatusCode.Aborted, (message) => new AbortedException(message) },
+            { StatusCode.OutOfRange, (message) => new OutOfRangeException(message) },
+            { StatusCode.Unimplemented, (message) => new UnimplementedException(message) },
+            { StatusCode.Internal, (message) => new InternalException(message) },
+            { StatusCode.Unavailable, (message) => new UnavailableException(message) },
+            { StatusCode.DataLoss, (message) => new DataLossException(message) },
+            { StatusCode.Unauthenticated,(message) => new UnauthenticatedException(message) },
         };
         public NitricException(string message) : base(message)
         {
         }
-
+        internal static NitricException FromRpcException(RpcException exception)
+        {
+            return Exceptions.ContainsKey(exception.StatusCode)
+                ? Exceptions[exception.StatusCode](exception.Message)
+                : new UnknownException(exception.Message);
+        }
     }
     public class CancelledException : NitricException
     {

@@ -177,6 +177,28 @@ namespace Nitric.Test.Api.Secret
                 () => new Secrets().Secret("test-secret").Version(null));
         }
         [Fact]
+        public void TestAccessSecretWithoutPermission()
+        {
+            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
+            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.PermissionDenied, "You do not have permission to access this secret")))
+                .Verifiable();
+
+            var secret = new Secrets(sc.Object)
+                .Secret("test-secret");
+            try
+            {
+                var response = secret.Version("test-secret").Access();
+            }
+            catch (Nitric.Api.Common.NitricException ne)
+            {
+                Assert.Equal("Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to access this secret\")", ne.Message);
+            }
+
+
+            sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [Fact]
         public void TestGetLatestSecretVersion()
         {
             var secretVersion = new Secrets()
