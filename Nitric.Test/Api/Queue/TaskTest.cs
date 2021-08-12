@@ -12,14 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Nitric.Test.Api.QueueClient
 {
-    [TestClass]
     public class QueueItemTest
     {
-        [TestMethod]
+        [Fact]
         public void TestBuild()
         {
             Dictionary<string, object> payload = new Dictionary<string, object>();
@@ -31,10 +30,10 @@ namespace Nitric.Test.Api.QueueClient
                 .PayloadType("payload type")
                 .Build();
 
-            Assert.IsNotNull(queueItem);
-            Assert.AreEqual("2", queueItem.ID);
-            Assert.AreEqual("payload type", queueItem.PayloadType);
-            Assert.AreEqual(payload, queueItem.Payload);
+            Assert.NotNull(queueItem);
+            Assert.Equal("2", queueItem.ID);
+            Assert.Equal("payload type", queueItem.PayloadType);
+            Assert.Equal(payload, queueItem.Payload);
         }
     }
 }

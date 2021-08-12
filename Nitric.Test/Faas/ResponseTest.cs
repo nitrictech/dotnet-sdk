@@ -12,22 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System.Text;
 using Nitric.Faas;
 
 namespace Nitric.Test.Faas
 {
-    [TestClass]
     public class ResponseTest
     {
-        [TestMethod]
+        [Fact]
         public void TestHttpToGrpc()
         {
             var ctx = new HttpResponseContext()
                 .SetStatus(200)
                 .AddHeader("x-nitric-testing", "test");
-            
+
             var response = new Response(
               Encoding.UTF8.GetBytes("Hello World"),
               ctx
@@ -35,17 +34,17 @@ namespace Nitric.Test.Faas
 
             var triggerResponse = response.ToGrpcTriggerResponse();
 
-            Assert.AreEqual(triggerResponse.Data.ToStringUtf8(), "Hello World");
-            Assert.IsNotNull(triggerResponse.Http);
-            Assert.AreEqual(triggerResponse.Http.Status, 200);
-            Assert.AreEqual(triggerResponse.Http.Headers["x-nitric-testing"], "test");
+            Assert.Equal("Hello World", triggerResponse.Data.ToStringUtf8());
+            Assert.NotNull(triggerResponse.Http);
+            Assert.Equal(200, triggerResponse.Http.Status);
+            Assert.Equal("test", triggerResponse.Http.Headers["x-nitric-testing"]);
         }
 
         public void TestTopicToGrpc()
         {
             var ctx = new TopicResponseContext()
                 .SetSuccess(true);
-            
+
             var response = new Response(
               Encoding.UTF8.GetBytes("Hello World"),
               ctx
@@ -53,9 +52,9 @@ namespace Nitric.Test.Faas
 
             var triggerResponse = response.ToGrpcTriggerResponse();
 
-            Assert.AreEqual(triggerResponse.Data.ToStringUtf8(), "Hello World");
-            Assert.IsNotNull(triggerResponse.Topic);
-            Assert.AreEqual(triggerResponse.Topic.Success, true);
+            Assert.Equal("Hello World", triggerResponse.Data.ToStringUtf8());
+            Assert.NotNull(triggerResponse.Topic);
+            Assert.Equal(true, triggerResponse.Topic.Success);
         }
     }
 }

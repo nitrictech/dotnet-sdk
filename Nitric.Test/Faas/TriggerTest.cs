@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using System.Text;
 using Nitric.Proto.Faas.v1;
@@ -20,10 +20,9 @@ using Nitric.Faas;
 
 namespace Nitric.Test.Faas
 {
-    [TestClass]
     public class TriggerTest
     {
-        [TestMethod]
+        [Fact]
         public void TestFromGrpcTriggerRequestHttp()
         {
             var triggerRequest = new TriggerRequest();
@@ -37,15 +36,15 @@ namespace Nitric.Test.Faas
             var trigger = Trigger.FromGrpcTriggerRequest(triggerRequest);
 
 
-            Assert.IsTrue(trigger.Context.IsHttp());
-            Assert.AreEqual("Hello World", Encoding.UTF8.GetString(trigger.Data));
-            Assert.AreEqual("text/plain", trigger.MimeType);
-            Assert.AreEqual(trigger.Context.AsHttp().Method, "GET");
-            Assert.AreEqual(trigger.Context.AsHttp().Path, "/test/");
-            Assert.AreEqual(trigger.Context.AsHttp().Headers["x-nitric-test"], "test");
+            Assert.True(trigger.Context.IsHttp());
+            Assert.Equal("Hello World", Encoding.UTF8.GetString(trigger.Data));
+            Assert.Equal("text/plain", trigger.MimeType);
+            Assert.Equal("GET", trigger.Context.AsHttp().Method);
+            Assert.Equal("/test/", trigger.Context.AsHttp().Path);
+            Assert.Equal("test", trigger.Context.AsHttp().Headers["x-nitric-test"]);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestFromGrpcTriggerTopic()
         {
             var triggerRequest = new TriggerRequest();
@@ -56,10 +55,10 @@ namespace Nitric.Test.Faas
 
             var trigger = Trigger.FromGrpcTriggerRequest(triggerRequest);
 
-            Assert.IsTrue(trigger.Context.IsTopic());
-            Assert.AreEqual("Hello World", Encoding.UTF8.GetString(trigger.Data));
-            Assert.AreEqual("text/plain", trigger.MimeType);
-            Assert.AreEqual(trigger.Context.AsTopic().Topic, "Test");
+            Assert.True(trigger.Context.IsTopic());
+            Assert.Equal("Hello World", Encoding.UTF8.GetString(trigger.Data));
+            Assert.Equal("text/plain", trigger.MimeType);
+            Assert.Equal("Test", trigger.Context.AsTopic().Topic);
         }
-		}
+    }
 }

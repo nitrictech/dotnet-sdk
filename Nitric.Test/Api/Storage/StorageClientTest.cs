@@ -13,56 +13,55 @@
 // limitations under the License.
 using System;
 using Grpc.Core;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using Nitric.Proto.Storage.v1;
 using Storage = Nitric.Api.Storage.Storage;
 
 namespace Nitric.Test.Api.StorageClient
 {
-    [TestClass]
     public class StorageClientTest
     {
-        [TestMethod]
+        [Fact]
         public void TestBuildStorage()
         {
             var storage = new Storage();
-            Assert.IsNotNull(storage);
+            Assert.NotNull(storage);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildBucketWithName()
         {
             var bucket = new Storage().Bucket("test-bucket");
-            Assert.IsNotNull(bucket);
-            Assert.AreEqual("test-bucket", bucket.Name);
+            Assert.NotNull(bucket);
+            Assert.Equal("test-bucket", bucket.Name);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildBucketWithoutName()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Storage().Bucket("")
             );
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Storage().Bucket(null)
             );
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildFileWithName()
         {
             var file = new Storage().Bucket("test-bucket").File("test-file");
-            Assert.IsNotNull(file);
+            Assert.NotNull(file);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildFileWithoutName()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Storage().Bucket("test-bucket").File("")
             );
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Storage().Bucket("test-bucket").File(null)
             );
         } 
-        [TestMethod]
+        [Fact]
         public void TestWrite()
         {
             var request = new StorageWriteRequest
@@ -84,7 +83,7 @@ namespace Nitric.Test.Api.StorageClient
 
             bc.Verify(t => t.Write(It.IsAny<StorageWriteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestReadExistingKey()
         {
             var storageResponse = new StorageReadResponse();
@@ -99,11 +98,11 @@ namespace Nitric.Test.Api.StorageClient
 
             var response = file.Read();
 
-            Assert.AreEqual("Hello World", System.Text.Encoding.UTF8.GetString(response));
+            Assert.Equal("Hello World", System.Text.Encoding.UTF8.GetString(response));
 
             bc.Verify(t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestReadNonExistingKey()
         {
             Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
@@ -116,14 +115,14 @@ namespace Nitric.Test.Api.StorageClient
             try
             {
                 file.Read();
-                Assert.IsTrue(false);
+                Assert.True(false);
             } catch (RpcException re) {
-                Assert.AreEqual("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", re.Message);
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", re.Message);
             }
 
             bc.Verify(t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestDeleteExistingKey()
         {
             Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
