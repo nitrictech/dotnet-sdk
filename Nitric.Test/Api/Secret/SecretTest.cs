@@ -196,7 +196,7 @@ namespace Nitric.Test.Api.Secret
             }
 
 
-            sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [Fact]
         public void TestGetLatestSecretVersion()
