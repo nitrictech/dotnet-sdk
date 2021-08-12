@@ -266,11 +266,11 @@ namespace Nitric.Test.Api.Document
             dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [Fact]
-        public void TestSetToNonExistentDocument()
+        public void TestSetToDocumentWithoutPermissions()
         {
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
             dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified document does not exist")))
+                .Throws(new RpcException(new Status(StatusCode.PermissionDenied, "You do not have permission to modify this document")))
                 .Verifiable();
 
             var document = new SortedDictionary<string, object>();
@@ -285,7 +285,7 @@ namespace Nitric.Test.Api.Document
             }
             catch (Nitric.Api.Common.NitricException ne)
             {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")", ne.Message);
+                Assert.Equal("Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to modify this document\")", ne.Message);
             }
 
             dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
