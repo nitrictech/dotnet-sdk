@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using Moq;
 using Google.Protobuf.WellKnownTypes;
 using Nitric.Api.Queue;
+using Grpc.Core;
 
 namespace Nitric.Test.Api.QueueClient
 {
@@ -37,6 +38,7 @@ namespace Nitric.Test.Api.QueueClient
             Assert.NotNull(queue);
             Assert.Equal("test-queue", queue.Name);
         }
+        [Fact]
         public void TestBuildQueueWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
@@ -45,6 +47,27 @@ namespace Nitric.Test.Api.QueueClient
             Assert.Throws<ArgumentNullException>(
                 () => new Queues().Queue(null)
             );
+        }
+        [Fact]
+        public void TestSendToNonExistentQueue()
+        {
+            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
+            qc.Setup(e => e.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
+                .Verifiable();
+
+            var queue = new Queues(qc.Object).Queue("test-queue");
+
+            try
+            {
+                queue.Send(new Task.Builder().Build());
+            }
+            catch (Nitric.Api.Common.NitricException ne)
+            {
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified queue does not exist\")", ne.Message);
+            }
+
+            qc.Verify(t => t.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [Fact]
         public void TestSendBatchWithFailedTasks()
@@ -91,7 +114,7 @@ namespace Nitric.Test.Api.QueueClient
 
             var response = queue.SendBatch(new List<Task>());
 
-            Assert.Equal(0, response.getFailedTasks().Count);
+            Assert.Empty(response.getFailedTasks());
 
             qc.Verify(t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
@@ -135,7 +158,7 @@ namespace Nitric.Test.Api.QueueClient
 
             var response = queue.Receive(3);
 
-            Assert.Equal(0, response.Count);
+            Assert.Empty(response);
 
             qc.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }

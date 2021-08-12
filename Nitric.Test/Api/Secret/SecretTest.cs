@@ -17,6 +17,7 @@ using Xunit;
 using Moq;
 using Nitric.Api.Secret;
 using Nitric.Proto.Secret.v1;
+using Grpc.Core;
 namespace Nitric.Test.Api.Secret
 {
     public class SecretTest
@@ -134,6 +135,29 @@ namespace Nitric.Test.Api.Secret
             var secret = new Secrets().Secret("test-secret");
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put((string)null));
+        }
+        [Fact]
+        public void TestPutNonExistentSecret()
+        {
+            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
+            sc.Setup(e => e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified secret does not exist")))
+                .Verifiable();
+
+            var testString = "Super secret message";
+            var secret = new Secrets(sc.Object)
+                .Secret("test-secret");
+            try
+            {
+                var response = secret.Put(testString);
+            }
+            catch (Nitric.Api.Common.NitricException ne)
+            {
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified secret does not exist\")", ne.Message);
+            }
+
+
+            sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [Fact]
         public void TestGetSecretVersion()

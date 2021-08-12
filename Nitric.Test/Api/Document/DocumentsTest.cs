@@ -18,6 +18,7 @@ using Nitric.Proto.Document.v1;
 using Xunit;
 using Moq;
 using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 namespace Nitric.Test.Api.Document
 {
     public class DocumentsTest
@@ -48,7 +49,7 @@ namespace Nitric.Test.Api.Document
         }
         /*
          * TESTING DOCS
-         */ 
+         */
         [Fact]
         public void TestBuildDocsWithDocumentId()
         {
@@ -105,7 +106,7 @@ namespace Nitric.Test.Api.Document
                 .Doc("test-document");
             var response = documentRef.Get();
 
-            Assert.Equal(response.Content["test"], "document");
+            Assert.Equal("document", response.Content["test"]);
             Assert.Equal(response.Ref, documentRef);
 
             dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
@@ -139,8 +140,30 @@ namespace Nitric.Test.Api.Document
                 .Collection<SortedDictionary<string, object>>("test-collection")
                 .Doc("test-document");
             var response = documentRef.Get();
-            Assert.Equal(response.Content["test"], "document");
+            Assert.Equal("document", response.Content["test"]);
             Assert.Equal(response.Ref, documentRef);
+
+            dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [Fact]
+        public void TestGetToNonExistentDocument()
+        {
+            Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
+            dc.Setup(e => e.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified document does not exist")))
+                .Verifiable();
+
+            var documentRef = new Documents(dc.Object)
+                .Collection<SortedDictionary<string, object>>("test-collection")
+                .Doc("test-document");
+            try
+            {
+                var response = documentRef.Get();
+            }
+            catch (Nitric.Api.Common.NitricException ne)
+            {
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")", ne.Message);
+            }
 
             dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
@@ -239,6 +262,31 @@ namespace Nitric.Test.Api.Document
                 .Doc("test-document");
 
             documentRef.Set(document);
+
+            dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [Fact]
+        public void TestSetToNonExistentDocument()
+        {
+            Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
+            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified document does not exist")))
+                .Verifiable();
+
+            var document = new SortedDictionary<string, object>();
+            document.Add("test", "document");
+
+            var documentRef = new Documents(dc.Object)
+                .Collection<SortedDictionary<string, object>>("test-collection")
+                .Doc("test-document");
+            try
+            {
+                documentRef.Set(document);
+            }
+            catch (Nitric.Api.Common.NitricException ne)
+            {
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")", ne.Message);
+            }
 
             dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
@@ -445,8 +493,8 @@ namespace Nitric.Test.Api.Document
             try
             {
                 var response = query.Fetch();
-                Assert.Equal(response.QueryData.Count, 1);
-                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Single(response.QueryData);
+                Assert.Equal("document", response.QueryData[0].Content["test"]);
                 Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -489,8 +537,8 @@ namespace Nitric.Test.Api.Document
                 var response = query
                     .Limit(1)
                     .Fetch();
-                Assert.Equal(response.QueryData.Count, 1);
-                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Single(response.QueryData);
+                Assert.Equal("document", response.QueryData[0].Content["test"]);
                 Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -534,8 +582,8 @@ namespace Nitric.Test.Api.Document
                     .Where("first_name", "==", "john")
                     .Where("last_name", "==", "smith")
                     .Fetch();
-                Assert.Equal(response.QueryData.Count, 1);
-                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Single(response.QueryData);
+                Assert.Equal("document", response.QueryData[0].Content["test"]);
                 Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -581,8 +629,8 @@ namespace Nitric.Test.Api.Document
                 var response = query
                     .PagingFrom(pagingToken)
                     .Fetch();
-                Assert.Equal(response.QueryData.Count, 1);
-                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Single(response.QueryData);
+                Assert.Equal("document", response.QueryData[0].Content["test"]);
                 Assert.Equal(response.PagingToken, updatedPagingToken);
             }
             catch (Exception)
@@ -624,14 +672,36 @@ namespace Nitric.Test.Api.Document
             try
             {
                 var response = query.FetchAll();
-                Assert.Equal(response.QueryData.Count, 1);
-                Assert.Equal(response.QueryData[0].Content["0"], "john smith");
-                Assert.Equal(response.QueryData[1].Content["1"], "jane doe");
+                Assert.Single(response.QueryData);
+                Assert.Equal("john smith", response.QueryData[0].Content["0"]);
+                Assert.Equal("jane doe", response.QueryData[1].Content["1"]);
                 Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
             {
                 Assert.False(false);
+            }
+
+            dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [Fact]
+        public void TestFetchNonExistentDocument()
+        {
+            Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
+            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified document does not exist")))
+                .Verifiable();
+
+            var query = new Documents(dc.Object)
+                .Collection<Dictionary<string, object>>("test-collection")
+                .Query();
+            try
+            {
+                var response = query.Fetch();
+            }
+            catch (Nitric.Api.Common.NitricException ne)
+            {
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")", ne.Message);
             }
 
             dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);

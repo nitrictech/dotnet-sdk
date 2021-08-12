@@ -18,6 +18,9 @@ using GrpcKey = Nitric.Proto.Document.v1.Key;
 using Nitric.Proto.Document.v1;
 using Util = Nitric.Api.Common.Util;
 using Google.Protobuf.WellKnownTypes;
+using RpcException = Grpc.Core.RpcException;
+using NitricException = Nitric.Api.Common.NitricException;
+
 namespace Nitric.Api.Document
 {
     public class DocumentRef<T> where T : IDictionary<string, object>, new()
@@ -44,25 +47,38 @@ namespace Nitric.Api.Document
             DocumentGetRequest request = new DocumentGetRequest();
             request.Key = this.Key.ToKey();
 
-            var response = this.documentClient.Get(request);
-
-            return new Document<T>(
-                this,
-                DocumentToGeneric(response.Document.Content)
-            );
+            try
+            {
+                var response = this.documentClient.Get(request);
+                return new Document<T>(
+                    this,
+                    DocumentToGeneric(response.Document.Content)
+                );
+            }
+            catch (RpcException re)
+            {
+                throw NitricException.Exceptions[re.StatusCode](re.Message);
+            }
         }
         public void Set(T value)
         {
             if (value == null)
             {
-                throw new ArgumentNullException("Provide non-null value");
+                throw new ArgumentNullException("value");
             }
             var request = new DocumentSetRequest
             {
                 Key = this.Key.ToKey(),
                 Content = Util.ObjToStruct(value),
             };
-            this.documentClient.Set(request);
+            try
+            {
+                this.documentClient.Set(request);
+            }
+            catch (RpcException re)
+            {
+                throw NitricException.Exceptions[re.StatusCode](re.Message);
+            }
         }
 
         public void Delete()
@@ -71,7 +87,14 @@ namespace Nitric.Api.Document
             {
                 Key = this.Key.ToKey(),
             };
-            this.documentClient.Delete(request);
+            try
+            {
+                this.documentClient.Delete(request);
+            }
+            catch (RpcException re)
+            {
+                throw NitricException.Exceptions[re.StatusCode](re.Message);
+            }
         }
 
         private int Depth(int depth, Collection collection)
@@ -84,7 +107,7 @@ namespace Nitric.Api.Document
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(name);
+                throw new ArgumentNullException("name");
             }
             if (Depth(0, this.collection.ToGrpcCollection()) >= DEPTH_LIMIT)
             {

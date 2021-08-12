@@ -33,7 +33,7 @@ namespace Nitric.Api.Secret
         {
             if (string.IsNullOrEmpty(version))
             {
-                throw new ArgumentNullException(version);
+                throw new ArgumentNullException("version");
             }
             return new SecretVersion(this, version);
         }
@@ -45,27 +45,34 @@ namespace Nitric.Api.Secret
         {
             if (value == null || value.Length == 0)
             {
-                throw new ArgumentNullException("provide non-empty value");
+                throw new ArgumentNullException("value");
             }
             var request = new SecretPutRequest
             {
                 Secret = new Proto.Secret.v1.Secret { Name = this.Name },
                 Value = Google.Protobuf.ByteString.CopyFrom(value),
             };
-            var secretResponse = client.Put(request);
-            return new SecretVersion(
-                new Secret(
-                    this.client,
-                    secretResponse.SecretVersion.Secret.Name
-                ),
-                secretResponse.SecretVersion.Version
-            );
+            try
+            {
+                var secretResponse = client.Put(request);
+                return new SecretVersion(
+                    new Secret(
+                        this.client,
+                        secretResponse.SecretVersion.Secret.Name
+                    ),
+                    secretResponse.SecretVersion.Version
+                );
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw Common.NitricException.Exceptions[re.StatusCode](re.Message);
+            }
         }
         public SecretVersion Put(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException(value);
+                throw new ArgumentNullException("value");
             }
             return Put(Encoding.UTF8.GetBytes(value));
         }

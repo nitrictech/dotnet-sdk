@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using Nitric.Proto.Event.v1;
 using Moq;
 using Util = Nitric.Api.Common.Util;
+using Grpc.Core;
 
 namespace Nitric.Test.Api.EventClient
 {
@@ -54,7 +55,7 @@ namespace Nitric.Test.Api.EventClient
             var evt = new NitricEvent { Id = "1", PayloadType = "payloadType", Payload = payloadStruct };
             var request = new EventPublishRequest { Topic = "test-topic", Event = evt };
 
-            Mock<Proto.Event.v1.EventService.EventServiceClient> ec = new Mock<Proto.Event.v1.EventService.EventServiceClient>();
+            Mock<EventService.EventServiceClient> ec = new Mock<EventService.EventServiceClient>();
 
             ec.Setup(e => e.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new EventPublishResponse())
@@ -71,7 +72,36 @@ namespace Nitric.Test.Api.EventClient
 
             var response = topic.Publish(evtToSend);
 
-            ec.Verify(t => t.Publish(It.IsAny<EventPublishRequest>(), null,null,It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            ec.Verify(t => t.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [Fact]
+        public void TestPublishToNonExistentTopic()
+        {
+            Mock<EventService.EventServiceClient> ec = new Mock<EventService.EventServiceClient>();
+
+            ec.Setup(e => e.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified topic does not exist")))
+                .Verifiable();
+
+            var topic = new Events(ec.Object).Topic("test-topic");
+
+            var evtToSend = EventModel
+                .NewBuilder()
+                .Id("1")
+                .PayloadType("payloadType")
+                .Payload(new Dictionary<string, string>())
+                .Build();
+
+            try
+            {
+                var response = topic.Publish(evtToSend);
+            }
+            catch (Nitric.Api.Common.NitricException ne)
+            {
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified topic does not exist\")", ne.Message);
+            }
+
+            ec.Verify(t => t.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     };
 }

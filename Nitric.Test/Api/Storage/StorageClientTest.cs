@@ -116,8 +116,10 @@ namespace Nitric.Test.Api.StorageClient
             {
                 file.Read();
                 Assert.True(false);
-            } catch (RpcException re) {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", re.Message);
+            }
+            catch (Nitric.Api.Common.NitricException ne)
+            {
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", ne.Message);
             }
 
             bc.Verify(t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
