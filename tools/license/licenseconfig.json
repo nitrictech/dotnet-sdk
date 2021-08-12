@@ -19,7 +19,7 @@
     "**/*.protodep",
     "**/*.config",
     "*.html",
-    "examples/"
+    "Nitric.Test/examples/**"
   ],
   "license": "./tools/license/license_header.txt",
   "licenseFormats": {
