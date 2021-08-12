@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System;
 using System.Text;
 using System.Net.Http;
@@ -24,7 +24,7 @@ namespace Nitric.Test.Faas
     //[TestClass]
     public class FaasTest
     {
-        [TestMethod]
+        //[Fact]
         public void TestDoubleStart()
         {
             Nitric.Faas.Faas faas = Nitric.Faas.Faas.NewBuilder()
@@ -32,9 +32,9 @@ namespace Nitric.Test.Faas
                 .Build();
             Thread faasThread = new Thread(() => faas.Start());
             faasThread.Start();
-            Assert.ThrowsException<RpcException>(() => faas.Start());
+            Assert.Throws<RpcException>(() => faas.Start());
         }
-        [TestMethod]
+        //[Fact]
         public void TestCall()
         {
             Nitric.Faas.Faas faas = Nitric.Faas.Faas.NewBuilder()
@@ -44,7 +44,7 @@ namespace Nitric.Test.Faas
             faasThread.Start();
             var client = new HttpClient();
             var result = client.GetAsync(string.Format("http://{0}:{1}/", "127.0.0.1", 8080));
-            Assert.AreEqual("Hello World", result.Result);
+            Assert.Equal("Hello World", result.Result.ToString());
         }
     }
     public class HelloWorld : INitricFunction

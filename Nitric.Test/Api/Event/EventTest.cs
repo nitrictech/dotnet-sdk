@@ -13,14 +13,13 @@
 // limitations under the License.
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Nitric.Test.Api.EventClient
 {
-    [TestClass]
     public class EventTest
     {
-        [TestMethod]
+        [Fact]
         public void TestBuild()
         {
             Dictionary<string, object> payload = new Dictionary<string, object>();
@@ -31,13 +30,13 @@ namespace Nitric.Test.Api.EventClient
                 .PayloadType("payloadType")
                 .Payload(Nitric.Api.Common.Util.ObjToStruct(payload))
                 .Build();
-                
-            Assert.IsNotNull(eventTest);
-            Assert.AreEqual("id", eventTest.Id);
-            Assert.AreEqual("payloadType", eventTest.PayloadType);
-            Assert.AreEqual(Nitric.Api.Common.Util.ObjToStruct(payload), eventTest.Payload);
+
+            Assert.NotNull(eventTest);
+            Assert.Equal("id", eventTest.Id);
+            Assert.Equal("payloadType", eventTest.PayloadType);
+            Assert.Equal(Nitric.Api.Common.Util.ObjToStruct(payload), eventTest.Payload);
         }
-        [TestMethod]
+        [Fact]
         public void TestToString()
         {
             Dictionary<string, object> payload = new Dictionary<string, object>();
@@ -48,7 +47,7 @@ namespace Nitric.Test.Api.EventClient
                 .PayloadType("payloadType")
                 .Payload(Nitric.Api.Common.Util.ObjToStruct(payload))
                 .Build();
-            Assert.AreEqual("Event[id=id, payloadType=payloadType, payload={ \"name\": \"value\" }]", eventTest.ToString());
+            Assert.Equal("Event[id=id, payloadType=payloadType, payload={ \"name\": \"value\" }]", eventTest.ToString());
         }
     }
 }

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Nitric.Proto.Queue.v1;
 using Google.Protobuf.Collections;
 using System.Collections.Generic;
@@ -22,32 +22,31 @@ using Nitric.Api.Queue;
 
 namespace Nitric.Test.Api.QueueClient
 {
-    [TestClass]
     public class QueueClientTest
     {
-        [TestMethod]
+        [Fact]
         public void TestBuildQueues()
         {
             var queues = new Queues();
-            Assert.IsNotNull(queues);
+            Assert.NotNull(queues);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildQueueWithName()
         {
             var queue = new Queues().Queue("test-queue");
-            Assert.IsNotNull(queue);
-            Assert.AreEqual("test-queue", queue.Name);
+            Assert.NotNull(queue);
+            Assert.Equal("test-queue", queue.Name);
         }
         public void TestBuildQueueWithoutName()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Queues().Queue("")
             );
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Queues().Queue(null)
             );
         }
-        [TestMethod]
+        [Fact]
         public void TestSendBatchWithFailedTasks()
         {
             //Setting up failed tasks to then return later
@@ -76,11 +75,11 @@ namespace Nitric.Test.Api.QueueClient
 
             var response = queue.SendBatch(new List<Task>());
 
-            Assert.AreEqual("I am a failed task... I failed my task", response.getFailedTasks()[0].Message);
+            Assert.Equal("I am a failed task... I failed my task", response.getFailedTasks()[0].Message);
 
             qc.Verify(t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestSendBatchWithNoFailedTasks()
         {
             Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
@@ -92,11 +91,11 @@ namespace Nitric.Test.Api.QueueClient
 
             var response = queue.SendBatch(new List<Task>());
 
-            Assert.AreEqual(0, response.getFailedTasks().Count);
+            Assert.Equal(0, response.getFailedTasks().Count);
 
             qc.Verify(t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestReceiveTasks()
         {
             NitricTask taskToReturn = new NitricTask();
@@ -120,11 +119,11 @@ namespace Nitric.Test.Api.QueueClient
 
             var response = queue.Receive(3);
 
-            Assert.AreEqual("32", response[0].ID);
+            Assert.Equal("32", response[0].ID);
 
             qc.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestReceiveNoTasks()
         {
             Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
@@ -136,11 +135,11 @@ namespace Nitric.Test.Api.QueueClient
 
             var response = queue.Receive(3);
 
-            Assert.AreEqual(0, response.Count);
+            Assert.Equal(0, response.Count);
 
             qc.Verify(t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestSend()
         {
             Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
@@ -158,7 +157,7 @@ namespace Nitric.Test.Api.QueueClient
 
             qc.Verify(t => t.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestComplete()
         {
             var receivedTask = ReceivedTask.NewBuilder()

@@ -12,16 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Nitric.Api.Http;
 using System.Collections.Generic;
 using System.Linq;
 namespace Nitric.Test.Api.Http
 {
-    [TestClass]
     public class HttpRequestTest
     {
-        [TestMethod]
+        [Fact]
         public void TestFullBuild()
         {
             var request = new HttpRequest
@@ -33,14 +32,14 @@ namespace Nitric.Test.Api.Http
                 .Headers(new Dictionary<string, List<string>>())
                 .Build();
 
-            Assert.AreEqual("Hello World", request.BodyText);
-            Assert.AreEqual("127.0.0.1:8080", request.Path);
-            Assert.AreEqual("GET", request.Method);
-            Assert.AreEqual("POST", request.Query);
-            Assert.IsNotNull(request.Parameters);
-            Assert.IsNotNull(request.Headers);
+            Assert.Equal("Hello World", request.BodyText);
+            Assert.Equal("127.0.0.1:8080", request.Path);
+            Assert.Equal("GET", request.Method);
+            Assert.Equal("POST", request.Query);
+            Assert.NotNull(request.Parameters);
+            Assert.NotNull(request.Headers);
         }
-        [TestMethod]
+        [Fact]
         public void TestBodyText()
         {
             var request = new HttpRequest
@@ -48,9 +47,9 @@ namespace Nitric.Test.Api.Http
                 .Body("Hello World")
                 .Build();
 
-            Assert.AreEqual("Hello World", request.BodyText);
+            Assert.Equal("Hello World", request.BodyText);
         }
-        [TestMethod]
+        [Fact]
         public void TestHeaders()
         {
             Dictionary<string, List<string>> headers = new Dictionary<string, List<string>>();
@@ -62,28 +61,28 @@ namespace Nitric.Test.Api.Http
                     .Headers(headers)
                     .Build();
 
-            Assert.IsNotNull(request.Headers);
-            Assert.IsNotNull(request.Headers["Content-length"]);
-            Assert.AreEqual("1024", request.Headers["Content-length"][0]);
+            Assert.NotNull(request.Headers);
+            Assert.NotNull(request.Headers["Content-length"]);
+            Assert.Equal("1024", request.Headers["Content-length"][0]);
 
-            Assert.IsNotNull(request.Headers["Accept-Charset"]);
-            Assert.AreEqual("ISO-8859-1", request.Headers["Accept-Charset"][0]);
+            Assert.NotNull(request.Headers["Accept-Charset"]);
+            Assert.Equal("ISO-8859-1", request.Headers["Accept-Charset"][0]);
 
             //Assert.ThrowsException<ArgumentNullException>(() => request.Headers.Add("Accept-Charset", "utf-16".Split(',').ToList()), "Cant modify headers");
         }
-        [TestMethod]
+        [Fact]
         public void TestDefaults()
         {
             var request = new HttpRequest
                 .Builder()
                 .Build();
 
-            Assert.AreEqual(null, request.Body);
-            Assert.AreEqual("", request.Path);
-            Assert.AreEqual("", request.Method);
-            Assert.AreEqual("", request.Query);
-            Assert.IsNotNull(request.Headers);
-            Assert.IsNotNull(request.Parameters);
+            Assert.Equal(null, request.Body);
+            Assert.Equal("", request.Path);
+            Assert.Equal("", request.Method);
+            Assert.Equal("", request.Query);
+            Assert.NotNull(request.Headers);
+            Assert.NotNull(request.Parameters);
         }
     }
 }

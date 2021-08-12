@@ -13,15 +13,14 @@
 // limitations under the License.
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Google.Protobuf.WellKnownTypes;
 
 namespace Nitric.Test.Api.QueueClient
 {
-    [TestClass]
     public class FailedTaskTest
     {
-        [TestMethod]
+        [Fact]
         public void TestBuild()
         {
             Dictionary<string, string> payload = new Dictionary<string, string>();
@@ -35,11 +34,11 @@ namespace Nitric.Test.Api.QueueClient
                 .Message("message")
                 .Build();
 
-            Assert.IsNotNull(failedTask);
-            Assert.AreEqual("1", failedTask.Task.ID);
-            Assert.AreEqual("payload type", failedTask.Task.PayloadType);
-            Assert.AreEqual(payloadStruct, failedTask.Task.Payload);
-            Assert.AreEqual("message", failedTask.Message);
+            Assert.NotNull(failedTask);
+            Assert.Equal("1", failedTask.Task.ID);
+            Assert.Equal("payload type", failedTask.Task.PayloadType);
+            Assert.Equal(payloadStruct, failedTask.Task.Payload);
+            Assert.Equal("message", failedTask.Message);
         }
     }
 }

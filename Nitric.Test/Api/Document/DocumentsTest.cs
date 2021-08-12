@@ -15,68 +15,67 @@ using System;
 using System.Collections.Generic;
 using Nitric.Api.Document;
 using Nitric.Proto.Document.v1;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using Google.Protobuf.WellKnownTypes;
 namespace Nitric.Test.Api.Document
 {
-    [TestClass]
     public class DocumentsTest
     {
-        [TestMethod]
+        [Fact]
         public void TestBuildDocuments()
         {
             var documents = new Documents();
-            Assert.IsNotNull(documents);
+            Assert.NotNull(documents);
         }
         /*
          * TESTING COLLECTIONS
          */
-        [TestMethod]
+        [Fact]
         public void TestCollectionsMethodWithName()
         {
             var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
-            Assert.IsNotNull(collection);
+            Assert.NotNull(collection);
         }
-        [TestMethod]
+        [Fact]
         public void TestCollectionsMethodWithoutName()
         {
             var documents = new Documents();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => documents.Collection<Dictionary<string, object>>(null));
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => documents.Collection<Dictionary<string, object>>(""));
         }
         /*
          * TESTING DOCS
          */ 
-        [TestMethod]
+        [Fact]
         public void TestBuildDocsWithDocumentId()
         {
             var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
             var docs = collection.Doc("test-document");
-            Assert.IsNotNull(docs);
+            Assert.NotNull(docs);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildDocWithoutDocumentId()
         {
             var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => collection.Doc(""));
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => collection.Doc(null));
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildQuery()
         {
             var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
             var query = collection.Query();
-            Assert.IsNotNull(query);
+            Assert.NotNull(query);
         }
         /*
          * TESTING GET (DOCS)
          */
-        [TestMethod]
+        [Fact]
         public void TestGetWithDictionary()
         {
             var value = new Value
@@ -106,12 +105,12 @@ namespace Nitric.Test.Api.Document
                 .Doc("test-document");
             var response = documentRef.Get();
 
-            Assert.AreEqual(response.Content["test"], "document");
-            Assert.AreEqual(response.Ref, documentRef);
+            Assert.Equal(response.Content["test"], "document");
+            Assert.Equal(response.Ref, documentRef);
 
             dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestGetWithSortedDictionary()
         {
             var value = new Value
@@ -140,15 +139,15 @@ namespace Nitric.Test.Api.Document
                 .Collection<SortedDictionary<string, object>>("test-collection")
                 .Doc("test-document");
             var response = documentRef.Get();
-            Assert.AreEqual(response.Content["test"], "document");
-            Assert.AreEqual(response.Ref, documentRef);
+            Assert.Equal(response.Content["test"], "document");
+            Assert.Equal(response.Ref, documentRef);
 
             dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         /*
          * TESTING SET (DOCS)
          */
-        [TestMethod]
+        [Fact]
         public void TestSetWithSingleEntryDictionary()
         {
             var document = new Dictionary<string, object>();
@@ -167,7 +166,7 @@ namespace Nitric.Test.Api.Document
 
             dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestSetWithMultipleEntryDictionary()
         {
             var document = new Dictionary<string, object>();
@@ -189,7 +188,7 @@ namespace Nitric.Test.Api.Document
 
             dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestSetWithEmptyDictionary()
         {
             var document = new Dictionary<string, object>();
@@ -207,8 +206,8 @@ namespace Nitric.Test.Api.Document
 
             dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
-        public void TestSetWithNullDictionaryThrowsException()
+        [Fact]
+        public void TestSetWithNullDictionaryThrows()
         {
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
             dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
@@ -219,12 +218,12 @@ namespace Nitric.Test.Api.Document
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => documentRef.Set(null));
 
             dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Never);
         }
-        [TestMethod]
+        [Fact]
         public void TestSetWithSortedDictionary()
         {
             var document = new SortedDictionary<string, object>();
@@ -246,7 +245,7 @@ namespace Nitric.Test.Api.Document
         /*
          * TESTING DELETE (DOCS)
          */
-        [TestMethod]
+        [Fact]
         public void TestDelete()
         {
             var documentSetResponse = new DocumentSetResponse();
@@ -267,7 +266,7 @@ namespace Nitric.Test.Api.Document
         /*
          * TESTING DOC COLLECTION (DOCS)
          */
-        [TestMethod]
+        [Fact]
         public void TestDocCollectionWithName()
         {
             var docCollection = new Documents()
@@ -275,24 +274,24 @@ namespace Nitric.Test.Api.Document
                 .Doc("test-document")
                 .Collection("test-collection-2");
 
-            Assert.IsNotNull(docCollection);
+            Assert.NotNull(docCollection);
         }
-        [TestMethod]
+        [Fact]
         public void TestDocCollectionWithoutName()
         {
             var document = new Documents()
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => document.Collection(null));
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => document.Collection(""));
         }
-        [TestMethod]
-        public void TestMultipleDocCollectionsThrowsException()
+        [Fact]
+        public void TestMultipleDocCollectionsThrows()
         {
-            Assert.ThrowsException<NotSupportedException>(
+            Assert.Throws<NotSupportedException>(
                 () => new Documents()
                     .Collection<Dictionary<string, object>>("test-collection")
                     .Doc("test-document")
@@ -304,7 +303,7 @@ namespace Nitric.Test.Api.Document
         /*
          * TEST QUERY
          */
-        [TestMethod]
+        [Fact]
         public void TestWhereExpression()
         {
             var query = new Documents()
@@ -320,14 +319,14 @@ namespace Nitric.Test.Api.Document
                     .Where("address", "startsWith", "B")
                     .Where("id", ">", "0")
                     .Where("id", "<", "5");
-                Assert.IsTrue(true);
+                Assert.True(true);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
         }
-        [TestMethod]
+        [Fact]
         public void TestChangingLimit()
         {
             var query = new Documents()
@@ -337,14 +336,14 @@ namespace Nitric.Test.Api.Document
             try
             {
                 query.Limit(100);
-                Assert.IsTrue(true);
+                Assert.True(true);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
         }
-        [TestMethod]
+        [Fact]
         public void TestHandlingNegativeLimits()
         {
             var query = new Documents()
@@ -354,14 +353,14 @@ namespace Nitric.Test.Api.Document
             try
             {
                 query.Limit(-100);
-                Assert.IsTrue(true);
+                Assert.True(true);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
         }
-        [TestMethod]
+        [Fact]
         public void TestChangingPagingToken()
         {
             var query = new Documents()
@@ -374,14 +373,14 @@ namespace Nitric.Test.Api.Document
             try
             {
                 query.PagingFrom(pagingToken);
-                Assert.IsTrue(true);
+                Assert.True(true);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
         }
-        [TestMethod]
+        [Fact]
         public void TestChangingWithNullPagingToken()
         {
             var query = new Documents()
@@ -391,14 +390,14 @@ namespace Nitric.Test.Api.Document
             try
             {
                 query.PagingFrom(null);
-                Assert.IsTrue(true);
+                Assert.True(true);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
         }
-        [TestMethod]
+        [Fact]
         public void TestChangingWithEmptyPagingToken()
         {
             var query = new Documents()
@@ -408,14 +407,14 @@ namespace Nitric.Test.Api.Document
             try
             {
                 query.PagingFrom(new Dictionary<string, string>());
-                Assert.IsTrue(true);
+                Assert.True(true);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
         }
-        [TestMethod]
+        [Fact]
         public void TestFetch()
         {
             var pagingToken = new Dictionary<string, string>();
@@ -446,18 +445,18 @@ namespace Nitric.Test.Api.Document
             try
             {
                 var response = query.Fetch();
-                Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0].Content["test"], "document");
-                Assert.AreEqual(response.PagingToken, pagingToken);
+                Assert.Equal(response.QueryData.Count, 1);
+                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
 
             dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestFetchConformsToLimitOfOne()
         {
             var pagingToken = new Dictionary<string, string>();
@@ -490,18 +489,18 @@ namespace Nitric.Test.Api.Document
                 var response = query
                     .Limit(1)
                     .Fetch();
-                Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0].Content["test"], "document");
-                Assert.AreEqual(response.PagingToken, pagingToken);
+                Assert.Equal(response.QueryData.Count, 1);
+                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
 
             dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestFetchWithExpressions()
         {
             var pagingToken = new Dictionary<string, string>();
@@ -535,18 +534,18 @@ namespace Nitric.Test.Api.Document
                     .Where("first_name", "==", "john")
                     .Where("last_name", "==", "smith")
                     .Fetch();
-                Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0].Content["test"], "document");
-                Assert.AreEqual(response.PagingToken, pagingToken);
+                Assert.Equal(response.QueryData.Count, 1);
+                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
 
             dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestFetchWithPagingToken()
         {
             var pagingToken = new Dictionary<string, string>();
@@ -582,18 +581,18 @@ namespace Nitric.Test.Api.Document
                 var response = query
                     .PagingFrom(pagingToken)
                     .Fetch();
-                Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0].Content["test"], "document");
-                Assert.AreEqual(response.PagingToken, updatedPagingToken);
+                Assert.Equal(response.QueryData.Count, 1);
+                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Equal(response.PagingToken, updatedPagingToken);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
 
             dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestFetchAll()
         {
             var pagingToken = new Dictionary<string, string>();
@@ -625,14 +624,14 @@ namespace Nitric.Test.Api.Document
             try
             {
                 var response = query.FetchAll();
-                Assert.AreEqual(response.QueryData.Count, 1);
-                Assert.AreEqual(response.QueryData[0].Content["0"], "john smith");
-                Assert.AreEqual(response.QueryData[1].Content["1"], "jane doe");
-                Assert.AreEqual(response.PagingToken, pagingToken);
+                Assert.Equal(response.QueryData.Count, 1);
+                Assert.Equal(response.QueryData[0].Content["0"], "john smith");
+                Assert.Equal(response.QueryData[1].Content["1"], "jane doe");
+                Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
             {
-                Assert.IsFalse(false);
+                Assert.False(false);
             }
 
             dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);

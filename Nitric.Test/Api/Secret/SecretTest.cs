@@ -13,44 +13,43 @@
 // limitations under the License.
 using System;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using Nitric.Api.Secret;
 using Nitric.Proto.Secret.v1;
 namespace Nitric.Test.Api.Secret
 {
-    [TestClass]
     public class SecretTest
     {
-        [TestMethod]
+        [Fact]
         public void TestBuildSecrets()
         {
             var secrets = new Secrets();
-            Assert.IsNotNull(secrets);
+            Assert.NotNull(secrets);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildSecretsWithNullClient()
         {
             var secrets = new Secrets(null);
-            Assert.IsNotNull(secrets);
+            Assert.NotNull(secrets);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildSecretWithName()
         {
             var secret = new Secrets().Secret("test-secret");
-            Assert.IsNotNull(secret);
-            Assert.AreEqual("test-secret", secret.Name);
+            Assert.NotNull(secret);
+            Assert.Equal("test-secret", secret.Name);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildSecretWithoutName()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Secrets().Secret(""));
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Secrets().Secret(null));
         }
         //Testing Secret Methods
-        [TestMethod]
+        [Fact]
         public void TestPutSecretBytes()
         {
             var secretPutResponse = new SecretPutResponse
@@ -74,12 +73,12 @@ namespace Nitric.Test.Api.Secret
                 .Secret("test-secret");
             var response = secret.Put(testBytes);
 
-            Assert.AreEqual("test-version", response.Version);
-            Assert.AreEqual(secret.Name, response.Secret.Name);
+            Assert.Equal("test-version", response.Version);
+            Assert.Equal(secret.Name, response.Secret.Name);
 
             sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestPutSecretString()
         {
             var secretPutResponse = new SecretPutResponse
@@ -103,74 +102,74 @@ namespace Nitric.Test.Api.Secret
                 .Secret("test-secret");
             var response = secret.Put(testString);
 
-            Assert.AreEqual("test-version", response.Version);
-            Assert.AreEqual(secret.Name, response.Secret.Name);
+            Assert.Equal("test-version", response.Version);
+            Assert.Equal(secret.Name, response.Secret.Name);
 
             sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestPutEmptySecretBytes()
         {
             var secret = new Secrets().Secret("test-secret");
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => secret.Put(new byte[] { }));
         }
-        [TestMethod]
+        [Fact]
         public void TestPutNullSecretBytes()
         {
             var secret = new Secrets().Secret("test-secret");
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => secret.Put((byte[])null));
         }
-        [TestMethod]
+        [Fact]
         public void TestPutEmptySecretString()
         {
             var secret = new Secrets().Secret("test-secret");
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => secret.Put(""));
         }
-        [TestMethod]
+        [Fact]
         public void TestPutNullSecretString()
         {
             var secret = new Secrets().Secret("test-secret");
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => secret.Put((string)null));
         }
-        [TestMethod]
+        [Fact]
         public void TestGetSecretVersion()
         {
             var secret = new Secrets().Secret("test-secret");
             var secretVersion = secret.Version("test-version");
-            Assert.IsNotNull(secretVersion);
-            Assert.AreEqual("test-version", secretVersion.Version);
-            Assert.AreEqual(secret, secretVersion.Secret);
+            Assert.NotNull(secretVersion);
+            Assert.Equal("test-version", secretVersion.Version);
+            Assert.Equal(secret, secretVersion.Secret);
         }
-        [TestMethod]
+        [Fact]
         public void TestGetSecretVersionWithoutName()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Secrets().Secret("test-secret").Version(""));
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Secrets().Secret("test-secret").Version(null));
         }
-        [TestMethod]
+        [Fact]
         public void TestGetLatestSecretVersion()
         {
             var secretVersion = new Secrets()
                 .Secret("test-secret")
                 .Latest();
-            Assert.AreEqual("latest", secretVersion.Version);
+            Assert.Equal("latest", secretVersion.Version);
         }
-        [TestMethod]
+        [Fact]
         public void TestSecretToString()
         {
             var secretString = new Secrets()
                 .Secret("test-secret")
                 .ToString();
-            Assert.AreEqual("[name=test-secret]", secretString);
+            Assert.Equal("[name=test-secret]", secretString);
         }
         //Testing Secret Version Methods
-        [TestMethod]
+        [Fact]
         public void TestAccess()
         {
             var secretPutResponse = new SecretAccessResponse
@@ -196,23 +195,23 @@ namespace Nitric.Test.Api.Secret
             var response = version.Access();
 
             var responseString = Encoding.UTF8.GetString(response.Value);
-            Assert.AreEqual("test-version", response.SecretVersion.Version);
-            Assert.AreEqual("test-secret", response.SecretVersion.Secret.Name);
-            Assert.AreEqual("Super secret message", Encoding.UTF8.GetString(response.Value));
-            Assert.AreEqual("Super secret message", response.ValueText);
+            Assert.Equal("test-version", response.SecretVersion.Version);
+            Assert.Equal("test-secret", response.SecretVersion.Secret.Name);
+            Assert.Equal("Super secret message", Encoding.UTF8.GetString(response.Value));
+            Assert.Equal("Super secret message", response.ValueText);
 
             sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
-        [TestMethod]
+        [Fact]
         public void TestSecretVersionToString()
         {
             var secretVersionString = new Secrets()
                 .Secret("test-secret")
                 .Version("test-version")
                 .ToString();
-            Assert.AreEqual("SecretVersion[secret=[name=test-secret], version=test-version]", secretVersionString);
+            Assert.Equal("SecretVersion[secret=[name=test-secret], version=test-version]", secretVersionString);
         }
-        [TestMethod]
+        [Fact]
         public void TestSecretValueToString()
         {
             var secretPutResponse = new SecretAccessResponse
@@ -238,7 +237,7 @@ namespace Nitric.Test.Api.Secret
 
             var response = version.Access();
 
-            Assert.AreEqual("SecretValue[secretVersion=SecretVersion[secret=[name=test-secret], version=test-version], value.length=20]", response.ToString());
+            Assert.Equal("SecretValue[secretVersion=SecretVersion[secret=[name=test-secret], version=test-version], value.length=20]", response.ToString());
 
             sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }

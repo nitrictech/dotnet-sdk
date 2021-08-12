@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Nitric.Api.Event;
 using EventModel = Nitric.Api.Event.Event;
 using System.Collections.Generic;
@@ -22,33 +22,32 @@ using Util = Nitric.Api.Common.Util;
 
 namespace Nitric.Test.Api.EventClient
 {
-    [TestClass]
     public class EventClientTest
     {
-        [TestMethod]
+        [Fact]
         public void TestBuildEvents()
         {
             var evt = new Events();
-            Assert.IsNotNull(evt);
+            Assert.NotNull(evt);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildTopicWithName()
         {
             var topic = new Events().Topic("test-topic");
-            Assert.IsNotNull(topic);
-            Assert.AreEqual("test-topic", topic.Name);
+            Assert.NotNull(topic);
+            Assert.Equal("test-topic", topic.Name);
         }
-        [TestMethod]
+        [Fact]
         public void TestBuildTopicWithoutName()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Events().Topic("")
             );
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => new Events().Topic(null)
             );
         }
-        [TestMethod]
+        [Fact]
         public void TestPublish()
         {
             var payloadStruct = Util.ObjToStruct(new Dictionary<string,string>());
