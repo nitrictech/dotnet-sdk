@@ -42,15 +42,15 @@ namespace Nitric.Api.Document
         {
             if (string.IsNullOrEmpty(operand))
             {
-                throw new ArgumentNullException(operand);
+                throw new ArgumentNullException("operand");
             }
             if (string.IsNullOrEmpty(op))
             {
-                throw new ArgumentNullException(op);
+                throw new ArgumentNullException("op");
             }
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException(value);
+                throw new ArgumentNullException("value");
             }
             this.expressions.Add(new Expression(operand, op, value));
             return this;
@@ -103,8 +103,15 @@ namespace Nitric.Api.Document
 
             var request = BuildDocQueryRequest(this.query.expressions);
 
-            DocumentQueryResponse response = this.query.documentClient.Query(request);
-            LoadPageData(response);
+            try
+            {
+                DocumentQueryResponse response = this.query.documentClient.Query(request);
+                LoadPageData(response);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw Common.NitricException.FromRpcException(re);
+            }
         }
 
         internal DocumentQueryRequest BuildDocQueryRequest(List<Expression> expressions)

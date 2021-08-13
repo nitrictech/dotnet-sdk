@@ -32,7 +32,7 @@ namespace Nitric.Api.Queue
         {
             if (string.IsNullOrEmpty(queueName))
             {
-                throw new ArgumentNullException(queueName);
+                throw new ArgumentNullException("queueName");
             }
             return new Queue(this, queueName);
         }
@@ -58,7 +58,14 @@ namespace Nitric.Api.Queue
                 Queue = this.Name,
                 Task = EventToWire(task)
             };
-            Queues.Client.Send(request);
+            try
+            {
+                Queues.Client.Send(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
         public PushResponse SendBatch(IList<Task> tasks)
         {
@@ -70,13 +77,20 @@ namespace Nitric.Api.Queue
 
             var request = new QueueSendBatchRequest { Queue = this.Name };
             request.Tasks.AddRange(wireEvents);
-            var response = Queues.Client.SendBatch(request);
-            List<FailedTask> failedTasks = new List<FailedTask>();
-            foreach (Proto.Queue.v1.FailedTask fe in response.FailedTasks)
+            try
             {
-                failedTasks.Add(WireToFailedTask(fe));
+                var response = Queues.Client.SendBatch(request);
+                List<FailedTask> failedTasks = new List<FailedTask>();
+                foreach (Proto.Queue.v1.FailedTask fe in response.FailedTasks)
+                {
+                    failedTasks.Add(WireToFailedTask(fe));
+                }
+                return new PushResponse(failedTasks);
             }
-            return new PushResponse(failedTasks);
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
 
         public List<ReceivedTask> Receive(int depth)
@@ -86,13 +100,20 @@ namespace Nitric.Api.Queue
                 depth = 1;
             }
             var request = new QueueReceiveRequest { Queue = this.Name, Depth = depth };
-            var response = this.Queues.Client.Receive(request);
-            List<ReceivedTask> items = new List<ReceivedTask>();
-            foreach (NitricTask nqi in response.Tasks)
+            try
             {
-                items.Add(WireToQueueItem(nqi));
+                var response = this.Queues.Client.Receive(request);
+                List<ReceivedTask> items = new List<ReceivedTask>();
+                foreach (NitricTask nqi in response.Tasks)
+                {
+                    items.Add(WireToQueueItem(nqi));
+                }
+                return items;
             }
-            return items;
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
         private ReceivedTask WireToQueueItem(NitricTask nitricTask)
         {

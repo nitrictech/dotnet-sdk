@@ -24,11 +24,11 @@ namespace Nitric.Api.Secret
         {
             if (secret == null || string.IsNullOrEmpty(secret.Name))
             {
-                throw new ArgumentNullException(secret.Name);
+                throw new ArgumentNullException("secret.Name");
             }
             if (string.IsNullOrEmpty(version))
             {
-                throw new ArgumentNullException(version);
+                throw new ArgumentNullException("version");
             }
             this.Secret = secret;
             this.Version = version;
@@ -43,13 +43,19 @@ namespace Nitric.Api.Secret
                     Version = this.Version,
                 }
             };
-            var response = this.Secret.client.Access(secret);
-            var value = response.Value.ToByteArray();
-            //Return a new secret value with a reference to this secret version
-            return new SecretValue(
-                this,
-                (value != null && value.Length > 0) ? value : new byte[0]
-            );
+            try
+            {
+                var response = this.Secret.client.Access(secret);
+                var value = response.Value.ToByteArray();
+                //Return a new secret value with a reference to this secret version
+                return new SecretValue(
+                    this,
+                    (value != null && value.Length > 0) ? value : new byte[0]
+                );
+            } catch (Grpc.Core.RpcException re)
+            {
+                throw Common.NitricException.FromRpcException(re);
+            }
         }
         public override string ToString()
         {

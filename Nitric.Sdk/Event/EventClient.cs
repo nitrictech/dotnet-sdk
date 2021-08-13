@@ -36,7 +36,7 @@ namespace Nitric.Api.Event
         {
             if (string.IsNullOrEmpty(topicName))
             {
-                throw new ArgumentNullException(topicName);
+                throw new ArgumentNullException("topicName");
             }
             return new Topic(this, topicName);
         }
@@ -44,14 +44,20 @@ namespace Nitric.Api.Event
         {
             var request = new TopicListRequest { };
 
-            var response = TopicClient.List(request);
-
-            List<Topic> topics = new List<Topic>();
-            foreach (NitricTopic topic in response.Topics)
+            try
             {
-                topics.Add(new Topic(this, topic.Name));
+                var response = TopicClient.List(request);
+                List<Topic> topics = new List<Topic>();
+                foreach (NitricTopic topic in response.Topics)
+                {
+                    topics.Add(new Topic(this, topic.Name));
+                }
+                return topics;
             }
-            return topics;
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
     }
     public class Topic : AbstractClient
@@ -70,9 +76,15 @@ namespace Nitric.Api.Event
             var nEvt = new NitricEvent { Id = evt.Id, PayloadType = evt.PayloadType, Payload = payloadStruct };
             var request = new EventPublishRequest { Topic = this.Name, Event = nEvt };
 
-            var response = this.Events.EventClient.Publish(request);
-
-            return response.Id;
+            try
+            {
+                var response = this.Events.EventClient.Publish(request);
+                return response.Id;
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
     }
 }

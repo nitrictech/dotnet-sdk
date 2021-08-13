@@ -27,7 +27,7 @@ namespace Nitric.Api.Secret
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(name);
+                throw new ArgumentNullException("name");
             }
             return new Secret(this.secretServiceClient, name);
         }

@@ -88,9 +88,9 @@ namespace Nitric.Faas
                     }
                     await call.RequestStream.CompleteAsync();
                 }
-                catch (RpcException e)
+                catch (RpcException re)
                 {
-                    Console.WriteLine(e.Message + "\n" + e.StackTrace);
+                    throw Api.Common.NitricException.FromRpcException(re);
                 }
             }
         }

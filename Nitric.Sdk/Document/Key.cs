@@ -27,7 +27,7 @@ namespace Nitric.Api.Document
         {
             if (collection == null)
             {
-                throw new ArgumentNullException("Provide non-null collection");
+                throw new ArgumentNullException("collection");
             }
             this.collection = collection;
             this.id = id != null ? id : "";

@@ -29,7 +29,7 @@ namespace Nitric.Api.Document
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(name);
+                throw new ArgumentNullException("name");
             }
             return new CollectionRef<T>(this.documentClient, name);
         }

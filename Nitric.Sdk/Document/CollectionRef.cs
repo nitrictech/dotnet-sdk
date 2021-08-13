@@ -34,7 +34,7 @@ namespace Nitric.Api.Document
         {
             if (string.IsNullOrEmpty(documentId))
             {
-                throw new ArgumentNullException(documentId);
+                throw new ArgumentNullException("documentId");
             }
             return new DocumentRef<T>(
                 this.documentClient,

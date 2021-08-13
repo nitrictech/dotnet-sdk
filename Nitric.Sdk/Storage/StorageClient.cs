@@ -31,7 +31,7 @@ namespace Nitric.Api.Storage
         {
             if (string.IsNullOrEmpty(bucketName))
             {
-                throw new ArgumentNullException(bucketName);
+                throw new ArgumentNullException("bucketName");
             }
             return new Bucket(this, bucketName);
         }
@@ -50,7 +50,7 @@ namespace Nitric.Api.Storage
         {
             if (string.IsNullOrEmpty(key))
             {
-                throw new ArgumentNullException(key);
+                throw new ArgumentNullException("key");
             }
             return new File(Storage, this, key);
         }
@@ -75,7 +75,14 @@ namespace Nitric.Api.Storage
                 Key = this.Key,
                 Body = ByteString.CopyFrom(body)
             };
-            Storage.Client.Write(request);
+            try
+            {
+                Storage.Client.Write(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
         public byte[] Read()
         {
@@ -84,8 +91,15 @@ namespace Nitric.Api.Storage
                 BucketName = Bucket.Name,
                 Key = this.Key
             };
-            var response = Storage.Client.Read(request);
-            return response.Body.ToByteArray();
+            try
+            {
+                var response = Storage.Client.Read(request);
+                return response.Body.ToByteArray();
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
         public void Delete()
         {
@@ -94,7 +108,14 @@ namespace Nitric.Api.Storage
                 BucketName = Bucket.Name,
                 Key = this.Key
             };
-            Storage.Client.Delete(request);
+            try
+            {
+                Storage.Client.Delete(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
         public override string ToString()
         {
