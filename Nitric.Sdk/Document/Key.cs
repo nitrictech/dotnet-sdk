@@ -20,10 +20,10 @@ namespace Nitric.Api.Document
 {
     public class Key<T> where T : IDictionary<string, object>, new()
     {
-        public readonly CollectionRef<T> collection;
+        public readonly AbstractCollection<T> collection;
         public readonly string id;
 
-        public Key(CollectionRef<T> collection, string id = null)
+        public Key(AbstractCollection<T> collection, string id = null)
         {
             if (collection == null)
             {

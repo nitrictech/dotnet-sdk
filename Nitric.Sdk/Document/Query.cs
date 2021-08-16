@@ -17,7 +17,6 @@ using GrpcExpression = Nitric.Proto.Document.v1.Expression;
 using ExpressionValue = Nitric.Proto.Document.v1.ExpressionValue;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using Nitric.Proto.Document.v1;
-using Collection = Nitric.Proto.Document.v1.Collection;
 using Util = Nitric.Api.Common.Util;
 
 namespace Nitric.Api.Document
@@ -25,12 +24,12 @@ namespace Nitric.Api.Document
     public class Query<T> where T : IDictionary<string, object>, new()
     {
         internal DocumentServiceClient documentClient;
-        internal CollectionRef<T> collection;
+        internal AbstractCollection<T> collection;
         internal List<Expression> expressions;
         internal object pagingToken;
         internal int limit;
 
-        internal Query(DocumentServiceClient documentClient, CollectionRef<T> collection)
+        internal Query(DocumentServiceClient documentClient, AbstractCollection<T> collection)
         {
             this.documentClient = documentClient;
             this.collection = collection;

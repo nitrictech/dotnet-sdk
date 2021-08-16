@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using Google.Protobuf;
 using System.Collections.Specialized;
 using System.Linq;
+using Collection = Nitric.Proto.Document.v1.Collection;
 
 namespace Nitric.Api.Common
 {
@@ -80,6 +81,11 @@ namespace Nitric.Api.Common
                 dict.Add(kv);
             }
             return dict;
+        }
+        public static int CollectionDepth(int depth, Collection collection)
+        {
+            return (collection.Parent != null) ?
+                CollectionDepth(depth + 1, collection.Parent.Collection) : depth;
         }
     }
 }

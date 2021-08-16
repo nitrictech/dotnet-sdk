@@ -47,6 +47,24 @@ namespace Nitric.Test.Api.Document
             Assert.Throws<ArgumentNullException>(
                 () => documents.Collection<Dictionary<string, object>>(""));
         }
+        [Fact]
+        public void TestCollectionSubCollectionWithName()
+        {
+            var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
+            var subcollection = collection.Collection("test-subcollection");
+            Assert.NotNull(subcollection);
+            Assert.Equal(collection, subcollection.ParentKey.collection);
+            Assert.Equal("", subcollection.ParentKey.id);
+        }
+        [Fact]
+        public void TestCollectionSubCollectionWithoutName()
+        {
+            var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
+            Assert.Throws<ArgumentNullException>(
+                () => collection.Collection(null));
+            Assert.Throws<ArgumentNullException>(
+                () => collection.Collection(""));
+        }
         /*
          * TESTING DOCS
          */
@@ -347,6 +365,30 @@ namespace Nitric.Test.Api.Document
                     .Doc("test-document-2")
                     .Collection("this-collection-throws-error")
             );
+        }
+        /*
+         * TEST COLLECTION GROUP 
+         */
+        [Fact]
+        public void TestCollectionGroupBuildWithName()
+        {
+            var collection = new Documents()
+                .Collection<Dictionary<string, object>>("test-collection");
+            var collectionGroup = collection.Collection("test-subcollection");
+            Assert.NotNull(collectionGroup);
+            Assert.Equal("test-subcollection", collectionGroup.Name);
+            Assert.Equal("", collectionGroup.ParentKey.id);
+        }
+        [Fact]
+        public void TestCollectionGroupBuildWithoutName()
+        {
+            var collection = new Documents()
+                .Collection<Dictionary<string, object>>("test-collection");
+
+            Assert.Throws<ArgumentNullException>(
+                () => collection.Collection(null));
+            Assert.Throws<ArgumentNullException>(
+                () => collection.Collection(""));
         }
         /*
          * TEST QUERY
@@ -702,6 +744,49 @@ namespace Nitric.Test.Api.Document
             catch (Nitric.Api.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")", ne.Message);
+            }
+
+            dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+        [Fact]
+        public void TestFetchFromSubcollection()
+        {
+            var pagingToken = new Dictionary<string, string>();
+            pagingToken.Add("page-from", "line 10");
+
+            var content = new Struct();
+            content.Fields.Add("test", Value.ForString("document"));
+            var testDocument = new Proto.Document.v1.Document
+            {
+                Content = content,
+            };
+            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document>();
+            documents.Add(testDocument);
+
+            var queryResponse = new DocumentQueryResponse();
+            queryResponse.Documents.Add(documents);
+            queryResponse.PagingToken.Add(pagingToken);
+
+            Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
+            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(queryResponse)
+                .Verifiable();
+
+            var query = new Documents(dc.Object)
+                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection("test-subcollection")
+                .Query();
+
+            try
+            {
+                var response = query.Fetch();
+                Assert.Equal(response.QueryData.Count, 1);
+                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Equal(response.PagingToken, pagingToken);
+            }
+            catch (Exception)
+            {
+                Assert.False(false);
             }
 
             dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
