@@ -21,20 +21,19 @@ using Google.Protobuf.WellKnownTypes;
 using RpcException = Grpc.Core.RpcException;
 using NitricException = Nitric.Api.Common.NitricException;
 
+using Constants = Nitric.Api.Common.Constants;
 namespace Nitric.Api.Document
 {
     public class DocumentRef<T> where T : IDictionary<string, object>, new()
     {
-        const int DEPTH_LIMIT = 1;
-
         private readonly DocumentServiceClient documentClient;
         public readonly Key<T> Key;
-        private readonly CollectionRef<T> collection;
+        private readonly AbstractCollection<T> collection;
 
         protected DocumentRef() { }
         internal DocumentRef(
             DocumentServiceClient documentClient,
-            CollectionRef<T> collection,
+            AbstractCollection<T> collection,
             string documentId)
         {
             this.documentClient = documentClient;
@@ -97,24 +96,32 @@ namespace Nitric.Api.Document
             }
         }
 
-        private int Depth(int depth, Collection collection)
-        {
-            return (collection.Parent != null) ?
-                Depth(depth + 1, collection.Parent.Collection) : depth;
-        }
-
         public CollectionRef<T> Collection(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException("name");
             }
-            if (Depth(0, this.collection.ToGrpcCollection()) >= DEPTH_LIMIT)
+            if (Util.CollectionDepth(0, this.collection.ToGrpcCollection()) >= Constants.DEPTH_LIMIT)
             {
-                throw new NotSupportedException("Currently subcollection are only able to be nested " + DEPTH_LIMIT + "deep");
+                throw new NotSupportedException("Currently subcollection are only able to be nested " + Constants.DEPTH_LIMIT + "deep");
             }
             return new CollectionRef<T>(this.documentClient, name, this.Key);
         }
+
+        public Query<T> Query(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("name");
+            }
+            var collectionGroup = new CollectionGroup<T>(
+                this.documentClient,
+                this.collection.Name,
+                this.Key);
+            return new Query<T>(this.documentClient, collectionGroup);
+        }
+
 
         //Utility function to convert a struct document to its generic counterpart
         protected T DocumentToGeneric(Struct content)

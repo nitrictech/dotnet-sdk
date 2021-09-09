@@ -13,23 +13,16 @@
 // limitations under the License.
 using System;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
-using Collection = Nitric.Proto.Document.v1.Collection;
-using GrpcKey = Nitric.Proto.Document.v1.Key;
+using Util = Nitric.Api.Common.Util;
 using System.Collections.Generic;
+using Constants = Nitric.Api.Common.Constants;
 namespace Nitric.Api.Document
 {
-    public class CollectionRef<T> where T : IDictionary<string, object>, new()
+    public class CollectionRef<T> : AbstractCollection<T> where T : IDictionary<string, object>, new()
     {
-        private string name;
-        public readonly Key<T> ParentKey;
-        private DocumentServiceClient documentClient;
-
         internal CollectionRef(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
-        {
-            this.documentClient = documentClient;
-            this.name = name;
-            this.ParentKey = parentKey;
-        }
+        : base(documentClient, name, parentKey) { }
+
         public DocumentRef<T> Doc(string documentId)
         {
             if (string.IsNullOrEmpty(documentId))
@@ -41,21 +34,21 @@ namespace Nitric.Api.Document
                 this,
                 documentId);
         }
-        public Query<T> Query()
+        public CollectionGroup<T> Collection(string name)
         {
-            return new Query<T>(this.documentClient, this);
-        }
-        internal Collection ToGrpcCollection()
-        {
-            var collection = new Collection()
+            if (string.IsNullOrEmpty(name))
             {
-                Name = this.name,
-            };
-            if (this.ParentKey != null)
-            {
-                collection.Parent = this.ParentKey.ToKey();
+                throw new ArgumentNullException(name);
             }
-            return collection;
+            if (Util.CollectionDepth(0, this.ToGrpcCollection()) >= Constants.DEPTH_LIMIT)
+            {
+                throw new NotSupportedException("Currently subcollection are only able to be nested " + Constants.DEPTH_LIMIT + "deep");
+            }
+            var parentKey = new Key<T>(this, "");
+            return new CollectionGroup<T>(
+                this.documentClient,
+                name,
+                parentKey);
         }
     }
 }
