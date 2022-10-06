@@ -11,9 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+using System.Collections.Generic;
 
 using Nitric.Api.Common;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
+
+using HeaderValue = Nitric.Proto.Faas.v1.HeaderValue;
+using QueryValue = Nitric.Proto.Faas.v1.QueryValue;
 
 namespace Nitric.Faas
 {
@@ -48,11 +52,21 @@ namespace Nitric.Faas
         {
             switch (trigger.ContextCase){
                 case TriggerRequestProto.ContextOneofCase.Http:
+                    var headers = new Dictionary<string, List<string>>();
+                    foreach (KeyValuePair<string, HeaderValue> kv in trigger.Http.Headers) {
+                        headers.Add(kv.Key, new List<string>(kv.Value.Value));
+                    }
+
+                    var queryParams = new Dictionary<string, List<string>>();
+                    foreach (KeyValuePair<string, QueryValue> kv in trigger.Http.QueryParams) {
+                        queryParams.Add(kv.Key, new List<string>(kv.Value.Value));
+                    }
+
                     return new HttpRequestTriggerContext(
                         trigger.Http.Method,
                         trigger.Http.Path,
-                        Util.CollectionToDict(trigger.Http.Headers),
-                        Util.CollectionToDict(trigger.Http.QueryParams)
+                        headers,
+                        queryParams
                     );
                 case TriggerRequestProto.ContextOneofCase.Topic:
                     return new TopicTriggerContext(

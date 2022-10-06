@@ -37,7 +37,7 @@ namespace Nitric.Test.Faas
             Assert.Equal("Hello World", triggerResponse.Data.ToStringUtf8());
             Assert.NotNull(triggerResponse.Http);
             Assert.Equal(200, triggerResponse.Http.Status);
-            Assert.Equal("test", triggerResponse.Http.Headers["x-nitric-testing"]);
+            Assert.Equal("test", triggerResponse.Http.Headers["x-nitric-testing"].Value[0]);
         }
 
         public void TestTopicToGrpc()

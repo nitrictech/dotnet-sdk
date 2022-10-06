@@ -19,13 +19,13 @@ namespace Nitric.Faas
     public class HttpResponseContext : ResponseContext
     {
         private int status = 200;
-        private Dictionary<string, string> headers = new Dictionary<string, string>();
+        private Dictionary<string, List<string>> headers = new Dictionary<string, List<string>>();
 
         public int GetStatus()
         {
             return this.status;
         }
-        public Dictionary<string, string> GetHeaders()
+        public Dictionary<string, List<string>> GetHeaders()
         {
             return this.headers;
         }
@@ -36,10 +36,14 @@ namespace Nitric.Faas
         }
         public HttpResponseContext AddHeader(string key, string value)
         {
-            this.headers.Add(key, value);
+            var arr = this.headers.GetValueOrDefault(key, new List<string>());
+            arr.Add(value);
+
+            this.headers.Add(key, arr);
+
             return this;
         }
-        public HttpResponseContext SetHeaders(Dictionary<string, string> headers)
+        public HttpResponseContext SetHeaders(Dictionary<string, List<string>> headers)
         {
             this.headers = headers;
             return this;

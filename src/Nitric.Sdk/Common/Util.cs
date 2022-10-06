@@ -64,10 +64,10 @@ namespace Nitric.Api.Common
             }
             return dict;
         }
-        public static Dictionary<string, string> CollectionToDict(IDictionary<string, string> dict)
+        public static Dictionary<K, V> CollectionToDict<K, V>(IDictionary<K, V> dict)
         {
-            Dictionary<string, string> newDict = new Dictionary<string, string>();
-            foreach (KeyValuePair<string, string> kv in dict)
+            Dictionary<K, V> newDict = new Dictionary<K, V>();
+            foreach (KeyValuePair<K, V> kv in dict)
             {
                 newDict.Add(kv.Key, kv.Value);
             }

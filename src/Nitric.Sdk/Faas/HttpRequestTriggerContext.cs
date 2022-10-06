@@ -20,14 +20,14 @@ namespace Nitric.Faas
     {
         public string Method { get; private set; }
         public string Path { get; private set; }
-        public Dictionary<string, string> Headers { get; private set; }
-        public Dictionary<string, string> QueryParams { get; private set; }
+        public Dictionary<string, List<string>> Headers { get; private set; }
+        public Dictionary<string, List<string>> QueryParams { get; private set; }
 
         public HttpRequestTriggerContext(
             string method,
             string path,
-            Dictionary<string, string> headers,
-            Dictionary<string, string> queryParams
+            Dictionary<string, List<string>> headers,
+            Dictionary<string, List<string>> queryParams
         )
         {
             this.Method = method;

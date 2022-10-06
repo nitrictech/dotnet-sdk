@@ -13,8 +13,8 @@
 // limitations under the License.
 namespace Nitric.Api.Common
 {
-    public static class Constants
+    internal static class Constants
     {
-        public static int DEPTH_LIMIT => 1;
+        internal static int DEPTH_LIMIT => 1;
     }
 }

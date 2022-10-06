@@ -29,7 +29,9 @@ namespace Nitric.Test.Faas
             triggerRequest.Data = Google.Protobuf.ByteString.CopyFrom(Encoding.UTF8.GetBytes("Hello World"));
             triggerRequest.Http = new HttpTriggerContext();
             triggerRequest.Http.Method = "GET";
-            triggerRequest.Http.Headers.Add("x-nitric-test", "test");
+            var testHeader = new HeaderValue();
+            testHeader.Value.Add("test");
+            triggerRequest.Http.Headers.Add("x-nitric-test", testHeader);
             triggerRequest.MimeType = "text/plain";
             triggerRequest.Http.Path = "/test/";
 
@@ -41,7 +43,7 @@ namespace Nitric.Test.Faas
             Assert.Equal("text/plain", trigger.MimeType);
             Assert.Equal("GET", trigger.Context.AsHttp().Method);
             Assert.Equal("/test/", trigger.Context.AsHttp().Path);
-            Assert.Equal("test", trigger.Context.AsHttp().Headers["x-nitric-test"]);
+            Assert.Equal("test", trigger.Context.AsHttp().Headers["x-nitric-test"][0]);
         }
 
         [Fact]

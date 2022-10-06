@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using TriggerResponse = Nitric.Proto.Faas.v1.TriggerResponse;
 using HttpResponseContextProto = Nitric.Proto.Faas.v1.HttpResponseContext;
 using TopicResponseContextProto = Nitric.Proto.Faas.v1.TopicResponseContext;
+using HeaderValue = Nitric.Proto.Faas.v1.HeaderValue;
 
 namespace Nitric.Faas
 {
@@ -38,9 +39,11 @@ namespace Nitric.Faas
                 var httpCtxBuilder = new HttpResponseContextProto {
                     Status = httpCtx.GetStatus(),
                 };
-                foreach (KeyValuePair<string,string> kv in httpCtx.GetHeaders())
+                foreach (KeyValuePair<string, List<string>> kv in httpCtx.GetHeaders())
                 {
-                    httpCtxBuilder.Headers.Add(kv.Key, kv.Value);
+                    var hv = new HeaderValue();
+                    hv.Value.Add(kv.Value);
+                    httpCtxBuilder.Headers.Add(kv.Key, hv);
                 }
 
                 return new TriggerResponse

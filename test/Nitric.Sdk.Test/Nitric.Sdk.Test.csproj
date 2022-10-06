@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Nitric.Sdk\Nitric.Sdk.csproj" />
+    <ProjectReference Include="..\..\src\Nitric.Sdk\Nitric.Sdk.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Faas\" />
