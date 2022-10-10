@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using Collection = Nitric.Proto.Document.v1.Collection;
 using GrpcKey = Nitric.Proto.Document.v1.Key;
 
-namespace Nitric.Api.Document
+namespace Nitric.Sdk.Document
 {
     public class Key<T> where T : IDictionary<string, object>, new()
     {

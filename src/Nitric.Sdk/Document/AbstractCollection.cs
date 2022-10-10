@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using Collection = Nitric.Proto.Document.v1.Collection;
-namespace Nitric.Api.Document
+namespace Nitric.Sdk.Document
 {
     public class AbstractCollection<T> where T : IDictionary<string, object>, new()
     {

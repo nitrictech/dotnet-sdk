@@ -20,7 +20,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Collection = Nitric.Proto.Document.v1.Collection;
 
-namespace Nitric.Api.Common
+namespace Nitric.Sdk.Common
 {
     public class Util
     {

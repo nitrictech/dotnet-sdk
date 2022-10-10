@@ -13,7 +13,7 @@
 // limitations under the License.
 using System.Collections.Generic;
 
-using Nitric.Api.Common;
+using Nitric.Sdk.Common;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
 
 using HeaderValue = Nitric.Proto.Faas.v1.HeaderValue;

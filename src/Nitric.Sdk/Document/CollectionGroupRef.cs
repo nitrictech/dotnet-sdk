@@ -13,7 +13,7 @@
 // limitations under the License.
 using System.Collections.Generic;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
-namespace Nitric.Api.Document
+namespace Nitric.Sdk.Document
 {
     public class CollectionGroup<T> : AbstractCollection<T> where T : IDictionary<string, object>, new()
     {

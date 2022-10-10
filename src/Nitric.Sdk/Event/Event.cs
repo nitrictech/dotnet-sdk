@@ -13,7 +13,7 @@
 // limitations under the License.
 using System;
 
-namespace Nitric.Api.Event
+namespace Nitric.Sdk.Event
 {
     public class Event
     {

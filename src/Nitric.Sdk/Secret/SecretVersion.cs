@@ -13,7 +13,7 @@
 // limitations under the License.
 using System;
 using Nitric.Proto.Secret.v1;
-namespace Nitric.Api.Secret
+namespace Nitric.Sdk.Secret
 {
     public class SecretVersion
     {

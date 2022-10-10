@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using AbstractClient = Nitric.Api.Common.AbstractClient;
+using AbstractClient = Nitric.Sdk.Common.AbstractClient;
 using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
-namespace Nitric.Api.Secret
+namespace Nitric.Sdk.Secret
 {
     public class Secrets : AbstractClient
     {

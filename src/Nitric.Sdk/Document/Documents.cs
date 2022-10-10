@@ -14,8 +14,8 @@
 using System;
 using System.Collections.Generic;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
-using Nitric.Api.Common;
-namespace Nitric.Api.Document
+using Nitric.Sdk.Common;
+namespace Nitric.Sdk.Document
 {
     public class Documents : AbstractClient
     {

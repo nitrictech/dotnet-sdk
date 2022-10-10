@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using Nitric.Proto.Queue.v1;
 
-namespace Nitric.Api.Queue
+namespace Nitric.Sdk.Queue
 {
     public class Task
     {

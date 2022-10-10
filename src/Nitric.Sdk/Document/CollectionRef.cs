@@ -13,10 +13,11 @@
 // limitations under the License.
 using System;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
-using Util = Nitric.Api.Common.Util;
+using Util = Nitric.Sdk.Common.Util;
 using System.Collections.Generic;
-using Constants = Nitric.Api.Common.Constants;
-namespace Nitric.Api.Document
+using Constants = Nitric.Sdk.Common.Constants;
+
+namespace Nitric.Sdk.Document
 {
     public class CollectionRef<T> : AbstractCollection<T> where T : IDictionary<string, object>, new()
     {

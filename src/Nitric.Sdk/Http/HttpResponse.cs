@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Linq;
-namespace Nitric.Api.Http
+namespace Nitric.Sdk.Http
 {
     public class HttpResponse
     {

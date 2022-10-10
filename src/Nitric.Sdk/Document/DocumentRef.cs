@@ -16,13 +16,13 @@ using System.Collections.Generic;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using GrpcKey = Nitric.Proto.Document.v1.Key;
 using Nitric.Proto.Document.v1;
-using Util = Nitric.Api.Common.Util;
+using Util = Nitric.Sdk.Common.Util;
 using Google.Protobuf.WellKnownTypes;
 using RpcException = Grpc.Core.RpcException;
-using NitricException = Nitric.Api.Common.NitricException;
+using NitricException = Nitric.Sdk.Common.NitricException;
+using Constants = Nitric.Sdk.Common.Constants;
 
-using Constants = Nitric.Api.Common.Constants;
-namespace Nitric.Api.Document
+namespace Nitric.Sdk.Document
 {
     public class DocumentRef<T> where T : IDictionary<string, object>, new()
     {

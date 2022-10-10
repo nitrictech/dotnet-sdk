@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System.Collections.Generic;
-namespace Nitric.Api.Document
+namespace Nitric.Sdk.Document
 {
     public class Document<T> where T : IDictionary<string, object>, new()
     {

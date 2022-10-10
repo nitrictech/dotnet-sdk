@@ -18,7 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Nitric.Api.Http
+namespace Nitric.Sdk.Http
 {
     public class HttpServer
     {
@@ -92,7 +92,7 @@ namespace Nitric.Api.Http
             }
             Listener.Start();
 
-            //Prints out the 
+            //Prints out the
             var builder = new StringBuilder().Append(GetType().Name);
             if (Hostname == DefaultHostName)
             {
@@ -183,7 +183,7 @@ namespace Nitric.Api.Http
 
                 var response = function.Handle(request);
 
-                //Converts the NitricResponse object into a HttpResponse 
+                //Converts the NitricResponse object into a HttpResponse
                 foreach (KeyValuePair<string, List<string>> entry in response.Headers)
                 {
                     ctx.Response.AddHeader(entry.Key, entry.Value.ToString());

@@ -14,7 +14,7 @@
 using System;
 using Grpc.Core;
 
-namespace Nitric.Api.Common
+namespace Nitric.Sdk.Common
 {
     public abstract class AbstractClient
     {

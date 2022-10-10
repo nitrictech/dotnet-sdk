@@ -15,10 +15,10 @@ using System.Collections.Generic;
 using Google.Protobuf.Collections;
 using GrpcClient = Nitric.Proto.Queue.v1.QueueService.QueueServiceClient;
 using Nitric.Proto.Queue.v1;
-using Nitric.Api.Common;
+using Nitric.Sdk.Common;
 using System;
 
-namespace Nitric.Api.Queue
+namespace Nitric.Sdk.Queue
 {
 
     public class Queues : AbstractClient

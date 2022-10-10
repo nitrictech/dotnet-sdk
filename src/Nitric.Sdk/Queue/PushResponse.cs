@@ -13,7 +13,7 @@
 // limitations under the License.
 ﻿using System.Collections.Generic;
 
-namespace Nitric.Api.Queue
+namespace Nitric.Sdk.Queue
 {
     public class PushResponse
     {

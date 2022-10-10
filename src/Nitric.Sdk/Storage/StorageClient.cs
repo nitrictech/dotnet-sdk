@@ -15,9 +15,9 @@ using System;
 using Google.Protobuf;
 using GrpcClient = Nitric.Proto.Storage.v1.StorageService.StorageServiceClient;
 using Nitric.Proto.Storage.v1;
-using Nitric.Api.Common;
+using Nitric.Sdk.Common;
 
-namespace Nitric.Api.Storage
+namespace Nitric.Sdk.Storage
 {
     public class Storage : AbstractClient
     {

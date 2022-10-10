@@ -17,9 +17,9 @@ using GrpcExpression = Nitric.Proto.Document.v1.Expression;
 using ExpressionValue = Nitric.Proto.Document.v1.ExpressionValue;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using Nitric.Proto.Document.v1;
-using Util = Nitric.Api.Common.Util;
+using Util = Nitric.Sdk.Common.Util;
 
-namespace Nitric.Api.Document
+namespace Nitric.Sdk.Document
 {
     public class Query<T> where T : IDictionary<string, object>, new()
     {

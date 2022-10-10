@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System.Text;
-namespace Nitric.Api.Secret
+namespace Nitric.Sdk.Secret
 {
     public class SecretValue
     {

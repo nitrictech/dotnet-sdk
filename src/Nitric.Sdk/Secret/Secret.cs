@@ -15,7 +15,7 @@ using System;
 using System.Text;
 using Nitric.Proto.Secret.v1;
 using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
-namespace Nitric.Api.Secret
+namespace Nitric.Sdk.Secret
 {
     public class Secret
     {

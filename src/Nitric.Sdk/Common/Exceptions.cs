@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using Grpc.Core;
 
-﻿namespace Nitric.Api.Common
+﻿namespace Nitric.Sdk.Common
 {
     public abstract class NitricException : Exception
     {
