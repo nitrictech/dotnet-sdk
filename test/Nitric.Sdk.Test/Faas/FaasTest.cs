@@ -27,7 +27,7 @@ namespace Nitric.Test.Faas
         //[Fact]
         public void TestDoubleStart()
         {
-            Nitric.Faas.Faas faas = Nitric.Faas.Faas.NewBuilder()
+            Sdk.Faas.Faas faas = Sdk.Faas.Faas.NewBuilder()
                 .Function(new HelloWorld())
                 .Build();
             Thread faasThread = new Thread(() => faas.Start());
@@ -37,7 +37,7 @@ namespace Nitric.Test.Faas
         //[Fact]
         public void TestCall()
         {
-            Nitric.Faas.Faas faas = Nitric.Faas.Faas.NewBuilder()
+            Sdk.Faas.Faas faas = Sdk.Faas.Faas.NewBuilder()
                 .Function(new HelloWorld())
                 .Build();
             Thread faasThread = new Thread(() => faas.Start());

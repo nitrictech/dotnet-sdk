@@ -11,18 +11,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
-using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Grpc.Core;
 using Grpc.Net.Client;
-using Util = Nitric.Sdk.Common.Util;
+using Nitric.Faas;
 using Nitric.Proto.Faas.v1;
+using Util = Nitric.Sdk.Common.Util;
 using ProtoClient = Nitric.Proto.Faas.v1.FaasService.FaasServiceClient;
 
-namespace Nitric.Faas
+namespace Nitric.Sdk.Faas
 {
     /**
      * <summary>Contains all the helper functions for Faas</summary>

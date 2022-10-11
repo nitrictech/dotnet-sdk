@@ -11,9 +11,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System.Collections.Generic;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Nitric.Sdk.Common;
+using Nitric.Sdk.Faas;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
 
 using HeaderValue = Nitric.Proto.Faas.v1.HeaderValue;
@@ -21,59 +24,44 @@ using QueryValue = Nitric.Proto.Faas.v1.QueryValue;
 
 namespace Nitric.Faas
 {
-    public abstract class TriggerContext
+    public abstract class AbstractRequest
     {
-        public bool IsHttp()
+        protected byte[] data;
+
+        protected AbstractRequest(byte[] data)
         {
-            return this.GetType() == typeof(HttpRequestTriggerContext);
+            this.data = data;
         }
-        public bool IsTopic()
+
+        public string ToText()
         {
-            return this.GetType() == typeof(TopicTriggerContext);
+            return System.Text.Encoding.UTF8.GetString(this.data, 0, this.data.Length);
         }
-        public HttpRequestTriggerContext AsHttp()
+    }
+    public abstract class TriggerContext<Req, Res> where Req : AbstractRequest
+    {
+        protected Req req;
+        protected Res res;
+
+        /// <summary>
+        /// Create a new trigger context with the provided request and response objects.
+        /// </summary>
+        /// <param name="req">The request object that initiated the trigger</param>
+        /// <param name="res">The response to be returned from processing the trigger</param>
+        protected TriggerContext(Req req, Res res)
         {
-            if (this.IsHttp())
+            this.req = req;
+            this.res = res;
+        }
+
+        public static T FromGrpcTriggerRequest<T>(TriggerRequestProto trigger) where T : TriggerContext<Req, Res>
+        {
+            return trigger.ContextCase switch
             {
-                return this as HttpRequestTriggerContext;
-            }
-            return null;
-        }
-
-        public TopicTriggerContext AsTopic()
-        {
-            if (this.IsTopic())
-            {
-                return this as TopicTriggerContext;
-            }
-            return null;
-        }
-        public static TriggerContext FromGrpcTriggerRequest(TriggerRequestProto trigger)
-        {
-            switch (trigger.ContextCase){
-                case TriggerRequestProto.ContextOneofCase.Http:
-                    var headers = new Dictionary<string, List<string>>();
-                    foreach (KeyValuePair<string, HeaderValue> kv in trigger.Http.Headers) {
-                        headers.Add(kv.Key, new List<string>(kv.Value.Value));
-                    }
-
-                    var queryParams = new Dictionary<string, List<string>>();
-                    foreach (KeyValuePair<string, QueryValue> kv in trigger.Http.QueryParams) {
-                        queryParams.Add(kv.Key, new List<string>(kv.Value.Value));
-                    }
-
-                    return new HttpRequestTriggerContext(
-                        trigger.Http.Method,
-                        trigger.Http.Path,
-                        headers,
-                        queryParams
-                    );
-                case TriggerRequestProto.ContextOneofCase.Topic:
-                    return new TopicTriggerContext(
-                        trigger.Topic.Topic
-                    );
-            }
-            return null;
+                TriggerRequestProto.ContextOneofCase.Http => HttpContext.FromGrpcTriggerRequest(trigger) as T,
+                TriggerRequestProto.ContextOneofCase.Topic => EventContext.FromGrpcTriggerRequest(trigger) as T,
+                _ => throw new Exception("Unsupported trigger request type")
+            };
         }
     }
 }

@@ -15,6 +15,7 @@
 using Xunit;
 using System.Text;
 using Nitric.Faas;
+using Nitric.Sdk.Faas;
 
 namespace Nitric.Test.Faas
 {
@@ -42,7 +43,7 @@ namespace Nitric.Test.Faas
 
         public void TestTopicToGrpc()
         {
-            var ctx = new TopicResponseContext()
+            var ctx = new EventResponse()
                 .SetSuccess(true);
 
             var response = new Response(
