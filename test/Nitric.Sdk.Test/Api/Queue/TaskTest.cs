@@ -23,7 +23,7 @@ namespace Nitric.Test.Api.QueueClient
         {
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
-            var queueItem = new Nitric.Api.Queue.Task
+            var queueItem = new Nitric.Sdk.Queue.Task
                 .Builder()
                 .Id("2")
                 .Payload(payload)

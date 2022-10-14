@@ -17,6 +17,7 @@ using GrpcClient = Nitric.Proto.Queue.v1.QueueService.QueueServiceClient;
 using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common;
 using System;
+using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Queue
 {
@@ -133,7 +134,7 @@ namespace Nitric.Sdk.Queue
             {
                 Id = task.ID,
                 PayloadType = task.PayloadType,
-                Payload = Util.ObjToStruct(task.Payload)
+                Payload = Utils.ObjToStruct(task.Payload)
             };
         }
 

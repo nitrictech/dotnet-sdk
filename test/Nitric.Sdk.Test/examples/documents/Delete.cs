@@ -1,6 +1,6 @@
 // [START import]
 using System.Collections.Generic;
-using Nitric.Api.Document;
+using Nitric.Sdk.Document;
 // [END import]
 namespace Examples
 {

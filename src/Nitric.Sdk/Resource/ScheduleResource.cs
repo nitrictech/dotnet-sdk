@@ -1,5 +1,4 @@
-using Nitric.Faas;
-using Nitric.Sdk.Faas;
+using Nitric.Sdk.Function;
 
 namespace Nitric.Sdk.Resource
 {

@@ -30,7 +30,6 @@
     <Folder Include="Api\Common\" />
     <Folder Include="Api\Storage\" />
     <Folder Include="Api\Queue\" />
-    <Folder Include="Http\" />
     <Folder Include="Api\Document\" />
     <Folder Include="Api\Secret\" />
     <Folder Include="examples\" />

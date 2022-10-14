@@ -14,11 +14,13 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Nitric.Faas;
+using Google.Protobuf;
+using Google.Protobuf.Collections;
+using Nitric.Proto.Faas.v1;
 using Nitric.Sdk.Common;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
 
-namespace Nitric.Sdk.Faas
+namespace Nitric.Sdk.Function
 {
     /// <summary>
     /// Represents a HTTP request.
@@ -29,20 +31,24 @@ namespace Nitric.Sdk.Faas
         /// The HTTP Method that generated this request. E.g. GET, POST, PUT, DELETE.
         /// </summary>
         public string Method { get; private set; }
+
         /// <summary>
         /// The HTTP path requested.
         /// </summary>
         public string Path { get; private set; }
+
         /// <summary>
         /// The auto-extracted path parameter values.
         ///
         /// E.g. for a path "/customers/:id" PathParams would contain an "id" key with the provided id value.
         /// </summary>
         public Dictionary<string, string> PathParams { get; private set; }
+
         /// <summary>
         /// Contains any provided query parameters.
         /// </summary>
         public Dictionary<string, IEnumerable<string>> QueryParams { get; private set; }
+
         /// <summary>
         /// Contains any HTTP headers provided with the request.
         /// </summary>
@@ -82,6 +88,7 @@ namespace Nitric.Sdk.Faas
         /// The HTTP body data to be returned.ß
         /// </summary>
         public byte[] Body { get; set; }
+
         /// <summary>
         /// The HTTP header to be included in the response.
         /// </summary>
@@ -153,6 +160,29 @@ namespace Nitric.Sdk.Faas
                     queryParams, headers),
                 new HttpResponse()
             );
+        }
+
+        /// <summary>
+        /// Create a gRPC trigger response from this context.
+        /// </summary>
+        /// <returns></returns>
+        public override TriggerResponse ToGrpcTriggerContext()
+        {
+            var responseHeaders = new MapField<string, HeaderValue>
+            {
+                this.res.headers.ToDictionary(h => h.Key, h =>
+                {
+                    var hv = new HeaderValue();
+                    hv.Value.Add(h.Value);
+                    return hv;
+                })
+            };
+            var triggerResponse = new TriggerResponse
+                { Http = new HttpResponseContext { Status = this.res.Status } };
+            triggerResponse.Http.Headers.Add(responseHeaders);
+            triggerResponse.Data = ByteString.CopyFrom(this.res.Body);
+
+            return triggerResponse;
         }
     }
 }

@@ -13,7 +13,7 @@
 // limitations under the License.
 using System.Linq;
 using System.Collections.Generic;
-using Nitric.Api.Document;
+using Nitric.Sdk.Document;
 using Xunit;
 using Google.Protobuf.WellKnownTypes;
 namespace Nitric.Test.Api.Document

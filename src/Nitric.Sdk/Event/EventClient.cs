@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using Nitric.Sdk.Common;
 using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using Nitric.Proto.Event.v1;
+using Nitric.Sdk.Common.Util;
 using GrpcClient = Nitric.Proto.Event.v1.EventService.EventServiceClient;
 using TopicClient = Nitric.Proto.Event.v1.TopicService.TopicServiceClient;
 
@@ -72,7 +73,7 @@ namespace Nitric.Sdk.Event
         }
         public string Publish(Event evt)
         {
-            var payloadStruct = Util.ObjToStruct(evt.Payload);
+            var payloadStruct = Utils.ObjToStruct(evt.Payload);
             var nEvt = new NitricEvent { Id = evt.Id, PayloadType = evt.PayloadType, Payload = payloadStruct };
             var request = new EventPublishRequest { Topic = this.Name, Event = nEvt };
 

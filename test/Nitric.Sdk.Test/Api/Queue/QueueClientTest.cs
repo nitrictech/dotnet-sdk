@@ -18,8 +18,9 @@ using Google.Protobuf.Collections;
 using System.Collections.Generic;
 using Moq;
 using Google.Protobuf.WellKnownTypes;
-using Nitric.Api.Queue;
+using Nitric.Sdk.Queue;
 using Grpc.Core;
+using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Test.Api.QueueClient
 {
@@ -62,7 +63,7 @@ namespace Nitric.Test.Api.QueueClient
             {
                 queue.Send(new Task.Builder().Build());
             }
-            catch (Nitric.Api.Common.NitricException ne)
+            catch (Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified queue does not exist\")", ne.Message);
             }
@@ -76,7 +77,7 @@ namespace Nitric.Test.Api.QueueClient
             NitricTask failedTaskTask = new NitricTask();
             failedTaskTask.Id = "0";
             failedTaskTask.LeaseId = "1";
-            failedTaskTask.Payload = Nitric.Api.Common.Util.ObjToStruct(new Dictionary<string, string>());
+            failedTaskTask.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
             failedTaskTask.PayloadType = "Dictionary";
 
             Proto.Queue.v1.FailedTask failedTask = new Proto.Queue.v1.FailedTask();
@@ -124,7 +125,7 @@ namespace Nitric.Test.Api.QueueClient
             NitricTask taskToReturn = new NitricTask();
             taskToReturn.Id = "32";
             taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = Nitric.Api.Common.Util.ObjToStruct(new Dictionary<string, string>());
+            taskToReturn.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
             taskToReturn.PayloadType = "Dictionary";
 
             RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();
@@ -193,7 +194,7 @@ namespace Nitric.Test.Api.QueueClient
             NitricTask taskToReturn = new NitricTask();
             taskToReturn.Id = "32";
             taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = Nitric.Api.Common.Util.ObjToStruct(new Dictionary<string, string>());
+            taskToReturn.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
             taskToReturn.PayloadType = "Dictionary";
 
             RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();

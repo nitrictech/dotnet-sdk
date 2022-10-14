@@ -15,7 +15,7 @@ using System;
 using System.Text;
 using Xunit;
 using Moq;
-using Nitric.Api.Secret;
+using Nitric.Sdk.Secret;
 using Nitric.Proto.Secret.v1;
 using Grpc.Core;
 namespace Nitric.Test.Api.Secret
@@ -151,7 +151,7 @@ namespace Nitric.Test.Api.Secret
             {
                 var response = secret.Put(testString);
             }
-            catch (Nitric.Api.Common.NitricException ne)
+            catch (Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified secret does not exist\")", ne.Message);
             }
@@ -190,7 +190,7 @@ namespace Nitric.Test.Api.Secret
             {
                 var response = secret.Version("test-secret").Access();
             }
-            catch (Nitric.Api.Common.NitricException ne)
+            catch (Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to access this secret\")", ne.Message);
             }

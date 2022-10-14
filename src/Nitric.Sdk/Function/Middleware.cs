@@ -1,10 +1,10 @@
-namespace Nitric.Sdk.Faas
+namespace Nitric.Sdk.Function
 {
     /// <summary>
     /// Represents a chainable handler for incoming requests. Useful for decorating existing handlers.
     /// </summary>
-    /// <typeparam name="Ctx">The request context.</typeparam>
-    public interface IMiddleware<Ctx>
+    /// <typeparam name="TCtx">The request context.</typeparam>
+    public interface IMiddleware<TCtx>
     {
         /// <summary>
         /// Invoke the middleware to process the provided context object.
@@ -12,6 +12,6 @@ namespace Nitric.Sdk.Faas
         /// <param name="ctx">the context to process</param>
         /// <param name="next">any future middleware or handlers to call next.</param>
         /// <returns></returns>
-        public Ctx Invoke(Ctx ctx, IHandler<Ctx> next);
+        public TCtx Invoke(TCtx ctx, IHandler<TCtx> next);
     }
 }

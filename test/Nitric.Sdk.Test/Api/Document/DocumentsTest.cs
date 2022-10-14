@@ -13,7 +13,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-using Nitric.Api.Document;
+using Nitric.Sdk.Document;
 using Nitric.Proto.Document.v1;
 using Xunit;
 using Moq;
@@ -178,7 +178,7 @@ namespace Nitric.Test.Api.Document
             {
                 var response = documentRef.Get();
             }
-            catch (Nitric.Api.Common.NitricException ne)
+            catch (Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")", ne.Message);
             }
@@ -301,7 +301,7 @@ namespace Nitric.Test.Api.Document
             {
                 documentRef.Set(document);
             }
-            catch (Nitric.Api.Common.NitricException ne)
+            catch (Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to modify this document\")", ne.Message);
             }
@@ -367,7 +367,7 @@ namespace Nitric.Test.Api.Document
             );
         }
         /*
-         * TEST COLLECTION GROUP 
+         * TEST COLLECTION GROUP
          */
         [Fact]
         public void TestCollectionGroupBuildWithName()
@@ -741,7 +741,7 @@ namespace Nitric.Test.Api.Document
             {
                 var response = query.Fetch();
             }
-            catch (Nitric.Api.Common.NitricException ne)
+            catch (Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")", ne.Message);
             }

@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using Nitric.Proto.Queue.v1;
+using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Queue
 {
@@ -53,7 +54,7 @@ namespace Nitric.Sdk.Queue
             {
                 this.id = "";
                 this.payloadType = "";
-                this.payload = Common.Util.ObjToStruct(new Dictionary<string, string>());
+                this.payload = Utils.ObjToStruct(new Dictionary<string, string>());
             }
             public Builder Id(string id)
             {

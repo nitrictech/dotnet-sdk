@@ -11,10 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System;
+
 using System.Collections.Generic;
 using Xunit;
 using Google.Protobuf.WellKnownTypes;
+using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Test.Api.QueueClient
 {
@@ -23,10 +24,10 @@ namespace Nitric.Test.Api.QueueClient
         [Fact]
         public void TestBuild()
         {
-            Dictionary<string, string> payload = new Dictionary<string, string>();
+            var payload = new Dictionary<string, string>();
             payload.Add("name", "value");
-            Struct payloadStruct = Nitric.Api.Common.Util.ObjToStruct(payload);
-            var failedTask = Nitric.Api.Queue.FailedTask
+            var payloadStruct = Utils.ObjToStruct(payload);
+            var failedTask = Nitric.Sdk.Queue.FailedTask
                 .NewBuilder()
                 .Id("1")
                 .PayloadType("payload type")

@@ -16,7 +16,7 @@ using Grpc.Core;
 using Xunit;
 using Moq;
 using Nitric.Proto.Storage.v1;
-using Storage = Nitric.Api.Storage.Storage;
+using Storage = Nitric.Sdk.Storage.Storage;
 
 namespace Nitric.Test.Api.StorageClient
 {
@@ -60,7 +60,7 @@ namespace Nitric.Test.Api.StorageClient
             Assert.Throws<ArgumentNullException>(
                 () => new Storage().Bucket("test-bucket").File(null)
             );
-        } 
+        }
         [Fact]
         public void TestWrite()
         {
@@ -117,7 +117,7 @@ namespace Nitric.Test.Api.StorageClient
                 file.Read();
                 Assert.True(false);
             }
-            catch (Nitric.Api.Common.NitricException ne)
+            catch (Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", ne.Message);
             }

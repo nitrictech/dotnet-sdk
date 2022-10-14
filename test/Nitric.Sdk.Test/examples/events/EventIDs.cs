@@ -1,6 +1,6 @@
 // [START import]
 using System.Collections.Generic;
-using Nitric.Api.Event;
+using Nitric.Sdk.Event;
 // [END import]
 
 namespace Examples

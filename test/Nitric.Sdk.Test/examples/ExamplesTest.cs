@@ -11,6 +11,7 @@ using Xunit;
 using System.Collections.Generic;
 using Google.Protobuf.Collections;
 using System;
+using Nitric.Sdk.Common.Util;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
@@ -135,7 +136,7 @@ namespace Nitric.Test.Examples
             NitricTask taskToReturn = new NitricTask();
             taskToReturn.Id = "32";
             taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = Nitric.Api.Common.Util.ObjToStruct(new Dictionary<string, string>());
+            taskToReturn.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
             taskToReturn.PayloadType = "Dictionary";
 
             RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();

@@ -143,7 +143,7 @@ namespace Nitric.Sdk.Document
             var collection = this.query.collection.ToGrpcCollection();
             foreach (var doc in response.Documents)
             {
-                var dict = Util.ObjToDict(doc.Content);
+                var dict = Util.Utils.ObjToDict(doc.Content);
 
                 if (typeof(T).IsAssignableFrom(dict.GetType()))
                 {
@@ -153,7 +153,7 @@ namespace Nitric.Sdk.Document
                             this.query.collection,
                             this.query.collection.ParentKey.id
                         ),
-                        (T)Util.DictToCollection<T>(dict))
+                        (T)Util.Utils.DictToCollection<T>(dict))
                     );
                 }
                 else
@@ -164,11 +164,11 @@ namespace Nitric.Sdk.Document
                             this.query.collection,
                             this.query.collection.ParentKey.id
                         ),
-                        (T)Util.DictToCollection<T>(Util.ObjToDict(dict)))
+                        (T)Util.Utils.DictToCollection<T>(Util.Utils.ObjToDict(dict)))
                     );
                 }
             }
-            this.PagingToken = Util.CollectionToDict(response.PagingToken);
+            this.PagingToken = Util.Utils.CollectionToDict(response.PagingToken);
         }
     }
     class Expression

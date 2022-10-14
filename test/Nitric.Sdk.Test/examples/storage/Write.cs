@@ -1,6 +1,6 @@
 // [START import]
 using System.Text;
-using Nitric.Api.Storage;
+using Nitric.Sdk.Storage;
 // [END import]
 
 namespace Examples

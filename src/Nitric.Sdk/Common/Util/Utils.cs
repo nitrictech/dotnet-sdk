@@ -11,28 +11,23 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System;
-using Struct = Google.Protobuf.WellKnownTypes.Struct;
+
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using Google.Protobuf;
 using System.Collections.Specialized;
 using System.Linq;
+using Google.Protobuf;
+using Newtonsoft.Json;
+using Struct = Google.Protobuf.WellKnownTypes.Struct;
 using Collection = Nitric.Proto.Document.v1.Collection;
 
-namespace Nitric.Sdk.Common
+namespace Nitric.Sdk.Common.Util
 {
-    public class Util
+    public static class Utils
     {
         public static Struct ObjToStruct(object obj)
         {
             string json = ObjToJson(obj);
             return JsonParser.Default.Parse<Struct>(json);
-        }
-        public static string GetEnvVar(string variable, string defaultValue = "")
-        {
-            var envVar = Environment.GetEnvironmentVariable(variable);
-            return string.IsNullOrEmpty(envVar) ? defaultValue : envVar;
         }
 
         public static string ObjToJson(object obj)

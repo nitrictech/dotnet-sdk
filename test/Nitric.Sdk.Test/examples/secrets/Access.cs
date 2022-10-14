@@ -1,5 +1,5 @@
 // [START import]
-using Nitric.Api.Secret;
+using Nitric.Sdk.Secret;
 // [END import]
 namespace Examples
 {

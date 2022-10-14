@@ -68,7 +68,7 @@ namespace Nitric.Sdk.Document
             var request = new DocumentSetRequest
             {
                 Key = this.Key.ToKey(),
-                Content = Util.ObjToStruct(value),
+                Content =  Util.Utils.ObjToStruct(value),
             };
             try
             {
@@ -102,7 +102,7 @@ namespace Nitric.Sdk.Document
             {
                 throw new ArgumentNullException("name");
             }
-            if (Util.CollectionDepth(0, this.collection.ToGrpcCollection()) >= Constants.DEPTH_LIMIT)
+            if (Util.Utils.CollectionDepth(0, this.collection.ToGrpcCollection()) >= Constants.DEPTH_LIMIT)
             {
                 throw new NotSupportedException("Currently subcollection are only able to be nested " + Constants.DEPTH_LIMIT + "deep");
             }

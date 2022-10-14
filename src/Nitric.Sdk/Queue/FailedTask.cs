@@ -13,6 +13,8 @@
 // limitations under the License.
 ﻿using Google.Protobuf.WellKnownTypes;
 using System.Collections.Generic;
+ using Nitric.Sdk.Common.Util;
+
 namespace Nitric.Sdk.Queue
 {
     public class FailedTask
@@ -52,7 +54,7 @@ namespace Nitric.Sdk.Queue
             {
                 this.ID = null;
                 this.payloadType = null;
-                this.payload = Common.Util.ObjToStruct(new Dictionary<string, string>());
+                this.payload = Utils.ObjToStruct(new Dictionary<string, string>());
                 this.message = null;
             }
             public Builder Id(string Id)

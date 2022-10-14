@@ -11,8 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-﻿using System;
+
 using System.Collections.Generic;
+using Nitric.Sdk.Common.Util;
 using Xunit;
 
 namespace Nitric.Test.Api.EventClient
@@ -25,16 +26,16 @@ namespace Nitric.Test.Api.EventClient
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
 
-            var eventTest = Nitric.Api.Event.Event.NewBuilder()
+            var eventTest = Nitric.Sdk.Event.Event.NewBuilder()
                 .Id("id")
                 .PayloadType("payloadType")
-                .Payload(Nitric.Api.Common.Util.ObjToStruct(payload))
+                .Payload(Utils.ObjToStruct(payload))
                 .Build();
 
             Assert.NotNull(eventTest);
             Assert.Equal("id", eventTest.Id);
             Assert.Equal("payloadType", eventTest.PayloadType);
-            Assert.Equal(Nitric.Api.Common.Util.ObjToStruct(payload), eventTest.Payload);
+            Assert.Equal(Utils.ObjToStruct(payload), eventTest.Payload);
         }
         [Fact]
         public void TestToString()
@@ -42,10 +43,10 @@ namespace Nitric.Test.Api.EventClient
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
 
-            var eventTest = Nitric.Api.Event.Event.NewBuilder()
+            var eventTest = Nitric.Sdk.Event.Event.NewBuilder()
                 .Id("id")
                 .PayloadType("payloadType")
-                .Payload(Nitric.Api.Common.Util.ObjToStruct(payload))
+                .Payload(Utils.ObjToStruct(payload))
                 .Build();
             Assert.Equal("Event[id=id, payloadType=payloadType, payload={ \"name\": \"value\" }]", eventTest.ToString());
         }

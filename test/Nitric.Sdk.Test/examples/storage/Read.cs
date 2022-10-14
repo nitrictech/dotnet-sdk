@@ -1,5 +1,5 @@
 // [START import]
-using Nitric.Api.Storage;
+using Nitric.Sdk.Storage;
 // [END import]
 
 namespace Examples

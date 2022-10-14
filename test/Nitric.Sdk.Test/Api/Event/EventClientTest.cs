@@ -13,12 +13,12 @@
 // limitations under the License.
 using System;
 using Xunit;
-using Nitric.Api.Event;
-using EventModel = Nitric.Api.Event.Event;
+using Nitric.Sdk.Event;
+using EventModel = Nitric.Sdk.Event.Event;
 using System.Collections.Generic;
 using Nitric.Proto.Event.v1;
 using Moq;
-using Util = Nitric.Api.Common.Util;
+using Util = Nitric.Sdk.Common.Util;
 using Grpc.Core;
 
 namespace Nitric.Test.Api.EventClient
@@ -51,7 +51,7 @@ namespace Nitric.Test.Api.EventClient
         [Fact]
         public void TestPublish()
         {
-            var payloadStruct = Util.ObjToStruct(new Dictionary<string,string>());
+            var payloadStruct = Util.Utils.ObjToStruct(new Dictionary<string,string>());
             var evt = new NitricEvent { Id = "1", PayloadType = "payloadType", Payload = payloadStruct };
             var request = new EventPublishRequest { Topic = "test-topic", Event = evt };
 
@@ -96,7 +96,7 @@ namespace Nitric.Test.Api.EventClient
             {
                 var response = topic.Publish(evtToSend);
             }
-            catch (Nitric.Api.Common.NitricException ne)
+            catch (Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified topic does not exist\")", ne.Message);
             }

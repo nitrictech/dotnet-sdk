@@ -1,5 +1,5 @@
 // [START import]
-using Nitric.Api.Queue;
+using Nitric.Sdk.Queue;
 // [END import]
 
 namespace Examples
