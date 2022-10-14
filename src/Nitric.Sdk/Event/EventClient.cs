@@ -22,15 +22,15 @@ using TopicClient = Nitric.Proto.Event.v1.TopicService.TopicServiceClient;
 
 namespace Nitric.Sdk.Event
 {
-    public class Events : AbstractClient
+    public class Events
     {
         internal GrpcClient EventClient;
         internal TopicClient TopicClient;
 
         public Events(GrpcClient client = null, TopicClient topic = null)
         {
-            this.EventClient = (client == null) ? new GrpcClient(this.GetChannel()) : client;
-            this.TopicClient = (topic == null) ? new TopicClient(this.GetChannel()) : topic;
+            this.EventClient = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
+            this.TopicClient = topic ?? new TopicClient(GrpcChannelProvider.GetChannel());
         }
 
         public Topic Topic(string topicName)
@@ -61,7 +61,7 @@ namespace Nitric.Sdk.Event
             }
         }
     }
-    public class Topic : AbstractClient
+    public class Topic
     {
         internal Events Events;
         public string Name { get; private set; }

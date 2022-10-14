@@ -13,6 +13,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GrpcExpression = Nitric.Proto.Document.v1.Expression;
 using ExpressionValue = Nitric.Proto.Document.v1.ExpressionValue;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
@@ -153,7 +154,7 @@ namespace Nitric.Sdk.Document
                             this.query.collection,
                             this.query.collection.ParentKey.id
                         ),
-                        (T)Util.Utils.DictToCollection<T>(dict))
+                        (T)dict)
                     );
                 }
                 else
@@ -164,11 +165,11 @@ namespace Nitric.Sdk.Document
                             this.query.collection,
                             this.query.collection.ParentKey.id
                         ),
-                        (T)Util.Utils.DictToCollection<T>(Util.Utils.ObjToDict(dict)))
-                    );
+                        (T)Util.Utils.ObjToDict(dict)
+                    ));
                 }
             }
-            this.PagingToken = Util.Utils.CollectionToDict(response.PagingToken);
+            this.PagingToken = response.PagingToken.Clone();
         }
     }
     class Expression

@@ -100,11 +100,11 @@ namespace Nitric.Sdk.Document
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
-            if (Util.Utils.CollectionDepth(0, this.collection.ToGrpcCollection()) >= Constants.DEPTH_LIMIT)
+            if (Util.Utils.CollectionDepth(this.collection.ToGrpcCollection()) >= Constants.DepthLimit)
             {
-                throw new NotSupportedException("Currently subcollection are only able to be nested " + Constants.DEPTH_LIMIT + "deep");
+                throw new NotSupportedException("Currently sub-collection are only able to be nested " + Constants.DepthLimit + "deep");
             }
             return new CollectionRef<T>(this.documentClient, name, this.Key);
         }

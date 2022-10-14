@@ -27,7 +27,6 @@
     <Folder Include="Faas\" />
     <Folder Include="Api\" />
     <Folder Include="Api\Event\" />
-    <Folder Include="Api\Common\" />
     <Folder Include="Api\Storage\" />
     <Folder Include="Api\Queue\" />
     <Folder Include="Api\Document\" />

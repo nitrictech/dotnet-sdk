@@ -15,14 +15,16 @@ using System;
 using System.Collections.Generic;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using Nitric.Sdk.Common;
+using Nitric.Sdk.Common.Util;
+
 namespace Nitric.Sdk.Document
 {
-    public class Documents : AbstractClient
+    public class Documents
     {
         private DocumentServiceClient documentClient;
         public Documents(DocumentServiceClient client = null)
         {
-            this.documentClient = (client != null) ? client : new DocumentServiceClient(this.GetChannel());
+            this.documentClient = (client != null) ? client : new DocumentServiceClient(GrpcChannelProvider.GetChannel());
         }
 
         public CollectionRef<T> Collection<T>(string name) where T : IDictionary<string, object>, new()

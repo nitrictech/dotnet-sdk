@@ -15,8 +15,11 @@ using System;
 using System.Collections.Generic;
 using Grpc.Core;
 
-﻿namespace Nitric.Sdk.Common
+namespace Nitric.Sdk.Common
 {
+    /// <summary>
+    /// Standard Nitric Exceptions
+    /// </summary>
     public abstract class NitricException : Exception
     {
         private static readonly Dictionary<StatusCode, Func<string, NitricException>> Exceptions = new Dictionary<StatusCode, Func<string, NitricException>>

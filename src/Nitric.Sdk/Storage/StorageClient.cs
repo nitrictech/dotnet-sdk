@@ -16,16 +16,17 @@ using Google.Protobuf;
 using GrpcClient = Nitric.Proto.Storage.v1.StorageService.StorageServiceClient;
 using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Common;
+using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Storage
 {
-    public class Storage : AbstractClient
+    public class Storage
     {
         internal GrpcClient Client;
 
         public Storage(GrpcClient client = null)
         {
-            this.Client = (client == null) ? new GrpcClient(GetChannel()) : client;
+            this.Client = (client == null) ? new GrpcClient(GrpcChannelProvider.GetChannel()) : client;
         }
         public Bucket Bucket(string bucketName)
         {

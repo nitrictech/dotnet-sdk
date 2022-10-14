@@ -20,8 +20,8 @@ namespace Nitric.Test.Examples
     [Collection("Examples")]
     public class DocumentsExamplesTest : IDisposable
     {
-        Server server = null;
-        Mock<DocumentService.DocumentServiceBase> mockServer = null;
+        private readonly Server server = null;
+        private readonly Mock<DocumentService.DocumentServiceBase> mockServer = null;
 
         public DocumentsExamplesTest()
         {
@@ -90,8 +90,8 @@ namespace Nitric.Test.Examples
     [Collection("Examples")]
     public class EventsExamplesTest : IDisposable
     {
-        Server server = null;
-        Mock<EventService.EventServiceBase> mockServer = null;
+        private Server server;
+        private Mock<EventService.EventServiceBase> mockServer;
         public EventsExamplesTest()
         {
             //Setup a mock server for the snippets to hit
@@ -128,22 +128,23 @@ namespace Nitric.Test.Examples
     [Collection("Examples")]
     public class QueuesExamplesTest : IDisposable
     {
-        Server server = null;
-        Mock<QueueService.QueueServiceBase> mockServer = null;
+        private readonly Server server = null;
+        private readonly Mock<QueueService.QueueServiceBase> mockServer = null;
 
         public QueuesExamplesTest()
         {
-            NitricTask taskToReturn = new NitricTask();
-            taskToReturn.Id = "32";
-            taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
-            taskToReturn.PayloadType = "Dictionary";
+            var taskToReturn = new NitricTask
+            {
+                Id = "32",
+                LeaseId = "1",
+                Payload = Utils.ObjToStruct(new Dictionary<string, string>()),
+                PayloadType = "Dictionary"
+            };
 
-            RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();
-            tasks.Add(taskToReturn);
+            var tasks = new RepeatedField<NitricTask> { taskToReturn };
 
-            var queueReceieveResponse = new QueueReceiveResponse();
-            queueReceieveResponse.Tasks.AddRange(tasks);
+            var queueReceiveResponse = new QueueReceiveResponse();
+            queueReceiveResponse.Tasks.AddRange(tasks);
 
             //Setup a mock server for the snippets to hit
             mockServer = new Mock<QueueService.QueueServiceBase>();
@@ -151,7 +152,7 @@ namespace Nitric.Test.Examples
                 .ReturnsAsync(new QueueSendResponse())
                 .Verifiable();
             mockServer.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), It.IsAny<ServerCallContext>()))
-                .ReturnsAsync(queueReceieveResponse)
+                .ReturnsAsync(queueReceiveResponse)
                 .Verifiable();
             mockServer.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), It.IsAny<ServerCallContext>()))
                 .ReturnsAsync(new QueueCompleteResponse())

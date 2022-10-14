@@ -15,6 +15,6 @@ namespace Nitric.Sdk.Common
 {
     internal static class Constants
     {
-        internal static int DEPTH_LIMIT => 1;
+        internal static int DepthLimit => 1;
     }
 }

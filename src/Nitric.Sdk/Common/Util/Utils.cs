@@ -13,8 +13,7 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
+using System.Text;
 using Google.Protobuf;
 using Newtonsoft.Json;
 using Struct = Google.Protobuf.WellKnownTypes.Struct;
@@ -22,65 +21,64 @@ using Collection = Nitric.Proto.Document.v1.Collection;
 
 namespace Nitric.Sdk.Common.Util
 {
+    /// <summary>
+    /// Common internal utility functions
+    /// </summary>
     public static class Utils
     {
+        /// <summary>
+        /// Convert an object to a protobuf struct
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static Struct ObjToStruct(object obj)
         {
             string json = ObjToJson(obj);
             return JsonParser.Default.Parse<Struct>(json);
         }
 
-        public static string ObjToJson(object obj)
+        private static string ObjToJson(object obj)
         {
             return JsonConvert.SerializeObject(obj);
         }
 
-        public static object JsonToObj(string json)
+        private static T JsonToObj<T>(string json)
         {
-            return JsonConvert.DeserializeObject(json);
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
-        public static object JsonToObj(byte[] json)
+        /// <summary>
+        /// Deserialize a UTF-8 JSON string to an object.
+        /// </summary>
+        /// <param name="json">byte array containing UTF-8 JSON data</param>
+        /// <returns>Deserialized object</returns>
+        public static T JsonToObj<T>(byte[] json)
         {
-            return JsonConvert.DeserializeObject(json.ToString());
+            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(json));
         }
 
-        public static Dictionary<string, object> ObjToDict(object obj)
+        /// <summary>
+        /// Convert an object to JSON compatible dictionary
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static IDictionary<string, object> ObjToDict(object obj)
         {
-            return (Dictionary<string, object>)JsonToObj(ObjToJson(obj));
+            return JsonToObj<Dictionary<string, object>>(ObjToJson(obj));
         }
 
-        public static Dictionary<string, List<string>> NameValueCollecToDict(NameValueCollection col)
+        /// <summary>
+        /// Determines the depth of the provided collection.
+        ///
+        /// If the collection has no parent collections the depth will be 1.
+        ///     The depth is increased by 1 for each parent.
+        /// </summary>
+        /// <param name="collection">the collection to check for depth</param>
+        /// <returns>the determined depth</returns>
+        public static int CollectionDepth(Collection collection)
         {
-            Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
-            foreach (var k in col.AllKeys)
-            {
-                dict.Add(k, col[k].Split(',').ToList());
-            }
-            return dict;
-        }
-        public static Dictionary<K, V> CollectionToDict<K, V>(IDictionary<K, V> dict)
-        {
-            Dictionary<K, V> newDict = new Dictionary<K, V>();
-            foreach (KeyValuePair<K, V> kv in dict)
-            {
-                newDict.Add(kv.Key, kv.Value);
-            }
-            return newDict;
-        }
-        public static IDictionary<string, object> DictToCollection<T>(Dictionary<string, object> dictionary) where T : IDictionary<string, object>, new()
-        {
-            IDictionary<string, object> dict = new T();
-            foreach (KeyValuePair<string, object> kv in dictionary)
-            {
-                dict.Add(kv);
-            }
-            return dict;
-        }
-        public static int CollectionDepth(int depth, Collection collection)
-        {
-            return (collection.Parent != null) ?
-                CollectionDepth(depth + 1, collection.Parent.Collection) : depth;
+            var parentDepth = (collection.Parent != null) ? CollectionDepth(collection.Parent.Collection) : 0;
+            return 1 + parentDepth;
         }
     }
 }

@@ -20,6 +20,7 @@ using Nitric.Proto.Event.v1;
 using Moq;
 using Util = Nitric.Sdk.Common.Util;
 using Grpc.Core;
+using static Nitric.Sdk.Common.Util.Utils;
 
 namespace Nitric.Test.Api.EventClient
 {
@@ -51,7 +52,7 @@ namespace Nitric.Test.Api.EventClient
         [Fact]
         public void TestPublish()
         {
-            var payloadStruct = Util.Utils.ObjToStruct(new Dictionary<string,string>());
+            var payloadStruct = ObjToStruct(new Dictionary<string,string>());
             var evt = new NitricEvent { Id = "1", PayloadType = "payloadType", Payload = payloadStruct };
             var request = new EventPublishRequest { Topic = "test-topic", Event = evt };
 

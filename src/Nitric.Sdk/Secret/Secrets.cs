@@ -12,16 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using AbstractClient = Nitric.Sdk.Common.AbstractClient;
+using Nitric.Sdk.Common.Util;
 using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
 namespace Nitric.Sdk.Secret
 {
-    public class Secrets : AbstractClient
+    public class Secrets
     {
         private GrpcClient secretServiceClient;
         public Secrets(GrpcClient client = null)
         {
-            this.secretServiceClient = (client != null) ? client : new GrpcClient(this.GetChannel());
+            this.secretServiceClient = (client != null) ? client : new GrpcClient(GrpcChannelProvider.GetChannel());
         }
         public Secret Secret(string name)
         {

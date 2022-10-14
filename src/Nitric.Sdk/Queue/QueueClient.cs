@@ -22,12 +22,12 @@ using Nitric.Sdk.Common.Util;
 namespace Nitric.Sdk.Queue
 {
 
-    public class Queues : AbstractClient
+    public class Queues
     {
         internal GrpcClient Client { get; private set; }
         public Queues(GrpcClient client = null)
         {
-            this.Client = (client == null) ? new GrpcClient(this.GetChannel()) : client;
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
         public Queue Queue(string queueName)
         {
