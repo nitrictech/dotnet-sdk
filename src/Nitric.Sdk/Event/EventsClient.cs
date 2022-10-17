@@ -11,8 +11,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Nitric.Sdk.Common;
 using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using Nitric.Proto.Event.v1;
@@ -22,65 +24,54 @@ using TopicClient = Nitric.Proto.Event.v1.TopicService.TopicServiceClient;
 
 namespace Nitric.Sdk.Event
 {
-    public class Events
+    /// <summary>
+    /// Events service client.
+    /// </summary>
+    public class EventsClient
     {
-        internal GrpcClient EventClient;
-        internal TopicClient TopicClient;
+        internal readonly GrpcClient EventClient;
+        private readonly TopicClient topicClient;
 
-        public Events(GrpcClient client = null, TopicClient topic = null)
+        /// <summary>
+        /// Create a new events service client.
+        /// </summary>
+        /// <param name="client">The events gRPC client.</param>
+        /// <param name="topic">The topics gRPC client.</param>
+        public EventsClient(GrpcClient client = null, TopicClient topic = null)
         {
             this.EventClient = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
-            this.TopicClient = topic ?? new TopicClient(GrpcChannelProvider.GetChannel());
+            this.topicClient = topic ?? new TopicClient(GrpcChannelProvider.GetChannel());
         }
 
+        /// <summary>
+        /// Create a reference to a topic.
+        /// </summary>
+        /// <param name="topicName">The name of the topic.</param>
+        /// <returns>The topic reference.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public Topic Topic(string topicName)
         {
             if (string.IsNullOrEmpty(topicName))
             {
-                throw new ArgumentNullException("topicName");
+                throw new ArgumentNullException(nameof(topicName));
             }
+
             return new Topic(this, topicName);
         }
+
+        /// <summary>
+        /// Return a list of all accessible topics.
+        /// </summary>
+        /// <returns>A list of accessible topics.</returns>
+        /// <exception cref="NitricException"></exception>
         public List<Topic> List()
         {
             var request = new TopicListRequest { };
 
             try
             {
-                var response = TopicClient.List(request);
-                List<Topic> topics = new List<Topic>();
-                foreach (NitricTopic topic in response.Topics)
-                {
-                    topics.Add(new Topic(this, topic.Name));
-                }
-                return topics;
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-    }
-    public class Topic
-    {
-        internal Events Events;
-        public string Name { get; private set; }
-
-        internal Topic(Events events, string name, TopicClient topic = null)
-        {
-            this.Events = events;
-            this.Name = name;
-        }
-        public string Publish(Event evt)
-        {
-            var payloadStruct = Utils.ObjToStruct(evt.Payload);
-            var nEvt = new NitricEvent { Id = evt.Id, PayloadType = evt.PayloadType, Payload = payloadStruct };
-            var request = new EventPublishRequest { Topic = this.Name, Event = nEvt };
-
-            try
-            {
-                var response = this.Events.EventClient.Publish(request);
-                return response.Id;
+                var response = topicClient.List(request);
+                return response.Topics.Select(topic => new Topic(this, topic.Name)).ToList();
             }
             catch (Grpc.Core.RpcException re)
             {

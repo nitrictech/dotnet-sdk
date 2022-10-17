@@ -9,7 +9,7 @@ namespace Examples
         public static void GetFile()
         {
             // [START snippet]
-            var docs = new Documents();
+            var docs = new DocumentsClient();
 
             var document = docs.Collection<Dictionary<string, object>>("products").Doc("nitric");
 

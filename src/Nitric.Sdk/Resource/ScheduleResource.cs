@@ -6,11 +6,17 @@ namespace Nitric.Sdk.Resource
     {
         private string name;
 
-        public ScheduleResource(string name)
+        internal ScheduleResource(string name)
         {
             this.name = name;
         }
 
+        /// <summary>
+        /// Set the rate, frequency and handler for this schedule.
+        /// </summary>
+        /// <param name="rate"></param>
+        /// <param name="frequency"></param>
+        /// <param name="middleware"></param>
         public void Every(int rate, Frequency frequency, IHandler<EventContext> middleware)
         {
 

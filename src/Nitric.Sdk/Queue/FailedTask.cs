@@ -11,76 +11,36 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using Google.Protobuf.WellKnownTypes;
 using System.Collections.Generic;
- using Nitric.Sdk.Common.Util;
+using Google.Protobuf;
+using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Queue
 {
+    /// <summary>
+    /// Represents a task that was unable to be sent to a queue.
+    /// </summary>
     public class FailedTask
     {
-        public string Message { get; private set; }
-        public Task Task { get; private set; }
-        private FailedTask(
-            string Id,
-            string payloadType,
-            Struct payload,
-            string message)
-        {
-            this.Task = Task.NewBuilder()
-                .Id(Id)
-                .PayloadType(payloadType)
-                .Payload(payload)
-                .Build();
-            this.Message = message;
-        }
+        /// <summary>
+        /// The error message.
+        /// </summary>
+        public string Message { get; internal set; }
+
+        /// <summary>
+        /// The task that failed to be sent.
+        /// </summary>
+        public Task Task { get; internal set; }
+
+        /// <summary>
+        /// Return a string representation of the failed task.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return GetType().Name + "[task=" + Task + ", message=" + Message + "]";
-        }
-
-        public static Builder NewBuilder() {
-            return new Builder();
-        }
-
-        public class Builder
-        {
-            private string ID;
-            private string payloadType;
-            private Struct payload;
-            private string message;
-            //Defines the defaults
-            public Builder()
-            {
-                this.ID = null;
-                this.payloadType = null;
-                this.payload = Utils.ObjToStruct(new Dictionary<string, string>());
-                this.message = null;
-            }
-            public Builder Id(string Id)
-            {
-                this.ID = Id;
-                return this;
-            }
-            public Builder PayloadType(string payloadType)
-            {
-                this.payloadType = payloadType;
-                return this;
-            }
-            public Builder Payload(Struct payload)
-            {
-                this.payload = payload;
-                return this;
-            }
-            public Builder Message(string message)
-            {
-                this.message = message;
-                return this;
-            }
-            public FailedTask Build()
-            {
-                return new FailedTask(ID, payloadType, payload, message);
-            }
         }
     }
 }

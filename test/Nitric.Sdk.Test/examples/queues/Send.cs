@@ -1,5 +1,7 @@
 // [START import]
+
 using Nitric.Sdk.Queue;
+
 // [END import]
 
 namespace Examples
@@ -9,11 +11,9 @@ namespace Examples
         public static void SendTask()
         {
             // [START snippet]
-            var queue = new Queues().Queue("my-queue");
+            var queue = new QueuesClient().Queue("my-queue");
 
-            var task = Task.NewBuilder()
-                .Id("my-task")
-                .Build();
+            var task = new Task { Id = "my-task" };
 
             queue.Send(task);
             // [END snippet]

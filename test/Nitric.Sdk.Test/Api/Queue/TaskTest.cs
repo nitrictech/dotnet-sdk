@@ -24,14 +24,14 @@ namespace Nitric.Test.Api.QueueClient
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
             var queueItem = new Nitric.Sdk.Queue.Task
-                .Builder()
-                .Id("2")
-                .Payload(payload)
-                .PayloadType("payload type")
-                .Build();
+            {
+                Id = "2",
+                PayloadType = "payload type",
+                Payload = payload
+            };
 
             Assert.NotNull(queueItem);
-            Assert.Equal("2", queueItem.ID);
+            Assert.Equal("2", queueItem.Id);
             Assert.Equal("payload type", queueItem.PayloadType);
             Assert.Equal(payload, queueItem.Payload);
         }

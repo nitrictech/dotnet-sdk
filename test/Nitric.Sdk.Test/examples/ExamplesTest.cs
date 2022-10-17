@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Google.Protobuf.Collections;
 using System;
 using Nitric.Sdk.Common.Util;
+using Environment = System.Environment;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
@@ -63,6 +64,7 @@ namespace Nitric.Test.Examples
             };
             server.Start();
         }
+
         [Fact]
         public void TestDocumentExamples()
         {
@@ -76,22 +78,27 @@ namespace Nitric.Test.Examples
             QueryLimitsExample.QueryLimits();
             SubDocQueryExample.QueryDocCol();
         }
+
         public void Dispose()
         {
             //Verify all the functions were called
-            mockServer.Verify(e => e.Delete(It.IsAny<DocumentDeleteRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
+            mockServer.Verify(e => e.Delete(It.IsAny<DocumentDeleteRequest>(), It.IsAny<ServerCallContext>()),
+                Times.Once);
             mockServer.Verify(e => e.Get(It.IsAny<DocumentGetRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
             mockServer.Verify(e => e.Set(It.IsAny<DocumentSetRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
-            mockServer.Verify(e => e.Query(It.IsAny<DocumentQueryRequest>(), It.IsAny<ServerCallContext>()), Times.Exactly(6));
+            mockServer.Verify(e => e.Query(It.IsAny<DocumentQueryRequest>(), It.IsAny<ServerCallContext>()),
+                Times.Exactly(6));
 
             this.server.KillAsync().Wait();
         }
     }
+
     [Collection("Examples")]
     public class EventsExamplesTest : IDisposable
     {
         private Server server;
         private Mock<EventService.EventServiceBase> mockServer;
+
         public EventsExamplesTest()
         {
             //Setup a mock server for the snippets to hit
@@ -107,6 +114,7 @@ namespace Nitric.Test.Examples
             };
             server.Start();
         }
+
         [Fact]
         public void TestEventsExample()
         {
@@ -115,16 +123,20 @@ namespace Nitric.Test.Examples
             PublishExample.PublishTopic();
 
             //Verify all the functions were called
-            mockServer.Verify(e => e.Publish(It.IsAny<EventPublishRequest>(), It.IsAny<ServerCallContext>()), Times.Exactly(2));
+            mockServer.Verify(e => e.Publish(It.IsAny<EventPublishRequest>(), It.IsAny<ServerCallContext>()),
+                Times.Exactly(2));
         }
+
         public void Dispose()
         {
             //Verify all the functions were called
-            mockServer.Verify(e => e.Publish(It.IsAny<EventPublishRequest>(), It.IsAny<ServerCallContext>()), Times.Exactly(2));
+            mockServer.Verify(e => e.Publish(It.IsAny<EventPublishRequest>(), It.IsAny<ServerCallContext>()),
+                Times.Exactly(2));
 
             this.server.KillAsync().Wait();
         }
     }
+
     [Collection("Examples")]
     public class QueuesExamplesTest : IDisposable
     {
@@ -165,6 +177,7 @@ namespace Nitric.Test.Examples
             };
             server.Start();
         }
+
         [Fact]
         public void TestQueuesExample()
         {
@@ -172,16 +185,20 @@ namespace Nitric.Test.Examples
             ReceiveExample.ReceiveTask();
             SendExample.SendTask();
         }
+
         public void Dispose()
         {
             //Verify all the functions were called
             mockServer.Verify(e => e.Send(It.IsAny<QueueSendRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
-            mockServer.Verify(e => e.Receive(It.IsAny<QueueReceiveRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
-            mockServer.Verify(e => e.Complete(It.IsAny<QueueCompleteRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
+            mockServer.Verify(e => e.Receive(It.IsAny<QueueReceiveRequest>(), It.IsAny<ServerCallContext>()),
+                Times.Once);
+            mockServer.Verify(e => e.Complete(It.IsAny<QueueCompleteRequest>(), It.IsAny<ServerCallContext>()),
+                Times.Once);
 
             this.server.KillAsync().Wait();
         }
     }
+
     [Collection("Examples")]
     public class SecretsExamplesTest : IDisposable
     {
@@ -228,6 +245,7 @@ namespace Nitric.Test.Examples
             };
             server.Start();
         }
+
         [Fact]
         public void TestSecretsExample()
         {
@@ -235,15 +253,18 @@ namespace Nitric.Test.Examples
             AccessExample.AccessSecret();
             PutExample.PutSecret();
         }
+
         public void Dispose()
         {
             //Verify all the functions were called
-            mockServer.Verify(e => e.Access(It.IsAny<SecretAccessRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
+            mockServer.Verify(e => e.Access(It.IsAny<SecretAccessRequest>(), It.IsAny<ServerCallContext>()),
+                Times.Once);
             mockServer.Verify(e => e.Put(It.IsAny<SecretPutRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
 
             this.server.KillAsync().Wait();
         }
     }
+
     [Collection("Examples")]
     public class StorageExamplesTest : IDisposable
     {
@@ -271,6 +292,7 @@ namespace Nitric.Test.Examples
             };
             server.Start();
         }
+
         [Fact]
         public void TestStorageExamples()
         {
@@ -279,12 +301,14 @@ namespace Nitric.Test.Examples
             ReadExample.ReadFile();
             WriteExample.WriteFile();
         }
+
         public void Dispose()
         {
             //Verify all the functions were called
             mockServer.Verify(e => e.Write(It.IsAny<StorageWriteRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
             mockServer.Verify(e => e.Read(It.IsAny<StorageReadRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
-            mockServer.Verify(e => e.Delete(It.IsAny<StorageDeleteRequest>(), It.IsAny<ServerCallContext>()), Times.Once);
+            mockServer.Verify(e => e.Delete(It.IsAny<StorageDeleteRequest>(), It.IsAny<ServerCallContext>()),
+                Times.Once);
 
             this.server.KillAsync().Wait();
         }

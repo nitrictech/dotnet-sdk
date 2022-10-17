@@ -11,20 +11,19 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Collections.Generic;
 
 namespace Nitric.Sdk.Queue
 {
-    public class PushResponse
+    /// <summary>
+    /// Represents the results of sending a batch of tasks to a queue.
+    /// </summary>
+    public class SendResponse
     {
-        private readonly List<FailedTask> failedTasks;
-        public PushResponse(List<FailedTask> failedTasks)
-        {
-            this.failedTasks = failedTasks;
-        }
-        public List<FailedTask> getFailedTasks()
-        {
-            return failedTasks;
-        }
+        /// <summary>
+        /// A list of any task that were unable to be sent to the queue.
+        /// </summary>
+        public List<FailedTask> FailedTasks { get; internal set; }
     }
 }

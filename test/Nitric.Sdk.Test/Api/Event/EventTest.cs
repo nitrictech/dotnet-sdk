@@ -26,29 +26,27 @@ namespace Nitric.Test.Api.EventClient
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
 
-            var eventTest = Nitric.Sdk.Event.Event.NewBuilder()
-                .Id("id")
-                .PayloadType("payloadType")
-                .Payload(Utils.ObjToStruct(payload))
-                .Build();
+            var eventTest = new Nitric.Sdk.Event.Event
+                { Id = "id", Payload = Utils.ObjToStruct(payload), PayloadType = "payloadType" };
 
             Assert.NotNull(eventTest);
             Assert.Equal("id", eventTest.Id);
             Assert.Equal("payloadType", eventTest.PayloadType);
             Assert.Equal(Utils.ObjToStruct(payload), eventTest.Payload);
         }
+
         [Fact]
         public void TestToString()
         {
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
 
-            var eventTest = Nitric.Sdk.Event.Event.NewBuilder()
-                .Id("id")
-                .PayloadType("payloadType")
-                .Payload(Utils.ObjToStruct(payload))
-                .Build();
-            Assert.Equal("Event[id=id, payloadType=payloadType, payload={ \"name\": \"value\" }]", eventTest.ToString());
+            var eventTest = new Nitric.Sdk.Event.Event
+                { Id = "id", Payload = Utils.ObjToStruct(payload), PayloadType = "payloadType" };
+
+
+            Assert.Equal<string>("Event[id=id, payloadType=payloadType, payload={ \"name\": \"value\" }]",
+                eventTest.ToString());
         }
     }
 }

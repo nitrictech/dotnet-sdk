@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using Xunit;
 using Google.Protobuf.WellKnownTypes;
 using Nitric.Sdk.Common.Util;
+using Nitric.Sdk.Queue;
 
 namespace Nitric.Test.Api.QueueClient
 {
@@ -27,16 +28,19 @@ namespace Nitric.Test.Api.QueueClient
             var payload = new Dictionary<string, string>();
             payload.Add("name", "value");
             var payloadStruct = Utils.ObjToStruct(payload);
-            var failedTask = Nitric.Sdk.Queue.FailedTask
-                .NewBuilder()
-                .Id("1")
-                .PayloadType("payload type")
-                .Payload(payloadStruct)
-                .Message("message")
-                .Build();
+            var failedTask = new Nitric.Sdk.Queue.FailedTask
+            {
+                Message = "1",
+                Task = new Task
+                {
+                    Id = "1",
+                    PayloadType = "payload type",
+                    Payload = payloadStruct
+                }
+            };
 
             Assert.NotNull(failedTask);
-            Assert.Equal("1", failedTask.Task.ID);
+            Assert.Equal("1", failedTask.Task.Id);
             Assert.Equal("payload type", failedTask.Task.PayloadType);
             Assert.Equal(payloadStruct, failedTask.Task.Payload);
             Assert.Equal("message", failedTask.Message);

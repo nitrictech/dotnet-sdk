@@ -11,66 +11,64 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 
 namespace Nitric.Sdk.Event
 {
+    /// <summary>
+    /// Events represent a Message delivered via Publish/Subscribe.
+    /// </summary>
     public class Event
     {
-        public string Id { get; protected set; }
-        public string PayloadType { get; protected set; }
-        public Object Payload { get; protected set; }
-        private Event(string Id, string payloadType, Object payload)
+        /// <summary>
+        /// The unique ID of this event.
+        ///
+        /// Used to every reprocessing.
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
+        /// The expected type of the event's payload.
+        /// </summary>
+        public string PayloadType { get; set; }
+
+        /// <summary>
+        /// The payload (contents) of the event.
+        /// </summary>
+        public object Payload { get; set; }
+
+        /// <summary>
+        /// Create a new event.
+        /// </summary>
+        public Event()
+        {
+        }
+
+        /// <summary>
+        /// Create a new event object.
+        /// </summary>
+        /// <param name="id">The unique id for this event.</param>
+        /// <param name="payloadType">The type of this event's payload.</param>
+        /// <param name="payload">The contents of the event message.</param>
+        public Event(string id, string payloadType, object payload)
         {
             this.Payload = payload;
-            this.Id = Id;
+            this.Id = id;
             this.PayloadType = payloadType;
         }
+
+        /// <summary>
+        /// Return a string representing the details of the event.
+        /// </summary>
+        /// <returns>A string</returns>
         public override string ToString()
         {
             return GetType().Name +
-                    "[id=" + Id
-                    + ", payloadType=" + PayloadType
-                    + ", payload=" + Payload
-                    + "]";
-        }
-
-        public static Builder NewBuilder()
-        {
-            return new Builder();
-        }
-
-        public class Builder
-        {
-            private string ID;
-            private string payloadType;
-            private Object payload;
-
-            public Builder()
-            {
-                this.ID = "";
-                this.payloadType = "";
-                this.payload = null;
-            }
-            public Builder Id(string Id)
-            {
-                this.ID = Id;
-                return this;
-            }
-            public Builder PayloadType(string payloadType)
-            {
-                this.payloadType = payloadType;
-                return this;
-            }
-            public Builder Payload(Object payload)
-            {
-                this.payload = payload;
-                return this;
-            }
-            public Event Build()
-            {
-                return new Event(ID, payloadType, payload);
-            }
+                   "[id=" + Id
+                   + ", payloadType=" + PayloadType
+                   + ", payload=" + Payload
+                   + "]";
         }
     }
 }

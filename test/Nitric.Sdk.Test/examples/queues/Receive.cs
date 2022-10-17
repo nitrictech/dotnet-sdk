@@ -9,7 +9,7 @@ namespace Examples
         public static void ReceiveTask()
         {
             // [START snippet]
-            var queue = new Queues().Queue("my-queue");
+            var queue = new QueuesClient().Queue("my-queue");
 
             var tasks = queue.Receive(10);
 

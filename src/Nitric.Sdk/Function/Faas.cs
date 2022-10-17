@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Grpc.Core;
-using Grpc.Net.Client;
 using Nitric.Proto.Faas.v1;
 using Nitric.Sdk.Common;
 using Util = Nitric.Sdk.Common.Util;
@@ -33,22 +32,27 @@ namespace Nitric.Sdk.Function
         /// GET
         /// </summary>
         GET,
+
         /// <summary>
         /// POST
         /// </summary>
         POST,
+
         /// <summary>
         /// PUT
         /// </summary>
         PUT,
+
         /// <summary>
         /// DELETE
         /// </summary>
         DELETE,
+
         /// <summary>
         /// PATCH
         /// </summary>
         PATCH,
+
         /// <summary>
         /// OPTIONS
         /// </summary>
@@ -65,7 +69,7 @@ namespace Nitric.Sdk.Function
     /// <summary>
     /// Options for API request handling workers.
     /// </summary>
-    public class ApiWorkerOptions: IFaasOptions
+    public class ApiWorkerOptions : IFaasOptions
     {
         private string api;
         private string route;
@@ -88,7 +92,7 @@ namespace Nitric.Sdk.Function
     /// <summary>
     /// Options for subscription trigger handling workers.
     /// </summary>
-    public class SubscriptionWorkerOptions: IFaasOptions
+    public class SubscriptionWorkerOptions : IFaasOptions
     {
         private string topic;
 
@@ -208,6 +212,7 @@ namespace Nitric.Sdk.Function
                             throw new ArgumentOutOfRangeException();
                     }
                 }
+
                 await call.RequestStream.CompleteAsync();
             }
             catch (RpcException re)

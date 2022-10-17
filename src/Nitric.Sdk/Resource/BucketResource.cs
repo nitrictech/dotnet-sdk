@@ -28,7 +28,7 @@ namespace Nitric.Sdk.Resource
 
     class BucketResource : SecureResource<BucketPermission>
     {
-        public BucketResource(string name) : base(name)
+        internal BucketResource(string name) : base(name)
         {
         }
 

@@ -9,7 +9,7 @@ namespace Examples
         public static void QueryDocCol()
         {
             // [START snippet]
-            var docs = new Documents();
+            var docs = new DocumentsClient();
 
             var query = docs.Collection<Dictionary<string, object>>("customers")
                     .Doc("apple")

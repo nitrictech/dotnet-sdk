@@ -9,7 +9,7 @@ namespace Examples
         public static void RefDocs()
         {
             // [START snippet]
-            var docs = new Documents();
+            var docs = new DocumentsClient();
 
             // create a reference to a collection named 'products'
             var collection = docs.Collection<Dictionary<string, object>>("products");

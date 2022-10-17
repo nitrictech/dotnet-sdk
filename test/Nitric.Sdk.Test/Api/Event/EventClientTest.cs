@@ -29,13 +29,13 @@ namespace Nitric.Test.Api.EventClient
         [Fact]
         public void TestBuildEvents()
         {
-            var evt = new Events();
+            var evt = new EventsClient();
             Assert.NotNull(evt);
         }
         [Fact]
         public void TestBuildTopicWithName()
         {
-            var topic = new Events().Topic("test-topic");
+            var topic = new EventsClient().Topic("test-topic");
             Assert.NotNull(topic);
             Assert.Equal("test-topic", topic.Name);
         }
@@ -43,10 +43,10 @@ namespace Nitric.Test.Api.EventClient
         public void TestBuildTopicWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Events().Topic("")
+                () => new EventsClient().Topic("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new Events().Topic(null)
+                () => new EventsClient().Topic(null)
             );
         }
         [Fact]
@@ -62,14 +62,9 @@ namespace Nitric.Test.Api.EventClient
                 .Returns(new EventPublishResponse())
                 .Verifiable();
 
-            var topic = new Events(ec.Object).Topic("test-topic");
+            var topic = new EventsClient(ec.Object).Topic("test-topic");
 
-            var evtToSend = EventModel
-                .NewBuilder()
-                .Id("1")
-                .PayloadType("payloadType")
-                .Payload(new Dictionary<string, string>())
-                .Build();
+            var evtToSend = new EventModel { Id = "1", Payload = new Dictionary<string, string>(), PayloadType = "payloadType"};
 
             var response = topic.Publish(evtToSend);
 
@@ -83,15 +78,8 @@ namespace Nitric.Test.Api.EventClient
             ec.Setup(e => e.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified topic does not exist")))
                 .Verifiable();
-
-            var topic = new Events(ec.Object).Topic("test-topic");
-
-            var evtToSend = EventModel
-                .NewBuilder()
-                .Id("1")
-                .PayloadType("payloadType")
-                .Payload(new Dictionary<string, string>())
-                .Build();
+            var topic = new EventsClient(ec.Object).Topic("test-topic");
+            var evtToSend = new EventModel { Id = "1", Payload = new Dictionary<string, string>(), PayloadType = "payloadType"};
 
             try
             {

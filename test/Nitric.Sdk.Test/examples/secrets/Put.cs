@@ -8,7 +8,7 @@ namespace Examples
         public static void PutSecret()
         {
             // [START snippet]
-            var secrets = new Secrets();
+            var secrets = new SecretsClient();
 
             var newPassword = "qxGJp9rWMbYvPEsNFXzukQa!";
 

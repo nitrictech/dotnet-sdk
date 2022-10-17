@@ -26,7 +26,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestBuildDocuments()
         {
-            var documents = new Documents();
+            var documents = new DocumentsClient();
             Assert.NotNull(documents);
         }
         /*
@@ -35,13 +35,13 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestCollectionsMethodWithName()
         {
-            var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
             Assert.NotNull(collection);
         }
         [Fact]
         public void TestCollectionsMethodWithoutName()
         {
-            var documents = new Documents();
+            var documents = new DocumentsClient();
             Assert.Throws<ArgumentNullException>(
                 () => documents.Collection<Dictionary<string, object>>(null));
             Assert.Throws<ArgumentNullException>(
@@ -50,16 +50,16 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestCollectionSubCollectionWithName()
         {
-            var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
             var subcollection = collection.Collection("test-subcollection");
             Assert.NotNull(subcollection);
-            Assert.Equal(collection, subcollection.ParentKey.collection);
-            Assert.Equal("", subcollection.ParentKey.id);
+            Assert.Equal(collection, subcollection.ParentKey.Collection);
+            Assert.Equal("", subcollection.ParentKey.Id);
         }
         [Fact]
         public void TestCollectionSubCollectionWithoutName()
         {
-            var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
             Assert.Throws<ArgumentNullException>(
                 () => collection.Collection(null));
             Assert.Throws<ArgumentNullException>(
@@ -71,14 +71,14 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestBuildDocsWithDocumentId()
         {
-            var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
             var docs = collection.Doc("test-document");
             Assert.NotNull(docs);
         }
         [Fact]
         public void TestBuildDocWithoutDocumentId()
         {
-            var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
             Assert.Throws<ArgumentNullException>(
                 () => collection.Doc(""));
             Assert.Throws<ArgumentNullException>(
@@ -87,7 +87,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestBuildQuery()
         {
-            var collection = new Documents().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
             var query = collection.Query();
             Assert.NotNull(query);
         }
@@ -119,7 +119,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(documentGetResponse)
                 .Verifiable();
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
             var response = documentRef.Get();
@@ -154,7 +154,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(documentGetResponse)
                 .Verifiable();
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<SortedDictionary<string, object>>("test-collection")
                 .Doc("test-document");
             var response = documentRef.Get();
@@ -171,7 +171,7 @@ namespace Nitric.Test.Api.Document
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified document does not exist")))
                 .Verifiable();
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<SortedDictionary<string, object>>("test-collection")
                 .Doc("test-document");
             try
@@ -199,7 +199,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
 
@@ -221,7 +221,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
 
@@ -239,7 +239,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
 
@@ -255,7 +255,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
 
@@ -275,7 +275,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<SortedDictionary<string, object>>("test-collection")
                 .Doc("test-document");
 
@@ -294,7 +294,7 @@ namespace Nitric.Test.Api.Document
             var document = new SortedDictionary<string, object>();
             document.Add("test", "document");
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<SortedDictionary<string, object>>("test-collection")
                 .Doc("test-document");
             try
@@ -321,7 +321,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(new DocumentDeleteResponse())
                 .Verifiable();
 
-            var documentRef = new Documents(dc.Object)
+            var documentRef = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
 
@@ -335,7 +335,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestDocCollectionWithName()
         {
-            var docCollection = new Documents()
+            var docCollection = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document")
                 .Collection("test-collection-2");
@@ -345,7 +345,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestDocCollectionWithoutName()
         {
-            var document = new Documents()
+            var document = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Doc("test-document");
 
@@ -358,7 +358,7 @@ namespace Nitric.Test.Api.Document
         public void TestMultipleDocCollectionsThrows()
         {
             Assert.Throws<NotSupportedException>(
-                () => new Documents()
+                () => new DocumentsClient()
                     .Collection<Dictionary<string, object>>("test-collection")
                     .Doc("test-document")
                     .Collection("test-collection-2")
@@ -372,17 +372,17 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestCollectionGroupBuildWithName()
         {
-            var collection = new Documents()
+            var collection = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection");
             var collectionGroup = collection.Collection("test-subcollection");
             Assert.NotNull(collectionGroup);
             Assert.Equal("test-subcollection", collectionGroup.Name);
-            Assert.Equal("", collectionGroup.ParentKey.id);
+            Assert.Equal("", collectionGroup.ParentKey.Id);
         }
         [Fact]
         public void TestCollectionGroupBuildWithoutName()
         {
-            var collection = new Documents()
+            var collection = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection");
 
             Assert.Throws<ArgumentNullException>(
@@ -396,7 +396,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestWhereExpression()
         {
-            var query = new Documents()
+            var query = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -419,7 +419,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestChangingLimit()
         {
-            var query = new Documents()
+            var query = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -436,7 +436,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestHandlingNegativeLimits()
         {
-            var query = new Documents()
+            var query = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -453,7 +453,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestChangingPagingToken()
         {
-            var query = new Documents()
+            var query = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -473,7 +473,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestChangingWithNullPagingToken()
         {
-            var query = new Documents()
+            var query = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -490,7 +490,7 @@ namespace Nitric.Test.Api.Document
         [Fact]
         public void TestChangingWithEmptyPagingToken()
         {
-            var query = new Documents()
+            var query = new DocumentsClient()
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -528,7 +528,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(queryResponse)
                 .Verifiable();
 
-            var query = new Documents(dc.Object)
+            var query = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -570,7 +570,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(queryResponse)
                 .Verifiable();
 
-            var query = new Documents(dc.Object)
+            var query = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -614,7 +614,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(queryResponse)
                 .Verifiable();
 
-            var query = new Documents(dc.Object)
+            var query = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -662,7 +662,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(queryResponse)
                 .Verifiable();
 
-            var query = new Documents(dc.Object)
+            var query = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -707,7 +707,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(queryResponse)
                 .Verifiable();
 
-            var query = new Documents(dc.Object)
+            var query = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
 
@@ -734,7 +734,7 @@ namespace Nitric.Test.Api.Document
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified document does not exist")))
                 .Verifiable();
 
-            var query = new Documents(dc.Object)
+            var query = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Query();
             try
@@ -772,7 +772,7 @@ namespace Nitric.Test.Api.Document
                 .Returns(queryResponse)
                 .Verifiable();
 
-            var query = new Documents(dc.Object)
+            var query = new DocumentsClient(dc.Object)
                 .Collection<Dictionary<string, object>>("test-collection")
                 .Collection("test-subcollection")
                 .Query();

@@ -11,32 +11,62 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using Collection = Nitric.Proto.Document.v1.Collection;
+
 namespace Nitric.Sdk.Document
 {
+    /// <summary>
+    /// Document collection base class
+    /// </summary>
+    /// <typeparam name="T">The type for documents in this collection</typeparam>
     public class AbstractCollection<T> where T : IDictionary<string, object>, new()
     {
+        /// <summary>
+        /// The name of the collection
+        /// </summary>
         public readonly string Name;
-        public readonly Key<T> ParentKey;
-        internal DocumentServiceClient documentClient;
 
-        public AbstractCollection(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
+        /// <summary>
+        /// A reference to the document this collection sits below.
+        ///
+        /// If set, this is a sub-collection.
+        /// </summary>
+        public readonly Key<T> ParentKey;
+
+        internal readonly DocumentServiceClient DocumentClient;
+
+        /// <summary>
+        /// Construct a new collection
+        /// </summary>
+        /// <param name="documentClient">The client reference to use for operations on this collection</param>
+        /// <param name="name">The name of the collection</param>
+        /// <param name="parentKey">An optional parent key</param>
+        /// <exception cref="ArgumentNullException">Throws if a required parameter is missing</exception>
+        protected AbstractCollection(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
-            this.documentClient = documentClient;
+
+            this.DocumentClient = documentClient;
             this.Name = name;
             this.ParentKey = parentKey;
         }
+
+        /// <summary>
+        /// Construct a query to find documents in the collection
+        /// </summary>
+        /// <returns>A new query builder</returns>
         public Query<T> Query()
         {
-            return new Query<T>(this.documentClient, this);
+            return new Query<T>(this.DocumentClient, this);
         }
+
         internal Collection ToGrpcCollection()
         {
             var collection = new Collection()
@@ -47,6 +77,7 @@ namespace Nitric.Sdk.Document
             {
                 collection.Parent = this.ParentKey.ToKey();
             }
+
             return collection;
         }
     }

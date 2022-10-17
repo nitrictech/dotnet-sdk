@@ -21,7 +21,7 @@ namespace Nitric.Sdk.Resource
 
     class TopicResource : SecureResource<TopicPermission>
     {
-        public TopicResource(string name) : base(name)
+        internal TopicResource(string name) : base(name)
         {
         }
 
@@ -42,7 +42,8 @@ namespace Nitric.Sdk.Resource
                     new List<Action> { Action.TopicEventPublish, Action.TopicList, Action.TopicDetail }
                 }
             };
-            return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x])).Distinct();
+            return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x]))
+                .Distinct();
         }
 
         // public void subscribe(EventHandler<> mw)
@@ -53,7 +54,7 @@ namespace Nitric.Sdk.Resource
         public Topic With(params TopicPermission[] permissions)
         {
             this.RegisterPolicy(permissions);
-            return new Events().Topic(this.name);
+            return new EventsClient().Topic(this.name);
         }
     }
 }

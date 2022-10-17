@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using Collection = Nitric.Proto.Document.v1.Collection;
@@ -18,31 +19,51 @@ using GrpcKey = Nitric.Proto.Document.v1.Key;
 
 namespace Nitric.Sdk.Document
 {
+    /// <summary>
+    /// A fully qualified reference to a specific document in the document service.
+    ///
+    /// Includes the unique ID of the document and a reference to the collection that contains it.
+    /// </summary>
+    /// <typeparam name="T">The expected type for the contents of the document.</typeparam>
     public class Key<T> where T : IDictionary<string, object>, new()
     {
-        public readonly AbstractCollection<T> collection;
-        public readonly string id;
+        /// <summary>
+        /// The collection containing this document.
+        /// </summary>
+        public AbstractCollection<T> Collection { get; set; }
 
-        public Key(AbstractCollection<T> collection, string id = null)
+        /// <summary>
+        /// The unique ID of this document within its collection.
+        /// </summary>
+        public string Id { get; set; }
+
+        internal Key()
         {
-            if (collection == null)
-            {
-                throw new ArgumentNullException("collection");
-            }
-            this.collection = collection;
-            this.id = id != null ? id : "";
+            // Internal construct to avoid external key creation.
         }
-        public GrpcKey ToKey()
+
+        /// <summary>
+        /// Convert this key to its gRPC representation.
+        /// </summary>
+        /// <returns></returns>
+        internal GrpcKey ToKey()
         {
             return new GrpcKey
             {
-                Collection = this.collection.ToGrpcCollection(),
-                Id = this.id,
+                Collection = this.Collection.ToGrpcCollection(),
+                Id = this.Id,
             };
         }
+
+        /// <summary>
+        /// Convert this key to a string.
+        ///
+        /// Useful for logging, should not be used for serialization of the key.
+        /// </summary>
+        /// <returns>A string with details of this key.</returns>
         public override string ToString()
         {
-            return this.GetType().Name + "[collection=" + collection + ", id=" + id + "]";
+            return this.GetType().Name + "[collection=" + Collection + ", id=" + Id + "]";
         }
     }
 }

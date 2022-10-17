@@ -8,7 +8,7 @@ namespace Examples
         public static void LatestSecret()
         {
             // [START snippet]
-            var secrets = new Secrets();
+            var secrets = new SecretsClient();
 
             var latest = secrets.Secret("database.password").Latest();
             // [END snippet]

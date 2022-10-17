@@ -25,19 +25,19 @@ namespace Nitric.Test.Api.Secret
         [Fact]
         public void TestBuildSecrets()
         {
-            var secrets = new Secrets();
+            var secrets = new SecretsClient();
             Assert.NotNull(secrets);
         }
         [Fact]
         public void TestBuildSecretsWithNullClient()
         {
-            var secrets = new Secrets(null);
+            var secrets = new SecretsClient(null);
             Assert.NotNull(secrets);
         }
         [Fact]
         public void TestBuildSecretWithName()
         {
-            var secret = new Secrets().Secret("test-secret");
+            var secret = new SecretsClient().Secret("test-secret");
             Assert.NotNull(secret);
             Assert.Equal("test-secret", secret.Name);
         }
@@ -45,9 +45,9 @@ namespace Nitric.Test.Api.Secret
         public void TestBuildSecretWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Secrets().Secret(""));
+                () => new SecretsClient().Secret(""));
             Assert.Throws<ArgumentNullException>(
-                () => new Secrets().Secret(null));
+                () => new SecretsClient().Secret(null));
         }
         //Testing Secret Methods
         [Fact]
@@ -70,11 +70,11 @@ namespace Nitric.Test.Api.Secret
                 .Verifiable();
 
             var testBytes = Encoding.UTF8.GetBytes("Super secret message");
-            var secret = new Secrets(sc.Object)
+            var secret = new SecretsClient(sc.Object)
                 .Secret("test-secret");
             var response = secret.Put(testBytes);
 
-            Assert.Equal("test-version", response.Version);
+            Assert.Equal("test-version", response.Id);
             Assert.Equal(secret.Name, response.Secret.Name);
 
             sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
@@ -99,11 +99,11 @@ namespace Nitric.Test.Api.Secret
                 .Verifiable();
 
             var testString = "Super secret message";
-            var secret = new Secrets(sc.Object)
+            var secret = new SecretsClient(sc.Object)
                 .Secret("test-secret");
             var response = secret.Put(testString);
 
-            Assert.Equal("test-version", response.Version);
+            Assert.Equal("test-version", response.Id);
             Assert.Equal(secret.Name, response.Secret.Name);
 
             sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
@@ -111,28 +111,28 @@ namespace Nitric.Test.Api.Secret
         [Fact]
         public void TestPutEmptySecretBytes()
         {
-            var secret = new Secrets().Secret("test-secret");
+            var secret = new SecretsClient().Secret("test-secret");
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put(new byte[] { }));
         }
         [Fact]
         public void TestPutNullSecretBytes()
         {
-            var secret = new Secrets().Secret("test-secret");
+            var secret = new SecretsClient().Secret("test-secret");
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put((byte[])null));
         }
         [Fact]
         public void TestPutEmptySecretString()
         {
-            var secret = new Secrets().Secret("test-secret");
+            var secret = new SecretsClient().Secret("test-secret");
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put(""));
         }
         [Fact]
         public void TestPutNullSecretString()
         {
-            var secret = new Secrets().Secret("test-secret");
+            var secret = new SecretsClient().Secret("test-secret");
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put((string)null));
         }
@@ -145,7 +145,7 @@ namespace Nitric.Test.Api.Secret
                 .Verifiable();
 
             var testString = "Super secret message";
-            var secret = new Secrets(sc.Object)
+            var secret = new SecretsClient(sc.Object)
                 .Secret("test-secret");
             try
             {
@@ -162,19 +162,19 @@ namespace Nitric.Test.Api.Secret
         [Fact]
         public void TestGetSecretVersion()
         {
-            var secret = new Secrets().Secret("test-secret");
+            var secret = new SecretsClient().Secret("test-secret");
             var secretVersion = secret.Version("test-version");
             Assert.NotNull(secretVersion);
-            Assert.Equal("test-version", secretVersion.Version);
+            Assert.Equal("test-version", secretVersion.Id);
             Assert.Equal(secret, secretVersion.Secret);
         }
         [Fact]
         public void TestGetSecretVersionWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Secrets().Secret("test-secret").Version(""));
+                () => new SecretsClient().Secret("test-secret").Version(""));
             Assert.Throws<ArgumentNullException>(
-                () => new Secrets().Secret("test-secret").Version(null));
+                () => new SecretsClient().Secret("test-secret").Version(null));
         }
         [Fact]
         public void TestAccessSecretWithoutPermission()
@@ -184,7 +184,7 @@ namespace Nitric.Test.Api.Secret
                 .Throws(new RpcException(new Status(StatusCode.PermissionDenied, "You do not have permission to access this secret")))
                 .Verifiable();
 
-            var secret = new Secrets(sc.Object)
+            var secret = new SecretsClient(sc.Object)
                 .Secret("test-secret");
             try
             {
@@ -201,15 +201,15 @@ namespace Nitric.Test.Api.Secret
         [Fact]
         public void TestGetLatestSecretVersion()
         {
-            var secretVersion = new Secrets()
+            var secretVersion = new SecretsClient()
                 .Secret("test-secret")
                 .Latest();
-            Assert.Equal("latest", secretVersion.Version);
+            Assert.Equal("latest", secretVersion.Id);
         }
         [Fact]
         public void TestSecretToString()
         {
-            var secretString = new Secrets()
+            var secretString = new SecretsClient()
                 .Secret("test-secret")
                 .ToString();
             Assert.Equal("[name=test-secret]", secretString);
@@ -235,23 +235,23 @@ namespace Nitric.Test.Api.Secret
                 .Returns(secretPutResponse)
                 .Verifiable();
 
-            var version = new Secrets(sc.Object)
+            var version = new SecretsClient(sc.Object)
                 .Secret("test-secret")
                 .Version("test-version");
             var response = version.Access();
 
             var responseString = Encoding.UTF8.GetString(response.Value);
-            Assert.Equal("test-version", response.SecretVersion.Version);
+            Assert.Equal("test-version", response.SecretVersion.Id);
             Assert.Equal("test-secret", response.SecretVersion.Secret.Name);
             Assert.Equal("Super secret message", Encoding.UTF8.GetString(response.Value));
-            Assert.Equal("Super secret message", response.ValueText);
+            Assert.Equal<string>("Super secret message", response.ValueText);
 
             sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
         [Fact]
         public void TestSecretVersionToString()
         {
-            var secretVersionString = new Secrets()
+            var secretVersionString = new SecretsClient()
                 .Secret("test-secret")
                 .Version("test-version")
                 .ToString();
@@ -277,7 +277,7 @@ namespace Nitric.Test.Api.Secret
                 .Returns(secretPutResponse)
                 .Verifiable();
 
-            var version = new Secrets(sc.Object)
+            var version = new SecretsClient(sc.Object)
                 .Secret("test-secret")
                 .Version("test-version");
 

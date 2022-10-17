@@ -13,7 +13,6 @@
 // limitations under the License.
 
 using Nitric.Proto.Faas.v1;
-using Nitric.Sdk.Common;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
 
 namespace Nitric.Sdk.Function
@@ -92,7 +91,7 @@ namespace Nitric.Sdk.Function
         /// <returns></returns>
         public override TriggerResponse ToGrpcTriggerContext()
         {
-            return new TriggerResponse { Topic = new TopicResponseContext {Success = this.res.Success}};
+            return new TriggerResponse { Topic = new TopicResponseContext { Success = this.res.Success } };
         }
     }
 }

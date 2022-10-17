@@ -11,12 +11,24 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Collections.Generic;
+
 namespace Nitric.Sdk.Document
 {
+    /// <summary>
+    /// Represents a point-in-time version of a document, including the contents.
+    /// </summary>
+    /// <typeparam name="T">The type of the contents of this document</typeparam>
     public class Document<T> where T : IDictionary<string, object>, new()
     {
+        /// <summary>
+        /// The reference to the document in the document database.
+        /// </summary>
         public DocumentRef<T> Ref { get; private set; }
+        /// <summary>
+        /// The document contents.
+        /// </summary>
         public T Content { get; private set; }
 
         internal Document(DocumentRef<T> documentRef, T content)

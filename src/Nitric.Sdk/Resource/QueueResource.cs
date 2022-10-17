@@ -24,7 +24,7 @@ namespace Nitric.Sdk.Resource
 
     class QueueResource : SecureResource<QueuePermission>
     {
-        public QueueResource(string name) : base(name)
+        internal QueueResource(string name) : base(name)
         {
         }
 
@@ -32,7 +32,7 @@ namespace Nitric.Sdk.Resource
         {
             var resource = new NitricResource { Name = this.name, Type = ResourceType.Queue };
             var request = new ResourceDeclareRequest { Resource = resource };
-            BaseResource.client.Declare(request);
+            client.Declare(request);
             return this;
         }
 
@@ -55,7 +55,7 @@ namespace Nitric.Sdk.Resource
         public Queue.Queue With(params QueuePermission[] permissions)
         {
             this.RegisterPolicy(permissions);
-            return new Queues().Queue(this.name);
+            return new QueuesClient().Queue(this.name);
         }
     }
 }
