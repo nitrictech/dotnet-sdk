@@ -21,8 +21,8 @@ namespace Nitric.Test.Examples
     [Collection("Examples")]
     public class DocumentsExamplesTest : IDisposable
     {
-        private readonly Server server = null;
-        private readonly Mock<DocumentService.DocumentServiceBase> mockServer = null;
+        private readonly Server server;
+        private readonly Mock<DocumentService.DocumentServiceBase> mockServer;
 
         public DocumentsExamplesTest()
         {
@@ -140,7 +140,7 @@ namespace Nitric.Test.Examples
     [Collection("Examples")]
     public class QueuesExamplesTest : IDisposable
     {
-        private readonly Server server = null;
+        private readonly Server server;
         private readonly Mock<QueueService.QueueServiceBase> mockServer = null;
 
         public QueuesExamplesTest()

@@ -11,7 +11,7 @@ namespace Nitric.Sdk.Resource
         protected string name;
         protected static GrpcClient client;
 
-        protected BaseResource(string name)
+        public BaseResource(string name)
         {
             this.name = name;
             BaseResource.client = (BaseResource.client == null) ? new GrpcClient(GrpcChannelProvider.GetChannel()) : client;

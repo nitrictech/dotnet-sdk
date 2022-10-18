@@ -22,7 +22,7 @@ namespace Nitric.Sdk.Resource
         Receiving
     }
 
-    class QueueResource : SecureResource<QueuePermission>
+    public class QueueResource : SecureResource<QueuePermission>
     {
         internal QueueResource(string name) : base(name)
         {

@@ -19,7 +19,7 @@ namespace Nitric.Sdk.Resource
         Publishing
     }
 
-    class TopicResource : SecureResource<TopicPermission>
+    public class TopicResource : SecureResource<TopicPermission>
     {
         internal TopicResource(string name) : base(name)
         {

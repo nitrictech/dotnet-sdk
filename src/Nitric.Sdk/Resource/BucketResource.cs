@@ -26,7 +26,7 @@ namespace Nitric.Sdk.Resource
         Deleting
     }
 
-    class BucketResource : SecureResource<BucketPermission>
+    public class BucketResource : SecureResource<BucketPermission>
     {
         internal BucketResource(string name) : base(name)
         {
