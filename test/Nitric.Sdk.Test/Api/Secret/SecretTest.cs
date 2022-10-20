@@ -11,14 +11,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Text;
-using Xunit;
-using Moq;
-using Nitric.Sdk.Secret;
-using Nitric.Proto.Secret.v1;
 using Grpc.Core;
-namespace Nitric.Test.Api.Secret
+using Moq;
+using Nitric.Proto.Secret.v1;
+using Nitric.Sdk.Secret;
+using Xunit;
+
+
+namespace Nitric.Sdk.Test.Api.Secret
 {
     public class SecretTest
     {
@@ -28,12 +31,14 @@ namespace Nitric.Test.Api.Secret
             var secrets = new SecretsClient();
             Assert.NotNull(secrets);
         }
+
         [Fact]
         public void TestBuildSecretsWithNullClient()
         {
             var secrets = new SecretsClient(null);
             Assert.NotNull(secrets);
         }
+
         [Fact]
         public void TestBuildSecretWithName()
         {
@@ -41,6 +46,7 @@ namespace Nitric.Test.Api.Secret
             Assert.NotNull(secret);
             Assert.Equal("test-secret", secret.Name);
         }
+
         [Fact]
         public void TestBuildSecretWithoutName()
         {
@@ -49,6 +55,7 @@ namespace Nitric.Test.Api.Secret
             Assert.Throws<ArgumentNullException>(
                 () => new SecretsClient().Secret(null));
         }
+
         //Testing Secret Methods
         [Fact]
         public void TestPutSecretBytes()
@@ -65,7 +72,8 @@ namespace Nitric.Test.Api.Secret
                 }
             };
             Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
-            sc.Setup(e => e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            sc.Setup(e =>
+                    e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(secretPutResponse)
                 .Verifiable();
 
@@ -77,8 +85,11 @@ namespace Nitric.Test.Api.Secret
             Assert.Equal("test-version", response.Id);
             Assert.Equal(secret.Name, response.Secret.Name);
 
-            sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            sc.Verify(
+                t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestPutSecretString()
         {
@@ -94,7 +105,8 @@ namespace Nitric.Test.Api.Secret
                 }
             };
             Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
-            sc.Setup(e => e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            sc.Setup(e =>
+                    e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(secretPutResponse)
                 .Verifiable();
 
@@ -106,8 +118,11 @@ namespace Nitric.Test.Api.Secret
             Assert.Equal("test-version", response.Id);
             Assert.Equal(secret.Name, response.Secret.Name);
 
-            sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            sc.Verify(
+                t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestPutEmptySecretBytes()
         {
@@ -115,6 +130,7 @@ namespace Nitric.Test.Api.Secret
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put(new byte[] { }));
         }
+
         [Fact]
         public void TestPutNullSecretBytes()
         {
@@ -122,6 +138,7 @@ namespace Nitric.Test.Api.Secret
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put((byte[])null));
         }
+
         [Fact]
         public void TestPutEmptySecretString()
         {
@@ -129,6 +146,7 @@ namespace Nitric.Test.Api.Secret
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put(""));
         }
+
         [Fact]
         public void TestPutNullSecretString()
         {
@@ -136,11 +154,13 @@ namespace Nitric.Test.Api.Secret
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put((string)null));
         }
+
         [Fact]
         public void TestPutNonExistentSecret()
         {
             Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
-            sc.Setup(e => e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            sc.Setup(e =>
+                    e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified secret does not exist")))
                 .Verifiable();
 
@@ -151,14 +171,18 @@ namespace Nitric.Test.Api.Secret
             {
                 var response = secret.Put(testString);
             }
-            catch (Nitric.Sdk.Common.NitricException ne)
+            catch (global::Nitric.Sdk.Common.NitricException ne)
             {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified secret does not exist\")", ne.Message);
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified secret does not exist\")",
+                    ne.Message);
             }
 
 
-            sc.Verify(t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            sc.Verify(
+                t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestGetSecretVersion()
         {
@@ -168,6 +192,7 @@ namespace Nitric.Test.Api.Secret
             Assert.Equal("test-version", secretVersion.Id);
             Assert.Equal(secret, secretVersion.Secret);
         }
+
         [Fact]
         public void TestGetSecretVersionWithoutName()
         {
@@ -176,12 +201,15 @@ namespace Nitric.Test.Api.Secret
             Assert.Throws<ArgumentNullException>(
                 () => new SecretsClient().Secret("test-secret").Version(null));
         }
+
         [Fact]
         public void TestAccessSecretWithoutPermission()
         {
             Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
-            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.PermissionDenied, "You do not have permission to access this secret")))
+            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.PermissionDenied,
+                    "You do not have permission to access this secret")))
                 .Verifiable();
 
             var secret = new SecretsClient(sc.Object)
@@ -190,14 +218,19 @@ namespace Nitric.Test.Api.Secret
             {
                 var response = secret.Version("test-secret").Access();
             }
-            catch (Nitric.Sdk.Common.NitricException ne)
+            catch (global::Nitric.Sdk.Common.NitricException ne)
             {
-                Assert.Equal("Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to access this secret\")", ne.Message);
+                Assert.Equal(
+                    "Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to access this secret\")",
+                    ne.Message);
             }
 
 
-            sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            sc.Verify(
+                t => t.Access(It.IsAny<SecretAccessRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         [Fact]
         public void TestGetLatestSecretVersion()
         {
@@ -206,6 +239,7 @@ namespace Nitric.Test.Api.Secret
                 .Latest();
             Assert.Equal("latest", secretVersion.Id);
         }
+
         [Fact]
         public void TestSecretToString()
         {
@@ -214,6 +248,7 @@ namespace Nitric.Test.Api.Secret
                 .ToString();
             Assert.Equal("[name=test-secret]", secretString);
         }
+
         //Testing Secret Version Methods
         [Fact]
         public void TestAccess()
@@ -231,7 +266,8 @@ namespace Nitric.Test.Api.Secret
                 Value = Google.Protobuf.ByteString.CopyFromUtf8("Super secret message"),
             };
             Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
-            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(secretPutResponse)
                 .Verifiable();
 
@@ -246,8 +282,11 @@ namespace Nitric.Test.Api.Secret
             Assert.Equal("Super secret message", Encoding.UTF8.GetString(response.Value));
             Assert.Equal<string>("Super secret message", response.ValueText);
 
-            sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            sc.Verify(
+                t => t.Access(It.IsAny<SecretAccessRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         [Fact]
         public void TestSecretVersionToString()
         {
@@ -257,6 +296,7 @@ namespace Nitric.Test.Api.Secret
                 .ToString();
             Assert.Equal("SecretVersion[secret=[name=test-secret], version=test-version]", secretVersionString);
         }
+
         [Fact]
         public void TestSecretValueToString()
         {
@@ -273,7 +313,8 @@ namespace Nitric.Test.Api.Secret
                 Value = Google.Protobuf.ByteString.CopyFromUtf8("Super secret message"),
             };
             Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
-            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(secretPutResponse)
                 .Verifiable();
 
@@ -283,9 +324,13 @@ namespace Nitric.Test.Api.Secret
 
             var response = version.Access();
 
-            Assert.Equal("SecretValue[secretVersion=SecretVersion[secret=[name=test-secret], version=test-version], value.length=20]", response.ToString());
+            Assert.Equal(
+                "SecretValue[secretVersion=SecretVersion[secret=[name=test-secret], version=test-version], value.length=20]",
+                response.ToString());
 
-            sc.Verify(t => t.Access(It.IsAny<SecretAccessRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            sc.Verify(
+                t => t.Access(It.IsAny<SecretAccessRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }
 }

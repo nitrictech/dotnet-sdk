@@ -13,8 +13,7 @@ namespace Examples
         {
             // [START snippet]
             //Build the payload
-            var examplePayload = new Dictionary<string, string>();
-            examplePayload.Add("Content", "of event");
+            var examplePayload = new Dictionary<string, string> { { "Content", "of event" } };
 
             var topic = new EventsClient().Topic("my-topic");
 

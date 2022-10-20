@@ -17,6 +17,6 @@ namespace Nitric.Sdk.Resource
             BaseResource.client = (BaseResource.client == null) ? new GrpcClient(GrpcChannelProvider.GetChannel()) : client;
         }
 
-        public abstract BaseResource Register();
+        internal abstract BaseResource Register();
     }
 }

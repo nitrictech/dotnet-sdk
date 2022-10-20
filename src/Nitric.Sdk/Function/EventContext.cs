@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Text;
 using Nitric.Proto.Faas.v1;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
 
@@ -26,6 +27,8 @@ namespace Nitric.Sdk.Function
         /// The name of the topic that triggered this request
         /// </summary>
         public string Topic { get; private set; }
+
+        public string Payload => Encoding.UTF8.GetString(this.data);
 
         /// <summary>
         /// Construct an event request

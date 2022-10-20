@@ -28,7 +28,7 @@ namespace Nitric.Sdk.Resource
         {
         }
 
-        public override BaseResource Register()
+        internal override BaseResource Register()
         {
             var resource = new NitricResource { Name = this.name, Type = ResourceType.Queue };
             var request = new ResourceDeclareRequest { Resource = resource };

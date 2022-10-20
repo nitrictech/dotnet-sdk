@@ -11,56 +11,61 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using Grpc.Core;
-using Xunit;
 using Moq;
 using Nitric.Proto.Storage.v1;
-using Storage = Nitric.Sdk.Storage.Storage;
+using Xunit;
 
-namespace Nitric.Test.Api.StorageClient
+namespace Nitric.Sdk.Test.Api.Storage
 {
     public class StorageClientTest
     {
         [Fact]
         public void TestBuildStorage()
         {
-            var storage = new Storage();
+            var storage = new Sdk.Storage.Storage();
             Assert.NotNull(storage);
         }
+
         [Fact]
         public void TestBuildBucketWithName()
         {
-            var bucket = new Storage().Bucket("test-bucket");
+            var bucket = new Sdk.Storage.Storage().Bucket("test-bucket");
             Assert.NotNull(bucket);
             Assert.Equal("test-bucket", bucket.Name);
         }
+
         [Fact]
         public void TestBuildBucketWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Storage().Bucket("")
+                () => new Sdk.Storage.Storage().Bucket("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new Storage().Bucket(null)
+                () => new Sdk.Storage.Storage().Bucket(null)
             );
         }
+
         [Fact]
         public void TestBuildFileWithName()
         {
-            var file = new Storage().Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Storage().Bucket("test-bucket").File("test-file");
             Assert.NotNull(file);
         }
+
         [Fact]
         public void TestBuildFileWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Storage().Bucket("test-bucket").File("")
+                () => new Sdk.Storage.Storage().Bucket("test-bucket").File("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new Storage().Bucket("test-bucket").File(null)
+                () => new Sdk.Storage.Storage().Bucket("test-bucket").File(null)
             );
         }
+
         [Fact]
         public void TestWrite()
         {
@@ -73,70 +78,87 @@ namespace Nitric.Test.Api.StorageClient
             };
 
             Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
-            bc.Setup(e => e.Write(It.IsAny<StorageWriteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            bc.Setup(e => e.Write(It.IsAny<StorageWriteRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new StorageWriteResponse())
                 .Verifiable();
 
-            var file = new Storage(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Storage(bc.Object).Bucket("test-bucket").File("test-file");
 
             file.Write(System.Text.Encoding.UTF8.GetBytes("Hello World"));
 
-            bc.Verify(t => t.Write(It.IsAny<StorageWriteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            bc.Verify(
+                t => t.Write(It.IsAny<StorageWriteRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         [Fact]
         public void TestReadExistingKey()
         {
             var storageResponse = new StorageReadResponse();
-            storageResponse.Body = Google.Protobuf.ByteString.CopyFrom(System.Text.Encoding.UTF8.GetBytes("Hello World"));
+            storageResponse.Body =
+                Google.Protobuf.ByteString.CopyFrom(System.Text.Encoding.UTF8.GetBytes("Hello World"));
 
             Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
-            bc.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            bc.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(storageResponse)
                 .Verifiable();
 
-            var file = new Storage(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Storage(bc.Object).Bucket("test-bucket").File("test-file");
 
             var response = file.Read();
 
             Assert.Equal("Hello World", System.Text.Encoding.UTF8.GetString(response));
 
-            bc.Verify(t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            bc.Verify(
+                t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestReadNonExistingKey()
         {
             Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
-            bc.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            bc.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var file = new Storage(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Storage(bc.Object).Bucket("test-bucket").File("test-file");
 
             try
             {
                 file.Read();
                 Assert.True(false);
             }
-            catch (Nitric.Sdk.Common.NitricException ne)
+            catch (global::Nitric.Sdk.Common.NitricException ne)
             {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")", ne.Message);
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")",
+                    ne.Message);
             }
 
-            bc.Verify(t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            bc.Verify(
+                t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestDeleteExistingKey()
         {
             Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
-            bc.Setup(e => e.Delete(It.IsAny<StorageDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            bc.Setup(e => e.Delete(It.IsAny<StorageDeleteRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new StorageDeleteResponse())
                 .Verifiable();
 
-            var file = new Storage(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Storage(bc.Object).Bucket("test-bucket").File("test-file");
 
             file.Delete();
 
-            bc.Verify(t => t.Delete(It.IsAny<StorageDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            bc.Verify(
+                t => t.Delete(It.IsAny<StorageDeleteRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }
 }

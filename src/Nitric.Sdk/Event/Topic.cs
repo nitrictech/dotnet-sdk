@@ -21,6 +21,16 @@ namespace Nitric.Sdk.Event
             this.Name = name;
         }
 
+        private static NitricEvent EventToWire(Event evt)
+        {
+            return new NitricEvent
+            {
+                Id = evt.Id ?? "",
+                PayloadType = evt.PayloadType ?? "",
+                Payload = Utils.ObjToStruct(evt.Payload)
+            };
+        }
+
         /// <summary>
         /// Publish a new event to this topic.
         /// </summary>
@@ -30,7 +40,7 @@ namespace Nitric.Sdk.Event
         public string Publish(Event evt)
         {
             var payloadStruct = Utils.ObjToStruct(evt.Payload);
-            var nEvt = new NitricEvent { Id = evt.Id, PayloadType = evt.PayloadType, Payload = payloadStruct };
+            var nEvt = EventToWire(evt);
             var request = new EventPublishRequest { Topic = this.Name, Event = nEvt };
 
             try

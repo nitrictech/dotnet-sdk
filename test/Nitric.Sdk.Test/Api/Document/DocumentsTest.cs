@@ -11,15 +11,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
-using Nitric.Sdk.Document;
-using Nitric.Proto.Document.v1;
-using Xunit;
-using Moq;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-namespace Nitric.Test.Api.Document
+using Moq;
+using Nitric.Proto.Document.v1;
+using Nitric.Sdk.Document;
+using Xunit;
+
+namespace Nitric.Sdk.Test.Api.Document
 {
     public class DocumentsTest
     {
@@ -29,6 +31,7 @@ namespace Nitric.Test.Api.Document
             var documents = new DocumentsClient();
             Assert.NotNull(documents);
         }
+
         /*
          * TESTING COLLECTIONS
          */
@@ -38,6 +41,7 @@ namespace Nitric.Test.Api.Document
             var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
             Assert.NotNull(collection);
         }
+
         [Fact]
         public void TestCollectionsMethodWithoutName()
         {
@@ -47,6 +51,7 @@ namespace Nitric.Test.Api.Document
             Assert.Throws<ArgumentNullException>(
                 () => documents.Collection<Dictionary<string, object>>(""));
         }
+
         [Fact]
         public void TestCollectionSubCollectionWithName()
         {
@@ -54,8 +59,9 @@ namespace Nitric.Test.Api.Document
             var subcollection = collection.Collection("test-subcollection");
             Assert.NotNull(subcollection);
             Assert.Equal(collection, subcollection.ParentKey.Collection);
-            Assert.Equal("", subcollection.ParentKey.Id);
+            Assert.Null(subcollection.ParentKey.Id);
         }
+
         [Fact]
         public void TestCollectionSubCollectionWithoutName()
         {
@@ -65,6 +71,7 @@ namespace Nitric.Test.Api.Document
             Assert.Throws<ArgumentNullException>(
                 () => collection.Collection(""));
         }
+
         /*
          * TESTING DOCS
          */
@@ -75,6 +82,7 @@ namespace Nitric.Test.Api.Document
             var docs = collection.Doc("test-document");
             Assert.NotNull(docs);
         }
+
         [Fact]
         public void TestBuildDocWithoutDocumentId()
         {
@@ -84,6 +92,7 @@ namespace Nitric.Test.Api.Document
             Assert.Throws<ArgumentNullException>(
                 () => collection.Doc(null));
         }
+
         [Fact]
         public void TestBuildQuery()
         {
@@ -91,6 +100,7 @@ namespace Nitric.Test.Api.Document
             var query = collection.Query();
             Assert.NotNull(query);
         }
+
         /*
          * TESTING GET (DOCS)
          */
@@ -115,7 +125,8 @@ namespace Nitric.Test.Api.Document
             };
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Get(It.IsAny<DocumentGetRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(documentGetResponse)
                 .Verifiable();
 
@@ -127,8 +138,11 @@ namespace Nitric.Test.Api.Document
             Assert.Equal("document", response.Content["test"]);
             Assert.Equal(response.Ref, documentRef);
 
-            dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestGetWithSortedDictionary()
         {
@@ -150,7 +164,8 @@ namespace Nitric.Test.Api.Document
             };
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Get(It.IsAny<DocumentGetRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(documentGetResponse)
                 .Verifiable();
 
@@ -161,13 +176,17 @@ namespace Nitric.Test.Api.Document
             Assert.Equal("document", response.Content["test"]);
             Assert.Equal(response.Ref, documentRef);
 
-            dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestGetToNonExistentDocument()
         {
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Get(It.IsAny<DocumentGetRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified document does not exist")))
                 .Verifiable();
 
@@ -178,13 +197,17 @@ namespace Nitric.Test.Api.Document
             {
                 var response = documentRef.Get();
             }
-            catch (Nitric.Sdk.Common.NitricException ne)
+            catch (global::Nitric.Sdk.Common.NitricException ne)
             {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")", ne.Message);
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")",
+                    ne.Message);
             }
 
-            dc.Verify(t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Get(It.IsAny<DocumentGetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         /*
          * TESTING SET (DOCS)
          */
@@ -195,7 +218,8 @@ namespace Nitric.Test.Api.Document
             document.Add("test", "document");
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
@@ -205,8 +229,11 @@ namespace Nitric.Test.Api.Document
 
             documentRef.Set(document);
 
-            dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestSetWithMultipleEntryDictionary()
         {
@@ -217,7 +244,8 @@ namespace Nitric.Test.Api.Document
             }
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
@@ -227,15 +255,19 @@ namespace Nitric.Test.Api.Document
 
             documentRef.Set(document);
 
-            dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestSetWithEmptyDictionary()
         {
             var document = new Dictionary<string, object>();
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
@@ -245,13 +277,17 @@ namespace Nitric.Test.Api.Document
 
             documentRef.Set(document);
 
-            dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestSetWithNullDictionaryThrows()
         {
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
@@ -262,8 +298,11 @@ namespace Nitric.Test.Api.Document
             Assert.Throws<ArgumentNullException>(
                 () => documentRef.Set(null));
 
-            dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Never);
+            dc.Verify(
+                t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Never);
         }
+
         [Fact]
         public void TestSetWithSortedDictionary()
         {
@@ -271,7 +310,8 @@ namespace Nitric.Test.Api.Document
             document.Add("test", "document");
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new DocumentSetResponse())
                 .Verifiable();
 
@@ -281,14 +321,19 @@ namespace Nitric.Test.Api.Document
 
             documentRef.Set(document);
 
-            dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         [Fact]
         public void TestSetToDocumentWithoutPermissions()
         {
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.PermissionDenied, "You do not have permission to modify this document")))
+            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.PermissionDenied,
+                    "You do not have permission to modify this document")))
                 .Verifiable();
 
             var document = new SortedDictionary<string, object>();
@@ -301,13 +346,18 @@ namespace Nitric.Test.Api.Document
             {
                 documentRef.Set(document);
             }
-            catch (Nitric.Sdk.Common.NitricException ne)
+            catch (global::Nitric.Sdk.Common.NitricException ne)
             {
-                Assert.Equal("Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to modify this document\")", ne.Message);
+                Assert.Equal(
+                    "Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to modify this document\")",
+                    ne.Message);
             }
 
-            dc.Verify(t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                Times.Once);
         }
+
         /*
          * TESTING DELETE (DOCS)
          */
@@ -317,7 +367,8 @@ namespace Nitric.Test.Api.Document
             var documentSetResponse = new DocumentSetResponse();
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Delete(It.IsAny<DocumentDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Delete(It.IsAny<DocumentDeleteRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new DocumentDeleteResponse())
                 .Verifiable();
 
@@ -327,8 +378,11 @@ namespace Nitric.Test.Api.Document
 
             documentRef.Delete();
 
-            dc.Verify(t => t.Delete(It.IsAny<DocumentDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Delete(It.IsAny<DocumentDeleteRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         /*
          * TESTING DOC COLLECTION (DOCS)
          */
@@ -342,6 +396,7 @@ namespace Nitric.Test.Api.Document
 
             Assert.NotNull(docCollection);
         }
+
         [Fact]
         public void TestDocCollectionWithoutName()
         {
@@ -354,6 +409,7 @@ namespace Nitric.Test.Api.Document
             Assert.Throws<ArgumentNullException>(
                 () => document.Collection(""));
         }
+
         [Fact]
         public void TestMultipleDocCollectionsThrows()
         {
@@ -366,6 +422,7 @@ namespace Nitric.Test.Api.Document
                     .Collection("this-collection-throws-error")
             );
         }
+
         /*
          * TEST COLLECTION GROUP
          */
@@ -377,8 +434,9 @@ namespace Nitric.Test.Api.Document
             var collectionGroup = collection.Collection("test-subcollection");
             Assert.NotNull(collectionGroup);
             Assert.Equal("test-subcollection", collectionGroup.Name);
-            Assert.Equal("", collectionGroup.ParentKey.Id);
+            Assert.Null(collectionGroup.ParentKey.Id);
         }
+
         [Fact]
         public void TestCollectionGroupBuildWithoutName()
         {
@@ -390,6 +448,7 @@ namespace Nitric.Test.Api.Document
             Assert.Throws<ArgumentNullException>(
                 () => collection.Collection(""));
         }
+
         /*
          * TEST QUERY
          */
@@ -416,6 +475,7 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
         }
+
         [Fact]
         public void TestChangingLimit()
         {
@@ -433,6 +493,7 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
         }
+
         [Fact]
         public void TestHandlingNegativeLimits()
         {
@@ -450,6 +511,7 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
         }
+
         [Fact]
         public void TestChangingPagingToken()
         {
@@ -470,6 +532,7 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
         }
+
         [Fact]
         public void TestChangingWithNullPagingToken()
         {
@@ -487,6 +550,7 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
         }
+
         [Fact]
         public void TestChangingWithEmptyPagingToken()
         {
@@ -504,6 +568,7 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
         }
+
         [Fact]
         public void TestFetch()
         {
@@ -524,7 +589,8 @@ namespace Nitric.Test.Api.Document
             queryResponse.PagingToken.Add(pagingToken);
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queryResponse)
                 .Verifiable();
 
@@ -544,8 +610,11 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
 
-            dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         [Fact]
         public void TestFetchConformsToLimitOfOne()
         {
@@ -566,7 +635,8 @@ namespace Nitric.Test.Api.Document
             queryResponse.PagingToken.Add(pagingToken);
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queryResponse)
                 .Verifiable();
 
@@ -588,8 +658,11 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
 
-            dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         [Fact]
         public void TestFetchWithExpressions()
         {
@@ -610,7 +683,8 @@ namespace Nitric.Test.Api.Document
             queryResponse.PagingToken.Add(pagingToken);
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queryResponse)
                 .Verifiable();
 
@@ -633,8 +707,11 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
 
-            dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         [Fact]
         public void TestFetchWithPagingToken()
         {
@@ -658,7 +735,8 @@ namespace Nitric.Test.Api.Document
             queryResponse.PagingToken.Add(updatedPagingToken);
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queryResponse)
                 .Verifiable();
 
@@ -680,8 +758,11 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
 
-            dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         [Fact]
         public void TestFetchAll()
         {
@@ -703,7 +784,8 @@ namespace Nitric.Test.Api.Document
             queryResponse.PagingToken.Add(pagingToken);
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queryResponse)
                 .Verifiable();
 
@@ -724,13 +806,17 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
 
-            dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         [Fact]
         public void TestFetchNonExistentDocument()
         {
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified document does not exist")))
                 .Verifiable();
 
@@ -741,13 +827,17 @@ namespace Nitric.Test.Api.Document
             {
                 var response = query.Fetch();
             }
-            catch (Nitric.Sdk.Common.NitricException ne)
+            catch (global::Nitric.Sdk.Common.NitricException ne)
             {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")", ne.Message);
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")",
+                    ne.Message);
             }
 
-            dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
         [Fact]
         public void TestFetchFromSubcollection()
         {
@@ -768,7 +858,8 @@ namespace Nitric.Test.Api.Document
             queryResponse.PagingToken.Add(pagingToken);
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queryResponse)
                 .Verifiable();
 
@@ -780,8 +871,8 @@ namespace Nitric.Test.Api.Document
             try
             {
                 var response = query.Fetch();
-                Assert.Equal(response.QueryData.Count, 1);
-                Assert.Equal(response.QueryData[0].Content["test"], "document");
+                Assert.Single(response.QueryData);
+                Assert.Equal("document", response.QueryData[0].Content["test"]);
                 Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -789,7 +880,9 @@ namespace Nitric.Test.Api.Document
                 Assert.False(false);
             }
 
-            dc.Verify(t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+            dc.Verify(
+                t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }
 }

@@ -33,7 +33,8 @@ namespace Nitric.Sdk.Common.Util
         /// <returns></returns>
         public static Struct ObjToStruct(object obj)
         {
-            string json = ObjToJson(obj);
+            if (obj == null) return null;
+            var json = ObjToJson(obj);
             return JsonParser.Default.Parse<Struct>(json);
         }
 

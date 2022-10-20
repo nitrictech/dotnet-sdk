@@ -1,3 +1,4 @@
+using System;
 using Nitric.Sdk.Function;
 
 namespace Nitric.Sdk.Resource
@@ -17,7 +18,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="rate"></param>
         /// <param name="frequency"></param>
         /// <param name="middleware"></param>
-        public void Every(int rate, Frequency frequency, IHandler<EventContext> middleware)
+        public void Every(int rate, Frequency frequency, Func<EventContext, EventContext> middleware)
         {
 
         }

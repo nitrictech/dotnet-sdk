@@ -31,6 +31,14 @@
     <Folder Include="Api\Queue\" />
     <Folder Include="Api\Document\" />
     <Folder Include="Api\Secret\" />
-    <Folder Include="examples\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="examples\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="examples\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="examples\**" />
   </ItemGroup>
 </Project>

@@ -51,7 +51,7 @@ namespace Nitric.Sdk.Document
             return new GrpcKey
             {
                 Collection = this.Collection.ToGrpcCollection(),
-                Id = this.Id,
+                Id = this.Id ?? "",
             };
         }
 

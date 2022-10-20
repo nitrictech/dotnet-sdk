@@ -11,10 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Collections.Generic;
 using Xunit;
 
-namespace Nitric.Test.Api.QueueClient
+namespace Nitric.Sdk.Test.Api.Queue
 {
     public class QueueItemTest
     {
@@ -23,7 +24,7 @@ namespace Nitric.Test.Api.QueueClient
         {
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
-            var queueItem = new Nitric.Sdk.Queue.Task
+            var queueItem = new global::Nitric.Sdk.Queue.Task
             {
                 Id = "2",
                 PayloadType = "payload type",

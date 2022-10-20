@@ -66,10 +66,11 @@ namespace Nitric.Sdk.Document
                 throw new ArgumentNullException(name);
             }
 
-            if (Util.Utils.CollectionDepth(this.ToGrpcCollection()) >= Constants.DepthLimit)
+            var collectionDepth = Util.Utils.CollectionDepth(this.ToGrpcCollection());
+            if (collectionDepth > Constants.DepthLimit)
             {
-                throw new NotSupportedException("Currently sub-collections are only able to be nested " +
-                                                Constants.DepthLimit + "deep");
+                throw new NotSupportedException("Currently sub-collections are only able to be nested to a depth of " +
+                                                Constants.DepthLimit + ", found depth " + collectionDepth);
             }
 
             var parentKey = new Key<T> { Collection = this };

@@ -36,7 +36,7 @@ namespace Nitric.Sdk.Queue
             var request = new QueueSendRequest
             {
                 Queue = this.Name,
-                Task = EventToWire(task)
+                Task = TaskToWire(task)
             };
             try
             {
@@ -59,7 +59,7 @@ namespace Nitric.Sdk.Queue
             var wireEvents = new RepeatedField<NitricTask>();
             foreach (var task in tasks)
             {
-                wireEvents.Add(EventToWire(task));
+                wireEvents.Add(TaskToWire(task));
             }
 
             var request = new QueueSendBatchRequest { Queue = this.Name };
@@ -116,12 +116,12 @@ namespace Nitric.Sdk.Queue
             };
         }
 
-        private static NitricTask EventToWire(Task task)
+        private static NitricTask TaskToWire(Task task)
         {
             return new NitricTask
             {
-                Id = task.Id,
-                PayloadType = task.PayloadType,
+                Id = task.Id ?? "",
+                PayloadType = task.PayloadType ?? "",
                 Payload = Utils.ObjToStruct(task.Payload)
             };
         }

@@ -12,12 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Xunit;
-
-using System.Text;
-using Nitric.Proto.Faas.v1;
-
-namespace Nitric.Test.Faas
+namespace Nitric.Sdk.Test.Faas
 {
     // public class TriggerTest
     // {

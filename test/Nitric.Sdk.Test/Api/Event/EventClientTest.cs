@@ -11,19 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
-using Xunit;
-using Nitric.Sdk.Event;
-using EventModel = Nitric.Sdk.Event.Event;
 using System.Collections.Generic;
-using Nitric.Proto.Event.v1;
-using Moq;
-using Util = Nitric.Sdk.Common.Util;
 using Grpc.Core;
+using Moq;
+using Nitric.Proto.Event.v1;
+using Nitric.Sdk.Event;
+using Xunit;
+using EventModel = Nitric.Sdk.Event.Event;
 using static Nitric.Sdk.Common.Util.Utils;
 
-namespace Nitric.Test.Api.EventClient
+namespace Nitric.Sdk.Test.Api.Event
 {
+
     public class EventClientTest
     {
         [Fact]
@@ -85,7 +86,7 @@ namespace Nitric.Test.Api.EventClient
             {
                 var response = topic.Publish(evtToSend);
             }
-            catch (Nitric.Sdk.Common.NitricException ne)
+            catch (global::Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified topic does not exist\")", ne.Message);
             }

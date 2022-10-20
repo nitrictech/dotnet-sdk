@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Nitric.Proto.Resource.v1;
 using Nitric.Sdk.Event;
+using Nitric.Sdk.Function;
 using Action = Nitric.Proto.Resource.v1.Action;
 using NitricResource = Nitric.Proto.Resource.v1.Resource;
 
@@ -25,7 +26,7 @@ namespace Nitric.Sdk.Resource
         {
         }
 
-        public override BaseResource Register()
+        internal override BaseResource Register()
         {
             var resource = new NitricResource { Name = this.name, Type = ResourceType.Topic };
             var request = new ResourceDeclareRequest { Resource = resource };
@@ -46,11 +47,25 @@ namespace Nitric.Sdk.Resource
                 .Distinct();
         }
 
-        // public void subscribe(EventHandler<> mw)
-        // {
-        //
-        // }
+        /// <summary>
+        /// Registers a handler to be called whenever a new event is published to this topic.
+        /// </summary>
+        /// <param name="handler">The handler to call to process events</param>
+        public void Subscribe(Func<EventContext, EventContext> handler)
+        {
+            var subWorker = new Faas
+            {
+                EventHandler = handler,
+                Options = new SubscriptionWorkerOptions { Topic = this.name },
+            };
+            Nitric.RegisterWorker(subWorker);
+        }
 
+        /// <summary>
+        /// Request specific access to this topic.
+        /// </summary>
+        /// <param name="permissions"></param>
+        /// <returns></returns>
         public Topic With(params TopicPermission[] permissions)
         {
             this.RegisterPolicy(permissions);

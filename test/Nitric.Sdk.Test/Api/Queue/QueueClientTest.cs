@@ -13,18 +13,18 @@
 // limitations under the License.
 
 using System;
-using Xunit;
-using Nitric.Proto.Queue.v1;
-using Google.Protobuf.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
+using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
-using Nitric.Sdk.Queue;
 using Grpc.Core;
+using Moq;
+using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common.Util;
+using Nitric.Sdk.Queue;
+using Xunit;
 
-namespace Nitric.Test.Api.QueueClient
+namespace Nitric.Sdk.Test.Api.Queue
 {
     public class QueueClientTest
     {
@@ -69,7 +69,7 @@ namespace Nitric.Test.Api.QueueClient
             {
                 queue.Send(new Task());
             }
-            catch (Nitric.Sdk.Common.NitricException ne)
+            catch (global::Nitric.Sdk.Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified queue does not exist\")",
                     ne.Message);

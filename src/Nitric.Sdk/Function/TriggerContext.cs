@@ -63,8 +63,8 @@ namespace Nitric.Sdk.Function
     /// <typeparam name="Res">The context's response.</typeparam>
     public abstract class TriggerContext<Req, Res> : IContext where Req : AbstractRequest
     {
-        protected Req req;
-        protected Res res;
+        public Req req;
+        public Res res;
 
         public abstract TriggerResponse ToGrpcTriggerContext();
 

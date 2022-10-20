@@ -14,8 +14,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Google.Protobuf;
 using Google.Protobuf.Collections;
+using Newtonsoft.Json;
 using Nitric.Proto.Faas.v1;
 using Nitric.Sdk.Common;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
@@ -82,28 +84,17 @@ namespace Nitric.Sdk.Function
         /// <summary>
         /// The HTTP status code of the response.
         /// </summary>
-        public int Status { get; set; }
+        public int Status { get; set; } = 200;
 
         /// <summary>
         /// The HTTP body data to be returned.ß
         /// </summary>
-        public byte[] Body { get; set; }
+        public byte[] Body { get; set; } = {};
 
         /// <summary>
         /// The HTTP header to be included in the response.
         /// </summary>
-        public Dictionary<string, IEnumerable<string>> headers;
-
-        /// <summary>
-        /// Represents an HTTP response to be sent.
-        /// </summary>
-        public HttpResponse()
-        {
-            this.Status = 200;
-            this.Body = System.Text.Encoding.UTF8.GetBytes("");
-            this.headers = new Dictionary<string, IEnumerable<string>>
-                { { "Content-Type", new List<string> { "text/plain" } } };
-        }
+        public Dictionary<string, IEnumerable<string>> Headers { get; set; } = new();
 
         /// <summary>
         /// Set the HTTP body data from an object.
@@ -111,10 +102,22 @@ namespace Nitric.Sdk.Function
         /// The object is converted to a JSON string with UTF-8 encoding and the Content-Type header is set to application/json.
         /// </summary>
         /// <exception cref="UnimplementedException"></exception>
-        public void Json()
+        public void Json(object obj)
         {
-            // TODO: JSON method implementation
-            throw new UnimplementedException("JSON body conversion not implemented.");
+            this.Body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(obj));
+            this.Headers["Content-Type"] = new List<string> { "application/json" };
+        }
+
+        /// <summary>
+        /// Set the HTTP body data from a string.
+        ///
+        /// The object is converted to bytes assuming UTF-8 encoding and the Content-Type header is set to text/plain.
+        /// </summary>
+        /// <exception cref="UnimplementedException"></exception>
+        public void Text(string text)
+        {
+            this.Body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
+            this.Headers["Content-Type"] = new List<string> { "text/plain" };
         }
     }
 
@@ -170,7 +173,7 @@ namespace Nitric.Sdk.Function
         {
             var responseHeaders = new MapField<string, HeaderValue>
             {
-                this.res.headers.ToDictionary(h => h.Key, h =>
+                this.res.Headers.ToDictionary(h => h.Key, h =>
                 {
                     var hv = new HeaderValue();
                     hv.Value.Add(h.Value);

@@ -7,7 +7,7 @@ namespace Nitric.Sdk.Common.Util
     /// </summary>
     internal static class Environment
     {
-        private const string NitricHostAddressDefault = "localhost:50051";
+        private const string NitricHostAddressDefault = "http://localhost:50051";
         private const string NitricHostAddressEnvVar = "SERVICE_ADDRESS";
 
         private static string GetEnvironmentVariable(string name, string defaultValue)

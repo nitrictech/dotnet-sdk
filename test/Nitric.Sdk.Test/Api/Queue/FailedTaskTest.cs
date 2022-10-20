@@ -13,12 +13,11 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using Xunit;
-using Google.Protobuf.WellKnownTypes;
 using Nitric.Sdk.Common.Util;
 using Nitric.Sdk.Queue;
+using Xunit;
 
-namespace Nitric.Test.Api.QueueClient
+namespace Nitric.Sdk.Test.Api.Queue
 {
     public class FailedTaskTest
     {
@@ -28,9 +27,9 @@ namespace Nitric.Test.Api.QueueClient
             var payload = new Dictionary<string, string>();
             payload.Add("name", "value");
             var payloadStruct = Utils.ObjToStruct(payload);
-            var failedTask = new Nitric.Sdk.Queue.FailedTask
+            var failedTask = new global::Nitric.Sdk.Queue.FailedTask
             {
-                Message = "1",
+                Message = "message",
                 Task = new Task
                 {
                     Id = "1",

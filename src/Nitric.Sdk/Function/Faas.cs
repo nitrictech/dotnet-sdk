@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Nitric.Proto.Faas.v1;
@@ -71,22 +72,20 @@ namespace Nitric.Sdk.Function
     /// </summary>
     public class ApiWorkerOptions : IFaasOptions
     {
-        private string api;
-        private string route;
-        private HashSet<HttpMethod> method;
+        /// <summary>
+        /// The name of the API this worker should register with.
+        /// </summary>
+        public string Api { get; set; }
 
         /// <summary>
-        /// Construct a new API worker options object.
+        /// The route this worker handlers.
         /// </summary>
-        /// <param name="api"></param>
-        /// <param name="route"></param>
-        /// <param name="method"></param>
-        public ApiWorkerOptions(string api, string route, HashSet<HttpMethod> method)
-        {
-            this.api = api;
-            this.route = route;
-            this.method = method;
-        }
+        public string Route { get; set; }
+
+        /// <summary>
+        /// The HTTP method this worker can respond to.
+        /// </summary>
+        public HashSet<HttpMethod> Methods { get; set; }
     }
 
     /// <summary>
@@ -94,16 +93,10 @@ namespace Nitric.Sdk.Function
     /// </summary>
     public class SubscriptionWorkerOptions : IFaasOptions
     {
-        private string topic;
-
         /// <summary>
-        /// Construct a new subscription worker options object.
+        ///
         /// </summary>
-        /// <param name="topic"></param>
-        public SubscriptionWorkerOptions(string topic)
-        {
-            this.topic = topic;
-        }
+        public string Topic { get; set; }
     }
 
     /// <summary>
@@ -111,22 +104,9 @@ namespace Nitric.Sdk.Function
     /// </summary>
     public class ScheduleWorkerOptions : IFaasOptions
     {
-        private string description;
-        private int rate;
-        private Frequency frequency;
-
-        /// <summary>
-        /// Construct a options for a schedule worker.
-        /// </summary>
-        /// <param name="description"></param>
-        /// <param name="rate"></param>
-        /// <param name="frequency"></param>
-        public ScheduleWorkerOptions(string description, int rate, Frequency frequency)
-        {
-            this.description = description;
-            this.rate = rate;
-            this.frequency = frequency;
-        }
+        public string Description { get; set; }
+        public int Rate { get; set; }
+        public Frequency Frequency { get; set; }
     }
 
     /// <summary>
@@ -136,10 +116,54 @@ namespace Nitric.Sdk.Function
     /// </summary>
     public class Faas
     {
-        private IFaasOptions Options { get; set; }
-        private IHandler<HttpContext> HttpHandler { get; set; }
-        private IHandler<EventContext> EventHandler { get; set; }
-        private ProtoClient Client { get; } = new ProtoClient(Util.GrpcChannelProvider.GetChannel());
+        /// <summary>
+        /// Function a as service options
+        /// </summary>
+        public IFaasOptions Options { get; set; }
+
+        /// <summary>
+        /// A handler for HTTP requests
+        /// </summary>
+        public Func<HttpContext, HttpContext> HttpHandler { get; set; }
+
+        /// <summary>
+        /// A handler for event requests
+        /// </summary>
+        public Func<EventContext, EventContext> EventHandler { get; set; }
+
+        public ProtoClient Client { get; } = new ProtoClient(Util.GrpcChannelProvider.GetChannel());
+
+        private static InitRequest OptionsToInit(IFaasOptions options)
+        {
+            switch (options)
+            {
+                case ApiWorkerOptions a:
+                    var apiInitReq = new InitRequest { Api = new ApiWorker { Api = a.Api, Path = a.Route } };
+                    apiInitReq.Api.Methods.Add(a.Methods.Select(m => m.ToString()));
+                    return apiInitReq;
+                case ScheduleWorkerOptions s:
+                    var scheduleInitReq = new InitRequest
+                    {
+                        Schedule = new ScheduleWorker
+                        {
+                            Rate = new ScheduleRate { Rate = s.Rate + " " + s.Frequency.ToString().ToLower() },
+                            Key = s.Description
+                        }
+                    };
+                    return scheduleInitReq;
+                case SubscriptionWorkerOptions s:
+                    var subInitReq = new InitRequest
+                    {
+                        Subscription = new SubscriptionWorker
+                        {
+                            Topic = s.Topic,
+                        },
+                    };
+                    return subInitReq;
+            }
+
+            throw new Exception("Invalid worker options");
+        }
 
         /// <summary>
         /// Start the FaaS service to start receiving requests from the Nitric Server
@@ -156,6 +180,14 @@ namespace Nitric.Sdk.Function
             }
 
             using var call = this.Client.TriggerStream();
+
+            await call.RequestStream.WriteAsync(
+                new ClientMessage
+                {
+                    InitRequest = OptionsToInit(this.Options),
+                }
+            );
+
             try
             {
                 while (await call.ResponseStream.MoveNext())
@@ -177,7 +209,7 @@ namespace Nitric.Sdk.Function
 
                                     var ctxHttp = TriggerContext<HttpRequest, HttpResponse>
                                         .FromGrpcTriggerRequest<HttpContext>(grpcRequest.TriggerRequest);
-                                    resultContext = this.HttpHandler.Invoke(ctxHttp);
+                                    resultContext = this.HttpHandler(ctxHttp);
                                     break;
                                 case TriggerRequest.ContextOneofCase.Topic:
                                     if (this.EventHandler == null)
@@ -187,7 +219,7 @@ namespace Nitric.Sdk.Function
 
                                     var ctxEvent = TriggerContext<EventRequest, EventResponse>
                                         .FromGrpcTriggerRequest<EventContext>(grpcRequest.TriggerRequest);
-                                    resultContext = this.EventHandler.Invoke(ctxEvent);
+                                    resultContext = this.EventHandler(ctxEvent);
                                     break;
                                 case TriggerRequest.ContextOneofCase.None:
                                 default:
@@ -213,7 +245,7 @@ namespace Nitric.Sdk.Function
                     }
                 }
 
-                await call.RequestStream.CompleteAsync();
+                // await call.RequestStream.CompleteAsync();
             }
             catch (RpcException re)
             {

@@ -16,7 +16,8 @@ using System.Collections.Generic;
 using Nitric.Sdk.Common.Util;
 using Xunit;
 
-namespace Nitric.Test.Api.EventClient
+
+namespace Nitric.Sdk.Test.Api.Event
 {
     public class EventTest
     {
@@ -26,7 +27,7 @@ namespace Nitric.Test.Api.EventClient
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
 
-            var eventTest = new Nitric.Sdk.Event.Event
+            var eventTest = new global::Nitric.Sdk.Event.Event
                 { Id = "id", Payload = Utils.ObjToStruct(payload), PayloadType = "payloadType" };
 
             Assert.NotNull(eventTest);
@@ -41,7 +42,7 @@ namespace Nitric.Test.Api.EventClient
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("name", "value");
 
-            var eventTest = new Nitric.Sdk.Event.Event
+            var eventTest = new global::Nitric.Sdk.Event.Event
                 { Id = "id", Payload = Utils.ObjToStruct(payload), PayloadType = "payloadType" };
 
 

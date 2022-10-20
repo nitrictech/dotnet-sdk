@@ -1,3 +1,5 @@
+using System;
+
 namespace Nitric.Sdk.Function
 {
     /// <summary>
@@ -12,6 +14,6 @@ namespace Nitric.Sdk.Function
         /// <param name="ctx">the context to process</param>
         /// <param name="next">any future middleware or handlers to call next.</param>
         /// <returns></returns>
-        public TCtx Invoke(TCtx ctx, IHandler<TCtx> next);
+        public TCtx Invoke(TCtx ctx, Func<TCtx, TCtx> next);
     }
 }

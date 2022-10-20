@@ -102,7 +102,7 @@ namespace Nitric.Test.Examples
         public EventsExamplesTest()
         {
             //Setup a mock server for the snippets to hit
-            Environment.SetEnvironmentVariable("SERVICE_BIND", "127.0.0.1:50052");
+            Environment.SetEnvironmentVariable("SERVICE_ADDRESS", "127.0.0.1:50052");
             mockServer = new Mock<EventService.EventServiceBase>();
             mockServer.Setup(e => e.Publish(It.IsAny<EventPublishRequest>(), It.IsAny<ServerCallContext>()))
                 .ReturnsAsync(new EventPublishResponse())
@@ -169,7 +169,7 @@ namespace Nitric.Test.Examples
             mockServer.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), It.IsAny<ServerCallContext>()))
                 .ReturnsAsync(new QueueCompleteResponse())
                 .Verifiable();
-            Environment.SetEnvironmentVariable("SERVICE_BIND", "127.0.0.1:50053");
+            Environment.SetEnvironmentVariable("SERVICE_ADDRESS", "127.0.0.1:50053");
             this.server = new Server
             {
                 Services = { QueueService.BindService(mockServer.Object) },
@@ -229,7 +229,7 @@ namespace Nitric.Test.Examples
                     Version = "test-version",
                 }
             };
-            Environment.SetEnvironmentVariable("SERVICE_BIND", "127.0.0.1:50054");
+            Environment.SetEnvironmentVariable("SERVICE_ADDRESS", "127.0.0.1:50054");
             //Setup a mock server for the snippets to hit
             mockServer = new Mock<SecretService.SecretServiceBase>();
             mockServer.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), It.IsAny<ServerCallContext>()))
@@ -284,7 +284,7 @@ namespace Nitric.Test.Examples
             mockServer.Setup(e => e.Delete(It.IsAny<StorageDeleteRequest>(), It.IsAny<ServerCallContext>()))
                 .ReturnsAsync(new StorageDeleteResponse())
                 .Verifiable();
-            Environment.SetEnvironmentVariable("SERVICE_BIND", "127.0.0.1:50055");
+            Environment.SetEnvironmentVariable("SERVICE_ADDRESS", "127.0.0.1:50055");
             this.server = new Server
             {
                 Services = { StorageService.BindService(mockServer.Object) },

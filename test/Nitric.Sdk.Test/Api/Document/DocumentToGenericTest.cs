@@ -11,21 +11,24 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System.Linq;
+
 using System.Collections.Generic;
+using System.Linq;
+using Google.Protobuf.WellKnownTypes;
 using Nitric.Sdk.Document;
 using Xunit;
-using Google.Protobuf.WellKnownTypes;
-namespace Nitric.Test.Api.Document
+
+namespace Nitric.Sdk.Test.Api.Document
 {
     public class DocumentToGenericTest : DocumentRef<Dictionary<string, object>>
     {
         public string ToAssertableString(IDictionary<string, object> dictionary)
         {
             var pairStrings = dictionary.OrderBy(p => p.Key)
-                                        .Select(p => p.Key + ": " + string.Join(", ", p.Value));
+                .Select(p => p.Key + ": " + string.Join(", ", p.Value));
             return string.Join("; ", pairStrings);
         }
+
         [Fact]
         public void TestStructWithScalars()
         {
@@ -45,6 +48,7 @@ namespace Nitric.Test.Api.Document
 
             Assert.Equal(ToAssertableString(expected), ToAssertableString(genericDict));
         }
+
         [Fact]
         public void TestStructWithList()
         {
@@ -57,7 +61,8 @@ namespace Nitric.Test.Api.Document
             var expected = new Dictionary<string, object>();
             expected.Add("list", expectedList);
 
-            Value[] actualList = new Value[] {
+            Value[] actualList = new Value[]
+            {
                 Value.ForString("string"),
                 Value.ForNull(),
                 Value.ForNumber(1),
@@ -71,6 +76,7 @@ namespace Nitric.Test.Api.Document
 
             Assert.Equal(ToAssertableString(expected), ToAssertableString(genericDict));
         }
+
         [Fact]
         public void TestStructWithStruct()
         {
@@ -96,6 +102,7 @@ namespace Nitric.Test.Api.Document
 
             Assert.Equal(ToAssertableString(expectedResponse), ToAssertableString(genericDict));
         }
+
         [Fact]
         public void TestStructWithNestedLists()
         {
@@ -145,10 +152,10 @@ namespace Nitric.Test.Api.Document
 
             Assert.Equal(ToAssertableString(expected), ToAssertableString(genericDict));
         }
+
         [Fact]
         public void TestStructWithNestedListAndNestedStructs()
         {
-
             Value[] nestedList3 = new Value[]
             {
                 Value.ForString("string"),

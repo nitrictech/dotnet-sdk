@@ -11,14 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using Xunit;
-using System;
-using System.Text;
-using System.Net.Http;
-using System.Threading;
-using Grpc.Core;
 
-namespace Nitric.Test.Faas
+namespace Nitric.Sdk.Test.Faas
 {
     // //[TestClass]
     // public class FaasTest
