@@ -45,6 +45,7 @@ namespace Nitric.Sdk.Function
         {
             return System.Text.Encoding.UTF8.GetString(this.data, 0, this.data.Length);
         }
+
     }
 
     public interface IContext
@@ -59,12 +60,12 @@ namespace Nitric.Sdk.Function
     /// <summary>
     /// The base context structure, common to HTTP and Event contexts.
     /// </summary>
-    /// <typeparam name="Req">The context's request.</typeparam>
-    /// <typeparam name="Res">The context's response.</typeparam>
-    public abstract class TriggerContext<Req, Res> : IContext where Req : AbstractRequest
+    /// <typeparam name="Request">The context's request.</typeparam>
+    /// <typeparam name="Response">The context's response.</typeparam>
+    public abstract class TriggerContext<Request, Response> : IContext where Request : AbstractRequest
     {
-        public Req req;
-        public Res res;
+        public Request Req;
+        public Response Res;
 
         public abstract TriggerResponse ToGrpcTriggerContext();
 
@@ -73,10 +74,10 @@ namespace Nitric.Sdk.Function
         /// </summary>
         /// <param name="req">The request object that initiated the trigger</param>
         /// <param name="res">The response to be returned from processing the trigger</param>
-        protected TriggerContext(Req req, Res res)
+        protected TriggerContext(Request req, Response res)
         {
-            this.req = req;
-            this.res = res;
+            this.Req = req;
+            this.Res = res;
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace Nitric.Sdk.Function
         /// <typeparam name="T">The expected context type.</typeparam>
         /// <returns>A new context object.</returns>
         /// <exception cref="Exception">Throws if the context type is unknown or unsupported.</exception>
-        public static T FromGrpcTriggerRequest<T>(TriggerRequestProto trigger) where T : TriggerContext<Req, Res>
+        public static T FromGrpcTriggerRequest<T>(TriggerRequestProto trigger) where T : TriggerContext<Request, Response>
         {
             return trigger.ContextCase switch
             {

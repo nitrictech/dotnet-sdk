@@ -43,14 +43,14 @@ namespace Nitric.Sdk.Test.Resource
                 };
                 // var id = pub.Publish(new Event.Event {Payload = payload});
                 // ctx.res.Text("id");
-                ctx.res.Json(payload);
+                ctx.Res.Json(payload);
                 return ctx;
             });
 
             api.Get("/two", ctx =>
             {
                 Console.Out.WriteLine("it's working");
-                ctx.res.Body = Encoding.UTF8.GetBytes("other thing");
+                ctx.Res.Body = Encoding.UTF8.GetBytes("other thing");
                 return ctx;
             });
 

@@ -101,7 +101,6 @@ namespace Nitric.Sdk.Function
         ///
         /// The object is converted to a JSON string with UTF-8 encoding and the Content-Type header is set to application/json.
         /// </summary>
-        /// <exception cref="UnimplementedException"></exception>
         public void Json(object obj)
         {
             this.Body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(obj));
@@ -113,10 +112,9 @@ namespace Nitric.Sdk.Function
         ///
         /// The object is converted to bytes assuming UTF-8 encoding and the Content-Type header is set to text/plain.
         /// </summary>
-        /// <exception cref="UnimplementedException"></exception>
         public void Text(string text)
         {
-            this.Body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
+            this.Body = Encoding.UTF8.GetBytes(text);
             this.Headers["Content-Type"] = new List<string> { "text/plain" };
         }
     }
@@ -173,7 +171,7 @@ namespace Nitric.Sdk.Function
         {
             var responseHeaders = new MapField<string, HeaderValue>
             {
-                this.res.Headers.ToDictionary(h => h.Key, h =>
+                this.Res.Headers.ToDictionary(h => h.Key, h =>
                 {
                     var hv = new HeaderValue();
                     hv.Value.Add(h.Value);
@@ -181,9 +179,9 @@ namespace Nitric.Sdk.Function
                 })
             };
             var triggerResponse = new TriggerResponse
-                { Http = new HttpResponseContext { Status = this.res.Status } };
+                { Http = new HttpResponseContext { Status = this.Res.Status } };
             triggerResponse.Http.Headers.Add(responseHeaders);
-            triggerResponse.Data = ByteString.CopyFrom(this.res.Body);
+            triggerResponse.Data = ByteString.CopyFrom(this.Res.Body);
 
             return triggerResponse;
         }

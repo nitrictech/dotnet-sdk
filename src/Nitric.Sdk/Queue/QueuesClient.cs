@@ -39,10 +39,6 @@ namespace Nitric.Sdk.Queue
             this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
-        // public Queues(GrpcClient client = null)
-        // {
-        //     this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
-        // }
         /// <summary>
         /// Create a reference to the queue in the queues service.
         /// </summary>
@@ -56,7 +52,7 @@ namespace Nitric.Sdk.Queue
                 throw new ArgumentNullException(nameof(queueName));
             }
 
-            return new Queue { QueuesClient = this, Name = queueName };
+            return new Queue(this, queueName);
         }
     }
 }

@@ -40,9 +40,9 @@ namespace Nitric.Sdk
         /// </summary>
         /// <param name="name">The unique name of this API.</param>
         /// <returns></returns>
-        public static ApiResource Api(string name)
+        public static ApiResource Api(string name, Dictionary<string, SecurityDefinition> securityDefs = null, Dictionary<string, string[]> security = null)
         {
-            return new ApiResource(name);
+            return new ApiResource(name, securityDefs, security);
         }
 
         /// <summary>

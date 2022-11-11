@@ -94,7 +94,7 @@ namespace Nitric.Sdk.Function
         /// <returns></returns>
         public override TriggerResponse ToGrpcTriggerContext()
         {
-            return new TriggerResponse { Topic = new TopicResponseContext { Success = this.res.Success } };
+            return new TriggerResponse { Topic = new TopicResponseContext { Success = this.Res.Success } };
         }
     }
 }

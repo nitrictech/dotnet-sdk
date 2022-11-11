@@ -48,16 +48,27 @@ namespace Nitric.Sdk.Resource
         }
 
         /// <summary>
+        /// Registers a chain of middleware to be called whenever a new event is published to this topic.
+        /// </summary>
+        /// <param name="handler">The handler to call to process events</param>
+        public void Subscribe(params Middleware<EventContext>[] middlewares)
+        {
+            var subWorker = new Faas(new SubscriptionWorkerOptions { Topic = this.name });
+
+            subWorker.Event(middlewares);
+           
+            Nitric.RegisterWorker(subWorker);
+        }
+
+        /// <summary>
         /// Registers a handler to be called whenever a new event is published to this topic.
         /// </summary>
         /// <param name="handler">The handler to call to process events</param>
         public void Subscribe(Func<EventContext, EventContext> handler)
         {
-            var subWorker = new Faas
-            {
-                EventHandler = handler,
-                Options = new SubscriptionWorkerOptions { Topic = this.name },
-            };
+            var subWorker = new Faas(new SubscriptionWorkerOptions { Topic = this.name });
+
+            subWorker.Event(handler);
             Nitric.RegisterWorker(subWorker);
         }
 

@@ -60,7 +60,7 @@ namespace Nitric.Sdk.Resource
             return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x])).Distinct();
         }
 
-        public Storage.Bucket With(params BucketPermission[] permissions)
+        public Bucket With(params BucketPermission[] permissions)
         {
             this.RegisterPolicy(permissions);
             return new Storage.Storage().Bucket(this.name);

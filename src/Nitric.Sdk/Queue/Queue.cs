@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Google.Protobuf.Collections;
 using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common;
@@ -18,7 +19,13 @@ namespace Nitric.Sdk.Queue
         /// </summary>
         public string Name { get; internal set; }
 
-        internal QueuesClient QueuesClient { get; set; }
+        internal readonly QueuesClient QueuesClient;
+
+        internal Queue(QueuesClient client, string name)
+        {
+            this.Name = name;
+            this.QueuesClient = client;
+        }
 
         /// <summary>
         /// Send a task to this queue.

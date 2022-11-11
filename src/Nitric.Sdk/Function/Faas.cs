@@ -19,7 +19,9 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Nitric.Proto.Faas.v1;
 using Nitric.Sdk.Common;
+using Nitric.Sdk.Resource;
 using Util = Nitric.Sdk.Common.Util;
+using ProtoApiWorkerOptions = Nitric.Proto.Faas.v1.ApiWorkerOptions;
 using ProtoClient = Nitric.Proto.Faas.v1.FaasService.FaasServiceClient;
 
 namespace Nitric.Sdk.Function
@@ -86,6 +88,15 @@ namespace Nitric.Sdk.Function
         /// The HTTP method this worker can respond to.
         /// </summary>
         public HashSet<HttpMethod> Methods { get; set; }
+
+        
+        public MethodOptions Options { get; set; }
+    }
+
+    public class MethodOptions
+    {
+        public Dictionary<string, string[]> Security { get; internal set; }
+        public Dictionary<string, SecurityDefinition> SecurityDefs { get; internal set; }
     }
 
     /// <summary>
@@ -122,25 +133,93 @@ namespace Nitric.Sdk.Function
         public IFaasOptions Options { get; set; }
 
         /// <summary>
-        /// A handler for HTTP requests
+        /// Handlers for HTTP requests
         /// </summary>
-        public Func<HttpContext, HttpContext> HttpHandler { get; set; }
+        private Func<HttpContext, HttpContext> HttpHandler;
+
+
+        private List<Middleware<HttpContext>> HttpHandlers = new List<Middleware<HttpContext>>();
 
         /// <summary>
-        /// A handler for event requests
+        /// Handlers for event requests
         /// </summary>
-        public Func<EventContext, EventContext> EventHandler { get; set; }
+        private Func<EventContext, EventContext> EventHandler;
+
+        public List<Middleware<EventContext>> EventHandlers = new List<Middleware<EventContext>>();
 
         public ProtoClient Client { get; } = new ProtoClient(Util.GrpcChannelProvider.GetChannel());
+
+        public Faas(IFaasOptions options)
+        {
+            this.Options = options;
+        }
+
+        /// <summary>
+        /// Add a handler to the list of HTTP handlers. Used to chain together HTTP middleware.
+        /// </summary>
+        /// <param name="handler">The HTTP handler to add to the handlers list</param>
+        /// <returns>A reference to this Faas object</returns>
+        public Faas Http(Func<HttpContext, HttpContext> handler)
+        {
+            this.HttpHandler = handler;
+
+            return this;
+        }
+
+        public Faas Http(Middleware<HttpContext>[] middleware)
+        {
+            this.HttpHandlers.AddRange(middleware);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Add a handler to the list of event handlers. Used to chain together event middleware.
+        /// </summary>
+        /// <param name="handler">The event handler to add to the handlers list</param>
+        /// <returns>A reference to this Faas object</returns>
+        public Faas Event(Func<EventContext, EventContext> handler)
+        {
+            this.EventHandler = handler;
+
+            return this;
+        }
+
+        public Faas Event(Middleware<EventContext>[] middleware)
+        {
+            this.EventHandlers.AddRange(middleware);
+
+            return this;
+        }
 
         private static InitRequest OptionsToInit(IFaasOptions options)
         {
             switch (options)
             {
                 case ApiWorkerOptions a:
-                    var apiInitReq = new InitRequest { Api = new ApiWorker { Api = a.Api, Path = a.Route } };
+                    var apiInitReq = new InitRequest { Api = new ApiWorker { Api = a.Api, Path = a.Route } };                    
+
                     apiInitReq.Api.Methods.Add(a.Methods.Select(m => m.ToString()));
-                    return apiInitReq;
+
+                    var opts = new ProtoApiWorkerOptions();                    
+
+                    if (a.Options.Security.Count == 0)
+                    {
+                        opts.SecurityDisabled = false;
+                    } else
+                    {                        
+                        foreach (KeyValuePair<string, string[]> kv in a.Options.Security)
+                        {
+                            var scopes = new ApiWorkerScopes();
+                            scopes.Scopes.AddRange(kv.Value);
+
+                            opts.Security.Add(kv.Key, scopes);
+                        }
+                    }
+
+                    apiInitReq.Api.Options = opts;
+
+                    return apiInitReq;                
                 case ScheduleWorkerOptions s:
                     var scheduleInitReq = new InitRequest
                     {
@@ -174,7 +253,7 @@ namespace Nitric.Sdk.Function
         /// <exception cref="NitricException"></exception>
         public async Task Start()
         {
-            if (this.EventHandler == null && this.HttpHandler == null)
+            if (this.EventHandlers.Count == 0 && this.EventHandler == null && this.HttpHandlers.Count == 0 && this.HttpHandler == null)
             {
                 throw new Exception("At least one handler must be provided.");
             }
@@ -202,32 +281,73 @@ namespace Nitric.Sdk.Function
                             switch (grpcRequest.TriggerRequest.ContextCase)
                             {
                                 case TriggerRequest.ContextOneofCase.Http:
-                                    if (this.HttpHandler == null)
+                                    if (this.HttpHandlers.Count == 0 && this.HttpHandler == null)
                                     {
                                         throw new UnimplementedException("Cannot handle HTTP requests.");
                                     }
 
                                     var ctxHttp = TriggerContext<HttpRequest, HttpResponse>
                                         .FromGrpcTriggerRequest<HttpContext>(grpcRequest.TriggerRequest);
-                                    resultContext = this.HttpHandler(ctxHttp);
+
+                                    Func<HttpContext, HttpContext> composedHttpHandler = this.HttpHandler;
+                                    if (this.HttpHandler == null)
+                                    {
+                                        Func<HttpContext, HttpContext> lastCall = (context) => context;
+
+                                        this.HttpHandlers.Reverse();
+
+                                        composedHttpHandler = this.HttpHandlers.Aggregate(lastCall, (next, handler) =>
+                                        {
+                                            Func<HttpContext, HttpContext> nextFunc = (context) =>
+                                            {
+                                                return handler(context, next) ?? context;
+                                            };
+
+                                            return nextFunc;
+                                        });
+
+                                    }
+
+                                    resultContext = composedHttpHandler(ctxHttp);
                                     break;
                                 case TriggerRequest.ContextOneofCase.Topic:
-                                    if (this.EventHandler == null)
+                                    if (this.EventHandlers.Count == 0 && this.EventHandler == null)
                                     {
                                         throw new UnimplementedException("Cannot handle event requests.");
                                     }
 
                                     var ctxEvent = TriggerContext<EventRequest, EventResponse>
                                         .FromGrpcTriggerRequest<EventContext>(grpcRequest.TriggerRequest);
-                                    resultContext = this.EventHandler(ctxEvent);
+
+
+                                    Func<EventContext, EventContext> composedEventHandler = this.EventHandler;
+                                    if (this.EventHandler == null)
+                                    {
+                                        Func<EventContext, EventContext> lastCall = (context) => context;
+
+                                        this.EventHandlers.Reverse();
+
+                                        composedEventHandler = this.EventHandlers.Aggregate(lastCall, (next, handler) =>
+                                        {
+                                            Func<EventContext, EventContext> nextFunc = (context) =>
+                                            {
+                                                return handler(context, next) ?? context;
+                                            };
+
+                                            return nextFunc;
+                                        });
+
+                                    }
+
+                                    resultContext = composedEventHandler(ctxEvent);
+
                                     break;
                                 case TriggerRequest.ContextOneofCase.None:
                                 default:
                                     throw new Exception("Unsupported trigger request type");
-                                    break;
                             }
 
-                            var grpcResponse = resultContext.ToGrpcTriggerContext();
+                            var grpcResponse = resultContext.ToGrpcTriggerContext();                            
 
                             //Write back the response to the server
                             await call.RequestStream.WriteAsync(
@@ -245,7 +365,7 @@ namespace Nitric.Sdk.Function
                     }
                 }
 
-                // await call.RequestStream.CompleteAsync();
+                 await call.RequestStream.CompleteAsync();
             }
             catch (RpcException re)
             {

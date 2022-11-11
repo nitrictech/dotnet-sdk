@@ -31,7 +31,7 @@ namespace Nitric.Sdk.Secret
         /// <param name="client"></param>
         public SecretsClient(GrpcClient client = null)
         {
-            this.secretServiceClient = (client != null) ? client : new GrpcClient(GrpcChannelProvider.GetChannel());
+            this.secretServiceClient = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         /// <summary>
