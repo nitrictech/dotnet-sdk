@@ -56,6 +56,8 @@ namespace Nitric.Sdk.Function
         /// </summary>
         public Dictionary<string, IEnumerable<string>> Headers { get; private set; }
 
+        public byte[] Data { get; private set; }
+
         /// <summary>
         /// Constructs a new HTTP Request object.
         /// </summary>

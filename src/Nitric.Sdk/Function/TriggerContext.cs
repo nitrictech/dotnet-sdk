@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using Newtonsoft.Json;
 using Nitric.Proto.Faas.v1;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
 
@@ -44,6 +45,16 @@ namespace Nitric.Sdk.Function
         public string ToText()
         {
             return System.Text.Encoding.UTF8.GetString(this.data, 0, this.data.Length);
+        }
+
+        /// <summary>
+        /// Get the HTTP body data encoded from json.
+        ///
+        /// The object is converted from a JSON string to a type T.
+        /// </summary>
+        public T FromJson<T>()
+        {
+            return JsonConvert.DeserializeObject<T>(this.data.ToString());
         }
 
     }

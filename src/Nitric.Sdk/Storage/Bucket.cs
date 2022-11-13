@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using Nitric.Proto.Storage.v1;
+using ProtoFile = Nitric.Proto.Storage.v1.File;
+
 
 namespace Nitric.Sdk.Storage
 {
@@ -34,6 +38,29 @@ namespace Nitric.Sdk.Storage
             }
 
             return new File(storage, this, key);
+        }
+
+        /// <summary>
+        /// Get a list of files in a bucket.
+        /// </summary>
+        /// <returns>All the files in the bucket as Nitric file references.</returns>
+        public List<File> Files()
+        {
+            var request = new StorageListFilesRequest
+            {
+                BucketName = this.Name,
+            };
+
+            var resp = this.storage.Client.ListFiles(request);
+
+            List<File> files = new List<File>();
+
+            foreach (ProtoFile file in resp.Files)
+            {
+                files.Add(new File(this.storage, this, file.Key));
+            }
+
+            return files;
         }
     }
 }

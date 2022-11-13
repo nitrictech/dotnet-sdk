@@ -35,32 +35,54 @@ namespace Nitric.Sdk.Resource
     }   
 
 
-    public class ApiResource : BaseResource
-    {        
-        internal Dictionary<string, SecurityDefinition> SecurityDefs;
-        internal Dictionary<string, string[]> Security;
+    public class ApiOptions
+    {
+        public Dictionary<string, SecurityDefinition> SecurityDefinitions { get; private set; }
+        public Dictionary<string, string[]> Security { get; private set; }
+        public string BasePath { get; private set; }
+        public Middleware<HttpContext>[] Middleware { get; private set; }
 
-        internal ApiResource(string name, Dictionary<string, SecurityDefinition> securityDefs, Dictionary<string, string[]> security) : base(name)
+        public ApiOptions(
+            Dictionary<string, SecurityDefinition> SecurityDefinitions = null,
+            Dictionary<string, string[]> Security = null,
+            string BasePath = "",
+            Middleware<HttpContext>[] Middleware = null
+        )
         {
-            this.SecurityDefs = securityDefs ?? new Dictionary<string, SecurityDefinition>();
-            this.Security = security ?? new Dictionary<string, string[]>();
+            this.SecurityDefinitions = SecurityDefinitions ?? new Dictionary<string, SecurityDefinition>();
+            this.Security = Security ?? new Dictionary<string, string[]>();
+            this.BasePath = BasePath;
+            this.Middleware = Middleware ?? new Middleware<HttpContext>[] { };
+        }
+    }
+
+
+    public class ApiResource : BaseResource
+    {
+        ApiOptions Opts;
+
+        internal ApiResource(string name, ApiOptions options = null) : base(name)
+        {
+            this.Opts = options;
         }
 
         internal ApiResource Method(string route, HttpMethod[] methods, Func<HttpContext, HttpContext> handler)
         {
             var opts = new MethodOptions
             {
-                Security = this.Security,
-                SecurityDefs = this.SecurityDefs
+                Security = this.Opts.Security,
+                SecurityDefs = this.Opts.SecurityDefinitions
             };
 
             var faas = new Faas(new ApiWorkerOptions
             {
                 Api = this.name,
-                Route = route,
+                Route = this.Opts.BasePath + route,
                 Methods = methods.ToHashSet(),
                 Options = opts
             });
+
+            faas.Http(this.Opts.Middleware);
 
             faas.Http(handler);
 
@@ -72,19 +94,21 @@ namespace Nitric.Sdk.Resource
         {
             var opts = new MethodOptions
             {
-                Security = this.Security,
-                SecurityDefs = this.SecurityDefs
+                Security = this.Opts.Security,
+                SecurityDefs = this.Opts.SecurityDefinitions
             };
 
             var faas = new Faas(new ApiWorkerOptions
             {
                 Api = this.name,
-                Route = route,
+                Route = this.Opts.BasePath + route,
                 Methods = methods.ToHashSet(),
                 Options = opts
             });
 
-            faas.Http(middleware);
+            var combinedMiddleware = this.Opts.Middleware.Concat(middleware).ToArray();
+
+            faas.Http(combinedMiddleware);
 
             Nitric.RegisterWorker(faas);
             return this;
@@ -181,7 +205,18 @@ namespace Nitric.Sdk.Resource
         /// <param name="path"></param>
         public ApiRoute Route(string path)
         {
-            return new ApiRoute(this, path);
+            return new ApiRoute(this, this.Opts.BasePath + path);
+        }
+
+        /// <summary>
+        /// Create a new route on a specified path.
+        /// </summary>
+        /// <returns>An ApiRoute that handlers can be added to.</returns>
+        /// <param name="path"></param>
+        /// <param name="middleware"></param>
+        public ApiRoute Route(string path, params Middleware<HttpContext>[] middleware)
+        {
+            return new ApiRoute(this, this.Opts.BasePath + path, middleware);
         }
 
         internal override BaseResource Register()
@@ -189,7 +224,7 @@ namespace Nitric.Sdk.Resource
             var resource = new NitricResource { Name = this.name, Type = ResourceType.Api };
             var apiResource = new ProtoApiResource();
 
-            foreach (KeyValuePair<string, string[]> kv in this.Security)
+            foreach (KeyValuePair<string, string[]> kv in this.Opts.Security)
             {
                 var scopes = new ApiScopes();
 
@@ -198,7 +233,7 @@ namespace Nitric.Sdk.Resource
                 apiResource.Security.Add(kv.Key, scopes);
             }
 
-            foreach (KeyValuePair<string, SecurityDefinition> kv in this.SecurityDefs) {
+            foreach (KeyValuePair<string, SecurityDefinition> kv in this.Opts.SecurityDefinitions) {
                 var definition = new ProtoSecurityDefinition();
 
                 if (kv.Value.Kind == "jwt")

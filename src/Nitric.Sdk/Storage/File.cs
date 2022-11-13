@@ -1,9 +1,25 @@
 using Google.Protobuf;
 using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Common;
+using ProtoFile = Nitric.Proto.Storage.v1.File;
 
 namespace Nitric.Sdk.Storage
 {
+    ///<Summary>
+    /// Available operations for signing a url.
+    ///</Summary>
+    public enum FileMode
+    {
+        /// <summary>
+        /// Download a file from a bucket.
+        /// </summary>
+        Read,
+        /// <summary>
+        /// Upload a file to a bucket.
+        /// </summary>
+        Write,
+    }
+
     /// <summary>
     /// A reference to a specific file in a bucket.
     /// </summary>
@@ -12,6 +28,7 @@ namespace Nitric.Sdk.Storage
         private readonly Storage storage;
         private readonly Bucket bucket;
         private string Key { get; set; }
+
 
         internal File(Storage storage, Bucket bucket, string key)
         {
@@ -85,6 +102,53 @@ namespace Nitric.Sdk.Storage
             {
                 throw NitricException.FromRpcException(re);
             }
+        }
+
+        /// <summary>
+        /// Create a presigned URL for reading or writing for the given file reference.
+        /// </summary>
+        /// <param name="mode">The mode the URL will access the file with. E.g. reading or writing.</param>
+        /// <param name="expiry">How long the URL should be valid for in seconds.</param>
+        /// <returns>The signed URL for reading or writing</returns>
+        internal string PreSignUrl(FileMode mode, int expiry)
+        {
+            var request = new StoragePreSignUrlRequest
+            {
+                BucketName = this.bucket.Name,
+                Key = this.Key,
+                Operation = mode == FileMode.Read ? StoragePreSignUrlRequest.Types.Operation.Read : StoragePreSignUrlRequest.Types.Operation.Write,
+                Expiry = expiry < 0 ? 0 : (uint)expiry,
+
+            };
+
+            try
+            {
+                var resp = storage.Client.PreSignUrl(request);
+                return resp.Url;
+            } catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Create a presigned URL for reading a given file reference.
+        /// </summary>
+        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
+        /// <returns>The signed URL for reading.</returns>
+        public string GetDownloadUrl(int expiry = 600)
+        {
+            return this.PreSignUrl(FileMode.Write, expiry);
+        }
+
+        /// <summary>
+        /// Create a presigned URL for writing to a given file reference.
+        /// </summary>
+        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
+        /// <returns>The signed URL for writing.</returns>
+        public string GetUploadUrl(int expiry = 600)
+        {
+            return this.PreSignUrl(FileMode.Read, expiry);
         }
 
         /// <summary>

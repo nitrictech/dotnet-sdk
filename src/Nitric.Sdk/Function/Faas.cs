@@ -111,13 +111,22 @@ namespace Nitric.Sdk.Function
     }
 
     /// <summary>
-    /// Options for schedule trigger handling workers.
+    /// Options for schedule trigger handling workers by a rate and frequency descriptors.
     /// </summary>
-    public class ScheduleWorkerOptions : IFaasOptions
+    public class ScheduleRateWorkerOptions : IFaasOptions
     {
         public string Description { get; set; }
         public int Rate { get; set; }
         public Frequency Frequency { get; set; }
+    }
+
+    /// <summary>
+    /// Options for scheduling triggers for workers by a cron expression.
+    /// </summary>
+    public class ScheduleCronWorkerOptions : IFaasOptions
+    {
+        public string Description { get; set; }
+        public string Cron { get; set; }
     }
 
     /// <summary>
@@ -135,8 +144,7 @@ namespace Nitric.Sdk.Function
         /// <summary>
         /// Handlers for HTTP requests
         /// </summary>
-        private Func<HttpContext, HttpContext> HttpHandler;
-
+        private Func<HttpContext, HttpContext> HttpHandler; 
 
         private List<Middleware<HttpContext>> HttpHandlers = new List<Middleware<HttpContext>>();
 
@@ -220,7 +228,7 @@ namespace Nitric.Sdk.Function
                     apiInitReq.Api.Options = opts;
 
                     return apiInitReq;                
-                case ScheduleWorkerOptions s:
+                case ScheduleRateWorkerOptions s:
                     var scheduleInitReq = new InitRequest
                     {
                         Schedule = new ScheduleWorker
@@ -230,6 +238,19 @@ namespace Nitric.Sdk.Function
                         }
                     };
                     return scheduleInitReq;
+                case ScheduleCronWorkerOptions s:
+                    var scheduleCronInitReq = new InitRequest
+                    {
+                        Schedule = new ScheduleWorker
+                        {
+                            Cron =
+                            {
+                                Cron = s.Cron,
+                            },
+                            Key = s.Description,
+                        }
+                    };
+                    return scheduleCronInitReq;
                 case SubscriptionWorkerOptions s:
                     var subInitReq = new InitRequest
                     {

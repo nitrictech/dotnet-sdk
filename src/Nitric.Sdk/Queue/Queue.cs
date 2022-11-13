@@ -61,7 +61,7 @@ namespace Nitric.Sdk.Queue
         /// <param name="tasks">The tasks to send.</param>
         /// <returns>Results of sending tasks to the queue, including any tasks that failed to be sent.</returns>
         /// <exception cref="NitricException"></exception>
-        public SendResponse SendBatch(IEnumerable<Task> tasks)
+        public List<FailedTask> Send(IEnumerable<Task> tasks)
         {
             var wireEvents = new RepeatedField<NitricTask>();
             foreach (var task in tasks)
@@ -75,7 +75,7 @@ namespace Nitric.Sdk.Queue
             {
                 var response = QueuesClient.Client.SendBatch(request);
                 var failedTasks = response.FailedTasks.Select(WireToFailedTask).ToList();
-                return new SendResponse { FailedTasks = failedTasks };
+                return failedTasks;
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -92,7 +92,7 @@ namespace Nitric.Sdk.Queue
         /// <param name="depth">The maximum number of tasks to receive.</param>
         /// <returns>Tasks received from the queue.</returns>
         /// <exception cref="NitricException"></exception>
-        public IEnumerable<ReceivedTask> Receive(int depth = 1)
+        public List<ReceivedTask> Receive(int depth = 1)
         {
             if (depth < 1)
             {
