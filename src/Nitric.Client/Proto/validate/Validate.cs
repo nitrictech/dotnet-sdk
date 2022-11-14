@@ -131,9 +131,9 @@ namespace Validate {
             "Z2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGLAIIAEoCDowCghyZXF1aXJl",
             "ZBIdLmdvb2dsZS5wcm90b2J1Zi5PbmVvZk9wdGlvbnMYrwggASgIOkMKBXJ1",
             "bGVzEh0uZ29vZ2xlLnByb3RvYnVmLkZpZWxkT3B0aW9ucxivCCABKAsyFC52",
-            "YWxpZGF0ZS5GaWVsZFJ1bGVzQlIKGmlvLmVudm95cHJveHkucGd2LnZhbGlk",
-            "YXRlUAFaMmdpdGh1Yi5jb20vZW52b3lwcm94eS9wcm90b2MtZ2VuLXZhbGlk",
-            "YXRlL3ZhbGlkYXRl"));
+            "YWxpZGF0ZS5GaWVsZFJ1bGVzQlAKGmlvLmVudm95cHJveHkucGd2LnZhbGlk",
+            "YXRlWjJnaXRodWIuY29tL2Vudm95cHJveHkvcHJvdG9jLWdlbi12YWxpZGF0",
+            "ZS92YWxpZGF0ZQ=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Reflection.DescriptorReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.DurationReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Validate.KnownRegex), }, new pb::Extension[] { ValidateExtensions.Disabled, ValidateExtensions.Ignored, ValidateExtensions.Required, ValidateExtensions.Rules }, new pbr::GeneratedClrTypeInfo[] {
