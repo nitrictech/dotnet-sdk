@@ -108,9 +108,9 @@ namespace Nitric.Sdk.Test.Api.Queue
 
             var queue = new QueuesClient(qc.Object).Queue("test-queue");
 
-            var response = queue.SendBatch(new List<Task>());
+            var failedTasksResp = queue.Send(new List<Task>());
 
-            Assert.Equal("I am a failed task... I failed my task", response.FailedTasks[0].Message);
+            Assert.Equal("I am a failed task... I failed my task", failedTasksResp[0].Message);
 
             qc.Verify(
                 t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null,
@@ -128,9 +128,9 @@ namespace Nitric.Sdk.Test.Api.Queue
 
             var queue = new QueuesClient(qc.Object).Queue("test-queue");
 
-            var response = queue.SendBatch(new List<Task>());
+            var failedTasks = queue.Send(new List<Task>());
 
-            Assert.Empty(response.FailedTasks);
+            Assert.Empty(failedTasks);
 
             qc.Verify(
                 t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null,
