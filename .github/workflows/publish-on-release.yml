@@ -7,36 +7,36 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        token: ${{secrets.SUB_MODULE_PAT}}
-        submodules: recursive    
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        source-url: https://api.nuget.org/v3/index.json
-        dotnet-version: 5.0.x
-      env:
-        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
-    - name: Normalize version string
-      run: |
-        version="${{ github.event.release.tag_name }}"
-        echo "::set-output name=VERSION::`echo ${version:1}`"
-      id: normalize_version
-    - name: Find and Replace Version templates
-      run: |
-        sed -i.bak 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/g' Nitric.Sdk/Nitric.Sdk.csproj
-        rm Nitric.Sdk/Nitric.Sdk.csproj.bak
-    - name: Exclude Test Project
-      run: dotnet sln remove Nitric.Test
-    - name: Restore Dependencies
-      run: dotnet restore
-    - name: Publish
-      run: |
-        mkdir __out
-        dotnet pack -c Release -o __out
-        dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
-        rm -rf __out
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{secrets.SUB_MODULE_PAT}}
+          submodules: recursive
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          source-url: https://api.nuget.org/v3/index.json
+          dotnet-version: 5.0.x
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
+      - name: Normalize version string
+        run: |
+          version="${{ github.event.release.tag_name }}"
+          echo "::set-output name=VERSION::`echo ${version:1}`"
+        id: normalize_version
+      - name: Find and Replace Version templates
+        run: |
+          sed -i.bak 's/${VERSION}/${{ steps.normalize_version.outputs.VERSION }}/g' src/Nitric.Sdk/Nitric.Sdk.csproj
+          rm Nitric.Sdk/Nitric.Sdk.csproj.bak
+      - name: Exclude Test Project
+        run: dotnet sln remove Nitric.Test
+      - name: Restore Dependencies
+        run: dotnet restore
+      - name: Publish
+        run: |
+          mkdir __out
+          dotnet pack -c Release -o __out
+          dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
+          rm -rf __out

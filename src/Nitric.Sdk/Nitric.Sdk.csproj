@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <Description>The Nitric .Net SDK.</Description>
+    <Version>${VERSION}</Version>
+    <PackageId>Nitric.Sdk</PackageId>
+    <Company>Nitric Pty Ltd</Company>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Description>The Nitric .NET SDK.</Description>
   </PropertyGroup>
 
   <ItemGroup>
