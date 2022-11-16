@@ -76,7 +76,7 @@ namespace Nitric.Sdk.Resource
 
         internal ApiResource(string name, ApiOptions options = null) : base(name)
         {
-            this.Opts = options;
+            this.Opts = options ?? new ApiOptions();
         }
 
         internal ApiResource Method(string route, HttpMethod[] methods, Func<HttpContext, HttpContext> handler)

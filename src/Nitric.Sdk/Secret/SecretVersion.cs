@@ -71,7 +71,7 @@ namespace Nitric.Sdk.Secret
                 //Return a new secret value with a reference to this secret version
                 return new SecretValue(
                     this,
-                    value is { Length: > 0 } ? value : Array.Empty<byte>()
+                    value.Length > 0 ? value : Array.Empty<byte>()
                 );
             }
             catch (Grpc.Core.RpcException re)

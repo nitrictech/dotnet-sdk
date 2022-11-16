@@ -27,12 +27,12 @@ namespace Nitric.Sdk.Queue
         /// <summary>
         /// The error message.
         /// </summary>
-        public string Message { get; internal set; }
+        public string Message { get; set; }
 
         /// <summary>
         /// The task that failed to be sent.
         /// </summary>
-        public Task Task { get; internal set; }
+        public Task Task { get; set; }        
 
         /// <summary>
         /// Return a string representation of the failed task.

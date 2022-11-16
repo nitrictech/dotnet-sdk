@@ -1,20 +1,37 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>${VERSION}</Version>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>0.8.5</Version>
     <PackageId>Nitric.Sdk</PackageId>
     <Company>Nitric Pty Ltd</Company>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <Description>The Nitric .NET SDK.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Grpc.Core" Version="2.38.1" />
     <PackageReference Include="Newtonsoft.json" Version="13.0.1" /> 
+    <PackageReference Include="Google.Protobuf" Version="3.17.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.38.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.38.1" PrivateAssets="All" />
+    <PackageReference Include="Google.Api.CommonProtos" Version="2.2.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Nitric.Client\Nitric.Client.csproj" />
+    <Protobuf Include="../../contracts/validate/validate.proto" ProtoRoot="../../contracts/" GrpcServices="None" OutputDir="Proto" />
+    <Protobuf Include="../../contracts/proto/error/v1/error.proto" ProtoRoot="../../contracts/" GrpcServices="None" OutputDir="Proto" />
+    <Protobuf Include="../../contracts/proto/**/*.proto" Exclude="../../contracts/proto/error/v1/error.proto" ProtoRoot="../../contracts/" OutputDir="Proto" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="../../contracts/" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
   </ItemGroup>
 </Project>

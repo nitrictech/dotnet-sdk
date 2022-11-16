@@ -188,7 +188,7 @@ namespace Nitric.Sdk.Document
             request.Limit = this.query.ResultsLimit;
             if (this.PagingToken == null) return request;
 
-            if (this.PagingToken is not IDictionary<string, string> token)
+            if (!(this.PagingToken is IDictionary<string, string> token))
             {
                 throw new ArgumentException("Invalid paging token provided!");
             }

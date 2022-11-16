@@ -4,12 +4,12 @@ NITRIC_VERSION := 0.18.0
 generate: clean download build
 
 build: 
-	dotnet build src/Nitric.Client/Nitric.Client.csproj
+	dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj
 
 clean:
-	rm -rf src/Nitric.Client/bin
-	rm -rf src/Nitric.Client/obj
-	rm -rf src/Nitric.Client/Proto
+	rm -rf src/Nitric.Sdk/bin
+	rm -rf src/Nitric.Sdk/obj
+	rm -rf src/Nitric.Sdk/Proto
 
 download:
 	curl -L https://github.com/nitrictech/nitric/releases/download/v${NITRIC_VERSION}/contracts.tgz -o contracts.tgz

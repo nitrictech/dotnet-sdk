@@ -25,15 +25,13 @@ namespace Nitric.Sdk.Queue
     /// </summary>
     public class Task
     {
-        public string Id { get; internal set; }
-        public string PayloadType { get; internal set; }
-        public object Payload { get; internal set; }
+        public string Id { get; set; }
+        public string PayloadType { get; set; }
+        public object Payload { get; set; }
 
-        /// <summary>
-        /// Construct a new task.
-        /// </summary>
         public Task()
         {
+
         }
 
         /// <summary>
@@ -57,12 +55,12 @@ namespace Nitric.Sdk.Queue
         /// <summary>
         /// The queue that was the source of this task.
         /// </summary>
-        public Queue Queue { get; internal set; }
+        public Queue Queue { get; set; }
 
         /// <summary>
         /// The unique lease id for this task lease.
         /// </summary>
-        public string LeaseId { get; internal set; }
+        public string LeaseId { get; set; }
 
         /// <summary>
         /// Complete this task and remove it from the source queue.

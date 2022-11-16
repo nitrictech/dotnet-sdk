@@ -96,7 +96,7 @@ namespace Nitric.Sdk.Function
         /// <summary>
         /// The HTTP header to be included in the response.
         /// </summary>
-        public Dictionary<string, IEnumerable<string>> Headers { get; set; } = new();
+        public Dictionary<string, IEnumerable<string>> Headers { get; set; } = new Dictionary<string, IEnumerable<string>>();
 
         /// <summary>
         /// Set the HTTP body data from an object.
