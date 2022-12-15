@@ -24,9 +24,9 @@ namespace Nitric.Sdk.Document
     /// A reference to a collection in the underlying document database.
     /// </summary>
     /// <typeparam name="T">The type of documents stored in the collection.</typeparam>
-    public class Collection<T> : AbstractCollection<T> where T : IDictionary<string, object>, new()
+    public class CollectionRef<T> : AbstractCollection<T> where T : IDictionary<string, object>, new()
     {
-        internal Collection(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
+        internal CollectionRef(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
             : base(documentClient, name, parentKey)
         {
         }
@@ -59,7 +59,7 @@ namespace Nitric.Sdk.Document
         /// <returns>A reference to all sub-collections with the provided name</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NotSupportedException"></exception>
-        public CollectionGroup<T> SubCollection(string name)
+        public CollectionGroup<T> Collection(string name)
         {
             if (string.IsNullOrEmpty(name))
             {

@@ -94,14 +94,6 @@ namespace Nitric.Sdk
         public static QueueResource Queue(string name) => Cached(name, n => new QueueResource(n));
 
         /// <summary>
-        /// Declare a collections resource to get and set document DBs.
-        /// </summary>
-        /// <param name="name">The unique name of the collection within this application.</param>
-        /// <returns>A collection resource, if the name has already been declared the same resource will be returned.</returns>
-        public static CollectionResource Collection(string name) => Cached(name, n => new CollectionResource(n));
-
-
-        /// <summary>
         /// Declare a topic resource for push-based events and messaging.
         /// </summary>
         /// <param name="name">The unique name of the topic within this application.</param>
