@@ -2,11 +2,13 @@
   "ignoreFile": ".gitignore",
   "ignore": [
     ".github/",
-    ".vs/",
+    "properties/**/*",
     "Scripts/",
+    "src/Nitric.Sdk/Proto/**/*",
+    "test/**/*",
     "tools/",
+    "makefile",
     ".*",
-    "Nitric.Sdk/contracts/**/*",
     "**/*.config.*",
     "**/.gitignore",
     "**/bin/*",
@@ -18,8 +20,7 @@
     "**/*.csproj",
     "**/*.protodep",
     "**/*.config",
-    "*.html",
-    "Nitric.Test/examples/**"
+    "*.html"
   ],
   "license": "./tools/license/license_header.txt",
   "licenseFormats": {
