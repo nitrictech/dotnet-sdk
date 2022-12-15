@@ -139,7 +139,7 @@ namespace Nitric.Sdk.Document
         /// <returns>The reference to the sub-collection.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NotSupportedException"></exception>
-        public CollectionRef<T> Collection(string name)
+        public Collection<T> Collection(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -154,7 +154,7 @@ namespace Nitric.Sdk.Document
                                                 Constants.DepthLimit + ", found depth " + collectionDepth);
             }
 
-            return new CollectionRef<T>(this.documentClient, name, this.Key);
+            return new Collection<T>(this.documentClient, name, this.Key);
         }
 
         /// <summary>

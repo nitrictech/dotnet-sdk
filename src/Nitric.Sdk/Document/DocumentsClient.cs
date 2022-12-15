@@ -43,14 +43,14 @@ namespace Nitric.Sdk.Document
         /// <typeparam name="T">The expected type for documents in the collection.</typeparam>
         /// <returns>The collection reference.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public CollectionRef<T> Collection<T>(string name) where T : IDictionary<string, object>, new()
+        public Collection<T> Collection<T>(string name) where T : IDictionary<string, object>, new()
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            return new CollectionRef<T>(this.documentClient, name);
+            return new Collection<T>(this.documentClient, name);
         }
     }
 }
