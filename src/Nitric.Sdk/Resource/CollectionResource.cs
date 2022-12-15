@@ -21,20 +21,20 @@ using NitricResource = Nitric.Proto.Resource.v1.Resource;
 namespace Nitric.Sdk.Resource
 {
     ///<Summary>
-    /// Available permissions for bucket resources.
+    /// Available permissions for collection resources.
     ///</Summary>
     public enum CollectionPermission
     {
         /// <summary>
-        /// Enables listing and reading files in the bucket.
+        /// Enables listing and reading documents in the collection.
         /// </summary>
         Reading,
         /// <summary>
-        /// Enables adding or updating files in the bucket.
+        /// Enables adding or updating documents in the collection.
         /// </summary>
         Writing,
         /// <summary>
-        /// Enables deleting files from the bucket.
+        /// Enables deleting documents from the collection.
         /// </summary>
         Deleting
     }
