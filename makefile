@@ -2,7 +2,6 @@
 NITRIC_VERSION := 0.18.0
 
 generate: clean download build
-publish: clean download build pack
 
 build: 
 	dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj
@@ -17,7 +16,8 @@ download:
 	tar xvzf contracts.tgz
 	rm contracts.tgz
 
-pack:
+publish: clean download
+	dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj -c Release
 	mkdir __out
 	dotnet pack -c Release -o __out
 	dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
