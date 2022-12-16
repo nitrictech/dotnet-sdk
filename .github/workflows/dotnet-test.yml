@@ -30,6 +30,8 @@ jobs:
           sed -i.bak 's/${VERSION}/0.0.1/g' src/Nitric.Sdk/Nitric.Sdk.csproj
       - name: Restore dependencies
         run: dotnet restore
+      - name: Generate Dependencies
+        run: make generate
       - name: Build
         run: dotnet build --no-restore --no-dependencies
       - name: Test
