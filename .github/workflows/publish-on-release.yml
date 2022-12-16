@@ -32,11 +32,5 @@ jobs:
           rm src/Nitric.Sdk/Nitric.Sdk.csproj.bak
       - name: Exclude Test Project
         run: dotnet sln remove Nitric.Test
-      - name: Build package
-        run: dotnet build -c Release
       - name: Publish
-        run: |
-          mkdir __out
-          dotnet pack -c Release -o __out
-          dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
-          rm -rf __out
+        run: make publish
