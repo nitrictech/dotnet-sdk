@@ -32,8 +32,8 @@ jobs:
           rm src/Nitric.Sdk/Nitric.Sdk.csproj.bak
       - name: Exclude Test Project
         run: dotnet sln remove Nitric.Test
-      - name: Restore Dependencies
-        run: dotnet restore
+      - name: Build package
+        run: dotnet build -c Release
       - name: Publish
         run: |
           mkdir __out
