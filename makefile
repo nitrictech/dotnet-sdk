@@ -15,3 +15,10 @@ download:
 	curl -L https://github.com/nitrictech/nitric/releases/download/v${NITRIC_VERSION}/contracts.tgz -o contracts.tgz
 	tar xvzf contracts.tgz
 	rm contracts.tgz
+
+publish: clean download
+	dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj -c Release
+	mkdir __out
+	dotnet pack -c Release -o __out
+	dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
+	rm -rf __out
