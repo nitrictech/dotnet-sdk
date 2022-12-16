@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <AssemblyClsCompliant>true</AssemblyClsCompliant>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <HighEntropyVA>true</HighEntropyVA>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Product>Nitric Framework</Product>
+    <Copyright>Copyright (c) Nitric Pty Ltd.  All rights reserved.</Copyright>
+    <Company>Nitric Pty Ltd.</Company>
+    <Authors>maintainers@nitric.io</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="2.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <MinVerDefaultPreReleasePhase>rc</MinVerDefaultPreReleasePhase>
+  </PropertyGroup>
+</Project>

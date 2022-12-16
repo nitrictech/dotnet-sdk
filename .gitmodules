@@ -1,3 +1,0 @@
-[submodule "contracts"]
-	path = Nitric.Sdk/contracts
-	url = git@github.com:nitrictech/contracts.git
