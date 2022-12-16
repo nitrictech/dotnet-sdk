@@ -42,7 +42,7 @@ jobs:
           echo "['MIT','Apache-2.0','BSD-3-Clause']" > licenses.json
           echo "['Google.Protobuf']" > filter.json
           echo "['Nitric.Sdk.csproj']" > packageFilter.json
-          dotnet-project-licenses -i Nitric.Sdk --allowed-license-types licenses.json --projects-filter packageFilter.json --packages-filter filter.json
+          dotnet-project-licenses -i src/Nitric.Sdk --allowed-license-types licenses.json --projects-filter packageFilter.json --packages-filter filter.json
           rm licenses.json
           rm filter.json
           dotnet tool uninstall --global dotnet-project-licenses
