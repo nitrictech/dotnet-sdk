@@ -36,4 +36,4 @@ jobs:
         run: |
           make pack
           dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
-	        rm -rf __out
+          rm -rf __out
