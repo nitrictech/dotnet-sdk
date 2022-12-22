@@ -25,37 +25,42 @@ namespace Nitric.Proto.Resource.v1 {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiBwcm90by9yZXNvdXJjZS92MS9yZXNvdXJjZS5wcm90bxISbml0cmljLnJl",
-            "c291cmNlLnYxGhd2YWxpZGF0ZS92YWxpZGF0ZS5wcm90byKgAQoOUG9saWN5",
-            "UmVzb3VyY2USMAoKcHJpbmNpcGFscxgBIAMoCzIcLm5pdHJpYy5yZXNvdXJj",
-            "ZS52MS5SZXNvdXJjZRIrCgdhY3Rpb25zGAIgAygOMhoubml0cmljLnJlc291",
-            "cmNlLnYxLkFjdGlvbhIvCglyZXNvdXJjZXMYAyADKAsyHC5uaXRyaWMucmVz",
-            "b3VyY2UudjEuUmVzb3VyY2UiSAoIUmVzb3VyY2USLgoEdHlwZRgBIAEoDjIg",
-            "Lm5pdHJpYy5yZXNvdXJjZS52MS5SZXNvdXJjZVR5cGUSDAoEbmFtZRgCIAEo",
-            "CSLKAwoWUmVzb3VyY2VEZWNsYXJlUmVxdWVzdBIuCghyZXNvdXJjZRgBIAEo",
-            "CzIcLm5pdHJpYy5yZXNvdXJjZS52MS5SZXNvdXJjZRI0CgZwb2xpY3kYCiAB",
-            "KAsyIi5uaXRyaWMucmVzb3VyY2UudjEuUG9saWN5UmVzb3VyY2VIABI0CgZi",
-            "dWNrZXQYCyABKAsyIi5uaXRyaWMucmVzb3VyY2UudjEuQnVja2V0UmVzb3Vy",
-            "Y2VIABIyCgVxdWV1ZRgMIAEoCzIhLm5pdHJpYy5yZXNvdXJjZS52MS5RdWV1",
-            "ZVJlc291cmNlSAASMgoFdG9waWMYDSABKAsyIS5uaXRyaWMucmVzb3VyY2Uu",
-            "djEuVG9waWNSZXNvdXJjZUgAEjwKCmNvbGxlY3Rpb24YDiABKAsyJi5uaXRy",
-            "aWMucmVzb3VyY2UudjEuQ29sbGVjdGlvblJlc291cmNlSAASNAoGc2VjcmV0",
-            "GA8gASgLMiIubml0cmljLnJlc291cmNlLnYxLlNlY3JldFJlc291cmNlSAAS",
-            "LgoDYXBpGBAgASgLMh8ubml0cmljLnJlc291cmNlLnYxLkFwaVJlc291cmNl",
-            "SABCCAoGY29uZmlnIhAKDkJ1Y2tldFJlc291cmNlIg8KDVF1ZXVlUmVzb3Vy",
-            "Y2UiDwoNVG9waWNSZXNvdXJjZSIUChJDb2xsZWN0aW9uUmVzb3VyY2UiEAoO",
-            "U2VjcmV0UmVzb3VyY2UiPQoYQXBpU2VjdXJpdHlEZWZpbml0aW9uSnd0Eg4K",
-            "Bmlzc3VlchgBIAEoCRIRCglhdWRpZW5jZXMYAiADKAkiYgoVQXBpU2VjdXJp",
-            "dHlEZWZpbml0aW9uEjsKA2p3dBgBIAEoCzIsLm5pdHJpYy5yZXNvdXJjZS52",
-            "MS5BcGlTZWN1cml0eURlZmluaXRpb25Kd3RIAEIMCgpkZWZpbml0aW9uIhsK",
-            "CUFwaVNjb3BlcxIOCgZzY29wZXMYASADKAki3QIKC0FwaVJlc291cmNlElYK",
-            "FHNlY3VyaXR5X2RlZmluaXRpb25zGAEgAygLMjgubml0cmljLnJlc291cmNl",
-            "LnYxLkFwaVJlc291cmNlLlNlY3VyaXR5RGVmaW5pdGlvbnNFbnRyeRI/Cghz",
-            "ZWN1cml0eRgCIAMoCzItLm5pdHJpYy5yZXNvdXJjZS52MS5BcGlSZXNvdXJj",
-            "ZS5TZWN1cml0eUVudHJ5GmUKGFNlY3VyaXR5RGVmaW5pdGlvbnNFbnRyeRIL",
-            "CgNrZXkYASABKAkSOAoFdmFsdWUYAiABKAsyKS5uaXRyaWMucmVzb3VyY2Uu",
-            "djEuQXBpU2VjdXJpdHlEZWZpbml0aW9uOgI4ARpOCg1TZWN1cml0eUVudHJ5",
-            "EgsKA2tleRgBIAEoCRIsCgV2YWx1ZRgCIAEoCzIdLm5pdHJpYy5yZXNvdXJj",
-            "ZS52MS5BcGlTY29wZXM6AjgBIhkKF1Jlc291cmNlRGVjbGFyZVJlc3BvbnNl",
+            "c291cmNlLnYxIqABCg5Qb2xpY3lSZXNvdXJjZRIwCgpwcmluY2lwYWxzGAEg",
+            "AygLMhwubml0cmljLnJlc291cmNlLnYxLlJlc291cmNlEisKB2FjdGlvbnMY",
+            "AiADKA4yGi5uaXRyaWMucmVzb3VyY2UudjEuQWN0aW9uEi8KCXJlc291cmNl",
+            "cxgDIAMoCzIcLm5pdHJpYy5yZXNvdXJjZS52MS5SZXNvdXJjZSJICghSZXNv",
+            "dXJjZRIuCgR0eXBlGAEgASgOMiAubml0cmljLnJlc291cmNlLnYxLlJlc291",
+            "cmNlVHlwZRIMCgRuYW1lGAIgASgJIsoDChZSZXNvdXJjZURlY2xhcmVSZXF1",
+            "ZXN0Ei4KCHJlc291cmNlGAEgASgLMhwubml0cmljLnJlc291cmNlLnYxLlJl",
+            "c291cmNlEjQKBnBvbGljeRgKIAEoCzIiLm5pdHJpYy5yZXNvdXJjZS52MS5Q",
+            "b2xpY3lSZXNvdXJjZUgAEjQKBmJ1Y2tldBgLIAEoCzIiLm5pdHJpYy5yZXNv",
+            "dXJjZS52MS5CdWNrZXRSZXNvdXJjZUgAEjIKBXF1ZXVlGAwgASgLMiEubml0",
+            "cmljLnJlc291cmNlLnYxLlF1ZXVlUmVzb3VyY2VIABIyCgV0b3BpYxgNIAEo",
+            "CzIhLm5pdHJpYy5yZXNvdXJjZS52MS5Ub3BpY1Jlc291cmNlSAASPAoKY29s",
+            "bGVjdGlvbhgOIAEoCzImLm5pdHJpYy5yZXNvdXJjZS52MS5Db2xsZWN0aW9u",
+            "UmVzb3VyY2VIABI0CgZzZWNyZXQYDyABKAsyIi5uaXRyaWMucmVzb3VyY2Uu",
+            "djEuU2VjcmV0UmVzb3VyY2VIABIuCgNhcGkYECABKAsyHy5uaXRyaWMucmVz",
+            "b3VyY2UudjEuQXBpUmVzb3VyY2VIAEIICgZjb25maWciEAoOQnVja2V0UmVz",
+            "b3VyY2UiDwoNUXVldWVSZXNvdXJjZSIPCg1Ub3BpY1Jlc291cmNlIhQKEkNv",
+            "bGxlY3Rpb25SZXNvdXJjZSIQCg5TZWNyZXRSZXNvdXJjZSI9ChhBcGlTZWN1",
+            "cml0eURlZmluaXRpb25Kd3QSDgoGaXNzdWVyGAEgASgJEhEKCWF1ZGllbmNl",
+            "cxgCIAMoCSJiChVBcGlTZWN1cml0eURlZmluaXRpb24SOwoDand0GAEgASgL",
+            "Miwubml0cmljLnJlc291cmNlLnYxLkFwaVNlY3VyaXR5RGVmaW5pdGlvbkp3",
+            "dEgAQgwKCmRlZmluaXRpb24iGwoJQXBpU2NvcGVzEg4KBnNjb3BlcxgBIAMo",
+            "CSLdAgoLQXBpUmVzb3VyY2USVgoUc2VjdXJpdHlfZGVmaW5pdGlvbnMYASAD",
+            "KAsyOC5uaXRyaWMucmVzb3VyY2UudjEuQXBpUmVzb3VyY2UuU2VjdXJpdHlE",
+            "ZWZpbml0aW9uc0VudHJ5Ej8KCHNlY3VyaXR5GAIgAygLMi0ubml0cmljLnJl",
+            "c291cmNlLnYxLkFwaVJlc291cmNlLlNlY3VyaXR5RW50cnkaZQoYU2VjdXJp",
+            "dHlEZWZpbml0aW9uc0VudHJ5EgsKA2tleRgBIAEoCRI4CgV2YWx1ZRgCIAEo",
+            "CzIpLm5pdHJpYy5yZXNvdXJjZS52MS5BcGlTZWN1cml0eURlZmluaXRpb246",
+            "AjgBGk4KDVNlY3VyaXR5RW50cnkSCwoDa2V5GAEgASgJEiwKBXZhbHVlGAIg",
+            "ASgLMh0ubml0cmljLnJlc291cmNlLnYxLkFwaVNjb3BlczoCOAEiGQoXUmVz",
+            "b3VyY2VEZWNsYXJlUmVzcG9uc2UiIQoSQXBpUmVzb3VyY2VEZXRhaWxzEgsK",
+            "A3VybBgBIAEoCSJIChZSZXNvdXJjZURldGFpbHNSZXF1ZXN0Ei4KCHJlc291",
+            "cmNlGAEgASgLMhwubml0cmljLnJlc291cmNlLnYxLlJlc291cmNlIooBChdS",
+            "ZXNvdXJjZURldGFpbHNSZXNwb25zZRIKCgJpZBgBIAEoCRIQCghwcm92aWRl",
+            "chgCIAEoCRIPCgdzZXJ2aWNlGAMgASgJEjUKA2FwaRgKIAEoCzImLm5pdHJp",
+            "Yy5yZXNvdXJjZS52MS5BcGlSZXNvdXJjZURldGFpbHNIAEIJCgdkZXRhaWxz",
             "Ko8BCgxSZXNvdXJjZVR5cGUSBwoDQXBpEAASDAoIRnVuY3Rpb24QARIKCgZC",
             "dWNrZXQQAhIJCgVRdWV1ZRADEgkKBVRvcGljEAQSDAoIU2NoZWR1bGUQBRIQ",
             "CgxTdWJzY3JpcHRpb24QBhIOCgpDb2xsZWN0aW9uEAcSCgoGUG9saWN5EAgS",
@@ -67,15 +72,17 @@ namespace Nitric.Proto.Resource.v1 {
             "bBCvAhIbChZDb2xsZWN0aW9uRG9jdW1lbnRSZWFkEJADEhwKF0NvbGxlY3Rp",
             "b25Eb2N1bWVudFdyaXRlEJEDEh0KGENvbGxlY3Rpb25Eb2N1bWVudERlbGV0",
             "ZRCSAxIUCg9Db2xsZWN0aW9uUXVlcnkQkwMSEwoOQ29sbGVjdGlvbkxpc3QQ",
-            "lAMSDgoJU2VjcmV0UHV0EPQDEhEKDFNlY3JldEFjY2VzcxD1AzJ1Cg9SZXNv",
-            "dXJjZVNlcnZpY2USYgoHRGVjbGFyZRIqLm5pdHJpYy5yZXNvdXJjZS52MS5S",
-            "ZXNvdXJjZURlY2xhcmVSZXF1ZXN0Gisubml0cmljLnJlc291cmNlLnYxLlJl",
-            "c291cmNlRGVjbGFyZVJlc3BvbnNlQm4KG2lvLm5pdHJpYy5wcm90by5yZXNv",
-            "dXJjZS52MUIJUmVzb3VyY2VzUAFaDG5pdHJpYy92MTt2MaoCGE5pdHJpYy5Q",
-            "cm90by5SZXNvdXJjZS52McoCGE5pdHJpY1xQcm90b1xSZXNvdXJjZVxWMWIG",
-            "cHJvdG8z"));
+            "lAMSDgoJU2VjcmV0UHV0EPQDEhEKDFNlY3JldEFjY2VzcxD1AzLZAQoPUmVz",
+            "b3VyY2VTZXJ2aWNlEmIKB0RlY2xhcmUSKi5uaXRyaWMucmVzb3VyY2UudjEu",
+            "UmVzb3VyY2VEZWNsYXJlUmVxdWVzdBorLm5pdHJpYy5yZXNvdXJjZS52MS5S",
+            "ZXNvdXJjZURlY2xhcmVSZXNwb25zZRJiCgdEZXRhaWxzEioubml0cmljLnJl",
+            "c291cmNlLnYxLlJlc291cmNlRGV0YWlsc1JlcXVlc3QaKy5uaXRyaWMucmVz",
+            "b3VyY2UudjEuUmVzb3VyY2VEZXRhaWxzUmVzcG9uc2VCbgobaW8ubml0cmlj",
+            "LnByb3RvLnJlc291cmNlLnYxQglSZXNvdXJjZXNQAVoMbml0cmljL3YxO3Yx",
+            "qgIYTml0cmljLlByb3RvLlJlc291cmNlLnYxygIYTml0cmljXFByb3RvXFJl",
+            "c291cmNlXFYxYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Validate.ValidateReflection.Descriptor, },
+          new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Nitric.Proto.Resource.v1.ResourceType), typeof(global::Nitric.Proto.Resource.v1.Action), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.PolicyResource), global::Nitric.Proto.Resource.v1.PolicyResource.Parser, new[]{ "Principals", "Actions", "Resources" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.Resource), global::Nitric.Proto.Resource.v1.Resource.Parser, new[]{ "Type", "Name" }, null, null, null, null),
@@ -89,7 +96,10 @@ namespace Nitric.Proto.Resource.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.ApiSecurityDefinition), global::Nitric.Proto.Resource.v1.ApiSecurityDefinition.Parser, new[]{ "Jwt" }, new[]{ "Definition" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.ApiScopes), global::Nitric.Proto.Resource.v1.ApiScopes.Parser, new[]{ "Scopes" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.ApiResource), global::Nitric.Proto.Resource.v1.ApiResource.Parser, new[]{ "SecurityDefinitions", "Security" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, }),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.ResourceDeclareResponse), global::Nitric.Proto.Resource.v1.ResourceDeclareResponse.Parser, null, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.ResourceDeclareResponse), global::Nitric.Proto.Resource.v1.ResourceDeclareResponse.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.ApiResourceDetails), global::Nitric.Proto.Resource.v1.ApiResourceDetails.Parser, new[]{ "Url" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest), global::Nitric.Proto.Resource.v1.ResourceDetailsRequest.Parser, new[]{ "Resource" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Resource.v1.ResourceDetailsResponse), global::Nitric.Proto.Resource.v1.ResourceDetailsResponse.Parser, new[]{ "Id", "Provider", "Service", "Api" }, new[]{ "Details" }, null, null, null)
           }));
     }
     #endregion
@@ -2715,6 +2725,689 @@ namespace Nitric.Proto.Resource.v1 {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class ApiResourceDetails : pb::IMessage<ApiResourceDetails>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ApiResourceDetails> _parser = new pb::MessageParser<ApiResourceDetails>(() => new ApiResourceDetails());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ApiResourceDetails> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Resource.v1.ResourceReflection.Descriptor.MessageTypes[13]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ApiResourceDetails() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ApiResourceDetails(ApiResourceDetails other) : this() {
+      url_ = other.url_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ApiResourceDetails Clone() {
+      return new ApiResourceDetails(this);
+    }
+
+    /// <summary>Field number for the "url" field.</summary>
+    public const int UrlFieldNumber = 1;
+    private string url_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Url {
+      get { return url_; }
+      set {
+        url_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ApiResourceDetails);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ApiResourceDetails other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Url != other.Url) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Url.Length != 0) hash ^= Url.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Url.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Url);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Url.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Url);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Url.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Url);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ApiResourceDetails other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Url.Length != 0) {
+        Url = other.Url;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Url = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Url = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class ResourceDetailsRequest : pb::IMessage<ResourceDetailsRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ResourceDetailsRequest> _parser = new pb::MessageParser<ResourceDetailsRequest>(() => new ResourceDetailsRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ResourceDetailsRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Resource.v1.ResourceReflection.Descriptor.MessageTypes[14]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResourceDetailsRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResourceDetailsRequest(ResourceDetailsRequest other) : this() {
+      resource_ = other.resource_ != null ? other.resource_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResourceDetailsRequest Clone() {
+      return new ResourceDetailsRequest(this);
+    }
+
+    /// <summary>Field number for the "resource" field.</summary>
+    public const int ResourceFieldNumber = 1;
+    private global::Nitric.Proto.Resource.v1.Resource resource_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Resource.v1.Resource Resource {
+      get { return resource_; }
+      set {
+        resource_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ResourceDetailsRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ResourceDetailsRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Resource, other.Resource)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (resource_ != null) hash ^= Resource.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (resource_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Resource);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (resource_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Resource);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (resource_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Resource);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ResourceDetailsRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.resource_ != null) {
+        if (resource_ == null) {
+          Resource = new global::Nitric.Proto.Resource.v1.Resource();
+        }
+        Resource.MergeFrom(other.Resource);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (resource_ == null) {
+              Resource = new global::Nitric.Proto.Resource.v1.Resource();
+            }
+            input.ReadMessage(Resource);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (resource_ == null) {
+              Resource = new global::Nitric.Proto.Resource.v1.Resource();
+            }
+            input.ReadMessage(Resource);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class ResourceDetailsResponse : pb::IMessage<ResourceDetailsResponse>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ResourceDetailsResponse> _parser = new pb::MessageParser<ResourceDetailsResponse>(() => new ResourceDetailsResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ResourceDetailsResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Resource.v1.ResourceReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResourceDetailsResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResourceDetailsResponse(ResourceDetailsResponse other) : this() {
+      id_ = other.id_;
+      provider_ = other.provider_;
+      service_ = other.service_;
+      switch (other.DetailsCase) {
+        case DetailsOneofCase.Api:
+          Api = other.Api.Clone();
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResourceDetailsResponse Clone() {
+      return new ResourceDetailsResponse(this);
+    }
+
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private string id_ = "";
+    /// <summary>
+    /// The identifier of the resource
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Id {
+      get { return id_; }
+      set {
+        id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "provider" field.</summary>
+    public const int ProviderFieldNumber = 2;
+    private string provider_ = "";
+    /// <summary>
+    /// The provider this resource is deployed with (e.g. aws)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Provider {
+      get { return provider_; }
+      set {
+        provider_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "service" field.</summary>
+    public const int ServiceFieldNumber = 3;
+    private string service_ = "";
+    /// <summary>
+    /// The service this resource is deployed on (e.g. ApiGateway)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Service {
+      get { return service_; }
+      set {
+        service_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "api" field.</summary>
+    public const int ApiFieldNumber = 10;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Resource.v1.ApiResourceDetails Api {
+      get { return detailsCase_ == DetailsOneofCase.Api ? (global::Nitric.Proto.Resource.v1.ApiResourceDetails) details_ : null; }
+      set {
+        details_ = value;
+        detailsCase_ = value == null ? DetailsOneofCase.None : DetailsOneofCase.Api;
+      }
+    }
+
+    private object details_;
+    /// <summary>Enum of possible cases for the "details" oneof.</summary>
+    public enum DetailsOneofCase {
+      None = 0,
+      Api = 10,
+    }
+    private DetailsOneofCase detailsCase_ = DetailsOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DetailsOneofCase DetailsCase {
+      get { return detailsCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearDetails() {
+      detailsCase_ = DetailsOneofCase.None;
+      details_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ResourceDetailsResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ResourceDetailsResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (Provider != other.Provider) return false;
+      if (Service != other.Service) return false;
+      if (!object.Equals(Api, other.Api)) return false;
+      if (DetailsCase != other.DetailsCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id.Length != 0) hash ^= Id.GetHashCode();
+      if (Provider.Length != 0) hash ^= Provider.GetHashCode();
+      if (Service.Length != 0) hash ^= Service.GetHashCode();
+      if (detailsCase_ == DetailsOneofCase.Api) hash ^= Api.GetHashCode();
+      hash ^= (int) detailsCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Id);
+      }
+      if (Provider.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Provider);
+      }
+      if (Service.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Service);
+      }
+      if (detailsCase_ == DetailsOneofCase.Api) {
+        output.WriteRawTag(82);
+        output.WriteMessage(Api);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Id);
+      }
+      if (Provider.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Provider);
+      }
+      if (Service.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Service);
+      }
+      if (detailsCase_ == DetailsOneofCase.Api) {
+        output.WriteRawTag(82);
+        output.WriteMessage(Api);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
+      }
+      if (Provider.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Provider);
+      }
+      if (Service.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Service);
+      }
+      if (detailsCase_ == DetailsOneofCase.Api) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Api);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ResourceDetailsResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id.Length != 0) {
+        Id = other.Id;
+      }
+      if (other.Provider.Length != 0) {
+        Provider = other.Provider;
+      }
+      if (other.Service.Length != 0) {
+        Service = other.Service;
+      }
+      switch (other.DetailsCase) {
+        case DetailsOneofCase.Api:
+          if (Api == null) {
+            Api = new global::Nitric.Proto.Resource.v1.ApiResourceDetails();
+          }
+          Api.MergeFrom(other.Api);
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Id = input.ReadString();
+            break;
+          }
+          case 18: {
+            Provider = input.ReadString();
+            break;
+          }
+          case 26: {
+            Service = input.ReadString();
+            break;
+          }
+          case 82: {
+            global::Nitric.Proto.Resource.v1.ApiResourceDetails subBuilder = new global::Nitric.Proto.Resource.v1.ApiResourceDetails();
+            if (detailsCase_ == DetailsOneofCase.Api) {
+              subBuilder.MergeFrom(Api);
+            }
+            input.ReadMessage(subBuilder);
+            Api = subBuilder;
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Id = input.ReadString();
+            break;
+          }
+          case 18: {
+            Provider = input.ReadString();
+            break;
+          }
+          case 26: {
+            Service = input.ReadString();
+            break;
+          }
+          case 82: {
+            global::Nitric.Proto.Resource.v1.ApiResourceDetails subBuilder = new global::Nitric.Proto.Resource.v1.ApiResourceDetails();
+            if (detailsCase_ == DetailsOneofCase.Api) {
+              subBuilder.MergeFrom(Api);
+            }
+            input.ReadMessage(subBuilder);
+            Api = subBuilder;
+            break;
+          }
         }
       }
     }

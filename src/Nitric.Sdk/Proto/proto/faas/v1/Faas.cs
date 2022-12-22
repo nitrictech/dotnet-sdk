@@ -48,46 +48,50 @@ namespace Nitric.Proto.Faas.v1 {
             "aRgKIAEoCzIZLm5pdHJpYy5mYWFzLnYxLkFwaVdvcmtlckgAEjoKDHN1YnNj",
             "cmlwdGlvbhgLIAEoCzIiLm5pdHJpYy5mYWFzLnYxLlN1YnNjcmlwdGlvbldv",
             "cmtlckgAEjIKCHNjaGVkdWxlGAwgASgLMh4ubml0cmljLmZhYXMudjEuU2No",
-            "ZWR1bGVXb3JrZXJIAEIICgZXb3JrZXIiDgoMSW5pdFJlc3BvbnNlIqYBCg5U",
-            "cmlnZ2VyUmVxdWVzdBIMCgRkYXRhGAEgASgMEhEKCW1pbWVfdHlwZRgCIAEo",
-            "CRIyCgRodHRwGAMgASgLMiIubml0cmljLmZhYXMudjEuSHR0cFRyaWdnZXJD",
-            "b250ZXh0SAASNAoFdG9waWMYBCABKAsyIy5uaXRyaWMuZmFhcy52MS5Ub3Bp",
-            "Y1RyaWdnZXJDb250ZXh0SABCCQoHY29udGV4dCIcCgtIZWFkZXJWYWx1ZRIN",
-            "CgV2YWx1ZRgBIAMoCSIbCgpRdWVyeVZhbHVlEg0KBXZhbHVlGAEgAygJIuUF",
-            "ChJIdHRwVHJpZ2dlckNvbnRleHQSDgoGbWV0aG9kGAEgASgJEgwKBHBhdGgY",
-            "AiABKAkSSwoLaGVhZGVyc19vbGQYAyADKAsyMi5uaXRyaWMuZmFhcy52MS5I",
-            "dHRwVHJpZ2dlckNvbnRleHQuSGVhZGVyc09sZEVudHJ5QgIYARJUChBxdWVy",
-            "eV9wYXJhbXNfb2xkGAQgAygLMjYubml0cmljLmZhYXMudjEuSHR0cFRyaWdn",
-            "ZXJDb250ZXh0LlF1ZXJ5UGFyYW1zT2xkRW50cnlCAhgBEkAKB2hlYWRlcnMY",
-            "BSADKAsyLy5uaXRyaWMuZmFhcy52MS5IdHRwVHJpZ2dlckNvbnRleHQuSGVh",
-            "ZGVyc0VudHJ5EkkKDHF1ZXJ5X3BhcmFtcxgGIAMoCzIzLm5pdHJpYy5mYWFz",
-            "LnYxLkh0dHBUcmlnZ2VyQ29udGV4dC5RdWVyeVBhcmFtc0VudHJ5EkcKC3Bh",
-            "dGhfcGFyYW1zGAcgAygLMjIubml0cmljLmZhYXMudjEuSHR0cFRyaWdnZXJD",
-            "b250ZXh0LlBhdGhQYXJhbXNFbnRyeRoxCg9IZWFkZXJzT2xkRW50cnkSCwoD",
-            "a2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARo1ChNRdWVyeVBhcmFtc09s",
-            "ZEVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEaSwoMSGVh",
-            "ZGVyc0VudHJ5EgsKA2tleRgBIAEoCRIqCgV2YWx1ZRgCIAEoCzIbLm5pdHJp",
-            "Yy5mYWFzLnYxLkhlYWRlclZhbHVlOgI4ARpOChBRdWVyeVBhcmFtc0VudHJ5",
-            "EgsKA2tleRgBIAEoCRIpCgV2YWx1ZRgCIAEoCzIaLm5pdHJpYy5mYWFzLnYx",
-            "LlF1ZXJ5VmFsdWU6AjgBGjEKD1BhdGhQYXJhbXNFbnRyeRILCgNrZXkYASAB",
-            "KAkSDQoFdmFsdWUYAiABKAk6AjgBIiQKE1RvcGljVHJpZ2dlckNvbnRleHQS",
-            "DQoFdG9waWMYASABKAkilgEKD1RyaWdnZXJSZXNwb25zZRIMCgRkYXRhGAEg",
-            "ASgMEjMKBGh0dHAYCiABKAsyIy5uaXRyaWMuZmFhcy52MS5IdHRwUmVzcG9u",
-            "c2VDb250ZXh0SAASNQoFdG9waWMYCyABKAsyJC5uaXRyaWMuZmFhcy52MS5U",
-            "b3BpY1Jlc3BvbnNlQ29udGV4dEgAQgkKB2NvbnRleHQitgIKE0h0dHBSZXNw",
-            "b25zZUNvbnRleHQSTAoLaGVhZGVyc19vbGQYASADKAsyMy5uaXRyaWMuZmFh",
-            "cy52MS5IdHRwUmVzcG9uc2VDb250ZXh0LkhlYWRlcnNPbGRFbnRyeUICGAES",
-            "DgoGc3RhdHVzGAIgASgFEkEKB2hlYWRlcnMYAyADKAsyMC5uaXRyaWMuZmFh",
-            "cy52MS5IdHRwUmVzcG9uc2VDb250ZXh0LkhlYWRlcnNFbnRyeRoxCg9IZWFk",
-            "ZXJzT2xkRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARpL",
-            "CgxIZWFkZXJzRW50cnkSCwoDa2V5GAEgASgJEioKBXZhbHVlGAIgASgLMhsu",
-            "bml0cmljLmZhYXMudjEuSGVhZGVyVmFsdWU6AjgBIicKFFRvcGljUmVzcG9u",
-            "c2VDb250ZXh0Eg8KB3N1Y2Nlc3MYASABKAgyYAoLRmFhc1NlcnZpY2USUQoN",
-            "VHJpZ2dlclN0cmVhbRIdLm5pdHJpYy5mYWFzLnYxLkNsaWVudE1lc3NhZ2Ua",
-            "HS5uaXRyaWMuZmFhcy52MS5TZXJ2ZXJNZXNzYWdlKAEwAUJjChdpby5uaXRy",
-            "aWMucHJvdG8uZmFhcy52MUIKTml0cmljRmFhc1ABWgxuaXRyaWMvdjE7djGq",
-            "AhROaXRyaWMuUHJvdG8uRmFhcy52McoCFE5pdHJpY1xQcm90b1xGYWFzXFYx",
-            "YgZwcm90bzM="));
+            "ZWR1bGVXb3JrZXJIAEIICgZXb3JrZXIiDgoMSW5pdFJlc3BvbnNlIncKDFRy",
+            "YWNlQ29udGV4dBI4CgZ2YWx1ZXMYASADKAsyKC5uaXRyaWMuZmFhcy52MS5U",
+            "cmFjZUNvbnRleHQuVmFsdWVzRW50cnkaLQoLVmFsdWVzRW50cnkSCwoDa2V5",
+            "GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASLbAQoOVHJpZ2dlclJlcXVlc3QS",
+            "DAoEZGF0YRgBIAEoDBIRCgltaW1lX3R5cGUYAiABKAkSMwoNdHJhY2VfY29u",
+            "dGV4dBgKIAEoCzIcLm5pdHJpYy5mYWFzLnYxLlRyYWNlQ29udGV4dBIyCgRo",
+            "dHRwGAMgASgLMiIubml0cmljLmZhYXMudjEuSHR0cFRyaWdnZXJDb250ZXh0",
+            "SAASNAoFdG9waWMYBCABKAsyIy5uaXRyaWMuZmFhcy52MS5Ub3BpY1RyaWdn",
+            "ZXJDb250ZXh0SABCCQoHY29udGV4dCIcCgtIZWFkZXJWYWx1ZRINCgV2YWx1",
+            "ZRgBIAMoCSIbCgpRdWVyeVZhbHVlEg0KBXZhbHVlGAEgAygJIuUFChJIdHRw",
+            "VHJpZ2dlckNvbnRleHQSDgoGbWV0aG9kGAEgASgJEgwKBHBhdGgYAiABKAkS",
+            "SwoLaGVhZGVyc19vbGQYAyADKAsyMi5uaXRyaWMuZmFhcy52MS5IdHRwVHJp",
+            "Z2dlckNvbnRleHQuSGVhZGVyc09sZEVudHJ5QgIYARJUChBxdWVyeV9wYXJh",
+            "bXNfb2xkGAQgAygLMjYubml0cmljLmZhYXMudjEuSHR0cFRyaWdnZXJDb250",
+            "ZXh0LlF1ZXJ5UGFyYW1zT2xkRW50cnlCAhgBEkAKB2hlYWRlcnMYBSADKAsy",
+            "Ly5uaXRyaWMuZmFhcy52MS5IdHRwVHJpZ2dlckNvbnRleHQuSGVhZGVyc0Vu",
+            "dHJ5EkkKDHF1ZXJ5X3BhcmFtcxgGIAMoCzIzLm5pdHJpYy5mYWFzLnYxLkh0",
+            "dHBUcmlnZ2VyQ29udGV4dC5RdWVyeVBhcmFtc0VudHJ5EkcKC3BhdGhfcGFy",
+            "YW1zGAcgAygLMjIubml0cmljLmZhYXMudjEuSHR0cFRyaWdnZXJDb250ZXh0",
+            "LlBhdGhQYXJhbXNFbnRyeRoxCg9IZWFkZXJzT2xkRW50cnkSCwoDa2V5GAEg",
+            "ASgJEg0KBXZhbHVlGAIgASgJOgI4ARo1ChNRdWVyeVBhcmFtc09sZEVudHJ5",
+            "EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEaSwoMSGVhZGVyc0Vu",
+            "dHJ5EgsKA2tleRgBIAEoCRIqCgV2YWx1ZRgCIAEoCzIbLm5pdHJpYy5mYWFz",
+            "LnYxLkhlYWRlclZhbHVlOgI4ARpOChBRdWVyeVBhcmFtc0VudHJ5EgsKA2tl",
+            "eRgBIAEoCRIpCgV2YWx1ZRgCIAEoCzIaLm5pdHJpYy5mYWFzLnYxLlF1ZXJ5",
+            "VmFsdWU6AjgBGjEKD1BhdGhQYXJhbXNFbnRyeRILCgNrZXkYASABKAkSDQoF",
+            "dmFsdWUYAiABKAk6AjgBIiQKE1RvcGljVHJpZ2dlckNvbnRleHQSDQoFdG9w",
+            "aWMYASABKAkilgEKD1RyaWdnZXJSZXNwb25zZRIMCgRkYXRhGAEgASgMEjMK",
+            "BGh0dHAYCiABKAsyIy5uaXRyaWMuZmFhcy52MS5IdHRwUmVzcG9uc2VDb250",
+            "ZXh0SAASNQoFdG9waWMYCyABKAsyJC5uaXRyaWMuZmFhcy52MS5Ub3BpY1Jl",
+            "c3BvbnNlQ29udGV4dEgAQgkKB2NvbnRleHQitgIKE0h0dHBSZXNwb25zZUNv",
+            "bnRleHQSTAoLaGVhZGVyc19vbGQYASADKAsyMy5uaXRyaWMuZmFhcy52MS5I",
+            "dHRwUmVzcG9uc2VDb250ZXh0LkhlYWRlcnNPbGRFbnRyeUICGAESDgoGc3Rh",
+            "dHVzGAIgASgFEkEKB2hlYWRlcnMYAyADKAsyMC5uaXRyaWMuZmFhcy52MS5I",
+            "dHRwUmVzcG9uc2VDb250ZXh0LkhlYWRlcnNFbnRyeRoxCg9IZWFkZXJzT2xk",
+            "RW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARpLCgxIZWFk",
+            "ZXJzRW50cnkSCwoDa2V5GAEgASgJEioKBXZhbHVlGAIgASgLMhsubml0cmlj",
+            "LmZhYXMudjEuSGVhZGVyVmFsdWU6AjgBIicKFFRvcGljUmVzcG9uc2VDb250",
+            "ZXh0Eg8KB3N1Y2Nlc3MYASABKAgyYAoLRmFhc1NlcnZpY2USUQoNVHJpZ2dl",
+            "clN0cmVhbRIdLm5pdHJpYy5mYWFzLnYxLkNsaWVudE1lc3NhZ2UaHS5uaXRy",
+            "aWMuZmFhcy52MS5TZXJ2ZXJNZXNzYWdlKAEwAUJjChdpby5uaXRyaWMucHJv",
+            "dG8uZmFhcy52MUIKTml0cmljRmFhc1ABWgxuaXRyaWMvdjE7djGqAhROaXRy",
+            "aWMuUHJvdG8uRmFhcy52McoCFE5pdHJpY1xQcm90b1xGYWFzXFYxYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -102,7 +106,8 @@ namespace Nitric.Proto.Faas.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.ScheduleCron), global::Nitric.Proto.Faas.v1.ScheduleCron.Parser, new[]{ "Cron" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.InitRequest), global::Nitric.Proto.Faas.v1.InitRequest.Parser, new[]{ "Api", "Subscription", "Schedule" }, new[]{ "Worker" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.InitResponse), global::Nitric.Proto.Faas.v1.InitResponse.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TriggerRequest), global::Nitric.Proto.Faas.v1.TriggerRequest.Parser, new[]{ "Data", "MimeType", "Http", "Topic" }, new[]{ "Context" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TraceContext), global::Nitric.Proto.Faas.v1.TraceContext.Parser, new[]{ "Values" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TriggerRequest), global::Nitric.Proto.Faas.v1.TriggerRequest.Parser, new[]{ "Data", "MimeType", "TraceContext", "Http", "Topic" }, new[]{ "Context" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.HeaderValue), global::Nitric.Proto.Faas.v1.HeaderValue.Parser, new[]{ "Value" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.QueryValue), global::Nitric.Proto.Faas.v1.QueryValue.Parser, new[]{ "Value" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.HttpTriggerContext), global::Nitric.Proto.Faas.v1.HttpTriggerContext.Parser, new[]{ "Method", "Path", "HeadersOld", "QueryParamsOld", "Headers", "QueryParams", "PathParams" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, }),
@@ -2670,6 +2675,167 @@ namespace Nitric.Proto.Faas.v1 {
 
   }
 
+  public sealed partial class TraceContext : pb::IMessage<TraceContext>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TraceContext> _parser = new pb::MessageParser<TraceContext>(() => new TraceContext());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<TraceContext> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TraceContext() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TraceContext(TraceContext other) : this() {
+      values_ = other.values_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TraceContext Clone() {
+      return new TraceContext(this);
+    }
+
+    /// <summary>Field number for the "values" field.</summary>
+    public const int ValuesFieldNumber = 1;
+    private static readonly pbc::MapField<string, string>.Codec _map_values_codec
+        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForString(18, ""), 10);
+    private readonly pbc::MapField<string, string> values_ = new pbc::MapField<string, string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<string, string> Values {
+      get { return values_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as TraceContext);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(TraceContext other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!Values.Equals(other.Values)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= Values.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      values_.WriteTo(output, _map_values_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      values_.WriteTo(ref output, _map_values_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += values_.CalculateSize(_map_values_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(TraceContext other) {
+      if (other == null) {
+        return;
+      }
+      values_.Add(other.values_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            values_.AddEntriesFrom(input, _map_values_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            values_.AddEntriesFrom(ref input, _map_values_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   /// <summary>
   /// The server has a trigger for the client to handle
   /// </summary>
@@ -2685,7 +2851,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2704,6 +2870,7 @@ namespace Nitric.Proto.Faas.v1 {
     public TriggerRequest(TriggerRequest other) : this() {
       data_ = other.data_;
       mimeType_ = other.mimeType_;
+      traceContext_ = other.traceContext_ != null ? other.traceContext_.Clone() : null;
       switch (other.ContextCase) {
         case ContextOneofCase.Http:
           Http = other.Http.Clone();
@@ -2747,6 +2914,23 @@ namespace Nitric.Proto.Faas.v1 {
       get { return mimeType_; }
       set {
         mimeType_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "trace_context" field.</summary>
+    public const int TraceContextFieldNumber = 10;
+    private global::Nitric.Proto.Faas.v1.TraceContext traceContext_;
+    /// <summary>
+    /// TraceInformation from the membrane
+    /// Allows tying traces from external triggers (e.g. HttpRequests)
+    /// into each event request/response pair of the Bidirectional stream.
+    /// which cannot be facilitated by OOTB stream interceptors from OTEL.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Faas.v1.TraceContext TraceContext {
+      get { return traceContext_; }
+      set {
+        traceContext_ = value;
       }
     }
 
@@ -2806,6 +2990,7 @@ namespace Nitric.Proto.Faas.v1 {
       }
       if (Data != other.Data) return false;
       if (MimeType != other.MimeType) return false;
+      if (!object.Equals(TraceContext, other.TraceContext)) return false;
       if (!object.Equals(Http, other.Http)) return false;
       if (!object.Equals(Topic, other.Topic)) return false;
       if (ContextCase != other.ContextCase) return false;
@@ -2817,6 +3002,7 @@ namespace Nitric.Proto.Faas.v1 {
       int hash = 1;
       if (Data.Length != 0) hash ^= Data.GetHashCode();
       if (MimeType.Length != 0) hash ^= MimeType.GetHashCode();
+      if (traceContext_ != null) hash ^= TraceContext.GetHashCode();
       if (contextCase_ == ContextOneofCase.Http) hash ^= Http.GetHashCode();
       if (contextCase_ == ContextOneofCase.Topic) hash ^= Topic.GetHashCode();
       hash ^= (int) contextCase_;
@@ -2852,6 +3038,10 @@ namespace Nitric.Proto.Faas.v1 {
         output.WriteRawTag(34);
         output.WriteMessage(Topic);
       }
+      if (traceContext_ != null) {
+        output.WriteRawTag(82);
+        output.WriteMessage(TraceContext);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2877,6 +3067,10 @@ namespace Nitric.Proto.Faas.v1 {
         output.WriteRawTag(34);
         output.WriteMessage(Topic);
       }
+      if (traceContext_ != null) {
+        output.WriteRawTag(82);
+        output.WriteMessage(TraceContext);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2891,6 +3085,9 @@ namespace Nitric.Proto.Faas.v1 {
       }
       if (MimeType.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(MimeType);
+      }
+      if (traceContext_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TraceContext);
       }
       if (contextCase_ == ContextOneofCase.Http) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Http);
@@ -2914,6 +3111,12 @@ namespace Nitric.Proto.Faas.v1 {
       }
       if (other.MimeType.Length != 0) {
         MimeType = other.MimeType;
+      }
+      if (other.traceContext_ != null) {
+        if (traceContext_ == null) {
+          TraceContext = new global::Nitric.Proto.Faas.v1.TraceContext();
+        }
+        TraceContext.MergeFrom(other.TraceContext);
       }
       switch (other.ContextCase) {
         case ContextOneofCase.Http:
@@ -2970,6 +3173,13 @@ namespace Nitric.Proto.Faas.v1 {
             Topic = subBuilder;
             break;
           }
+          case 82: {
+            if (traceContext_ == null) {
+              TraceContext = new global::Nitric.Proto.Faas.v1.TraceContext();
+            }
+            input.ReadMessage(TraceContext);
+            break;
+          }
         }
       }
     #endif
@@ -3010,6 +3220,13 @@ namespace Nitric.Proto.Faas.v1 {
             Topic = subBuilder;
             break;
           }
+          case 82: {
+            if (traceContext_ == null) {
+              TraceContext = new global::Nitric.Proto.Faas.v1.TraceContext();
+            }
+            input.ReadMessage(TraceContext);
+            break;
+          }
         }
       }
     }
@@ -3029,7 +3246,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3190,7 +3407,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3351,7 +3568,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3709,7 +3926,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3887,7 +4104,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4203,7 +4420,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4441,7 +4658,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

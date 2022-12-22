@@ -1,5 +1,5 @@
 # the version of of https://github.com/nitrictech/nitric to use in base client generation.
-NITRIC_VERSION := 0.18.0
+NITRIC_VERSION := 0.21.0
 
 generate: clean download build
 

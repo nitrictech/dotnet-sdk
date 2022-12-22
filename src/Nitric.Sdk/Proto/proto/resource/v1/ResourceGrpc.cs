@@ -48,6 +48,8 @@ namespace Nitric.Proto.Resource.v1 {
 
     static readonly grpc::Marshaller<global::Nitric.Proto.Resource.v1.ResourceDeclareRequest> __Marshaller_nitric_resource_v1_ResourceDeclareRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Resource.v1.ResourceDeclareRequest.Parser));
     static readonly grpc::Marshaller<global::Nitric.Proto.Resource.v1.ResourceDeclareResponse> __Marshaller_nitric_resource_v1_ResourceDeclareResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Resource.v1.ResourceDeclareResponse.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Resource.v1.ResourceDetailsRequest> __Marshaller_nitric_resource_v1_ResourceDetailsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Resource.v1.ResourceDetailsRequest.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> __Marshaller_nitric_resource_v1_ResourceDetailsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Resource.v1.ResourceDetailsResponse.Parser));
 
     static readonly grpc::Method<global::Nitric.Proto.Resource.v1.ResourceDeclareRequest, global::Nitric.Proto.Resource.v1.ResourceDeclareResponse> __Method_Declare = new grpc::Method<global::Nitric.Proto.Resource.v1.ResourceDeclareRequest, global::Nitric.Proto.Resource.v1.ResourceDeclareResponse>(
         grpc::MethodType.Unary,
@@ -55,6 +57,13 @@ namespace Nitric.Proto.Resource.v1 {
         "Declare",
         __Marshaller_nitric_resource_v1_ResourceDeclareRequest,
         __Marshaller_nitric_resource_v1_ResourceDeclareResponse);
+
+    static readonly grpc::Method<global::Nitric.Proto.Resource.v1.ResourceDetailsRequest, global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> __Method_Details = new grpc::Method<global::Nitric.Proto.Resource.v1.ResourceDetailsRequest, global::Nitric.Proto.Resource.v1.ResourceDetailsResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Details",
+        __Marshaller_nitric_resource_v1_ResourceDetailsRequest,
+        __Marshaller_nitric_resource_v1_ResourceDetailsResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -75,6 +84,17 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Resource.v1.ResourceDeclareResponse> Declare(global::Nitric.Proto.Resource.v1.ResourceDeclareRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Retrieve details about a resource at runtime
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> Details(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -156,6 +176,50 @@ namespace Nitric.Proto.Resource.v1 {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Declare, null, options, request);
       }
+      /// <summary>
+      /// Retrieve details about a resource at runtime
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Nitric.Proto.Resource.v1.ResourceDetailsResponse Details(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Details(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Retrieve details about a resource at runtime
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Nitric.Proto.Resource.v1.ResourceDetailsResponse Details(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Details, null, options, request);
+      }
+      /// <summary>
+      /// Retrieve details about a resource at runtime
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> DetailsAsync(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DetailsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Retrieve details about a resource at runtime
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> DetailsAsync(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Details, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ResourceServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -168,7 +232,8 @@ namespace Nitric.Proto.Resource.v1 {
     public static grpc::ServerServiceDefinition BindService(ResourceServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Declare, serviceImpl.Declare).Build();
+          .AddMethod(__Method_Declare, serviceImpl.Declare)
+          .AddMethod(__Method_Details, serviceImpl.Details).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -178,6 +243,7 @@ namespace Nitric.Proto.Resource.v1 {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ResourceServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Declare, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Resource.v1.ResourceDeclareRequest, global::Nitric.Proto.Resource.v1.ResourceDeclareResponse>(serviceImpl.Declare));
+      serviceBinder.AddMethod(__Method_Details, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Resource.v1.ResourceDetailsRequest, global::Nitric.Proto.Resource.v1.ResourceDetailsResponse>(serviceImpl.Details));
     }
 
   }
