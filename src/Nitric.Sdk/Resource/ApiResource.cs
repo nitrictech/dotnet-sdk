@@ -47,6 +47,13 @@ namespace Nitric.Sdk.Resource
         }                
     }   
 
+    public class ApiDetails {
+        internal string ID { get; set; }
+        internal string Provider { get; set; }
+        internal string Service { get; set; }
+        internal string URL { get; set; }
+    }
+
 
     public class ApiOptions
     {
@@ -266,6 +273,26 @@ namespace Nitric.Sdk.Resource
             BaseResource.client.Declare(request);
 
             return this;
+        }
+
+        internal ApiDetails Details() {
+            var resource = new NitricResource { Name = this.name, Type = ResourceType.Api };
+
+            var request = new ResourceDetailsRequest { Resource = resource };
+            var response = BaseResource.client.Details(request);
+
+            return new ApiDetails
+            {
+                ID = response.Id,
+                Provider = response.Provider,
+                Service = response.Service,
+                URL = response.Api.Url,
+            };
+        }
+
+        public string URL()
+        {
+            return this.Details().URL;
         }
     }
 

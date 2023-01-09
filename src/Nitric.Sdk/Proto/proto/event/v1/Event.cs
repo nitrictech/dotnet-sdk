@@ -26,26 +26,26 @@ namespace Nitric.Proto.Event.v1 {
           string.Concat(
             "Chpwcm90by9ldmVudC92MS9ldmVudC5wcm90bxIPbml0cmljLmV2ZW50LnYx",
             "Ghxnb29nbGUvcHJvdG9idWYvc3RydWN0LnByb3RvGhd2YWxpZGF0ZS92YWxp",
-            "ZGF0ZS5wcm90byJ3ChNFdmVudFB1Ymxpc2hSZXF1ZXN0EikKBXRvcGljGAEg",
-            "ASgJQhr6QhdyFSiAAjIQXlx3KyhbLlwtXVx3KykqJBI1CgVldmVudBgCIAEo",
-            "CzIcLm5pdHJpYy5ldmVudC52MS5OaXRyaWNFdmVudEII+kIFigECEAEiIgoU",
-            "RXZlbnRQdWJsaXNoUmVzcG9uc2USCgoCaWQYASABKAkiEgoQVG9waWNMaXN0",
-            "UmVxdWVzdCJBChFUb3BpY0xpc3RSZXNwb25zZRIsCgZ0b3BpY3MYASADKAsy",
-            "HC5uaXRyaWMuZXZlbnQudjEuTml0cmljVG9waWMiGwoLTml0cmljVG9waWMS",
-            "DAoEbmFtZRgBIAEoCSJZCgtOaXRyaWNFdmVudBIKCgJpZBgBIAEoCRIUCgxw",
-            "YXlsb2FkX3R5cGUYAiABKAkSKAoHcGF5bG9hZBgDIAEoCzIXLmdvb2dsZS5w",
-            "cm90b2J1Zi5TdHJ1Y3QyZgoMRXZlbnRTZXJ2aWNlElYKB1B1Ymxpc2gSJC5u",
-            "aXRyaWMuZXZlbnQudjEuRXZlbnRQdWJsaXNoUmVxdWVzdBolLm5pdHJpYy5l",
-            "dmVudC52MS5FdmVudFB1Ymxpc2hSZXNwb25zZTJdCgxUb3BpY1NlcnZpY2US",
-            "TQoETGlzdBIhLm5pdHJpYy5ldmVudC52MS5Ub3BpY0xpc3RSZXF1ZXN0GiIu",
-            "bml0cmljLmV2ZW50LnYxLlRvcGljTGlzdFJlc3BvbnNlQmIKGGlvLm5pdHJp",
-            "Yy5wcm90by5ldmVudC52MUIGRXZlbnRzUAFaDG5pdHJpYy92MTt2MaoCFU5p",
-            "dHJpYy5Qcm90by5FdmVudC52McoCFU5pdHJpY1xQcm90b1xFdmVudFxWMWIG",
-            "cHJvdG8z"));
+            "ZGF0ZS5wcm90byKWAQoTRXZlbnRQdWJsaXNoUmVxdWVzdBIpCgV0b3BpYxgB",
+            "IAEoCUIa+kIXchUogAIyEF5cdysoWy5cLV1cdyspKiQSNQoFZXZlbnQYAiAB",
+            "KAsyHC5uaXRyaWMuZXZlbnQudjEuTml0cmljRXZlbnRCCPpCBYoBAhABEh0K",
+            "BWRlbGF5GAMgASgNQg76QgsqCRiAmp4BKApAASIiChRFdmVudFB1Ymxpc2hS",
+            "ZXNwb25zZRIKCgJpZBgBIAEoCSISChBUb3BpY0xpc3RSZXF1ZXN0IkEKEVRv",
+            "cGljTGlzdFJlc3BvbnNlEiwKBnRvcGljcxgBIAMoCzIcLm5pdHJpYy5ldmVu",
+            "dC52MS5OaXRyaWNUb3BpYyIbCgtOaXRyaWNUb3BpYxIMCgRuYW1lGAEgASgJ",
+            "IlkKC05pdHJpY0V2ZW50EgoKAmlkGAEgASgJEhQKDHBheWxvYWRfdHlwZRgC",
+            "IAEoCRIoCgdwYXlsb2FkGAMgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVj",
+            "dDJmCgxFdmVudFNlcnZpY2USVgoHUHVibGlzaBIkLm5pdHJpYy5ldmVudC52",
+            "MS5FdmVudFB1Ymxpc2hSZXF1ZXN0GiUubml0cmljLmV2ZW50LnYxLkV2ZW50",
+            "UHVibGlzaFJlc3BvbnNlMl0KDFRvcGljU2VydmljZRJNCgRMaXN0EiEubml0",
+            "cmljLmV2ZW50LnYxLlRvcGljTGlzdFJlcXVlc3QaIi5uaXRyaWMuZXZlbnQu",
+            "djEuVG9waWNMaXN0UmVzcG9uc2VCYgoYaW8ubml0cmljLnByb3RvLmV2ZW50",
+            "LnYxQgZFdmVudHNQAVoMbml0cmljL3YxO3YxqgIVTml0cmljLlByb3RvLkV2",
+            "ZW50LnYxygIVTml0cmljXFByb3RvXEV2ZW50XFYxYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.StructReflection.Descriptor, global::Validate.ValidateReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Event.v1.EventPublishRequest), global::Nitric.Proto.Event.v1.EventPublishRequest.Parser, new[]{ "Topic", "Event" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Event.v1.EventPublishRequest), global::Nitric.Proto.Event.v1.EventPublishRequest.Parser, new[]{ "Topic", "Event", "Delay" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Event.v1.EventPublishResponse), global::Nitric.Proto.Event.v1.EventPublishResponse.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Event.v1.TopicListRequest), global::Nitric.Proto.Event.v1.TopicListRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Event.v1.TopicListResponse), global::Nitric.Proto.Event.v1.TopicListResponse.Parser, new[]{ "Topics" }, null, null, null, null),
@@ -91,6 +91,7 @@ namespace Nitric.Proto.Event.v1 {
     public EventPublishRequest(EventPublishRequest other) : this() {
       topic_ = other.topic_;
       event_ = other.event_ != null ? other.event_.Clone() : null;
+      delay_ = other.delay_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -127,6 +128,20 @@ namespace Nitric.Proto.Event.v1 {
       }
     }
 
+    /// <summary>Field number for the "delay" field.</summary>
+    public const int DelayFieldNumber = 3;
+    private uint delay_;
+    /// <summary>
+    /// An optional delay specified in seconds (minimum 10 seconds)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Delay {
+      get { return delay_; }
+      set {
+        delay_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as EventPublishRequest);
@@ -142,6 +157,7 @@ namespace Nitric.Proto.Event.v1 {
       }
       if (Topic != other.Topic) return false;
       if (!object.Equals(Event, other.Event)) return false;
+      if (Delay != other.Delay) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -150,6 +166,7 @@ namespace Nitric.Proto.Event.v1 {
       int hash = 1;
       if (Topic.Length != 0) hash ^= Topic.GetHashCode();
       if (event_ != null) hash ^= Event.GetHashCode();
+      if (Delay != 0) hash ^= Delay.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -174,6 +191,10 @@ namespace Nitric.Proto.Event.v1 {
         output.WriteRawTag(18);
         output.WriteMessage(Event);
       }
+      if (Delay != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Delay);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -191,6 +212,10 @@ namespace Nitric.Proto.Event.v1 {
         output.WriteRawTag(18);
         output.WriteMessage(Event);
       }
+      if (Delay != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Delay);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -205,6 +230,9 @@ namespace Nitric.Proto.Event.v1 {
       }
       if (event_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Event);
+      }
+      if (Delay != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Delay);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -225,6 +253,9 @@ namespace Nitric.Proto.Event.v1 {
           Event = new global::Nitric.Proto.Event.v1.NitricEvent();
         }
         Event.MergeFrom(other.Event);
+      }
+      if (other.Delay != 0) {
+        Delay = other.Delay;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -251,6 +282,10 @@ namespace Nitric.Proto.Event.v1 {
             input.ReadMessage(Event);
             break;
           }
+          case 24: {
+            Delay = input.ReadUInt32();
+            break;
+          }
         }
       }
     #endif
@@ -274,6 +309,10 @@ namespace Nitric.Proto.Event.v1 {
               Event = new global::Nitric.Proto.Event.v1.NitricEvent();
             }
             input.ReadMessage(Event);
+            break;
+          }
+          case 24: {
+            Delay = input.ReadUInt32();
             break;
           }
         }
