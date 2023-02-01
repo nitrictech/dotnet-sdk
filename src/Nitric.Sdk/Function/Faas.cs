@@ -295,7 +295,7 @@ namespace Nitric.Sdk.Function
                 // If the server is unavailable, provide a informative message
                 throw re.StatusCode == StatusCode.Unavailable ?
                     new Exception(
-                        "Unable to connect to a nitric server! If you\'re running locally make sure to run \"nitric start\"")
+                        "Unable to connect to a nitric server! If you're running locally make sure to run \"nitric start\"")
                     : re;
 
             }
