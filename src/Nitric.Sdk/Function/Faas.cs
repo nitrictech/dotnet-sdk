@@ -281,12 +281,24 @@ namespace Nitric.Sdk.Function
 
             using var call = this.Client.TriggerStream();
 
-            await call.RequestStream.WriteAsync(
-                new ClientMessage
-                {
-                    InitRequest = OptionsToInit(this.Options),
-                }
-            );
+            try
+            {
+                await call.RequestStream.WriteAsync(
+                    new ClientMessage
+                    {
+                        InitRequest = OptionsToInit(this.Options),
+                    }
+                );
+            }
+            catch (RpcException re)
+            {
+                // If the server is unavailable, provide a informative message
+                throw re.StatusCode == StatusCode.Unavailable ?
+                    new Exception(
+                        "Unable to connect to a nitric server! If you're running locally make sure to run \"nitric start\"")
+                    : re;
+
+            }
 
             try
             {
