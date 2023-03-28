@@ -15,6 +15,7 @@ namespace Nitric.Proto.Faas.v1 {
   {
     static readonly string __ServiceName = "nitric.faas.v1.FaasService";
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static void __Helper_SerializeMessage(global::Google.Protobuf.IMessage message, grpc::SerializationContext context)
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -29,11 +30,13 @@ namespace Nitric.Proto.Faas.v1 {
       context.Complete(global::Google.Protobuf.MessageExtensions.ToByteArray(message));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static class __Helper_MessageCache<T>
     {
       public static readonly bool IsBufferMessage = global::System.Reflection.IntrospectionExtensions.GetTypeInfo(typeof(global::Google.Protobuf.IBufferMessage)).IsAssignableFrom(typeof(T));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static T __Helper_DeserializeMessage<T>(grpc::DeserializationContext context, global::Google.Protobuf.MessageParser<T> parser) where T : global::Google.Protobuf.IMessage<T>
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -45,9 +48,12 @@ namespace Nitric.Proto.Faas.v1 {
       return parser.ParseFrom(context.PayloadAsNewBuffer());
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Faas.v1.ClientMessage> __Marshaller_nitric_faas_v1_ClientMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Faas.v1.ClientMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Faas.v1.ServerMessage> __Marshaller_nitric_faas_v1_ServerMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Faas.v1.ServerMessage.Parser));
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Faas.v1.ClientMessage, global::Nitric.Proto.Faas.v1.ServerMessage> __Method_TriggerStream = new grpc::Method<global::Nitric.Proto.Faas.v1.ClientMessage, global::Nitric.Proto.Faas.v1.ServerMessage>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
@@ -72,6 +78,7 @@ namespace Nitric.Proto.Faas.v1 {
       /// <param name="responseStream">Used for sending responses back to the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>A task indicating completion of the handler.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task TriggerStream(grpc::IAsyncStreamReader<global::Nitric.Proto.Faas.v1.ClientMessage> requestStream, grpc::IServerStreamWriter<global::Nitric.Proto.Faas.v1.ServerMessage> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -84,20 +91,24 @@ namespace Nitric.Proto.Faas.v1 {
     {
       /// <summary>Creates a new client for FaasService</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public FaasServiceClient(grpc::ChannelBase channel) : base(channel)
       {
       }
       /// <summary>Creates a new client for FaasService that uses a custom <c>CallInvoker</c>.</summary>
       /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public FaasServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
       {
       }
       /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected FaasServiceClient() : base()
       {
       }
       /// <summary>Protected constructor to allow creation of configured clients.</summary>
       /// <param name="configuration">The client configuration.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected FaasServiceClient(ClientBaseConfiguration configuration) : base(configuration)
       {
       }
@@ -109,6 +120,7 @@ namespace Nitric.Proto.Faas.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncDuplexStreamingCall<global::Nitric.Proto.Faas.v1.ClientMessage, global::Nitric.Proto.Faas.v1.ServerMessage> TriggerStream(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return TriggerStream(new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -118,11 +130,13 @@ namespace Nitric.Proto.Faas.v1 {
       /// </summary>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncDuplexStreamingCall<global::Nitric.Proto.Faas.v1.ClientMessage, global::Nitric.Proto.Faas.v1.ServerMessage> TriggerStream(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_TriggerStream, null, options);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override FaasServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
         return new FaasServiceClient(configuration);
@@ -131,6 +145,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static grpc::ServerServiceDefinition BindService(FaasServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
@@ -141,6 +156,7 @@ namespace Nitric.Proto.Faas.v1 {
     /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
     /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, FaasServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_TriggerStream, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Nitric.Proto.Faas.v1.ClientMessage, global::Nitric.Proto.Faas.v1.ServerMessage>(serviceImpl.TriggerStream));

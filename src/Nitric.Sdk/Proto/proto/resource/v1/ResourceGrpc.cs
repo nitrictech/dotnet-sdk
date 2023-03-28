@@ -16,6 +16,7 @@ namespace Nitric.Proto.Resource.v1 {
   {
     static readonly string __ServiceName = "nitric.resource.v1.ResourceService";
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static void __Helper_SerializeMessage(global::Google.Protobuf.IMessage message, grpc::SerializationContext context)
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -30,11 +31,13 @@ namespace Nitric.Proto.Resource.v1 {
       context.Complete(global::Google.Protobuf.MessageExtensions.ToByteArray(message));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static class __Helper_MessageCache<T>
     {
       public static readonly bool IsBufferMessage = global::System.Reflection.IntrospectionExtensions.GetTypeInfo(typeof(global::Google.Protobuf.IBufferMessage)).IsAssignableFrom(typeof(T));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static T __Helper_DeserializeMessage<T>(grpc::DeserializationContext context, global::Google.Protobuf.MessageParser<T> parser) where T : global::Google.Protobuf.IMessage<T>
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -46,11 +49,16 @@ namespace Nitric.Proto.Resource.v1 {
       return parser.ParseFrom(context.PayloadAsNewBuffer());
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Resource.v1.ResourceDeclareRequest> __Marshaller_nitric_resource_v1_ResourceDeclareRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Resource.v1.ResourceDeclareRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Resource.v1.ResourceDeclareResponse> __Marshaller_nitric_resource_v1_ResourceDeclareResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Resource.v1.ResourceDeclareResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Resource.v1.ResourceDetailsRequest> __Marshaller_nitric_resource_v1_ResourceDetailsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Resource.v1.ResourceDetailsRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> __Marshaller_nitric_resource_v1_ResourceDetailsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Resource.v1.ResourceDetailsResponse.Parser));
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Resource.v1.ResourceDeclareRequest, global::Nitric.Proto.Resource.v1.ResourceDeclareResponse> __Method_Declare = new grpc::Method<global::Nitric.Proto.Resource.v1.ResourceDeclareRequest, global::Nitric.Proto.Resource.v1.ResourceDeclareResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -58,6 +66,7 @@ namespace Nitric.Proto.Resource.v1 {
         __Marshaller_nitric_resource_v1_ResourceDeclareRequest,
         __Marshaller_nitric_resource_v1_ResourceDeclareResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Resource.v1.ResourceDetailsRequest, global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> __Method_Details = new grpc::Method<global::Nitric.Proto.Resource.v1.ResourceDetailsRequest, global::Nitric.Proto.Resource.v1.ResourceDetailsResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -83,6 +92,7 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Resource.v1.ResourceDeclareResponse> Declare(global::Nitric.Proto.Resource.v1.ResourceDeclareRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -94,6 +104,7 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> Details(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -106,20 +117,24 @@ namespace Nitric.Proto.Resource.v1 {
     {
       /// <summary>Creates a new client for ResourceService</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public ResourceServiceClient(grpc::ChannelBase channel) : base(channel)
       {
       }
       /// <summary>Creates a new client for ResourceService that uses a custom <c>CallInvoker</c>.</summary>
       /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public ResourceServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
       {
       }
       /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected ResourceServiceClient() : base()
       {
       }
       /// <summary>Protected constructor to allow creation of configured clients.</summary>
       /// <param name="configuration">The client configuration.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected ResourceServiceClient(ClientBaseConfiguration configuration) : base(configuration)
       {
       }
@@ -134,6 +149,7 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Resource.v1.ResourceDeclareResponse Declare(global::Nitric.Proto.Resource.v1.ResourceDeclareRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Declare(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -146,6 +162,7 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Resource.v1.ResourceDeclareResponse Declare(global::Nitric.Proto.Resource.v1.ResourceDeclareRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Declare, null, options, request);
@@ -160,6 +177,7 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Resource.v1.ResourceDeclareResponse> DeclareAsync(global::Nitric.Proto.Resource.v1.ResourceDeclareRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeclareAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -172,6 +190,7 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Resource.v1.ResourceDeclareResponse> DeclareAsync(global::Nitric.Proto.Resource.v1.ResourceDeclareRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Declare, null, options, request);
@@ -184,6 +203,7 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Resource.v1.ResourceDetailsResponse Details(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Details(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -194,6 +214,7 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Resource.v1.ResourceDetailsResponse Details(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Details, null, options, request);
@@ -206,6 +227,7 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> DetailsAsync(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DetailsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -216,11 +238,13 @@ namespace Nitric.Proto.Resource.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Resource.v1.ResourceDetailsResponse> DetailsAsync(global::Nitric.Proto.Resource.v1.ResourceDetailsRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Details, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override ResourceServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
         return new ResourceServiceClient(configuration);
@@ -229,6 +253,7 @@ namespace Nitric.Proto.Resource.v1 {
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static grpc::ServerServiceDefinition BindService(ResourceServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
@@ -240,6 +265,7 @@ namespace Nitric.Proto.Resource.v1 {
     /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
     /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ResourceServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Declare, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Resource.v1.ResourceDeclareRequest, global::Nitric.Proto.Resource.v1.ResourceDeclareResponse>(serviceImpl.Declare));

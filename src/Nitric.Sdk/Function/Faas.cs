@@ -24,6 +24,10 @@ using Util = Nitric.Sdk.Common.Util;
 using ProtoApiWorkerOptions = Nitric.Proto.Faas.v1.ApiWorkerOptions;
 using ProtoClient = Nitric.Proto.Faas.v1.FaasService.FaasServiceClient;
 
+using OpenTelemetry;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+
 namespace Nitric.Sdk.Function
 {
     /// <summary>
@@ -89,7 +93,7 @@ namespace Nitric.Sdk.Function
         /// </summary>
         public HashSet<HttpMethod> Methods { get; set; }
 
-        
+
         public MethodOptions Options { get; set; }
     }
 
@@ -144,7 +148,7 @@ namespace Nitric.Sdk.Function
         /// <summary>
         /// Handlers for HTTP requests
         /// </summary>
-        private Func<HttpContext, HttpContext> HttpHandler; 
+        private Func<HttpContext, HttpContext> HttpHandler;
 
         private List<Middleware<HttpContext>> HttpHandlers = new List<Middleware<HttpContext>>();
 
@@ -205,17 +209,17 @@ namespace Nitric.Sdk.Function
             switch (options)
             {
                 case ApiWorkerOptions a:
-                    var apiInitReq = new InitRequest { Api = new ApiWorker { Api = a.Api, Path = a.Route } };                    
+                    var apiInitReq = new InitRequest { Api = new ApiWorker { Api = a.Api, Path = a.Route } };
 
                     apiInitReq.Api.Methods.Add(a.Methods.Select(m => m.ToString()));
 
-                    var opts = new ProtoApiWorkerOptions();                    
+                    var opts = new ProtoApiWorkerOptions();
 
                     if (a.Options.Security.Count == 0)
                     {
                         opts.SecurityDisabled = false;
                     } else
-                    {                        
+                    {
                         foreach (KeyValuePair<string, string[]> kv in a.Options.Security)
                         {
                             var scopes = new ApiWorkerScopes();
@@ -227,7 +231,7 @@ namespace Nitric.Sdk.Function
 
                     apiInitReq.Api.Options = opts;
 
-                    return apiInitReq;                
+                    return apiInitReq;
                 case ScheduleRateWorkerOptions s:
                     var scheduleInitReq = new InitRequest
                     {
@@ -274,6 +278,35 @@ namespace Nitric.Sdk.Function
         /// <exception cref="NitricException"></exception>
         public async Task Start()
         {
+            var localRun = Util.Environment.GetEnvironmentVariable("NITRIC_ENVIRONMENT", "local");
+            var samplingPercent = Double.Parse(Util.Environment.GetEnvironmentVariable("NITRIC_TRACE_SAMPLE_PERCENT", "100"));
+            var serviceName = Util.Environment.GetEnvironmentVariable("NITRIC_STACK", "dotnet-function");
+            var serviceVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            var provider = OpenTelemetry.Sdk.CreateTracerProviderBuilder()
+                .AddSource(serviceName)
+                .AddHttpClientInstrumentation()
+                .AddGrpcClientInstrumentation()
+                .SetResourceBuilder(
+                    ResourceBuilder.CreateDefault()
+                        .AddService(serviceName: serviceName, serviceVersion: serviceVersion))
+                .SetSampler(new TraceIdRatioBasedSampler(samplingPercent/100.0));
+
+            if (localRun == "local")
+            {
+                provider.AddConsoleExporter();
+            }
+            else
+            {
+                provider.AddOtlpExporter(o =>
+                {
+                    o.Endpoint = new Uri("http://localhost:4317");
+                    o.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+                });
+            }
+
+            provider.Build();
+
             if (this.EventHandlers.Count == 0 && this.EventHandler == null && this.HttpHandlers.Count == 0 && this.HttpHandler == null)
             {
                 throw new Exception("At least one handler must be provided.");
@@ -293,7 +326,7 @@ namespace Nitric.Sdk.Function
             catch (RpcException re)
             {
                 // If the server is unavailable, provide a informative message
-                throw re.StatusCode == StatusCode.Unavailable ?
+                throw re.StatusCode == Grpc.Core.StatusCode.Unavailable ?
                     new Exception(
                         "Unable to connect to a nitric server! If you're running locally make sure to run \"nitric start\"")
                     : re;
@@ -380,7 +413,7 @@ namespace Nitric.Sdk.Function
                                     throw new Exception("Unsupported trigger request type");
                             }
 
-                            var grpcResponse = resultContext.ToGrpcTriggerContext();                            
+                            var grpcResponse = resultContext.ToGrpcTriggerContext();
 
                             //Write back the response to the server
                             await call.RequestStream.WriteAsync(

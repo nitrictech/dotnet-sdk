@@ -15,6 +15,7 @@ namespace Nitric.Proto.Storage.v1 {
   {
     static readonly string __ServiceName = "nitric.storage.v1.StorageService";
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static void __Helper_SerializeMessage(global::Google.Protobuf.IMessage message, grpc::SerializationContext context)
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -29,11 +30,13 @@ namespace Nitric.Proto.Storage.v1 {
       context.Complete(global::Google.Protobuf.MessageExtensions.ToByteArray(message));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static class __Helper_MessageCache<T>
     {
       public static readonly bool IsBufferMessage = global::System.Reflection.IntrospectionExtensions.GetTypeInfo(typeof(global::Google.Protobuf.IBufferMessage)).IsAssignableFrom(typeof(T));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static T __Helper_DeserializeMessage<T>(grpc::DeserializationContext context, global::Google.Protobuf.MessageParser<T> parser) where T : global::Google.Protobuf.IMessage<T>
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -45,17 +48,28 @@ namespace Nitric.Proto.Storage.v1 {
       return parser.ParseFrom(context.PayloadAsNewBuffer());
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageReadRequest> __Marshaller_nitric_storage_v1_StorageReadRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageReadRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageReadResponse> __Marshaller_nitric_storage_v1_StorageReadResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageReadResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageWriteRequest> __Marshaller_nitric_storage_v1_StorageWriteRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageWriteRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageWriteResponse> __Marshaller_nitric_storage_v1_StorageWriteResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageWriteResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageDeleteRequest> __Marshaller_nitric_storage_v1_StorageDeleteRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageDeleteRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageDeleteResponse> __Marshaller_nitric_storage_v1_StorageDeleteResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageDeleteResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest> __Marshaller_nitric_storage_v1_StoragePreSignUrlRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse> __Marshaller_nitric_storage_v1_StoragePreSignUrlResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageListFilesRequest> __Marshaller_nitric_storage_v1_StorageListFilesRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageListFilesRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageListFilesResponse> __Marshaller_nitric_storage_v1_StorageListFilesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageListFilesResponse.Parser));
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Storage.v1.StorageReadRequest, global::Nitric.Proto.Storage.v1.StorageReadResponse> __Method_Read = new grpc::Method<global::Nitric.Proto.Storage.v1.StorageReadRequest, global::Nitric.Proto.Storage.v1.StorageReadResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -63,6 +77,7 @@ namespace Nitric.Proto.Storage.v1 {
         __Marshaller_nitric_storage_v1_StorageReadRequest,
         __Marshaller_nitric_storage_v1_StorageReadResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Storage.v1.StorageWriteRequest, global::Nitric.Proto.Storage.v1.StorageWriteResponse> __Method_Write = new grpc::Method<global::Nitric.Proto.Storage.v1.StorageWriteRequest, global::Nitric.Proto.Storage.v1.StorageWriteResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -70,6 +85,7 @@ namespace Nitric.Proto.Storage.v1 {
         __Marshaller_nitric_storage_v1_StorageWriteRequest,
         __Marshaller_nitric_storage_v1_StorageWriteResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Storage.v1.StorageDeleteRequest, global::Nitric.Proto.Storage.v1.StorageDeleteResponse> __Method_Delete = new grpc::Method<global::Nitric.Proto.Storage.v1.StorageDeleteRequest, global::Nitric.Proto.Storage.v1.StorageDeleteResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -77,6 +93,7 @@ namespace Nitric.Proto.Storage.v1 {
         __Marshaller_nitric_storage_v1_StorageDeleteRequest,
         __Marshaller_nitric_storage_v1_StorageDeleteResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest, global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse> __Method_PreSignUrl = new grpc::Method<global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest, global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -84,6 +101,7 @@ namespace Nitric.Proto.Storage.v1 {
         __Marshaller_nitric_storage_v1_StoragePreSignUrlRequest,
         __Marshaller_nitric_storage_v1_StoragePreSignUrlResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Storage.v1.StorageListFilesRequest, global::Nitric.Proto.Storage.v1.StorageListFilesResponse> __Method_ListFiles = new grpc::Method<global::Nitric.Proto.Storage.v1.StorageListFilesRequest, global::Nitric.Proto.Storage.v1.StorageListFilesResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -107,6 +125,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Storage.v1.StorageReadResponse> Read(global::Nitric.Proto.Storage.v1.StorageReadRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -118,6 +137,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Storage.v1.StorageWriteResponse> Write(global::Nitric.Proto.Storage.v1.StorageWriteRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -129,6 +149,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Storage.v1.StorageDeleteResponse> Delete(global::Nitric.Proto.Storage.v1.StorageDeleteRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -140,6 +161,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse> PreSignUrl(global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -151,6 +173,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Storage.v1.StorageListFilesResponse> ListFiles(global::Nitric.Proto.Storage.v1.StorageListFilesRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -163,20 +186,24 @@ namespace Nitric.Proto.Storage.v1 {
     {
       /// <summary>Creates a new client for StorageService</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public StorageServiceClient(grpc::ChannelBase channel) : base(channel)
       {
       }
       /// <summary>Creates a new client for StorageService that uses a custom <c>CallInvoker</c>.</summary>
       /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public StorageServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
       {
       }
       /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected StorageServiceClient() : base()
       {
       }
       /// <summary>Protected constructor to allow creation of configured clients.</summary>
       /// <param name="configuration">The client configuration.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected StorageServiceClient(ClientBaseConfiguration configuration) : base(configuration)
       {
       }
@@ -189,6 +216,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StorageReadResponse Read(global::Nitric.Proto.Storage.v1.StorageReadRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Read(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -199,6 +227,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StorageReadResponse Read(global::Nitric.Proto.Storage.v1.StorageReadRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Read, null, options, request);
@@ -211,6 +240,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageReadResponse> ReadAsync(global::Nitric.Proto.Storage.v1.StorageReadRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ReadAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -221,6 +251,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageReadResponse> ReadAsync(global::Nitric.Proto.Storage.v1.StorageReadRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Read, null, options, request);
@@ -233,6 +264,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StorageWriteResponse Write(global::Nitric.Proto.Storage.v1.StorageWriteRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Write(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -243,6 +275,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StorageWriteResponse Write(global::Nitric.Proto.Storage.v1.StorageWriteRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Write, null, options, request);
@@ -255,6 +288,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageWriteResponse> WriteAsync(global::Nitric.Proto.Storage.v1.StorageWriteRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return WriteAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -265,6 +299,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageWriteResponse> WriteAsync(global::Nitric.Proto.Storage.v1.StorageWriteRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Write, null, options, request);
@@ -277,6 +312,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StorageDeleteResponse Delete(global::Nitric.Proto.Storage.v1.StorageDeleteRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Delete(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -287,6 +323,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StorageDeleteResponse Delete(global::Nitric.Proto.Storage.v1.StorageDeleteRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Delete, null, options, request);
@@ -299,6 +336,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageDeleteResponse> DeleteAsync(global::Nitric.Proto.Storage.v1.StorageDeleteRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -309,6 +347,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageDeleteResponse> DeleteAsync(global::Nitric.Proto.Storage.v1.StorageDeleteRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Delete, null, options, request);
@@ -321,6 +360,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse PreSignUrl(global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PreSignUrl(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -331,6 +371,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse PreSignUrl(global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_PreSignUrl, null, options, request);
@@ -343,6 +384,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse> PreSignUrlAsync(global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PreSignUrlAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -353,6 +395,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse> PreSignUrlAsync(global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_PreSignUrl, null, options, request);
@@ -365,6 +408,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StorageListFilesResponse ListFiles(global::Nitric.Proto.Storage.v1.StorageListFilesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ListFiles(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -375,6 +419,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Storage.v1.StorageListFilesResponse ListFiles(global::Nitric.Proto.Storage.v1.StorageListFilesRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_ListFiles, null, options, request);
@@ -387,6 +432,7 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageListFilesResponse> ListFilesAsync(global::Nitric.Proto.Storage.v1.StorageListFilesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ListFilesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -397,11 +443,13 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageListFilesResponse> ListFilesAsync(global::Nitric.Proto.Storage.v1.StorageListFilesRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_ListFiles, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override StorageServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
         return new StorageServiceClient(configuration);
@@ -410,6 +458,7 @@ namespace Nitric.Proto.Storage.v1 {
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static grpc::ServerServiceDefinition BindService(StorageServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
@@ -424,6 +473,7 @@ namespace Nitric.Proto.Storage.v1 {
     /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
     /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, StorageServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Read, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Storage.v1.StorageReadRequest, global::Nitric.Proto.Storage.v1.StorageReadResponse>(serviceImpl.Read));

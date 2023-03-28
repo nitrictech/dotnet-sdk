@@ -15,6 +15,7 @@ namespace Nitric.Proto.Queue.v1 {
   {
     static readonly string __ServiceName = "nitric.queue.v1.QueueService";
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static void __Helper_SerializeMessage(global::Google.Protobuf.IMessage message, grpc::SerializationContext context)
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -29,11 +30,13 @@ namespace Nitric.Proto.Queue.v1 {
       context.Complete(global::Google.Protobuf.MessageExtensions.ToByteArray(message));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static class __Helper_MessageCache<T>
     {
       public static readonly bool IsBufferMessage = global::System.Reflection.IntrospectionExtensions.GetTypeInfo(typeof(global::Google.Protobuf.IBufferMessage)).IsAssignableFrom(typeof(T));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static T __Helper_DeserializeMessage<T>(grpc::DeserializationContext context, global::Google.Protobuf.MessageParser<T> parser) where T : global::Google.Protobuf.IMessage<T>
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -45,15 +48,24 @@ namespace Nitric.Proto.Queue.v1 {
       return parser.ParseFrom(context.PayloadAsNewBuffer());
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Queue.v1.QueueSendRequest> __Marshaller_nitric_queue_v1_QueueSendRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queue.v1.QueueSendRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Queue.v1.QueueSendResponse> __Marshaller_nitric_queue_v1_QueueSendResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queue.v1.QueueSendResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Queue.v1.QueueSendBatchRequest> __Marshaller_nitric_queue_v1_QueueSendBatchRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queue.v1.QueueSendBatchRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Queue.v1.QueueSendBatchResponse> __Marshaller_nitric_queue_v1_QueueSendBatchResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queue.v1.QueueSendBatchResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Queue.v1.QueueReceiveRequest> __Marshaller_nitric_queue_v1_QueueReceiveRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queue.v1.QueueReceiveRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Queue.v1.QueueReceiveResponse> __Marshaller_nitric_queue_v1_QueueReceiveResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queue.v1.QueueReceiveResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Queue.v1.QueueCompleteRequest> __Marshaller_nitric_queue_v1_QueueCompleteRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queue.v1.QueueCompleteRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Queue.v1.QueueCompleteResponse> __Marshaller_nitric_queue_v1_QueueCompleteResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queue.v1.QueueCompleteResponse.Parser));
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Queue.v1.QueueSendRequest, global::Nitric.Proto.Queue.v1.QueueSendResponse> __Method_Send = new grpc::Method<global::Nitric.Proto.Queue.v1.QueueSendRequest, global::Nitric.Proto.Queue.v1.QueueSendResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -61,6 +73,7 @@ namespace Nitric.Proto.Queue.v1 {
         __Marshaller_nitric_queue_v1_QueueSendRequest,
         __Marshaller_nitric_queue_v1_QueueSendResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Queue.v1.QueueSendBatchRequest, global::Nitric.Proto.Queue.v1.QueueSendBatchResponse> __Method_SendBatch = new grpc::Method<global::Nitric.Proto.Queue.v1.QueueSendBatchRequest, global::Nitric.Proto.Queue.v1.QueueSendBatchResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -68,6 +81,7 @@ namespace Nitric.Proto.Queue.v1 {
         __Marshaller_nitric_queue_v1_QueueSendBatchRequest,
         __Marshaller_nitric_queue_v1_QueueSendBatchResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Queue.v1.QueueReceiveRequest, global::Nitric.Proto.Queue.v1.QueueReceiveResponse> __Method_Receive = new grpc::Method<global::Nitric.Proto.Queue.v1.QueueReceiveRequest, global::Nitric.Proto.Queue.v1.QueueReceiveResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -75,6 +89,7 @@ namespace Nitric.Proto.Queue.v1 {
         __Marshaller_nitric_queue_v1_QueueReceiveRequest,
         __Marshaller_nitric_queue_v1_QueueReceiveResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Queue.v1.QueueCompleteRequest, global::Nitric.Proto.Queue.v1.QueueCompleteResponse> __Method_Complete = new grpc::Method<global::Nitric.Proto.Queue.v1.QueueCompleteRequest, global::Nitric.Proto.Queue.v1.QueueCompleteResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -98,6 +113,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Queue.v1.QueueSendResponse> Send(global::Nitric.Proto.Queue.v1.QueueSendRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -109,6 +125,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Queue.v1.QueueSendBatchResponse> SendBatch(global::Nitric.Proto.Queue.v1.QueueSendBatchRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -120,6 +137,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Queue.v1.QueueReceiveResponse> Receive(global::Nitric.Proto.Queue.v1.QueueReceiveRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -131,6 +149,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Queue.v1.QueueCompleteResponse> Complete(global::Nitric.Proto.Queue.v1.QueueCompleteRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -143,20 +162,24 @@ namespace Nitric.Proto.Queue.v1 {
     {
       /// <summary>Creates a new client for QueueService</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public QueueServiceClient(grpc::ChannelBase channel) : base(channel)
       {
       }
       /// <summary>Creates a new client for QueueService that uses a custom <c>CallInvoker</c>.</summary>
       /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public QueueServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
       {
       }
       /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected QueueServiceClient() : base()
       {
       }
       /// <summary>Protected constructor to allow creation of configured clients.</summary>
       /// <param name="configuration">The client configuration.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected QueueServiceClient(ClientBaseConfiguration configuration) : base(configuration)
       {
       }
@@ -169,6 +192,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Queue.v1.QueueSendResponse Send(global::Nitric.Proto.Queue.v1.QueueSendRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Send(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -179,6 +203,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Queue.v1.QueueSendResponse Send(global::Nitric.Proto.Queue.v1.QueueSendRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Send, null, options, request);
@@ -191,6 +216,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queue.v1.QueueSendResponse> SendAsync(global::Nitric.Proto.Queue.v1.QueueSendRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SendAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -201,6 +227,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queue.v1.QueueSendResponse> SendAsync(global::Nitric.Proto.Queue.v1.QueueSendRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Send, null, options, request);
@@ -213,6 +240,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Queue.v1.QueueSendBatchResponse SendBatch(global::Nitric.Proto.Queue.v1.QueueSendBatchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SendBatch(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -223,6 +251,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Queue.v1.QueueSendBatchResponse SendBatch(global::Nitric.Proto.Queue.v1.QueueSendBatchRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_SendBatch, null, options, request);
@@ -235,6 +264,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queue.v1.QueueSendBatchResponse> SendBatchAsync(global::Nitric.Proto.Queue.v1.QueueSendBatchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SendBatchAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -245,6 +275,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queue.v1.QueueSendBatchResponse> SendBatchAsync(global::Nitric.Proto.Queue.v1.QueueSendBatchRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_SendBatch, null, options, request);
@@ -257,6 +288,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Queue.v1.QueueReceiveResponse Receive(global::Nitric.Proto.Queue.v1.QueueReceiveRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Receive(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -267,6 +299,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Queue.v1.QueueReceiveResponse Receive(global::Nitric.Proto.Queue.v1.QueueReceiveRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Receive, null, options, request);
@@ -279,6 +312,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queue.v1.QueueReceiveResponse> ReceiveAsync(global::Nitric.Proto.Queue.v1.QueueReceiveRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ReceiveAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -289,6 +323,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queue.v1.QueueReceiveResponse> ReceiveAsync(global::Nitric.Proto.Queue.v1.QueueReceiveRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Receive, null, options, request);
@@ -301,6 +336,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Queue.v1.QueueCompleteResponse Complete(global::Nitric.Proto.Queue.v1.QueueCompleteRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Complete(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -311,6 +347,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Queue.v1.QueueCompleteResponse Complete(global::Nitric.Proto.Queue.v1.QueueCompleteRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Complete, null, options, request);
@@ -323,6 +360,7 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queue.v1.QueueCompleteResponse> CompleteAsync(global::Nitric.Proto.Queue.v1.QueueCompleteRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CompleteAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -333,11 +371,13 @@ namespace Nitric.Proto.Queue.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queue.v1.QueueCompleteResponse> CompleteAsync(global::Nitric.Proto.Queue.v1.QueueCompleteRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Complete, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override QueueServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
         return new QueueServiceClient(configuration);
@@ -346,6 +386,7 @@ namespace Nitric.Proto.Queue.v1 {
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static grpc::ServerServiceDefinition BindService(QueueServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
@@ -359,6 +400,7 @@ namespace Nitric.Proto.Queue.v1 {
     /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
     /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, QueueServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Send, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Queue.v1.QueueSendRequest, global::Nitric.Proto.Queue.v1.QueueSendResponse>(serviceImpl.Send));

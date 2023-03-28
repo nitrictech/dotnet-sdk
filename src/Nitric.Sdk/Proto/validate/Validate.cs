@@ -223,19 +223,23 @@ namespace Validate {
     private static readonly pb::MessageParser<FieldRules> _parser = new pb::MessageParser<FieldRules>(() => new FieldRules());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<FieldRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FieldRules() {
       OnConstruction();
     }
@@ -243,6 +247,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FieldRules(FieldRules other) : this() {
       message_ = other.message_ != null ? other.message_.Clone() : null;
       switch (other.TypeCase) {
@@ -315,6 +320,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FieldRules Clone() {
       return new FieldRules(this);
     }
@@ -323,6 +329,7 @@ namespace Validate {
     public const int MessageFieldNumber = 17;
     private global::Validate.MessageRules message_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.MessageRules Message {
       get { return message_; }
       set {
@@ -336,6 +343,7 @@ namespace Validate {
     /// Scalar Field Types
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.FloatRules Float {
       get { return typeCase_ == TypeOneofCase.Float ? (global::Validate.FloatRules) type_ : null; }
       set {
@@ -347,6 +355,7 @@ namespace Validate {
     /// <summary>Field number for the "double" field.</summary>
     public const int DoubleFieldNumber = 2;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.DoubleRules Double {
       get { return typeCase_ == TypeOneofCase.Double ? (global::Validate.DoubleRules) type_ : null; }
       set {
@@ -358,6 +367,7 @@ namespace Validate {
     /// <summary>Field number for the "int32" field.</summary>
     public const int Int32FieldNumber = 3;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.Int32Rules Int32 {
       get { return typeCase_ == TypeOneofCase.Int32 ? (global::Validate.Int32Rules) type_ : null; }
       set {
@@ -369,6 +379,7 @@ namespace Validate {
     /// <summary>Field number for the "int64" field.</summary>
     public const int Int64FieldNumber = 4;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.Int64Rules Int64 {
       get { return typeCase_ == TypeOneofCase.Int64 ? (global::Validate.Int64Rules) type_ : null; }
       set {
@@ -380,6 +391,7 @@ namespace Validate {
     /// <summary>Field number for the "uint32" field.</summary>
     public const int Uint32FieldNumber = 5;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.UInt32Rules Uint32 {
       get { return typeCase_ == TypeOneofCase.Uint32 ? (global::Validate.UInt32Rules) type_ : null; }
       set {
@@ -391,6 +403,7 @@ namespace Validate {
     /// <summary>Field number for the "uint64" field.</summary>
     public const int Uint64FieldNumber = 6;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.UInt64Rules Uint64 {
       get { return typeCase_ == TypeOneofCase.Uint64 ? (global::Validate.UInt64Rules) type_ : null; }
       set {
@@ -402,6 +415,7 @@ namespace Validate {
     /// <summary>Field number for the "sint32" field.</summary>
     public const int Sint32FieldNumber = 7;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.SInt32Rules Sint32 {
       get { return typeCase_ == TypeOneofCase.Sint32 ? (global::Validate.SInt32Rules) type_ : null; }
       set {
@@ -413,6 +427,7 @@ namespace Validate {
     /// <summary>Field number for the "sint64" field.</summary>
     public const int Sint64FieldNumber = 8;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.SInt64Rules Sint64 {
       get { return typeCase_ == TypeOneofCase.Sint64 ? (global::Validate.SInt64Rules) type_ : null; }
       set {
@@ -424,6 +439,7 @@ namespace Validate {
     /// <summary>Field number for the "fixed32" field.</summary>
     public const int Fixed32FieldNumber = 9;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.Fixed32Rules Fixed32 {
       get { return typeCase_ == TypeOneofCase.Fixed32 ? (global::Validate.Fixed32Rules) type_ : null; }
       set {
@@ -435,6 +451,7 @@ namespace Validate {
     /// <summary>Field number for the "fixed64" field.</summary>
     public const int Fixed64FieldNumber = 10;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.Fixed64Rules Fixed64 {
       get { return typeCase_ == TypeOneofCase.Fixed64 ? (global::Validate.Fixed64Rules) type_ : null; }
       set {
@@ -446,6 +463,7 @@ namespace Validate {
     /// <summary>Field number for the "sfixed32" field.</summary>
     public const int Sfixed32FieldNumber = 11;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.SFixed32Rules Sfixed32 {
       get { return typeCase_ == TypeOneofCase.Sfixed32 ? (global::Validate.SFixed32Rules) type_ : null; }
       set {
@@ -457,6 +475,7 @@ namespace Validate {
     /// <summary>Field number for the "sfixed64" field.</summary>
     public const int Sfixed64FieldNumber = 12;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.SFixed64Rules Sfixed64 {
       get { return typeCase_ == TypeOneofCase.Sfixed64 ? (global::Validate.SFixed64Rules) type_ : null; }
       set {
@@ -468,6 +487,7 @@ namespace Validate {
     /// <summary>Field number for the "bool" field.</summary>
     public const int BoolFieldNumber = 13;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.BoolRules Bool {
       get { return typeCase_ == TypeOneofCase.Bool ? (global::Validate.BoolRules) type_ : null; }
       set {
@@ -479,6 +499,7 @@ namespace Validate {
     /// <summary>Field number for the "string" field.</summary>
     public const int StringFieldNumber = 14;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.StringRules String {
       get { return typeCase_ == TypeOneofCase.String ? (global::Validate.StringRules) type_ : null; }
       set {
@@ -490,6 +511,7 @@ namespace Validate {
     /// <summary>Field number for the "bytes" field.</summary>
     public const int BytesFieldNumber = 15;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.BytesRules Bytes {
       get { return typeCase_ == TypeOneofCase.Bytes ? (global::Validate.BytesRules) type_ : null; }
       set {
@@ -504,6 +526,7 @@ namespace Validate {
     /// Complex Field Types
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.EnumRules Enum {
       get { return typeCase_ == TypeOneofCase.Enum ? (global::Validate.EnumRules) type_ : null; }
       set {
@@ -515,6 +538,7 @@ namespace Validate {
     /// <summary>Field number for the "repeated" field.</summary>
     public const int RepeatedFieldNumber = 18;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.RepeatedRules Repeated {
       get { return typeCase_ == TypeOneofCase.Repeated ? (global::Validate.RepeatedRules) type_ : null; }
       set {
@@ -526,6 +550,7 @@ namespace Validate {
     /// <summary>Field number for the "map" field.</summary>
     public const int MapFieldNumber = 19;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.MapRules Map {
       get { return typeCase_ == TypeOneofCase.Map ? (global::Validate.MapRules) type_ : null; }
       set {
@@ -540,6 +565,7 @@ namespace Validate {
     /// Well-Known Field Types
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.AnyRules Any {
       get { return typeCase_ == TypeOneofCase.Any ? (global::Validate.AnyRules) type_ : null; }
       set {
@@ -551,6 +577,7 @@ namespace Validate {
     /// <summary>Field number for the "duration" field.</summary>
     public const int DurationFieldNumber = 21;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.DurationRules Duration {
       get { return typeCase_ == TypeOneofCase.Duration ? (global::Validate.DurationRules) type_ : null; }
       set {
@@ -562,6 +589,7 @@ namespace Validate {
     /// <summary>Field number for the "timestamp" field.</summary>
     public const int TimestampFieldNumber = 22;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.TimestampRules Timestamp {
       get { return typeCase_ == TypeOneofCase.Timestamp ? (global::Validate.TimestampRules) type_ : null; }
       set {
@@ -598,22 +626,26 @@ namespace Validate {
     }
     private TypeOneofCase typeCase_ = TypeOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public TypeOneofCase TypeCase {
       get { return typeCase_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearType() {
       typeCase_ = TypeOneofCase.None;
       type_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as FieldRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(FieldRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -648,6 +680,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (message_ != null) hash ^= Message.GetHashCode();
@@ -680,11 +713,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -785,6 +820,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (typeCase_ == TypeOneofCase.Float) {
         output.WriteRawTag(10);
@@ -881,6 +917,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (message_ != null) {
@@ -956,6 +993,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(FieldRules other) {
       if (other == null) {
         return;
@@ -1099,6 +1137,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -1312,6 +1351,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -1534,19 +1574,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<FloatRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FloatRules() {
       OnConstruction();
     }
@@ -1554,6 +1598,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FloatRules(FloatRules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -1568,6 +1613,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FloatRules Clone() {
       return new FloatRules(this);
     }
@@ -1581,6 +1627,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public float Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -1590,11 +1637,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -1609,6 +1658,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public float Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -1618,11 +1668,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -1637,6 +1689,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public float Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -1646,11 +1699,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -1666,6 +1721,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public float Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -1675,11 +1731,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -1695,6 +1753,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public float Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -1704,11 +1763,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -1723,6 +1784,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<float> In {
       get { return in_; }
     }
@@ -1737,6 +1799,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<float> NotIn {
       get { return notIn_; }
     }
@@ -1751,6 +1814,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -1760,21 +1824,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as FloatRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(FloatRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -1794,6 +1862,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Const);
@@ -1811,11 +1880,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -1854,6 +1925,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(13);
@@ -1888,6 +1960,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -1917,6 +1990,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(FloatRules other) {
       if (other == null) {
         return;
@@ -1945,6 +2019,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -1996,6 +2071,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -2056,19 +2132,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<DoubleRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DoubleRules() {
       OnConstruction();
     }
@@ -2076,6 +2156,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DoubleRules(DoubleRules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -2090,6 +2171,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DoubleRules Clone() {
       return new DoubleRules(this);
     }
@@ -2103,6 +2185,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public double Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -2112,11 +2195,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -2131,6 +2216,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public double Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -2140,11 +2226,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -2159,6 +2247,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public double Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -2168,11 +2257,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -2188,6 +2279,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public double Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -2197,11 +2289,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -2217,6 +2311,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public double Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -2226,11 +2321,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -2245,6 +2342,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<double> In {
       get { return in_; }
     }
@@ -2259,6 +2357,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<double> NotIn {
       get { return notIn_; }
     }
@@ -2273,6 +2372,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -2282,21 +2382,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as DoubleRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(DoubleRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -2316,6 +2420,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Const);
@@ -2333,11 +2438,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -2376,6 +2483,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(9);
@@ -2410,6 +2518,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -2439,6 +2548,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(DoubleRules other) {
       if (other == null) {
         return;
@@ -2467,6 +2577,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -2518,6 +2629,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -2578,19 +2690,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<Int32Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Int32Rules() {
       OnConstruction();
     }
@@ -2598,6 +2714,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Int32Rules(Int32Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -2612,6 +2729,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Int32Rules Clone() {
       return new Int32Rules(this);
     }
@@ -2625,6 +2743,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -2634,11 +2753,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -2653,6 +2774,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -2662,11 +2784,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -2681,6 +2805,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -2690,11 +2815,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -2710,6 +2837,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -2719,11 +2847,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -2739,6 +2869,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -2748,11 +2879,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -2767,6 +2900,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<int> In {
       get { return in_; }
     }
@@ -2781,6 +2915,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<int> NotIn {
       get { return notIn_; }
     }
@@ -2795,6 +2930,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -2804,21 +2940,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as Int32Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(Int32Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -2838,6 +2978,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -2855,11 +2996,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -2898,6 +3041,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(8);
@@ -2932,6 +3076,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -2961,6 +3106,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(Int32Rules other) {
       if (other == null) {
         return;
@@ -2989,6 +3135,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -3040,6 +3187,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -3100,19 +3248,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<Int64Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Int64Rules() {
       OnConstruction();
     }
@@ -3120,6 +3272,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Int64Rules(Int64Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -3134,6 +3287,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Int64Rules Clone() {
       return new Int64Rules(this);
     }
@@ -3147,6 +3301,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -3156,11 +3311,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -3175,6 +3332,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -3184,11 +3342,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -3203,6 +3363,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -3212,11 +3373,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -3232,6 +3395,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -3241,11 +3405,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -3261,6 +3427,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -3270,11 +3437,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -3289,6 +3458,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<long> In {
       get { return in_; }
     }
@@ -3303,6 +3473,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<long> NotIn {
       get { return notIn_; }
     }
@@ -3317,6 +3488,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -3326,21 +3498,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as Int64Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(Int64Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -3360,6 +3536,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -3377,11 +3554,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -3420,6 +3599,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(8);
@@ -3454,6 +3634,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -3483,6 +3664,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(Int64Rules other) {
       if (other == null) {
         return;
@@ -3511,6 +3693,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -3562,6 +3745,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -3622,19 +3806,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<UInt32Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public UInt32Rules() {
       OnConstruction();
     }
@@ -3642,6 +3830,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public UInt32Rules(UInt32Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -3656,6 +3845,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public UInt32Rules Clone() {
       return new UInt32Rules(this);
     }
@@ -3669,6 +3859,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -3678,11 +3869,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -3697,6 +3890,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -3706,11 +3900,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -3725,6 +3921,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -3734,11 +3931,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -3754,6 +3953,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -3763,11 +3963,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -3783,6 +3985,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -3792,11 +3995,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -3811,6 +4016,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<uint> In {
       get { return in_; }
     }
@@ -3825,6 +4031,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<uint> NotIn {
       get { return notIn_; }
     }
@@ -3839,6 +4046,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -3848,21 +4056,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as UInt32Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(UInt32Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -3882,6 +4094,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -3899,11 +4112,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -3942,6 +4157,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(8);
@@ -3976,6 +4192,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -4005,6 +4222,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(UInt32Rules other) {
       if (other == null) {
         return;
@@ -4033,6 +4251,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -4084,6 +4303,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -4144,19 +4364,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<UInt64Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public UInt64Rules() {
       OnConstruction();
     }
@@ -4164,6 +4388,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public UInt64Rules(UInt64Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -4178,6 +4403,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public UInt64Rules Clone() {
       return new UInt64Rules(this);
     }
@@ -4191,6 +4417,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -4200,11 +4427,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -4219,6 +4448,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -4228,11 +4458,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -4247,6 +4479,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -4256,11 +4489,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -4276,6 +4511,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -4285,11 +4521,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -4305,6 +4543,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -4314,11 +4553,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -4333,6 +4574,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<ulong> In {
       get { return in_; }
     }
@@ -4347,6 +4589,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<ulong> NotIn {
       get { return notIn_; }
     }
@@ -4361,6 +4604,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -4370,21 +4614,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as UInt64Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(UInt64Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -4404,6 +4652,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -4421,11 +4670,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -4464,6 +4715,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(8);
@@ -4498,6 +4750,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -4527,6 +4780,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(UInt64Rules other) {
       if (other == null) {
         return;
@@ -4555,6 +4809,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -4606,6 +4861,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -4666,19 +4922,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<SInt32Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SInt32Rules() {
       OnConstruction();
     }
@@ -4686,6 +4946,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SInt32Rules(SInt32Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -4700,6 +4961,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SInt32Rules Clone() {
       return new SInt32Rules(this);
     }
@@ -4713,6 +4975,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -4722,11 +4985,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -4741,6 +5006,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -4750,11 +5016,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -4769,6 +5037,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -4778,11 +5047,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -4798,6 +5069,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -4807,11 +5079,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -4827,6 +5101,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -4836,11 +5111,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -4855,6 +5132,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<int> In {
       get { return in_; }
     }
@@ -4869,6 +5147,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<int> NotIn {
       get { return notIn_; }
     }
@@ -4883,6 +5162,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -4892,21 +5172,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as SInt32Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(SInt32Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -4926,6 +5210,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -4943,11 +5228,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -4986,6 +5273,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(8);
@@ -5020,6 +5308,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -5049,6 +5338,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(SInt32Rules other) {
       if (other == null) {
         return;
@@ -5077,6 +5367,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -5128,6 +5419,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -5188,19 +5480,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<SInt64Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SInt64Rules() {
       OnConstruction();
     }
@@ -5208,6 +5504,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SInt64Rules(SInt64Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -5222,6 +5519,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SInt64Rules Clone() {
       return new SInt64Rules(this);
     }
@@ -5235,6 +5533,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -5244,11 +5543,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -5263,6 +5564,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -5272,11 +5574,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -5291,6 +5595,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -5300,11 +5605,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -5320,6 +5627,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -5329,11 +5637,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -5349,6 +5659,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -5358,11 +5669,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -5377,6 +5690,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<long> In {
       get { return in_; }
     }
@@ -5391,6 +5705,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<long> NotIn {
       get { return notIn_; }
     }
@@ -5405,6 +5720,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -5414,21 +5730,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as SInt64Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(SInt64Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -5448,6 +5768,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -5465,11 +5786,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -5508,6 +5831,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(8);
@@ -5542,6 +5866,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -5571,6 +5896,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(SInt64Rules other) {
       if (other == null) {
         return;
@@ -5599,6 +5925,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -5650,6 +5977,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -5710,19 +6038,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<Fixed32Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Fixed32Rules() {
       OnConstruction();
     }
@@ -5730,6 +6062,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Fixed32Rules(Fixed32Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -5744,6 +6077,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Fixed32Rules Clone() {
       return new Fixed32Rules(this);
     }
@@ -5757,6 +6091,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -5766,11 +6101,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -5785,6 +6122,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -5794,11 +6132,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -5813,6 +6153,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -5822,11 +6163,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -5842,6 +6185,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -5851,11 +6195,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -5871,6 +6217,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -5880,11 +6227,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -5899,6 +6248,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<uint> In {
       get { return in_; }
     }
@@ -5913,6 +6263,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<uint> NotIn {
       get { return notIn_; }
     }
@@ -5927,6 +6278,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -5936,21 +6288,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as Fixed32Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(Fixed32Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -5970,6 +6326,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -5987,11 +6344,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -6030,6 +6389,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(13);
@@ -6064,6 +6424,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -6093,6 +6454,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(Fixed32Rules other) {
       if (other == null) {
         return;
@@ -6121,6 +6483,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -6172,6 +6535,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -6232,19 +6596,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<Fixed64Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Fixed64Rules() {
       OnConstruction();
     }
@@ -6252,6 +6620,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Fixed64Rules(Fixed64Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -6266,6 +6635,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Fixed64Rules Clone() {
       return new Fixed64Rules(this);
     }
@@ -6279,6 +6649,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -6288,11 +6659,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -6307,6 +6680,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -6316,11 +6690,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -6335,6 +6711,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -6344,11 +6721,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -6364,6 +6743,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -6373,11 +6753,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -6393,6 +6775,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -6402,11 +6785,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -6421,6 +6806,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<ulong> In {
       get { return in_; }
     }
@@ -6435,6 +6821,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<ulong> NotIn {
       get { return notIn_; }
     }
@@ -6449,6 +6836,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -6458,21 +6846,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as Fixed64Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(Fixed64Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -6492,6 +6884,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -6509,11 +6902,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -6552,6 +6947,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(9);
@@ -6586,6 +6982,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -6615,6 +7012,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(Fixed64Rules other) {
       if (other == null) {
         return;
@@ -6643,6 +7041,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -6694,6 +7093,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -6754,19 +7154,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<SFixed32Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SFixed32Rules() {
       OnConstruction();
     }
@@ -6774,6 +7178,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SFixed32Rules(SFixed32Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -6788,6 +7193,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SFixed32Rules Clone() {
       return new SFixed32Rules(this);
     }
@@ -6801,6 +7207,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -6810,11 +7217,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -6829,6 +7238,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -6838,11 +7248,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -6857,6 +7269,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -6866,11 +7279,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -6886,6 +7301,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -6895,11 +7311,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -6915,6 +7333,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -6924,11 +7343,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -6943,6 +7364,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<int> In {
       get { return in_; }
     }
@@ -6957,6 +7379,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<int> NotIn {
       get { return notIn_; }
     }
@@ -6971,6 +7394,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -6980,21 +7404,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as SFixed32Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(SFixed32Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -7014,6 +7442,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -7031,11 +7460,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -7074,6 +7505,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(13);
@@ -7108,6 +7540,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -7137,6 +7570,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(SFixed32Rules other) {
       if (other == null) {
         return;
@@ -7165,6 +7599,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -7216,6 +7651,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -7276,19 +7712,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<SFixed64Rules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SFixed64Rules() {
       OnConstruction();
     }
@@ -7296,6 +7736,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SFixed64Rules(SFixed64Rules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -7310,6 +7751,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SFixed64Rules Clone() {
       return new SFixed64Rules(this);
     }
@@ -7323,6 +7765,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -7332,11 +7775,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -7351,6 +7796,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Lt {
       get { if ((_hasBits0 & 2) != 0) { return lt_; } else { return LtDefaultValue; } }
       set {
@@ -7360,11 +7806,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLt {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLt() {
       _hasBits0 &= ~2;
     }
@@ -7379,6 +7827,7 @@ namespace Validate {
     /// specified value, inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Lte {
       get { if ((_hasBits0 & 4) != 0) { return lte_; } else { return LteDefaultValue; } }
       set {
@@ -7388,11 +7837,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLte {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "lte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLte() {
       _hasBits0 &= ~4;
     }
@@ -7408,6 +7859,7 @@ namespace Validate {
     /// range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Gt {
       get { if ((_hasBits0 & 8) != 0) { return gt_; } else { return GtDefaultValue; } }
       set {
@@ -7417,11 +7869,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGt {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "gt" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGt() {
       _hasBits0 &= ~8;
     }
@@ -7437,6 +7891,7 @@ namespace Validate {
     /// specified Lt or Lte, the range is reversed.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Gte {
       get { if ((_hasBits0 & 16) != 0) { return gte_; } else { return GteDefaultValue; } }
       set {
@@ -7446,11 +7901,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gte" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGte {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "gte" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGte() {
       _hasBits0 &= ~16;
     }
@@ -7465,6 +7922,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<long> In {
       get { return in_; }
     }
@@ -7479,6 +7937,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<long> NotIn {
       get { return notIn_; }
     }
@@ -7493,6 +7952,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 32) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -7502,21 +7962,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~32;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as SFixed64Rules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(SFixed64Rules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -7536,6 +8000,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -7553,11 +8018,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -7596,6 +8063,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(9);
@@ -7630,6 +8098,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -7659,6 +8128,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(SFixed64Rules other) {
       if (other == null) {
         return;
@@ -7687,6 +8157,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -7738,6 +8209,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -7798,19 +8270,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<BoolRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BoolRules() {
       OnConstruction();
     }
@@ -7818,6 +8294,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BoolRules(BoolRules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -7825,6 +8302,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BoolRules Clone() {
       return new BoolRules(this);
     }
@@ -7838,6 +8316,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -7847,21 +8326,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as BoolRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(BoolRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -7874,6 +8357,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -7884,11 +8368,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -7905,6 +8391,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(8);
@@ -7917,6 +8404,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -7929,6 +8417,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(BoolRules other) {
       if (other == null) {
         return;
@@ -7940,6 +8429,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -7961,6 +8451,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -7991,19 +8482,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<StringRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public StringRules() {
       OnConstruction();
     }
@@ -8011,6 +8506,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public StringRules(StringRules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -8066,6 +8562,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public StringRules Clone() {
       return new StringRules(this);
     }
@@ -8079,6 +8576,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Const {
       get { return const_ ?? ConstDefaultValue; }
       set {
@@ -8087,11 +8585,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return const_ != null; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       const_ = null;
     }
@@ -8107,6 +8607,7 @@ namespace Validate {
     /// characters may differ from the number of bytes in the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Len {
       get { if ((_hasBits0 & 16) != 0) { return len_; } else { return LenDefaultValue; } }
       set {
@@ -8116,11 +8617,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "len" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLen {
       get { return (_hasBits0 & 16) != 0; }
     }
     /// <summary>Clears the value of the "len" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLen() {
       _hasBits0 &= ~16;
     }
@@ -8136,6 +8639,7 @@ namespace Validate {
     /// characters may differ from the number of bytes in the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MinLen {
       get { if ((_hasBits0 & 1) != 0) { return minLen_; } else { return MinLenDefaultValue; } }
       set {
@@ -8145,11 +8649,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "min_len" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMinLen {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "min_len" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMinLen() {
       _hasBits0 &= ~1;
     }
@@ -8165,6 +8671,7 @@ namespace Validate {
     /// characters may differ from the number of bytes in the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MaxLen {
       get { if ((_hasBits0 & 2) != 0) { return maxLen_; } else { return MaxLenDefaultValue; } }
       set {
@@ -8174,11 +8681,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "max_len" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMaxLen {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "max_len" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMaxLen() {
       _hasBits0 &= ~2;
     }
@@ -8193,6 +8702,7 @@ namespace Validate {
     /// at a minimum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong LenBytes {
       get { if ((_hasBits0 & 32) != 0) { return lenBytes_; } else { return LenBytesDefaultValue; } }
       set {
@@ -8202,11 +8712,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "len_bytes" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLenBytes {
       get { return (_hasBits0 & 32) != 0; }
     }
     /// <summary>Clears the value of the "len_bytes" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLenBytes() {
       _hasBits0 &= ~32;
     }
@@ -8221,6 +8733,7 @@ namespace Validate {
     /// at a minimum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MinBytes {
       get { if ((_hasBits0 & 4) != 0) { return minBytes_; } else { return MinBytesDefaultValue; } }
       set {
@@ -8230,11 +8743,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "min_bytes" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMinBytes {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "min_bytes" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMinBytes() {
       _hasBits0 &= ~4;
     }
@@ -8249,6 +8764,7 @@ namespace Validate {
     /// at a maximum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MaxBytes {
       get { if ((_hasBits0 & 8) != 0) { return maxBytes_; } else { return MaxBytesDefaultValue; } }
       set {
@@ -8258,11 +8774,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "max_bytes" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMaxBytes {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "max_bytes" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMaxBytes() {
       _hasBits0 &= ~8;
     }
@@ -8278,6 +8796,7 @@ namespace Validate {
     /// any delimiters.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Pattern {
       get { return pattern_ ?? PatternDefaultValue; }
       set {
@@ -8286,11 +8805,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "pattern" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasPattern {
       get { return pattern_ != null; }
     }
     /// <summary>Clears the value of the "pattern" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearPattern() {
       pattern_ = null;
     }
@@ -8305,6 +8826,7 @@ namespace Validate {
     /// the beginning of the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Prefix {
       get { return prefix_ ?? PrefixDefaultValue; }
       set {
@@ -8313,11 +8835,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "prefix" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasPrefix {
       get { return prefix_ != null; }
     }
     /// <summary>Clears the value of the "prefix" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearPrefix() {
       prefix_ = null;
     }
@@ -8332,6 +8856,7 @@ namespace Validate {
     /// the end of the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Suffix {
       get { return suffix_ ?? SuffixDefaultValue; }
       set {
@@ -8340,11 +8865,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "suffix" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasSuffix {
       get { return suffix_ != null; }
     }
     /// <summary>Clears the value of the "suffix" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearSuffix() {
       suffix_ = null;
     }
@@ -8359,6 +8886,7 @@ namespace Validate {
     /// anywhere in the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Contains {
       get { return contains_ ?? ContainsDefaultValue; }
       set {
@@ -8367,11 +8895,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "contains" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasContains {
       get { return contains_ != null; }
     }
     /// <summary>Clears the value of the "contains" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearContains() {
       contains_ = null;
     }
@@ -8386,6 +8916,7 @@ namespace Validate {
     /// anywhere in the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string NotContains {
       get { return notContains_ ?? NotContainsDefaultValue; }
       set {
@@ -8394,11 +8925,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "not_contains" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasNotContains {
       get { return notContains_ != null; }
     }
     /// <summary>Clears the value of the "not_contains" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearNotContains() {
       notContains_ = null;
     }
@@ -8413,6 +8946,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<string> In {
       get { return in_; }
     }
@@ -8427,6 +8961,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<string> NotIn {
       get { return notIn_; }
     }
@@ -8438,6 +8973,7 @@ namespace Validate {
     /// defined by RFC 5322
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Email {
       get { return HasEmail ? (bool) wellKnown_ : false; }
       set {
@@ -8447,11 +8983,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "email" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasEmail {
       get { return wellKnownCase_ == WellKnownOneofCase.Email; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "email" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearEmail() {
       if (HasEmail) {
         ClearWellKnown();
@@ -8466,6 +9004,7 @@ namespace Validate {
     /// internationalized domain names (IDNs).
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Hostname {
       get { return HasHostname ? (bool) wellKnown_ : false; }
       set {
@@ -8475,11 +9014,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "hostname" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasHostname {
       get { return wellKnownCase_ == WellKnownOneofCase.Hostname; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "hostname" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearHostname() {
       if (HasHostname) {
         ClearWellKnown();
@@ -8493,6 +9034,7 @@ namespace Validate {
     /// Valid IPv6 addresses should not include surrounding square brackets.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Ip {
       get { return HasIp ? (bool) wellKnown_ : false; }
       set {
@@ -8502,11 +9044,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ip" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIp {
       get { return wellKnownCase_ == WellKnownOneofCase.Ip; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "ip" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIp() {
       if (HasIp) {
         ClearWellKnown();
@@ -8519,6 +9063,7 @@ namespace Validate {
     /// Ipv4 specifies that the field must be a valid IPv4 address.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Ipv4 {
       get { return HasIpv4 ? (bool) wellKnown_ : false; }
       set {
@@ -8528,11 +9073,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ipv4" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIpv4 {
       get { return wellKnownCase_ == WellKnownOneofCase.Ipv4; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "ipv4" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIpv4() {
       if (HasIpv4) {
         ClearWellKnown();
@@ -8546,6 +9093,7 @@ namespace Validate {
     /// IPv6 addresses should not include surrounding square brackets.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Ipv6 {
       get { return HasIpv6 ? (bool) wellKnown_ : false; }
       set {
@@ -8555,11 +9103,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ipv6" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIpv6 {
       get { return wellKnownCase_ == WellKnownOneofCase.Ipv6; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "ipv6" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIpv6() {
       if (HasIpv6) {
         ClearWellKnown();
@@ -8573,6 +9123,7 @@ namespace Validate {
     /// by RFC 3986
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Uri {
       get { return HasUri ? (bool) wellKnown_ : false; }
       set {
@@ -8582,11 +9133,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "uri" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasUri {
       get { return wellKnownCase_ == WellKnownOneofCase.Uri; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "uri" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearUri() {
       if (HasUri) {
         ClearWellKnown();
@@ -8600,6 +9153,7 @@ namespace Validate {
     /// 3986 and may be relative or absolute.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool UriRef {
       get { return HasUriRef ? (bool) wellKnown_ : false; }
       set {
@@ -8609,11 +9163,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "uri_ref" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasUriRef {
       get { return wellKnownCase_ == WellKnownOneofCase.UriRef; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "uri_ref" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearUriRef() {
       if (HasUriRef) {
         ClearWellKnown();
@@ -8628,6 +9184,7 @@ namespace Validate {
     /// names or IDNs), or it can be a valid IP (v4 or v6).
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Address {
       get { return HasAddress ? (bool) wellKnown_ : false; }
       set {
@@ -8637,11 +9194,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "address" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasAddress {
       get { return wellKnownCase_ == WellKnownOneofCase.Address; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "address" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearAddress() {
       if (HasAddress) {
         ClearWellKnown();
@@ -8655,6 +9214,7 @@ namespace Validate {
     /// RFC 4122
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Uuid {
       get { return HasUuid ? (bool) wellKnown_ : false; }
       set {
@@ -8664,11 +9224,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "uuid" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasUuid {
       get { return wellKnownCase_ == WellKnownOneofCase.Uuid; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "uuid" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearUuid() {
       if (HasUuid) {
         ClearWellKnown();
@@ -8681,6 +9243,7 @@ namespace Validate {
     /// WellKnownRegex specifies a common well known pattern defined as a regex.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.KnownRegex WellKnownRegex {
       get { return HasWellKnownRegex ? (global::Validate.KnownRegex) wellKnown_ : global::Validate.KnownRegex.Unknown; }
       set {
@@ -8690,11 +9253,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "well_known_regex" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasWellKnownRegex {
       get { return wellKnownCase_ == WellKnownOneofCase.WellKnownRegex; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "well_known_regex" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearWellKnownRegex() {
       if (HasWellKnownRegex) {
         ClearWellKnown();
@@ -8714,6 +9279,7 @@ namespace Validate {
     /// \r\n\0 characters, which can be used to bypass header matching rules.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Strict {
       get { if ((_hasBits0 & 64) != 0) { return strict_; } else { return StrictDefaultValue; } }
       set {
@@ -8723,11 +9289,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "strict" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasStrict {
       get { return (_hasBits0 & 64) != 0; }
     }
     /// <summary>Clears the value of the "strict" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearStrict() {
       _hasBits0 &= ~64;
     }
@@ -8742,6 +9310,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 128) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -8751,11 +9320,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 128) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~128;
     }
@@ -8777,22 +9348,26 @@ namespace Validate {
     }
     private WellKnownOneofCase wellKnownCase_ = WellKnownOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public WellKnownOneofCase WellKnownCase {
       get { return wellKnownCase_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearWellKnown() {
       wellKnownCase_ = WellKnownOneofCase.None;
       wellKnown_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as StringRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(StringRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -8831,6 +9406,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -8867,11 +9443,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -8982,6 +9560,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(10);
@@ -9088,6 +9667,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -9171,6 +9751,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(StringRules other) {
       if (other == null) {
         return;
@@ -9256,6 +9837,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -9378,6 +9960,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -9509,19 +10092,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<BytesRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BytesRules() {
       OnConstruction();
     }
@@ -9529,6 +10116,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BytesRules(BytesRules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -9558,6 +10146,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BytesRules Clone() {
       return new BytesRules(this);
     }
@@ -9571,6 +10160,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pb::ByteString Const {
       get { return const_ ?? ConstDefaultValue; }
       set {
@@ -9579,11 +10169,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return const_ != null; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       const_ = null;
     }
@@ -9597,6 +10189,7 @@ namespace Validate {
     /// Len specifies that this field must be the specified number of bytes
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong Len {
       get { if ((_hasBits0 & 4) != 0) { return len_; } else { return LenDefaultValue; } }
       set {
@@ -9606,11 +10199,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "len" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLen {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "len" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLen() {
       _hasBits0 &= ~4;
     }
@@ -9625,6 +10220,7 @@ namespace Validate {
     /// at a minimum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MinLen {
       get { if ((_hasBits0 & 1) != 0) { return minLen_; } else { return MinLenDefaultValue; } }
       set {
@@ -9634,11 +10230,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "min_len" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMinLen {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "min_len" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMinLen() {
       _hasBits0 &= ~1;
     }
@@ -9653,6 +10251,7 @@ namespace Validate {
     /// at a maximum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MaxLen {
       get { if ((_hasBits0 & 2) != 0) { return maxLen_; } else { return MaxLenDefaultValue; } }
       set {
@@ -9662,11 +10261,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "max_len" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMaxLen {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "max_len" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMaxLen() {
       _hasBits0 &= ~2;
     }
@@ -9682,6 +10283,7 @@ namespace Validate {
     /// any delimiters.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Pattern {
       get { return pattern_ ?? PatternDefaultValue; }
       set {
@@ -9690,11 +10292,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "pattern" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasPattern {
       get { return pattern_ != null; }
     }
     /// <summary>Clears the value of the "pattern" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearPattern() {
       pattern_ = null;
     }
@@ -9709,6 +10313,7 @@ namespace Validate {
     /// beginning of the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pb::ByteString Prefix {
       get { return prefix_ ?? PrefixDefaultValue; }
       set {
@@ -9717,11 +10322,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "prefix" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasPrefix {
       get { return prefix_ != null; }
     }
     /// <summary>Clears the value of the "prefix" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearPrefix() {
       prefix_ = null;
     }
@@ -9736,6 +10343,7 @@ namespace Validate {
     /// end of the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pb::ByteString Suffix {
       get { return suffix_ ?? SuffixDefaultValue; }
       set {
@@ -9744,11 +10352,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "suffix" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasSuffix {
       get { return suffix_ != null; }
     }
     /// <summary>Clears the value of the "suffix" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearSuffix() {
       suffix_ = null;
     }
@@ -9763,6 +10373,7 @@ namespace Validate {
     /// anywhere in the string.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pb::ByteString Contains {
       get { return contains_ ?? ContainsDefaultValue; }
       set {
@@ -9771,11 +10382,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "contains" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasContains {
       get { return contains_ != null; }
     }
     /// <summary>Clears the value of the "contains" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearContains() {
       contains_ = null;
     }
@@ -9790,6 +10403,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<pb::ByteString> In {
       get { return in_; }
     }
@@ -9804,6 +10418,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<pb::ByteString> NotIn {
       get { return notIn_; }
     }
@@ -9815,6 +10430,7 @@ namespace Validate {
     /// byte format
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Ip {
       get { return HasIp ? (bool) wellKnown_ : false; }
       set {
@@ -9824,11 +10440,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ip" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIp {
       get { return wellKnownCase_ == WellKnownOneofCase.Ip; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "ip" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIp() {
       if (HasIp) {
         ClearWellKnown();
@@ -9842,6 +10460,7 @@ namespace Validate {
     /// format
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Ipv4 {
       get { return HasIpv4 ? (bool) wellKnown_ : false; }
       set {
@@ -9851,11 +10470,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ipv4" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIpv4 {
       get { return wellKnownCase_ == WellKnownOneofCase.Ipv4; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "ipv4" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIpv4() {
       if (HasIpv4) {
         ClearWellKnown();
@@ -9869,6 +10490,7 @@ namespace Validate {
     /// format
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Ipv6 {
       get { return HasIpv6 ? (bool) wellKnown_ : false; }
       set {
@@ -9878,11 +10500,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ipv6" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIpv6 {
       get { return wellKnownCase_ == WellKnownOneofCase.Ipv6; }
     }
     /// <summary> Clears the value of the oneof if it's currently set to "ipv6" </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIpv6() {
       if (HasIpv6) {
         ClearWellKnown();
@@ -9899,6 +10523,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 8) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -9908,11 +10533,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~8;
     }
@@ -9927,22 +10554,26 @@ namespace Validate {
     }
     private WellKnownOneofCase wellKnownCase_ = WellKnownOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public WellKnownOneofCase WellKnownCase {
       get { return wellKnownCase_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearWellKnown() {
       wellKnownCase_ = WellKnownOneofCase.None;
       wellKnown_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as BytesRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(BytesRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -9969,6 +10600,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -9993,11 +10625,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -10060,6 +10694,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(10);
@@ -10118,6 +10753,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -10165,6 +10801,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(BytesRules other) {
       if (other == null) {
         return;
@@ -10214,6 +10851,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -10287,6 +10925,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -10369,19 +11008,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<EnumRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public EnumRules() {
       OnConstruction();
     }
@@ -10389,6 +11032,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public EnumRules(EnumRules other) : this() {
       _hasBits0 = other._hasBits0;
       const_ = other.const_;
@@ -10399,6 +11043,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public EnumRules Clone() {
       return new EnumRules(this);
     }
@@ -10412,6 +11057,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Const {
       get { if ((_hasBits0 & 1) != 0) { return const_; } else { return ConstDefaultValue; } }
       set {
@@ -10421,11 +11067,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "const" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasConst {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "const" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearConst() {
       _hasBits0 &= ~1;
     }
@@ -10440,6 +11088,7 @@ namespace Validate {
     /// values for this enum, failing on any undefined value.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool DefinedOnly {
       get { if ((_hasBits0 & 2) != 0) { return definedOnly_; } else { return DefinedOnlyDefaultValue; } }
       set {
@@ -10449,11 +11098,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "defined_only" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasDefinedOnly {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "defined_only" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearDefinedOnly() {
       _hasBits0 &= ~2;
     }
@@ -10468,6 +11119,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<int> In {
       get { return in_; }
     }
@@ -10482,16 +11134,19 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<int> NotIn {
       get { return notIn_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as EnumRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(EnumRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -10507,6 +11162,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasConst) hash ^= Const.GetHashCode();
@@ -10520,11 +11176,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -10547,6 +11205,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasConst) {
         output.WriteRawTag(8);
@@ -10565,6 +11224,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasConst) {
@@ -10582,6 +11242,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(EnumRules other) {
       if (other == null) {
         return;
@@ -10598,6 +11259,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -10633,6 +11295,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -10678,19 +11341,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<MessageRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public MessageRules() {
       OnConstruction();
     }
@@ -10698,6 +11365,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public MessageRules(MessageRules other) : this() {
       _hasBits0 = other._hasBits0;
       skip_ = other.skip_;
@@ -10706,6 +11374,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public MessageRules Clone() {
       return new MessageRules(this);
     }
@@ -10720,6 +11389,7 @@ namespace Validate {
     /// evaluated
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Skip {
       get { if ((_hasBits0 & 1) != 0) { return skip_; } else { return SkipDefaultValue; } }
       set {
@@ -10729,11 +11399,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "skip" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasSkip {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "skip" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearSkip() {
       _hasBits0 &= ~1;
     }
@@ -10747,6 +11419,7 @@ namespace Validate {
     /// Required specifies that this field must be set
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Required {
       get { if ((_hasBits0 & 2) != 0) { return required_; } else { return RequiredDefaultValue; } }
       set {
@@ -10756,21 +11429,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "required" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasRequired {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "required" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearRequired() {
       _hasBits0 &= ~2;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as MessageRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(MessageRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -10784,6 +11461,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasSkip) hash ^= Skip.GetHashCode();
@@ -10795,11 +11473,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -10820,6 +11500,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasSkip) {
         output.WriteRawTag(8);
@@ -10836,6 +11517,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasSkip) {
@@ -10851,6 +11533,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(MessageRules other) {
       if (other == null) {
         return;
@@ -10865,6 +11548,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -10890,6 +11574,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -10924,19 +11609,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<RepeatedRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RepeatedRules() {
       OnConstruction();
     }
@@ -10944,6 +11633,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RepeatedRules(RepeatedRules other) : this() {
       _hasBits0 = other._hasBits0;
       minItems_ = other.minItems_;
@@ -10955,6 +11645,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RepeatedRules Clone() {
       return new RepeatedRules(this);
     }
@@ -10969,6 +11660,7 @@ namespace Validate {
     /// items at a minimum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MinItems {
       get { if ((_hasBits0 & 1) != 0) { return minItems_; } else { return MinItemsDefaultValue; } }
       set {
@@ -10978,11 +11670,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "min_items" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMinItems {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "min_items" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMinItems() {
       _hasBits0 &= ~1;
     }
@@ -10997,6 +11691,7 @@ namespace Validate {
     /// items at a maximum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MaxItems {
       get { if ((_hasBits0 & 2) != 0) { return maxItems_; } else { return MaxItemsDefaultValue; } }
       set {
@@ -11006,11 +11701,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "max_items" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMaxItems {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "max_items" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMaxItems() {
       _hasBits0 &= ~2;
     }
@@ -11026,6 +11723,7 @@ namespace Validate {
     /// supported).
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Unique {
       get { if ((_hasBits0 & 4) != 0) { return unique_; } else { return UniqueDefaultValue; } }
       set {
@@ -11035,11 +11733,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "unique" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasUnique {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "unique" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearUnique() {
       _hasBits0 &= ~4;
     }
@@ -11053,6 +11753,7 @@ namespace Validate {
     /// unless skip is specified here.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.FieldRules Items {
       get { return items_; }
       set {
@@ -11070,6 +11771,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 8) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -11079,21 +11781,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~8;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as RepeatedRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(RepeatedRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -11110,6 +11816,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasMinItems) hash ^= MinItems.GetHashCode();
@@ -11124,11 +11831,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -11161,6 +11870,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasMinItems) {
         output.WriteRawTag(8);
@@ -11189,6 +11899,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasMinItems) {
@@ -11213,6 +11924,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(RepeatedRules other) {
       if (other == null) {
         return;
@@ -11239,6 +11951,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -11279,6 +11992,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -11328,19 +12042,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<MapRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public MapRules() {
       OnConstruction();
     }
@@ -11348,6 +12066,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public MapRules(MapRules other) : this() {
       _hasBits0 = other._hasBits0;
       minPairs_ = other.minPairs_;
@@ -11360,6 +12079,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public MapRules Clone() {
       return new MapRules(this);
     }
@@ -11374,6 +12094,7 @@ namespace Validate {
     /// KVs at a minimum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MinPairs {
       get { if ((_hasBits0 & 1) != 0) { return minPairs_; } else { return MinPairsDefaultValue; } }
       set {
@@ -11383,11 +12104,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "min_pairs" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMinPairs {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "min_pairs" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMinPairs() {
       _hasBits0 &= ~1;
     }
@@ -11402,6 +12125,7 @@ namespace Validate {
     /// KVs at a maximum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ulong MaxPairs {
       get { if ((_hasBits0 & 2) != 0) { return maxPairs_; } else { return MaxPairsDefaultValue; } }
       set {
@@ -11411,11 +12135,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "max_pairs" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasMaxPairs {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "max_pairs" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearMaxPairs() {
       _hasBits0 &= ~2;
     }
@@ -11430,6 +12156,7 @@ namespace Validate {
     /// applies to map's with message value types.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool NoSparse {
       get { if ((_hasBits0 & 4) != 0) { return noSparse_; } else { return NoSparseDefaultValue; } }
       set {
@@ -11439,11 +12166,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "no_sparse" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasNoSparse {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "no_sparse" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearNoSparse() {
       _hasBits0 &= ~4;
     }
@@ -11455,6 +12184,7 @@ namespace Validate {
     /// Keys specifies the constraints to be applied to each key in the field.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.FieldRules Keys {
       get { return keys_; }
       set {
@@ -11471,6 +12201,7 @@ namespace Validate {
     /// unless skip is specified here.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Validate.FieldRules Values {
       get { return values_; }
       set {
@@ -11488,6 +12219,7 @@ namespace Validate {
     /// evaluated only if the field is not empty
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IgnoreEmpty {
       get { if ((_hasBits0 & 8) != 0) { return ignoreEmpty_; } else { return IgnoreEmptyDefaultValue; } }
       set {
@@ -11497,21 +12229,25 @@ namespace Validate {
     }
     /// <summary>Gets whether the "ignore_empty" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasIgnoreEmpty {
       get { return (_hasBits0 & 8) != 0; }
     }
     /// <summary>Clears the value of the "ignore_empty" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearIgnoreEmpty() {
       _hasBits0 &= ~8;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as MapRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(MapRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -11529,6 +12265,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasMinPairs) hash ^= MinPairs.GetHashCode();
@@ -11544,11 +12281,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -11585,6 +12324,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasMinPairs) {
         output.WriteRawTag(8);
@@ -11617,6 +12357,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasMinPairs) {
@@ -11644,6 +12385,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(MapRules other) {
       if (other == null) {
         return;
@@ -11676,6 +12418,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -11723,6 +12466,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -11780,19 +12524,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<AnyRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AnyRules() {
       OnConstruction();
     }
@@ -11800,6 +12548,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AnyRules(AnyRules other) : this() {
       _hasBits0 = other._hasBits0;
       required_ = other.required_;
@@ -11809,6 +12558,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AnyRules Clone() {
       return new AnyRules(this);
     }
@@ -11822,6 +12572,7 @@ namespace Validate {
     /// Required specifies that this field must be set
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Required {
       get { if ((_hasBits0 & 1) != 0) { return required_; } else { return RequiredDefaultValue; } }
       set {
@@ -11831,11 +12582,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "required" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasRequired {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "required" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearRequired() {
       _hasBits0 &= ~1;
     }
@@ -11850,6 +12603,7 @@ namespace Validate {
     /// specified values.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<string> In {
       get { return in_; }
     }
@@ -11864,16 +12618,19 @@ namespace Validate {
     /// the specified values.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<string> NotIn {
       get { return notIn_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as AnyRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(AnyRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -11888,6 +12645,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasRequired) hash ^= Required.GetHashCode();
@@ -11900,11 +12658,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -11923,6 +12683,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasRequired) {
         output.WriteRawTag(8);
@@ -11937,6 +12698,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasRequired) {
@@ -11951,6 +12713,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(AnyRules other) {
       if (other == null) {
         return;
@@ -11964,6 +12727,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -11993,6 +12757,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -12032,19 +12797,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<DurationRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DurationRules() {
       OnConstruction();
     }
@@ -12052,6 +12821,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DurationRules(DurationRules other) : this() {
       _hasBits0 = other._hasBits0;
       required_ = other.required_;
@@ -12066,6 +12836,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DurationRules Clone() {
       return new DurationRules(this);
     }
@@ -12079,6 +12850,7 @@ namespace Validate {
     /// Required specifies that this field must be set
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Required {
       get { if ((_hasBits0 & 1) != 0) { return required_; } else { return RequiredDefaultValue; } }
       set {
@@ -12088,11 +12860,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "required" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasRequired {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "required" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearRequired() {
       _hasBits0 &= ~1;
     }
@@ -12104,6 +12878,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Duration Const {
       get { return const_; }
       set {
@@ -12119,6 +12894,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Duration Lt {
       get { return lt_; }
       set {
@@ -12134,6 +12910,7 @@ namespace Validate {
     /// inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Duration Lte {
       get { return lte_; }
       set {
@@ -12149,6 +12926,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Duration Gt {
       get { return gt_; }
       set {
@@ -12164,6 +12942,7 @@ namespace Validate {
     /// inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Duration Gte {
       get { return gte_; }
       set {
@@ -12181,6 +12960,7 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> In {
       get { return in_; }
     }
@@ -12195,16 +12975,19 @@ namespace Validate {
     /// values
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> NotIn {
       get { return notIn_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as DurationRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(DurationRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -12224,6 +13007,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasRequired) hash ^= Required.GetHashCode();
@@ -12241,11 +13025,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -12284,6 +13070,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasRequired) {
         output.WriteRawTag(8);
@@ -12318,6 +13105,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasRequired) {
@@ -12347,6 +13135,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(DurationRules other) {
       if (other == null) {
         return;
@@ -12390,6 +13179,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -12454,6 +13244,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -12528,19 +13319,23 @@ namespace Validate {
     private pb::UnknownFieldSet _unknownFields;
     private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<TimestampRules> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Validate.ValidateReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public TimestampRules() {
       OnConstruction();
     }
@@ -12548,6 +13343,7 @@ namespace Validate {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public TimestampRules(TimestampRules other) : this() {
       _hasBits0 = other._hasBits0;
       required_ = other.required_;
@@ -12563,6 +13359,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public TimestampRules Clone() {
       return new TimestampRules(this);
     }
@@ -12576,6 +13373,7 @@ namespace Validate {
     /// Required specifies that this field must be set
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Required {
       get { if ((_hasBits0 & 1) != 0) { return required_; } else { return RequiredDefaultValue; } }
       set {
@@ -12585,11 +13383,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "required" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasRequired {
       get { return (_hasBits0 & 1) != 0; }
     }
     /// <summary>Clears the value of the "required" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearRequired() {
       _hasBits0 &= ~1;
     }
@@ -12601,6 +13401,7 @@ namespace Validate {
     /// Const specifies that this field must be exactly the specified value
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Timestamp Const {
       get { return const_; }
       set {
@@ -12616,6 +13417,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Timestamp Lt {
       get { return lt_; }
       set {
@@ -12631,6 +13433,7 @@ namespace Validate {
     /// inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Timestamp Lte {
       get { return lte_; }
       set {
@@ -12646,6 +13449,7 @@ namespace Validate {
     /// exclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Timestamp Gt {
       get { return gt_; }
       set {
@@ -12661,6 +13465,7 @@ namespace Validate {
     /// inclusive
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Timestamp Gte {
       get { return gte_; }
       set {
@@ -12678,6 +13483,7 @@ namespace Validate {
     /// can only be used with the Within rule.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool LtNow {
       get { if ((_hasBits0 & 2) != 0) { return ltNow_; } else { return LtNowDefaultValue; } }
       set {
@@ -12687,11 +13493,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "lt_now" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasLtNow {
       get { return (_hasBits0 & 2) != 0; }
     }
     /// <summary>Clears the value of the "lt_now" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearLtNow() {
       _hasBits0 &= ~2;
     }
@@ -12706,6 +13514,7 @@ namespace Validate {
     /// can only be used with the Within rule.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool GtNow {
       get { if ((_hasBits0 & 4) != 0) { return gtNow_; } else { return GtNowDefaultValue; } }
       set {
@@ -12715,11 +13524,13 @@ namespace Validate {
     }
     /// <summary>Gets whether the "gt_now" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool HasGtNow {
       get { return (_hasBits0 & 4) != 0; }
     }
     /// <summary>Clears the value of the "gt_now" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void ClearGtNow() {
       _hasBits0 &= ~4;
     }
@@ -12733,6 +13544,7 @@ namespace Validate {
     /// GtNow rules.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Duration Within {
       get { return within_; }
       set {
@@ -12741,11 +13553,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as TimestampRules);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(TimestampRules other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -12766,6 +13580,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (HasRequired) hash ^= Required.GetHashCode();
@@ -12784,11 +13599,13 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
@@ -12837,6 +13654,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       if (HasRequired) {
         output.WriteRawTag(8);
@@ -12881,6 +13699,7 @@ namespace Validate {
     #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (HasRequired) {
@@ -12917,6 +13736,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(TimestampRules other) {
       if (other == null) {
         return;
@@ -12970,6 +13790,7 @@ namespace Validate {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       input.ReadRawMessage(this);
@@ -13041,6 +13862,7 @@ namespace Validate {
 
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {

@@ -15,6 +15,7 @@ namespace Nitric.Proto.Document.v1 {
   {
     static readonly string __ServiceName = "nitric.document.v1.DocumentService";
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static void __Helper_SerializeMessage(global::Google.Protobuf.IMessage message, grpc::SerializationContext context)
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -29,11 +30,13 @@ namespace Nitric.Proto.Document.v1 {
       context.Complete(global::Google.Protobuf.MessageExtensions.ToByteArray(message));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static class __Helper_MessageCache<T>
     {
       public static readonly bool IsBufferMessage = global::System.Reflection.IntrospectionExtensions.GetTypeInfo(typeof(global::Google.Protobuf.IBufferMessage)).IsAssignableFrom(typeof(T));
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static T __Helper_DeserializeMessage<T>(grpc::DeserializationContext context, global::Google.Protobuf.MessageParser<T> parser) where T : global::Google.Protobuf.IMessage<T>
     {
       #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
@@ -45,17 +48,28 @@ namespace Nitric.Proto.Document.v1 {
       return parser.ParseFrom(context.PayloadAsNewBuffer());
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentGetRequest> __Marshaller_nitric_document_v1_DocumentGetRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentGetRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentGetResponse> __Marshaller_nitric_document_v1_DocumentGetResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentGetResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentSetRequest> __Marshaller_nitric_document_v1_DocumentSetRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentSetRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentSetResponse> __Marshaller_nitric_document_v1_DocumentSetResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentSetResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentDeleteRequest> __Marshaller_nitric_document_v1_DocumentDeleteRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentDeleteRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentDeleteResponse> __Marshaller_nitric_document_v1_DocumentDeleteResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentDeleteResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentQueryRequest> __Marshaller_nitric_document_v1_DocumentQueryRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentQueryRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentQueryResponse> __Marshaller_nitric_document_v1_DocumentQueryResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentQueryResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentQueryStreamRequest> __Marshaller_nitric_document_v1_DocumentQueryStreamRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentQueryStreamRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Nitric.Proto.Document.v1.DocumentQueryStreamResponse> __Marshaller_nitric_document_v1_DocumentQueryStreamResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Document.v1.DocumentQueryStreamResponse.Parser));
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Document.v1.DocumentGetRequest, global::Nitric.Proto.Document.v1.DocumentGetResponse> __Method_Get = new grpc::Method<global::Nitric.Proto.Document.v1.DocumentGetRequest, global::Nitric.Proto.Document.v1.DocumentGetResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -63,6 +77,7 @@ namespace Nitric.Proto.Document.v1 {
         __Marshaller_nitric_document_v1_DocumentGetRequest,
         __Marshaller_nitric_document_v1_DocumentGetResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Document.v1.DocumentSetRequest, global::Nitric.Proto.Document.v1.DocumentSetResponse> __Method_Set = new grpc::Method<global::Nitric.Proto.Document.v1.DocumentSetRequest, global::Nitric.Proto.Document.v1.DocumentSetResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -70,6 +85,7 @@ namespace Nitric.Proto.Document.v1 {
         __Marshaller_nitric_document_v1_DocumentSetRequest,
         __Marshaller_nitric_document_v1_DocumentSetResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Document.v1.DocumentDeleteRequest, global::Nitric.Proto.Document.v1.DocumentDeleteResponse> __Method_Delete = new grpc::Method<global::Nitric.Proto.Document.v1.DocumentDeleteRequest, global::Nitric.Proto.Document.v1.DocumentDeleteResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -77,6 +93,7 @@ namespace Nitric.Proto.Document.v1 {
         __Marshaller_nitric_document_v1_DocumentDeleteRequest,
         __Marshaller_nitric_document_v1_DocumentDeleteResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Document.v1.DocumentQueryRequest, global::Nitric.Proto.Document.v1.DocumentQueryResponse> __Method_Query = new grpc::Method<global::Nitric.Proto.Document.v1.DocumentQueryRequest, global::Nitric.Proto.Document.v1.DocumentQueryResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -84,6 +101,7 @@ namespace Nitric.Proto.Document.v1 {
         __Marshaller_nitric_document_v1_DocumentQueryRequest,
         __Marshaller_nitric_document_v1_DocumentQueryResponse);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Nitric.Proto.Document.v1.DocumentQueryStreamRequest, global::Nitric.Proto.Document.v1.DocumentQueryStreamResponse> __Method_QueryStream = new grpc::Method<global::Nitric.Proto.Document.v1.DocumentQueryStreamRequest, global::Nitric.Proto.Document.v1.DocumentQueryStreamResponse>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
@@ -107,6 +125,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Document.v1.DocumentGetResponse> Get(global::Nitric.Proto.Document.v1.DocumentGetRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -118,6 +137,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Document.v1.DocumentSetResponse> Set(global::Nitric.Proto.Document.v1.DocumentSetRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -129,6 +149,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Document.v1.DocumentDeleteResponse> Delete(global::Nitric.Proto.Document.v1.DocumentDeleteRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -140,6 +161,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Document.v1.DocumentQueryResponse> Query(global::Nitric.Proto.Document.v1.DocumentQueryRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -152,6 +174,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="responseStream">Used for sending responses back to the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>A task indicating completion of the handler.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task QueryStream(global::Nitric.Proto.Document.v1.DocumentQueryStreamRequest request, grpc::IServerStreamWriter<global::Nitric.Proto.Document.v1.DocumentQueryStreamResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -164,20 +187,24 @@ namespace Nitric.Proto.Document.v1 {
     {
       /// <summary>Creates a new client for DocumentService</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public DocumentServiceClient(grpc::ChannelBase channel) : base(channel)
       {
       }
       /// <summary>Creates a new client for DocumentService that uses a custom <c>CallInvoker</c>.</summary>
       /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public DocumentServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
       {
       }
       /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected DocumentServiceClient() : base()
       {
       }
       /// <summary>Protected constructor to allow creation of configured clients.</summary>
       /// <param name="configuration">The client configuration.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected DocumentServiceClient(ClientBaseConfiguration configuration) : base(configuration)
       {
       }
@@ -190,6 +217,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Document.v1.DocumentGetResponse Get(global::Nitric.Proto.Document.v1.DocumentGetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Get(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -200,6 +228,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Document.v1.DocumentGetResponse Get(global::Nitric.Proto.Document.v1.DocumentGetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Get, null, options, request);
@@ -212,6 +241,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Document.v1.DocumentGetResponse> GetAsync(global::Nitric.Proto.Document.v1.DocumentGetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -222,6 +252,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Document.v1.DocumentGetResponse> GetAsync(global::Nitric.Proto.Document.v1.DocumentGetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Get, null, options, request);
@@ -234,6 +265,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Document.v1.DocumentSetResponse Set(global::Nitric.Proto.Document.v1.DocumentSetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Set(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -244,6 +276,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Document.v1.DocumentSetResponse Set(global::Nitric.Proto.Document.v1.DocumentSetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Set, null, options, request);
@@ -256,6 +289,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Document.v1.DocumentSetResponse> SetAsync(global::Nitric.Proto.Document.v1.DocumentSetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -266,6 +300,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Document.v1.DocumentSetResponse> SetAsync(global::Nitric.Proto.Document.v1.DocumentSetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Set, null, options, request);
@@ -278,6 +313,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Document.v1.DocumentDeleteResponse Delete(global::Nitric.Proto.Document.v1.DocumentDeleteRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Delete(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -288,6 +324,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Document.v1.DocumentDeleteResponse Delete(global::Nitric.Proto.Document.v1.DocumentDeleteRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Delete, null, options, request);
@@ -300,6 +337,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Document.v1.DocumentDeleteResponse> DeleteAsync(global::Nitric.Proto.Document.v1.DocumentDeleteRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -310,6 +348,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Document.v1.DocumentDeleteResponse> DeleteAsync(global::Nitric.Proto.Document.v1.DocumentDeleteRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Delete, null, options, request);
@@ -322,6 +361,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Document.v1.DocumentQueryResponse Query(global::Nitric.Proto.Document.v1.DocumentQueryRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Query(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -332,6 +372,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::Nitric.Proto.Document.v1.DocumentQueryResponse Query(global::Nitric.Proto.Document.v1.DocumentQueryRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Query, null, options, request);
@@ -344,6 +385,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Document.v1.DocumentQueryResponse> QueryAsync(global::Nitric.Proto.Document.v1.DocumentQueryRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return QueryAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -354,6 +396,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Document.v1.DocumentQueryResponse> QueryAsync(global::Nitric.Proto.Document.v1.DocumentQueryRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Query, null, options, request);
@@ -366,6 +409,7 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncServerStreamingCall<global::Nitric.Proto.Document.v1.DocumentQueryStreamResponse> QueryStream(global::Nitric.Proto.Document.v1.DocumentQueryStreamRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return QueryStream(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -376,11 +420,13 @@ namespace Nitric.Proto.Document.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual grpc::AsyncServerStreamingCall<global::Nitric.Proto.Document.v1.DocumentQueryStreamResponse> QueryStream(global::Nitric.Proto.Document.v1.DocumentQueryStreamRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_QueryStream, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override DocumentServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
         return new DocumentServiceClient(configuration);
@@ -389,6 +435,7 @@ namespace Nitric.Proto.Document.v1 {
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static grpc::ServerServiceDefinition BindService(DocumentServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
@@ -403,6 +450,7 @@ namespace Nitric.Proto.Document.v1 {
     /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
     /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, DocumentServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Get, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Document.v1.DocumentGetRequest, global::Nitric.Proto.Document.v1.DocumentGetResponse>(serviceImpl.Get));

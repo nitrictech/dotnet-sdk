@@ -23,9 +23,9 @@ namespace Nitric.Sdk.Common.Util
         private const string NitricHostAddressDefault = "localhost:50051";
         private const string NitricHostAddressEnvVar = "SERVICE_ADDRESS";
 
-        private static string GetEnvironmentVariable(string name, string defaultValue)
+        internal static string GetEnvironmentVariable(string name, string defaultValue)
         {
-            var envVar = SystemEnv.GetEnvironmentVariable(name);            
+            var envVar = SystemEnv.GetEnvironmentVariable(name);
             return envVar != null && envVar.Length > 0 ? envVar : defaultValue;
         }
 
