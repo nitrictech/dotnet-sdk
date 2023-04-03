@@ -269,14 +269,7 @@ namespace Nitric.Sdk.Function
             throw new Exception("Invalid worker options");
         }
 
-        /// <summary>
-        /// Start the FaaS service to start receiving requests from the Nitric Server
-        /// </summary>
-        /// <exception cref="Exception"></exception>
-        /// <exception cref="UnimplementedException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="NitricException"></exception>
-        public async Task Start()
+        private static TracerProvider CreateTraceProvider()
         {
             var localRun = Util.Environment.GetEnvironmentVariable("NITRIC_ENVIRONMENT", "local");
             var samplingPercent = Double.Parse(Util.Environment.GetEnvironmentVariable("NITRIC_TRACE_SAMPLE_PERCENT", "100"));
@@ -305,7 +298,19 @@ namespace Nitric.Sdk.Function
                 });
             }
 
-            provider.Build();
+            return provider.Build();
+        }
+
+        /// <summary>
+        /// Start the FaaS service to start receiving requests from the Nitric Server
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="UnimplementedException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="NitricException"></exception>
+        public async Task Start()
+        {
+            var provider = CreateTraceProvider();
 
             if (this.EventHandlers.Count == 0 && this.EventHandler == null && this.HttpHandlers.Count == 0 && this.HttpHandler == null)
             {
@@ -330,7 +335,6 @@ namespace Nitric.Sdk.Function
                     new Exception(
                         "Unable to connect to a nitric server! If you're running locally make sure to run \"nitric start\"")
                     : re;
-
             }
 
             try
@@ -432,10 +436,13 @@ namespace Nitric.Sdk.Function
                 }
 
                  await call.RequestStream.CompleteAsync();
+
+                 builtProvider.Shutdown();
             }
             catch (RpcException re)
             {
-                throw Sdk.Common.NitricException.FromRpcException(re);
+                builtProvider.Shutdown();
+                throw NitricException.FromRpcException(re);
             }
         }
     }
