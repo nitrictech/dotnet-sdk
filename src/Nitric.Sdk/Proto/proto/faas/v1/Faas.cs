@@ -44,57 +44,74 @@ namespace Nitric.Proto.Faas.v1 {
             "YXRlGAogASgLMhwubml0cmljLmZhYXMudjEuU2NoZWR1bGVSYXRlSAASLAoE",
             "Y3JvbhgLIAEoCzIcLm5pdHJpYy5mYWFzLnYxLlNjaGVkdWxlQ3JvbkgAQgkK",
             "B2NhZGVuY2UiHAoMU2NoZWR1bGVSYXRlEgwKBHJhdGUYASABKAkiHAoMU2No",
-            "ZWR1bGVDcm9uEgwKBGNyb24YASABKAkisQEKC0luaXRSZXF1ZXN0EigKA2Fw",
-            "aRgKIAEoCzIZLm5pdHJpYy5mYWFzLnYxLkFwaVdvcmtlckgAEjoKDHN1YnNj",
-            "cmlwdGlvbhgLIAEoCzIiLm5pdHJpYy5mYWFzLnYxLlN1YnNjcmlwdGlvbldv",
-            "cmtlckgAEjIKCHNjaGVkdWxlGAwgASgLMh4ubml0cmljLmZhYXMudjEuU2No",
-            "ZWR1bGVXb3JrZXJIAEIICgZXb3JrZXIiDgoMSW5pdFJlc3BvbnNlIncKDFRy",
-            "YWNlQ29udGV4dBI4CgZ2YWx1ZXMYASADKAsyKC5uaXRyaWMuZmFhcy52MS5U",
-            "cmFjZUNvbnRleHQuVmFsdWVzRW50cnkaLQoLVmFsdWVzRW50cnkSCwoDa2V5",
-            "GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASLbAQoOVHJpZ2dlclJlcXVlc3QS",
-            "DAoEZGF0YRgBIAEoDBIRCgltaW1lX3R5cGUYAiABKAkSMwoNdHJhY2VfY29u",
-            "dGV4dBgKIAEoCzIcLm5pdHJpYy5mYWFzLnYxLlRyYWNlQ29udGV4dBIyCgRo",
-            "dHRwGAMgASgLMiIubml0cmljLmZhYXMudjEuSHR0cFRyaWdnZXJDb250ZXh0",
-            "SAASNAoFdG9waWMYBCABKAsyIy5uaXRyaWMuZmFhcy52MS5Ub3BpY1RyaWdn",
-            "ZXJDb250ZXh0SABCCQoHY29udGV4dCIcCgtIZWFkZXJWYWx1ZRINCgV2YWx1",
-            "ZRgBIAMoCSIbCgpRdWVyeVZhbHVlEg0KBXZhbHVlGAEgAygJIuUFChJIdHRw",
-            "VHJpZ2dlckNvbnRleHQSDgoGbWV0aG9kGAEgASgJEgwKBHBhdGgYAiABKAkS",
-            "SwoLaGVhZGVyc19vbGQYAyADKAsyMi5uaXRyaWMuZmFhcy52MS5IdHRwVHJp",
-            "Z2dlckNvbnRleHQuSGVhZGVyc09sZEVudHJ5QgIYARJUChBxdWVyeV9wYXJh",
-            "bXNfb2xkGAQgAygLMjYubml0cmljLmZhYXMudjEuSHR0cFRyaWdnZXJDb250",
-            "ZXh0LlF1ZXJ5UGFyYW1zT2xkRW50cnlCAhgBEkAKB2hlYWRlcnMYBSADKAsy",
-            "Ly5uaXRyaWMuZmFhcy52MS5IdHRwVHJpZ2dlckNvbnRleHQuSGVhZGVyc0Vu",
-            "dHJ5EkkKDHF1ZXJ5X3BhcmFtcxgGIAMoCzIzLm5pdHJpYy5mYWFzLnYxLkh0",
-            "dHBUcmlnZ2VyQ29udGV4dC5RdWVyeVBhcmFtc0VudHJ5EkcKC3BhdGhfcGFy",
-            "YW1zGAcgAygLMjIubml0cmljLmZhYXMudjEuSHR0cFRyaWdnZXJDb250ZXh0",
-            "LlBhdGhQYXJhbXNFbnRyeRoxCg9IZWFkZXJzT2xkRW50cnkSCwoDa2V5GAEg",
-            "ASgJEg0KBXZhbHVlGAIgASgJOgI4ARo1ChNRdWVyeVBhcmFtc09sZEVudHJ5",
-            "EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEaSwoMSGVhZGVyc0Vu",
-            "dHJ5EgsKA2tleRgBIAEoCRIqCgV2YWx1ZRgCIAEoCzIbLm5pdHJpYy5mYWFz",
-            "LnYxLkhlYWRlclZhbHVlOgI4ARpOChBRdWVyeVBhcmFtc0VudHJ5EgsKA2tl",
-            "eRgBIAEoCRIpCgV2YWx1ZRgCIAEoCzIaLm5pdHJpYy5mYWFzLnYxLlF1ZXJ5",
-            "VmFsdWU6AjgBGjEKD1BhdGhQYXJhbXNFbnRyeRILCgNrZXkYASABKAkSDQoF",
-            "dmFsdWUYAiABKAk6AjgBIiQKE1RvcGljVHJpZ2dlckNvbnRleHQSDQoFdG9w",
-            "aWMYASABKAkilgEKD1RyaWdnZXJSZXNwb25zZRIMCgRkYXRhGAEgASgMEjMK",
-            "BGh0dHAYCiABKAsyIy5uaXRyaWMuZmFhcy52MS5IdHRwUmVzcG9uc2VDb250",
-            "ZXh0SAASNQoFdG9waWMYCyABKAsyJC5uaXRyaWMuZmFhcy52MS5Ub3BpY1Jl",
-            "c3BvbnNlQ29udGV4dEgAQgkKB2NvbnRleHQitgIKE0h0dHBSZXNwb25zZUNv",
-            "bnRleHQSTAoLaGVhZGVyc19vbGQYASADKAsyMy5uaXRyaWMuZmFhcy52MS5I",
-            "dHRwUmVzcG9uc2VDb250ZXh0LkhlYWRlcnNPbGRFbnRyeUICGAESDgoGc3Rh",
-            "dHVzGAIgASgFEkEKB2hlYWRlcnMYAyADKAsyMC5uaXRyaWMuZmFhcy52MS5I",
-            "dHRwUmVzcG9uc2VDb250ZXh0LkhlYWRlcnNFbnRyeRoxCg9IZWFkZXJzT2xk",
-            "RW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARpLCgxIZWFk",
-            "ZXJzRW50cnkSCwoDa2V5GAEgASgJEioKBXZhbHVlGAIgASgLMhsubml0cmlj",
-            "LmZhYXMudjEuSGVhZGVyVmFsdWU6AjgBIicKFFRvcGljUmVzcG9uc2VDb250",
-            "ZXh0Eg8KB3N1Y2Nlc3MYASABKAgyYAoLRmFhc1NlcnZpY2USUQoNVHJpZ2dl",
-            "clN0cmVhbRIdLm5pdHJpYy5mYWFzLnYxLkNsaWVudE1lc3NhZ2UaHS5uaXRy",
-            "aWMuZmFhcy52MS5TZXJ2ZXJNZXNzYWdlKAEwAUJjChdpby5uaXRyaWMucHJv",
-            "dG8uZmFhcy52MUIKTml0cmljRmFhc1ABWgxuaXRyaWMvdjE7djGqAhROaXRy",
-            "aWMuUHJvdG8uRmFhcy52McoCFE5pdHJpY1xQcm90b1xGYWFzXFYxYgZwcm90",
-            "bzM="));
+            "ZWR1bGVDcm9uEgwKBGNyb24YASABKAkiZAoYQnVja2V0Tm90aWZpY2F0aW9u",
+            "V29ya2VyEg4KBmJ1Y2tldBgBIAEoCRI4CgZjb25maWcYAiABKAsyKC5uaXRy",
+            "aWMuZmFhcy52MS5CdWNrZXROb3RpZmljYXRpb25Db25maWcigQEKGEJ1Y2tl",
+            "dE5vdGlmaWNhdGlvbkNvbmZpZxJBChFub3RpZmljYXRpb25fdHlwZRgBIAEo",
+            "DjImLm5pdHJpYy5mYWFzLnYxLkJ1Y2tldE5vdGlmaWNhdGlvblR5cGUSIgoa",
+            "bm90aWZpY2F0aW9uX3ByZWZpeF9maWx0ZXIYAiABKAki+gEKC0luaXRSZXF1",
+            "ZXN0EigKA2FwaRgKIAEoCzIZLm5pdHJpYy5mYWFzLnYxLkFwaVdvcmtlckgA",
+            "EjoKDHN1YnNjcmlwdGlvbhgLIAEoCzIiLm5pdHJpYy5mYWFzLnYxLlN1YnNj",
+            "cmlwdGlvbldvcmtlckgAEjIKCHNjaGVkdWxlGAwgASgLMh4ubml0cmljLmZh",
+            "YXMudjEuU2NoZWR1bGVXb3JrZXJIABJHChNidWNrZXRfbm90aWZpY2F0aW9u",
+            "GA0gASgLMigubml0cmljLmZhYXMudjEuQnVja2V0Tm90aWZpY2F0aW9uV29y",
+            "a2VySABCCAoGV29ya2VyIg4KDEluaXRSZXNwb25zZSJ3CgxUcmFjZUNvbnRl",
+            "eHQSOAoGdmFsdWVzGAEgAygLMigubml0cmljLmZhYXMudjEuVHJhY2VDb250",
+            "ZXh0LlZhbHVlc0VudHJ5Gi0KC1ZhbHVlc0VudHJ5EgsKA2tleRgBIAEoCRIN",
+            "CgV2YWx1ZRgCIAEoCToCOAEinwIKDlRyaWdnZXJSZXF1ZXN0EgwKBGRhdGEY",
+            "ASABKAwSEQoJbWltZV90eXBlGAIgASgJEjMKDXRyYWNlX2NvbnRleHQYCiAB",
+            "KAsyHC5uaXRyaWMuZmFhcy52MS5UcmFjZUNvbnRleHQSMgoEaHR0cBgDIAEo",
+            "CzIiLm5pdHJpYy5mYWFzLnYxLkh0dHBUcmlnZ2VyQ29udGV4dEgAEjQKBXRv",
+            "cGljGAQgASgLMiMubml0cmljLmZhYXMudjEuVG9waWNUcmlnZ2VyQ29udGV4",
+            "dEgAEkIKDG5vdGlmaWNhdGlvbhgFIAEoCzIqLm5pdHJpYy5mYWFzLnYxLk5v",
+            "dGlmaWNhdGlvblRyaWdnZXJDb250ZXh0SABCCQoHY29udGV4dCIcCgtIZWFk",
+            "ZXJWYWx1ZRINCgV2YWx1ZRgBIAMoCSIbCgpRdWVyeVZhbHVlEg0KBXZhbHVl",
+            "GAEgAygJIuUFChJIdHRwVHJpZ2dlckNvbnRleHQSDgoGbWV0aG9kGAEgASgJ",
+            "EgwKBHBhdGgYAiABKAkSSwoLaGVhZGVyc19vbGQYAyADKAsyMi5uaXRyaWMu",
+            "ZmFhcy52MS5IdHRwVHJpZ2dlckNvbnRleHQuSGVhZGVyc09sZEVudHJ5QgIY",
+            "ARJUChBxdWVyeV9wYXJhbXNfb2xkGAQgAygLMjYubml0cmljLmZhYXMudjEu",
+            "SHR0cFRyaWdnZXJDb250ZXh0LlF1ZXJ5UGFyYW1zT2xkRW50cnlCAhgBEkAK",
+            "B2hlYWRlcnMYBSADKAsyLy5uaXRyaWMuZmFhcy52MS5IdHRwVHJpZ2dlckNv",
+            "bnRleHQuSGVhZGVyc0VudHJ5EkkKDHF1ZXJ5X3BhcmFtcxgGIAMoCzIzLm5p",
+            "dHJpYy5mYWFzLnYxLkh0dHBUcmlnZ2VyQ29udGV4dC5RdWVyeVBhcmFtc0Vu",
+            "dHJ5EkcKC3BhdGhfcGFyYW1zGAcgAygLMjIubml0cmljLmZhYXMudjEuSHR0",
+            "cFRyaWdnZXJDb250ZXh0LlBhdGhQYXJhbXNFbnRyeRoxCg9IZWFkZXJzT2xk",
+            "RW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARo1ChNRdWVy",
+            "eVBhcmFtc09sZEVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToC",
+            "OAEaSwoMSGVhZGVyc0VudHJ5EgsKA2tleRgBIAEoCRIqCgV2YWx1ZRgCIAEo",
+            "CzIbLm5pdHJpYy5mYWFzLnYxLkhlYWRlclZhbHVlOgI4ARpOChBRdWVyeVBh",
+            "cmFtc0VudHJ5EgsKA2tleRgBIAEoCRIpCgV2YWx1ZRgCIAEoCzIaLm5pdHJp",
+            "Yy5mYWFzLnYxLlF1ZXJ5VmFsdWU6AjgBGjEKD1BhdGhQYXJhbXNFbnRyeRIL",
+            "CgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBIiQKE1RvcGljVHJpZ2dl",
+            "ckNvbnRleHQSDQoFdG9waWMYASABKAkiVwoSQnVja2V0Tm90aWZpY2F0aW9u",
+            "EgsKA2tleRgBIAEoCRI0CgR0eXBlGAIgASgOMiYubml0cmljLmZhYXMudjEu",
+            "QnVja2V0Tm90aWZpY2F0aW9uVHlwZSJyChpOb3RpZmljYXRpb25UcmlnZ2Vy",
+            "Q29udGV4dBIOCgZzb3VyY2UYASABKAkSNAoGYnVja2V0GAogASgLMiIubml0",
+            "cmljLmZhYXMudjEuQnVja2V0Tm90aWZpY2F0aW9uSABCDgoMbm90aWZpY2F0",
+            "aW9uItsBCg9UcmlnZ2VyUmVzcG9uc2USDAoEZGF0YRgBIAEoDBIzCgRodHRw",
+            "GAogASgLMiMubml0cmljLmZhYXMudjEuSHR0cFJlc3BvbnNlQ29udGV4dEgA",
+            "EjUKBXRvcGljGAsgASgLMiQubml0cmljLmZhYXMudjEuVG9waWNSZXNwb25z",
+            "ZUNvbnRleHRIABJDCgxub3RpZmljYXRpb24YDCABKAsyKy5uaXRyaWMuZmFh",
+            "cy52MS5Ob3RpZmljYXRpb25SZXNwb25zZUNvbnRleHRIAEIJCgdjb250ZXh0",
+            "IrYCChNIdHRwUmVzcG9uc2VDb250ZXh0EkwKC2hlYWRlcnNfb2xkGAEgAygL",
+            "MjMubml0cmljLmZhYXMudjEuSHR0cFJlc3BvbnNlQ29udGV4dC5IZWFkZXJz",
+            "T2xkRW50cnlCAhgBEg4KBnN0YXR1cxgCIAEoBRJBCgdoZWFkZXJzGAMgAygL",
+            "MjAubml0cmljLmZhYXMudjEuSHR0cFJlc3BvbnNlQ29udGV4dC5IZWFkZXJz",
+            "RW50cnkaMQoPSGVhZGVyc09sZEVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1",
+            "ZRgCIAEoCToCOAEaSwoMSGVhZGVyc0VudHJ5EgsKA2tleRgBIAEoCRIqCgV2",
+            "YWx1ZRgCIAEoCzIbLm5pdHJpYy5mYWFzLnYxLkhlYWRlclZhbHVlOgI4ASIn",
+            "ChRUb3BpY1Jlc3BvbnNlQ29udGV4dBIPCgdzdWNjZXNzGAEgASgIIi4KG05v",
+            "dGlmaWNhdGlvblJlc3BvbnNlQ29udGV4dBIPCgdzdWNjZXNzGAEgASgIKjsK",
+            "FkJ1Y2tldE5vdGlmaWNhdGlvblR5cGUSBwoDQWxsEAASCwoHQ3JlYXRlZBAB",
+            "EgsKB0RlbGV0ZWQQAjJgCgtGYWFzU2VydmljZRJRCg1UcmlnZ2VyU3RyZWFt",
+            "Eh0ubml0cmljLmZhYXMudjEuQ2xpZW50TWVzc2FnZRodLm5pdHJpYy5mYWFz",
+            "LnYxLlNlcnZlck1lc3NhZ2UoATABQooBChdpby5uaXRyaWMucHJvdG8uZmFh",
+            "cy52MUIKTml0cmljRmFhc1ABWjNnaXRodWIuY29tL25pdHJpY3RlY2gvbml0",
+            "cmljL2NvcmUvcGtnL2FwaS9uaXRyaWMvdjGqAhROaXRyaWMuUHJvdG8uRmFh",
+            "cy52McoCFE5pdHJpY1xQcm90b1xGYWFzXFYxYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Nitric.Proto.Faas.v1.BucketNotificationType), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.ClientMessage), global::Nitric.Proto.Faas.v1.ClientMessage.Parser, new[]{ "Id", "InitRequest", "TriggerResponse" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.ServerMessage), global::Nitric.Proto.Faas.v1.ServerMessage.Parser, new[]{ "Id", "InitResponse", "TriggerRequest" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.ApiWorkerScopes), global::Nitric.Proto.Faas.v1.ApiWorkerScopes.Parser, new[]{ "Scopes" }, null, null, null, null),
@@ -104,22 +121,39 @@ namespace Nitric.Proto.Faas.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.ScheduleWorker), global::Nitric.Proto.Faas.v1.ScheduleWorker.Parser, new[]{ "Key", "Rate", "Cron" }, new[]{ "Cadence" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.ScheduleRate), global::Nitric.Proto.Faas.v1.ScheduleRate.Parser, new[]{ "Rate" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.ScheduleCron), global::Nitric.Proto.Faas.v1.ScheduleCron.Parser, new[]{ "Cron" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.InitRequest), global::Nitric.Proto.Faas.v1.InitRequest.Parser, new[]{ "Api", "Subscription", "Schedule" }, new[]{ "Worker" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.BucketNotificationWorker), global::Nitric.Proto.Faas.v1.BucketNotificationWorker.Parser, new[]{ "Bucket", "Config" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.BucketNotificationConfig), global::Nitric.Proto.Faas.v1.BucketNotificationConfig.Parser, new[]{ "NotificationType", "NotificationPrefixFilter" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.InitRequest), global::Nitric.Proto.Faas.v1.InitRequest.Parser, new[]{ "Api", "Subscription", "Schedule", "BucketNotification" }, new[]{ "Worker" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.InitResponse), global::Nitric.Proto.Faas.v1.InitResponse.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TraceContext), global::Nitric.Proto.Faas.v1.TraceContext.Parser, new[]{ "Values" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TriggerRequest), global::Nitric.Proto.Faas.v1.TriggerRequest.Parser, new[]{ "Data", "MimeType", "TraceContext", "Http", "Topic" }, new[]{ "Context" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TriggerRequest), global::Nitric.Proto.Faas.v1.TriggerRequest.Parser, new[]{ "Data", "MimeType", "TraceContext", "Http", "Topic", "Notification" }, new[]{ "Context" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.HeaderValue), global::Nitric.Proto.Faas.v1.HeaderValue.Parser, new[]{ "Value" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.QueryValue), global::Nitric.Proto.Faas.v1.QueryValue.Parser, new[]{ "Value" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.HttpTriggerContext), global::Nitric.Proto.Faas.v1.HttpTriggerContext.Parser, new[]{ "Method", "Path", "HeadersOld", "QueryParamsOld", "Headers", "QueryParams", "PathParams" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TopicTriggerContext), global::Nitric.Proto.Faas.v1.TopicTriggerContext.Parser, new[]{ "Topic" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TriggerResponse), global::Nitric.Proto.Faas.v1.TriggerResponse.Parser, new[]{ "Data", "Http", "Topic" }, new[]{ "Context" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.BucketNotification), global::Nitric.Proto.Faas.v1.BucketNotification.Parser, new[]{ "Key", "Type" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.NotificationTriggerContext), global::Nitric.Proto.Faas.v1.NotificationTriggerContext.Parser, new[]{ "Source", "Bucket" }, new[]{ "Notification" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TriggerResponse), global::Nitric.Proto.Faas.v1.TriggerResponse.Parser, new[]{ "Data", "Http", "Topic", "Notification" }, new[]{ "Context" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.HttpResponseContext), global::Nitric.Proto.Faas.v1.HttpResponseContext.Parser, new[]{ "HeadersOld", "Status", "Headers" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, }),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TopicResponseContext), global::Nitric.Proto.Faas.v1.TopicResponseContext.Parser, new[]{ "Success" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.TopicResponseContext), global::Nitric.Proto.Faas.v1.TopicResponseContext.Parser, new[]{ "Success" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Faas.v1.NotificationResponseContext), global::Nitric.Proto.Faas.v1.NotificationResponseContext.Parser, new[]{ "Success" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
+  #region Enums
+  /// <summary>
+  /// Notification Workers
+  /// </summary>
+  public enum BucketNotificationType {
+    [pbr::OriginalName("All")] All = 0,
+    [pbr::OriginalName("Created")] Created = 1,
+    [pbr::OriginalName("Deleted")] Deleted = 2,
+  }
+
+  #endregion
+
   #region Messages
   /// <summary>
   /// Messages the client is able to send to the server
@@ -2214,6 +2248,435 @@ namespace Nitric.Proto.Faas.v1 {
 
   }
 
+  public sealed partial class BucketNotificationWorker : pb::IMessage<BucketNotificationWorker>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<BucketNotificationWorker> _parser = new pb::MessageParser<BucketNotificationWorker>(() => new BucketNotificationWorker());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BucketNotificationWorker> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BucketNotificationWorker() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BucketNotificationWorker(BucketNotificationWorker other) : this() {
+      bucket_ = other.bucket_;
+      config_ = other.config_ != null ? other.config_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BucketNotificationWorker Clone() {
+      return new BucketNotificationWorker(this);
+    }
+
+    /// <summary>Field number for the "bucket" field.</summary>
+    public const int BucketFieldNumber = 1;
+    private string bucket_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Bucket {
+      get { return bucket_; }
+      set {
+        bucket_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "config" field.</summary>
+    public const int ConfigFieldNumber = 2;
+    private global::Nitric.Proto.Faas.v1.BucketNotificationConfig config_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Faas.v1.BucketNotificationConfig Config {
+      get { return config_; }
+      set {
+        config_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BucketNotificationWorker);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BucketNotificationWorker other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Bucket != other.Bucket) return false;
+      if (!object.Equals(Config, other.Config)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Bucket.Length != 0) hash ^= Bucket.GetHashCode();
+      if (config_ != null) hash ^= Config.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Bucket.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Bucket);
+      }
+      if (config_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Config);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Bucket.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Bucket);
+      }
+      if (config_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Config);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Bucket.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Bucket);
+      }
+      if (config_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Config);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BucketNotificationWorker other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Bucket.Length != 0) {
+        Bucket = other.Bucket;
+      }
+      if (other.config_ != null) {
+        if (config_ == null) {
+          Config = new global::Nitric.Proto.Faas.v1.BucketNotificationConfig();
+        }
+        Config.MergeFrom(other.Config);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Bucket = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (config_ == null) {
+              Config = new global::Nitric.Proto.Faas.v1.BucketNotificationConfig();
+            }
+            input.ReadMessage(Config);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Bucket = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (config_ == null) {
+              Config = new global::Nitric.Proto.Faas.v1.BucketNotificationConfig();
+            }
+            input.ReadMessage(Config);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class BucketNotificationConfig : pb::IMessage<BucketNotificationConfig>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<BucketNotificationConfig> _parser = new pb::MessageParser<BucketNotificationConfig>(() => new BucketNotificationConfig());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BucketNotificationConfig> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BucketNotificationConfig() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BucketNotificationConfig(BucketNotificationConfig other) : this() {
+      notificationType_ = other.notificationType_;
+      notificationPrefixFilter_ = other.notificationPrefixFilter_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BucketNotificationConfig Clone() {
+      return new BucketNotificationConfig(this);
+    }
+
+    /// <summary>Field number for the "notification_type" field.</summary>
+    public const int NotificationTypeFieldNumber = 1;
+    private global::Nitric.Proto.Faas.v1.BucketNotificationType notificationType_ = global::Nitric.Proto.Faas.v1.BucketNotificationType.All;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Faas.v1.BucketNotificationType NotificationType {
+      get { return notificationType_; }
+      set {
+        notificationType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "notification_prefix_filter" field.</summary>
+    public const int NotificationPrefixFilterFieldNumber = 2;
+    private string notificationPrefixFilter_ = "";
+    /// <summary>
+    /// A notification filter is a prefix for a bucket object in which creations or deletions should trigger a notification:
+    /// e.g. Notification filter: /images/cat and Event Type: created, would trigger on creating /images/cat.png and /images/cat.jpg but not creating /cat.png
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string NotificationPrefixFilter {
+      get { return notificationPrefixFilter_; }
+      set {
+        notificationPrefixFilter_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BucketNotificationConfig);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BucketNotificationConfig other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (NotificationType != other.NotificationType) return false;
+      if (NotificationPrefixFilter != other.NotificationPrefixFilter) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (NotificationType != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) hash ^= NotificationType.GetHashCode();
+      if (NotificationPrefixFilter.Length != 0) hash ^= NotificationPrefixFilter.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (NotificationType != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) NotificationType);
+      }
+      if (NotificationPrefixFilter.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(NotificationPrefixFilter);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (NotificationType != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) NotificationType);
+      }
+      if (NotificationPrefixFilter.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(NotificationPrefixFilter);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (NotificationType != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) NotificationType);
+      }
+      if (NotificationPrefixFilter.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(NotificationPrefixFilter);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BucketNotificationConfig other) {
+      if (other == null) {
+        return;
+      }
+      if (other.NotificationType != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) {
+        NotificationType = other.NotificationType;
+      }
+      if (other.NotificationPrefixFilter.Length != 0) {
+        NotificationPrefixFilter = other.NotificationPrefixFilter;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            NotificationType = (global::Nitric.Proto.Faas.v1.BucketNotificationType) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            NotificationPrefixFilter = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            NotificationType = (global::Nitric.Proto.Faas.v1.BucketNotificationType) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            NotificationPrefixFilter = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   /// <summary>
   /// InitRequest - Identifies a worker as ready to recieve triggers
   /// This message will contain information on the type of triggers that
@@ -2231,7 +2694,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2257,6 +2720,9 @@ namespace Nitric.Proto.Faas.v1 {
           break;
         case WorkerOneofCase.Schedule:
           Schedule = other.Schedule.Clone();
+          break;
+        case WorkerOneofCase.BucketNotification:
+          BucketNotification = other.BucketNotification.Clone();
           break;
       }
 
@@ -2301,6 +2767,17 @@ namespace Nitric.Proto.Faas.v1 {
       }
     }
 
+    /// <summary>Field number for the "bucket_notification" field.</summary>
+    public const int BucketNotificationFieldNumber = 13;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Faas.v1.BucketNotificationWorker BucketNotification {
+      get { return workerCase_ == WorkerOneofCase.BucketNotification ? (global::Nitric.Proto.Faas.v1.BucketNotificationWorker) worker_ : null; }
+      set {
+        worker_ = value;
+        workerCase_ = value == null ? WorkerOneofCase.None : WorkerOneofCase.BucketNotification;
+      }
+    }
+
     private object worker_;
     /// <summary>Enum of possible cases for the "Worker" oneof.</summary>
     public enum WorkerOneofCase {
@@ -2308,6 +2785,7 @@ namespace Nitric.Proto.Faas.v1 {
       Api = 10,
       Subscription = 11,
       Schedule = 12,
+      BucketNotification = 13,
     }
     private WorkerOneofCase workerCase_ = WorkerOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2337,6 +2815,7 @@ namespace Nitric.Proto.Faas.v1 {
       if (!object.Equals(Api, other.Api)) return false;
       if (!object.Equals(Subscription, other.Subscription)) return false;
       if (!object.Equals(Schedule, other.Schedule)) return false;
+      if (!object.Equals(BucketNotification, other.BucketNotification)) return false;
       if (WorkerCase != other.WorkerCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -2347,6 +2826,7 @@ namespace Nitric.Proto.Faas.v1 {
       if (workerCase_ == WorkerOneofCase.Api) hash ^= Api.GetHashCode();
       if (workerCase_ == WorkerOneofCase.Subscription) hash ^= Subscription.GetHashCode();
       if (workerCase_ == WorkerOneofCase.Schedule) hash ^= Schedule.GetHashCode();
+      if (workerCase_ == WorkerOneofCase.BucketNotification) hash ^= BucketNotification.GetHashCode();
       hash ^= (int) workerCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -2376,6 +2856,10 @@ namespace Nitric.Proto.Faas.v1 {
         output.WriteRawTag(98);
         output.WriteMessage(Schedule);
       }
+      if (workerCase_ == WorkerOneofCase.BucketNotification) {
+        output.WriteRawTag(106);
+        output.WriteMessage(BucketNotification);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2397,6 +2881,10 @@ namespace Nitric.Proto.Faas.v1 {
         output.WriteRawTag(98);
         output.WriteMessage(Schedule);
       }
+      if (workerCase_ == WorkerOneofCase.BucketNotification) {
+        output.WriteRawTag(106);
+        output.WriteMessage(BucketNotification);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2414,6 +2902,9 @@ namespace Nitric.Proto.Faas.v1 {
       }
       if (workerCase_ == WorkerOneofCase.Schedule) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Schedule);
+      }
+      if (workerCase_ == WorkerOneofCase.BucketNotification) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(BucketNotification);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2444,6 +2935,12 @@ namespace Nitric.Proto.Faas.v1 {
             Schedule = new global::Nitric.Proto.Faas.v1.ScheduleWorker();
           }
           Schedule.MergeFrom(other.Schedule);
+          break;
+        case WorkerOneofCase.BucketNotification:
+          if (BucketNotification == null) {
+            BucketNotification = new global::Nitric.Proto.Faas.v1.BucketNotificationWorker();
+          }
+          BucketNotification.MergeFrom(other.BucketNotification);
           break;
       }
 
@@ -2488,6 +2985,15 @@ namespace Nitric.Proto.Faas.v1 {
             Schedule = subBuilder;
             break;
           }
+          case 106: {
+            global::Nitric.Proto.Faas.v1.BucketNotificationWorker subBuilder = new global::Nitric.Proto.Faas.v1.BucketNotificationWorker();
+            if (workerCase_ == WorkerOneofCase.BucketNotification) {
+              subBuilder.MergeFrom(BucketNotification);
+            }
+            input.ReadMessage(subBuilder);
+            BucketNotification = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -2529,6 +3035,15 @@ namespace Nitric.Proto.Faas.v1 {
             Schedule = subBuilder;
             break;
           }
+          case 106: {
+            global::Nitric.Proto.Faas.v1.BucketNotificationWorker subBuilder = new global::Nitric.Proto.Faas.v1.BucketNotificationWorker();
+            if (workerCase_ == WorkerOneofCase.BucketNotification) {
+              subBuilder.MergeFrom(BucketNotification);
+            }
+            input.ReadMessage(subBuilder);
+            BucketNotification = subBuilder;
+            break;
+          }
         }
       }
     }
@@ -2551,7 +3066,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2687,7 +3202,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2851,7 +3366,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2877,6 +3392,9 @@ namespace Nitric.Proto.Faas.v1 {
           break;
         case ContextOneofCase.Topic:
           Topic = other.Topic.Clone();
+          break;
+        case ContextOneofCase.Notification:
+          Notification = other.Notification.Clone();
           break;
       }
 
@@ -2956,12 +3474,24 @@ namespace Nitric.Proto.Faas.v1 {
       }
     }
 
+    /// <summary>Field number for the "notification" field.</summary>
+    public const int NotificationFieldNumber = 5;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Faas.v1.NotificationTriggerContext Notification {
+      get { return contextCase_ == ContextOneofCase.Notification ? (global::Nitric.Proto.Faas.v1.NotificationTriggerContext) context_ : null; }
+      set {
+        context_ = value;
+        contextCase_ = value == null ? ContextOneofCase.None : ContextOneofCase.Notification;
+      }
+    }
+
     private object context_;
     /// <summary>Enum of possible cases for the "context" oneof.</summary>
     public enum ContextOneofCase {
       None = 0,
       Http = 3,
       Topic = 4,
+      Notification = 5,
     }
     private ContextOneofCase contextCase_ = ContextOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2993,6 +3523,7 @@ namespace Nitric.Proto.Faas.v1 {
       if (!object.Equals(TraceContext, other.TraceContext)) return false;
       if (!object.Equals(Http, other.Http)) return false;
       if (!object.Equals(Topic, other.Topic)) return false;
+      if (!object.Equals(Notification, other.Notification)) return false;
       if (ContextCase != other.ContextCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3005,6 +3536,7 @@ namespace Nitric.Proto.Faas.v1 {
       if (traceContext_ != null) hash ^= TraceContext.GetHashCode();
       if (contextCase_ == ContextOneofCase.Http) hash ^= Http.GetHashCode();
       if (contextCase_ == ContextOneofCase.Topic) hash ^= Topic.GetHashCode();
+      if (contextCase_ == ContextOneofCase.Notification) hash ^= Notification.GetHashCode();
       hash ^= (int) contextCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3038,6 +3570,10 @@ namespace Nitric.Proto.Faas.v1 {
         output.WriteRawTag(34);
         output.WriteMessage(Topic);
       }
+      if (contextCase_ == ContextOneofCase.Notification) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Notification);
+      }
       if (traceContext_ != null) {
         output.WriteRawTag(82);
         output.WriteMessage(TraceContext);
@@ -3067,6 +3603,10 @@ namespace Nitric.Proto.Faas.v1 {
         output.WriteRawTag(34);
         output.WriteMessage(Topic);
       }
+      if (contextCase_ == ContextOneofCase.Notification) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Notification);
+      }
       if (traceContext_ != null) {
         output.WriteRawTag(82);
         output.WriteMessage(TraceContext);
@@ -3094,6 +3634,9 @@ namespace Nitric.Proto.Faas.v1 {
       }
       if (contextCase_ == ContextOneofCase.Topic) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Topic);
+      }
+      if (contextCase_ == ContextOneofCase.Notification) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Notification);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3130,6 +3673,12 @@ namespace Nitric.Proto.Faas.v1 {
             Topic = new global::Nitric.Proto.Faas.v1.TopicTriggerContext();
           }
           Topic.MergeFrom(other.Topic);
+          break;
+        case ContextOneofCase.Notification:
+          if (Notification == null) {
+            Notification = new global::Nitric.Proto.Faas.v1.NotificationTriggerContext();
+          }
+          Notification.MergeFrom(other.Notification);
           break;
       }
 
@@ -3171,6 +3720,15 @@ namespace Nitric.Proto.Faas.v1 {
             }
             input.ReadMessage(subBuilder);
             Topic = subBuilder;
+            break;
+          }
+          case 42: {
+            global::Nitric.Proto.Faas.v1.NotificationTriggerContext subBuilder = new global::Nitric.Proto.Faas.v1.NotificationTriggerContext();
+            if (contextCase_ == ContextOneofCase.Notification) {
+              subBuilder.MergeFrom(Notification);
+            }
+            input.ReadMessage(subBuilder);
+            Notification = subBuilder;
             break;
           }
           case 82: {
@@ -3220,6 +3778,15 @@ namespace Nitric.Proto.Faas.v1 {
             Topic = subBuilder;
             break;
           }
+          case 42: {
+            global::Nitric.Proto.Faas.v1.NotificationTriggerContext subBuilder = new global::Nitric.Proto.Faas.v1.NotificationTriggerContext();
+            if (contextCase_ == ContextOneofCase.Notification) {
+              subBuilder.MergeFrom(Notification);
+            }
+            input.ReadMessage(subBuilder);
+            Notification = subBuilder;
+            break;
+          }
           case 82: {
             if (traceContext_ == null) {
               TraceContext = new global::Nitric.Proto.Faas.v1.TraceContext();
@@ -3246,7 +3813,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3407,7 +3974,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3568,7 +4135,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3926,7 +4493,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4089,6 +4656,463 @@ namespace Nitric.Proto.Faas.v1 {
 
   }
 
+  public sealed partial class BucketNotification : pb::IMessage<BucketNotification>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<BucketNotification> _parser = new pb::MessageParser<BucketNotification>(() => new BucketNotification());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BucketNotification> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[19]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BucketNotification() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BucketNotification(BucketNotification other) : this() {
+      key_ = other.key_;
+      type_ = other.type_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BucketNotification Clone() {
+      return new BucketNotification(this);
+    }
+
+    /// <summary>Field number for the "key" field.</summary>
+    public const int KeyFieldNumber = 1;
+    private string key_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Key {
+      get { return key_; }
+      set {
+        key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 2;
+    private global::Nitric.Proto.Faas.v1.BucketNotificationType type_ = global::Nitric.Proto.Faas.v1.BucketNotificationType.All;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Faas.v1.BucketNotificationType Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BucketNotification);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BucketNotification other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Key != other.Key) return false;
+      if (Type != other.Type) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Key.Length != 0) hash ^= Key.GetHashCode();
+      if (Type != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) hash ^= Type.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Key.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Key);
+      }
+      if (Type != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) Type);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Key.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Key);
+      }
+      if (Type != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) Type);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Key.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
+      }
+      if (Type != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BucketNotification other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Key.Length != 0) {
+        Key = other.Key;
+      }
+      if (other.Type != global::Nitric.Proto.Faas.v1.BucketNotificationType.All) {
+        Type = other.Type;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Key = input.ReadString();
+            break;
+          }
+          case 16: {
+            Type = (global::Nitric.Proto.Faas.v1.BucketNotificationType) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Key = input.ReadString();
+            break;
+          }
+          case 16: {
+            Type = (global::Nitric.Proto.Faas.v1.BucketNotificationType) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class NotificationTriggerContext : pb::IMessage<NotificationTriggerContext>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<NotificationTriggerContext> _parser = new pb::MessageParser<NotificationTriggerContext>(() => new NotificationTriggerContext());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<NotificationTriggerContext> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[20]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public NotificationTriggerContext() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public NotificationTriggerContext(NotificationTriggerContext other) : this() {
+      source_ = other.source_;
+      switch (other.NotificationCase) {
+        case NotificationOneofCase.Bucket:
+          Bucket = other.Bucket.Clone();
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public NotificationTriggerContext Clone() {
+      return new NotificationTriggerContext(this);
+    }
+
+    /// <summary>Field number for the "source" field.</summary>
+    public const int SourceFieldNumber = 1;
+    private string source_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Source {
+      get { return source_; }
+      set {
+        source_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "bucket" field.</summary>
+    public const int BucketFieldNumber = 10;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Faas.v1.BucketNotification Bucket {
+      get { return notificationCase_ == NotificationOneofCase.Bucket ? (global::Nitric.Proto.Faas.v1.BucketNotification) notification_ : null; }
+      set {
+        notification_ = value;
+        notificationCase_ = value == null ? NotificationOneofCase.None : NotificationOneofCase.Bucket;
+      }
+    }
+
+    private object notification_;
+    /// <summary>Enum of possible cases for the "notification" oneof.</summary>
+    public enum NotificationOneofCase {
+      None = 0,
+      Bucket = 10,
+    }
+    private NotificationOneofCase notificationCase_ = NotificationOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public NotificationOneofCase NotificationCase {
+      get { return notificationCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearNotification() {
+      notificationCase_ = NotificationOneofCase.None;
+      notification_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as NotificationTriggerContext);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(NotificationTriggerContext other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Source != other.Source) return false;
+      if (!object.Equals(Bucket, other.Bucket)) return false;
+      if (NotificationCase != other.NotificationCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Source.Length != 0) hash ^= Source.GetHashCode();
+      if (notificationCase_ == NotificationOneofCase.Bucket) hash ^= Bucket.GetHashCode();
+      hash ^= (int) notificationCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Source.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Source);
+      }
+      if (notificationCase_ == NotificationOneofCase.Bucket) {
+        output.WriteRawTag(82);
+        output.WriteMessage(Bucket);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Source.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Source);
+      }
+      if (notificationCase_ == NotificationOneofCase.Bucket) {
+        output.WriteRawTag(82);
+        output.WriteMessage(Bucket);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Source.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Source);
+      }
+      if (notificationCase_ == NotificationOneofCase.Bucket) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Bucket);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(NotificationTriggerContext other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Source.Length != 0) {
+        Source = other.Source;
+      }
+      switch (other.NotificationCase) {
+        case NotificationOneofCase.Bucket:
+          if (Bucket == null) {
+            Bucket = new global::Nitric.Proto.Faas.v1.BucketNotification();
+          }
+          Bucket.MergeFrom(other.Bucket);
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Source = input.ReadString();
+            break;
+          }
+          case 82: {
+            global::Nitric.Proto.Faas.v1.BucketNotification subBuilder = new global::Nitric.Proto.Faas.v1.BucketNotification();
+            if (notificationCase_ == NotificationOneofCase.Bucket) {
+              subBuilder.MergeFrom(Bucket);
+            }
+            input.ReadMessage(subBuilder);
+            Bucket = subBuilder;
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Source = input.ReadString();
+            break;
+          }
+          case 82: {
+            global::Nitric.Proto.Faas.v1.BucketNotification subBuilder = new global::Nitric.Proto.Faas.v1.BucketNotification();
+            if (notificationCase_ == NotificationOneofCase.Bucket) {
+              subBuilder.MergeFrom(Bucket);
+            }
+            input.ReadMessage(subBuilder);
+            Bucket = subBuilder;
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   /// <summary>
   /// The worker has successfully processed a trigger
   /// </summary>
@@ -4104,7 +5128,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4128,6 +5152,9 @@ namespace Nitric.Proto.Faas.v1 {
           break;
         case ContextOneofCase.Topic:
           Topic = other.Topic.Clone();
+          break;
+        case ContextOneofCase.Notification:
+          Notification = other.Notification.Clone();
           break;
       }
 
@@ -4181,12 +5208,27 @@ namespace Nitric.Proto.Faas.v1 {
       }
     }
 
+    /// <summary>Field number for the "notification" field.</summary>
+    public const int NotificationFieldNumber = 12;
+    /// <summary>
+    /// response to a notification trigger
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Faas.v1.NotificationResponseContext Notification {
+      get { return contextCase_ == ContextOneofCase.Notification ? (global::Nitric.Proto.Faas.v1.NotificationResponseContext) context_ : null; }
+      set {
+        context_ = value;
+        contextCase_ = value == null ? ContextOneofCase.None : ContextOneofCase.Notification;
+      }
+    }
+
     private object context_;
     /// <summary>Enum of possible cases for the "context" oneof.</summary>
     public enum ContextOneofCase {
       None = 0,
       Http = 10,
       Topic = 11,
+      Notification = 12,
     }
     private ContextOneofCase contextCase_ = ContextOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4216,6 +5258,7 @@ namespace Nitric.Proto.Faas.v1 {
       if (Data != other.Data) return false;
       if (!object.Equals(Http, other.Http)) return false;
       if (!object.Equals(Topic, other.Topic)) return false;
+      if (!object.Equals(Notification, other.Notification)) return false;
       if (ContextCase != other.ContextCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -4226,6 +5269,7 @@ namespace Nitric.Proto.Faas.v1 {
       if (Data.Length != 0) hash ^= Data.GetHashCode();
       if (contextCase_ == ContextOneofCase.Http) hash ^= Http.GetHashCode();
       if (contextCase_ == ContextOneofCase.Topic) hash ^= Topic.GetHashCode();
+      if (contextCase_ == ContextOneofCase.Notification) hash ^= Notification.GetHashCode();
       hash ^= (int) contextCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -4255,6 +5299,10 @@ namespace Nitric.Proto.Faas.v1 {
         output.WriteRawTag(90);
         output.WriteMessage(Topic);
       }
+      if (contextCase_ == ContextOneofCase.Notification) {
+        output.WriteRawTag(98);
+        output.WriteMessage(Notification);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4276,6 +5324,10 @@ namespace Nitric.Proto.Faas.v1 {
         output.WriteRawTag(90);
         output.WriteMessage(Topic);
       }
+      if (contextCase_ == ContextOneofCase.Notification) {
+        output.WriteRawTag(98);
+        output.WriteMessage(Notification);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4293,6 +5345,9 @@ namespace Nitric.Proto.Faas.v1 {
       }
       if (contextCase_ == ContextOneofCase.Topic) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Topic);
+      }
+      if (contextCase_ == ContextOneofCase.Notification) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Notification);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4320,6 +5375,12 @@ namespace Nitric.Proto.Faas.v1 {
             Topic = new global::Nitric.Proto.Faas.v1.TopicResponseContext();
           }
           Topic.MergeFrom(other.Topic);
+          break;
+        case ContextOneofCase.Notification:
+          if (Notification == null) {
+            Notification = new global::Nitric.Proto.Faas.v1.NotificationResponseContext();
+          }
+          Notification.MergeFrom(other.Notification);
           break;
       }
 
@@ -4359,6 +5420,15 @@ namespace Nitric.Proto.Faas.v1 {
             Topic = subBuilder;
             break;
           }
+          case 98: {
+            global::Nitric.Proto.Faas.v1.NotificationResponseContext subBuilder = new global::Nitric.Proto.Faas.v1.NotificationResponseContext();
+            if (contextCase_ == ContextOneofCase.Notification) {
+              subBuilder.MergeFrom(Notification);
+            }
+            input.ReadMessage(subBuilder);
+            Notification = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -4395,6 +5465,15 @@ namespace Nitric.Proto.Faas.v1 {
             Topic = subBuilder;
             break;
           }
+          case 98: {
+            global::Nitric.Proto.Faas.v1.NotificationResponseContext subBuilder = new global::Nitric.Proto.Faas.v1.NotificationResponseContext();
+            if (contextCase_ == ContextOneofCase.Notification) {
+              subBuilder.MergeFrom(Notification);
+            }
+            input.ReadMessage(subBuilder);
+            Notification = subBuilder;
+            break;
+          }
         }
       }
     }
@@ -4420,7 +5499,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4658,7 +5737,7 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4772,6 +5851,178 @@ namespace Nitric.Proto.Faas.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(TopicResponseContext other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class NotificationResponseContext : pb::IMessage<NotificationResponseContext>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<NotificationResponseContext> _parser = new pb::MessageParser<NotificationResponseContext>(() => new NotificationResponseContext());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<NotificationResponseContext> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor.MessageTypes[24]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public NotificationResponseContext() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public NotificationResponseContext(NotificationResponseContext other) : this() {
+      success_ = other.success_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public NotificationResponseContext Clone() {
+      return new NotificationResponseContext(this);
+    }
+
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as NotificationResponseContext);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(NotificationResponseContext other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Success != other.Success) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Success != false) hash ^= Success.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Success != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(NotificationResponseContext other) {
       if (other == null) {
         return;
       }

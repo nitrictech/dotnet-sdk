@@ -98,12 +98,14 @@ namespace Nitric.Sdk.Function
         /// <typeparam name="T">The expected context type.</typeparam>
         /// <returns>A new context object.</returns>
         /// <exception cref="Exception">Throws if the context type is unknown or unsupported.</exception>
-        public static T FromGrpcTriggerRequest<T>(TriggerRequestProto trigger) where T : TriggerContext<Request, Response>
+        public static T FromGrpcTriggerRequest<T>(TriggerRequestProto trigger, IFaasOptions options) where T : TriggerContext<Request, Response>
         {
             return trigger.ContextCase switch
             {
                 TriggerRequestProto.ContextOneofCase.Http => HttpContext.FromGrpcTriggerRequest(trigger) as T,
                 TriggerRequestProto.ContextOneofCase.Topic => EventContext.FromGrpcTriggerRequest(trigger) as T,
+                TriggerRequestProto.ContextOneofCase.Notification =>
+                    BucketNotificationContext.FromGrpcTriggerRequest(trigger, (BucketNotificationWorkerOptions)options) as T,
                 _ => throw new Exception("Unsupported trigger request type")
             };
         }

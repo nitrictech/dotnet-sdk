@@ -25,39 +25,37 @@ namespace Nitric.Proto.Storage.v1 {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ch5wcm90by9zdG9yYWdlL3YxL3N0b3JhZ2UucHJvdG8SEW5pdHJpYy5zdG9y",
-            "YWdlLnYxGhd2YWxpZGF0ZS92YWxpZGF0ZS5wcm90byJqChNTdG9yYWdlV3Jp",
-            "dGVSZXF1ZXN0Ei8KC2J1Y2tldF9uYW1lGAEgASgJQhr6QhdyFSiAAjIQXlx3",
-            "KyhbLlwtXVx3KykqJBIUCgNrZXkYAiABKAlCB/pCBHICEAESDAoEYm9keRgD",
-            "IAEoDCIWChRTdG9yYWdlV3JpdGVSZXNwb25zZSJbChJTdG9yYWdlUmVhZFJl",
-            "cXVlc3QSLwoLYnVja2V0X25hbWUYASABKAlCGvpCF3IVKIACMhBeXHcrKFsu",
-            "XC1dXHcrKSokEhQKA2tleRgCIAEoCUIH+kIEcgIQASIjChNTdG9yYWdlUmVh",
-            "ZFJlc3BvbnNlEgwKBGJvZHkYASABKAwiXQoUU3RvcmFnZURlbGV0ZVJlcXVl",
-            "c3QSLwoLYnVja2V0X25hbWUYASABKAlCGvpCF3IVKIACMhBeXHcrKFsuXC1d",
-            "XHcrKSokEhQKA2tleRgCIAEoCUIH+kIEcgIQASIXChVTdG9yYWdlRGVsZXRl",
-            "UmVzcG9uc2Ui3QEKGFN0b3JhZ2VQcmVTaWduVXJsUmVxdWVzdBIvCgtidWNr",
-            "ZXRfbmFtZRgBIAEoCUIa+kIXchUogAIyEF5cdysoWy5cLV1cdyspKiQSFAoD",
-            "a2V5GAIgASgJQgf6QgRyAhABEkgKCW9wZXJhdGlvbhgDIAEoDjI1Lm5pdHJp",
-            "Yy5zdG9yYWdlLnYxLlN0b3JhZ2VQcmVTaWduVXJsUmVxdWVzdC5PcGVyYXRp",
-            "b24SDgoGZXhwaXJ5GAQgASgNIiAKCU9wZXJhdGlvbhIICgRSRUFEEAASCQoF",
-            "V1JJVEUQASIoChlTdG9yYWdlUHJlU2lnblVybFJlc3BvbnNlEgsKA3VybBgB",
-            "IAEoCSJKChdTdG9yYWdlTGlzdEZpbGVzUmVxdWVzdBIvCgtidWNrZXRfbmFt",
-            "ZRgBIAEoCUIa+kIXchUogAIyEF5cdysoWy5cLV1cdyspKiQiEwoERmlsZRIL",
-            "CgNrZXkYASABKAkiQgoYU3RvcmFnZUxpc3RGaWxlc1Jlc3BvbnNlEiYKBWZp",
-            "bGVzGAEgAygLMhcubml0cmljLnN0b3JhZ2UudjEuRmlsZTLtAwoOU3RvcmFn",
-            "ZVNlcnZpY2USVQoEUmVhZBIlLm5pdHJpYy5zdG9yYWdlLnYxLlN0b3JhZ2VS",
-            "ZWFkUmVxdWVzdBomLm5pdHJpYy5zdG9yYWdlLnYxLlN0b3JhZ2VSZWFkUmVz",
-            "cG9uc2USWAoFV3JpdGUSJi5uaXRyaWMuc3RvcmFnZS52MS5TdG9yYWdlV3Jp",
-            "dGVSZXF1ZXN0Gicubml0cmljLnN0b3JhZ2UudjEuU3RvcmFnZVdyaXRlUmVz",
-            "cG9uc2USWwoGRGVsZXRlEicubml0cmljLnN0b3JhZ2UudjEuU3RvcmFnZURl",
-            "bGV0ZVJlcXVlc3QaKC5uaXRyaWMuc3RvcmFnZS52MS5TdG9yYWdlRGVsZXRl",
-            "UmVzcG9uc2USZwoKUHJlU2lnblVybBIrLm5pdHJpYy5zdG9yYWdlLnYxLlN0",
-            "b3JhZ2VQcmVTaWduVXJsUmVxdWVzdBosLm5pdHJpYy5zdG9yYWdlLnYxLlN0",
-            "b3JhZ2VQcmVTaWduVXJsUmVzcG9uc2USZAoJTGlzdEZpbGVzEioubml0cmlj",
-            "LnN0b3JhZ2UudjEuU3RvcmFnZUxpc3RGaWxlc1JlcXVlc3QaKy5uaXRyaWMu",
-            "c3RvcmFnZS52MS5TdG9yYWdlTGlzdEZpbGVzUmVzcG9uc2VCagoaaW8ubml0",
-            "cmljLnByb3RvLnN0b3JhZ2UudjFCCFN0b3JhZ2VzUAFaDG5pdHJpYy92MTt2",
-            "MaoCF05pdHJpYy5Qcm90by5TdG9yYWdlLnYxygIXTml0cmljXFByb3RvXFN0",
-            "b3JhZ2VcVjFiBnByb3RvMw=="));
+            "YWdlLnYxGhd2YWxpZGF0ZS92YWxpZGF0ZS5wcm90byJOChNTdG9yYWdlV3Jp",
+            "dGVSZXF1ZXN0EhMKC2J1Y2tldF9uYW1lGAEgASgJEhQKA2tleRgCIAEoCUIH",
+            "+kIEcgIQARIMCgRib2R5GAMgASgMIhYKFFN0b3JhZ2VXcml0ZVJlc3BvbnNl",
+            "Ij8KElN0b3JhZ2VSZWFkUmVxdWVzdBITCgtidWNrZXRfbmFtZRgBIAEoCRIU",
+            "CgNrZXkYAiABKAlCB/pCBHICEAEiIwoTU3RvcmFnZVJlYWRSZXNwb25zZRIM",
+            "CgRib2R5GAEgASgMIkEKFFN0b3JhZ2VEZWxldGVSZXF1ZXN0EhMKC2J1Y2tl",
+            "dF9uYW1lGAEgASgJEhQKA2tleRgCIAEoCUIH+kIEcgIQASIXChVTdG9yYWdl",
+            "RGVsZXRlUmVzcG9uc2UiwQEKGFN0b3JhZ2VQcmVTaWduVXJsUmVxdWVzdBIT",
+            "CgtidWNrZXRfbmFtZRgBIAEoCRIUCgNrZXkYAiABKAlCB/pCBHICEAESSAoJ",
+            "b3BlcmF0aW9uGAMgASgOMjUubml0cmljLnN0b3JhZ2UudjEuU3RvcmFnZVBy",
+            "ZVNpZ25VcmxSZXF1ZXN0Lk9wZXJhdGlvbhIOCgZleHBpcnkYBCABKA0iIAoJ",
+            "T3BlcmF0aW9uEggKBFJFQUQQABIJCgVXUklURRABIigKGVN0b3JhZ2VQcmVT",
+            "aWduVXJsUmVzcG9uc2USCwoDdXJsGAEgASgJIj4KF1N0b3JhZ2VMaXN0Rmls",
+            "ZXNSZXF1ZXN0EhMKC2J1Y2tldF9uYW1lGAEgASgJEg4KBnByZWZpeBgCIAEo",
+            "CSITCgRGaWxlEgsKA2tleRgBIAEoCSJCChhTdG9yYWdlTGlzdEZpbGVzUmVz",
+            "cG9uc2USJgoFZmlsZXMYASADKAsyFy5uaXRyaWMuc3RvcmFnZS52MS5GaWxl",
+            "Mu0DCg5TdG9yYWdlU2VydmljZRJVCgRSZWFkEiUubml0cmljLnN0b3JhZ2Uu",
+            "djEuU3RvcmFnZVJlYWRSZXF1ZXN0GiYubml0cmljLnN0b3JhZ2UudjEuU3Rv",
+            "cmFnZVJlYWRSZXNwb25zZRJYCgVXcml0ZRImLm5pdHJpYy5zdG9yYWdlLnYx",
+            "LlN0b3JhZ2VXcml0ZVJlcXVlc3QaJy5uaXRyaWMuc3RvcmFnZS52MS5TdG9y",
+            "YWdlV3JpdGVSZXNwb25zZRJbCgZEZWxldGUSJy5uaXRyaWMuc3RvcmFnZS52",
+            "MS5TdG9yYWdlRGVsZXRlUmVxdWVzdBooLm5pdHJpYy5zdG9yYWdlLnYxLlN0",
+            "b3JhZ2VEZWxldGVSZXNwb25zZRJnCgpQcmVTaWduVXJsEisubml0cmljLnN0",
+            "b3JhZ2UudjEuU3RvcmFnZVByZVNpZ25VcmxSZXF1ZXN0Giwubml0cmljLnN0",
+            "b3JhZ2UudjEuU3RvcmFnZVByZVNpZ25VcmxSZXNwb25zZRJkCglMaXN0Rmls",
+            "ZXMSKi5uaXRyaWMuc3RvcmFnZS52MS5TdG9yYWdlTGlzdEZpbGVzUmVxdWVz",
+            "dBorLm5pdHJpYy5zdG9yYWdlLnYxLlN0b3JhZ2VMaXN0RmlsZXNSZXNwb25z",
+            "ZUKRAQoaaW8ubml0cmljLnByb3RvLnN0b3JhZ2UudjFCCFN0b3JhZ2VzUAFa",
+            "M2dpdGh1Yi5jb20vbml0cmljdGVjaC9uaXRyaWMvY29yZS9wa2cvYXBpL25p",
+            "dHJpYy92MaoCF05pdHJpYy5Qcm90by5TdG9yYWdlLnYxygIXTml0cmljXFBy",
+            "b3RvXFN0b3JhZ2VcVjFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Validate.ValidateReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -69,7 +67,7 @@ namespace Nitric.Proto.Storage.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StorageDeleteResponse), global::Nitric.Proto.Storage.v1.StorageDeleteResponse.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest), global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest.Parser, new[]{ "BucketName", "Key", "Operation", "Expiry" }, null, new[]{ typeof(global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest.Types.Operation) }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse), global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse.Parser, new[]{ "Url" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StorageListFilesRequest), global::Nitric.Proto.Storage.v1.StorageListFilesRequest.Parser, new[]{ "BucketName" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StorageListFilesRequest), global::Nitric.Proto.Storage.v1.StorageListFilesRequest.Parser, new[]{ "BucketName", "Prefix" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.File), global::Nitric.Proto.Storage.v1.File.Parser, new[]{ "Key" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StorageListFilesResponse), global::Nitric.Proto.Storage.v1.StorageListFilesResponse.Parser, new[]{ "Files" }, null, null, null, null)
           }));
@@ -1742,6 +1740,7 @@ namespace Nitric.Proto.Storage.v1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public StorageListFilesRequest(StorageListFilesRequest other) : this() {
       bucketName_ = other.bucketName_;
+      prefix_ = other.prefix_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1761,6 +1760,17 @@ namespace Nitric.Proto.Storage.v1 {
       }
     }
 
+    /// <summary>Field number for the "prefix" field.</summary>
+    public const int PrefixFieldNumber = 2;
+    private string prefix_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Prefix {
+      get { return prefix_; }
+      set {
+        prefix_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as StorageListFilesRequest);
@@ -1775,6 +1785,7 @@ namespace Nitric.Proto.Storage.v1 {
         return true;
       }
       if (BucketName != other.BucketName) return false;
+      if (Prefix != other.Prefix) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1782,6 +1793,7 @@ namespace Nitric.Proto.Storage.v1 {
     public override int GetHashCode() {
       int hash = 1;
       if (BucketName.Length != 0) hash ^= BucketName.GetHashCode();
+      if (Prefix.Length != 0) hash ^= Prefix.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1802,6 +1814,10 @@ namespace Nitric.Proto.Storage.v1 {
         output.WriteRawTag(10);
         output.WriteString(BucketName);
       }
+      if (Prefix.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Prefix);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1815,6 +1831,10 @@ namespace Nitric.Proto.Storage.v1 {
         output.WriteRawTag(10);
         output.WriteString(BucketName);
       }
+      if (Prefix.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Prefix);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1826,6 +1846,9 @@ namespace Nitric.Proto.Storage.v1 {
       int size = 0;
       if (BucketName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(BucketName);
+      }
+      if (Prefix.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Prefix);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1840,6 +1863,9 @@ namespace Nitric.Proto.Storage.v1 {
       }
       if (other.BucketName.Length != 0) {
         BucketName = other.BucketName;
+      }
+      if (other.Prefix.Length != 0) {
+        Prefix = other.Prefix;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1859,6 +1885,10 @@ namespace Nitric.Proto.Storage.v1 {
             BucketName = input.ReadString();
             break;
           }
+          case 18: {
+            Prefix = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -1875,6 +1905,10 @@ namespace Nitric.Proto.Storage.v1 {
             break;
           case 10: {
             BucketName = input.ReadString();
+            break;
+          }
+          case 18: {
+            Prefix = input.ReadString();
             break;
           }
         }

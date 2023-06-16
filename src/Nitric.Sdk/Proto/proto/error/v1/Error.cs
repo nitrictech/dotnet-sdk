@@ -30,9 +30,10 @@ namespace Nitric.Proto.Error.v1 {
             "ZS5BcmdzRW50cnkaKwoJQXJnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1",
             "ZRgCIAEoCToCOAEiWgoMRXJyb3JEZXRhaWxzEg8KB21lc3NhZ2UYASABKAkS",
             "DQoFY2F1c2UYAiABKAkSKgoFc2NvcGUYAyABKAsyGy5uaXRyaWMuZXJyb3Iu",
-            "djEuRXJyb3JTY29wZUJiChhpby5uaXRyaWMucHJvdG8uZXJyb3IudjFCBkVy",
-            "cm9yc1ABWgxuaXRyaWMvdjE7djGqAhVOaXRyaWMuUHJvdG8uRXJyb3IudjHK",
-            "AhVOaXRyaWNcUHJvdG9cRXJyb3JcVjFiBnByb3RvMw=="));
+            "djEuRXJyb3JTY29wZUKJAQoYaW8ubml0cmljLnByb3RvLmVycm9yLnYxQgZF",
+            "cnJvcnNQAVozZ2l0aHViLmNvbS9uaXRyaWN0ZWNoL25pdHJpYy9jb3JlL3Br",
+            "Zy9hcGkvbml0cmljL3YxqgIVTml0cmljLlByb3RvLkVycm9yLnYxygIVTml0",
+            "cmljXFByb3RvXEVycm9yXFYxYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
