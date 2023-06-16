@@ -53,6 +53,7 @@ namespace Nitric.Sdk.Test.Api.Storage
         {
             var file = new Sdk.Storage.Storage().Bucket("test-bucket").File("test-file");
             Assert.NotNull(file);
+            Assert.Equal("test-file", file.Name);
         }
 
         [Fact]
@@ -86,6 +87,32 @@ namespace Nitric.Sdk.Test.Api.Storage
             var file = new Sdk.Storage.Storage(bc.Object).Bucket("test-bucket").File("test-file");
 
             file.Write(System.Text.Encoding.UTF8.GetBytes("Hello World"));
+
+            bc.Verify(
+                t => t.Write(It.IsAny<StorageWriteRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public void TestWriteString()
+        {
+            var request = new StorageWriteRequest
+            {
+                BucketName = "test-bucket",
+                Key = "test-file",
+                Body = Google.Protobuf.ByteString.CopyFrom(
+                    System.Text.Encoding.UTF8.GetBytes("Body"))
+            };
+
+            Mock<StorageService.StorageServiceClient> bc = new Mock<StorageService.StorageServiceClient>();
+            bc.Setup(e => e.Write(It.IsAny<StorageWriteRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(new StorageWriteResponse())
+                .Verifiable();
+
+            var file = new Sdk.Storage.Storage(bc.Object).Bucket("test-bucket").File("test-file");
+
+            file.Write("Hello World");
 
             bc.Verify(
                 t => t.Write(It.IsAny<StorageWriteRequest>(), null, null,
