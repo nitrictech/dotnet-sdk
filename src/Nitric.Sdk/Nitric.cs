@@ -74,7 +74,15 @@ namespace Nitric.Sdk
             var resource = typeMap!.GetValueOrDefault(name, make(name)) as T;
 
             // update the cache
-            Cache.Add(typeof(T), typeMap);
+            if (Cache.ContainsKey(typeof(T)))
+            {
+                Cache[typeof(T)] = typeMap;
+            }
+            else
+            {
+                Cache.Add(typeof(T), typeMap);
+
+            }
 
             return resource;
         }

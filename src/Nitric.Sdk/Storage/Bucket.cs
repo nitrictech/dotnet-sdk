@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using Nitric.Proto.Storage.v1;
+using Nitric.Sdk.Function;
 using ProtoFile = Nitric.Proto.Storage.v1.File;
 
 
@@ -74,6 +75,50 @@ namespace Nitric.Sdk.Storage
             }
 
             return files;
+        }
+
+        /// <summary>
+        /// Registers handlers to be called whenever a file triggers an event in the bucket
+        /// </summary>
+        /// <param name="notificationType">The type of events that should trigger events, Write or Delete</param>
+        /// <param name="notificationPrefixFilter">The prefix of file names that should trigger events</param>
+        /// <param name="middleware">The handlers to call to process notification events</param>
+        public void On(
+            BucketNotificationType notificationType,
+            string notificationPrefixFilter,
+            params Middleware<FileNotificationContext>[] middleware)
+        {
+            var notificationWorker = new Faas(new FileNotificationWorkerOptions(
+                this,
+                notificationType,
+                notificationPrefixFilter
+            ));
+
+            notificationWorker.FileNotification(middleware);
+
+            Nitric.RegisterWorker(notificationWorker);
+        }
+
+        /// <summary>
+        /// Registers a handler to be called whenever a file triggers an event in the bucket
+        /// </summary>
+        /// <param name="notificationType">The type of events that should trigger events, Write or Delete</param>
+        /// <param name="notificationPrefixFilter">The prefix of file names that should trigger events</param>
+        /// <param name="handler">The handler to call to process notification events</param>
+        public void On(
+            BucketNotificationType notificationType,
+            string notificationPrefixFilter,
+            Func<FileNotificationContext, FileNotificationContext> handler)
+        {
+            var notificationWorker = new Faas(new FileNotificationWorkerOptions(
+                this,
+                notificationType,
+                notificationPrefixFilter
+            ));
+
+            notificationWorker.FileNotification(handler);
+
+            Nitric.RegisterWorker(notificationWorker);
         }
     }
 }

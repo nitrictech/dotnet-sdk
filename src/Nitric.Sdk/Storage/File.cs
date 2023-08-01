@@ -11,9 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+using System;
+using System.Text;
 using Google.Protobuf;
 using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Common;
+using Nitric.Sdk.Function;
 using ProtoFile = Nitric.Proto.Storage.v1.File;
 
 namespace Nitric.Sdk.Storage
@@ -40,14 +44,14 @@ namespace Nitric.Sdk.Storage
     {
         private readonly Storage storage;
         private readonly Bucket bucket;
-        private string Key { get; set; }
+        public string Name { get; private set; }
 
 
         internal File(Storage storage, Bucket bucket, string key)
         {
             this.storage = storage;
             this.bucket = bucket;
-            this.Key = key;
+            this.Name = key;
         }
 
         /// <summary>
@@ -60,8 +64,31 @@ namespace Nitric.Sdk.Storage
             var request = new StorageWriteRequest
             {
                 BucketName = bucket.Name,
-                Key = this.Key,
+                Key = this.Name,
                 Body = ByteString.CopyFrom(body)
+            };
+            try
+            {
+                storage.Client.Write(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Create or update the contents of the file.
+        /// </summary>
+        /// <param name="body">The contents to write.</param>
+        /// <exception cref="NitricException"></exception>
+        public void Write(string body)
+        {
+            var request = new StorageWriteRequest
+            {
+                BucketName = bucket.Name,
+                Key = this.Name,
+                Body = ByteString.CopyFromUtf8(body)
             };
             try
             {
@@ -83,7 +110,7 @@ namespace Nitric.Sdk.Storage
             var request = new StorageReadRequest
             {
                 BucketName = bucket.Name,
-                Key = this.Key
+                Key = this.Name
             };
             try
             {
@@ -105,7 +132,7 @@ namespace Nitric.Sdk.Storage
             var request = new StorageDeleteRequest
             {
                 BucketName = bucket.Name,
-                Key = this.Key
+                Key = this.Name
             };
             try
             {
@@ -128,7 +155,7 @@ namespace Nitric.Sdk.Storage
             var request = new StoragePreSignUrlRequest
             {
                 BucketName = this.bucket.Name,
-                Key = this.Key,
+                Key = this.Name,
                 Operation = mode == FileMode.Read ? StoragePreSignUrlRequest.Types.Operation.Read : StoragePreSignUrlRequest.Types.Operation.Write,
                 Expiry = expiry < 0 ? 0 : (uint)expiry,
 
@@ -170,7 +197,7 @@ namespace Nitric.Sdk.Storage
         /// <returns></returns>
         public override string ToString()
         {
-            return GetType().Name + "[key=" + Key + "\nbucket=" + bucket.Name + "]";
+            return GetType().Name + "[name=" + Name + "\nbucket=" + bucket.Name + "]";
         }
     }
 }

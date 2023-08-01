@@ -49,7 +49,7 @@ namespace Nitric.Sdk.Function
         /// <summary>
         /// Indicates whether the event was successfully processed.
         ///
-        /// If this value is false, the event maybe resent.
+        /// If this value is false, the event may be resent.
         /// </summary>
         public bool Success { get; set; }
 
