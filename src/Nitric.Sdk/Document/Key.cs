@@ -25,7 +25,7 @@ namespace Nitric.Sdk.Document
     /// Includes the unique ID of the document and a reference to the collection that contains it.
     /// </summary>
     /// <typeparam name="T">The expected type for the contents of the document.</typeparam>
-    public class Key<T> where T : IDictionary<string, object>, new()
+    public class Key<T>
     {
         /// <summary>
         /// The collection containing this document.

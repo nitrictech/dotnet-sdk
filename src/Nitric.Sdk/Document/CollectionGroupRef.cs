@@ -25,7 +25,7 @@ namespace Nitric.Sdk.Document
     /// E.g. search all cities in all states. The group of sub-collections are expected to have the same name (e.g. "cities")
     /// </summary>
     /// <typeparam name="T">The type of documents contained in the group of collections</typeparam>
-    public class CollectionGroup<T> : AbstractCollection<T> where T : IDictionary<string, object>, new()
+    public class CollectionGroup<T> : AbstractCollection<T>
     {
         /// <summary>
         /// Construct a new collection group

@@ -94,6 +94,23 @@ namespace Nitric.Sdk
         /// <returns>A bucket resource, if the name has already been declared the same resource will be returned.</returns>
         public static BucketResource Bucket(string name) => Cached(name, t => new BucketResource(t));
 
+
+        /// <summary>
+        /// Declare a collection resource for document storage.
+        /// </summary>
+        /// <param name="name">The unique name of the collection within this application.</param>
+        /// <typeparam name="T">The type of documents to be stored in the collection.</typeparam>
+        /// <returns>A collection resource, if the name has already been declared the same resource will be returned.</returns>
+        public static CollectionResource<T> Collection<T>(string name) =>
+            Cached(name, t => new CollectionResource<T>(t));
+
+        /// <summary>
+        /// Declare a secret resource for accessing and putting secret values.
+        /// </summary>
+        /// <param name="name">The unique name of the secret within this application.</param>
+        /// <returns>A secret resource, if the name has already been declared the same resource will be returned.</returns>
+        public static SecretResource Secret(string name) => Cached(name, t => new SecretResource(t));
+
         /// <summary>
         /// Declare a queue resources for pull-based tasks and batch workloads.
         /// </summary>

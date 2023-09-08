@@ -55,6 +55,8 @@ namespace Nitric.Proto.Storage.v1 {
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse> __Marshaller_nitric_storage_v1_StoragePreSignUrlResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse.Parser));
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageListFilesRequest> __Marshaller_nitric_storage_v1_StorageListFilesRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageListFilesRequest.Parser));
     static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageListFilesResponse> __Marshaller_nitric_storage_v1_StorageListFilesResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageListFilesResponse.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageExistsRequest> __Marshaller_nitric_storage_v1_StorageExistsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageExistsRequest.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Storage.v1.StorageExistsResponse> __Marshaller_nitric_storage_v1_StorageExistsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Storage.v1.StorageExistsResponse.Parser));
 
     static readonly grpc::Method<global::Nitric.Proto.Storage.v1.StorageReadRequest, global::Nitric.Proto.Storage.v1.StorageReadResponse> __Method_Read = new grpc::Method<global::Nitric.Proto.Storage.v1.StorageReadRequest, global::Nitric.Proto.Storage.v1.StorageReadResponse>(
         grpc::MethodType.Unary,
@@ -90,6 +92,13 @@ namespace Nitric.Proto.Storage.v1 {
         "ListFiles",
         __Marshaller_nitric_storage_v1_StorageListFilesRequest,
         __Marshaller_nitric_storage_v1_StorageListFilesResponse);
+
+    static readonly grpc::Method<global::Nitric.Proto.Storage.v1.StorageExistsRequest, global::Nitric.Proto.Storage.v1.StorageExistsResponse> __Method_Exists = new grpc::Method<global::Nitric.Proto.Storage.v1.StorageExistsRequest, global::Nitric.Proto.Storage.v1.StorageExistsResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Exists",
+        __Marshaller_nitric_storage_v1_StorageExistsRequest,
+        __Marshaller_nitric_storage_v1_StorageExistsResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -152,6 +161,17 @@ namespace Nitric.Proto.Storage.v1 {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Storage.v1.StorageListFilesResponse> ListFiles(global::Nitric.Proto.Storage.v1.StorageListFilesRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Determine is an object exists in a bucket
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Storage.v1.StorageExistsResponse> Exists(global::Nitric.Proto.Storage.v1.StorageExistsRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -401,6 +421,50 @@ namespace Nitric.Proto.Storage.v1 {
       {
         return CallInvoker.AsyncUnaryCall(__Method_ListFiles, null, options, request);
       }
+      /// <summary>
+      /// Determine is an object exists in a bucket
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Nitric.Proto.Storage.v1.StorageExistsResponse Exists(global::Nitric.Proto.Storage.v1.StorageExistsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Exists(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Determine is an object exists in a bucket
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Nitric.Proto.Storage.v1.StorageExistsResponse Exists(global::Nitric.Proto.Storage.v1.StorageExistsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Exists, null, options, request);
+      }
+      /// <summary>
+      /// Determine is an object exists in a bucket
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageExistsResponse> ExistsAsync(global::Nitric.Proto.Storage.v1.StorageExistsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ExistsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Determine is an object exists in a bucket
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Storage.v1.StorageExistsResponse> ExistsAsync(global::Nitric.Proto.Storage.v1.StorageExistsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Exists, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override StorageServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -417,7 +481,8 @@ namespace Nitric.Proto.Storage.v1 {
           .AddMethod(__Method_Write, serviceImpl.Write)
           .AddMethod(__Method_Delete, serviceImpl.Delete)
           .AddMethod(__Method_PreSignUrl, serviceImpl.PreSignUrl)
-          .AddMethod(__Method_ListFiles, serviceImpl.ListFiles).Build();
+          .AddMethod(__Method_ListFiles, serviceImpl.ListFiles)
+          .AddMethod(__Method_Exists, serviceImpl.Exists).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -431,6 +496,7 @@ namespace Nitric.Proto.Storage.v1 {
       serviceBinder.AddMethod(__Method_Delete, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Storage.v1.StorageDeleteRequest, global::Nitric.Proto.Storage.v1.StorageDeleteResponse>(serviceImpl.Delete));
       serviceBinder.AddMethod(__Method_PreSignUrl, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Storage.v1.StoragePreSignUrlRequest, global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse>(serviceImpl.PreSignUrl));
       serviceBinder.AddMethod(__Method_ListFiles, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Storage.v1.StorageListFilesRequest, global::Nitric.Proto.Storage.v1.StorageListFilesResponse>(serviceImpl.ListFiles));
+      serviceBinder.AddMethod(__Method_Exists, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Storage.v1.StorageExistsRequest, global::Nitric.Proto.Storage.v1.StorageExistsResponse>(serviceImpl.Exists));
     }
 
   }

@@ -238,7 +238,7 @@ namespace Nitric.Sdk.Function
 
         private Func<FileNotificationContext, FileNotificationContext> FileNotificationHandler;
 
-        public List<Middleware<FileNotificationContext>> FileNotificationHandlers =
+        private List<Middleware<FileNotificationContext>> FileNotificationHandlers =
             new List<Middleware<FileNotificationContext>>();
 
 

@@ -24,7 +24,7 @@ namespace Nitric.Sdk.Document
     /// A reference to a collection in the underlying document database.
     /// </summary>
     /// <typeparam name="T">The type of documents stored in the collection.</typeparam>
-    public class CollectionRef<T> : AbstractCollection<T> where T : IDictionary<string, object>, new()
+    public class CollectionRef<T> : AbstractCollection<T>
     {
         internal CollectionRef(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
             : base(documentClient, name, parentKey)

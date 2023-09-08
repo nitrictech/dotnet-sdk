@@ -41,21 +41,25 @@ namespace Nitric.Proto.Storage.v1 {
             "ZXNSZXF1ZXN0EhMKC2J1Y2tldF9uYW1lGAEgASgJEg4KBnByZWZpeBgCIAEo",
             "CSITCgRGaWxlEgsKA2tleRgBIAEoCSJCChhTdG9yYWdlTGlzdEZpbGVzUmVz",
             "cG9uc2USJgoFZmlsZXMYASADKAsyFy5uaXRyaWMuc3RvcmFnZS52MS5GaWxl",
-            "Mu0DCg5TdG9yYWdlU2VydmljZRJVCgRSZWFkEiUubml0cmljLnN0b3JhZ2Uu",
-            "djEuU3RvcmFnZVJlYWRSZXF1ZXN0GiYubml0cmljLnN0b3JhZ2UudjEuU3Rv",
-            "cmFnZVJlYWRSZXNwb25zZRJYCgVXcml0ZRImLm5pdHJpYy5zdG9yYWdlLnYx",
-            "LlN0b3JhZ2VXcml0ZVJlcXVlc3QaJy5uaXRyaWMuc3RvcmFnZS52MS5TdG9y",
-            "YWdlV3JpdGVSZXNwb25zZRJbCgZEZWxldGUSJy5uaXRyaWMuc3RvcmFnZS52",
-            "MS5TdG9yYWdlRGVsZXRlUmVxdWVzdBooLm5pdHJpYy5zdG9yYWdlLnYxLlN0",
-            "b3JhZ2VEZWxldGVSZXNwb25zZRJnCgpQcmVTaWduVXJsEisubml0cmljLnN0",
-            "b3JhZ2UudjEuU3RvcmFnZVByZVNpZ25VcmxSZXF1ZXN0Giwubml0cmljLnN0",
-            "b3JhZ2UudjEuU3RvcmFnZVByZVNpZ25VcmxSZXNwb25zZRJkCglMaXN0Rmls",
-            "ZXMSKi5uaXRyaWMuc3RvcmFnZS52MS5TdG9yYWdlTGlzdEZpbGVzUmVxdWVz",
-            "dBorLm5pdHJpYy5zdG9yYWdlLnYxLlN0b3JhZ2VMaXN0RmlsZXNSZXNwb25z",
-            "ZUKRAQoaaW8ubml0cmljLnByb3RvLnN0b3JhZ2UudjFCCFN0b3JhZ2VzUAFa",
-            "M2dpdGh1Yi5jb20vbml0cmljdGVjaC9uaXRyaWMvY29yZS9wa2cvYXBpL25p",
-            "dHJpYy92MaoCF05pdHJpYy5Qcm90by5TdG9yYWdlLnYxygIXTml0cmljXFBy",
-            "b3RvXFN0b3JhZ2VcVjFiBnByb3RvMw=="));
+            "IjwKFFN0b3JhZ2VFeGlzdHNSZXF1ZXN0Eg4KBmJ1Y2tldBgBIAEoCRIUCgNr",
+            "ZXkYAiABKAlCB/pCBHICEAEiJwoVU3RvcmFnZUV4aXN0c1Jlc3BvbnNlEg4K",
+            "BmV4aXN0cxgBIAEoCDLKBAoOU3RvcmFnZVNlcnZpY2USVQoEUmVhZBIlLm5p",
+            "dHJpYy5zdG9yYWdlLnYxLlN0b3JhZ2VSZWFkUmVxdWVzdBomLm5pdHJpYy5z",
+            "dG9yYWdlLnYxLlN0b3JhZ2VSZWFkUmVzcG9uc2USWAoFV3JpdGUSJi5uaXRy",
+            "aWMuc3RvcmFnZS52MS5TdG9yYWdlV3JpdGVSZXF1ZXN0Gicubml0cmljLnN0",
+            "b3JhZ2UudjEuU3RvcmFnZVdyaXRlUmVzcG9uc2USWwoGRGVsZXRlEicubml0",
+            "cmljLnN0b3JhZ2UudjEuU3RvcmFnZURlbGV0ZVJlcXVlc3QaKC5uaXRyaWMu",
+            "c3RvcmFnZS52MS5TdG9yYWdlRGVsZXRlUmVzcG9uc2USZwoKUHJlU2lnblVy",
+            "bBIrLm5pdHJpYy5zdG9yYWdlLnYxLlN0b3JhZ2VQcmVTaWduVXJsUmVxdWVz",
+            "dBosLm5pdHJpYy5zdG9yYWdlLnYxLlN0b3JhZ2VQcmVTaWduVXJsUmVzcG9u",
+            "c2USZAoJTGlzdEZpbGVzEioubml0cmljLnN0b3JhZ2UudjEuU3RvcmFnZUxp",
+            "c3RGaWxlc1JlcXVlc3QaKy5uaXRyaWMuc3RvcmFnZS52MS5TdG9yYWdlTGlz",
+            "dEZpbGVzUmVzcG9uc2USWwoGRXhpc3RzEicubml0cmljLnN0b3JhZ2UudjEu",
+            "U3RvcmFnZUV4aXN0c1JlcXVlc3QaKC5uaXRyaWMuc3RvcmFnZS52MS5TdG9y",
+            "YWdlRXhpc3RzUmVzcG9uc2VCkQEKGmlvLm5pdHJpYy5wcm90by5zdG9yYWdl",
+            "LnYxQghTdG9yYWdlc1ABWjNnaXRodWIuY29tL25pdHJpY3RlY2gvbml0cmlj",
+            "L2NvcmUvcGtnL2FwaS9uaXRyaWMvdjGqAhdOaXRyaWMuUHJvdG8uU3RvcmFn",
+            "ZS52McoCF05pdHJpY1xQcm90b1xTdG9yYWdlXFYxYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Validate.ValidateReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -69,7 +73,9 @@ namespace Nitric.Proto.Storage.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse), global::Nitric.Proto.Storage.v1.StoragePreSignUrlResponse.Parser, new[]{ "Url" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StorageListFilesRequest), global::Nitric.Proto.Storage.v1.StorageListFilesRequest.Parser, new[]{ "BucketName", "Prefix" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.File), global::Nitric.Proto.Storage.v1.File.Parser, new[]{ "Key" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StorageListFilesResponse), global::Nitric.Proto.Storage.v1.StorageListFilesResponse.Parser, new[]{ "Files" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StorageListFilesResponse), global::Nitric.Proto.Storage.v1.StorageListFilesResponse.Parser, new[]{ "Files" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StorageExistsRequest), global::Nitric.Proto.Storage.v1.StorageExistsRequest.Parser, new[]{ "Bucket", "Key" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Storage.v1.StorageExistsResponse), global::Nitric.Proto.Storage.v1.StorageExistsResponse.Parser, new[]{ "Exists" }, null, null, null, null)
           }));
     }
     #endregion
@@ -2245,6 +2251,389 @@ namespace Nitric.Proto.Storage.v1 {
             break;
           case 10: {
             files_.AddEntriesFrom(ref input, _repeated_files_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class StorageExistsRequest : pb::IMessage<StorageExistsRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<StorageExistsRequest> _parser = new pb::MessageParser<StorageExistsRequest>(() => new StorageExistsRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<StorageExistsRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Storage.v1.StorageReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public StorageExistsRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public StorageExistsRequest(StorageExistsRequest other) : this() {
+      bucket_ = other.bucket_;
+      key_ = other.key_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public StorageExistsRequest Clone() {
+      return new StorageExistsRequest(this);
+    }
+
+    /// <summary>Field number for the "bucket" field.</summary>
+    public const int BucketFieldNumber = 1;
+    private string bucket_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Bucket {
+      get { return bucket_; }
+      set {
+        bucket_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "key" field.</summary>
+    public const int KeyFieldNumber = 2;
+    private string key_ = "";
+    /// <summary>
+    /// Key of item to retrieve
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Key {
+      get { return key_; }
+      set {
+        key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as StorageExistsRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(StorageExistsRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Bucket != other.Bucket) return false;
+      if (Key != other.Key) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Bucket.Length != 0) hash ^= Bucket.GetHashCode();
+      if (Key.Length != 0) hash ^= Key.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Bucket.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Bucket);
+      }
+      if (Key.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Key);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Bucket.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Bucket);
+      }
+      if (Key.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Key);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Bucket.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Bucket);
+      }
+      if (Key.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(StorageExistsRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Bucket.Length != 0) {
+        Bucket = other.Bucket;
+      }
+      if (other.Key.Length != 0) {
+        Key = other.Key;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Bucket = input.ReadString();
+            break;
+          }
+          case 18: {
+            Key = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Bucket = input.ReadString();
+            break;
+          }
+          case 18: {
+            Key = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class StorageExistsResponse : pb::IMessage<StorageExistsResponse>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<StorageExistsResponse> _parser = new pb::MessageParser<StorageExistsResponse>(() => new StorageExistsResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<StorageExistsResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Storage.v1.StorageReflection.Descriptor.MessageTypes[12]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public StorageExistsResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public StorageExistsResponse(StorageExistsResponse other) : this() {
+      exists_ = other.exists_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public StorageExistsResponse Clone() {
+      return new StorageExistsResponse(this);
+    }
+
+    /// <summary>Field number for the "exists" field.</summary>
+    public const int ExistsFieldNumber = 1;
+    private bool exists_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Exists {
+      get { return exists_; }
+      set {
+        exists_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as StorageExistsResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(StorageExistsResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Exists != other.Exists) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Exists != false) hash ^= Exists.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Exists != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Exists);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Exists != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Exists);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Exists != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(StorageExistsResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Exists != false) {
+        Exists = other.Exists;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Exists = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Exists = input.ReadBool();
             break;
           }
         }

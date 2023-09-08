@@ -15,6 +15,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Google.Api;
 using Nitric.Proto.Resource.v1;
 using Nitric.Sdk.Function;
 using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
@@ -44,8 +45,8 @@ namespace Nitric.Sdk.Resource
         {
             this.Issuer = Issuer;
             this.Audiences = Audiences;
-        }                
-    }   
+        }
+    }
 
     public class ApiDetails {
         internal string ID { get; set; }
@@ -63,23 +64,23 @@ namespace Nitric.Sdk.Resource
         public Middleware<HttpContext>[] Middleware { get; private set; }
 
         public ApiOptions(
-            Dictionary<string, SecurityDefinition> SecurityDefinitions = null,
-            Dictionary<string, string[]> Security = null,
-            string BasePath = "",
-            Middleware<HttpContext>[] Middleware = null
+            Dictionary<string, SecurityDefinition> securityDefinitions = null,
+            Dictionary<string, string[]> security = null,
+            string basePath = "",
+            Middleware<HttpContext>[] middleware = null
         )
         {
-            this.SecurityDefinitions = SecurityDefinitions ?? new Dictionary<string, SecurityDefinition>();
-            this.Security = Security ?? new Dictionary<string, string[]>();
-            this.BasePath = BasePath;
-            this.Middleware = Middleware ?? new Middleware<HttpContext>[] { };
+            this.SecurityDefinitions = securityDefinitions ?? new Dictionary<string, SecurityDefinition>();
+            this.Security = security ?? new Dictionary<string, string[]>();
+            this.BasePath = basePath;
+            this.Middleware = middleware ?? new Middleware<HttpContext>[] { };
         }
     }
 
 
     public class ApiResource : BaseResource
     {
-        ApiOptions Opts;
+        internal readonly ApiOptions Opts;
 
         internal ApiResource(string name, ApiOptions options = null) : base(name, ResourceType.Api)
         {
@@ -152,7 +153,7 @@ namespace Nitric.Sdk.Resource
         /// Create a new POST handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
-        /// <param name="handler"></param>        
+        /// <param name="handler"></param>
         public ApiResource Post(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.POST }, handler);
 
         /// <summary>
@@ -225,7 +226,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="path"></param>
         public ApiRoute Route(string path)
         {
-            return new ApiRoute(this, this.Opts.BasePath + path);
+            return new ApiRoute(this, this.Opts.BasePath + path, new RouteOptions());
         }
 
         /// <summary>
@@ -234,9 +235,9 @@ namespace Nitric.Sdk.Resource
         /// <returns>An ApiRoute that handlers can be added to.</returns>
         /// <param name="path"></param>
         /// <param name="middleware"></param>
-        public ApiRoute Route(string path, params Middleware<HttpContext>[] middleware)
+        public ApiRoute Route(string path, RouteOptions options)
         {
-            return new ApiRoute(this, this.Opts.BasePath + path, middleware);
+            return new ApiRoute(this, this.Opts.BasePath + path, options);
         }
 
         internal override BaseResource Register()
@@ -270,7 +271,7 @@ namespace Nitric.Sdk.Resource
                 }
 
                 apiResource.SecurityDefinitions.Add(kv.Key, definition);
-            }            
+            }
 
             var request = new ResourceDeclareRequest { Resource = resource, Api = apiResource };
             BaseResource.client.Declare(request);
@@ -278,11 +279,19 @@ namespace Nitric.Sdk.Resource
             return this;
         }
 
-        internal ApiDetails Details() {
+        /// <summary>
+        /// Retrieve details about the deployed API at runtime. These details include:
+        /// - ID: the identifier for the resource.
+        /// - Provider: the cloud provider that this API is deployed to.
+        /// - Service: the cloud service that is running this API (i.e. AWS API Gateway).
+        /// - URL: the url of the deployed API.
+        /// </summary>
+        /// <returns>The details of the API</returns>
+        public ApiDetails Details() {
             var resource = new NitricResource { Name = this.name, Type = ResourceType.Api };
 
             var request = new ResourceDetailsRequest { Resource = resource };
-            var response = BaseResource.client.Details(request);
+            var response = client.Details(request);
 
             return new ApiDetails
             {
@@ -292,11 +301,15 @@ namespace Nitric.Sdk.Resource
                 URL = response.Api.Url,
             };
         }
+    }
 
-        public string URL()
-        {
-            return this.Details().URL;
-        }
+    public class RouteOptions
+    {
+        // The middleware that is run on every route
+        public Middleware<HttpContext>[] Middlewares { get; set; }
+
+        // Security rules to apply to this specific route
+        public Dictionary<string, string[]> Security { get; set; }
     }
 
     public class ApiRoute
@@ -307,29 +320,34 @@ namespace Nitric.Sdk.Resource
         // The path that this route's handlers respond to
         public readonly string Path;
 
-        // The middleware that is run on every route
-        private readonly Middleware<HttpContext>[] middleware;
+        // Options for the API route, including middleware and security
+        public readonly RouteOptions Opts;
 
-        internal ApiRoute(ApiResource api, string path, params Middleware<HttpContext>[] middleware)
+        internal ApiRoute(ApiResource api, string path, RouteOptions opts)
         {
             this.api = api;
             this.Path = path;
-            this.middleware = middleware;
+
+            var composedMiddleware = this.api.Opts.Middleware.Concat(opts.Middlewares).ToArray();
+            this.Opts = new RouteOptions {
+                Middlewares = composedMiddleware,
+                Security = opts.Security
+            };
         }
 
-        internal Middleware<HttpContext>[] ConcatMiddleware(Func<HttpContext, HttpContext> handler)
+        private Middleware<HttpContext>[] ConcatMiddleware(Func<HttpContext, HttpContext> handler)
         {
-            Middleware<HttpContext> middleware = (context, next) =>
+            HttpContext ComposedMiddleware(HttpContext context, Func<HttpContext, HttpContext> next)
             {
                 context = handler(context);
                 return next(context);
             };
-            return this.middleware.Append(middleware).ToArray();
+            return this.Opts.Middlewares.Append(ComposedMiddleware).ToArray();
         }
 
-        internal Middleware<HttpContext>[] ConcatMiddleware(Middleware<HttpContext>[] middleware)
+        private Middleware<HttpContext>[] ConcatMiddleware(Middleware<HttpContext>[] middlewares)
         {
-            return this.middleware.Concat(middleware).ToArray();
+            return this.Opts.Middlewares.Concat(middlewares).ToArray();
         }
 
         /// <summary>

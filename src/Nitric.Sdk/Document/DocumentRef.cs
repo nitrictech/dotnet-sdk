@@ -13,13 +13,13 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using GrpcKey = Nitric.Proto.Document.v1.Key;
 using Nitric.Proto.Document.v1;
 using Util = Nitric.Sdk.Common.Util;
 using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
 using RpcException = Grpc.Core.RpcException;
 using NitricException = Nitric.Sdk.Common.NitricException;
 using Constants = Nitric.Sdk.Common.Constants;
@@ -30,7 +30,7 @@ namespace Nitric.Sdk.Document
     /// A reference to a specific document in a collection.
     /// </summary>
     /// <typeparam name="T">The expected type of the document's contents</typeparam>
-    public class DocumentRef<T> where T : IDictionary<string, object>, new()
+    public class DocumentRef<T>
     {
         private readonly DocumentServiceClient documentClient;
 
@@ -185,13 +185,16 @@ namespace Nitric.Sdk.Document
         /// <returns></returns>
         protected T DocumentToGeneric(Struct content)
         {
-            var doc = new T();
-            foreach (var kv in content.Fields)
-            {
-                doc.Add(kv.Key, UnwrapValue(kv.Value));
-            }
+            var doc = content.Fields.ToDictionary(
+                kv => kv.Key, kv => UnwrapValue(kv.Value));
 
-            return doc;
+            var dictInJson = JsonConvert.SerializeObject(doc, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                FloatFormatHandling = FloatFormatHandling.DefaultValue,
+            });
+
+            return JsonConvert.DeserializeObject<T>(dictInJson);
         }
 
         private static object UnwrapValue(Value value)

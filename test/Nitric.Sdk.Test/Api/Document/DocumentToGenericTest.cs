@@ -12,16 +12,41 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
 using Nitric.Sdk.Document;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Nitric.Sdk.Test.Api.Document
 {
-    public class DocumentToGenericTest : DocumentRef<Dictionary<string, object>>
+    public class TestProfile
     {
+        public string Name { get; set; }
+        public float Age { get; set; }
+        public bool Employed { get; set; }
+        public List<string> Hobbies { get; set; }
+        public float[][] Numbers { get; set; }
+        public TestAddress Address { get; set; }
+    }
+
+    public class TestAddress
+    {
+        public string Street { get; set; }
+    }
+
+    public class DocumentToGenericTest : DocumentRef<TestProfile>
+    {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public DocumentToGenericTest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
         public string ToAssertableString(IDictionary<string, object> dictionary)
         {
             var pairStrings = dictionary.OrderBy(p => p.Key)
@@ -32,197 +57,95 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestStructWithScalars()
         {
-            var expected = new Dictionary<string, object>();
-            expected.Add("string", "string");
-            expected.Add("null", null);
-            expected.Add("number", 1.0);
-            expected.Add("boolean", true);
-
             var genericStruct = new Struct();
-            genericStruct.Fields.Add("string", Value.ForString("string"));
-            genericStruct.Fields.Add("null", Value.ForNull());
-            genericStruct.Fields.Add("number", Value.ForNumber(1.0));
-            genericStruct.Fields.Add("boolean", Value.ForBool(true));
+            genericStruct.Fields.Add("name", Value.ForString("John Smith"));
+            genericStruct.Fields.Add("age", Value.ForNumber(21.0));
+            genericStruct.Fields.Add("employed", Value.ForBool(true));
 
-            var genericDict = DocumentToGeneric(genericStruct);
+            var actual = DocumentToGeneric(genericStruct);
 
-            Assert.Equal(ToAssertableString(expected), ToAssertableString(genericDict));
+            var expected = new TestProfile {
+                Name = "John Smith",
+                Age = 21,
+                Employed = true,
+            };
+
+            Assert.Equivalent(expected, actual);
         }
 
         [Fact]
         public void TestStructWithList()
         {
-            List<object> expectedList = new List<object>();
-            expectedList.Add("string");
-            expectedList.Add(null);
-            expectedList.Add(1.0);
-            expectedList.Add(true);
+            var genericList = new List<Value> { Value.ForString("Reading"), Value.ForString("Writing"), Value.ForString("Deleting") };
 
-            var expected = new Dictionary<string, object>();
-            expected.Add("list", expectedList);
+            var genericStruct = new Struct();
+            genericStruct.Fields.Add("name", Value.ForString("John Smith"));
+            genericStruct.Fields.Add("age", Value.ForNumber(21));
+            genericStruct.Fields.Add("employed", Value.ForBool(true));
+            genericStruct.Fields.Add("hobbies", Value.ForList(genericList.ToArray()));
 
-            Value[] actualList = new Value[]
-            {
-                Value.ForString("string"),
-                Value.ForNull(),
-                Value.ForNumber(1),
-                Value.ForBool(true),
+            var expectedList = new List<string> { "Reading", "Writing", "Deleting" };
+
+            var expected = new TestProfile {
+                Name = "John Smith",
+                Age = 21,
+                Employed = true,
+                Hobbies = expectedList,
             };
 
-            var genericStruct = new Struct();
-            genericStruct.Fields.Add("list", Value.ForList(actualList));
+            var actual = DocumentToGeneric(genericStruct);
 
-            var genericDict = DocumentToGeneric(genericStruct);
-
-            Assert.Equal(ToAssertableString(expected), ToAssertableString(genericDict));
-        }
-
-        [Fact]
-        public void TestStructWithStruct()
-        {
-            var expected = new Struct();
-            expected.Fields.Add("string", Value.ForString("string"));
-            expected.Fields.Add("boolean", Value.ForBool(true));
-            expected.Fields.Add("number", Value.ForNumber(1.0));
-            expected.Fields.Add("null", Value.ForNull());
-
-            var genericStruct = new Struct();
-            genericStruct.Fields.Add("struct", Value.ForStruct(expected));
-
-            var genericDict = DocumentToGeneric(genericStruct);
-
-            var fields = new Dictionary<string, object>();
-            fields.Add("string", "string");
-            fields.Add("boolean", true);
-            fields.Add("number", 1.0);
-            fields.Add("null", null);
-
-            var expectedResponse = new Dictionary<string, object>();
-            expectedResponse.Add("struct", fields);
-
-            Assert.Equal(ToAssertableString(expectedResponse), ToAssertableString(genericDict));
+            Assert.Equivalent(expected, actual);
         }
 
         [Fact]
         public void TestStructWithNestedLists()
         {
-            List<object> nestedList2 = new List<object>();
-            nestedList2.Add("string");
-            nestedList2.Add(null);
-            nestedList2.Add(1.0);
-            nestedList2.Add(true);
-
-            List<object> nestedList1 = new List<object>();
-            nestedList1.Add(nestedList2);
-            nestedList1.Add(nestedList2);
-            nestedList1.Add(nestedList2);
-
-            List<object> expectedList = new List<object>();
-            expectedList.Add(nestedList1);
-            expectedList.Add(nestedList1);
-            expectedList.Add(nestedList1);
-
-            var expected = new Dictionary<string, object>();
-            expected.Add("list", expectedList);
-
-            Value[] actualNestedList2 = new Value[]
-            {
-                Value.ForString("string"),
-                Value.ForNull(),
-                Value.ForNumber(1),
-                Value.ForBool(true),
-            };
-            Value[] actualNestedList1 = new Value[]
-            {
-                Value.ForList(actualNestedList2),
-                Value.ForList(actualNestedList2),
-                Value.ForList(actualNestedList2),
-            };
-            Value[] actualList = new Value[]
-            {
-                Value.ForList(actualNestedList1),
-                Value.ForList(actualNestedList1),
-                Value.ForList(actualNestedList1),
-            };
-
             var genericStruct = new Struct();
-            genericStruct.Fields.Add("list", Value.ForList(actualList));
+            genericStruct.Fields.Add("name", Value.ForString("John Smith"));
+            genericStruct.Fields.Add("age", Value.ForNumber(21));
+            genericStruct.Fields.Add("employed", Value.ForBool(true));
+            genericStruct.Fields.Add("numbers", Value.ForList(new[] {
+                Value.ForList(Value.ForNumber(0), Value.ForNumber(1)),
+                Value.ForList(Value.ForNumber(2), Value.ForNumber(3)),
+            }));
 
-            var genericDict = DocumentToGeneric(genericStruct);
+            var expected = new TestProfile {
+                Name = "John Smith",
+                Age = 21,
+                Employed = true,
+                Numbers = new float[][] { new float[] { 0, 1}, new float[] { 2, 3 }}
+            };
 
-            Assert.Equal(ToAssertableString(expected), ToAssertableString(genericDict));
+            var actual = DocumentToGeneric(genericStruct);
+
+            Assert.Equivalent(expected, actual);
         }
 
         [Fact]
-        public void TestStructWithNestedListAndNestedStructs()
+        public void TestStructWithNestedStruct()
         {
-            Value[] nestedList3 = new Value[]
-            {
-                Value.ForString("string"),
-                Value.ForNull(),
-                Value.ForNumber(1),
-                Value.ForBool(true),
-            };
-
-            Value[] nestedList2 = new Value[]
-            {
-                Value.ForList(nestedList3),
-                Value.ForList(nestedList3),
-                Value.ForList(nestedList3),
-            };
-
-            var nestedStruct1 = new Struct();
-            nestedStruct1.Fields.Add("struct-list", Value.ForList(nestedList2));
-
-            List<object> nestedList1 = new List<object>();
-            nestedList1.Add(nestedStruct1);
-            nestedList1.Add(nestedStruct1);
-            nestedList1.Add(nestedStruct1);
-
-            List<object> expectedList = new List<object>();
-            expectedList.Add(nestedList1);
-            expectedList.Add(nestedList1);
-            expectedList.Add(nestedList1);
-
-            var expected = new Dictionary<string, object>();
-            expected.Add("list", expectedList);
-
-            Value[] actualNestedList3 = new Value[]
-            {
-                Value.ForString("string"),
-                Value.ForNull(),
-                Value.ForNumber(1),
-                Value.ForBool(true),
-            };
-            Value[] actualNestedList2 = new Value[]
-            {
-                Value.ForList(actualNestedList3),
-                Value.ForList(actualNestedList3),
-                Value.ForList(actualNestedList3),
-            };
-
-            var actualNestedStruct1 = new Struct();
-            actualNestedStruct1.Fields.Add("struct-list", Value.ForList(actualNestedList2));
-
-            Value[] actualNestedList1 = new Value[]
-            {
-                Value.ForStruct(actualNestedStruct1),
-                Value.ForStruct(actualNestedStruct1),
-                Value.ForStruct(actualNestedStruct1),
-            };
-            Value[] actualList = new Value[]
-            {
-                Value.ForList(actualNestedList1),
-                Value.ForList(actualNestedList1),
-                Value.ForList(actualNestedList1),
-            };
+            var nestedStruct = new Struct();
+            nestedStruct.Fields.Add("street", Value.ForString("123 street st"));
 
             var genericStruct = new Struct();
-            genericStruct.Fields.Add("list", Value.ForList(actualList));
+            genericStruct.Fields.Add("name", Value.ForString("John Smith"));
+            genericStruct.Fields.Add("age", Value.ForNumber(21));
+            genericStruct.Fields.Add("employed", Value.ForBool(true));
+            genericStruct.Fields.Add("address", Value.ForStruct(nestedStruct));
 
-            var genericDict = DocumentToGeneric(genericStruct);
+            var expected = new TestProfile {
+                Name = "John Smith",
+                Age = 21,
+                Employed = true,
+                Address = new TestAddress {
+                    Street = "123 street st"
+                },
+            };
 
-            Assert.Equal(ToAssertableString(expected), ToAssertableString(genericDict));
+            var actual = DocumentToGeneric(genericStruct);
+
+            Assert.Equivalent(expected, actual);
         }
     }
 }

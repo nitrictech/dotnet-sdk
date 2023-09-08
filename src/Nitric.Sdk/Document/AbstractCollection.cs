@@ -13,7 +13,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using Collection = Nitric.Proto.Document.v1.Collection;
 
@@ -23,7 +22,7 @@ namespace Nitric.Sdk.Document
     /// Document collection base class
     /// </summary>
     /// <typeparam name="T">The type for documents in this collection</typeparam>
-    public class AbstractCollection<T> where T : IDictionary<string, object>, new()
+    public class AbstractCollection<T>
     {
         /// <summary>
         /// The name of the collection

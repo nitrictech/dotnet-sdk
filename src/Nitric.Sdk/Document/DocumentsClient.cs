@@ -13,9 +13,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
-using Nitric.Sdk.Common;
 using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Document
@@ -43,7 +41,7 @@ namespace Nitric.Sdk.Document
         /// <typeparam name="T">The expected type for documents in the collection.</typeparam>
         /// <returns>The collection reference.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public CollectionRef<T> Collection<T>(string name) where T : IDictionary<string, object>, new()
+        public CollectionRef<T> Collection<T>(string name)
         {
             if (string.IsNullOrEmpty(name))
             {

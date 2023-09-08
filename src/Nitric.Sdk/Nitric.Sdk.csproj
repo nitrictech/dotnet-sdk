@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>${VERSION}</Version>
+    <Version>0.0.2</Version>
     <PackageId>Nitric.Sdk</PackageId>
     <Company>Nitric Pty Ltd</Company>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -13,13 +13,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.Core" Version="2.38.1" />
-    <PackageReference Include="Newtonsoft.json" Version="13.0.1" /> 
+    <PackageReference Include="Grpc.Core" Version="2.38.1" /> 
     <PackageReference Include="Google.Protobuf" Version="3.17.3" />
     <PackageReference Include="Grpc.Net.Client" Version="2.38.0" />
     <PackageReference Include="Grpc.Tools" Version="2.38.1" PrivateAssets="All" />
     <PackageReference Include="Google.Api.CommonProtos" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

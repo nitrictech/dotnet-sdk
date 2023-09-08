@@ -19,7 +19,6 @@ using Google.Protobuf;
 using Google.Protobuf.Collections;
 using Newtonsoft.Json;
 using Nitric.Proto.Faas.v1;
-using Nitric.Sdk.Common;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
 
 namespace Nitric.Sdk.Function
