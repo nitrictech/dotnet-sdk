@@ -37,7 +37,7 @@ namespace Nitric.Sdk.Resource
 
     public class QueueResource : SecureResource<QueuePermission>
     {
-        internal QueueResource(string name) : base(name)
+        internal QueueResource(string name) : base(name, ResourceType.Queue)
         {
         }
 
@@ -65,6 +65,11 @@ namespace Nitric.Sdk.Resource
             return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x])).Distinct();
         }
 
+        /// <summary>
+        /// Request specific access to this queue.
+        /// </summary>
+        /// <param name="permissions">The permissions that the function has to access the queue.</param>
+        /// <returns>A reference to the queue.</returns>
         public Queue.Queue With(params QueuePermission[] permissions)
         {
             this.RegisterPolicy(permissions);

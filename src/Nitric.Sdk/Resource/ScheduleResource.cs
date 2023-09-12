@@ -26,11 +26,11 @@ namespace Nitric.Sdk.Resource
         }
 
         /// <summary>
-        /// Set the rate, frequency and handler for this schedule.
+        /// Run code at a specific time, represented by a a rate and a frequency. e.g. every 7 days
         /// </summary>
-        /// <param name="rate"></param>
-        /// <param name="frequency"></param>
-        /// <param name="middleware"></param>
+        /// <param name="rate">The interval for the schedule running. e.g. 7 for every '7 days'</param>
+        /// <param name="frequency">The frequency for the schedule running. e.g. Days for every '7 days'</param>
+        /// <param name="middleware">The middleware (code) to run on a schedule.</param>
         public void Every(int rate, Frequency frequency, Func<EventContext, EventContext> middleware)
         {
             var faas = new Faas(new ScheduleRateWorkerOptions
@@ -45,6 +45,12 @@ namespace Nitric.Sdk.Resource
             Nitric.RegisterWorker(faas);
         }
 
+        /// <summary>
+        /// Run code at a specific time, represented by a rate and a frequency. e.g. every 7 days
+        /// </summary>
+        /// <param name="rate">The interval for the schedule running. e.g. 7 for every '7 days'</param>
+        /// <param name="frequency">The frequency for the schedule running. e.g. Days for every '7 days'</param>
+        /// <param name="middleware">The middlewares (code) to run on a schedule.</param>
         public void Every(int rate, Frequency frequency, params Middleware<EventContext>[] middleware)
         {
             var faas = new Faas(new ScheduleRateWorkerOptions
@@ -59,6 +65,11 @@ namespace Nitric.Sdk.Resource
             Nitric.RegisterWorker(faas);
         }
 
+        /// <summary>
+        /// Run code at a specific time, represented by a cron expression.
+        /// </summary>
+        /// <param name="expression">The cron expression representing when the schedule should run.</param>
+        /// <param name="middleware">The middleware (code) to run on a schedule.</param>
         public void Cron(string expression, Func<EventContext, EventContext> middleware)
         {
             var faas = new Faas(new ScheduleCronWorkerOptions
@@ -72,6 +83,11 @@ namespace Nitric.Sdk.Resource
             Nitric.RegisterWorker(faas);
         }
 
+        /// <summary>
+        /// Run code at a specific time, represented by a cron expression.
+        /// </summary>
+        /// <param name="expression">The cron expression representing when the schedule should run.</param>
+        /// <param name="middleware">The middlewares (code) to run on a schedule.</param>
         public void Cron(string expression, params Middleware<EventContext>[] middleware)
         {
             var faas = new Faas(new ScheduleCronWorkerOptions
