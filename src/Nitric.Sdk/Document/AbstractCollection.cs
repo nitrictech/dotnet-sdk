@@ -18,12 +18,10 @@ using Collection = Nitric.Proto.Document.v1.Collection;
 
 namespace Nitric.Sdk.Document
 {
-    /// <summary>
-    /// Document collection base class
-    /// </summary>
-    /// <typeparam name="T">The type for documents in this collection</typeparam>
-    public class AbstractCollection<T>
+    public abstract class AbstractCollection
     {
+        internal readonly DocumentServiceClient DocumentClient;
+
         /// <summary>
         /// The name of the collection
         /// </summary>
@@ -34,9 +32,7 @@ namespace Nitric.Sdk.Document
         ///
         /// If set, this is a sub-collection.
         /// </summary>
-        public readonly Key<T> ParentKey;
-
-        internal readonly DocumentServiceClient DocumentClient;
+        public readonly Key ParentKey;
 
         /// <summary>
         /// Construct a new collection
@@ -45,25 +41,16 @@ namespace Nitric.Sdk.Document
         /// <param name="name">The name of the collection</param>
         /// <param name="parentKey">An optional parent key</param>
         /// <exception cref="ArgumentNullException">Throws if a required parameter is missing</exception>
-        protected AbstractCollection(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
+        protected AbstractCollection(DocumentServiceClient documentClient, string name, Key parentKey)
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            this.DocumentClient = documentClient;
             this.Name = name;
             this.ParentKey = parentKey;
-        }
-
-        /// <summary>
-        /// Construct a query to find documents in the collection
-        /// </summary>
-        /// <returns>A new query builder</returns>
-        public Query<T> Query()
-        {
-            return new Query<T>(this.DocumentClient, this);
+            this.DocumentClient = documentClient;
         }
 
         internal Collection ToGrpcCollection()
@@ -79,5 +66,39 @@ namespace Nitric.Sdk.Document
 
             return collection;
         }
+
+        /// <summary>
+        /// Determines the depth of this collection.
+        ///
+        /// If the collection has no parent collections the depth will be 1. The depth is increased by 1 for each parent.
+        /// </summary>
+        /// <returns></returns>
+        public int Depth()
+        {
+            var parentDepth = (this.ParentKey != null) ? this.ParentKey.Collection.Depth() : 0;
+            return 1 + parentDepth;
+        }
+    }
+
+    /// <summary>
+    /// Document collection base class
+    /// </summary>
+    /// <typeparam name="TDocument">The type for documents in this collection</typeparam>
+    public abstract class AbstractCollection<TDocument> : AbstractCollection
+    {
+
+        public AbstractCollection(DocumentServiceClient documentClient, string name, Key parentKey) : base(documentClient, name, parentKey) {
+
+        }
+
+        /// <summary>
+        /// Construct a query to find documents in the collection
+        /// </summary>
+        /// <returns>A new query builder</returns>
+        public Query<TDocument> Query()
+        {
+            return new Query<TDocument>(this.DocumentClient, this);
+        }
+
     }
 }

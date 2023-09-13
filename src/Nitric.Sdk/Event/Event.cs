@@ -13,6 +13,10 @@
 // limitations under the License.
 
 using System;
+using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
+using Nitric.Proto.Event.v1;
 
 namespace Nitric.Sdk.Event
 {
@@ -64,11 +68,29 @@ namespace Nitric.Sdk.Event
         /// <returns>A string</returns>
         public override string ToString()
         {
+            var jsonPayload = JsonConvert.SerializeObject(Payload);
             return GetType().Name +
                    "[id=" + Id
                    + ", payloadType=" + PayloadType
-                   + ", payload=" + Payload
+                   + ", payload=" + jsonPayload
                    + "]";
+        }
+
+        internal NitricEvent ToWire()
+        {
+            Struct payload = null;
+            if (this.Payload != null)
+            {
+                var jsonPayload = JsonConvert.SerializeObject(this.Payload);
+                payload = JsonParser.Default.Parse<Struct>(jsonPayload);
+            }
+
+            return new NitricEvent
+            {
+                Id = this.Id ?? "",
+                PayloadType = this.PayloadType ?? "",
+                Payload = payload,
+            };
         }
     }
 }

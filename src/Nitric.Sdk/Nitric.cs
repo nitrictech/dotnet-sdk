@@ -101,8 +101,8 @@ namespace Nitric.Sdk
         /// <param name="name">The unique name of the collection within this application.</param>
         /// <typeparam name="T">The type of documents to be stored in the collection.</typeparam>
         /// <returns>A collection resource, if the name has already been declared the same resource will be returned.</returns>
-        public static CollectionResource<T> Collection<T>(string name) =>
-            Cached(name, t => new CollectionResource<T>(t));
+        public static CollectionResource<TDocument> Collection<TDocument>(string name) =>
+            Cached(name, t => new CollectionResource<TDocument>(t));
 
         /// <summary>
         /// Declare a secret resource for accessing and putting secret values.

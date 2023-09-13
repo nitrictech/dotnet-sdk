@@ -20,7 +20,6 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Moq;
 using Nitric.Proto.Queue.v1;
-using Nitric.Sdk.Common.Util;
 using Nitric.Sdk.Queue;
 using Xunit;
 
@@ -87,7 +86,7 @@ namespace Nitric.Sdk.Test.Api.Queue
             NitricTask failedTaskTask = new NitricTask();
             failedTaskTask.Id = "0";
             failedTaskTask.LeaseId = "1";
-            failedTaskTask.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
+            failedTaskTask.Payload = new Struct();
             failedTaskTask.PayloadType = "Dictionary";
 
             Proto.Queue.v1.FailedTask failedTask = new Proto.Queue.v1.FailedTask();
@@ -143,7 +142,7 @@ namespace Nitric.Sdk.Test.Api.Queue
             NitricTask taskToReturn = new NitricTask();
             taskToReturn.Id = "32";
             taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
+            taskToReturn.Payload = new Struct();
             taskToReturn.PayloadType = "Dictionary";
 
             RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();
@@ -220,7 +219,7 @@ namespace Nitric.Sdk.Test.Api.Queue
             NitricTask taskToReturn = new NitricTask();
             taskToReturn.Id = "32";
             taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
+            taskToReturn.Payload = new Struct();
             taskToReturn.PayloadType = "Dictionary";
 
             RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();

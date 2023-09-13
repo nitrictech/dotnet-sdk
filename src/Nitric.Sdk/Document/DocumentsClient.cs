@@ -13,8 +13,8 @@
 // limitations under the License.
 
 using System;
+using Nitric.Sdk.Common;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
-using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Document
 {

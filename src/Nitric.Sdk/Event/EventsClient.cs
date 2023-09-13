@@ -18,7 +18,6 @@ using System.Linq;
 using Nitric.Sdk.Common;
 using NitricEvent = Nitric.Proto.Event.v1.NitricEvent;
 using Nitric.Proto.Event.v1;
-using Nitric.Sdk.Common.Util;
 using GrpcClient = Nitric.Proto.Event.v1.EventService.EventServiceClient;
 using TopicClient = Nitric.Proto.Event.v1.TopicService.TopicServiceClient;
 

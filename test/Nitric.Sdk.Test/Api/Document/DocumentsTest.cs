@@ -23,6 +23,19 @@ using Xunit;
 
 namespace Nitric.Sdk.Test.Api.Document
 {
+    class TestDocument
+    {
+        public String name { get; set; }
+        public float age { get; set; }
+        public List<string> addresses { get; set; }
+    }
+
+    class TestSubDocument
+    {
+        public String name { get; set; }
+        public float age { get; set; }
+        public List<string> addresses { get; set; }
+    }
     public class DocumentsTest
     {
         [Fact]
@@ -38,7 +51,7 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestCollectionsMethodWithName()
         {
-            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<TestDocument>("test-collection");
             Assert.NotNull(collection);
         }
 
@@ -47,29 +60,29 @@ namespace Nitric.Sdk.Test.Api.Document
         {
             var documents = new DocumentsClient();
             Assert.Throws<ArgumentNullException>(
-                () => documents.Collection<Dictionary<string, object>>(null));
+                () => documents.Collection<TestDocument>(null));
             Assert.Throws<ArgumentNullException>(
-                () => documents.Collection<Dictionary<string, object>>(""));
+                () => documents.Collection<TestDocument>(""));
         }
 
         [Fact]
         public void TestCollectionSubCollectionWithName()
         {
-            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
-            var subcollection = collection.Collection("test-subcollection");
+            var collection = new DocumentsClient().Collection<TestDocument>("test-collection");
+            var subcollection = collection.Collection<TestSubDocument>("test-subcollection");
             Assert.NotNull(subcollection);
-            Assert.Equal(collection, subcollection.ParentKey.Collection);
+            Assert.Equal(collection.Name, subcollection.ParentKey.Collection.Name);
             Assert.Null(subcollection.ParentKey.Id);
         }
 
         [Fact]
         public void TestCollectionSubCollectionWithoutName()
         {
-            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<TestDocument>("test-collection");
             Assert.Throws<ArgumentNullException>(
-                () => collection.Collection(null));
+                () => collection.Collection<TestDocument>(null));
             Assert.Throws<ArgumentNullException>(
-                () => collection.Collection(""));
+                () => collection.Collection<TestDocument>(""));
         }
 
         /*
@@ -78,7 +91,7 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestBuildDocsWithDocumentId()
         {
-            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<TestDocument>("test-collection");
             var docs = collection.Doc("test-document");
             Assert.NotNull(docs);
         }
@@ -86,7 +99,7 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestBuildDocWithoutDocumentId()
         {
-            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<TestDocument>("test-collection");
             Assert.Throws<ArgumentNullException>(
                 () => collection.Doc(""));
             Assert.Throws<ArgumentNullException>(
@@ -96,7 +109,7 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestBuildQuery()
         {
-            var collection = new DocumentsClient().Collection<Dictionary<string, object>>("test-collection");
+            var collection = new DocumentsClient().Collection<TestDocument>("test-collection");
             var query = collection.Query();
             Assert.NotNull(query);
         }
@@ -105,15 +118,12 @@ namespace Nitric.Sdk.Test.Api.Document
          * TESTING GET (DOCS)
          */
         [Fact]
-        public void TestGetWithDictionary()
+        public void TestGet()
         {
-            var value = new Value
-            {
-                StringValue = "document"
-            };
-
             var content = new Struct();
-            content.Fields.Add("test", value);
+            content.Fields.Add("name", Value.ForString("John Smith"));
+            content.Fields.Add("age", Value.ForNumber(21));
+            content.Fields.Add("addresses", Value.ForList(Value.ForString("123 street st")));
 
             var document = new Proto.Document.v1.Document
             {
@@ -131,11 +141,13 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var documentRef = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Doc("test-document");
             var response = documentRef.Get();
 
-            Assert.Equal("document", response.Content["test"]);
+            Assert.Equal("John Smith", response.Content.name);
+            Assert.Equal(21, response.Content.age);
+            Assert.Equal(new List<string> { "123 street st" }, response.Content.addresses);
             Assert.Equal(response.Ref, documentRef);
 
             dc.Verify(
@@ -197,7 +209,7 @@ namespace Nitric.Sdk.Test.Api.Document
             {
                 var response = documentRef.Get();
             }
-            catch (global::Nitric.Sdk.Common.NitricException ne)
+            catch (Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified document does not exist\")",
                     ne.Message);
@@ -214,8 +226,7 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestSetWithSingleEntryDictionary()
         {
-            var document = new Dictionary<string, object>();
-            document.Add("test", "document");
+            var document = new TestDocument { name = "document", age = 21, addresses = new List<string> { "123 street st" } };
 
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
             dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null,
@@ -224,7 +235,7 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var documentRef = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Doc("test-document");
 
             documentRef.Set(document);
@@ -283,7 +294,7 @@ namespace Nitric.Sdk.Test.Api.Document
         }
 
         [Fact]
-        public void TestSetWithNullDictionaryThrows()
+        public void TestSetWithNullDocumentThrows()
         {
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
             dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null,
@@ -292,7 +303,7 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var documentRef = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Doc("test-document");
 
             Assert.Throws<ArgumentNullException>(
@@ -301,29 +312,6 @@ namespace Nitric.Sdk.Test.Api.Document
             dc.Verify(
                 t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
                 Times.Never);
-        }
-
-        [Fact]
-        public void TestSetWithSortedDictionary()
-        {
-            var document = new SortedDictionary<string, object>();
-            document.Add("test", "document");
-
-            Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Set(It.IsAny<DocumentSetRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new DocumentSetResponse())
-                .Verifiable();
-
-            var documentRef = new DocumentsClient(dc.Object)
-                .Collection<SortedDictionary<string, object>>("test-collection")
-                .Doc("test-document");
-
-            documentRef.Set(document);
-
-            dc.Verify(
-                t => t.Set(It.IsAny<DocumentSetRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
         }
 
         [Fact]
@@ -336,17 +324,16 @@ namespace Nitric.Sdk.Test.Api.Document
                     "You do not have permission to modify this document")))
                 .Verifiable();
 
-            var document = new SortedDictionary<string, object>();
-            document.Add("test", "document");
+            var document = new TestDocument { name = "document" };
 
             var documentRef = new DocumentsClient(dc.Object)
-                .Collection<SortedDictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Doc("test-document");
             try
             {
                 documentRef.Set(document);
             }
-            catch (global::Nitric.Sdk.Common.NitricException ne)
+            catch (Common.NitricException ne)
             {
                 Assert.Equal(
                     "Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to modify this document\")",
@@ -364,8 +351,6 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestDelete()
         {
-            var documentSetResponse = new DocumentSetResponse();
-
             Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
             dc.Setup(e => e.Delete(It.IsAny<DocumentDeleteRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
@@ -373,7 +358,7 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var documentRef = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Doc("test-document");
 
             documentRef.Delete();
@@ -390,9 +375,9 @@ namespace Nitric.Sdk.Test.Api.Document
         public void TestDocCollectionWithName()
         {
             var docCollection = new DocumentsClient()
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Doc("test-document")
-                .Collection("test-collection-2");
+                .Collection<TestSubDocument>("test-collection-2");
 
             Assert.NotNull(docCollection);
         }
@@ -401,25 +386,26 @@ namespace Nitric.Sdk.Test.Api.Document
         public void TestDocCollectionWithoutName()
         {
             var document = new DocumentsClient()
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Doc("test-document");
 
             Assert.Throws<ArgumentNullException>(
-                () => document.Collection(null));
+                () => document.Collection<TestDocument>(null));
             Assert.Throws<ArgumentNullException>(
-                () => document.Collection(""));
+                () => document.Collection<TestDocument>(""));
         }
 
         [Fact]
         public void TestMultipleDocCollectionsThrows()
         {
+            var doc = new DocumentsClient().Collection<TestDocument>("test-collection")
+                .Doc("test-document")
+                .Collection<TestSubDocument>("test-collection-2")
+                .Doc("test-document-2");
+
             Assert.Throws<NotSupportedException>(
-                () => new DocumentsClient()
-                    .Collection<Dictionary<string, object>>("test-collection")
-                    .Doc("test-document")
-                    .Collection("test-collection-2")
-                    .Doc("test-document-2")
-                    .Collection("this-collection-throws-error")
+                () =>
+                    doc.Collection<TestSubDocument>("this-collection-throws-error")
             );
         }
 
@@ -430,8 +416,8 @@ namespace Nitric.Sdk.Test.Api.Document
         public void TestCollectionGroupBuildWithName()
         {
             var collection = new DocumentsClient()
-                .Collection<Dictionary<string, object>>("test-collection");
-            var collectionGroup = collection.Collection("test-subcollection");
+                .Collection<TestDocument>("test-collection");
+            var collectionGroup = collection.Collection<TestSubDocument>("test-subcollection");
             Assert.NotNull(collectionGroup);
             Assert.Equal("test-subcollection", collectionGroup.Name);
             Assert.Null(collectionGroup.ParentKey.Id);
@@ -441,12 +427,12 @@ namespace Nitric.Sdk.Test.Api.Document
         public void TestCollectionGroupBuildWithoutName()
         {
             var collection = new DocumentsClient()
-                .Collection<Dictionary<string, object>>("test-collection");
+                .Collection<TestDocument>("test-collection");
 
             Assert.Throws<ArgumentNullException>(
-                () => collection.Collection(null));
+                () => collection.Collection<TestSubDocument>(null));
             Assert.Throws<ArgumentNullException>(
-                () => collection.Collection(""));
+                () => collection.Collection<TestSubDocument>(""));
         }
 
         /*
@@ -456,7 +442,7 @@ namespace Nitric.Sdk.Test.Api.Document
         public void TestWhereExpression()
         {
             var query = new DocumentsClient()
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
 
             try
@@ -480,7 +466,7 @@ namespace Nitric.Sdk.Test.Api.Document
         public void TestChangingLimit()
         {
             var query = new DocumentsClient()
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
 
             try
@@ -516,7 +502,7 @@ namespace Nitric.Sdk.Test.Api.Document
         public void TestChangingPagingToken()
         {
             var query = new DocumentsClient()
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
 
             var pagingToken = new Dictionary<string, string>();
@@ -537,7 +523,7 @@ namespace Nitric.Sdk.Test.Api.Document
         public void TestChangingWithNullPagingToken()
         {
             var query = new DocumentsClient()
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
 
             try
@@ -555,7 +541,7 @@ namespace Nitric.Sdk.Test.Api.Document
         public void TestChangingWithEmptyPagingToken()
         {
             var query = new DocumentsClient()
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
 
             try
@@ -572,17 +558,17 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestFetch()
         {
-            var pagingToken = new Dictionary<string, string>();
-            pagingToken.Add("page-from", "line 10");
+            var pagingToken = new Dictionary<string, string> { { "page-from", "line 10" } };
 
             var content = new Struct();
-            content.Fields.Add("test", Value.ForString("document"));
+            content.Fields.Add("name", Value.ForString("document"));
+            content.Fields.Add("age", Value.ForNumber(21));
+            content.Fields.Add("addresses", Value.ForList(new [] { Value.ForString("123 street st")}));
             var testDocument = new Proto.Document.v1.Document
             {
                 Content = content,
             };
-            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document>();
-            documents.Add(testDocument);
+            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document> { testDocument };
 
             var queryResponse = new DocumentQueryResponse();
             queryResponse.Documents.Add(documents);
@@ -595,14 +581,16 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var query = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
 
             try
             {
                 var response = query.Fetch();
-                Assert.Single(response.QueryData);
-                Assert.Equal("document", response.QueryData[0].Content["test"]);
+                Assert.Single(response.Documents);
+                Assert.Equal("document", response.Documents[0].Content.name);
+                Assert.Equal(21, response.Documents[0].Content.age);
+                Assert.Equal(new List<string> { "123 street st" }, response.Documents[0].Content.addresses);
                 Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -618,17 +606,17 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestFetchConformsToLimitOfOne()
         {
-            var pagingToken = new Dictionary<string, string>();
-            pagingToken.Add("page-from", "line 10");
+            var pagingToken = new Dictionary<string, string> { { "page-from", "line 10" } };
 
             var content = new Struct();
-            content.Fields.Add("test", Value.ForString("document"));
+            content.Fields.Add("name", Value.ForString("document"));
+            content.Fields.Add("age", Value.ForNumber(21));
+            content.Fields.Add("addresses", Value.ForList(new [] { Value.ForString("123 street st")}));
             var testDocument = new Proto.Document.v1.Document
             {
                 Content = content,
             };
-            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document>();
-            documents.Add(testDocument);
+            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document> { testDocument };
 
             var queryResponse = new DocumentQueryResponse();
             queryResponse.Documents.Add(documents);
@@ -641,7 +629,7 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var query = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
 
             try
@@ -649,8 +637,10 @@ namespace Nitric.Sdk.Test.Api.Document
                 var response = query
                     .Limit(1)
                     .Fetch();
-                Assert.Single(response.QueryData);
-                Assert.Equal("document", response.QueryData[0].Content["test"]);
+                Assert.Single(response.Documents);
+                Assert.Equal("document", response.Documents[0].Content.name);
+                Assert.Equal(21, response.Documents[0].Content.age);
+                Assert.Equal(new List<string> { "123 street st" }, response.Documents[0].Content.addresses);
                 Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -666,17 +656,17 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestFetchWithExpressions()
         {
-            var pagingToken = new Dictionary<string, string>();
-            pagingToken.Add("page-from", "line 10");
+            var pagingToken = new Dictionary<string, string> { { "page-from", "line 10" } };
 
             var content = new Struct();
-            content.Fields.Add("john", Value.ForString("smith"));
+            content.Fields.Add("name", Value.ForString("John Smith"));
+            content.Fields.Add("age", Value.ForNumber(21));
+            content.Fields.Add("addresses", Value.ForList(new []{ Value.ForString("123 street st")}));
             var testDocument = new Proto.Document.v1.Document
             {
                 Content = content,
             };
-            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document>();
-            documents.Add(testDocument);
+            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document> { testDocument };
 
             var queryResponse = new DocumentQueryResponse();
             queryResponse.Documents.Add(documents);
@@ -689,17 +679,19 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var query = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
 
             try
             {
                 var response = query
-                    .Where("first_name", "==", "john")
-                    .Where("last_name", "==", "smith")
+                    .Where("name", "startsWith", "John")
+                    .Where("name", "!=", "John Baker")
                     .Fetch();
-                Assert.Single(response.QueryData);
-                Assert.Equal("document", response.QueryData[0].Content["test"]);
+                Assert.Single(response.Documents);
+                Assert.Equal("John Smith", response.Documents[0].Content.name);
+                Assert.Equal(21, response.Documents[0].Content.age);
+                Assert.Equal(new List<string> { "123 street st"}, response.Documents[0].Content.addresses);
                 Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
@@ -715,20 +707,20 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestFetchWithPagingToken()
         {
-            var pagingToken = new Dictionary<string, string>();
-            pagingToken.Add("page-from", "line 10");
+            var pagingToken = new Dictionary<string, string> { { "page-from", "line 10" } };
 
-            var updatedPagingToken = new Dictionary<string, string>();
-            updatedPagingToken.Add("page-from", "line 11");
+            var updatedPagingToken = new Dictionary<string, string> { { "page-from", "line 11" } };
 
             var content = new Struct();
-            content.Fields.Add("test", Value.ForString("document"));
+            content.Fields.Add("name", Value.ForString("John Smith"));
+            content.Fields.Add("age", Value.ForNumber(21));
+            content.Fields.Add("addresses", Value.ForList(new []{ Value.ForString("123 street st")}));
+
             var testDocument = new Proto.Document.v1.Document
             {
                 Content = content,
             };
-            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document>();
-            documents.Add(testDocument);
+            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document> { testDocument };
 
             var queryResponse = new DocumentQueryResponse();
             queryResponse.Documents.Add(documents);
@@ -741,7 +733,7 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var query = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
 
             try
@@ -749,57 +741,11 @@ namespace Nitric.Sdk.Test.Api.Document
                 var response = query
                     .PagingFrom(pagingToken)
                     .Fetch();
-                Assert.Single(response.QueryData);
-                Assert.Equal("document", response.QueryData[0].Content["test"]);
+                Assert.Single(response.Documents);
+                Assert.Equal("John Smith", response.Documents[0].Content.name);
+                Assert.Equal(21, response.Documents[0].Content.age);
+                Assert.Equal(new List<string> { "123 street st"}, response.Documents[0].Content.addresses);
                 Assert.Equal(response.PagingToken, updatedPagingToken);
-            }
-            catch (Exception)
-            {
-                Assert.False(false);
-            }
-
-            dc.Verify(
-                t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestFetchAll()
-        {
-            var pagingToken = new Dictionary<string, string>();
-            pagingToken.Add("page-from", "line 10");
-
-            var content = new Struct();
-            content.Fields.Add("0", Value.ForString("john smith"));
-            content.Fields.Add("1", Value.ForString("jane doe"));
-            var testDocument = new Proto.Document.v1.Document
-            {
-                Content = content,
-            };
-            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document>();
-            documents.Add(testDocument);
-
-            var queryResponse = new DocumentQueryResponse();
-            queryResponse.Documents.Add(documents);
-            queryResponse.PagingToken.Add(pagingToken);
-
-            Mock<DocumentService.DocumentServiceClient> dc = new Mock<DocumentService.DocumentServiceClient>();
-            dc.Setup(e => e.Query(It.IsAny<DocumentQueryRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(queryResponse)
-                .Verifiable();
-
-            var query = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
-                .Query();
-
-            try
-            {
-                var response = query.FetchAll();
-                Assert.Single(response.QueryData);
-                Assert.Equal("john smith", response.QueryData[0].Content["0"]);
-                Assert.Equal("jane doe", response.QueryData[1].Content["1"]);
-                Assert.Equal(response.PagingToken, pagingToken);
             }
             catch (Exception)
             {
@@ -821,7 +767,7 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var query = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
+                .Collection<TestDocument>("test-collection")
                 .Query();
             try
             {
@@ -841,17 +787,17 @@ namespace Nitric.Sdk.Test.Api.Document
         [Fact]
         public void TestFetchFromSubcollection()
         {
-            var pagingToken = new Dictionary<string, string>();
-            pagingToken.Add("page-from", "line 10");
+            var pagingToken = new Dictionary<string, string> { { "page-from", "line 10" } };
 
             var content = new Struct();
-            content.Fields.Add("test", Value.ForString("document"));
+            content.Fields.Add("name", Value.ForString("John Smith"));
+            content.Fields.Add("age", Value.ForNumber(21));
+            content.Fields.Add("addresses", Value.ForList(new []{ Value.ForString("123 street st")}));
             var testDocument = new Proto.Document.v1.Document
             {
                 Content = content,
             };
-            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document>();
-            documents.Add(testDocument);
+            var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document> { testDocument };
 
             var queryResponse = new DocumentQueryResponse();
             queryResponse.Documents.Add(documents);
@@ -864,21 +810,17 @@ namespace Nitric.Sdk.Test.Api.Document
                 .Verifiable();
 
             var query = new DocumentsClient(dc.Object)
-                .Collection<Dictionary<string, object>>("test-collection")
-                .Collection("test-subcollection")
+                .Collection<TestDocument>("test-collection")
+                .Collection<TestSubDocument>("test-subcollection")
                 .Query();
 
-            try
-            {
-                var response = query.Fetch();
-                Assert.Single(response.QueryData);
-                Assert.Equal("document", response.QueryData[0].Content["test"]);
-                Assert.Equal(response.PagingToken, pagingToken);
-            }
-            catch (Exception)
-            {
-                Assert.False(false);
-            }
+            var response = query.Fetch();
+            Assert.Single(response.Documents);
+            Assert.Equal("John Smith", response.Documents[0].Content.name);
+            Assert.Equal(21, response.Documents[0].Content.age);
+            Assert.Equal(new List<string> { "123 street st"}, response.Documents[0].Content.addresses);
+            Assert.Equal(response.PagingToken, pagingToken);
+
 
             dc.Verify(
                 t => t.Query(It.IsAny<DocumentQueryRequest>(), null, null,

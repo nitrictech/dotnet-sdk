@@ -11,11 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
-using System.Text;
 using Nitric.Proto.Resource.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Common.Util;
 using GrpcClient = Nitric.Proto.Resource.v1.ResourceService.ResourceServiceClient;
 using ProtoResource = Nitric.Proto.Resource.v1.Resource;
 

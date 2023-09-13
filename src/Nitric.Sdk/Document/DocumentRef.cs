@@ -14,10 +14,10 @@
 
 using System;
 using System.Linq;
+using Google.Protobuf;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using GrpcKey = Nitric.Proto.Document.v1.Key;
 using Nitric.Proto.Document.v1;
-using Util = Nitric.Sdk.Common.Util;
 using Google.Protobuf.WellKnownTypes;
 using Newtonsoft.Json;
 using RpcException = Grpc.Core.RpcException;
@@ -29,17 +29,17 @@ namespace Nitric.Sdk.Document
     /// <summary>
     /// A reference to a specific document in a collection.
     /// </summary>
-    /// <typeparam name="T">The expected type of the document's contents</typeparam>
-    public class DocumentRef<T>
+    /// <typeparam name="TDocument">The expected type of the document's contents</typeparam>
+    public class DocumentRef<TDocument>
     {
         private readonly DocumentServiceClient documentClient;
 
         /// <summary>
         /// The unique key of the document.
         /// </summary>
-        public readonly Key<T> Key;
+        public readonly Key Key;
 
-        private readonly AbstractCollection<T> collection;
+        private readonly AbstractCollection collection;
 
         /// <summary>
         /// Construct a new document reference.
@@ -50,11 +50,11 @@ namespace Nitric.Sdk.Document
 
         internal DocumentRef(
             DocumentServiceClient documentClient,
-            AbstractCollection<T> collection,
+            AbstractCollection collection,
             string documentId)
         {
             this.documentClient = documentClient;
-            this.Key = new Key<T> { Collection = collection, Id = documentId };
+            this.Key = new Key { Collection = collection, Id = documentId };
             this.collection = collection;
         }
 
@@ -63,7 +63,7 @@ namespace Nitric.Sdk.Document
         /// </summary>
         /// <returns>The document</returns>
         /// <exception cref="NitricException"></exception>
-        public Document<T> Get()
+        public Document<TDocument> Get()
         {
             var request = new DocumentGetRequest
             {
@@ -73,7 +73,7 @@ namespace Nitric.Sdk.Document
             try
             {
                 var response = this.documentClient.Get(request);
-                return new Document<T>(
+                return new Document<TDocument>(
                     this,
                     DocumentToGeneric(response.Document.Content)
                 );
@@ -90,17 +90,20 @@ namespace Nitric.Sdk.Document
         /// <param name="value">The contents to store in the document.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NitricException"></exception>
-        public void Set(T value)
+        public void Set(TDocument value)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
+            var json = JsonConvert.SerializeObject(value);
+            var content = JsonParser.Default.Parse<Struct>(json);
+
             var request = new DocumentSetRequest
             {
                 Key = this.Key.ToKey(),
-                Content = Util.Utils.ObjToStruct(value),
+                Content = content
             };
             try
             {
@@ -139,22 +142,21 @@ namespace Nitric.Sdk.Document
         /// <returns>The reference to the sub-collection.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NotSupportedException"></exception>
-        public CollectionRef<T> Collection(string name)
+        public CollectionRef<TSubType> Collection<TSubType>(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-
-            var collectionDepth = Util.Utils.CollectionDepth(this.collection.ToGrpcCollection());
+            var collectionDepth = this.Key.Collection.Depth();
             if (collectionDepth > Constants.DepthLimit)
             {
                 throw new NotSupportedException("Currently sub-collections are only able to be nested to a depth of " +
                                                 Constants.DepthLimit + ", found depth " + collectionDepth);
             }
 
-            return new CollectionRef<T>(this.documentClient, name, this.Key);
+            return new CollectionRef<TSubType>(this.documentClient, name, this.Key);
         }
 
         /// <summary>
@@ -163,27 +165,26 @@ namespace Nitric.Sdk.Document
         /// <param name="name">The sub-collection name</param>
         /// <returns>The query builder.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public Query<T> Query(string name)
+        public Query<TDocument> Query(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var collectionGroup = new CollectionGroup<T>(
+            var collectionGroup = new CollectionGroup<TDocument>(
                 this.documentClient,
                 this.collection.Name,
                 this.Key);
-            return new Query<T>(this.documentClient, collectionGroup);
+            return new Query<TDocument>(this.documentClient, collectionGroup);
         }
-
 
         /// <summary>
         /// Utility function to convert a struct document to its generic counterpart
         /// </summary>
         /// <param name="content">The struct to convert.</param>
         /// <returns></returns>
-        protected T DocumentToGeneric(Struct content)
+        protected TDocument DocumentToGeneric(Struct content)
         {
             var doc = content.Fields.ToDictionary(
                 kv => kv.Key, kv => UnwrapValue(kv.Value));
@@ -194,10 +195,10 @@ namespace Nitric.Sdk.Document
                 FloatFormatHandling = FloatFormatHandling.DefaultValue,
             });
 
-            return JsonConvert.DeserializeObject<T>(dictInJson);
+            return JsonConvert.DeserializeObject<TDocument>(dictInJson);
         }
 
-        private static object UnwrapValue(Value value)
+        internal static object UnwrapValue(Value value)
         {
             switch (value.KindCase)
             {

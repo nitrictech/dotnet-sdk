@@ -12,14 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
-using Google.Protobuf.Collections;
 using GrpcClient = Nitric.Proto.Queue.v1.QueueService.QueueServiceClient;
-using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common;
 using System;
-using System.Linq;
-using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Queue
 {

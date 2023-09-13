@@ -13,7 +13,6 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using Nitric.Sdk.Common.Util;
 using Xunit;
 
 
@@ -24,29 +23,27 @@ namespace Nitric.Sdk.Test.Api.Event
         [Fact]
         public void TestBuild()
         {
-            Dictionary<string, object> payload = new Dictionary<string, object>();
-            payload.Add("name", "value");
+            var payload = new Dictionary<string, string> { { "name", "value" } };
 
             var eventTest = new global::Nitric.Sdk.Event.Event
-                { Id = "id", Payload = Utils.ObjToStruct(payload), PayloadType = "payloadType" };
+                { Id = "id", Payload = payload, PayloadType = "payloadType" };
 
             Assert.NotNull(eventTest);
             Assert.Equal("id", eventTest.Id);
             Assert.Equal("payloadType", eventTest.PayloadType);
-            Assert.Equal(Utils.ObjToStruct(payload), eventTest.Payload);
+            Assert.Equal(new Dictionary<string, string> { { "name", "value" }}, eventTest.Payload);
         }
 
         [Fact]
         public void TestToString()
         {
-            Dictionary<string, object> payload = new Dictionary<string, object>();
-            payload.Add("name", "value");
+            var payload = new Dictionary<string, string> { { "name", "value" } };
 
             var eventTest = new global::Nitric.Sdk.Event.Event
-                { Id = "id", Payload = Utils.ObjToStruct(payload), PayloadType = "payloadType" };
+                { Id = "id", Payload = payload, PayloadType = "payloadType" };
 
 
-            Assert.Equal<string>("Event[id=id, payloadType=payloadType, payload={ \"name\": \"value\" }]",
+            Assert.Equal("Event[id=id, payloadType=payloadType, payload={\"name\":\"value\"}]",
                 eventTest.ToString());
         }
     }

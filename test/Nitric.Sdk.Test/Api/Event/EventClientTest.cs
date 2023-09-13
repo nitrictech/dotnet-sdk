@@ -14,13 +14,12 @@
 
 using System;
 using System.Collections.Generic;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Moq;
 using Nitric.Proto.Event.v1;
 using Nitric.Sdk.Event;
 using Xunit;
-using EventModel = Nitric.Sdk.Event.Event;
-using static Nitric.Sdk.Common.Util.Utils;
 
 namespace Nitric.Sdk.Test.Api.Event
 {
@@ -53,7 +52,7 @@ namespace Nitric.Sdk.Test.Api.Event
         [Fact]
         public void TestPublish()
         {
-            var payloadStruct = ObjToStruct(new Dictionary<string,string>());
+            var payloadStruct = new Struct();
             var evt = new NitricEvent { Id = "1", PayloadType = "payloadType", Payload = payloadStruct };
             var request = new EventPublishRequest { Topic = "test-topic", Event = evt };
 
@@ -65,7 +64,7 @@ namespace Nitric.Sdk.Test.Api.Event
 
             var topic = new EventsClient(ec.Object).Topic("test-topic");
 
-            var evtToSend = new EventModel { Id = "1", Payload = new Dictionary<string, string>(), PayloadType = "payloadType"};
+            var evtToSend = new Sdk.Event.Event { Id = "1", Payload = new Dictionary<string, string>(), PayloadType = "payloadType"};
 
             var response = topic.Publish(evtToSend);
 
@@ -80,7 +79,7 @@ namespace Nitric.Sdk.Test.Api.Event
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified topic does not exist")))
                 .Verifiable();
             var topic = new EventsClient(ec.Object).Topic("test-topic");
-            var evtToSend = new EventModel { Id = "1", Payload = new Dictionary<string, string>(), PayloadType = "payloadType"};
+            var evtToSend = new Sdk.Event.Event { Id = "1", Payload = new Dictionary<string, string>(), PayloadType = "payloadType"};
 
             try
             {

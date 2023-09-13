@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
-using Nitric.Sdk.Common.Util;
+using Google.Protobuf.WellKnownTypes;
 using Nitric.Sdk.Queue;
 using Xunit;
 
@@ -24,9 +23,7 @@ namespace Nitric.Sdk.Test.Api.Queue
         [Fact]
         public void TestBuild()
         {
-            var payload = new Dictionary<string, string>();
-            payload.Add("name", "value");
-            var payloadStruct = Utils.ObjToStruct(payload);
+            var payload = new Struct();
             var failedTask = new global::Nitric.Sdk.Queue.FailedTask
             {
                 Message = "message",
@@ -34,14 +31,14 @@ namespace Nitric.Sdk.Test.Api.Queue
                 {
                     Id = "1",
                     PayloadType = "payload type",
-                    Payload = payloadStruct
+                    Payload = payload
                 }
             };
 
             Assert.NotNull(failedTask);
             Assert.Equal("1", failedTask.Task.Id);
             Assert.Equal("payload type", failedTask.Task.PayloadType);
-            Assert.Equal(payloadStruct, failedTask.Task.Payload);
+            Assert.Equal(payload, failedTask.Task.Payload);
             Assert.Equal("message", failedTask.Message);
         }
     }

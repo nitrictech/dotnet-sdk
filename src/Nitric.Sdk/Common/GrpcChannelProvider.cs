@@ -13,7 +13,7 @@
 // limitations under the License.
 using Grpc.Net.Client;
 
-namespace Nitric.Sdk.Common.Util
+namespace Nitric.Sdk.Common
 {
     internal static class GrpcChannelProvider
     {

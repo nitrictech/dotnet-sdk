@@ -13,7 +13,7 @@
 // limitations under the License.
 
 using System;
-using Nitric.Sdk.Common.Util;
+using Nitric.Sdk.Common;
 using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
 
 namespace Nitric.Sdk.Secret

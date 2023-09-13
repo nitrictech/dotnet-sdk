@@ -14,11 +14,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Google.Protobuf.Collections;
 using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Queue
 {
@@ -56,7 +54,7 @@ namespace Nitric.Sdk.Queue
             var request = new QueueSendRequest
             {
                 Queue = this.Name,
-                Task = TaskToWire(task)
+                Task = task.ToWire()
             };
             try
             {
@@ -79,7 +77,7 @@ namespace Nitric.Sdk.Queue
             var wireEvents = new RepeatedField<NitricTask>();
             foreach (var task in tasks)
             {
-                wireEvents.Add(TaskToWire(task));
+                wireEvents.Add(task.ToWire());
             }
 
             var request = new QueueSendBatchRequest { Queue = this.Name };
@@ -133,16 +131,6 @@ namespace Nitric.Sdk.Queue
                 Payload = nitricTask.Payload,
                 LeaseId = nitricTask.LeaseId,
                 Queue = this,
-            };
-        }
-
-        private static NitricTask TaskToWire(Task task)
-        {
-            return new NitricTask
-            {
-                Id = task.Id ?? "",
-                PayloadType = task.PayloadType ?? "",
-                Payload = Utils.ObjToStruct(task.Payload)
             };
         }
 

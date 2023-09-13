@@ -21,7 +21,6 @@ using Nitric.Proto.Faas.v1;
 using Nitric.Sdk.Common;
 using Nitric.Sdk.Resource;
 using Nitric.Sdk.Storage;
-using Util = Nitric.Sdk.Common.Util;
 using ProtoApiWorkerOptions = Nitric.Proto.Faas.v1.ApiWorkerOptions;
 using ProtoClient = Nitric.Proto.Faas.v1.FaasService.FaasServiceClient;
 using BucketNotificationTypeProto = Nitric.Proto.Faas.v1.BucketNotificationType;
@@ -91,7 +90,7 @@ namespace Nitric.Sdk.Function
         /// </summary>
         public HashSet<HttpMethod> Methods { get; set; }
 
-        
+
         public MethodOptions Options { get; set; }
     }
 
@@ -242,7 +241,7 @@ namespace Nitric.Sdk.Function
             new List<Middleware<FileNotificationContext>>();
 
 
-        public ProtoClient Client { get; } = new ProtoClient(Util.GrpcChannelProvider.GetChannel());
+        public ProtoClient Client { get; } = new ProtoClient(GrpcChannelProvider.GetChannel());
 
         public Faas(IFaasOptions options)
         {

@@ -13,10 +13,11 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
 using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Queue
 {
@@ -31,7 +32,6 @@ namespace Nitric.Sdk.Queue
 
         public Task()
         {
-
         }
 
         /// <summary>
@@ -41,6 +41,23 @@ namespace Nitric.Sdk.Queue
         public override string ToString()
         {
             return GetType().Name + "[ID=" + this.Id + "]";
+        }
+
+        internal NitricTask ToWire()
+        {
+            Struct payload = null;
+            if (this.Payload != null)
+            {
+                var jsonPayload = JsonConvert.SerializeObject(this.Payload);
+                payload = JsonParser.Default.Parse<Struct>(jsonPayload);
+            }
+
+            return new NitricTask
+            {
+                Id = this.Id ?? "",
+                PayloadType = this.PayloadType ?? "",
+                Payload = payload
+            };
         }
     }
 

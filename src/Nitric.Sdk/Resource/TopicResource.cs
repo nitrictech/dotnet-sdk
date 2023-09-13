@@ -69,7 +69,7 @@ namespace Nitric.Sdk.Resource
             var subWorker = new Faas(new SubscriptionWorkerOptions { Topic = this.name });
 
             subWorker.Event(middleware);
-           
+
             Nitric.RegisterWorker(subWorker);
         }
 

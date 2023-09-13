@@ -14,7 +14,6 @@
 
 using Nitric.Proto.Event.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Event
 {
@@ -35,16 +34,6 @@ namespace Nitric.Sdk.Event
             this.Name = name;
         }
 
-        private static NitricEvent EventToWire(Event evt)
-        {
-            return new NitricEvent
-            {
-                Id = evt.Id ?? "",
-                PayloadType = evt.PayloadType ?? "",
-                Payload = Utils.ObjToStruct(evt.Payload)
-            };
-        }
-
         /// <summary>
         /// Publish a new event to this topic.
         /// </summary>
@@ -53,9 +42,7 @@ namespace Nitric.Sdk.Event
         /// <exception cref="NitricException"></exception>
         public string Publish(Event evt)
         {
-            var payloadStruct = Utils.ObjToStruct(evt.Payload);
-            var nEvt = EventToWire(evt);
-            var request = new EventPublishRequest { Topic = this.Name, Event = nEvt };
+            var request = new EventPublishRequest { Topic = this.Name, Event = evt.ToWire() };
 
             try
             {
