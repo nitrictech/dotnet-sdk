@@ -81,7 +81,7 @@ namespace Nitric.Sdk.Resource
     {
         ApiOptions Opts;
 
-        internal ApiResource(string name, ApiOptions options = null) : base(name)
+        internal ApiResource(string name, ApiOptions options = null) : base(name, ResourceType.Api)
         {
             this.Opts = options ?? new ApiOptions();
         }
@@ -258,10 +258,13 @@ namespace Nitric.Sdk.Resource
 
                 if (kv.Value.Kind == "jwt")
                 {
-                    var secDef = new ApiSecurityDefinitionJwt();
+                    var jwtSecurityDefinition = kv.Value as JwtSecurityDefinition;
+                    var secDef = new ApiSecurityDefinitionJwt
+                    {
+                        Issuer = jwtSecurityDefinition.Issuer
+                    };
 
-                    secDef.Issuer = (kv.Value as JwtSecurityDefinition).Issuer;
-                    secDef.Audiences.AddRange((kv.Value as JwtSecurityDefinition).Audiences);
+                    secDef.Audiences.AddRange(jwtSecurityDefinition.Audiences);
 
                     definition.Jwt = secDef;
                 }

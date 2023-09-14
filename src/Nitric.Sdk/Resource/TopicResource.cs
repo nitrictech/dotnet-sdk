@@ -35,7 +35,7 @@ namespace Nitric.Sdk.Resource
 
     public class TopicResource : SecureResource<TopicPermission>
     {
-        internal TopicResource(string name) : base(name)
+        internal TopicResource(string name) : base(name, ResourceType.Topic)
         {
         }
 
@@ -88,8 +88,8 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Request specific access to this topic.
         /// </summary>
-        /// <param name="permissions"></param>
-        /// <returns></returns>
+        /// <param name="permissions">The permissions that the function has to access the topic.</param>
+        /// <returns>A reference to the topic.</returns>
         public Topic With(params TopicPermission[] permissions)
         {
             this.RegisterPolicy(permissions);

@@ -13,9 +13,11 @@
 // limitations under the License.
 using System;
 using System.Text;
+using Nitric.Proto.Resource.v1;
 using Nitric.Sdk.Common;
 using Nitric.Sdk.Common.Util;
 using GrpcClient = Nitric.Proto.Resource.v1.ResourceService.ResourceServiceClient;
+using ProtoResource = Nitric.Proto.Resource.v1.Resource;
 
 namespace Nitric.Sdk.Resource
 {
@@ -23,11 +25,18 @@ namespace Nitric.Sdk.Resource
     {
         protected string name;
         protected static GrpcClient client;
+        protected ResourceType type;
 
-        public BaseResource(string name)
+        public BaseResource(string name, ResourceType type)
         {
             this.name = name;
+            this.type = type;
             BaseResource.client = (BaseResource.client == null) ? new GrpcClient(GrpcChannelProvider.GetChannel()) : client;
+        }
+
+        internal ProtoResource AsProtoResource()
+        {
+            return new ProtoResource { Name = this.name, Type = this.type };
         }
 
         internal abstract BaseResource Register();

@@ -44,7 +44,7 @@ namespace Nitric.Sdk.Resource
 
     public class BucketResource : SecureResource<BucketPermission>
     {
-        internal BucketResource(string name) : base(name)
+        internal BucketResource(string name) : base(name, ResourceType.Bucket)
         {
         }
 
@@ -120,6 +120,11 @@ namespace Nitric.Sdk.Resource
             Nitric.RegisterWorker(notificationWorker);
         }
 
+        /// <summary>
+        /// Request specific access to this bucket.
+        /// </summary>
+        /// <param name="permissions">The permissions that the function has to access the bucket.</param>
+        /// <returns>A reference to the bucket.</returns>
         public Bucket With(params BucketPermission[] permissions)
         {
             this.RegisterPolicy(permissions);
