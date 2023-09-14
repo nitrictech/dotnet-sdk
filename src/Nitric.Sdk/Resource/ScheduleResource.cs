@@ -26,7 +26,7 @@ namespace Nitric.Sdk.Resource
         }
 
         /// <summary>
-        /// Run code at a specific time, represented by a a rate and a frequency. e.g. every 7 days
+        /// Run code at a specific time, represented by a rate and a frequency. e.g. every 7 days
         /// </summary>
         /// <param name="rate">The interval for the schedule running. e.g. 7 for every '7 days'</param>
         /// <param name="frequency">The frequency for the schedule running. e.g. Days for every '7 days'</param>
