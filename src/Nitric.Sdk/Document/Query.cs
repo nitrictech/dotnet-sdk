@@ -235,15 +235,12 @@ namespace Nitric.Sdk.Document
         {
             var request = new DocumentQueryRequest
             {
-                Collection = this.query.Collection.ToGrpcCollection()
+                Collection = this.query.Collection.ToGrpcCollection(),
+                Limit = this.query.ResultsLimit,
             };
 
-            foreach (var expression in expressions)
-            {
-                request.Expressions.Add(expression.ToGrpcExpression());
-            }
+            request.Expressions.AddRange(expressions.Select(exp => exp.ToGrpcExpression()));
 
-            request.Limit = this.query.ResultsLimit;
             if (this.PagingToken == null) return request;
 
             if (!(this.PagingToken is IDictionary<string, string> token))
@@ -261,7 +258,7 @@ namespace Nitric.Sdk.Document
 
         private void LoadPageData(DocumentQueryResponse response)
         {
-            Documents = new List<Document<TDocument>>(response.Documents.Count);
+            this.Documents = new List<Document<TDocument>>(response.Documents.Count);
             foreach (var doc in response.Documents)
             {
                 var dict = doc.Content.Fields.ToDictionary(
@@ -280,7 +277,7 @@ namespace Nitric.Sdk.Document
                     new DocumentRef<TDocument>(
                         this.query.DocumentClient,
                         this.query.Collection,
-                        this.query.Collection.ParentKey.Id
+                        doc.Key.Id
                     ),
                     content
                 ));
