@@ -28,7 +28,7 @@ namespace Nitric.Sdk.Resource
 
     public class CollectionResource<T> : SecureResource<CollectionPermission>
     {
-        internal CollectionResource(string name) : base(name)
+        internal CollectionResource(string name) : base(name, ResourceType.Collection)
         {
         }
 

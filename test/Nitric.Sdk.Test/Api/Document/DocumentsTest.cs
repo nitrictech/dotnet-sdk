@@ -20,6 +20,7 @@ using Moq;
 using Nitric.Proto.Document.v1;
 using Nitric.Sdk.Document;
 using Xunit;
+using Key = Nitric.Proto.Document.v1.Key;
 
 namespace Nitric.Sdk.Test.Api.Document
 {
@@ -795,6 +796,7 @@ namespace Nitric.Sdk.Test.Api.Document
             content.Fields.Add("addresses", Value.ForList(new []{ Value.ForString("123 street st")}));
             var testDocument = new Proto.Document.v1.Document
             {
+                Key = new Key { Id = "1234" },
                 Content = content,
             };
             var documents = new Google.Protobuf.Collections.RepeatedField<Proto.Document.v1.Document> { testDocument };

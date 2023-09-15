@@ -24,7 +24,7 @@ namespace Nitric.Sdk.Resource
 
     public class SecretResource : SecureResource<SecretPermission>
     {
-        internal SecretResource(string name) : base(name)
+        internal SecretResource(string name) : base(name, ResourceType.Secret)
         {
         }
 
