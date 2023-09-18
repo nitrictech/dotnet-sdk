@@ -21,5 +21,5 @@ download:
 
 pack: clean download
 	dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj -c Release
-	mkdir __out
+	mkdir -p __out
 	dotnet pack -c Release -o __out

@@ -280,7 +280,7 @@ namespace Nitric.Sdk.Test.Api.Secret
             Assert.Equal("test-version", response.SecretVersion.Id);
             Assert.Equal("test-secret", response.SecretVersion.Secret.Name);
             Assert.Equal("Super secret message", Encoding.UTF8.GetString(response.Value));
-            Assert.Equal<string>("Super secret message", response.ValueText);
+            Assert.Equal("Super secret message", response.ValueText);
 
             sc.Verify(
                 t => t.Access(It.IsAny<SecretAccessRequest>(), null, null,

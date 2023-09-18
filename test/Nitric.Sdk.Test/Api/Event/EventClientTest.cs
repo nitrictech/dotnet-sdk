@@ -23,53 +23,84 @@ using Xunit;
 
 namespace Nitric.Sdk.Test.Api.Event
 {
+    public class TestProfile
+    {
+        public string Name;
+        public double Age;
+        public List<string> Addresses;
+    }
 
     public class EventClientTest
     {
         [Fact]
         public void TestBuildEvents()
         {
-            var evt = new EventsClient();
+            var evt = new EventsClient<TestProfile>();
             Assert.NotNull(evt);
         }
         [Fact]
         public void TestBuildTopicWithName()
         {
-            var topic = new EventsClient().Topic("test-topic");
+            var topic = new EventsClient<TestProfile>().Topic("test-topic");
             Assert.NotNull(topic);
             Assert.Equal("test-topic", topic.Name);
         }
+
         [Fact]
         public void TestBuildTopicWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new EventsClient().Topic("")
+                () => new EventsClient<TestProfile>().Topic("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new EventsClient().Topic(null)
+                () => new EventsClient<TestProfile>().Topic(null)
             );
         }
+
         [Fact]
         public void TestPublish()
         {
-            var payloadStruct = new Struct();
-            var evt = new NitricEvent { Id = "1", PayloadType = "payloadType", Payload = payloadStruct };
-            var request = new EventPublishRequest { Topic = "test-topic", Event = evt };
-
             Mock<EventService.EventServiceClient> ec = new Mock<EventService.EventServiceClient>();
 
             ec.Setup(e => e.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new EventPublishResponse())
+                .Returns(new EventPublishResponse { Id = "1234" })
                 .Verifiable();
 
-            var topic = new EventsClient(ec.Object).Topic("test-topic");
+            var topic = new EventsClient<TestProfile>(ec.Object).Topic("test-topic");
 
-            var evtToSend = new Sdk.Event.Event { Id = "1", Payload = new Dictionary<string, string>(), PayloadType = "payloadType"};
+            var payload = new TestProfile
+                { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
+
+            var evtToSend = new Sdk.Event.Event<TestProfile> { Id = "1234", Payload = payload, PayloadType = "payloadType"};
 
             var response = topic.Publish(evtToSend);
 
+            Assert.Equal("1234", response);
+
             ec.Verify(t => t.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
+
+        [Fact]
+        public void TestPublishOnlyPayload()
+        {
+            Mock<EventService.EventServiceClient> ec = new Mock<EventService.EventServiceClient>();
+
+            ec.Setup(e => e.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(new EventPublishResponse { Id = "1234" })
+                .Verifiable();
+
+            var topic = new EventsClient<TestProfile>(ec.Object).Topic("test-topic");
+
+            var payload = new TestProfile
+                { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
+
+            var response = topic.Publish(payload);
+
+            Assert.Equal("1234", response);
+
+            ec.Verify(t => t.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+
         [Fact]
         public void TestPublishToNonExistentTopic()
         {
@@ -78,8 +109,13 @@ namespace Nitric.Sdk.Test.Api.Event
             ec.Setup(e => e.Publish(It.IsAny<EventPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified topic does not exist")))
                 .Verifiable();
-            var topic = new EventsClient(ec.Object).Topic("test-topic");
-            var evtToSend = new Sdk.Event.Event { Id = "1", Payload = new Dictionary<string, string>(), PayloadType = "payloadType"};
+
+            var topic = new EventsClient<TestProfile>(ec.Object).Topic("test-topic");
+
+            var payload = new TestProfile
+                { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
+
+            var evtToSend = new Sdk.Event.Event<TestProfile> { Id = "1", Payload = payload, PayloadType = "payloadType"};
 
             try
             {

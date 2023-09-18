@@ -26,7 +26,7 @@ namespace Nitric.Sdk.Event
     /// <summary>
     /// Events service client.
     /// </summary>
-    public class EventsClient
+    public class EventsClient<T>
     {
         internal readonly GrpcClient EventClient;
         private readonly TopicClient topicClient;
@@ -48,14 +48,14 @@ namespace Nitric.Sdk.Event
         /// <param name="topicName">The name of the topic.</param>
         /// <returns>The topic reference.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public Topic Topic(string topicName)
+        public Topic<T> Topic(string topicName)
         {
             if (string.IsNullOrEmpty(topicName))
             {
                 throw new ArgumentNullException(nameof(topicName));
             }
 
-            return new Topic(this, topicName);
+            return new Topic<T>(this, topicName);
         }
 
         /// <summary>
@@ -63,14 +63,14 @@ namespace Nitric.Sdk.Event
         /// </summary>
         /// <returns>A list of accessible topics.</returns>
         /// <exception cref="NitricException"></exception>
-        public List<Topic> List()
+        public List<Topic<T>> List()
         {
             var request = new TopicListRequest { };
 
             try
             {
                 var response = topicClient.List(request);
-                return response.Topics.Select(topic => new Topic(this, topic.Name)).ToList();
+                return response.Topics.Select(topic => new Topic<T>(this, topic.Name)).ToList();
             }
             catch (Grpc.Core.RpcException re)
             {

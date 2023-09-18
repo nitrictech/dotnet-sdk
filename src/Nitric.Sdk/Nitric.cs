@@ -123,6 +123,6 @@ namespace Nitric.Sdk
         /// </summary>
         /// <param name="name">The unique name of the topic within this application.</param>
         /// <returns>A topic resource, if the name has already been declared the same resource will be returned.</returns>
-        public static TopicResource Topic(string name) => Cached(name, t => new TopicResource(t));
+        public static TopicResource<T> Topic<T>(string name) => Cached(name, t => new TopicResource<T>(t));
     }
 }

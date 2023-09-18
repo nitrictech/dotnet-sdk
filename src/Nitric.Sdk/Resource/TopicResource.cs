@@ -33,7 +33,7 @@ namespace Nitric.Sdk.Resource
         Publishing
     }
 
-    public class TopicResource : SecureResource<TopicPermission>
+    public class TopicResource<T> : SecureResource<TopicPermission>
     {
         internal TopicResource(string name) : base(name, ResourceType.Topic)
         {
@@ -90,10 +90,10 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="permissions">The permissions that the function has to access the topic.</param>
         /// <returns>A reference to the topic.</returns>
-        public Topic With(params TopicPermission[] permissions)
+        public Topic<T> With(params TopicPermission[] permissions)
         {
             this.RegisterPolicy(permissions);
-            return new EventsClient().Topic(this.name);
+            return new EventsClient<T>().Topic(this.name);
         }
     }
 }
