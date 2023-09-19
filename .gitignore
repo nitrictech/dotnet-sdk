@@ -329,3 +329,5 @@ ASALocalRun/
 
 **/obj/
 **/bin/
+.idea
+.vs
