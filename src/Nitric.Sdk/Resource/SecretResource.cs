@@ -30,7 +30,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.name, Type = ResourceType.Secret };
+            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Secret };
             var request = new ResourceDeclareRequest { Resource = resource };
             client.Declare(request);
             return this;
@@ -55,7 +55,7 @@ namespace Nitric.Sdk.Resource
         public Secret.Secret With(params SecretPermission[] permissions)
         {
             this.RegisterPolicy(permissions);
-            return new SecretsClient().Secret(this.name);
+            return new SecretsClient().Secret(this.Name);
         }
     }
 }

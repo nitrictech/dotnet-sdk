@@ -34,7 +34,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.name, Type = ResourceType.Collection };
+            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Collection };
             var request = new ResourceDeclareRequest { Resource = resource };
             client.Declare(request);
             return this;
@@ -64,7 +64,7 @@ namespace Nitric.Sdk.Resource
         public CollectionRef<T> With(params CollectionPermission[] permissions)
         {
             this.RegisterPolicy(permissions);
-            return new DocumentsClient().Collection<T>(this.name);
+            return new DocumentsClient().Collection<T>(this.Name);
         }
     }
 }

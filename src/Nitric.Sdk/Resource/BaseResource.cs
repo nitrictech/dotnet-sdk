@@ -20,20 +20,20 @@ namespace Nitric.Sdk.Resource
 {
     public abstract class BaseResource
     {
-        protected string name;
+        internal string Name;
         protected static GrpcClient client;
         protected ResourceType type;
 
         public BaseResource(string name, ResourceType type)
         {
-            this.name = name;
+            this.Name = name;
             this.type = type;
             BaseResource.client = (BaseResource.client == null) ? new GrpcClient(GrpcChannelProvider.GetChannel()) : client;
         }
 
         internal ProtoResource AsProtoResource()
         {
-            return new ProtoResource { Name = this.name, Type = this.type };
+            return new ProtoResource { Name = this.Name, Type = this.type };
         }
 
         internal abstract BaseResource Register();

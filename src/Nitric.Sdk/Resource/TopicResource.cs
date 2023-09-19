@@ -41,7 +41,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.name, Type = ResourceType.Topic };
+            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Topic };
             var request = new ResourceDeclareRequest { Resource = resource };
             BaseResource.client.Declare(request);
             return this;
@@ -66,7 +66,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="middleware">The middleware to call to process events</param>
         public void Subscribe(params Middleware<EventContext>[] middleware)
         {
-            var subWorker = new Faas(new SubscriptionWorkerOptions { Topic = this.name });
+            var subWorker = new Faas(new SubscriptionWorkerOptions { Topic = this.Name });
 
             subWorker.Event(middleware);
 
@@ -79,7 +79,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="handler">The handler to call to process events</param>
         public void Subscribe(Func<EventContext, EventContext> handler)
         {
-            var subWorker = new Faas(new SubscriptionWorkerOptions { Topic = this.name });
+            var subWorker = new Faas(new SubscriptionWorkerOptions { Topic = this.Name });
 
             subWorker.Event(handler);
             Nitric.RegisterWorker(subWorker);
@@ -93,7 +93,7 @@ namespace Nitric.Sdk.Resource
         public Topic<T> With(params TopicPermission[] permissions)
         {
             this.RegisterPolicy(permissions);
-            return new EventsClient<T>().Topic(this.name);
+            return new EventsClient<T>().Topic(this.Name);
         }
     }
 }

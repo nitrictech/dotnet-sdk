@@ -40,14 +40,14 @@ namespace Nitric.Sdk.Queue
         /// <param name="queueName">The queue's name</param>
         /// <returns>A new queue reference for sending or receiving tasks.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public Queue Queue(string queueName)
+        public Queue<T> Queue<T>(string queueName)
         {
             if (string.IsNullOrEmpty(queueName))
             {
                 throw new ArgumentNullException(nameof(queueName));
             }
 
-            return new Queue(this, queueName);
+            return new Queue<T>(this, queueName);
         }
     }
 }

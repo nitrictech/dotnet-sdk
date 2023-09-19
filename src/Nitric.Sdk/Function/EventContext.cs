@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Text;
-using Newtonsoft.Json;
 using Nitric.Proto.Faas.v1;
 using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
 

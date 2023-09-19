@@ -276,11 +276,10 @@ namespace Nitric.Sdk.Test.Api.Secret
                 .Version("test-version");
             var response = version.Access();
 
-            var responseString = Encoding.UTF8.GetString(response.Value);
             Assert.Equal("test-version", response.SecretVersion.Id);
             Assert.Equal("test-secret", response.SecretVersion.Secret.Name);
-            Assert.Equal("Super secret message", Encoding.UTF8.GetString(response.Value));
-            Assert.Equal("Super secret message", response.ValueText);
+            Assert.Equal("Super secret message", Encoding.UTF8.GetString(response.ValueBytes));
+            Assert.Equal("Super secret message", response.Value);
 
             sc.Verify(
                 t => t.Access(It.IsAny<SecretAccessRequest>(), null, null,

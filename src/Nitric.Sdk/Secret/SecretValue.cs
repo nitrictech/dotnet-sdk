@@ -29,18 +29,18 @@ namespace Nitric.Sdk.Secret
         /// <summary>
         /// The value retrieved from the secrets store as bytes.
         /// </summary>
-        public byte[] Value { get; }
+        public byte[] ValueBytes { get; }
 
         /// <summary>
         /// The the value retrieved from the secrets store as a string.
         /// </summary>
-        public string ValueText { get; }
+        public string Value { get; }
 
         internal SecretValue(SecretVersion secretVersion, byte[] value)
         {
             this.SecretVersion = secretVersion;
-            this.Value = value;
-            this.ValueText = Encoding.UTF8.GetString(Value);
+            this.Value = Encoding.UTF8.GetString(value);
+            this.ValueBytes = value;
         }
 
         /// <summary>

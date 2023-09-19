@@ -50,7 +50,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.name, Type = ResourceType.Bucket };
+            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Bucket };
             var request = new ResourceDeclareRequest { Resource = resource };
             BaseResource.client.Declare(request);
             return this;
@@ -88,7 +88,7 @@ namespace Nitric.Sdk.Resource
             params Middleware<BucketNotificationContext>[] middleware)
         {
             var notificationWorker = new Faas(new BucketNotificationWorkerOptions(
-                this.name,
+                this.Name,
                 notificationType,
                 notificationPrefixFilter
             ));
@@ -110,7 +110,7 @@ namespace Nitric.Sdk.Resource
             Func<BucketNotificationContext, BucketNotificationContext> handler)
         {
             var notificationWorker = new Faas(new BucketNotificationWorkerOptions(
-                this.name,
+                this.Name,
                 notificationType,
                 notificationPrefixFilter
             ));
@@ -128,7 +128,7 @@ namespace Nitric.Sdk.Resource
         public Bucket With(params BucketPermission[] permissions)
         {
             this.RegisterPolicy(permissions);
-            return new Storage.Storage().Bucket(this.name);
+            return new Storage.Storage().Bucket(this.Name);
         }
     }
 }

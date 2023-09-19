@@ -24,11 +24,11 @@ namespace Nitric.Sdk.Queue
     /// <summary>
     /// Represents a Message to be delivered via a Queue.
     /// </summary>
-    public class Task
+    public class Task<T>
     {
         public string Id { get; set; }
         public string PayloadType { get; set; }
-        public object Payload { get; set; }
+        public T Payload { get; set; }
 
         public Task()
         {
@@ -67,12 +67,12 @@ namespace Nitric.Sdk.Queue
     /// Since received tasks are on a limited time lease they include a lease ID.
     /// Received tasks must be completed to be removed from the queue and avoid reprocessing
     /// </summary>
-    public class ReceivedTask : Task
+    public class ReceivedTask<T> : Task<T>
     {
         /// <summary>
         /// The queue that was the source of this task.
         /// </summary>
-        public Queue Queue { get; set; }
+        public Queue<T> Queue { get; set; }
 
         /// <summary>
         /// The unique lease id for this task lease.
@@ -102,7 +102,7 @@ namespace Nitric.Sdk.Queue
             }
             catch (Grpc.Core.RpcException re)
             {
-                throw Common.NitricException.FromRpcException(re);
+                throw NitricException.FromRpcException(re);
             }
         }
     }

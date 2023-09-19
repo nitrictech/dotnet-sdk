@@ -97,7 +97,7 @@ namespace Nitric.Sdk.Resource
 
             var faas = new Faas(new ApiWorkerOptions
             {
-                Api = this.name,
+                Api = this.Name,
                 Route = this.Opts.BasePath + route,
                 Methods = methods.ToHashSet(),
                 Options = opts
@@ -121,7 +121,7 @@ namespace Nitric.Sdk.Resource
 
             var faas = new Faas(new ApiWorkerOptions
             {
-                Api = this.name,
+                Api = this.Name,
                 Route = this.Opts.BasePath + route,
                 Methods = methods.ToHashSet(),
                 Options = opts
@@ -242,7 +242,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.name, Type = ResourceType.Api };
+            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Api };
             var apiResource = new ProtoApiResource();
 
             foreach (KeyValuePair<string, string[]> kv in this.Opts.Security)
@@ -288,7 +288,7 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <returns>The details of the API</returns>
         public ApiDetails Details() {
-            var resource = new NitricResource { Name = this.name, Type = ResourceType.Api };
+            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Api };
 
             var request = new ResourceDetailsRequest { Resource = resource };
             var response = client.Details(request);

@@ -12,22 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using Google.Protobuf.WellKnownTypes;
 using Nitric.Sdk.Queue;
 using Xunit;
 
 namespace Nitric.Sdk.Test.Api.Queue
 {
+    public class TestProfile
+    {
+        public string Name;
+        public double Age;
+        public List<string> Addresses;
+    }
+
     public class FailedTaskTest
     {
         [Fact]
         public void TestBuild()
         {
-            var payload = new Struct();
-            var failedTask = new global::Nitric.Sdk.Queue.FailedTask
+            var payload = new TestProfile
+                { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st " } };
+            var failedTask = new global::Nitric.Sdk.Queue.FailedTask<TestProfile>
             {
                 Message = "message",
-                Task = new Task
+                Task = new Task<TestProfile>
                 {
                     Id = "1",
                     PayloadType = "payload type",

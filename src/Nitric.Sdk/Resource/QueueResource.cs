@@ -35,7 +35,7 @@ namespace Nitric.Sdk.Resource
         Receiving
     }
 
-    public class QueueResource : SecureResource<QueuePermission>
+    public class QueueResource<T> : SecureResource<QueuePermission>
     {
         internal QueueResource(string name) : base(name, ResourceType.Queue)
         {
@@ -43,7 +43,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.name, Type = ResourceType.Queue };
+            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Queue };
             var request = new ResourceDeclareRequest { Resource = resource };
             client.Declare(request);
             return this;
@@ -70,10 +70,10 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="permissions">The permissions that the function has to access the queue.</param>
         /// <returns>A reference to the queue.</returns>
-        public Queue.Queue With(params QueuePermission[] permissions)
+        public Queue.Queue<T> With(params QueuePermission[] permissions)
         {
             this.RegisterPolicy(permissions);
-            return new QueuesClient().Queue(this.name);
+            return new QueuesClient().Queue<T>(this.Name);
         }
     }
 }

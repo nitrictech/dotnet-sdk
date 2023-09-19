@@ -24,6 +24,7 @@ using Nitric.Sdk.Storage;
 using ProtoApiWorkerOptions = Nitric.Proto.Faas.v1.ApiWorkerOptions;
 using ProtoClient = Nitric.Proto.Faas.v1.FaasService.FaasServiceClient;
 using BucketNotificationTypeProto = Nitric.Proto.Faas.v1.BucketNotificationType;
+using WebsocketNotificationTypeProto = Nitric.Proto.Faas.v1.WebsocketEvent;
 
 namespace Nitric.Sdk.Function
 {
@@ -146,7 +147,6 @@ namespace Nitric.Sdk.Function
             this.Bucket = bucket;
             this.NotificationType = ToGrpcNotificationType(notificationType);
             this.NotificationPrefixFilter = notificationPrefixFilter;
-
         }
 
         /// <summary>
@@ -201,6 +201,39 @@ namespace Nitric.Sdk.Function
         }
     }
 
+    public class WebsocketWorkerOptions : IFaasOptions
+    {
+        public string Socket { get; set; }
+
+        public WebsocketNotificationTypeProto NotificationType { get; set; }
+
+        public WebsocketWorkerOptions(
+            string socket,
+            WebsocketEventType notificationType
+            )
+        {
+            this.Socket = socket;
+            this.NotificationType = ToGrpcNotificationType(notificationType);
+        }
+
+        /// <summary>
+        /// Converts a Nitric bucket notification type to the gRPC equivalent for over-the-wire transfer.
+        /// </summary>
+        /// <param name="notificationType">The type of notification that the bucket should be triggered on</param>
+        /// <returns>A gRPC representation of the bucket notification type</returns>
+        /// <exception cref="ArgumentException">If there is no matching notification type</exception>
+        private static WebsocketNotificationTypeProto ToGrpcNotificationType(WebsocketEventType notificationType)
+        {
+            return notificationType switch
+            {
+                WebsocketEventType.Connected => WebsocketNotificationTypeProto.Connect,
+                WebsocketEventType.Disconnected => WebsocketNotificationTypeProto.Disconnect,
+                WebsocketEventType.Message => WebsocketNotificationTypeProto.Message,
+                _ => throw new ArgumentException("Unsupported websocket notification type")
+            };
+        }
+    }
+
     /// <summary>
     /// Function as a Service server.
     ///
@@ -239,6 +272,10 @@ namespace Nitric.Sdk.Function
 
         private List<Middleware<FileNotificationContext>> FileNotificationHandlers =
             new List<Middleware<FileNotificationContext>>();
+
+        private Func<WebsocketContext, WebsocketContext> WebsocketHandler;
+
+        private List<Middleware<WebsocketContext>> WebsocketHandlers = new List<Middleware<WebsocketContext>>();
 
 
         public ProtoClient Client { get; } = new ProtoClient(GrpcChannelProvider.GetChannel());
@@ -320,6 +357,20 @@ namespace Nitric.Sdk.Function
         public Faas FileNotification(Middleware<FileNotificationContext>[] middleware)
         {
             this.FileNotificationHandlers.AddRange(middleware);
+
+            return this;
+        }
+
+        public Faas Websocket(Func<WebsocketContext, WebsocketContext> handler)
+        {
+            this.WebsocketHandler = handler;
+
+            return this;
+        }
+
+        public Faas Websocket(Middleware<WebsocketContext>[] middleware)
+        {
+            this.WebsocketHandlers.AddRange(middleware);
 
             return this;
         }
@@ -412,6 +463,16 @@ namespace Nitric.Sdk.Function
                         }
                     };
                     return fNotificationInitRequest;
+                case WebsocketWorkerOptions w:
+                    var websocketInitRequest = new InitRequest
+                    {
+                        Websocket = new WebsocketWorker
+                        {
+                            Socket = w.Socket,
+                            Event = w.NotificationType,
+                        }
+                    };
+                    return websocketInitRequest;
             }
 
             throw new Exception("Invalid worker options");
@@ -430,7 +491,8 @@ namespace Nitric.Sdk.Function
                 this.EventHandlers.Count == 0 && this.EventHandler == null &&
                 this.HttpHandlers.Count == 0 && this.HttpHandler == null &&
                 this.BucketNotificationHandlers.Count == 0 && this.BucketNotificationHandler == null &&
-                this.FileNotificationHandlers.Count == 0 && this.FileNotificationHandler == null
+                this.FileNotificationHandlers.Count == 0 && this.FileNotificationHandler == null &&
+                this.WebsocketHandlers.Count == 0 && this.WebsocketHandler == null
                 )
             {
                 throw new Exception("At least one handler must be provided.");
@@ -453,7 +515,7 @@ namespace Nitric.Sdk.Function
                 throw re.StatusCode == StatusCode.Unavailable ?
                     new Exception(
                         "Unable to connect to a nitric server! If you're running locally make sure to run \"nitric start\"")
-                    : re;
+                    : NitricException.FromRpcException(re);
             }
 
             try
@@ -602,6 +664,32 @@ namespace Nitric.Sdk.Function
                                         resultContext = composedNotificationHandler(ctxNotification);
                                     }
 
+                                    break;
+                                case TriggerRequest.ContextOneofCase.Websocket:
+                                    if (this.WebsocketHandlers.Count == 0 && this.WebsocketHandler == null)
+                                    {
+                                        throw new UnimplementedException("Cannot handle Websocket requests.");
+                                    }
+
+                                    var ctxWebsocket = TriggerContext<WebsocketRequest, WebsocketResponse>
+                                        .FromGrpcTriggerRequest<WebsocketContext>(grpcRequest.TriggerRequest, this.Options);
+
+                                    Func<WebsocketContext, WebsocketContext> composedWebsocketHandler = this.WebsocketHandler;
+                                    if (this.WebsocketHandler == null)
+                                    {
+                                        Func<WebsocketContext, WebsocketContext> lastCall = (context) => context;
+
+                                        this.WebsocketHandlers.Reverse();
+
+                                        composedWebsocketHandler = this.WebsocketHandlers.Aggregate(lastCall, (next, handler) =>
+                                        {
+                                            Func<WebsocketContext, WebsocketContext> nextFunc = (context) => handler(context, next) ?? context;
+
+                                            return nextFunc;
+                                        });
+                                    }
+
+                                    resultContext = composedWebsocketHandler(ctxWebsocket);
                                     break;
                                 case TriggerRequest.ContextOneofCase.None:
                                 default:

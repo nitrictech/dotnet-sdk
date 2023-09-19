@@ -116,7 +116,7 @@ namespace Nitric.Sdk
         /// </summary>
         /// <param name="name">The unique name of the queue within this application.</param>
         /// <returns>A queue resource, if the name has already been declared the same resource will be returned.</returns>
-        public static QueueResource Queue(string name) => Cached(name, n => new QueueResource(n));
+        public static QueueResource<T> Queue<T>(string name) => Cached(name, n => new QueueResource<T>(n));
 
         /// <summary>
         /// Declare a topic resource for push-based events and messaging.
@@ -124,5 +124,12 @@ namespace Nitric.Sdk
         /// <param name="name">The unique name of the topic within this application.</param>
         /// <returns>A topic resource, if the name has already been declared the same resource will be returned.</returns>
         public static TopicResource<T> Topic<T>(string name) => Cached(name, t => new TopicResource<T>(t));
+
+        /// <summary>
+        /// Declare a websocket resource for bidirectional HTTP communication.
+        /// </summary>
+        /// <param name="name">The unique name of the websocket within this application.</param>
+        /// <returns>A websocket resource, if the name has already been declared the same resource will be returned.</returns>
+        public static WebsocketResource Websocket(string name) => Cached(name, t => new WebsocketResource(t));
     }
 }

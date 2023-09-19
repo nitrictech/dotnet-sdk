@@ -55,7 +55,20 @@ namespace Nitric.Sdk.Function
         /// </summary>
         public Dictionary<string, IEnumerable<string>> Headers { get; private set; }
 
-        public byte[] Data { get; private set; }
+        /// <summary>
+        /// Convert the payload of the request to a string, assuming UTF-8 encoding.
+        /// </summary>
+        /// <returns></returns>
+        public string Text => System.Text.Encoding.UTF8.GetString(this.data, 0, this.data.Length);
+
+        /// <summary>
+        /// Get the HTTP body data encoded from json.
+        ///
+        /// The object is converted from a JSON string to a type T.
+        /// </summary>
+        public T Json<T>() {
+            return JsonConvert.DeserializeObject<T>(Encoding.Default.GetString(this.data));
+        }
 
         /// <summary>
         /// Constructs a new HTTP Request object.
