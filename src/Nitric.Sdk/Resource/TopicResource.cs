@@ -90,9 +90,12 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="permissions">The permissions that the function has to access the topic.</param>
         /// <returns>A reference to the topic.</returns>
-        public Topic<T> With(params TopicPermission[] permissions)
+        public Topic<T> With(TopicPermission permission, params TopicPermission[] permissions)
         {
-            this.RegisterPolicy(permissions);
+            var allPerms = new List<TopicPermission> { permission };
+            allPerms.AddRange(permissions);
+
+            this.RegisterPolicy(allPerms);
             return new EventsClient<T>().Topic(this.Name);
         }
     }

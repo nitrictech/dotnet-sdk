@@ -125,9 +125,12 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="permissions">The permissions that the function has to access the bucket.</param>
         /// <returns>A reference to the bucket.</returns>
-        public Bucket With(params BucketPermission[] permissions)
+        public Bucket With(BucketPermission permission, params BucketPermission[] permissions)
         {
-            this.RegisterPolicy(permissions);
+            var allPerms = new List<BucketPermission> { permission };
+            allPerms.AddRange(permissions);
+
+            this.RegisterPolicy(allPerms);
             return new Storage.Storage().Bucket(this.Name);
         }
     }
