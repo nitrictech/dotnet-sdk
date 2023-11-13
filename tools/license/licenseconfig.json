@@ -1,6 +1,8 @@
 {
   "ignoreFile": ".gitignore",
   "ignore": [
+    ".idea/**/*",
+    ".vs/**/*",
     ".github/",
     "properties/**/*",
     "Scripts/",

@@ -24,16 +24,16 @@ namespace Nitric.Sdk.Document
     ///
     /// E.g. search all cities in all states. The group of sub-collections are expected to have the same name (e.g. "cities")
     /// </summary>
-    /// <typeparam name="T">The type of documents contained in the group of collections</typeparam>
-    public class CollectionGroup<T> : AbstractCollection<T> where T : IDictionary<string, object>, new()
+    /// <typeparam name="TDocument">The type of documents contained in the group of collections</typeparam>
+    public class CollectionGroup<TDocument> : AbstractCollection<TDocument>
     {
         /// <summary>
         /// Construct a new collection group
         /// </summary>
         /// <param name="documentClient">The document client used to interact with this group</param>
         /// <param name="name">A name of the collections</param>
-        /// <param name="parentKey"></param>
-        public CollectionGroup(DocumentServiceClient documentClient, string name, Key<T> parentKey)
+        /// <param name="parentKey">The parent of the collection</param>
+        public CollectionGroup(DocumentServiceClient documentClient, string name, Key parentKey)
             : base(documentClient, name, parentKey)
         {
         }

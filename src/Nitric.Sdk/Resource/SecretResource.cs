@@ -14,66 +14,61 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nitric.Proto.Resource.v1;
-using Nitric.Sdk.Queue;
+using Nitric.Sdk.Secret;
 using Action = Nitric.Proto.Resource.v1.Action;
 using NitricResource = Nitric.Proto.Resource.v1.Resource;
 
 namespace Nitric.Sdk.Resource
 {
     ///<Summary>
-    /// Available permissions for queue resources.
+    /// Available permissions for secret resources.
     ///</Summary>
-    public enum QueuePermission
+    public enum SecretPermission
     {
         /// <summary>
-        /// Enables pushing new tasks to the queue.
+        /// Enables putting secrets to the secret store.
         /// </summary>
-        Sending,
+        Putting,
         /// <summary>
-        /// Enables pulling and completing tasks on the queue.
+        /// Enables accessing secrets from the secret store.
         /// </summary>
-        Receiving
+        Accessing
     }
 
-    public class QueueResource<T> : SecureResource<QueuePermission>
+    public class SecretResource : SecureResource<SecretPermission>
     {
-        internal QueueResource(string name) : base(name, ResourceType.Queue)
+        internal SecretResource(string name) : base(name, ResourceType.Secret)
         {
         }
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Queue };
+            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Secret };
             var request = new ResourceDeclareRequest { Resource = resource };
             client.Declare(request);
             return this;
         }
 
-        protected override IEnumerable<Action> PermissionsToActions(IEnumerable<QueuePermission> permissions)
+        protected override IEnumerable<Action> PermissionsToActions(IEnumerable<SecretPermission> permissions)
         {
-            var actionMap = new Dictionary<QueuePermission, List<Action>>
+            var actionMap = new Dictionary<SecretPermission, List<Action>>
             {
                 {
-                    QueuePermission.Sending,
-                    new List<Action> { Action.QueueSend, Action.QueueDetail, Action.QueueList }
+                    SecretPermission.Putting,
+                    new List<Action> { Action.SecretPut }
                 },
                 {
-                    QueuePermission.Receiving,
-                    new List<Action> { Action.QueueReceive, Action.QueueDetail, Action.QueueList }
+                    SecretPermission.Accessing,
+                    new List<Action> { Action.SecretAccess }
                 }
             };
             return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x])).Distinct();
         }
 
-        /// <summary>
-        /// Request specific access to this queue.
-        /// </summary>
-        /// <param name="permissions">The permissions that the function has to access the queue.</param>
-        /// <returns>A reference to the queue.</returns>
-        public Queue.Queue<T> With(params QueuePermission[] permissions)
+        public Secret.Secret With(params SecretPermission[] permissions)
         {
             this.RegisterPolicy(permissions);
-            return new QueuesClient().Queue<T>(this.Name);
+            return new SecretsClient().Secret(this.Name);
         }
     }
 }

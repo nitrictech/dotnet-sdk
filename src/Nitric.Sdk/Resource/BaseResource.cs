@@ -11,11 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
-using System.Text;
 using Nitric.Proto.Resource.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Common.Util;
 using GrpcClient = Nitric.Proto.Resource.v1.ResourceService.ResourceServiceClient;
 using ProtoResource = Nitric.Proto.Resource.v1.Resource;
 
@@ -23,20 +20,20 @@ namespace Nitric.Sdk.Resource
 {
     public abstract class BaseResource
     {
-        protected string name;
+        internal string Name;
         protected static GrpcClient client;
         protected ResourceType type;
 
         public BaseResource(string name, ResourceType type)
         {
-            this.name = name;
+            this.Name = name;
             this.type = type;
             BaseResource.client = (BaseResource.client == null) ? new GrpcClient(GrpcChannelProvider.GetChannel()) : client;
         }
 
         internal ProtoResource AsProtoResource()
         {
-            return new ProtoResource { Name = this.name, Type = this.type };
+            return new ProtoResource { Name = this.Name, Type = this.type };
         }
 
         internal abstract BaseResource Register();

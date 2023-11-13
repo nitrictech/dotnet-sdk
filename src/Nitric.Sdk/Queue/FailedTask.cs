@@ -12,17 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Google.Protobuf.WellKnownTypes;
-using System.Collections.Generic;
-using Google.Protobuf;
-using Nitric.Sdk.Common.Util;
-
 namespace Nitric.Sdk.Queue
 {
     /// <summary>
     /// Represents a task that was unable to be sent to a queue.
     /// </summary>
-    public class FailedTask
+    public class FailedTask<T>
     {
         /// <summary>
         /// The error message.
@@ -32,7 +27,7 @@ namespace Nitric.Sdk.Queue
         /// <summary>
         /// The task that failed to be sent.
         /// </summary>
-        public Task Task { get; set; }        
+        public Task<T> Task { get; set; }
 
         /// <summary>
         /// Return a string representation of the failed task.

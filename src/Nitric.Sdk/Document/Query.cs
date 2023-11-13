@@ -14,27 +14,28 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using GrpcExpression = Nitric.Proto.Document.v1.Expression;
 using ExpressionValue = Nitric.Proto.Document.v1.ExpressionValue;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
 using Nitric.Proto.Document.v1;
-using Util = Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Document
 {
     /// <summary>
     /// A query object used to construct document queries.
     /// </summary>
-    /// <typeparam name="T">The expected type of the found documents.</typeparam>
-    public class Query<T> where T : IDictionary<string, object>, new()
+    /// <typeparam name="TDocument">The expected type of the found documents.</typeparam>
+    public class Query<TDocument>
     {
         internal readonly DocumentServiceClient DocumentClient;
-        internal readonly AbstractCollection<T> Collection;
+        internal readonly AbstractCollection  Collection;
         internal readonly List<Expression> Expressions;
         internal object PagingToken;
         internal int ResultsLimit;
 
-        internal Query(DocumentServiceClient documentClient, AbstractCollection<T> collection)
+        internal Query(DocumentServiceClient documentClient, AbstractCollection collection)
         {
             this.DocumentClient = documentClient;
             this.Collection = collection;
@@ -44,14 +45,14 @@ namespace Nitric.Sdk.Document
         }
 
         /// <summary>
-        /// Add a 'where' claus to this query.
+        /// Add a 'where' clause to this query.
         /// </summary>
         /// <param name="operand">The key of the document to compare with.</param>
         /// <param name="op">The comparison type.</param>
         /// <param name="value">The value to compare with.</param>
         /// <returns>The query with the 'where' claus added.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public Query<T> Where(string operand, string op, string value)
+        public Query<TDocument> Where(string operand, string op, string value)
         {
             if (string.IsNullOrEmpty(operand))
             {
@@ -73,13 +74,85 @@ namespace Nitric.Sdk.Document
         }
 
         /// <summary>
+        /// Add a 'where' clause to this query.
+        /// </summary>
+        /// <param name="operand">The key of the document to compare with.</param>
+        /// <param name="op">The comparison type.</param>
+        /// <param name="value">The value to compare with.</param>
+        /// <returns>The query with the 'where' claus added.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public Query<TDocument> Where(string operand, string op, double value)
+        {
+            if (string.IsNullOrEmpty(operand))
+            {
+                throw new ArgumentNullException(nameof(operand));
+            }
+
+            if (string.IsNullOrEmpty(op))
+            {
+                throw new ArgumentNullException(nameof(op));
+            }
+
+            this.Expressions.Add(new Expression(operand, op, value));
+            return this;
+        }
+
+        /// <summary>
+        /// Add a 'where' clause to this query.
+        /// </summary>
+        /// <param name="operand">The key of the document to compare with.</param>
+        /// <param name="op">The comparison type.</param>
+        /// <param name="value">The value to compare with.</param>
+        /// <returns>The query with the 'where' claus added.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public Query<TDocument> Where(string operand, string op, int value)
+        {
+            if (string.IsNullOrEmpty(operand))
+            {
+                throw new ArgumentNullException(nameof(operand));
+            }
+
+            if (string.IsNullOrEmpty(op))
+            {
+                throw new ArgumentNullException(nameof(op));
+            }
+
+            this.Expressions.Add(new Expression(operand, op, value));
+            return this;
+        }
+
+        /// <summary>
+        /// Add a 'where' clause to this query.
+        /// </summary>
+        /// <param name="operand">The key of the document to compare with.</param>
+        /// <param name="op">The comparison type.</param>
+        /// <param name="value">The value to compare with.</param>
+        /// <returns>The query with the 'where' claus added.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public Query<TDocument> Where(string operand, string op, bool value)
+        {
+            if (string.IsNullOrEmpty(operand))
+            {
+                throw new ArgumentNullException(nameof(operand));
+            }
+
+            if (string.IsNullOrEmpty(op))
+            {
+                throw new ArgumentNullException(nameof(op));
+            }
+
+            this.Expressions.Add(new Expression(operand, op, value));
+            return this;
+        }
+
+        /// <summary>
         /// Query results starting from an existing paging token.
         ///
         /// Used when paging the results of a query for requesting subsequent pages.
         /// </summary>
         /// <param name="pagingToken">A paging token returned from a previous query.</param>
         /// <returns>The query with the paging token added.</returns>
-        public Query<T> PagingFrom(object pagingToken)
+        public Query<TDocument> PagingFrom(object pagingToken)
         {
             this.PagingToken = pagingToken;
             return this;
@@ -90,7 +163,7 @@ namespace Nitric.Sdk.Document
         /// </summary>
         /// <param name="limit">A positive integer represent the maximum number of results to return.</param>
         /// <returns></returns>
-        public Query<T> Limit(int limit)
+        public Query<TDocument> Limit(int limit)
         {
             this.ResultsLimit = Math.Max(0, limit);
             return this;
@@ -100,23 +173,9 @@ namespace Nitric.Sdk.Document
         /// Retrieve a page of query results.
         /// </summary>
         /// <returns>Results</returns>
-        public QueryResult<T> Fetch()
+        public QueryResult<TDocument> Fetch()
         {
-            return new QueryResult<T>(this, false);
-        }
-
-        /// <summary>
-        /// Retrieve all found results.
-        /// </summary>
-        /// <returns>Results</returns>
-        public QueryResult<T> FetchAll()
-        {
-            if (this.ResultsLimit <= 0)
-            {
-                this.ResultsLimit = 1000;
-            }
-
-            return new QueryResult<T>(this, true);
+            return new QueryResult<TDocument>(this, false);
         }
 
         /// <summary>
@@ -137,10 +196,10 @@ namespace Nitric.Sdk.Document
     /// <summary>
     /// Represents the results of an executed query.
     /// </summary>
-    /// <typeparam name="T">The expected type of the found documents.</typeparam>
-    public class QueryResult<T> where T : IDictionary<string, object>, new()
+    /// <typeparam name="TDocument">The expected type of the found documents.</typeparam>
+    public class QueryResult<TDocument>
     {
-        private readonly Query<T> query;
+        private readonly Query<TDocument> query;
         private readonly bool paginateAll;
 
         /// <summary>
@@ -151,11 +210,10 @@ namespace Nitric.Sdk.Document
         /// <summary>
         /// The results returned from the query.
         /// </summary>
-        public List<Document<T>> QueryData { get; private set; }
+        public List<Document<TDocument>> Documents { get; private set; }
 
-        internal QueryResult(Query<T> query, bool paginateAll)
+        internal QueryResult(Query<TDocument> query, bool paginateAll)
         {
-            // TODO: implement paging functionality.
             this.query = query;
             this.paginateAll = paginateAll;
             this.PagingToken = query.PagingToken;
@@ -177,15 +235,12 @@ namespace Nitric.Sdk.Document
         {
             var request = new DocumentQueryRequest
             {
-                Collection = this.query.Collection.ToGrpcCollection()
+                Collection = this.query.Collection.ToGrpcCollection(),
+                Limit = this.query.ResultsLimit,
             };
 
-            foreach (var expression in expressions)
-            {
-                request.Expressions.Add(expression.ToGrpcExpression());
-            }
+            request.Expressions.AddRange(expressions.Select(exp => exp.ToGrpcExpression()));
 
-            request.Limit = this.query.ResultsLimit;
             if (this.PagingToken == null) return request;
 
             if (!(this.PagingToken is IDictionary<string, string> token))
@@ -203,34 +258,29 @@ namespace Nitric.Sdk.Document
 
         private void LoadPageData(DocumentQueryResponse response)
         {
-            QueryData = new List<Document<T>>(response.Documents.Count);
-            var collection = this.query.Collection.ToGrpcCollection();
+            this.Documents = new List<Document<TDocument>>(response.Documents.Count);
             foreach (var doc in response.Documents)
             {
-                var dict = Util.Utils.ObjToDict(doc.Content);
+                var dict = doc.Content.Fields.ToDictionary(
+                    kv => kv.Key,
+                    kv => DocumentRef<TDocument>.UnwrapValue(kv.Value));
 
-                if (typeof(T).IsAssignableFrom(dict.GetType()))
+                var dictInJson = JsonConvert.SerializeObject(dict, new JsonSerializerSettings
                 {
-                    QueryData.Add(new Document<T>(
-                        new DocumentRef<T>(
-                            this.query.DocumentClient,
-                            this.query.Collection,
-                            this.query.Collection.ParentKey.Id
-                        ),
-                        (T)dict)
-                    );
-                }
-                else
-                {
-                    QueryData.Add(new Document<T>(
-                        new DocumentRef<T>(
-                            this.query.DocumentClient,
-                            this.query.Collection,
-                            this.query.Collection.ParentKey.Id
-                        ),
-                        (T)Util.Utils.ObjToDict(dict)
-                    ));
-                }
+                    NullValueHandling = NullValueHandling.Ignore,
+                    FloatFormatHandling = FloatFormatHandling.DefaultValue,
+                });
+
+                var content = JsonConvert.DeserializeObject<TDocument>(dictInJson);
+
+                Documents.Add(new Document<TDocument>(
+                    new DocumentRef<TDocument>(
+                        this.query.DocumentClient,
+                        this.query.Collection,
+                        doc.Key.Id
+                    ),
+                    content
+                ));
             }
 
             this.PagingToken = response.PagingToken.Clone();

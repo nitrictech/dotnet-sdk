@@ -94,18 +94,42 @@ namespace Nitric.Sdk
         /// <returns>A bucket resource, if the name has already been declared the same resource will be returned.</returns>
         public static BucketResource Bucket(string name) => Cached(name, t => new BucketResource(t));
 
+
+        /// <summary>
+        /// Declare a collection resource for document storage.
+        /// </summary>
+        /// <param name="name">The unique name of the collection within this application.</param>
+        /// <typeparam name="T">The type of documents to be stored in the collection.</typeparam>
+        /// <returns>A collection resource, if the name has already been declared the same resource will be returned.</returns>
+        public static CollectionResource<TDocument> Collection<TDocument>(string name) =>
+            Cached(name, t => new CollectionResource<TDocument>(t));
+
+        /// <summary>
+        /// Declare a secret resource for accessing and putting secret values.
+        /// </summary>
+        /// <param name="name">The unique name of the secret within this application.</param>
+        /// <returns>A secret resource, if the name has already been declared the same resource will be returned.</returns>
+        public static SecretResource Secret(string name) => Cached(name, t => new SecretResource(t));
+
         /// <summary>
         /// Declare a queue resources for pull-based tasks and batch workloads.
         /// </summary>
         /// <param name="name">The unique name of the queue within this application.</param>
         /// <returns>A queue resource, if the name has already been declared the same resource will be returned.</returns>
-        public static QueueResource Queue(string name) => Cached(name, n => new QueueResource(n));
+        public static QueueResource<T> Queue<T>(string name) => Cached(name, n => new QueueResource<T>(n));
 
         /// <summary>
         /// Declare a topic resource for push-based events and messaging.
         /// </summary>
         /// <param name="name">The unique name of the topic within this application.</param>
         /// <returns>A topic resource, if the name has already been declared the same resource will be returned.</returns>
-        public static TopicResource Topic(string name) => Cached(name, t => new TopicResource(t));
+        public static TopicResource<T> Topic<T>(string name) => Cached(name, t => new TopicResource<T>(t));
+
+        /// <summary>
+        /// Declare a websocket resource for bidirectional HTTP communication.
+        /// </summary>
+        /// <param name="name">The unique name of the websocket within this application.</param>
+        /// <returns>A websocket resource, if the name has already been declared the same resource will be returned.</returns>
+        public static WebsocketResource Websocket(string name) => Cached(name, t => new WebsocketResource(t));
     }
 }

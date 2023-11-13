@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
-using Collection = Nitric.Proto.Document.v1.Collection;
 using GrpcKey = Nitric.Proto.Document.v1.Key;
 
 namespace Nitric.Sdk.Document
@@ -24,13 +21,13 @@ namespace Nitric.Sdk.Document
     ///
     /// Includes the unique ID of the document and a reference to the collection that contains it.
     /// </summary>
-    /// <typeparam name="T">The expected type for the contents of the document.</typeparam>
-    public class Key<T> where T : IDictionary<string, object>, new()
+    /// <typeparam name="TDocument">The expected type for the contents of the document.</typeparam>
+    public class Key
     {
         /// <summary>
         /// The collection containing this document.
         /// </summary>
-        public AbstractCollection<T> Collection { get; set; }
+        public AbstractCollection Collection { get; set; }
 
         /// <summary>
         /// The unique ID of this document within its collection.
@@ -40,6 +37,17 @@ namespace Nitric.Sdk.Document
         internal Key()
         {
             // Internal construct to avoid external key creation.
+        }
+
+        /// <summary>
+        /// Convert this key to a string.
+        ///
+        /// Useful for logging, should not be used for serialization of the key.
+        /// </summary>
+        /// <returns>A string with details of this key.</returns>
+        public override string ToString()
+        {
+            return this.GetType().Name + "[collection=" + Collection + ", id=" + Id + "]";
         }
 
         /// <summary>
@@ -53,17 +61,6 @@ namespace Nitric.Sdk.Document
                 Collection = this.Collection.ToGrpcCollection(),
                 Id = this.Id ?? "",
             };
-        }
-
-        /// <summary>
-        /// Convert this key to a string.
-        ///
-        /// Useful for logging, should not be used for serialization of the key.
-        /// </summary>
-        /// <returns>A string with details of this key.</returns>
-        public override string ToString()
-        {
-            return this.GetType().Name + "[collection=" + Collection + ", id=" + Id + "]";
         }
     }
 }

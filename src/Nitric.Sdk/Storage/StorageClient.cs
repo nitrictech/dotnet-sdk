@@ -13,8 +13,8 @@
 // limitations under the License.
 
 using System;
+using Nitric.Sdk.Common;
 using GrpcClient = Nitric.Proto.Storage.v1.StorageService.StorageServiceClient;
-using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Storage
 {

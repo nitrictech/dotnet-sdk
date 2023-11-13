@@ -14,8 +14,6 @@
 
 using System;
 using DocumentServiceClient = Nitric.Proto.Document.v1.DocumentService.DocumentServiceClient;
-using Util = Nitric.Sdk.Common.Util;
-using System.Collections.Generic;
 using Constants = Nitric.Sdk.Common.Constants;
 
 namespace Nitric.Sdk.Document
@@ -23,10 +21,10 @@ namespace Nitric.Sdk.Document
     /// <summary>
     /// A reference to a collection in the underlying document database.
     /// </summary>
-    /// <typeparam name="T">The type of documents stored in the collection.</typeparam>
-    public class CollectionRef<T> : AbstractCollection<T> where T : IDictionary<string, object>, new()
+    /// <typeparam name="TDocument">The type of documents stored in the collection.</typeparam>
+    public class CollectionRef<TDocument> : AbstractCollection<TDocument>
     {
-        internal CollectionRef(DocumentServiceClient documentClient, string name, Key<T> parentKey = null)
+        internal CollectionRef(DocumentServiceClient documentClient, string name, Key parentKey = null)
             : base(documentClient, name, parentKey)
         {
         }
@@ -37,14 +35,14 @@ namespace Nitric.Sdk.Document
         /// <param name="documentId">The unique ID of the document.</param>
         /// <returns>A new document reference, which can be used to interact with the document.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public DocumentRef<T> Doc(string documentId)
+        public DocumentRef<TDocument> Doc(string documentId)
         {
             if (string.IsNullOrEmpty(documentId))
             {
                 throw new ArgumentNullException(nameof(documentId));
             }
 
-            return new DocumentRef<T>(
+            return new DocumentRef<TDocument>(
                 this.DocumentClient,
                 this,
                 documentId);
@@ -59,22 +57,22 @@ namespace Nitric.Sdk.Document
         /// <returns>A reference to all sub-collections with the provided name</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NotSupportedException"></exception>
-        public CollectionGroup<T> Collection(string name)
+        public CollectionGroup<TSubType> Collection<TSubType>(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(name);
             }
 
-            var collectionDepth = Util.Utils.CollectionDepth(this.ToGrpcCollection());
+            var collectionDepth = this.Depth();
             if (collectionDepth > Constants.DepthLimit)
             {
                 throw new NotSupportedException("Currently sub-collections are only able to be nested to a depth of " +
                                                 Constants.DepthLimit + ", found depth " + collectionDepth);
             }
 
-            var parentKey = new Key<T> { Collection = this };
-            return new CollectionGroup<T>(
+            var parentKey = new Key { Collection = this };
+            return new CollectionGroup<TSubType>(
                 this.DocumentClient,
                 name,
                 parentKey);

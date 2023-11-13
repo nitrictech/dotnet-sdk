@@ -22,9 +22,8 @@ namespace Nitric.Sdk.Test.Api.Queue
         [Fact]
         public void TestBuild()
         {
-            Dictionary<string, object> payload = new Dictionary<string, object>();
-            payload.Add("name", "value");
-            var queueItem = new global::Nitric.Sdk.Queue.Task
+            var payload = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" }};
+            var queueItem = new global::Nitric.Sdk.Queue.Task<TestProfile>
             {
                 Id = "2",
                 PayloadType = "payload type",

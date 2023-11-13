@@ -11,19 +11,23 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+using Grpc.Net.Client;
 
-using System.Collections.Generic;
-
-namespace Nitric.Sdk.Queue
+namespace Nitric.Sdk.Common
 {
-    /// <summary>
-    /// Represents the results of sending a batch of tasks to a queue.
-    /// </summary>
-    public class SendResponse
+    internal static class GrpcChannelProvider
     {
-        /// <summary>
-        /// A list of any task that were unable to be sent to the queue.
-        /// </summary>
-        public List<FailedTask> FailedTasks { get; internal set; }
+        private static GrpcChannel _channel;
+
+        internal static GrpcChannel GetChannel()
+        {
+            if (GrpcChannelProvider._channel == null)
+            {
+                var address = Environment.GetNitricHost();
+                GrpcChannelProvider._channel = GrpcChannel.ForAddress(address);
+            }
+
+            return GrpcChannelProvider._channel;
+        }
     }
 }

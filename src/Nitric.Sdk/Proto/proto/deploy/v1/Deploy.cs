@@ -57,34 +57,44 @@ namespace Nitric.Proto.Deploy.v1 {
             "b2xsZWN0aW9uIggKBlNlY3JldCI4ChJTdWJzY3JpcHRpb25UYXJnZXQSGAoO",
             "ZXhlY3V0aW9uX3VuaXQYASABKAlIAEIICgZ0YXJnZXQiSQoRVG9waWNTdWJz",
             "Y3JpcHRpb24SNAoGdGFyZ2V0GAEgASgLMiQubml0cmljLmRlcGxveS52MS5T",
-            "dWJzY3JpcHRpb25UYXJnZXQiJAoDQXBpEhEKB29wZW5hcGkYASABKAlIAEIK",
-            "Cghkb2N1bWVudCI0Cg5TY2hlZHVsZVRhcmdldBIYCg5leGVjdXRpb25fdW5p",
-            "dBgBIAEoCUgAQggKBnRhcmdldCJKCghTY2hlZHVsZRIMCgRjcm9uGAEgASgJ",
-            "EjAKBnRhcmdldBgCIAEoCzIgLm5pdHJpYy5kZXBsb3kudjEuU2NoZWR1bGVU",
-            "YXJnZXQi7wMKCFJlc291cmNlEgwKBG5hbWUYASABKAkSLgoEdHlwZRgCIAEo",
-            "DjIgLm5pdHJpYy5yZXNvdXJjZS52MS5SZXNvdXJjZVR5cGUSOQoOZXhlY3V0",
-            "aW9uX3VuaXQYCiABKAsyHy5uaXRyaWMuZGVwbG95LnYxLkV4ZWN1dGlvblVu",
-            "aXRIABIqCgZidWNrZXQYCyABKAsyGC5uaXRyaWMuZGVwbG95LnYxLkJ1Y2tl",
-            "dEgAEigKBXRvcGljGAwgASgLMhcubml0cmljLmRlcGxveS52MS5Ub3BpY0gA",
-            "EigKBXF1ZXVlGA0gASgLMhcubml0cmljLmRlcGxveS52MS5RdWV1ZUgAEiQK",
-            "A2FwaRgOIAEoCzIVLm5pdHJpYy5kZXBsb3kudjEuQXBpSAASKgoGcG9saWN5",
-            "GA8gASgLMhgubml0cmljLmRlcGxveS52MS5Qb2xpY3lIABIuCghzY2hlZHVs",
-            "ZRgQIAEoCzIaLm5pdHJpYy5kZXBsb3kudjEuU2NoZWR1bGVIABIyCgpjb2xs",
-            "ZWN0aW9uGBEgASgLMhwubml0cmljLmRlcGxveS52MS5Db2xsZWN0aW9uSAAS",
-            "KgoGc2VjcmV0GBIgASgLMhgubml0cmljLmRlcGxveS52MS5TZWNyZXRIAEII",
-            "CgZjb25maWcilAEKBlBvbGljeRIuCgpwcmluY2lwYWxzGAEgAygLMhoubml0",
-            "cmljLmRlcGxveS52MS5SZXNvdXJjZRIrCgdhY3Rpb25zGAIgAygOMhoubml0",
-            "cmljLnJlc291cmNlLnYxLkFjdGlvbhItCglyZXNvdXJjZXMYAyADKAsyGi5u",
-            "aXRyaWMuZGVwbG95LnYxLlJlc291cmNlIjUKBFNwZWMSLQoJcmVzb3VyY2Vz",
-            "GAEgAygLMhoubml0cmljLmRlcGxveS52MS5SZXNvdXJjZTKtAQoNRGVwbG95",
-            "U2VydmljZRJKCgJVcBIhLm5pdHJpYy5kZXBsb3kudjEuRGVwbG95VXBSZXF1",
-            "ZXN0Gh8ubml0cmljLmRlcGxveS52MS5EZXBsb3lVcEV2ZW50MAESUAoERG93",
-            "bhIjLm5pdHJpYy5kZXBsb3kudjEuRGVwbG95RG93blJlcXVlc3QaIS5uaXRy",
-            "aWMuZGVwbG95LnYxLkRlcGxveURvd25FdmVudDABQpQBChlpby5uaXRyaWMu",
-            "cHJvdG8uZGVwbG95LnYxQgdEZXBsb3lzUAFaOmdpdGh1Yi5jb20vbml0cmlj",
-            "dGVjaC9uaXRyaWMvY29yZS9wa2cvYXBpL25pdHJpYy9kZXBsb3kvdjGqAhZO",
-            "aXRyaWMuUHJvdG8uRGVwbG95LnYxygIWTml0cmljXFByb3RvXERlcGxveVxW",
-            "MWIGcHJvdG8z"));
+            "dWJzY3JpcHRpb25UYXJnZXQiMAoKSHR0cFRhcmdldBIYCg5leGVjdXRpb25f",
+            "dW5pdBgBIAEoCUgAQggKBnRhcmdldCI0CgRIdHRwEiwKBnRhcmdldBgBIAEo",
+            "CzIcLm5pdHJpYy5kZXBsb3kudjEuSHR0cFRhcmdldCIkCgNBcGkSEQoHb3Bl",
+            "bmFwaRgBIAEoCUgAQgoKCGRvY3VtZW50Ir8BCglXZWJzb2NrZXQSOQoOY29u",
+            "bmVjdF90YXJnZXQYASABKAsyIS5uaXRyaWMuZGVwbG95LnYxLldlYnNvY2tl",
+            "dFRhcmdldBI8ChFkaXNjb25uZWN0X3RhcmdldBgCIAEoCzIhLm5pdHJpYy5k",
+            "ZXBsb3kudjEuV2Vic29ja2V0VGFyZ2V0EjkKDm1lc3NhZ2VfdGFyZ2V0GAMg",
+            "ASgLMiEubml0cmljLmRlcGxveS52MS5XZWJzb2NrZXRUYXJnZXQiNQoPV2Vi",
+            "c29ja2V0VGFyZ2V0EhgKDmV4ZWN1dGlvbl91bml0GAEgASgJSABCCAoGdGFy",
+            "Z2V0IjQKDlNjaGVkdWxlVGFyZ2V0EhgKDmV4ZWN1dGlvbl91bml0GAEgASgJ",
+            "SABCCAoGdGFyZ2V0IkoKCFNjaGVkdWxlEgwKBGNyb24YASABKAkSMAoGdGFy",
+            "Z2V0GAIgASgLMiAubml0cmljLmRlcGxveS52MS5TY2hlZHVsZVRhcmdldCLJ",
+            "BAoIUmVzb3VyY2USDAoEbmFtZRgBIAEoCRIuCgR0eXBlGAIgASgOMiAubml0",
+            "cmljLnJlc291cmNlLnYxLlJlc291cmNlVHlwZRI5Cg5leGVjdXRpb25fdW5p",
+            "dBgKIAEoCzIfLm5pdHJpYy5kZXBsb3kudjEuRXhlY3V0aW9uVW5pdEgAEioK",
+            "BmJ1Y2tldBgLIAEoCzIYLm5pdHJpYy5kZXBsb3kudjEuQnVja2V0SAASKAoF",
+            "dG9waWMYDCABKAsyFy5uaXRyaWMuZGVwbG95LnYxLlRvcGljSAASKAoFcXVl",
+            "dWUYDSABKAsyFy5uaXRyaWMuZGVwbG95LnYxLlF1ZXVlSAASJAoDYXBpGA4g",
+            "ASgLMhUubml0cmljLmRlcGxveS52MS5BcGlIABIqCgZwb2xpY3kYDyABKAsy",
+            "GC5uaXRyaWMuZGVwbG95LnYxLlBvbGljeUgAEi4KCHNjaGVkdWxlGBAgASgL",
+            "Mhoubml0cmljLmRlcGxveS52MS5TY2hlZHVsZUgAEjIKCmNvbGxlY3Rpb24Y",
+            "ESABKAsyHC5uaXRyaWMuZGVwbG95LnYxLkNvbGxlY3Rpb25IABIqCgZzZWNy",
+            "ZXQYEiABKAsyGC5uaXRyaWMuZGVwbG95LnYxLlNlY3JldEgAEjAKCXdlYnNv",
+            "Y2tldBgTIAEoCzIbLm5pdHJpYy5kZXBsb3kudjEuV2Vic29ja2V0SAASJgoE",
+            "aHR0cBgUIAEoCzIWLm5pdHJpYy5kZXBsb3kudjEuSHR0cEgAQggKBmNvbmZp",
+            "ZyKUAQoGUG9saWN5Ei4KCnByaW5jaXBhbHMYASADKAsyGi5uaXRyaWMuZGVw",
+            "bG95LnYxLlJlc291cmNlEisKB2FjdGlvbnMYAiADKA4yGi5uaXRyaWMucmVz",
+            "b3VyY2UudjEuQWN0aW9uEi0KCXJlc291cmNlcxgDIAMoCzIaLm5pdHJpYy5k",
+            "ZXBsb3kudjEuUmVzb3VyY2UiNQoEU3BlYxItCglyZXNvdXJjZXMYASADKAsy",
+            "Gi5uaXRyaWMuZGVwbG95LnYxLlJlc291cmNlMq0BCg1EZXBsb3lTZXJ2aWNl",
+            "EkoKAlVwEiEubml0cmljLmRlcGxveS52MS5EZXBsb3lVcFJlcXVlc3QaHy5u",
+            "aXRyaWMuZGVwbG95LnYxLkRlcGxveVVwRXZlbnQwARJQCgREb3duEiMubml0",
+            "cmljLmRlcGxveS52MS5EZXBsb3lEb3duUmVxdWVzdBohLm5pdHJpYy5kZXBs",
+            "b3kudjEuRGVwbG95RG93bkV2ZW50MAFClAEKGWlvLm5pdHJpYy5wcm90by5k",
+            "ZXBsb3kudjFCB0RlcGxveXNQAVo6Z2l0aHViLmNvbS9uaXRyaWN0ZWNoL25p",
+            "dHJpYy9jb3JlL3BrZy9hcGkvbml0cmljL2RlcGxveS92MaoCFk5pdHJpYy5Q",
+            "cm90by5EZXBsb3kudjHKAhZOaXRyaWNcUHJvdG9cRGVwbG95XFYxYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.StructReflection.Descriptor, global::Nitric.Proto.Resource.v1.ResourceReflection.Descriptor, global::Nitric.Proto.Faas.v1.FaasReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -106,10 +116,14 @@ namespace Nitric.Proto.Deploy.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.Secret), global::Nitric.Proto.Deploy.v1.Secret.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.SubscriptionTarget), global::Nitric.Proto.Deploy.v1.SubscriptionTarget.Parser, new[]{ "ExecutionUnit" }, new[]{ "Target" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.TopicSubscription), global::Nitric.Proto.Deploy.v1.TopicSubscription.Parser, new[]{ "Target" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.HttpTarget), global::Nitric.Proto.Deploy.v1.HttpTarget.Parser, new[]{ "ExecutionUnit" }, new[]{ "Target" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.Http), global::Nitric.Proto.Deploy.v1.Http.Parser, new[]{ "Target" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.Api), global::Nitric.Proto.Deploy.v1.Api.Parser, new[]{ "Openapi" }, new[]{ "Document" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.Websocket), global::Nitric.Proto.Deploy.v1.Websocket.Parser, new[]{ "ConnectTarget", "DisconnectTarget", "MessageTarget" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.WebsocketTarget), global::Nitric.Proto.Deploy.v1.WebsocketTarget.Parser, new[]{ "ExecutionUnit" }, new[]{ "Target" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.ScheduleTarget), global::Nitric.Proto.Deploy.v1.ScheduleTarget.Parser, new[]{ "ExecutionUnit" }, new[]{ "Target" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.Schedule), global::Nitric.Proto.Deploy.v1.Schedule.Parser, new[]{ "Cron", "Target" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.Resource), global::Nitric.Proto.Deploy.v1.Resource.Parser, new[]{ "Name", "Type", "ExecutionUnit", "Bucket", "Topic", "Queue", "Api", "Policy", "Schedule", "Collection", "Secret" }, new[]{ "Config" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.Resource), global::Nitric.Proto.Deploy.v1.Resource.Parser, new[]{ "Name", "Type", "ExecutionUnit", "Bucket", "Topic", "Queue", "Api", "Policy", "Schedule", "Collection", "Secret", "Websocket", "Http" }, new[]{ "Config" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.Policy), global::Nitric.Proto.Deploy.v1.Policy.Parser, new[]{ "Principals", "Actions", "Resources" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deploy.v1.Spec), global::Nitric.Proto.Deploy.v1.Spec.Parser, new[]{ "Resources" }, null, null, null, null)
           }));
@@ -3765,6 +3779,393 @@ namespace Nitric.Proto.Deploy.v1 {
 
   }
 
+  public sealed partial class HttpTarget : pb::IMessage<HttpTarget>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<HttpTarget> _parser = new pb::MessageParser<HttpTarget>(() => new HttpTarget());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<HttpTarget> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[18]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public HttpTarget() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public HttpTarget(HttpTarget other) : this() {
+      switch (other.TargetCase) {
+        case TargetOneofCase.ExecutionUnit:
+          ExecutionUnit = other.ExecutionUnit;
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public HttpTarget Clone() {
+      return new HttpTarget(this);
+    }
+
+    /// <summary>Field number for the "execution_unit" field.</summary>
+    public const int ExecutionUnitFieldNumber = 1;
+    /// <summary>
+    /// The name of an execution unit to target
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ExecutionUnit {
+      get { return targetCase_ == TargetOneofCase.ExecutionUnit ? (string) target_ : ""; }
+      set {
+        target_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        targetCase_ = TargetOneofCase.ExecutionUnit;
+      }
+    }
+
+    private object target_;
+    /// <summary>Enum of possible cases for the "target" oneof.</summary>
+    public enum TargetOneofCase {
+      None = 0,
+      ExecutionUnit = 1,
+    }
+    private TargetOneofCase targetCase_ = TargetOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TargetOneofCase TargetCase {
+      get { return targetCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearTarget() {
+      targetCase_ = TargetOneofCase.None;
+      target_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as HttpTarget);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(HttpTarget other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ExecutionUnit != other.ExecutionUnit) return false;
+      if (TargetCase != other.TargetCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (targetCase_ == TargetOneofCase.ExecutionUnit) hash ^= ExecutionUnit.GetHashCode();
+      hash ^= (int) targetCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (targetCase_ == TargetOneofCase.ExecutionUnit) {
+        output.WriteRawTag(10);
+        output.WriteString(ExecutionUnit);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (targetCase_ == TargetOneofCase.ExecutionUnit) {
+        output.WriteRawTag(10);
+        output.WriteString(ExecutionUnit);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (targetCase_ == TargetOneofCase.ExecutionUnit) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ExecutionUnit);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(HttpTarget other) {
+      if (other == null) {
+        return;
+      }
+      switch (other.TargetCase) {
+        case TargetOneofCase.ExecutionUnit:
+          ExecutionUnit = other.ExecutionUnit;
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            ExecutionUnit = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            ExecutionUnit = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// A http resource
+  /// </summary>
+  public sealed partial class Http : pb::IMessage<Http>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Http> _parser = new pb::MessageParser<Http>(() => new Http());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Http> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[19]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Http() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Http(Http other) : this() {
+      target_ = other.target_ != null ? other.target_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Http Clone() {
+      return new Http(this);
+    }
+
+    /// <summary>Field number for the "target" field.</summary>
+    public const int TargetFieldNumber = 1;
+    private global::Nitric.Proto.Deploy.v1.HttpTarget target_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Deploy.v1.HttpTarget Target {
+      get { return target_; }
+      set {
+        target_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Http);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Http other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Target, other.Target)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (target_ != null) hash ^= Target.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (target_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Target);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (target_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Target);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (target_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Target);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Http other) {
+      if (other == null) {
+        return;
+      }
+      if (other.target_ != null) {
+        if (target_ == null) {
+          Target = new global::Nitric.Proto.Deploy.v1.HttpTarget();
+        }
+        Target.MergeFrom(other.Target);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (target_ == null) {
+              Target = new global::Nitric.Proto.Deploy.v1.HttpTarget();
+            }
+            input.ReadMessage(Target);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (target_ == null) {
+              Target = new global::Nitric.Proto.Deploy.v1.HttpTarget();
+            }
+            input.ReadMessage(Target);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class Api : pb::IMessage<Api>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -3777,7 +4178,7 @@ namespace Nitric.Proto.Deploy.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3969,6 +4370,492 @@ namespace Nitric.Proto.Deploy.v1 {
 
   }
 
+  /// <summary>
+  /// Declare a new websocket
+  /// </summary>
+  public sealed partial class Websocket : pb::IMessage<Websocket>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Websocket> _parser = new pb::MessageParser<Websocket>(() => new Websocket());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Websocket> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[21]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Websocket() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Websocket(Websocket other) : this() {
+      connectTarget_ = other.connectTarget_ != null ? other.connectTarget_.Clone() : null;
+      disconnectTarget_ = other.disconnectTarget_ != null ? other.disconnectTarget_.Clone() : null;
+      messageTarget_ = other.messageTarget_ != null ? other.messageTarget_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Websocket Clone() {
+      return new Websocket(this);
+    }
+
+    /// <summary>Field number for the "connect_target" field.</summary>
+    public const int ConnectTargetFieldNumber = 1;
+    private global::Nitric.Proto.Deploy.v1.WebsocketTarget connectTarget_;
+    /// <summary>
+    /// Target for handling new client connections
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Deploy.v1.WebsocketTarget ConnectTarget {
+      get { return connectTarget_; }
+      set {
+        connectTarget_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "disconnect_target" field.</summary>
+    public const int DisconnectTargetFieldNumber = 2;
+    private global::Nitric.Proto.Deploy.v1.WebsocketTarget disconnectTarget_;
+    /// <summary>
+    /// Target for handling client disconnections
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Deploy.v1.WebsocketTarget DisconnectTarget {
+      get { return disconnectTarget_; }
+      set {
+        disconnectTarget_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "message_target" field.</summary>
+    public const int MessageTargetFieldNumber = 3;
+    private global::Nitric.Proto.Deploy.v1.WebsocketTarget messageTarget_;
+    /// <summary>
+    /// Target for handling all other message types
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Deploy.v1.WebsocketTarget MessageTarget {
+      get { return messageTarget_; }
+      set {
+        messageTarget_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Websocket);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Websocket other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(ConnectTarget, other.ConnectTarget)) return false;
+      if (!object.Equals(DisconnectTarget, other.DisconnectTarget)) return false;
+      if (!object.Equals(MessageTarget, other.MessageTarget)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (connectTarget_ != null) hash ^= ConnectTarget.GetHashCode();
+      if (disconnectTarget_ != null) hash ^= DisconnectTarget.GetHashCode();
+      if (messageTarget_ != null) hash ^= MessageTarget.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (connectTarget_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ConnectTarget);
+      }
+      if (disconnectTarget_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(DisconnectTarget);
+      }
+      if (messageTarget_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(MessageTarget);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (connectTarget_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ConnectTarget);
+      }
+      if (disconnectTarget_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(DisconnectTarget);
+      }
+      if (messageTarget_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(MessageTarget);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (connectTarget_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ConnectTarget);
+      }
+      if (disconnectTarget_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(DisconnectTarget);
+      }
+      if (messageTarget_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MessageTarget);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Websocket other) {
+      if (other == null) {
+        return;
+      }
+      if (other.connectTarget_ != null) {
+        if (connectTarget_ == null) {
+          ConnectTarget = new global::Nitric.Proto.Deploy.v1.WebsocketTarget();
+        }
+        ConnectTarget.MergeFrom(other.ConnectTarget);
+      }
+      if (other.disconnectTarget_ != null) {
+        if (disconnectTarget_ == null) {
+          DisconnectTarget = new global::Nitric.Proto.Deploy.v1.WebsocketTarget();
+        }
+        DisconnectTarget.MergeFrom(other.DisconnectTarget);
+      }
+      if (other.messageTarget_ != null) {
+        if (messageTarget_ == null) {
+          MessageTarget = new global::Nitric.Proto.Deploy.v1.WebsocketTarget();
+        }
+        MessageTarget.MergeFrom(other.MessageTarget);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (connectTarget_ == null) {
+              ConnectTarget = new global::Nitric.Proto.Deploy.v1.WebsocketTarget();
+            }
+            input.ReadMessage(ConnectTarget);
+            break;
+          }
+          case 18: {
+            if (disconnectTarget_ == null) {
+              DisconnectTarget = new global::Nitric.Proto.Deploy.v1.WebsocketTarget();
+            }
+            input.ReadMessage(DisconnectTarget);
+            break;
+          }
+          case 26: {
+            if (messageTarget_ == null) {
+              MessageTarget = new global::Nitric.Proto.Deploy.v1.WebsocketTarget();
+            }
+            input.ReadMessage(MessageTarget);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (connectTarget_ == null) {
+              ConnectTarget = new global::Nitric.Proto.Deploy.v1.WebsocketTarget();
+            }
+            input.ReadMessage(ConnectTarget);
+            break;
+          }
+          case 18: {
+            if (disconnectTarget_ == null) {
+              DisconnectTarget = new global::Nitric.Proto.Deploy.v1.WebsocketTarget();
+            }
+            input.ReadMessage(DisconnectTarget);
+            break;
+          }
+          case 26: {
+            if (messageTarget_ == null) {
+              MessageTarget = new global::Nitric.Proto.Deploy.v1.WebsocketTarget();
+            }
+            input.ReadMessage(MessageTarget);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class WebsocketTarget : pb::IMessage<WebsocketTarget>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<WebsocketTarget> _parser = new pb::MessageParser<WebsocketTarget>(() => new WebsocketTarget());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<WebsocketTarget> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[22]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public WebsocketTarget() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public WebsocketTarget(WebsocketTarget other) : this() {
+      switch (other.TargetCase) {
+        case TargetOneofCase.ExecutionUnit:
+          ExecutionUnit = other.ExecutionUnit;
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public WebsocketTarget Clone() {
+      return new WebsocketTarget(this);
+    }
+
+    /// <summary>Field number for the "execution_unit" field.</summary>
+    public const int ExecutionUnitFieldNumber = 1;
+    /// <summary>
+    /// The name of an execution unit to target
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ExecutionUnit {
+      get { return targetCase_ == TargetOneofCase.ExecutionUnit ? (string) target_ : ""; }
+      set {
+        target_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        targetCase_ = TargetOneofCase.ExecutionUnit;
+      }
+    }
+
+    private object target_;
+    /// <summary>Enum of possible cases for the "target" oneof.</summary>
+    public enum TargetOneofCase {
+      None = 0,
+      ExecutionUnit = 1,
+    }
+    private TargetOneofCase targetCase_ = TargetOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TargetOneofCase TargetCase {
+      get { return targetCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearTarget() {
+      targetCase_ = TargetOneofCase.None;
+      target_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as WebsocketTarget);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(WebsocketTarget other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ExecutionUnit != other.ExecutionUnit) return false;
+      if (TargetCase != other.TargetCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (targetCase_ == TargetOneofCase.ExecutionUnit) hash ^= ExecutionUnit.GetHashCode();
+      hash ^= (int) targetCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (targetCase_ == TargetOneofCase.ExecutionUnit) {
+        output.WriteRawTag(10);
+        output.WriteString(ExecutionUnit);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (targetCase_ == TargetOneofCase.ExecutionUnit) {
+        output.WriteRawTag(10);
+        output.WriteString(ExecutionUnit);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (targetCase_ == TargetOneofCase.ExecutionUnit) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ExecutionUnit);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(WebsocketTarget other) {
+      if (other == null) {
+        return;
+      }
+      switch (other.TargetCase) {
+        case TargetOneofCase.ExecutionUnit:
+          ExecutionUnit = other.ExecutionUnit;
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            ExecutionUnit = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            ExecutionUnit = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class ScheduleTarget : pb::IMessage<ScheduleTarget>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -3981,7 +4868,7 @@ namespace Nitric.Proto.Deploy.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4184,7 +5071,7 @@ namespace Nitric.Proto.Deploy.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4401,7 +5288,7 @@ namespace Nitric.Proto.Deploy.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4447,6 +5334,12 @@ namespace Nitric.Proto.Deploy.v1 {
           break;
         case ConfigOneofCase.Secret:
           Secret = other.Secret.Clone();
+          break;
+        case ConfigOneofCase.Websocket:
+          Websocket = other.Websocket.Clone();
+          break;
+        case ConfigOneofCase.Http:
+          Http = other.Http.Clone();
           break;
       }
 
@@ -4579,6 +5472,28 @@ namespace Nitric.Proto.Deploy.v1 {
       }
     }
 
+    /// <summary>Field number for the "websocket" field.</summary>
+    public const int WebsocketFieldNumber = 19;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Deploy.v1.Websocket Websocket {
+      get { return configCase_ == ConfigOneofCase.Websocket ? (global::Nitric.Proto.Deploy.v1.Websocket) config_ : null; }
+      set {
+        config_ = value;
+        configCase_ = value == null ? ConfigOneofCase.None : ConfigOneofCase.Websocket;
+      }
+    }
+
+    /// <summary>Field number for the "http" field.</summary>
+    public const int HttpFieldNumber = 20;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Deploy.v1.Http Http {
+      get { return configCase_ == ConfigOneofCase.Http ? (global::Nitric.Proto.Deploy.v1.Http) config_ : null; }
+      set {
+        config_ = value;
+        configCase_ = value == null ? ConfigOneofCase.None : ConfigOneofCase.Http;
+      }
+    }
+
     private object config_;
     /// <summary>Enum of possible cases for the "config" oneof.</summary>
     public enum ConfigOneofCase {
@@ -4592,6 +5507,8 @@ namespace Nitric.Proto.Deploy.v1 {
       Schedule = 16,
       Collection = 17,
       Secret = 18,
+      Websocket = 19,
+      Http = 20,
     }
     private ConfigOneofCase configCase_ = ConfigOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4629,6 +5546,8 @@ namespace Nitric.Proto.Deploy.v1 {
       if (!object.Equals(Schedule, other.Schedule)) return false;
       if (!object.Equals(Collection, other.Collection)) return false;
       if (!object.Equals(Secret, other.Secret)) return false;
+      if (!object.Equals(Websocket, other.Websocket)) return false;
+      if (!object.Equals(Http, other.Http)) return false;
       if (ConfigCase != other.ConfigCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -4647,6 +5566,8 @@ namespace Nitric.Proto.Deploy.v1 {
       if (configCase_ == ConfigOneofCase.Schedule) hash ^= Schedule.GetHashCode();
       if (configCase_ == ConfigOneofCase.Collection) hash ^= Collection.GetHashCode();
       if (configCase_ == ConfigOneofCase.Secret) hash ^= Secret.GetHashCode();
+      if (configCase_ == ConfigOneofCase.Websocket) hash ^= Websocket.GetHashCode();
+      if (configCase_ == ConfigOneofCase.Http) hash ^= Http.GetHashCode();
       hash ^= (int) configCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -4708,6 +5629,14 @@ namespace Nitric.Proto.Deploy.v1 {
         output.WriteRawTag(146, 1);
         output.WriteMessage(Secret);
       }
+      if (configCase_ == ConfigOneofCase.Websocket) {
+        output.WriteRawTag(154, 1);
+        output.WriteMessage(Websocket);
+      }
+      if (configCase_ == ConfigOneofCase.Http) {
+        output.WriteRawTag(162, 1);
+        output.WriteMessage(Http);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4761,6 +5690,14 @@ namespace Nitric.Proto.Deploy.v1 {
         output.WriteRawTag(146, 1);
         output.WriteMessage(Secret);
       }
+      if (configCase_ == ConfigOneofCase.Websocket) {
+        output.WriteRawTag(154, 1);
+        output.WriteMessage(Websocket);
+      }
+      if (configCase_ == ConfigOneofCase.Http) {
+        output.WriteRawTag(162, 1);
+        output.WriteMessage(Http);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4802,6 +5739,12 @@ namespace Nitric.Proto.Deploy.v1 {
       }
       if (configCase_ == ConfigOneofCase.Secret) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(Secret);
+      }
+      if (configCase_ == ConfigOneofCase.Websocket) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Websocket);
+      }
+      if (configCase_ == ConfigOneofCase.Http) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Http);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4874,6 +5817,18 @@ namespace Nitric.Proto.Deploy.v1 {
             Secret = new global::Nitric.Proto.Deploy.v1.Secret();
           }
           Secret.MergeFrom(other.Secret);
+          break;
+        case ConfigOneofCase.Websocket:
+          if (Websocket == null) {
+            Websocket = new global::Nitric.Proto.Deploy.v1.Websocket();
+          }
+          Websocket.MergeFrom(other.Websocket);
+          break;
+        case ConfigOneofCase.Http:
+          if (Http == null) {
+            Http = new global::Nitric.Proto.Deploy.v1.Http();
+          }
+          Http.MergeFrom(other.Http);
           break;
       }
 
@@ -4980,6 +5935,24 @@ namespace Nitric.Proto.Deploy.v1 {
             Secret = subBuilder;
             break;
           }
+          case 154: {
+            global::Nitric.Proto.Deploy.v1.Websocket subBuilder = new global::Nitric.Proto.Deploy.v1.Websocket();
+            if (configCase_ == ConfigOneofCase.Websocket) {
+              subBuilder.MergeFrom(Websocket);
+            }
+            input.ReadMessage(subBuilder);
+            Websocket = subBuilder;
+            break;
+          }
+          case 162: {
+            global::Nitric.Proto.Deploy.v1.Http subBuilder = new global::Nitric.Proto.Deploy.v1.Http();
+            if (configCase_ == ConfigOneofCase.Http) {
+              subBuilder.MergeFrom(Http);
+            }
+            input.ReadMessage(subBuilder);
+            Http = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -5083,6 +6056,24 @@ namespace Nitric.Proto.Deploy.v1 {
             Secret = subBuilder;
             break;
           }
+          case 154: {
+            global::Nitric.Proto.Deploy.v1.Websocket subBuilder = new global::Nitric.Proto.Deploy.v1.Websocket();
+            if (configCase_ == ConfigOneofCase.Websocket) {
+              subBuilder.MergeFrom(Websocket);
+            }
+            input.ReadMessage(subBuilder);
+            Websocket = subBuilder;
+            break;
+          }
+          case 162: {
+            global::Nitric.Proto.Deploy.v1.Http subBuilder = new global::Nitric.Proto.Deploy.v1.Http();
+            if (configCase_ == ConfigOneofCase.Http) {
+              subBuilder.MergeFrom(Http);
+            }
+            input.ReadMessage(subBuilder);
+            Http = subBuilder;
+            break;
+          }
         }
       }
     }
@@ -5107,7 +6098,7 @@ namespace Nitric.Proto.Deploy.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5325,7 +6316,7 @@ namespace Nitric.Proto.Deploy.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[23]; }
+      get { return global::Nitric.Proto.Deploy.v1.DeployReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

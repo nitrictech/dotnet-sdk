@@ -13,25 +13,25 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
+using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
 using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Queue
 {
     /// <summary>
     /// Represents a Message to be delivered via a Queue.
     /// </summary>
-    public class Task
+    public class Task<T>
     {
         public string Id { get; set; }
         public string PayloadType { get; set; }
-        public object Payload { get; set; }
+        public T Payload { get; set; }
 
         public Task()
         {
-
         }
 
         /// <summary>
@@ -42,6 +42,23 @@ namespace Nitric.Sdk.Queue
         {
             return GetType().Name + "[ID=" + this.Id + "]";
         }
+
+        internal NitricTask ToWire()
+        {
+            Struct payload = null;
+            if (this.Payload != null)
+            {
+                var jsonPayload = JsonConvert.SerializeObject(this.Payload);
+                payload = JsonParser.Default.Parse<Struct>(jsonPayload);
+            }
+
+            return new NitricTask
+            {
+                Id = this.Id ?? "",
+                PayloadType = this.PayloadType ?? "",
+                Payload = payload
+            };
+        }
     }
 
     /// <summary>
@@ -50,12 +67,12 @@ namespace Nitric.Sdk.Queue
     /// Since received tasks are on a limited time lease they include a lease ID.
     /// Received tasks must be completed to be removed from the queue and avoid reprocessing
     /// </summary>
-    public class ReceivedTask : Task
+    public class ReceivedTask<T> : Task<T>
     {
         /// <summary>
         /// The queue that was the source of this task.
         /// </summary>
-        public Queue Queue { get; set; }
+        public Queue<T> Queue { get; set; }
 
         /// <summary>
         /// The unique lease id for this task lease.
@@ -85,7 +102,7 @@ namespace Nitric.Sdk.Queue
             }
             catch (Grpc.Core.RpcException re)
             {
-                throw Common.NitricException.FromRpcException(re);
+                throw NitricException.FromRpcException(re);
             }
         }
     }

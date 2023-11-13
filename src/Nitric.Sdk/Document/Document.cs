@@ -20,7 +20,7 @@ namespace Nitric.Sdk.Document
     /// Represents a point-in-time version of a document, including the contents.
     /// </summary>
     /// <typeparam name="T">The type of the contents of this document</typeparam>
-    public class Document<T> where T : IDictionary<string, object>, new()
+    public class Document<T>
     {
         /// <summary>
         /// The reference to the document in the document database.

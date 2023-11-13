@@ -20,7 +20,6 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Moq;
 using Nitric.Proto.Queue.v1;
-using Nitric.Sdk.Common.Util;
 using Nitric.Sdk.Queue;
 using Xunit;
 
@@ -38,7 +37,7 @@ namespace Nitric.Sdk.Test.Api.Queue
         [Fact]
         public void TestBuildQueueWithName()
         {
-            var queue = new QueuesClient().Queue("test-queue");
+            var queue = new QueuesClient().Queue<TestProfile>("test-queue");
             Assert.NotNull(queue);
             Assert.Equal("test-queue", queue.Name);
         }
@@ -47,10 +46,10 @@ namespace Nitric.Sdk.Test.Api.Queue
         public void TestBuildQueueWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new QueuesClient().Queue("")
+                () => new QueuesClient().Queue<TestProfile>("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new QueuesClient().Queue(null)
+                () => new QueuesClient().Queue<TestProfile>(null)
             );
         }
 
@@ -63,11 +62,11 @@ namespace Nitric.Sdk.Test.Api.Queue
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue("test-queue");
+            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
             try
             {
-                queue.Send(new Task());
+                queue.Send(new Task<TestProfile>());
             }
             catch (global::Nitric.Sdk.Common.NitricException ne)
             {
@@ -87,7 +86,7 @@ namespace Nitric.Sdk.Test.Api.Queue
             NitricTask failedTaskTask = new NitricTask();
             failedTaskTask.Id = "0";
             failedTaskTask.LeaseId = "1";
-            failedTaskTask.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
+            failedTaskTask.Payload = new Struct();
             failedTaskTask.PayloadType = "Dictionary";
 
             Proto.Queue.v1.FailedTask failedTask = new Proto.Queue.v1.FailedTask();
@@ -106,9 +105,9 @@ namespace Nitric.Sdk.Test.Api.Queue
                 .Returns(queueBatchResponse)
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue("test-queue");
+            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
-            var failedTasksResp = queue.Send(new List<Task>());
+            var failedTasksResp = queue.Send(new TestProfile {}, new TestProfile {});
 
             Assert.Equal("I am a failed task... I failed my task", failedTasksResp[0].Message);
 
@@ -126,9 +125,9 @@ namespace Nitric.Sdk.Test.Api.Queue
                 .Returns(new QueueSendBatchResponse())
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue("test-queue");
+            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
-            var failedTasks = queue.Send(new List<Task>());
+            var failedTasks = queue.Send(new TestProfile {}, new TestProfile {});
 
             Assert.Empty(failedTasks);
 
@@ -143,7 +142,7 @@ namespace Nitric.Sdk.Test.Api.Queue
             NitricTask taskToReturn = new NitricTask();
             taskToReturn.Id = "32";
             taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
+            taskToReturn.Payload = new Struct();
             taskToReturn.PayloadType = "Dictionary";
 
             RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();
@@ -158,7 +157,7 @@ namespace Nitric.Sdk.Test.Api.Queue
                 .Returns(queueReceieveResponse)
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue("test-queue");
+            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
             var response = queue.Receive(3);
 
@@ -178,7 +177,7 @@ namespace Nitric.Sdk.Test.Api.Queue
                 .Returns(new QueueReceiveResponse())
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue("test-queue");
+            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
             var response = queue.Receive(3);
 
@@ -197,9 +196,9 @@ namespace Nitric.Sdk.Test.Api.Queue
                     e.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue("test-queue");
+            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
-            queue.Send(new Task { Id = "0", Payload = new Struct(), PayloadType = "JSON" });
+            queue.Send(new Task<TestProfile> { Id = "0", Payload = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" }}, PayloadType = "JSON" });
 
             qc.Verify(
                 t => t.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
@@ -209,19 +208,24 @@ namespace Nitric.Sdk.Test.Api.Queue
         [Fact]
         public void TestComplete()
         {
-            var receivedTask = new ReceivedTask
+            var receivedTask = new ReceivedTask<TestProfile>
             {
                 Id = "32",
                 LeaseId = "1",
-                PayloadType = "Dictionary",
-                Payload = new Dictionary<string, string>(),
+                PayloadType = "profile",
+                Payload = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" }}
             };
+
+            var payload = new Struct();
+            payload.Fields.Add("Name", Value.ForString("John Smith"));
+            payload.Fields.Add("Age", Value.ForNumber(30.0));
+            payload.Fields.Add("Addresses", Value.ForList(new []{ Value.ForString("123 street st") }));
 
             NitricTask taskToReturn = new NitricTask();
             taskToReturn.Id = "32";
             taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = Utils.ObjToStruct(new Dictionary<string, string>());
-            taskToReturn.PayloadType = "Dictionary";
+            taskToReturn.Payload = payload;
+            taskToReturn.PayloadType = "profile";
 
             RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();
             tasks.Add(taskToReturn);
@@ -240,7 +244,7 @@ namespace Nitric.Sdk.Test.Api.Queue
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue("test-queue");
+            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
             var response = queue.Receive(3);
 

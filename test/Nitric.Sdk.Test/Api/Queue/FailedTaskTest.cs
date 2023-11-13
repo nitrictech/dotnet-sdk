@@ -13,35 +13,41 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using Nitric.Sdk.Common.Util;
+using Google.Protobuf.WellKnownTypes;
 using Nitric.Sdk.Queue;
 using Xunit;
 
 namespace Nitric.Sdk.Test.Api.Queue
 {
+    public class TestProfile
+    {
+        public string Name;
+        public double Age;
+        public List<string> Addresses;
+    }
+
     public class FailedTaskTest
     {
         [Fact]
         public void TestBuild()
         {
-            var payload = new Dictionary<string, string>();
-            payload.Add("name", "value");
-            var payloadStruct = Utils.ObjToStruct(payload);
-            var failedTask = new global::Nitric.Sdk.Queue.FailedTask
+            var payload = new TestProfile
+                { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st " } };
+            var failedTask = new global::Nitric.Sdk.Queue.FailedTask<TestProfile>
             {
                 Message = "message",
-                Task = new Task
+                Task = new Task<TestProfile>
                 {
                     Id = "1",
                     PayloadType = "payload type",
-                    Payload = payloadStruct
+                    Payload = payload
                 }
             };
 
             Assert.NotNull(failedTask);
             Assert.Equal("1", failedTask.Task.Id);
             Assert.Equal("payload type", failedTask.Task.PayloadType);
-            Assert.Equal(payloadStruct, failedTask.Task.Payload);
+            Assert.Equal(payload, failedTask.Task.Payload);
             Assert.Equal("message", failedTask.Message);
         }
     }

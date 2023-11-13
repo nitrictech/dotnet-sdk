@@ -37,26 +37,6 @@ namespace Nitric.Sdk.Function
         {
             this.data = data;
         }
-
-        /// <summary>
-        /// Convert the payload of the request to a string, assuming UTF-8 encoding.
-        /// </summary>
-        /// <returns></returns>
-        public string ToText()
-        {
-            return System.Text.Encoding.UTF8.GetString(this.data, 0, this.data.Length);
-        }
-
-        /// <summary>
-        /// Get the HTTP body data encoded from json.
-        ///
-        /// The object is converted from a JSON string to a type T.
-        /// </summary>
-        public T FromJson<T>()
-        {
-            return JsonConvert.DeserializeObject<T>(this.data.ToString());
-        }
-
     }
 
     public interface IContext
@@ -106,6 +86,7 @@ namespace Nitric.Sdk.Function
                 TriggerRequestProto.ContextOneofCase.Topic => EventContext.FromGrpcTriggerRequest(trigger) as T,
                 TriggerRequestProto.ContextOneofCase.Notification =>
                     BucketNotificationContext.FromGrpcTriggerRequest(trigger, (BucketNotificationWorkerOptions)options) as T,
+                TriggerRequestProto.ContextOneofCase.Websocket => WebsocketContext.FromGrpcTriggerRequest(trigger) as T,
                 _ => throw new Exception("Unsupported trigger request type")
             };
         }

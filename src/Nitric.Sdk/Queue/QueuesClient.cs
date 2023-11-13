@@ -12,14 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
-using Google.Protobuf.Collections;
 using GrpcClient = Nitric.Proto.Queue.v1.QueueService.QueueServiceClient;
-using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common;
 using System;
-using System.Linq;
-using Nitric.Sdk.Common.Util;
 
 namespace Nitric.Sdk.Queue
 {
@@ -45,14 +40,14 @@ namespace Nitric.Sdk.Queue
         /// <param name="queueName">The queue's name</param>
         /// <returns>A new queue reference for sending or receiving tasks.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public Queue Queue(string queueName)
+        public Queue<T> Queue<T>(string queueName)
         {
             if (string.IsNullOrEmpty(queueName))
             {
                 throw new ArgumentNullException(nameof(queueName));
             }
 
-            return new Queue(this, queueName);
+            return new Queue<T>(this, queueName);
         }
     }
 }

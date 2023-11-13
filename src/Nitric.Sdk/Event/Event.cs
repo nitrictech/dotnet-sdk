@@ -13,13 +13,19 @@
 // limitations under the License.
 
 using System;
+using System.Runtime.CompilerServices;
+using System.Text;
+using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
+using Nitric.Proto.Event.v1;
 
 namespace Nitric.Sdk.Event
 {
     /// <summary>
     /// Events represent a Message delivered via Publish/Subscribe.
     /// </summary>
-    public class Event
+    public class Event<T>
     {
         /// <summary>
         /// The unique ID of this event.
@@ -36,7 +42,7 @@ namespace Nitric.Sdk.Event
         /// <summary>
         /// The payload (contents) of the event.
         /// </summary>
-        public object Payload { get; set; }
+        public T Payload { get; set; }
 
         /// <summary>
         /// Create a new event.
@@ -51,11 +57,17 @@ namespace Nitric.Sdk.Event
         /// <param name="id">The unique id for this event.</param>
         /// <param name="payloadType">The type of this event's payload.</param>
         /// <param name="payload">The contents of the event message.</param>
-        public Event(string id, string payloadType, object payload)
+        public Event(string id, string payloadType, T payload)
         {
             this.Payload = payload;
-            this.Id = id;
-            this.PayloadType = payloadType;
+            this.Id = id ?? Guid.NewGuid().ToString();
+            this.PayloadType = payloadType ?? "none";
+        }
+
+        public static Event<T> FromPayload(byte[] data)
+        {
+            var eventData = Encoding.Default.GetString(data);
+            return JsonConvert.DeserializeObject<Event<T>>(eventData);
         }
 
         /// <summary>
@@ -64,11 +76,28 @@ namespace Nitric.Sdk.Event
         /// <returns>A string</returns>
         public override string ToString()
         {
-            return GetType().Name +
-                   "[id=" + Id
-                   + ", payloadType=" + PayloadType
-                   + ", payload=" + Payload
-                   + "]";
+            var jsonPayload = JsonConvert.SerializeObject(Payload);
+            return "Event[id=" + Id
+                               + ", payloadType=" + PayloadType
+                               + ", payload=" + jsonPayload
+                               + "]";
+        }
+
+        internal NitricEvent ToWire()
+        {
+            Struct payload = null;
+            if (this.Payload != null)
+            {
+                var jsonPayload = JsonConvert.SerializeObject(this.Payload);
+                payload = JsonParser.Default.Parse<Struct>(jsonPayload);
+            }
+
+            return new NitricEvent
+            {
+                Id = this.Id ?? "",
+                PayloadType = this.PayloadType ?? "",
+                Payload = payload,
+            };
         }
     }
 }

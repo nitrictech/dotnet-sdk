@@ -13,7 +13,7 @@
 // limitations under the License.
 using SystemEnv = System.Environment;
 
-namespace Nitric.Sdk.Common.Util
+namespace Nitric.Sdk.Common
 {
     /// <summary>
     /// Helper Utils for access common Nitric environment variables
@@ -25,8 +25,8 @@ namespace Nitric.Sdk.Common.Util
 
         private static string GetEnvironmentVariable(string name, string defaultValue)
         {
-            var envVar = SystemEnv.GetEnvironmentVariable(name);            
-            return envVar != null && envVar.Length > 0 ? envVar : defaultValue;
+            var envVar = SystemEnv.GetEnvironmentVariable(name);
+            return !string.IsNullOrEmpty(envVar) ? envVar : defaultValue;
         }
 
         internal static string GetNitricHost() =>
