@@ -70,9 +70,12 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="permissions">The permissions that the function has to access the queue.</param>
         /// <returns>A reference to the queue.</returns>
-        public Queue.Queue<T> With(params QueuePermission[] permissions)
+        public Queue.Queue<T> With(QueuePermission permission, params QueuePermission[] permissions)
         {
-            this.RegisterPolicy(permissions);
+            var allPerms = new List<QueuePermission> { permission };
+            allPerms.AddRange(permissions);
+
+            this.RegisterPolicy(allPerms);
             return new QueuesClient().Queue<T>(this.Name);
         }
     }

@@ -74,9 +74,12 @@ namespace Nitric.Sdk.Resource
                 .Distinct();
         }
 
-        public CollectionRef<T> With(params CollectionPermission[] permissions)
+        public CollectionRef<T> With(CollectionPermission permission, params CollectionPermission[] permissions)
         {
-            this.RegisterPolicy(permissions);
+            var allPerms = new List<CollectionPermission> { permission };
+            allPerms.AddRange(permissions);
+
+            this.RegisterPolicy(allPerms);
             return new DocumentsClient().Collection<T>(this.Name);
         }
     }
