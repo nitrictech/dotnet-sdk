@@ -16,27 +16,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Nitric.Sdk.Common;
-using NitricEvent = Nitric.Proto.Topics.v1.NitricEvent;
 using Nitric.Proto.Topics.v1;
-using Nitric.Proto.Topics.v1.Topics.TopicsClient;
-using Nitric.Proto.Topics.v1.Topics.SubscriberClient;
 
 namespace Nitric.Sdk.Topic
 {
     /// <summary>
     /// Events service client.
     /// </summary>
-    public class EventsClient<T>
+    public class TopicsClient<T>
     {
-        internal readonly GrpcClient EventClient;
-        private readonly TopicClient topicClient;
+        internal readonly Topics.TopicsClient TopicClient;
+        private readonly Subscriber.SubscriberClient subscriberClient;
 
         /// <summary>
         /// Create a new events service client.
         /// </summary>
         /// <param name="client">The events gRPC client.</param>
         /// <param name="topic">The topics gRPC client.</param>
-        public EventsClient(GrpcClient client = null, TopicClient topic = null)
+        public TopicsClient(GrpcClient client = null, TopicClient topic = null)
         {
             this.EventClient = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
             this.topicClient = topic ?? new TopicClient(GrpcChannelProvider.GetChannel());

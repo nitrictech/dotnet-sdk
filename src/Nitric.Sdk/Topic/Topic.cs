@@ -12,64 +12,50 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Nitric.Proto.Event.v1;
+using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
+using Nitric.Proto.Topics.v1;
 using Nitric.Sdk.Common;
 
-namespace Nitric.Sdk.Event
+namespace Nitric.Sdk.Topic
 {
     /// <summary>
     /// Represents a reference to a topic.
     /// </summary>
     public class Topic<T>
     {
-        private readonly EventsClient<T> eventsClient;
+        private readonly TopicsClient<T> TopicsClient;
         /// <summary>
         /// The name of topic.
         /// </summary>
         public string Name { get; private set; }
 
-        internal Topic(EventsClient<T> eventsClient, string name)
+        internal Topic(TopicsClient<T> TopicsClient, string name)
         {
-            this.eventsClient = eventsClient;
+            this.TopicsClient = TopicsClient;
             this.Name = name;
         }
 
         /// <summary>
-        /// Publish a new event to this topic.
+        /// Publish a new message to this topic.
         /// </summary>
-        /// <param name="evt">The event to publish</param>
-        /// <returns>The unique id of the published event.</returns>
+        /// <param name="message">The message to publish</param>
         /// <exception cref="NitricException"></exception>
-        public string Publish(Event<T> evt)
+        public void Publish(T message)
         {
-            var request = new EventPublishRequest { Topic = this.Name, Event = evt.ToWire() };
+            Struct structPayload = null;
+            if (message != null)
+            {
+                var jsonPayload = JsonConvert.SerializeObject(message);
+                structPayload = JsonParser.Default.Parse<Struct>(jsonPayload);
+            }
+
+            var request = new TopicPublishRequest { TopicName = this.Name, Message = new Message { StructPayload = structPayload } };
 
             try
             {
-                var response = this.eventsClient.EventClient.Publish(request);
-                return response.Id;
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Publish a new event to this topic.
-        /// </summary>
-        /// <param name="payload">The payload of the event</param>
-        /// <returns>The unique id of the published event.</returns>
-        /// <exception cref="NitricException"></exception>
-        public string Publish(T payload)
-        {
-            var evt = new Event<T> { Payload = payload };
-            var request = new EventPublishRequest { Topic = this.Name, Event = evt.ToWire() };
-
-            try
-            {
-                var response = this.eventsClient.EventClient.Publish(request);
-                return response.Id;
+                this.TopicsClient.TopicClient.Publish(request);
             }
             catch (Grpc.Core.RpcException re)
             {
