@@ -18,7 +18,7 @@ using Google.Protobuf;
 using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Common;
 using Nitric.Sdk.Function;
-using ProtoFile = Nitric.Proto.Storage.v1.File;
+using ProtoFile = Nitric.Proto.Storage.v1.Object;
 
 namespace Nitric.Sdk.Storage
 {

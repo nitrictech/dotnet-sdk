@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.Core" Version="2.38.1" /> 
+    <PackageReference Include="Grpc.Core" Version="2.38.1" />
     <PackageReference Include="Google.Protobuf" Version="3.17.3" />
     <PackageReference Include="Grpc.Net.Client" Version="2.38.0" />
     <PackageReference Include="Grpc.Tools" Version="2.38.1" PrivateAssets="All" />
@@ -23,13 +23,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="../../contracts/validate/validate.proto" ProtoRoot="../../contracts/" GrpcServices="None" OutputDir="Proto" />
-    <Protobuf Include="../../contracts/proto/error/v1/error.proto" ProtoRoot="../../contracts/" GrpcServices="None" OutputDir="Proto" />
-    <Protobuf Include="../../contracts/proto/**/*.proto" Exclude="../../contracts/proto/error/v1/error.proto" ProtoRoot="../../contracts/" OutputDir="Proto" />
+    <Protobuf Include="../../nitric/proto/**/*.proto" ProtoRoot="../../"
+      OutputDir="Proto" />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <Folder Include="../../contracts/" />
+    <Folder Include="../../nitric/" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />

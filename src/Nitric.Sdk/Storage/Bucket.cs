@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Function;
-using ProtoFile = Nitric.Proto.Storage.v1.File;
+using ProtoFile = Nitric.Proto.Storage.v1.Object;
 
 
 namespace Nitric.Sdk.Storage

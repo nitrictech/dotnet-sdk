@@ -19,7 +19,16 @@ download:
 	tar xvzf contracts.tgz
 	rm contracts.tgz
 
-pack: clean download
+download-local:
+	@rm -rf ./nitric
+	@mkdir ./nitric
+	@cp -r ${NITRIC_CORE_HOME}/nitric/proto ./nitric
+
+# /Users/rs/Development/nitric
+
+# "rm -r ./nitric && mkdir ./nitric && cp -r $NITRIC_CORE_HOME/nitric/proto ./nitric",
+
+pack: clean download-local
 	dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj -c Release
 	mkdir -p __out
 	dotnet pack -c Release -o __out
