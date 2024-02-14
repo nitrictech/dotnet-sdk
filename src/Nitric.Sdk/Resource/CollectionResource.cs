@@ -13,7 +13,7 @@
 // limitations under the License.
 using System.Collections.Generic;
 using System.Linq;
-using Nitric.Proto.Resource.v1;
+using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.Document;
 using Action = Nitric.Proto.Resource.v1.Action;
 using NitricResource = Nitric.Proto.Resource.v1.Resource;

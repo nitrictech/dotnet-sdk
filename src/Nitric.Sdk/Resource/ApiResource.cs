@@ -16,13 +16,13 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Google.Api;
-using Nitric.Proto.Resource.v1;
+using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.Function;
-using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
-using ProtoApiResource = Nitric.Proto.Resource.v1.ApiResource;
-using ProtoSecurityDefinition = Nitric.Proto.Resource.v1.ApiSecurityDefinition;
-using ProtoSecurityDefinitionJwt = Nitric.Proto.Resource.v1.ApiSecurityDefinitionJwt;
+using GrpcClient = Nitric.Proto.Secrets.v1.SecretManager.SecretManagerClient;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
+using ProtoApiResource = Nitric.Proto.Resources.v1.ApiResource;
+using ProtoSecurityDefinition = Nitric.Proto.Resources.v1.ApiSecurityDefinitionResource;
+using ProtoSecurityDefinitionJwt = Nitric.Proto.Resources.v1.ApiOpenIdConnectionDefinition;
 
 
 namespace Nitric.Sdk.Resource
@@ -260,20 +260,20 @@ namespace Nitric.Sdk.Resource
                 if (kv.Value.Kind == "jwt")
                 {
                     var jwtSecurityDefinition = kv.Value as JwtSecurityDefinition;
-                    var secDef = new ApiSecurityDefinitionJwt
+                    var secDef = new ApiOpenIdConnectionDefinition
                     {
                         Issuer = jwtSecurityDefinition.Issuer
                     };
 
                     secDef.Audiences.AddRange(jwtSecurityDefinition.Audiences);
 
-                    definition.Jwt = secDef;
+                    definition.Oidc = secDef;
                 }
 
                 apiResource.SecurityDefinitions.Add(kv.Key, definition);
             }
 
-            var request = new ResourceDeclareRequest { Resource = resource, Api = apiResource };
+            var request = new ResourceDeclareRequest { Id = resource, Api = apiResource };
             BaseResource.client.Declare(request);
 
             return this;
@@ -287,20 +287,20 @@ namespace Nitric.Sdk.Resource
         /// - URL: the url of the deployed API.
         /// </summary>
         /// <returns>The details of the API</returns>
-        public ApiDetails Details() {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Api };
+        // public ApiDetails Details() {
+        //     var resource = new NitricResource { Name = this.Name, Type = ResourceType.Api };
 
-            var request = new ResourceDetailsRequest { Resource = resource };
-            var response = client.Details(request);
+        //     var request = new ResourceDetailsRequest { Resource = resource };
+        //     var response = client.Details(request);
 
-            return new ApiDetails
-            {
-                ID = response.Id,
-                Provider = response.Provider,
-                Service = response.Service,
-                URL = response.Api.Url,
-            };
-        }
+        //     return new ApiDetails
+        //     {
+        //         ID = response.Id,
+        //         Provider = response.Provider,
+        //         Service = response.Service,
+        //         URL = response.Api.Url,
+        //     };
+        // }
     }
 
     public class RouteOptions

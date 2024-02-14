@@ -40,88 +40,89 @@ namespace Nitric.Proto.Deployments.v1 {
             "b24YAyABKA4yNS5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuUmVzb3Vy",
             "Y2VEZXBsb3ltZW50QWN0aW9uEkUKBnN0YXR1cxgEIAEoDjI1Lm5pdHJpYy5w",
             "cm90by5kZXBsb3ltZW50cy52MS5SZXNvdXJjZURlcGxveW1lbnRTdGF0dXMS",
-            "FAoMc3ViX3Jlc291cmNlGAUgASgJEg8KB21lc3NhZ2UYBiABKAkiLAoIVXBS",
-            "ZXN1bHQSDwoHc3VjY2VzcxgBIAEoCBIPCgdkZXRhaWxzGAIgASgJIlkKFURl",
-            "cGxveW1lbnREb3duUmVxdWVzdBIrCgphdHRyaWJ1dGVzGAEgASgLMhcuZ29v",
-            "Z2xlLnByb3RvYnVmLlN0cnVjdBITCgtpbnRlcmFjdGl2ZRgCIAEoCCKtAQoT",
-            "RGVwbG95bWVudERvd25FdmVudBIRCgdtZXNzYWdlGAEgASgJSAASOQoGcmVz",
-            "dWx0GAIgASgLMicubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLkRvd25S",
-            "ZXN1bHRIABI9CgZ1cGRhdGUYAyABKAsyKy5uaXRyaWMucHJvdG8uZGVwbG95",
-            "bWVudHMudjEuUmVzb3VyY2VVcGRhdGVIAEIJCgdjb250ZW50IgwKCkRvd25S",
-            "ZXN1bHQiGgoLSW1hZ2VTb3VyY2USCwoDdXJpGAEgASgJIv4BCgdTZXJ2aWNl",
-            "EjkKBWltYWdlGAEgASgLMigubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYx",
-            "LkltYWdlU291cmNlSAASDwoHd29ya2VycxgKIAEoBRITCgd0aW1lb3V0GAsg",
-            "ASgFQgIYARISCgZtZW1vcnkYDCABKAVCAhgBEgwKBHR5cGUYDSABKAkSOgoD",
-            "ZW52GA4gAygLMi0ubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLlNlcnZp",
-            "Y2UuRW52RW50cnkaKgoIRW52RW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVl",
-            "GAIgASgJOgI4AUIICgZzb3VyY2UiSAoGQnVja2V0Ej4KCWxpc3RlbmVycxgB",
-            "IAMoCzIrLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5CdWNrZXRMaXN0",
-            "ZW5lciJrCg5CdWNrZXRMaXN0ZW5lchI8CgZjb25maWcYASABKAsyLC5uaXRy",
-            "aWMucHJvdG8uc3RvcmFnZS52MS5SZWdpc3RyYXRpb25SZXF1ZXN0EhEKB3Nl",
-            "cnZpY2UYAiABKAlIAEIICgZ0YXJnZXQiTwoFVG9waWMSRgoNc3Vic2NyaXB0",
-            "aW9ucxgBIAMoCzIvLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5TdWJz",
-            "Y3JpcHRpb25UYXJnZXQiBwoFUXVldWUiDwoNS2V5VmFsdWVTdG9yZSIICgZT",
-            "ZWNyZXQiMQoSU3Vic2NyaXB0aW9uVGFyZ2V0EhEKB3NlcnZpY2UYASABKAlI",
-            "AEIICgZ0YXJnZXQiVAoRVG9waWNTdWJzY3JpcHRpb24SPwoGdGFyZ2V0GAEg",
-            "ASgLMi8ubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLlN1YnNjcmlwdGlv",
-            "blRhcmdldCIpCgpIdHRwVGFyZ2V0EhEKB3NlcnZpY2UYASABKAlIAEIICgZ0",
-            "YXJnZXQiPwoESHR0cBI3CgZ0YXJnZXQYASABKAsyJy5uaXRyaWMucHJvdG8u",
-            "ZGVwbG95bWVudHMudjEuSHR0cFRhcmdldCIkCgNBcGkSEQoHb3BlbmFwaRgB",
-            "IAEoCUgAQgoKCGRvY3VtZW50IuABCglXZWJzb2NrZXQSRAoOY29ubmVjdF90",
-            "YXJnZXQYASABKAsyLC5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuV2Vi",
-            "c29ja2V0VGFyZ2V0EkcKEWRpc2Nvbm5lY3RfdGFyZ2V0GAIgASgLMiwubml0",
-            "cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLldlYnNvY2tldFRhcmdldBJECg5t",
-            "ZXNzYWdlX3RhcmdldBgDIAEoCzIsLm5pdHJpYy5wcm90by5kZXBsb3ltZW50",
-            "cy52MS5XZWJzb2NrZXRUYXJnZXQiLgoPV2Vic29ja2V0VGFyZ2V0EhEKB3Nl",
-            "cnZpY2UYASABKAlIAEIICgZ0YXJnZXQiLQoOU2NoZWR1bGVUYXJnZXQSEQoH",
-            "c2VydmljZRgBIAEoCUgAQggKBnRhcmdldCLKAQoIU2NoZWR1bGUSOwoGdGFy",
-            "Z2V0GAEgASgLMisubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLlNjaGVk",
-            "dWxlVGFyZ2V0EjsKBWV2ZXJ5GAogASgLMioubml0cmljLnByb3RvLmRlcGxv",
-            "eW1lbnRzLnYxLlNjaGVkdWxlRXZlcnlIABI5CgRjcm9uGAsgASgLMikubml0",
-            "cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLlNjaGVkdWxlQ3JvbkgAQgkKB2Nh",
-            "ZGVuY2UiHQoNU2NoZWR1bGVFdmVyeRIMCgRyYXRlGAEgASgJIiIKDFNjaGVk",
-            "dWxlQ3JvbhISCgpleHByZXNzaW9uGAEgASgJIroFCghSZXNvdXJjZRI5CgJp",
-            "ZBgBIAEoCzItLm5pdHJpYy5wcm90by5yZXNvdXJjZXMudjEuUmVzb3VyY2VJ",
-            "ZGVudGlmaWVyEjcKB3NlcnZpY2UYCiABKAsyJC5uaXRyaWMucHJvdG8uZGVw",
-            "bG95bWVudHMudjEuU2VydmljZUgAEjUKBmJ1Y2tldBgLIAEoCzIjLm5pdHJp",
-            "Yy5wcm90by5kZXBsb3ltZW50cy52MS5CdWNrZXRIABIzCgV0b3BpYxgMIAEo",
-            "CzIiLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5Ub3BpY0gAEi8KA2Fw",
-            "aRgNIAEoCzIgLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5BcGlIABI1",
-            "CgZwb2xpY3kYDiABKAsyIy5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEu",
-            "UG9saWN5SAASOQoIc2NoZWR1bGUYDyABKAsyJS5uaXRyaWMucHJvdG8uZGVw",
-            "bG95bWVudHMudjEuU2NoZWR1bGVIABJFCg9rZXlfdmFsdWVfc3RvcmUYECAB",
-            "KAsyKi5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuS2V5VmFsdWVTdG9y",
-            "ZUgAEjUKBnNlY3JldBgRIAEoCzIjLm5pdHJpYy5wcm90by5kZXBsb3ltZW50",
-            "cy52MS5TZWNyZXRIABI7Cgl3ZWJzb2NrZXQYEiABKAsyJi5uaXRyaWMucHJv",
-            "dG8uZGVwbG95bWVudHMudjEuV2Vic29ja2V0SAASMQoEaHR0cBgTIAEoCzIh",
-            "Lm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5IdHRwSAASMwoFcXVldWUY",
-            "FCABKAsyIi5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuUXVldWVIAEII",
-            "CgZjb25maWcisQEKBlBvbGljeRI5CgpwcmluY2lwYWxzGAEgAygLMiUubml0",
-            "cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLlJlc291cmNlEjIKB2FjdGlvbnMY",
-            "AiADKA4yIS5uaXRyaWMucHJvdG8ucmVzb3VyY2VzLnYxLkFjdGlvbhI4Cgly",
-            "ZXNvdXJjZXMYAyADKAsyJS5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEu",
-            "UmVzb3VyY2UiQAoEU3BlYxI4CglyZXNvdXJjZXMYASADKAsyJS5uaXRyaWMu",
-            "cHJvdG8uZGVwbG95bWVudHMudjEuUmVzb3VyY2UqVQoYUmVzb3VyY2VEZXBs",
-            "b3ltZW50QWN0aW9uEgoKBkNSRUFURRAAEgoKBlVQREFURRABEgsKB1JFUExB",
-            "Q0UQAhIICgRTQU1FEAMSCgoGREVMRVRFEAQqUQoYUmVzb3VyY2VEZXBsb3lt",
-            "ZW50U3RhdHVzEgsKB1BFTkRJTkcQABIPCgtJTl9QUk9HUkVTUxABEgsKB1NV",
-            "Q0NFU1MQAhIKCgZGQUlMRUQQAzLmAQoKRGVwbG95bWVudBJoCgJVcBIwLm5p",
-            "dHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5EZXBsb3ltZW50VXBSZXF1ZXN0",
-            "Gi4ubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLkRlcGxveW1lbnRVcEV2",
-            "ZW50MAESbgoERG93bhIyLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5E",
-            "ZXBsb3ltZW50RG93blJlcXVlc3QaMC5uaXRyaWMucHJvdG8uZGVwbG95bWVu",
-            "dHMudjEuRGVwbG95bWVudERvd25FdmVudDABQrUBCh5pby5uaXRyaWMucHJv",
-            "dG8uZGVwbG95bWVudHMudjFCC0RlcGxveW1lbnRzUAFaSGdpdGh1Yi5jb20v",
-            "bml0cmljdGVjaC9uaXRyaWMvY29yZS9wa2cvcHJvdG8vZGVwbG95bWVudHMv",
-            "djE7ZGVwbG95bWVudHNwYqoCG05pdHJpYy5Qcm90by5EZXBsb3ltZW50cy52",
-            "McoCG05pdHJpY1xQcm90b1xEZXBsb3ltZW50c1xWMWIGcHJvdG8z"));
+            "FAoMc3ViX3Jlc291cmNlGAUgASgJEg8KB21lc3NhZ2UYBiABKAkiNgoIVXBS",
+            "ZXN1bHQSDwoHc3VjY2VzcxgBIAEoCBIOCgRUZXh0GAIgASgJSABCCQoHY29u",
+            "dGVudCJZChVEZXBsb3ltZW50RG93blJlcXVlc3QSKwoKYXR0cmlidXRlcxgB",
+            "IAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSEwoLaW50ZXJhY3RpdmUY",
+            "AiABKAgirQEKE0RlcGxveW1lbnREb3duRXZlbnQSEQoHbWVzc2FnZRgBIAEo",
+            "CUgAEjkKBnJlc3VsdBgCIAEoCzInLm5pdHJpYy5wcm90by5kZXBsb3ltZW50",
+            "cy52MS5Eb3duUmVzdWx0SAASPQoGdXBkYXRlGAMgASgLMisubml0cmljLnBy",
+            "b3RvLmRlcGxveW1lbnRzLnYxLlJlc291cmNlVXBkYXRlSABCCQoHY29udGVu",
+            "dCIMCgpEb3duUmVzdWx0IhoKC0ltYWdlU291cmNlEgsKA3VyaRgBIAEoCSL+",
+            "AQoHU2VydmljZRI5CgVpbWFnZRgBIAEoCzIoLm5pdHJpYy5wcm90by5kZXBs",
+            "b3ltZW50cy52MS5JbWFnZVNvdXJjZUgAEg8KB3dvcmtlcnMYCiABKAUSEwoH",
+            "dGltZW91dBgLIAEoBUICGAESEgoGbWVtb3J5GAwgASgFQgIYARIMCgR0eXBl",
+            "GA0gASgJEjoKA2VudhgOIAMoCzItLm5pdHJpYy5wcm90by5kZXBsb3ltZW50",
+            "cy52MS5TZXJ2aWNlLkVudkVudHJ5GioKCEVudkVudHJ5EgsKA2tleRgBIAEo",
+            "CRINCgV2YWx1ZRgCIAEoCToCOAFCCAoGc291cmNlIkgKBkJ1Y2tldBI+Cgls",
+            "aXN0ZW5lcnMYASADKAsyKy5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEu",
+            "QnVja2V0TGlzdGVuZXIiawoOQnVja2V0TGlzdGVuZXISPAoGY29uZmlnGAEg",
+            "ASgLMiwubml0cmljLnByb3RvLnN0b3JhZ2UudjEuUmVnaXN0cmF0aW9uUmVx",
+            "dWVzdBIRCgdzZXJ2aWNlGAIgASgJSABCCAoGdGFyZ2V0Ik8KBVRvcGljEkYK",
+            "DXN1YnNjcmlwdGlvbnMYASADKAsyLy5uaXRyaWMucHJvdG8uZGVwbG95bWVu",
+            "dHMudjEuU3Vic2NyaXB0aW9uVGFyZ2V0IgcKBVF1ZXVlIg8KDUtleVZhbHVl",
+            "U3RvcmUiCAoGU2VjcmV0IjEKElN1YnNjcmlwdGlvblRhcmdldBIRCgdzZXJ2",
+            "aWNlGAEgASgJSABCCAoGdGFyZ2V0IlQKEVRvcGljU3Vic2NyaXB0aW9uEj8K",
+            "BnRhcmdldBgBIAEoCzIvLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5T",
+            "dWJzY3JpcHRpb25UYXJnZXQiKQoKSHR0cFRhcmdldBIRCgdzZXJ2aWNlGAEg",
+            "ASgJSABCCAoGdGFyZ2V0Ij8KBEh0dHASNwoGdGFyZ2V0GAEgASgLMicubml0",
+            "cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLkh0dHBUYXJnZXQiJAoDQXBpEhEK",
+            "B29wZW5hcGkYASABKAlIAEIKCghkb2N1bWVudCLgAQoJV2Vic29ja2V0EkQK",
+            "DmNvbm5lY3RfdGFyZ2V0GAEgASgLMiwubml0cmljLnByb3RvLmRlcGxveW1l",
+            "bnRzLnYxLldlYnNvY2tldFRhcmdldBJHChFkaXNjb25uZWN0X3RhcmdldBgC",
+            "IAEoCzIsLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5XZWJzb2NrZXRU",
+            "YXJnZXQSRAoObWVzc2FnZV90YXJnZXQYAyABKAsyLC5uaXRyaWMucHJvdG8u",
+            "ZGVwbG95bWVudHMudjEuV2Vic29ja2V0VGFyZ2V0Ii4KD1dlYnNvY2tldFRh",
+            "cmdldBIRCgdzZXJ2aWNlGAEgASgJSABCCAoGdGFyZ2V0Ii0KDlNjaGVkdWxl",
+            "VGFyZ2V0EhEKB3NlcnZpY2UYASABKAlIAEIICgZ0YXJnZXQiygEKCFNjaGVk",
+            "dWxlEjsKBnRhcmdldBgBIAEoCzIrLm5pdHJpYy5wcm90by5kZXBsb3ltZW50",
+            "cy52MS5TY2hlZHVsZVRhcmdldBI7CgVldmVyeRgKIAEoCzIqLm5pdHJpYy5w",
+            "cm90by5kZXBsb3ltZW50cy52MS5TY2hlZHVsZUV2ZXJ5SAASOQoEY3JvbhgL",
+            "IAEoCzIpLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5TY2hlZHVsZUNy",
+            "b25IAEIJCgdjYWRlbmNlIh0KDVNjaGVkdWxlRXZlcnkSDAoEcmF0ZRgBIAEo",
+            "CSIiCgxTY2hlZHVsZUNyb24SEgoKZXhwcmVzc2lvbhgBIAEoCSK6BQoIUmVz",
+            "b3VyY2USOQoCaWQYASABKAsyLS5uaXRyaWMucHJvdG8ucmVzb3VyY2VzLnYx",
+            "LlJlc291cmNlSWRlbnRpZmllchI3CgdzZXJ2aWNlGAogASgLMiQubml0cmlj",
+            "LnByb3RvLmRlcGxveW1lbnRzLnYxLlNlcnZpY2VIABI1CgZidWNrZXQYCyAB",
+            "KAsyIy5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuQnVja2V0SAASMwoF",
+            "dG9waWMYDCABKAsyIi5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuVG9w",
+            "aWNIABIvCgNhcGkYDSABKAsyIC5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMu",
+            "djEuQXBpSAASNQoGcG9saWN5GA4gASgLMiMubml0cmljLnByb3RvLmRlcGxv",
+            "eW1lbnRzLnYxLlBvbGljeUgAEjkKCHNjaGVkdWxlGA8gASgLMiUubml0cmlj",
+            "LnByb3RvLmRlcGxveW1lbnRzLnYxLlNjaGVkdWxlSAASRQoPa2V5X3ZhbHVl",
+            "X3N0b3JlGBAgASgLMioubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLktl",
+            "eVZhbHVlU3RvcmVIABI1CgZzZWNyZXQYESABKAsyIy5uaXRyaWMucHJvdG8u",
+            "ZGVwbG95bWVudHMudjEuU2VjcmV0SAASOwoJd2Vic29ja2V0GBIgASgLMiYu",
+            "bml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLldlYnNvY2tldEgAEjEKBGh0",
+            "dHAYEyABKAsyIS5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuSHR0cEgA",
+            "EjMKBXF1ZXVlGBQgASgLMiIubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYx",
+            "LlF1ZXVlSABCCAoGY29uZmlnIrEBCgZQb2xpY3kSOQoKcHJpbmNpcGFscxgB",
+            "IAMoCzIlLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5SZXNvdXJjZRIy",
+            "CgdhY3Rpb25zGAIgAygOMiEubml0cmljLnByb3RvLnJlc291cmNlcy52MS5B",
+            "Y3Rpb24SOAoJcmVzb3VyY2VzGAMgAygLMiUubml0cmljLnByb3RvLmRlcGxv",
+            "eW1lbnRzLnYxLlJlc291cmNlIkAKBFNwZWMSOAoJcmVzb3VyY2VzGAEgAygL",
+            "MiUubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLlJlc291cmNlKlUKGFJl",
+            "c291cmNlRGVwbG95bWVudEFjdGlvbhIKCgZDUkVBVEUQABIKCgZVUERBVEUQ",
+            "ARILCgdSRVBMQUNFEAISCAoEU0FNRRADEgoKBkRFTEVURRAEKlEKGFJlc291",
+            "cmNlRGVwbG95bWVudFN0YXR1cxILCgdQRU5ESU5HEAASDwoLSU5fUFJPR1JF",
+            "U1MQARILCgdTVUNDRVNTEAISCgoGRkFJTEVEEAMy5gEKCkRlcGxveW1lbnQS",
+            "aAoCVXASMC5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuRGVwbG95bWVu",
+            "dFVwUmVxdWVzdBouLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5EZXBs",
+            "b3ltZW50VXBFdmVudDABEm4KBERvd24SMi5uaXRyaWMucHJvdG8uZGVwbG95",
+            "bWVudHMudjEuRGVwbG95bWVudERvd25SZXF1ZXN0GjAubml0cmljLnByb3Rv",
+            "LmRlcGxveW1lbnRzLnYxLkRlcGxveW1lbnREb3duRXZlbnQwAUK1AQoeaW8u",
+            "bml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxQgtEZXBsb3ltZW50c1ABWkhn",
+            "aXRodWIuY29tL25pdHJpY3RlY2gvbml0cmljL2NvcmUvcGtnL3Byb3RvL2Rl",
+            "cGxveW1lbnRzL3YxO2RlcGxveW1lbnRzcGKqAhtOaXRyaWMuUHJvdG8uRGVw",
+            "bG95bWVudHMudjHKAhtOaXRyaWNcUHJvdG9cRGVwbG95bWVudHNcVjFiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.StructReflection.Descriptor, global::Nitric.Proto.Resources.v1.ResourcesReflection.Descriptor, global::Nitric.Proto.Storage.v1.StorageReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Nitric.Proto.Deployments.v1.ResourceDeploymentAction), typeof(global::Nitric.Proto.Deployments.v1.ResourceDeploymentStatus), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.DeploymentUpRequest), global::Nitric.Proto.Deployments.v1.DeploymentUpRequest.Parser, new[]{ "Spec", "Attributes", "Interactive" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.DeploymentUpEvent), global::Nitric.Proto.Deployments.v1.DeploymentUpEvent.Parser, new[]{ "Message", "Update", "Result" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.ResourceUpdate), global::Nitric.Proto.Deployments.v1.ResourceUpdate.Parser, new[]{ "Id", "Action", "Status", "SubResource", "Message" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.UpResult), global::Nitric.Proto.Deployments.v1.UpResult.Parser, new[]{ "Success", "Details" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.UpResult), global::Nitric.Proto.Deployments.v1.UpResult.Parser, new[]{ "Success", "Text" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.DeploymentDownRequest), global::Nitric.Proto.Deployments.v1.DeploymentDownRequest.Parser, new[]{ "Attributes", "Interactive" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.DeploymentDownEvent), global::Nitric.Proto.Deployments.v1.DeploymentDownEvent.Parser, new[]{ "Message", "Result", "Update" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.DownResult), global::Nitric.Proto.Deployments.v1.DownResult.Parser, null, null, null, null, null),
@@ -1151,7 +1152,12 @@ namespace Nitric.Proto.Deployments.v1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public UpResult(UpResult other) : this() {
       success_ = other.success_;
-      details_ = other.details_;
+      switch (other.ContentCase) {
+        case ContentOneofCase.Text:
+          Text = other.Text;
+          break;
+      }
+
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1174,18 +1180,36 @@ namespace Nitric.Proto.Deployments.v1 {
       }
     }
 
-    /// <summary>Field number for the "details" field.</summary>
-    public const int DetailsFieldNumber = 2;
-    private string details_ = "";
+    /// <summary>Field number for the "Text" field.</summary>
+    public const int TextFieldNumber = 2;
     /// <summary>
-    /// Simple formatted string output as result
+    /// Simple text output as result
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Details {
-      get { return details_; }
+    public string Text {
+      get { return contentCase_ == ContentOneofCase.Text ? (string) content_ : ""; }
       set {
-        details_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        content_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        contentCase_ = ContentOneofCase.Text;
       }
+    }
+
+    private object content_;
+    /// <summary>Enum of possible cases for the "content" oneof.</summary>
+    public enum ContentOneofCase {
+      None = 0,
+      Text = 2,
+    }
+    private ContentOneofCase contentCase_ = ContentOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContentOneofCase ContentCase {
+      get { return contentCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearContent() {
+      contentCase_ = ContentOneofCase.None;
+      content_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1202,7 +1226,8 @@ namespace Nitric.Proto.Deployments.v1 {
         return true;
       }
       if (Success != other.Success) return false;
-      if (Details != other.Details) return false;
+      if (Text != other.Text) return false;
+      if (ContentCase != other.ContentCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1210,7 +1235,8 @@ namespace Nitric.Proto.Deployments.v1 {
     public override int GetHashCode() {
       int hash = 1;
       if (Success != false) hash ^= Success.GetHashCode();
-      if (Details.Length != 0) hash ^= Details.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Text) hash ^= Text.GetHashCode();
+      hash ^= (int) contentCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1231,9 +1257,9 @@ namespace Nitric.Proto.Deployments.v1 {
         output.WriteRawTag(8);
         output.WriteBool(Success);
       }
-      if (Details.Length != 0) {
+      if (contentCase_ == ContentOneofCase.Text) {
         output.WriteRawTag(18);
-        output.WriteString(Details);
+        output.WriteString(Text);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1248,9 +1274,9 @@ namespace Nitric.Proto.Deployments.v1 {
         output.WriteRawTag(8);
         output.WriteBool(Success);
       }
-      if (Details.Length != 0) {
+      if (contentCase_ == ContentOneofCase.Text) {
         output.WriteRawTag(18);
-        output.WriteString(Details);
+        output.WriteString(Text);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1264,8 +1290,8 @@ namespace Nitric.Proto.Deployments.v1 {
       if (Success != false) {
         size += 1 + 1;
       }
-      if (Details.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Details);
+      if (contentCase_ == ContentOneofCase.Text) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Text);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1281,9 +1307,12 @@ namespace Nitric.Proto.Deployments.v1 {
       if (other.Success != false) {
         Success = other.Success;
       }
-      if (other.Details.Length != 0) {
-        Details = other.Details;
+      switch (other.ContentCase) {
+        case ContentOneofCase.Text:
+          Text = other.Text;
+          break;
       }
+
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1303,7 +1332,7 @@ namespace Nitric.Proto.Deployments.v1 {
             break;
           }
           case 18: {
-            Details = input.ReadString();
+            Text = input.ReadString();
             break;
           }
         }
@@ -1325,7 +1354,7 @@ namespace Nitric.Proto.Deployments.v1 {
             break;
           }
           case 18: {
-            Details = input.ReadString();
+            Text = input.ReadString();
             break;
           }
         }

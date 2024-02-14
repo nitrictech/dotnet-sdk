@@ -15,11 +15,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nitric.Proto.Resource.v1;
+using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.Function;
 using Nitric.Sdk.Storage;
-using Action = Nitric.Proto.Resource.v1.Action;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
+using Action = Nitric.Proto.Resources.v1.Action;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
 
 namespace Nitric.Sdk.Resource
 {
@@ -51,7 +51,7 @@ namespace Nitric.Sdk.Resource
         internal override BaseResource Register()
         {
             var resource = new NitricResource { Name = this.Name, Type = ResourceType.Bucket };
-            var request = new ResourceDeclareRequest { Resource = resource };
+            var request = new ResourceDeclareRequest { Id = resource };
             BaseResource.client.Declare(request);
             return this;
         }

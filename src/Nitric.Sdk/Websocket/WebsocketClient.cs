@@ -13,7 +13,7 @@
 // limitations under the License.
 using System;
 using Nitric.Sdk.Common;
-using GrpcClient = Nitric.Proto.Websocket.v1.WebsocketService.WebsocketServiceClient;
+using GrpcClient = Nitric.Proto.Websockets.v1.Websocket.WebsocketClient;
 
 namespace Nitric.Sdk.Websocket
 {

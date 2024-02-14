@@ -14,11 +14,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nitric.Proto.Resource.v1;
+using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.Event;
 using Nitric.Sdk.Function;
-using Action = Nitric.Proto.Resource.v1.Action;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
+using Nitric.Sdk.Topic;
+using Action = Nitric.Proto.Resources.v1.Action;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
+using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
 
 namespace Nitric.Sdk.Resource
 {
@@ -42,7 +44,7 @@ namespace Nitric.Sdk.Resource
         internal override BaseResource Register()
         {
             var resource = new NitricResource { Name = this.Name, Type = ResourceType.Topic };
-            var request = new ResourceDeclareRequest { Resource = resource };
+            var request = new ResourceDeclareRequest { Id = resource };
             BaseResource.client.Declare(request);
             return this;
         }
