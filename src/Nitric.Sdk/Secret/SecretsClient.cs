@@ -14,7 +14,7 @@
 
 using System;
 using Nitric.Sdk.Common;
-using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
+using GrpcClient = Nitric.Proto.Secrets.v1.SecretManager.SecretManagerClient;
 
 namespace Nitric.Sdk.Secret
 {

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 using System;
-using Nitric.Proto.Secret.v1;
+using Nitric.Proto.Secrets.v1;
 using Nitric.Sdk.Common;
 
 namespace Nitric.Sdk.Secret
@@ -58,9 +58,9 @@ namespace Nitric.Sdk.Secret
         {
             var secret = new SecretAccessRequest
             {
-                SecretVersion = new Proto.Secret.v1.SecretVersion
+                SecretVersion = new Proto.Secrets.v1.SecretVersion
                 {
-                    Secret = new Proto.Secret.v1.Secret { Name = this.Secret.Name },
+                    Secret = new Proto.Secrets.v1.Secret { Name = this.Secret.Name },
                     Version = this.Id,
                 }
             };

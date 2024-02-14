@@ -14,9 +14,9 @@
 
 using System;
 using System.Text;
-using Nitric.Proto.Secret.v1;
+using Nitric.Proto.Secrets.v1;
 using Nitric.Sdk.Common;
-using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
+using GrpcClient = Nitric.Proto.Secrets.v1.SecretManager.SecretManagerClient;
 
 namespace Nitric.Sdk.Secret
 {
@@ -81,7 +81,7 @@ namespace Nitric.Sdk.Secret
 
             var request = new SecretPutRequest
             {
-                Secret = new Proto.Secret.v1.Secret { Name = this.Name },
+                Secret = new Proto.Secrets.v1.Secret { Name = this.Name },
                 Value = Google.Protobuf.ByteString.CopyFrom(value),
             };
             try
