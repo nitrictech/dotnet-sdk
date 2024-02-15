@@ -18,16 +18,20 @@ using System.Text;
 using Google.Protobuf;
 using Google.Protobuf.Collections;
 using Newtonsoft.Json;
-using Nitric.Proto.Faas.v1;
-using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
+using Nitric.Proto.Apis.v1;
 
-namespace Nitric.Sdk.Function
+namespace Nitric.Sdk.Service
 {
     /// <summary>
     /// Represents a HTTP request.
     /// </summary>
-    public class HttpRequest : AbstractRequest
+    public class HttpRequest : TriggerRequest
     {
+        /// <summary>
+        /// The raw bytes.
+        /// </summary>
+        private byte[] data;
+
         /// <summary>
         /// The HTTP Method that generated this request. E.g. GET, POST, PUT, DELETE.
         /// </summary>
@@ -59,7 +63,7 @@ namespace Nitric.Sdk.Function
         /// Convert the payload of the request to a string, assuming UTF-8 encoding.
         /// </summary>
         /// <returns></returns>
-        public string Text => System.Text.Encoding.UTF8.GetString(this.data, 0, this.data.Length);
+        public string Text => Encoding.UTF8.GetString(this.data, 0, this.data.Length);
 
         /// <summary>
         /// Get the HTTP body data encoded from json.
@@ -81,8 +85,9 @@ namespace Nitric.Sdk.Function
         /// <param name="headers">any provided HTTP headers</param>
         public HttpRequest(byte[] data, string method, string path, Dictionary<string, string> pathParams,
             Dictionary<string, IEnumerable<string>> queryParams,
-            Dictionary<string, IEnumerable<string>> headers) : base(data)
+            Dictionary<string, IEnumerable<string>> headers) : base()
         {
+            this.data = data;
             this.Path = path;
             this.PathParams = pathParams;
             this.QueryParams = queryParams;
@@ -93,7 +98,7 @@ namespace Nitric.Sdk.Function
     /// <summary>
     /// The response to an HTTP trigger.
     /// </summary>
-    public class HttpResponse
+    public class HttpResponse : TriggerResponse
     {
         /// <summary>
         /// The HTTP status code of the response.
@@ -143,7 +148,7 @@ namespace Nitric.Sdk.Function
         /// </summary>
         /// <param name="req">The context's request</param>
         /// <param name="res">The context's response</param>
-        public HttpContext(HttpRequest req, HttpResponse res) : base(req, res)
+        public HttpContext(string id, HttpRequest req, HttpResponse res) : base(id, req, res)
         {
         }
 
@@ -152,26 +157,27 @@ namespace Nitric.Sdk.Function
         /// </summary>
         /// <param name="trigger"></param>
         /// <returns></returns>
-        public static HttpContext FromGrpcTriggerRequest(TriggerRequestProto trigger)
+        public static HttpContext FromRequest(ServerMessage trigger)
         {
             var headers = new Dictionary<string, IEnumerable<string>>();
-            foreach (var kv in trigger.Http.Headers)
+            foreach (var kv in trigger.HttpRequest.Headers)
             {
                 var values = headers.GetValueOrDefault(kv.Key, new List<string>());
                 headers.Add(kv.Key, values.Concat(kv.Value.Value));
             }
 
             var queryParams = new Dictionary<string, IEnumerable<string>>();
-            foreach (var kv in trigger.Http.QueryParams)
+            foreach (var kv in trigger.HttpRequest.QueryParams)
             {
                 var values = queryParams.GetValueOrDefault(kv.Key, new List<string>());
                 queryParams.Add(kv.Key, values.Concat(kv.Value.Value));
             }
 
-            var pathParams = trigger.Http.PathParams.ToDictionary(kv => kv.Key, kv => kv.Value);
+            var pathParams = trigger.HttpRequest.PathParams.ToDictionary(kv => kv.Key, kv => kv.Value);
 
             return new HttpContext(
-                new HttpRequest(trigger.Data.ToByteArray(), trigger.Http.Method, trigger.Http.Path, pathParams,
+                trigger.Id,
+                new HttpRequest(trigger.HttpRequest.Body.ToByteArray(), trigger.HttpRequest.Method, trigger.HttpRequest.Path, pathParams,
                     queryParams, headers),
                 new HttpResponse()
             );
@@ -181,7 +187,7 @@ namespace Nitric.Sdk.Function
         /// Create a gRPC trigger response from this context.
         /// </summary>
         /// <returns></returns>
-        public override TriggerResponse ToGrpcTriggerContext()
+        public ClientMessage ToResponse()
         {
             var responseHeaders = new MapField<string, HeaderValue>
             {
@@ -192,10 +198,17 @@ namespace Nitric.Sdk.Function
                     return hv;
                 })
             };
-            var triggerResponse = new TriggerResponse
-                { Http = new HttpResponseContext { Status = this.Res.Status } };
-            triggerResponse.Http.Headers.Add(responseHeaders);
-            triggerResponse.Data = ByteString.CopyFrom(this.Res.Body);
+
+            var triggerResponse = new ClientMessage {
+                Id = Id,
+                HttpResponse = new Proto.Apis.v1.HttpResponse
+                {
+                    Status = this.Res.Status,
+                    Body = ByteString.CopyFrom(this.Res.Body),
+                }
+            };
+
+            triggerResponse.HttpResponse.Headers.Add(responseHeaders);
 
             return triggerResponse;
         }

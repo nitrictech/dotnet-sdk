@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using GrpcClient = Nitric.Proto.Queue.v1.QueueService.QueueServiceClient;
+using GrpcClient = Nitric.Proto.Queues.v1.Queues.QueuesClient;
 using Nitric.Sdk.Common;
 using System;
 

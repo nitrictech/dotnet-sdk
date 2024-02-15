@@ -16,8 +16,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Google.Protobuf.Collections;
 using Newtonsoft.Json;
-using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common;
+using Nitric.Proto.Queues.v1;
 
 namespace Nitric.Sdk.Queue
 {
@@ -54,8 +54,7 @@ namespace Nitric.Sdk.Queue
 
             var request = new QueueSendRequest
             {
-                Queue = this.Name,
-                Task = task.ToWire()
+                Payload = task.Payload;
             };
             try
             {

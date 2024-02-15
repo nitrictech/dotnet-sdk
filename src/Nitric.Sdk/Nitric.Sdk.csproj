@@ -23,12 +23,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="../../nitric/proto/**/*.proto" ProtoRoot="../../"
-      OutputDir="Proto" />
+    <Protobuf Include="../../nitric/proto/**/*.proto" ProtoRoot="../../" OutputDir="Proto" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="../../nitric/" />
+    <Folder Include="Worker\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Worker\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />

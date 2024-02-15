@@ -12,41 +12,41 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Nitric.Proto.Faas.v1;
-using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
+using Nitric.Sdk.Common;
+using Nitric.Proto.Topics.v1;
+using ProtoMessageResponse = Nitric.Proto.Topics.v1.MessageResponse;
+using System.Collections.Generic;
 
-namespace Nitric.Sdk.Function
+namespace Nitric.Sdk.Service
 {
     /// <summary>
     /// Represents a message pushed to a subscriber via a topic.
     /// </summary>
-    public class EventRequest : AbstractRequest
+    public class MessageRequest : TriggerRequest
     {
         /// <summary>
         /// The name of the topic that triggered this request
         /// </summary>
-        public string Topic { get; private set; }
+        public string TopicName { get; private set; }
+
+        public Dictionary<string, object> Payload { get; private set; }
 
         /// <summary>
         /// Construct an event request
         /// </summary>
-        /// <param name="data">the payload of the message</param>
-        /// <param name="topic">the source topic</param>
-        public EventRequest(byte[] data, string topic) : base(data)
+        /// <param name="topicName">the source topic</param>
+        /// <param name="message">the message payload</param>
+        public MessageRequest(string topicName, Message message) : base()
         {
-            this.Topic = topic;
-        }
-
-        public Event.Event<T> Payload<T>()
-        {
-            return Event.Event<T>.FromPayload(this.data);
+            this.TopicName = topicName;
+            this.Payload = Struct.ToDictionary(message.StructPayload);
         }
     }
 
     /// <summary>
     /// Represents the results of processing an event.
     /// </summary>
-    public class EventResponse
+    public class MessageResponse : TriggerResponse
     {
         /// <summary>
         /// Indicates whether the event was successfully processed.
@@ -59,7 +59,7 @@ namespace Nitric.Sdk.Function
         /// Construct an event response.
         /// </summary>
         /// <param name="success">Indicates whether the event was successfully processed.</param>
-        public EventResponse(bool success)
+        public MessageResponse(bool success)
         {
             this.Success = success;
         }
@@ -68,14 +68,14 @@ namespace Nitric.Sdk.Function
     /// <summary>
     /// Represents the request/response context for an event.
     /// </summary>
-    public class EventContext : TriggerContext<EventRequest, EventResponse>
+    public class MessageContext : TriggerContext<MessageRequest, MessageResponse>
     {
         /// <summary>
         /// Construct a new EventContext.
         /// </summary>
         /// <param name="req">The request object</param>
         /// <param name="res">The response object</param>
-        public EventContext(EventRequest req, EventResponse res) : base(req, res)
+        public MessageContext(string id, MessageRequest req, MessageResponse res) : base(id, req, res)
         {
         }
 
@@ -84,19 +84,23 @@ namespace Nitric.Sdk.Function
         /// </summary>
         /// <param name="trigger">The trigger to convert into an EventContext.</param>
         /// <returns>the new event context</returns>
-        public static EventContext FromGrpcTriggerRequest(TriggerRequestProto trigger)
+        protected static MessageContext FromRequest(ServerMessage trigger)
         {
-            return new EventContext(new EventRequest(trigger.Data.ToByteArray(), trigger.Topic.Topic),
-                new EventResponse(true));
+            return new MessageContext(trigger.Id, new MessageRequest(trigger.MessageRequest.TopicName, trigger.MessageRequest.Message),
+                new MessageResponse(true));
         }
 
         /// <summary>
         /// Create a gRPC trigger response from this context.
         /// </summary>
         /// <returns></returns>
-        public override TriggerResponse ToGrpcTriggerContext()
+        protected ClientMessage ToResponse()
         {
-            return new TriggerResponse { Topic = new TopicResponseContext { Success = this.Res.Success } };
+            return new ClientMessage
+            {
+                Id = Id,
+                MessageResponse = new ProtoMessageResponse { Success = Res.Success },
+            };
         }
     }
 }

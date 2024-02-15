@@ -15,8 +15,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nitric.Sdk.Function;
 using Nitric.Sdk.Resource;
+using Nitric.Sdk.Worker;
+using Nitric.Sdk.Service;
 
 namespace Nitric.Sdk
 {
@@ -25,12 +26,12 @@ namespace Nitric.Sdk
     /// </summary>
     public class Nitric
     {
-        private static readonly List<Faas> Workers = new List<Faas>();
+        private static readonly List<AbstractWorker> Workers = new List<AbstractWorker>();
 
         private static readonly Dictionary<Type, Dictionary<string, BaseResource>> Cache =
             new Dictionary<Type, Dictionary<string, BaseResource>>();
 
-        internal static void RegisterWorker(Faas worker)
+        internal static void RegisterWorker(AbstractWorker worker)
         {
             Nitric.Workers.Add(worker);
         }

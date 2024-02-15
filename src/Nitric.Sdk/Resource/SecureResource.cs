@@ -14,7 +14,6 @@
 using System.Collections.Generic;
 using Nitric.Proto.Resources.v1;
 using Action = Nitric.Proto.Resources.v1.Action;
-using GrpcClient = Nitric.Proto.Secrets.v1.SecretManager.SecretManagerClient;
 
 namespace Nitric.Sdk.Resource
 {

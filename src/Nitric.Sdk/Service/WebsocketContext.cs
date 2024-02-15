@@ -14,14 +14,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using Newtonsoft.Json;
-using Nitric.Proto.Faas.v1;
-using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
-using WebsocketNotificationTypeProto = Nitric.Proto.Faas.v1.WebsocketEvent;
+using Nitric.Proto.Websockets.v1;
+using WebsocketEventTypeProto = Nitric.Proto.Websockets.v1.WebsocketEventRequest.WebsocketEventOneofCase;
+using Google.Protobuf.Collections;
 
-namespace Nitric.Sdk.Function
+namespace Nitric.Sdk.Service
 {
     public enum WebsocketEventType
     {
@@ -30,12 +29,17 @@ namespace Nitric.Sdk.Function
         Message
     }
 
-    public class WebsocketRequest : AbstractRequest
+    public class WebsocketRequest : TriggerRequest
     {
+        /// <summary>
+        /// The raw message bytes
+        /// </summary>
+        private byte[] data;
+
         /// <summary>
         /// The name of the websocket that triggered this request
         /// </summary>
-        public string Socket { get; private set; }
+        public string SocketName { get; private set; }
 
         /// <summary>
         /// The type of websocket notification
@@ -59,21 +63,21 @@ namespace Nitric.Sdk.Function
         /// <summary>
         /// Construct an event request
         /// </summary>
-        /// <param name="data">the payload of the message</param>
-        /// <param name="socket">the source websocket</param>
+        /// <param name="socketName">the source websocket</param>
         /// <param name="notificationType">the type of websocket notification</param>
         /// <param name="connectionId">the id of the individual connection</param>
         /// <param name="query">the websocket query parameters </param>
-        public WebsocketRequest(byte[] data, string socket, WebsocketEventType notificationType, string connectionId, Dictionary<string, string[]> query) : base(data)
+        public WebsocketRequest(byte[] data, string socketName, WebsocketEventType notificationType, string connectionId, Dictionary<string, string[]> query) : base()
         {
-            this.Socket = socket;
+            this.data = data;
+            this.SocketName = socketName;
             this.NotificationType = notificationType;
             this.ConnectionId = connectionId;
             this.Query = query;
         }
     }
 
-    public class WebsocketResponse
+    public class WebsocketResponse : TriggerResponse
     {
         /// <summary>
         /// Indicates whether the event was successfully processed.
@@ -99,7 +103,7 @@ namespace Nitric.Sdk.Function
         /// </summary>
         /// <param name="req">The request object</param>
         /// <param name="res">The response object</param>
-        public WebsocketContext(WebsocketRequest req, WebsocketResponse res) : base(req, res)
+        public WebsocketContext(string id, WebsocketRequest req, WebsocketResponse res) : base(id, req, res)
         {
         }
 
@@ -108,26 +112,39 @@ namespace Nitric.Sdk.Function
         /// </summary>
         /// <param name="trigger">The trigger to convert into an EventContext.</param>
         /// <returns>the new event context</returns>
-        public static WebsocketContext FromGrpcTriggerRequest(TriggerRequestProto trigger)
+        public static WebsocketContext ToRequest(ServerMessage trigger)
         {
-            var type = FromGrpcWebsocketNotificationType(trigger.Websocket.Event);
-            Dictionary<string, string[]> query = trigger.Websocket.QueryParams.Select
-                (kv =>
-                    new KeyValuePair<string, string[]>(kv.Key, kv.Value.Value.ToArray())
-                ).ToDictionary(x => x.Key, x => x.Value);
+            var type = FromGrpcWebsocketNotificationType(trigger.WebsocketEventRequest.WebsocketEventCase);
+            var queryParams = GetQueryParams(trigger.WebsocketEventRequest.Connection.QueryParams);
+
             return new WebsocketContext(
-                new WebsocketRequest(trigger.Data.ToByteArray(), trigger.Websocket.Socket, type, trigger.Websocket.ConnectionId, query),
+                trigger.Id,
+                new WebsocketRequest(
+                    trigger.WebsocketEventRequest.Message.Body.ToByteArray(),
+                    trigger.WebsocketEventRequest.SocketName,
+                    type,
+                    trigger.WebsocketEventRequest.ConnectionId,
+                    queryParams
+                ),
                 new WebsocketResponse(true));
         }
 
+        private static Dictionary<string, string[]> GetQueryParams(MapField<string, QueryValue> queryParams)
+        {
+            return queryParams.Select
+                (kv =>
+                    new KeyValuePair<string, string[]>(kv.Key, kv.Value.Value.ToArray())
+                ).ToDictionary(x => x.Key, x => x.Value);
+        }
+
         private static WebsocketEventType FromGrpcWebsocketNotificationType(
-            WebsocketNotificationTypeProto notificationType)
+            WebsocketEventTypeProto notificationType)
         {
             return notificationType switch
             {
-                WebsocketNotificationTypeProto.Connect => WebsocketEventType.Connected,
-                WebsocketNotificationTypeProto.Disconnect => WebsocketEventType.Disconnected,
-                WebsocketNotificationTypeProto.Message => WebsocketEventType.Message,
+                WebsocketEventTypeProto.Connection => WebsocketEventType.Connected,
+                WebsocketEventTypeProto.Disconnection => WebsocketEventType.Disconnected,
+                WebsocketEventTypeProto.Message => WebsocketEventType.Message,
                 _ => throw new ArgumentException("Unsupported bucket notification type")
             };
         }
@@ -136,9 +153,9 @@ namespace Nitric.Sdk.Function
         /// Create a gRPC trigger response from this context.
         /// </summary>
         /// <returns></returns>
-        public override TriggerResponse ToGrpcTriggerContext()
+        public ClientMessage ToResponse()
         {
-            return new TriggerResponse { Websocket = new WebsocketResponseContext { Success = this.Res.Success } };
+            return new ClientMessage { Id = Id, WebsocketEventResponse = new WebsocketEventResponse { } };
         }
     }
 }

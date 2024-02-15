@@ -12,83 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using Newtonsoft.Json;
-using Nitric.Proto.Faas.v1;
-using TriggerRequestProto = Nitric.Proto.Faas.v1.TriggerRequest;
-
-namespace Nitric.Sdk.Function
+namespace Nitric.Sdk.Service
 {
     /// <summary>
     /// The base request structure, common to HTTP and Event requests.
     /// </summary>
-    public abstract class AbstractRequest
-    {
-        /// <summary>
-        /// The payload of the request.
-        /// </summary>
-        protected byte[] data;
+    public abstract class TriggerRequest { }
 
-        /// <summary>
-        /// Construct a request.
-        /// </summary>
-        /// <param name="data">The payload of the request.</param>
-        protected AbstractRequest(byte[] data)
-        {
-            this.data = data;
-        }
-    }
-
-    public interface IContext
-    {
-        /// <summary>
-        /// Convert the context object to the gRPC wire representation.
-        /// </summary>
-        /// <returns>A TriggerResponse from the context</returns>
-        public TriggerResponse ToGrpcTriggerContext();
-    }
+    public abstract class TriggerResponse { }
 
     /// <summary>
     /// The base context structure, common to HTTP and Event contexts.
     /// </summary>
     /// <typeparam name="Request">The context's request.</typeparam>
     /// <typeparam name="Response">The context's response.</typeparam>
-    public abstract class TriggerContext<Request, Response> : IContext where Request : AbstractRequest
+    public abstract class TriggerContext<Request, Response>
+        where Request : TriggerRequest
+        where Response : TriggerResponse
     {
+        protected string Id;
         public Request Req;
         public Response Res;
-
-        public abstract TriggerResponse ToGrpcTriggerContext();
 
         /// <summary>
         /// Create a new trigger context with the provided request and response objects.
         /// </summary>
         /// <param name="req">The request object that initiated the trigger</param>
         /// <param name="res">The response to be returned from processing the trigger</param>
-        protected TriggerContext(Request req, Response res)
+        protected TriggerContext(string id, Request req, Response res)
         {
+            this.Id = id;
             this.Req = req;
             this.Res = res;
-        }
-
-        /// <summary>
-        /// Construct the appropriate context object based on the type of the incoming trigger.
-        /// </summary>
-        /// <param name="trigger">The trigger to use to create the context.</param>
-        /// <typeparam name="T">The expected context type.</typeparam>
-        /// <returns>A new context object.</returns>
-        /// <exception cref="Exception">Throws if the context type is unknown or unsupported.</exception>
-        public static T FromGrpcTriggerRequest<T>(TriggerRequestProto trigger, IFaasOptions options) where T : TriggerContext<Request, Response>
-        {
-            return trigger.ContextCase switch
-            {
-                TriggerRequestProto.ContextOneofCase.Http => HttpContext.FromGrpcTriggerRequest(trigger) as T,
-                TriggerRequestProto.ContextOneofCase.Topic => EventContext.FromGrpcTriggerRequest(trigger) as T,
-                TriggerRequestProto.ContextOneofCase.Notification =>
-                    BucketNotificationContext.FromGrpcTriggerRequest(trigger, (BucketNotificationWorkerOptions)options) as T,
-                TriggerRequestProto.ContextOneofCase.Websocket => WebsocketContext.FromGrpcTriggerRequest(trigger) as T,
-                _ => throw new Exception("Unsupported trigger request type")
-            };
         }
     }
 }

@@ -12,17 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using Nitric.Sdk.Function;
+using Nitric.Sdk.Service;
+using Nitric.Sdk.Worker;
+using Nitric.Proto.Schedules.v1;
 
 namespace Nitric.Sdk.Resource
 {
     public class ScheduleResource
     {
-        private string name;
+        private string Name;
 
         internal ScheduleResource(string name)
         {
-            this.name = name;
+            this.Name = name;
         }
 
         /// <summary>
@@ -31,16 +33,14 @@ namespace Nitric.Sdk.Resource
         /// <param name="rate">The interval for the schedule running. e.g. 7 for every '7 days'</param>
         /// <param name="frequency">The frequency for the schedule running. e.g. Days for every '7 days'</param>
         /// <param name="middleware">The middleware (code) to run on a schedule.</param>
-        public void Every(int rate, Frequency frequency, Func<EventContext, EventContext> middleware)
+        public void Every(int rate, Frequency frequency, Func<IntervalContext, IntervalContext> middleware)
         {
-            var faas = new Faas(new ScheduleRateWorkerOptions
+            var registration = new RegistrationRequest
             {
-                Rate = rate,
-                Frequency = frequency,
-                Description = this.name
-            });
-
-            faas.Event(middleware);
+                ScheduleName = this.Name,
+                Every = new ScheduleEvery { Rate = rate, }
+            };
+            var worker = new ScheduleWorker();
 
             Nitric.RegisterWorker(faas);
         }
@@ -51,7 +51,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="rate">The interval for the schedule running. e.g. 7 for every '7 days'</param>
         /// <param name="frequency">The frequency for the schedule running. e.g. Days for every '7 days'</param>
         /// <param name="middleware">The middlewares (code) to run on a schedule.</param>
-        public void Every(int rate, Frequency frequency, params Middleware<EventContext>[] middleware)
+        public void Every(int rate, Frequency frequency, params Middleware<IntervalContext>[] middleware)
         {
             var faas = new Faas(new ScheduleRateWorkerOptions
             {

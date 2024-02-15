@@ -11,14 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 
-namespace Nitric.Sdk.Function
+namespace Nitric.Sdk.Service
 {
     /// <summary>
     /// Represents a chainable handler for incoming requests. Useful for decorating existing handlers.
     /// </summary>
     /// <typeparam name="TCtx">The request context.</typeparam>
-
     public delegate TCtx Middleware<TCtx>(TCtx ctx, Func<TCtx, TCtx> next);
 }

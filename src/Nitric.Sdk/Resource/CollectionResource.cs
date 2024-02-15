@@ -14,9 +14,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nitric.Proto.Resources.v1;
-using Nitric.Sdk.Document;
-using Action = Nitric.Proto.Resource.v1.Action;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
+using Action = Nitric.Proto.Resources.v1.Action;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
+using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
 
 namespace Nitric.Sdk.Resource
 {
@@ -41,7 +41,7 @@ namespace Nitric.Sdk.Resource
 
     public class CollectionResource<T> : SecureResource<CollectionPermission>
     {
-        internal CollectionResource(string name) : base(name, ResourceType.Collection)
+        internal CollectionResource(string name) : base(name, ResourceType.KeyValueStore)
         {
         }
 
