@@ -84,7 +84,7 @@ namespace Nitric.Proto.KeyValue.v1 {
     public abstract partial class KeyValueBase
     {
       /// <summary>
-      /// Get an existing document
+      /// Get an existing value
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -95,7 +95,7 @@ namespace Nitric.Proto.KeyValue.v1 {
       }
 
       /// <summary>
-      /// Create a new or overwrite an existing document
+      /// Create a new or overwrite an existing value
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -106,7 +106,7 @@ namespace Nitric.Proto.KeyValue.v1 {
       }
 
       /// <summary>
-      /// Delete an existing document
+      /// Delete a key and its value
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -142,7 +142,7 @@ namespace Nitric.Proto.KeyValue.v1 {
       }
 
       /// <summary>
-      /// Get an existing document
+      /// Get an existing value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -154,7 +154,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return Get(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Get an existing document
+      /// Get an existing value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -164,7 +164,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return CallInvoker.BlockingUnaryCall(__Method_Get, null, options, request);
       }
       /// <summary>
-      /// Get an existing document
+      /// Get an existing value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -176,7 +176,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return GetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Get an existing document
+      /// Get an existing value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -186,7 +186,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return CallInvoker.AsyncUnaryCall(__Method_Get, null, options, request);
       }
       /// <summary>
-      /// Create a new or overwrite an existing document
+      /// Create a new or overwrite an existing value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -198,7 +198,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return Set(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Create a new or overwrite an existing document
+      /// Create a new or overwrite an existing value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -208,7 +208,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return CallInvoker.BlockingUnaryCall(__Method_Set, null, options, request);
       }
       /// <summary>
-      /// Create a new or overwrite an existing document
+      /// Create a new or overwrite an existing value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -220,7 +220,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return SetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Create a new or overwrite an existing document
+      /// Create a new or overwrite an existing value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -230,7 +230,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return CallInvoker.AsyncUnaryCall(__Method_Set, null, options, request);
       }
       /// <summary>
-      /// Delete an existing document
+      /// Delete a key and its value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -242,7 +242,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return Delete(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Delete an existing document
+      /// Delete a key and its value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -252,7 +252,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return CallInvoker.BlockingUnaryCall(__Method_Delete, null, options, request);
       }
       /// <summary>
-      /// Delete an existing document
+      /// Delete a key and its value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -264,7 +264,7 @@ namespace Nitric.Proto.KeyValue.v1 {
         return DeleteAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Delete an existing document
+      /// Delete a key and its value
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>

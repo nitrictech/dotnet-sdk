@@ -8,6 +8,9 @@
 using grpc = global::Grpc.Core;
 
 namespace Nitric.Proto.Secrets.v1 {
+  /// <summary>
+  /// The Nitric Secret Service
+  /// </summary>
   public static partial class SecretManager
   {
     static readonly string __ServiceName = "nitric.proto.secrets.v1.SecretManager";

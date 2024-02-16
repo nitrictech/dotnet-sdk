@@ -30,31 +30,30 @@ namespace Nitric.Proto.Schedules.v1 {
             "dHJpYy5wcm90by5zY2hlZHVsZXMudjEuUmVnaXN0cmF0aW9uUmVxdWVzdEgA",
             "EkgKEWludGVydmFsX3Jlc3BvbnNlGAMgASgLMisubml0cmljLnByb3RvLnNj",
             "aGVkdWxlcy52MS5JbnRlcnZhbFJlc3BvbnNlSABCCQoHY29udGVudCIoCg9J",
-            "bnRlcnZhbFJlcXVlc3QSFQoNc2NoZWR1bGVfbmFtZRgBIAEoCSIiCg9NZXNz",
-            "YWdlUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCCLAAQoNU2VydmVyTWVzc2Fn",
-            "ZRIKCgJpZBgBIAEoCRJQChVyZWdpc3RyYXRpb25fcmVzcG9uc2UYAiABKAsy",
-            "Ly5uaXRyaWMucHJvdG8uc2NoZWR1bGVzLnYxLlJlZ2lzdHJhdGlvblJlc3Bv",
-            "bnNlSAASRgoQaW50ZXJ2YWxfcmVxdWVzdBgDIAEoCzIqLm5pdHJpYy5wcm90",
-            "by5zY2hlZHVsZXMudjEuSW50ZXJ2YWxSZXF1ZXN0SABCCQoHY29udGVudCKr",
-            "AQoTUmVnaXN0cmF0aW9uUmVxdWVzdBIVCg1zY2hlZHVsZV9uYW1lGAEgASgJ",
-            "EjkKBWV2ZXJ5GAogASgLMigubml0cmljLnByb3RvLnNjaGVkdWxlcy52MS5T",
-            "Y2hlZHVsZUV2ZXJ5SAASNwoEY3JvbhgLIAEoCzInLm5pdHJpYy5wcm90by5z",
-            "Y2hlZHVsZXMudjEuU2NoZWR1bGVDcm9uSABCCQoHY2FkZW5jZSIdCg1TY2hl",
-            "ZHVsZUV2ZXJ5EgwKBHJhdGUYASABKAkiIgoMU2NoZWR1bGVDcm9uEhIKCmV4",
-            "cHJlc3Npb24YASABKAkiFgoUUmVnaXN0cmF0aW9uUmVzcG9uc2UiEgoQSW50",
-            "ZXJ2YWxSZXNwb25zZTJvCglTY2hlZHVsZXMSYgoIU2NoZWR1bGUSKC5uaXRy",
-            "aWMucHJvdG8uc2NoZWR1bGVzLnYxLkNsaWVudE1lc3NhZ2UaKC5uaXRyaWMu",
-            "cHJvdG8uc2NoZWR1bGVzLnYxLlNlcnZlck1lc3NhZ2UoATABQrABChxpby5u",
-            "aXRyaWMucHJvdG8uc2NoZWR1bGVzLnYxQhBTY2hlZHVsZXNTZXJ2aWNlUAFa",
-            "RGdpdGh1Yi5jb20vbml0cmljdGVjaC9uaXRyaWMvY29yZS9wa2cvcHJvdG8v",
-            "c2NoZWR1bGVzL3YxO3NjaGVkdWxlc3BiqgIZTml0cmljLlByb3RvLlNjaGVk",
-            "dWxlcy52McoCGU5pdHJpY1xQcm90b1xTY2hlZHVsZXNcVjFiBnByb3RvMw=="));
+            "bnRlcnZhbFJlcXVlc3QSFQoNc2NoZWR1bGVfbmFtZRgBIAEoCSLAAQoNU2Vy",
+            "dmVyTWVzc2FnZRIKCgJpZBgBIAEoCRJQChVyZWdpc3RyYXRpb25fcmVzcG9u",
+            "c2UYAiABKAsyLy5uaXRyaWMucHJvdG8uc2NoZWR1bGVzLnYxLlJlZ2lzdHJh",
+            "dGlvblJlc3BvbnNlSAASRgoQaW50ZXJ2YWxfcmVxdWVzdBgDIAEoCzIqLm5p",
+            "dHJpYy5wcm90by5zY2hlZHVsZXMudjEuSW50ZXJ2YWxSZXF1ZXN0SABCCQoH",
+            "Y29udGVudCKrAQoTUmVnaXN0cmF0aW9uUmVxdWVzdBIVCg1zY2hlZHVsZV9u",
+            "YW1lGAEgASgJEjkKBWV2ZXJ5GAogASgLMigubml0cmljLnByb3RvLnNjaGVk",
+            "dWxlcy52MS5TY2hlZHVsZUV2ZXJ5SAASNwoEY3JvbhgLIAEoCzInLm5pdHJp",
+            "Yy5wcm90by5zY2hlZHVsZXMudjEuU2NoZWR1bGVDcm9uSABCCQoHY2FkZW5j",
+            "ZSIdCg1TY2hlZHVsZUV2ZXJ5EgwKBHJhdGUYASABKAkiIgoMU2NoZWR1bGVD",
+            "cm9uEhIKCmV4cHJlc3Npb24YASABKAkiFgoUUmVnaXN0cmF0aW9uUmVzcG9u",
+            "c2UiEgoQSW50ZXJ2YWxSZXNwb25zZTJvCglTY2hlZHVsZXMSYgoIU2NoZWR1",
+            "bGUSKC5uaXRyaWMucHJvdG8uc2NoZWR1bGVzLnYxLkNsaWVudE1lc3NhZ2Ua",
+            "KC5uaXRyaWMucHJvdG8uc2NoZWR1bGVzLnYxLlNlcnZlck1lc3NhZ2UoATAB",
+            "QrABChxpby5uaXRyaWMucHJvdG8uc2NoZWR1bGVzLnYxQhBTY2hlZHVsZXNT",
+            "ZXJ2aWNlUAFaRGdpdGh1Yi5jb20vbml0cmljdGVjaC9uaXRyaWMvY29yZS9w",
+            "a2cvcHJvdG8vc2NoZWR1bGVzL3YxO3NjaGVkdWxlc3BiqgIZTml0cmljLlBy",
+            "b3RvLlNjaGVkdWxlcy52McoCGU5pdHJpY1xQcm90b1xTY2hlZHVsZXNcVjFi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Schedules.v1.ClientMessage), global::Nitric.Proto.Schedules.v1.ClientMessage.Parser, new[]{ "Id", "RegistrationRequest", "IntervalResponse" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Schedules.v1.IntervalRequest), global::Nitric.Proto.Schedules.v1.IntervalRequest.Parser, new[]{ "ScheduleName" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Schedules.v1.MessageResponse), global::Nitric.Proto.Schedules.v1.MessageResponse.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Schedules.v1.ServerMessage), global::Nitric.Proto.Schedules.v1.ServerMessage.Parser, new[]{ "Id", "RegistrationResponse", "IntervalRequest" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Schedules.v1.RegistrationRequest), global::Nitric.Proto.Schedules.v1.RegistrationRequest.Parser, new[]{ "ScheduleName", "Every", "Cron" }, new[]{ "Cadence" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Schedules.v1.ScheduleEvery), global::Nitric.Proto.Schedules.v1.ScheduleEvery.Parser, new[]{ "Rate" }, null, null, null, null),
@@ -67,6 +66,9 @@ namespace Nitric.Proto.Schedules.v1 {
 
   }
   #region Messages
+  /// <summary>
+  /// ClientMessages are sent from the service to the nitric server
+  /// </summary>
   public sealed partial class ClientMessage : pb::IMessage<ClientMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -131,7 +133,7 @@ namespace Nitric.Proto.Schedules.v1 {
     /// <summary>Field number for the "registration_request" field.</summary>
     public const int RegistrationRequestFieldNumber = 2;
     /// <summary>
-    /// Register a subscription to a schedule
+    /// Register new a schedule
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Nitric.Proto.Schedules.v1.RegistrationRequest RegistrationRequest {
@@ -145,7 +147,7 @@ namespace Nitric.Proto.Schedules.v1 {
     /// <summary>Field number for the "interval_response" field.</summary>
     public const int IntervalResponseFieldNumber = 3;
     /// <summary>
-    /// Response to a schedule interval
+    /// Response to a schedule interval (i.e. response from callback function)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Nitric.Proto.Schedules.v1.IntervalResponse IntervalResponse {
@@ -549,178 +551,9 @@ namespace Nitric.Proto.Schedules.v1 {
 
   }
 
-  public sealed partial class MessageResponse : pb::IMessage<MessageResponse>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<MessageResponse> _parser = new pb::MessageParser<MessageResponse>(() => new MessageResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<MessageResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[2]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MessageResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MessageResponse(MessageResponse other) : this() {
-      success_ = other.success_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MessageResponse Clone() {
-      return new MessageResponse(this);
-    }
-
-    /// <summary>Field number for the "success" field.</summary>
-    public const int SuccessFieldNumber = 1;
-    private bool success_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Success {
-      get { return success_; }
-      set {
-        success_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as MessageResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(MessageResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Success != other.Success) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Success != false) hash ^= Success.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (Success != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Success);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Success != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Success);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Success != false) {
-        size += 1 + 1;
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(MessageResponse other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Success != false) {
-        Success = other.Success;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            Success = input.ReadBool();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 8: {
-            Success = input.ReadBool();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
+  /// <summary>
+  /// ServerMessages are sent from the nitric server to the service
+  /// </summary>
   public sealed partial class ServerMessage : pb::IMessage<ServerMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -733,7 +566,7 @@ namespace Nitric.Proto.Schedules.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -799,7 +632,7 @@ namespace Nitric.Proto.Schedules.v1 {
     /// <summary>Field number for the "interval_request" field.</summary>
     public const int IntervalRequestFieldNumber = 3;
     /// <summary>
-    /// A schedule interval trigger request
+    /// A schedule interval trigger request (i.e. call the callback)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Nitric.Proto.Schedules.v1.IntervalRequest IntervalRequest {
@@ -1043,7 +876,7 @@ namespace Nitric.Proto.Schedules.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1344,7 +1177,7 @@ namespace Nitric.Proto.Schedules.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1516,7 +1349,7 @@ namespace Nitric.Proto.Schedules.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1688,7 +1521,7 @@ namespace Nitric.Proto.Schedules.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1824,7 +1657,7 @@ namespace Nitric.Proto.Schedules.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Nitric.Proto.Schedules.v1.SchedulesReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

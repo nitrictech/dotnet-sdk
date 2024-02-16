@@ -69,7 +69,7 @@ namespace Nitric.Proto.KeyValue.v1 {
   }
   #region Messages
   /// <summary>
-  /// Provides a Key Value Store type for storing documents
+  /// Provides a Key/Value Store
   /// </summary>
   public sealed partial class Store : pb::IMessage<Store>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE

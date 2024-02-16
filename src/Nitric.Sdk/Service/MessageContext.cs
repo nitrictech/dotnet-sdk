@@ -15,31 +15,30 @@
 using Nitric.Sdk.Common;
 using Nitric.Proto.Topics.v1;
 using ProtoMessageResponse = Nitric.Proto.Topics.v1.MessageResponse;
-using System.Collections.Generic;
 
 namespace Nitric.Sdk.Service
 {
     /// <summary>
     /// Represents a message pushed to a subscriber via a topic.
     /// </summary>
-    public class MessageRequest : TriggerRequest
+    public class MessageRequest<T> : TriggerRequest
     {
         /// <summary>
         /// The name of the topic that triggered this request
         /// </summary>
         public string TopicName { get; private set; }
 
-        public Dictionary<string, object> Payload { get; private set; }
+        public T Payload { get; private set; }
 
         /// <summary>
         /// Construct an event request
         /// </summary>
         /// <param name="topicName">the source topic</param>
         /// <param name="message">the message payload</param>
-        public MessageRequest(string topicName, Message message) : base()
+        public MessageRequest(string topicName, TopicMessage message) : base()
         {
             this.TopicName = topicName;
-            this.Payload = Struct.ToDictionary(message.StructPayload);
+            this.Payload = Struct.ToJsonSerializable<T>(message.StructPayload);
         }
     }
 
@@ -68,14 +67,14 @@ namespace Nitric.Sdk.Service
     /// <summary>
     /// Represents the request/response context for an event.
     /// </summary>
-    public class MessageContext : TriggerContext<MessageRequest, MessageResponse>
+    public class MessageContext<T> : TriggerContext<MessageRequest<T>, MessageResponse>
     {
         /// <summary>
         /// Construct a new EventContext.
         /// </summary>
         /// <param name="req">The request object</param>
         /// <param name="res">The response object</param>
-        public MessageContext(string id, MessageRequest req, MessageResponse res) : base(id, req, res)
+        public MessageContext(string id, MessageRequest<T> req, MessageResponse res) : base(id, req, res)
         {
         }
 
@@ -84,9 +83,9 @@ namespace Nitric.Sdk.Service
         /// </summary>
         /// <param name="trigger">The trigger to convert into an EventContext.</param>
         /// <returns>the new event context</returns>
-        protected static MessageContext FromRequest(ServerMessage trigger)
+        internal static MessageContext<T> FromRequest(ServerMessage trigger)
         {
-            return new MessageContext(trigger.Id, new MessageRequest(trigger.MessageRequest.TopicName, trigger.MessageRequest.Message),
+            return new MessageContext<T>(trigger.Id, new MessageRequest<T>(trigger.MessageRequest.TopicName, trigger.MessageRequest.Message),
                 new MessageResponse(true));
         }
 
@@ -94,7 +93,7 @@ namespace Nitric.Sdk.Service
         /// Create a gRPC trigger response from this context.
         /// </summary>
         /// <returns></returns>
-        protected ClientMessage ToResponse()
+        internal ClientMessage ToResponse()
         {
             return new ClientMessage
             {

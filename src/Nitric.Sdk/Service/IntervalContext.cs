@@ -60,7 +60,7 @@ namespace Nitric.Sdk.Service
         /// </summary>
         /// <param name="trigger">The trigger to convert into an EventContext.</param>
         /// <returns>the new event context</returns>
-        public static IntervalContext FromRequest(ServerMessage trigger)
+        internal static IntervalContext FromRequest(ServerMessage trigger)
         {
             return new IntervalContext(trigger.Id, new IntervalRequest(trigger.IntervalRequest.ScheduleName),
                 new IntervalResponse());
@@ -70,7 +70,7 @@ namespace Nitric.Sdk.Service
         /// Create a gRPC trigger response from this context.
         /// </summary>
         /// <returns></returns>
-        public ClientMessage ToRequest()
+        internal ClientMessage ToResponse()
         {
             return new ClientMessage { Id = Id, IntervalResponse = new Proto.Schedules.v1.IntervalResponse() };
         }

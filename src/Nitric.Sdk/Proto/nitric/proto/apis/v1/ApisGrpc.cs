@@ -9,7 +9,7 @@ using grpc = global::Grpc.Core;
 
 namespace Nitric.Proto.Apis.v1 {
   /// <summary>
-  /// Service for publishing asynchronous messages
+  /// Service for API routing and handlers
   /// </summary>
   public static partial class Api
   {
@@ -57,10 +57,10 @@ namespace Nitric.Proto.Apis.v1 {
         __Marshaller_nitric_proto_apis_v1_ClientMessage,
         __Marshaller_nitric_proto_apis_v1_ServerMessage);
 
-    static readonly grpc::Method<global::Nitric.Proto.Apis.v1.ApiDetailsRequest, global::Nitric.Proto.Apis.v1.ApiDetailsResponse> __Method_Details = new grpc::Method<global::Nitric.Proto.Apis.v1.ApiDetailsRequest, global::Nitric.Proto.Apis.v1.ApiDetailsResponse>(
+    static readonly grpc::Method<global::Nitric.Proto.Apis.v1.ApiDetailsRequest, global::Nitric.Proto.Apis.v1.ApiDetailsResponse> __Method_ApiDetails = new grpc::Method<global::Nitric.Proto.Apis.v1.ApiDetailsRequest, global::Nitric.Proto.Apis.v1.ApiDetailsResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "Details",
+        "ApiDetails",
         __Marshaller_nitric_proto_apis_v1_ApiDetailsRequest,
         __Marshaller_nitric_proto_apis_v1_ApiDetailsResponse);
 
@@ -92,7 +92,7 @@ namespace Nitric.Proto.Apis.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Apis.v1.ApiDetailsResponse> Details(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Apis.v1.ApiDetailsResponse> ApiDetails(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -150,9 +150,9 @@ namespace Nitric.Proto.Apis.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Apis.v1.ApiDetailsResponse Details(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Nitric.Proto.Apis.v1.ApiDetailsResponse ApiDetails(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return Details(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return ApiDetails(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Retrieve details about an API
@@ -160,9 +160,9 @@ namespace Nitric.Proto.Apis.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Apis.v1.ApiDetailsResponse Details(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::CallOptions options)
+      public virtual global::Nitric.Proto.Apis.v1.ApiDetailsResponse ApiDetails(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_Details, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_ApiDetails, null, options, request);
       }
       /// <summary>
       /// Retrieve details about an API
@@ -172,9 +172,9 @@ namespace Nitric.Proto.Apis.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Apis.v1.ApiDetailsResponse> DetailsAsync(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Apis.v1.ApiDetailsResponse> ApiDetailsAsync(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return DetailsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return ApiDetailsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Retrieve details about an API
@@ -182,9 +182,9 @@ namespace Nitric.Proto.Apis.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Apis.v1.ApiDetailsResponse> DetailsAsync(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Apis.v1.ApiDetailsResponse> ApiDetailsAsync(global::Nitric.Proto.Apis.v1.ApiDetailsRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_Details, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_ApiDetails, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ApiClient NewInstance(ClientBaseConfiguration configuration)
@@ -199,7 +199,7 @@ namespace Nitric.Proto.Apis.v1 {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_Serve, serviceImpl.Serve)
-          .AddMethod(__Method_Details, serviceImpl.Details).Build();
+          .AddMethod(__Method_ApiDetails, serviceImpl.ApiDetails).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -209,7 +209,7 @@ namespace Nitric.Proto.Apis.v1 {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ApiBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Serve, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Nitric.Proto.Apis.v1.ClientMessage, global::Nitric.Proto.Apis.v1.ServerMessage>(serviceImpl.Serve));
-      serviceBinder.AddMethod(__Method_Details, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Apis.v1.ApiDetailsRequest, global::Nitric.Proto.Apis.v1.ApiDetailsResponse>(serviceImpl.Details));
+      serviceBinder.AddMethod(__Method_ApiDetails, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Apis.v1.ApiDetailsRequest, global::Nitric.Proto.Apis.v1.ApiDetailsResponse>(serviceImpl.ApiDetails));
     }
 
   }

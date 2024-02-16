@@ -1,23 +1,23 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Nitric.Sdk.Common;
-using Nitric.Proto.Schedules.v1;
-using GrpcClient = Nitric.Proto.Schedules.v1.Schedules.SchedulesClient;
+using Nitric.Proto.Apis.v1;
+using GrpcClient = Nitric.Proto.Apis.v1.Api.ApiClient;
 using Nitric.Sdk.Service;
 using System;
 
 namespace Nitric.Sdk.Worker
 {
-    public class ScheduleWorker : AbstractWorker<IntervalContext>
+    public class ApiWorker : AbstractWorker<HttpContext>
     {
         readonly private RegistrationRequest RegistrationRequest;
 
-        public ScheduleWorker(RegistrationRequest request, Func<IntervalContext, IntervalContext> middleware) : base(middleware)
+        public ApiWorker(RegistrationRequest request, Func<HttpContext, HttpContext> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
         }
 
-        public ScheduleWorker(RegistrationRequest request, params Middleware<IntervalContext>[] middlewares) : base(middlewares)
+        public ApiWorker(RegistrationRequest request, params Middleware<HttpContext>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
         }
@@ -26,7 +26,7 @@ namespace Nitric.Sdk.Worker
         {
             var client = new GrpcClient(GrpcChannelProvider.GetChannel());
 
-            var stream = client.Schedule();
+            var stream = client.Serve();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
@@ -38,9 +38,9 @@ namespace Nitric.Sdk.Worker
                 {
                     // Schedule connected with Nitric server.
                 }
-                else if (req.IntervalRequest != null)
+                else if (req.HttpRequest != null)
                 {
-                    var ctx = IntervalContext.FromRequest(req);
+                    var ctx = HttpContext.FromRequest(req);
 
                     ctx = this.Middleware(ctx);
 

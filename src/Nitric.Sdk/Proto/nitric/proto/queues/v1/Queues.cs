@@ -26,59 +26,60 @@ namespace Nitric.Proto.Queues.v1 {
           string.Concat(
             "CiNuaXRyaWMvcHJvdG8vcXVldWVzL3YxL3F1ZXVlcy5wcm90bxIWbml0cmlj",
             "LnByb3RvLnF1ZXVlcy52MRocZ29vZ2xlL3Byb3RvYnVmL3N0cnVjdC5wcm90",
-            "byJnChVRdWV1ZVNlbmRSZXF1ZXN0QmF0Y2gSEgoKcXVldWVfbmFtZRgBIAEo",
-            "CRI6CghyZXF1ZXN0cxgCIAMoCzIoLm5pdHJpYy5wcm90by5xdWV1ZXMudjEu",
-            "UXVldWVTZW5kUmVxdWVzdCJXChFRdWV1ZVNlbmRSZXNwb25zZRJCCg9mYWls",
-            "ZWRfcmVxdWVzdHMYASADKAsyKS5uaXRyaWMucHJvdG8ucXVldWVzLnYxLkZh",
-            "aWxlZFNlbmRSZXF1ZXN0IjgKE1F1ZXVlUmVjZWl2ZVJlcXVlc3QSEgoKcXVl",
-            "dWVfbmFtZRgBIAEoCRINCgVkZXB0aBgCIAEoBSJLChRRdWV1ZVJlY2VpdmVS",
-            "ZXNwb25zZRIzCgV0YXNrcxgBIAMoCzIkLm5pdHJpYy5wcm90by5xdWV1ZXMu",
-            "djEuUmVjZWl2ZWRUYXNrIjwKFFF1ZXVlQ29tcGxldGVSZXF1ZXN0EhIKCnF1",
-            "ZXVlX25hbWUYASABKAkSEAoIbGVhc2VfaWQYAiABKAkiFwoVUXVldWVDb21w",
-            "bGV0ZVJlc3BvbnNlIjwKEFF1ZXVlU2VuZFJlcXVlc3QSKAoHcGF5bG9hZBgB",
-            "IAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QiSgoMUmVjZWl2ZWRUYXNr",
-            "EhAKCGxlYXNlX2lkGAEgASgJEigKB3BheWxvYWQYAiABKAsyFy5nb29nbGUu",
-            "cHJvdG9idWYuU3RydWN0Il8KEUZhaWxlZFNlbmRSZXF1ZXN0EjkKB3JlcXVl",
-            "c3QYASABKAsyKC5uaXRyaWMucHJvdG8ucXVldWVzLnYxLlF1ZXVlU2VuZFJl",
-            "cXVlc3QSDwoHbWVzc2FnZRgCIAEoCTK5AgoGUXVldWVzEmAKBFNlbmQSLS5u",
-            "aXRyaWMucHJvdG8ucXVldWVzLnYxLlF1ZXVlU2VuZFJlcXVlc3RCYXRjaBop",
-            "Lm5pdHJpYy5wcm90by5xdWV1ZXMudjEuUXVldWVTZW5kUmVzcG9uc2USZAoH",
-            "UmVjZWl2ZRIrLm5pdHJpYy5wcm90by5xdWV1ZXMudjEuUXVldWVSZWNlaXZl",
-            "UmVxdWVzdBosLm5pdHJpYy5wcm90by5xdWV1ZXMudjEuUXVldWVSZWNlaXZl",
-            "UmVzcG9uc2USZwoIQ29tcGxldGUSLC5uaXRyaWMucHJvdG8ucXVldWVzLnYx",
-            "LlF1ZXVlQ29tcGxldGVSZXF1ZXN0Gi0ubml0cmljLnByb3RvLnF1ZXVlcy52",
-            "MS5RdWV1ZUNvbXBsZXRlUmVzcG9uc2VCngEKGWlvLm5pdHJpYy5wcm90by5x",
-            "dWV1ZXMudjFCDVF1ZXVlc1NlcnZpY2VQAVo+Z2l0aHViLmNvbS9uaXRyaWN0",
-            "ZWNoL25pdHJpYy9jb3JlL3BrZy9wcm90by9xdWV1ZXMvdjE7cXVldWVzcGKq",
-            "AhZOaXRyaWMuUHJvdG8uUXVldWVzLnYxygIWTml0cmljXFByb3RvXFF1ZXVl",
-            "c1xWMWIGcHJvdG8z"));
+            "byJhChNRdWV1ZUVucXVldWVSZXF1ZXN0EhIKCnF1ZXVlX25hbWUYASABKAkS",
+            "NgoIbWVzc2FnZXMYAiADKAsyJC5uaXRyaWMucHJvdG8ucXVldWVzLnYxLlF1",
+            "ZXVlTWVzc2FnZSJdChRRdWV1ZUVucXVldWVSZXNwb25zZRJFCg9mYWlsZWRf",
+            "bWVzc2FnZXMYASADKAsyLC5uaXRyaWMucHJvdG8ucXVldWVzLnYxLkZhaWxl",
+            "ZEVucXVldWVNZXNzYWdlIjgKE1F1ZXVlRGVxdWV1ZVJlcXVlc3QSEgoKcXVl",
+            "dWVfbmFtZRgBIAEoCRINCgVkZXB0aBgCIAEoBSJRChRRdWV1ZURlcXVldWVS",
+            "ZXNwb25zZRI5CghtZXNzYWdlcxgBIAMoCzInLm5pdHJpYy5wcm90by5xdWV1",
+            "ZXMudjEuRGVxdWV1ZWRNZXNzYWdlIjwKFFF1ZXVlQ29tcGxldGVSZXF1ZXN0",
+            "EhIKCnF1ZXVlX25hbWUYASABKAkSEAoIbGVhc2VfaWQYAiABKAkiFwoVUXVl",
+            "dWVDb21wbGV0ZVJlc3BvbnNlIkwKDFF1ZXVlTWVzc2FnZRIxCg5zdHJ1Y3Rf",
+            "cGF5bG9hZBgBIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RIAEIJCgdj",
+            "b250ZW50IloKD0RlcXVldWVkTWVzc2FnZRIQCghsZWFzZV9pZBgBIAEoCRI1",
+            "CgdtZXNzYWdlGAIgASgLMiQubml0cmljLnByb3RvLnF1ZXVlcy52MS5RdWV1",
+            "ZU1lc3NhZ2UiXgoURmFpbGVkRW5xdWV1ZU1lc3NhZ2USNQoHbWVzc2FnZRgB",
+            "IAEoCzIkLm5pdHJpYy5wcm90by5xdWV1ZXMudjEuUXVldWVNZXNzYWdlEg8K",
+            "B2RldGFpbHMYAiABKAkyvQIKBlF1ZXVlcxJkCgdFbnF1ZXVlEisubml0cmlj",
+            "LnByb3RvLnF1ZXVlcy52MS5RdWV1ZUVucXVldWVSZXF1ZXN0Giwubml0cmlj",
+            "LnByb3RvLnF1ZXVlcy52MS5RdWV1ZUVucXVldWVSZXNwb25zZRJkCgdEZXF1",
+            "ZXVlEisubml0cmljLnByb3RvLnF1ZXVlcy52MS5RdWV1ZURlcXVldWVSZXF1",
+            "ZXN0Giwubml0cmljLnByb3RvLnF1ZXVlcy52MS5RdWV1ZURlcXVldWVSZXNw",
+            "b25zZRJnCghDb21wbGV0ZRIsLm5pdHJpYy5wcm90by5xdWV1ZXMudjEuUXVl",
+            "dWVDb21wbGV0ZVJlcXVlc3QaLS5uaXRyaWMucHJvdG8ucXVldWVzLnYxLlF1",
+            "ZXVlQ29tcGxldGVSZXNwb25zZUKeAQoZaW8ubml0cmljLnByb3RvLnF1ZXVl",
+            "cy52MUINUXVldWVzU2VydmljZVABWj5naXRodWIuY29tL25pdHJpY3RlY2gv",
+            "bml0cmljL2NvcmUvcGtnL3Byb3RvL3F1ZXVlcy92MTtxdWV1ZXNwYqoCFk5p",
+            "dHJpYy5Qcm90by5RdWV1ZXMudjHKAhZOaXRyaWNcUHJvdG9cUXVldWVzXFYx",
+            "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueSendRequestBatch), global::Nitric.Proto.Queues.v1.QueueSendRequestBatch.Parser, new[]{ "QueueName", "Requests" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueSendResponse), global::Nitric.Proto.Queues.v1.QueueSendResponse.Parser, new[]{ "FailedRequests" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueReceiveRequest), global::Nitric.Proto.Queues.v1.QueueReceiveRequest.Parser, new[]{ "QueueName", "Depth" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueReceiveResponse), global::Nitric.Proto.Queues.v1.QueueReceiveResponse.Parser, new[]{ "Tasks" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueEnqueueRequest), global::Nitric.Proto.Queues.v1.QueueEnqueueRequest.Parser, new[]{ "QueueName", "Messages" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueEnqueueResponse), global::Nitric.Proto.Queues.v1.QueueEnqueueResponse.Parser, new[]{ "FailedMessages" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueDequeueRequest), global::Nitric.Proto.Queues.v1.QueueDequeueRequest.Parser, new[]{ "QueueName", "Depth" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueDequeueResponse), global::Nitric.Proto.Queues.v1.QueueDequeueResponse.Parser, new[]{ "Messages" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueCompleteRequest), global::Nitric.Proto.Queues.v1.QueueCompleteRequest.Parser, new[]{ "QueueName", "LeaseId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueCompleteResponse), global::Nitric.Proto.Queues.v1.QueueCompleteResponse.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueSendRequest), global::Nitric.Proto.Queues.v1.QueueSendRequest.Parser, new[]{ "Payload" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.ReceivedTask), global::Nitric.Proto.Queues.v1.ReceivedTask.Parser, new[]{ "LeaseId", "Payload" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.FailedSendRequest), global::Nitric.Proto.Queues.v1.FailedSendRequest.Parser, new[]{ "Request", "Message" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.QueueMessage), global::Nitric.Proto.Queues.v1.QueueMessage.Parser, new[]{ "StructPayload" }, new[]{ "Content" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.DequeuedMessage), global::Nitric.Proto.Queues.v1.DequeuedMessage.Parser, new[]{ "LeaseId", "Message" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Queues.v1.FailedEnqueueMessage), global::Nitric.Proto.Queues.v1.FailedEnqueueMessage.Parser, new[]{ "Message", "Details" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class QueueSendRequestBatch : pb::IMessage<QueueSendRequestBatch>
+  public sealed partial class QueueEnqueueRequest : pb::IMessage<QueueEnqueueRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<QueueSendRequestBatch> _parser = new pb::MessageParser<QueueSendRequestBatch>(() => new QueueSendRequestBatch());
+    private static readonly pb::MessageParser<QueueEnqueueRequest> _parser = new pb::MessageParser<QueueEnqueueRequest>(() => new QueueEnqueueRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<QueueSendRequestBatch> Parser { get { return _parser; } }
+    public static pb::MessageParser<QueueEnqueueRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -91,22 +92,22 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueSendRequestBatch() {
+    public QueueEnqueueRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueSendRequestBatch(QueueSendRequestBatch other) : this() {
+    public QueueEnqueueRequest(QueueEnqueueRequest other) : this() {
       queueName_ = other.queueName_;
-      requests_ = other.requests_.Clone();
+      messages_ = other.messages_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueSendRequestBatch Clone() {
-      return new QueueSendRequestBatch(this);
+    public QueueEnqueueRequest Clone() {
+      return new QueueEnqueueRequest(this);
     }
 
     /// <summary>Field number for the "queue_name" field.</summary>
@@ -124,26 +125,26 @@ namespace Nitric.Proto.Queues.v1 {
       }
     }
 
-    /// <summary>Field number for the "requests" field.</summary>
-    public const int RequestsFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::Nitric.Proto.Queues.v1.QueueSendRequest> _repeated_requests_codec
-        = pb::FieldCodec.ForMessage(18, global::Nitric.Proto.Queues.v1.QueueSendRequest.Parser);
-    private readonly pbc::RepeatedField<global::Nitric.Proto.Queues.v1.QueueSendRequest> requests_ = new pbc::RepeatedField<global::Nitric.Proto.Queues.v1.QueueSendRequest>();
+    /// <summary>Field number for the "messages" field.</summary>
+    public const int MessagesFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Nitric.Proto.Queues.v1.QueueMessage> _repeated_messages_codec
+        = pb::FieldCodec.ForMessage(18, global::Nitric.Proto.Queues.v1.QueueMessage.Parser);
+    private readonly pbc::RepeatedField<global::Nitric.Proto.Queues.v1.QueueMessage> messages_ = new pbc::RepeatedField<global::Nitric.Proto.Queues.v1.QueueMessage>();
     /// <summary>
-    /// Array of tasks to push to the queue
+    /// Array of messages to push to the queue
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Nitric.Proto.Queues.v1.QueueSendRequest> Requests {
-      get { return requests_; }
+    public pbc::RepeatedField<global::Nitric.Proto.Queues.v1.QueueMessage> Messages {
+      get { return messages_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as QueueSendRequestBatch);
+      return Equals(other as QueueEnqueueRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(QueueSendRequestBatch other) {
+    public bool Equals(QueueEnqueueRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -151,7 +152,7 @@ namespace Nitric.Proto.Queues.v1 {
         return true;
       }
       if (QueueName != other.QueueName) return false;
-      if(!requests_.Equals(other.requests_)) return false;
+      if(!messages_.Equals(other.messages_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -159,7 +160,7 @@ namespace Nitric.Proto.Queues.v1 {
     public override int GetHashCode() {
       int hash = 1;
       if (QueueName.Length != 0) hash ^= QueueName.GetHashCode();
-      hash ^= requests_.GetHashCode();
+      hash ^= messages_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -180,7 +181,7 @@ namespace Nitric.Proto.Queues.v1 {
         output.WriteRawTag(10);
         output.WriteString(QueueName);
       }
-      requests_.WriteTo(output, _repeated_requests_codec);
+      messages_.WriteTo(output, _repeated_messages_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -194,7 +195,7 @@ namespace Nitric.Proto.Queues.v1 {
         output.WriteRawTag(10);
         output.WriteString(QueueName);
       }
-      requests_.WriteTo(ref output, _repeated_requests_codec);
+      messages_.WriteTo(ref output, _repeated_messages_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -207,7 +208,7 @@ namespace Nitric.Proto.Queues.v1 {
       if (QueueName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(QueueName);
       }
-      size += requests_.CalculateSize(_repeated_requests_codec);
+      size += messages_.CalculateSize(_repeated_messages_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -215,14 +216,14 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(QueueSendRequestBatch other) {
+    public void MergeFrom(QueueEnqueueRequest other) {
       if (other == null) {
         return;
       }
       if (other.QueueName.Length != 0) {
         QueueName = other.QueueName;
       }
-      requests_.Add(other.requests_);
+      messages_.Add(other.messages_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -242,7 +243,7 @@ namespace Nitric.Proto.Queues.v1 {
             break;
           }
           case 18: {
-            requests_.AddEntriesFrom(input, _repeated_requests_codec);
+            messages_.AddEntriesFrom(input, _repeated_messages_codec);
             break;
           }
         }
@@ -264,7 +265,7 @@ namespace Nitric.Proto.Queues.v1 {
             break;
           }
           case 18: {
-            requests_.AddEntriesFrom(ref input, _repeated_requests_codec);
+            messages_.AddEntriesFrom(ref input, _repeated_messages_codec);
             break;
           }
         }
@@ -275,17 +276,17 @@ namespace Nitric.Proto.Queues.v1 {
   }
 
   /// <summary>
-  /// Response for sending a collection of tasks
+  /// Response for sending messages to a queue
   /// </summary>
-  public sealed partial class QueueSendResponse : pb::IMessage<QueueSendResponse>
+  public sealed partial class QueueEnqueueResponse : pb::IMessage<QueueEnqueueResponse>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<QueueSendResponse> _parser = new pb::MessageParser<QueueSendResponse>(() => new QueueSendResponse());
+    private static readonly pb::MessageParser<QueueEnqueueResponse> _parser = new pb::MessageParser<QueueEnqueueResponse>(() => new QueueEnqueueResponse());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<QueueSendResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<QueueEnqueueResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -298,57 +299,57 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueSendResponse() {
+    public QueueEnqueueResponse() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueSendResponse(QueueSendResponse other) : this() {
-      failedRequests_ = other.failedRequests_.Clone();
+    public QueueEnqueueResponse(QueueEnqueueResponse other) : this() {
+      failedMessages_ = other.failedMessages_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueSendResponse Clone() {
-      return new QueueSendResponse(this);
+    public QueueEnqueueResponse Clone() {
+      return new QueueEnqueueResponse(this);
     }
 
-    /// <summary>Field number for the "failed_requests" field.</summary>
-    public const int FailedRequestsFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Nitric.Proto.Queues.v1.FailedSendRequest> _repeated_failedRequests_codec
-        = pb::FieldCodec.ForMessage(10, global::Nitric.Proto.Queues.v1.FailedSendRequest.Parser);
-    private readonly pbc::RepeatedField<global::Nitric.Proto.Queues.v1.FailedSendRequest> failedRequests_ = new pbc::RepeatedField<global::Nitric.Proto.Queues.v1.FailedSendRequest>();
+    /// <summary>Field number for the "failed_messages" field.</summary>
+    public const int FailedMessagesFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Nitric.Proto.Queues.v1.FailedEnqueueMessage> _repeated_failedMessages_codec
+        = pb::FieldCodec.ForMessage(10, global::Nitric.Proto.Queues.v1.FailedEnqueueMessage.Parser);
+    private readonly pbc::RepeatedField<global::Nitric.Proto.Queues.v1.FailedEnqueueMessage> failedMessages_ = new pbc::RepeatedField<global::Nitric.Proto.Queues.v1.FailedEnqueueMessage>();
     /// <summary>
-    /// A list of tasks that failed to be queued
+    /// A list of messages that failed to be queued
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Nitric.Proto.Queues.v1.FailedSendRequest> FailedRequests {
-      get { return failedRequests_; }
+    public pbc::RepeatedField<global::Nitric.Proto.Queues.v1.FailedEnqueueMessage> FailedMessages {
+      get { return failedMessages_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as QueueSendResponse);
+      return Equals(other as QueueEnqueueResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(QueueSendResponse other) {
+    public bool Equals(QueueEnqueueResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!failedRequests_.Equals(other.failedRequests_)) return false;
+      if(!failedMessages_.Equals(other.failedMessages_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= failedRequests_.GetHashCode();
+      hash ^= failedMessages_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -365,7 +366,7 @@ namespace Nitric.Proto.Queues.v1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      failedRequests_.WriteTo(output, _repeated_failedRequests_codec);
+      failedMessages_.WriteTo(output, _repeated_failedMessages_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -375,7 +376,7 @@ namespace Nitric.Proto.Queues.v1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      failedRequests_.WriteTo(ref output, _repeated_failedRequests_codec);
+      failedMessages_.WriteTo(ref output, _repeated_failedMessages_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -385,7 +386,7 @@ namespace Nitric.Proto.Queues.v1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += failedRequests_.CalculateSize(_repeated_failedRequests_codec);
+      size += failedMessages_.CalculateSize(_repeated_failedMessages_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -393,11 +394,11 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(QueueSendResponse other) {
+    public void MergeFrom(QueueEnqueueResponse other) {
       if (other == null) {
         return;
       }
-      failedRequests_.Add(other.failedRequests_);
+      failedMessages_.Add(other.failedMessages_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -413,7 +414,7 @@ namespace Nitric.Proto.Queues.v1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            failedRequests_.AddEntriesFrom(input, _repeated_failedRequests_codec);
+            failedMessages_.AddEntriesFrom(input, _repeated_failedMessages_codec);
             break;
           }
         }
@@ -431,7 +432,7 @@ namespace Nitric.Proto.Queues.v1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            failedRequests_.AddEntriesFrom(ref input, _repeated_failedRequests_codec);
+            failedMessages_.AddEntriesFrom(ref input, _repeated_failedMessages_codec);
             break;
           }
         }
@@ -441,15 +442,15 @@ namespace Nitric.Proto.Queues.v1 {
 
   }
 
-  public sealed partial class QueueReceiveRequest : pb::IMessage<QueueReceiveRequest>
+  public sealed partial class QueueDequeueRequest : pb::IMessage<QueueDequeueRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<QueueReceiveRequest> _parser = new pb::MessageParser<QueueReceiveRequest>(() => new QueueReceiveRequest());
+    private static readonly pb::MessageParser<QueueDequeueRequest> _parser = new pb::MessageParser<QueueDequeueRequest>(() => new QueueDequeueRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<QueueReceiveRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<QueueDequeueRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -462,22 +463,22 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueReceiveRequest() {
+    public QueueDequeueRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueReceiveRequest(QueueReceiveRequest other) : this() {
+    public QueueDequeueRequest(QueueDequeueRequest other) : this() {
       queueName_ = other.queueName_;
       depth_ = other.depth_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueReceiveRequest Clone() {
-      return new QueueReceiveRequest(this);
+    public QueueDequeueRequest Clone() {
+      return new QueueDequeueRequest(this);
     }
 
     /// <summary>Field number for the "queue_name" field.</summary>
@@ -499,7 +500,7 @@ namespace Nitric.Proto.Queues.v1 {
     public const int DepthFieldNumber = 2;
     private int depth_;
     /// <summary>
-    /// The max number of items to pop off the queue, may be capped by provider specific limitations
+    /// The max number of messages to pop off the queue, may be capped by provider specific limitations
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Depth {
@@ -511,11 +512,11 @@ namespace Nitric.Proto.Queues.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as QueueReceiveRequest);
+      return Equals(other as QueueDequeueRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(QueueReceiveRequest other) {
+    public bool Equals(QueueDequeueRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -595,7 +596,7 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(QueueReceiveRequest other) {
+    public void MergeFrom(QueueDequeueRequest other) {
       if (other == null) {
         return;
       }
@@ -656,15 +657,15 @@ namespace Nitric.Proto.Queues.v1 {
 
   }
 
-  public sealed partial class QueueReceiveResponse : pb::IMessage<QueueReceiveResponse>
+  public sealed partial class QueueDequeueResponse : pb::IMessage<QueueDequeueResponse>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<QueueReceiveResponse> _parser = new pb::MessageParser<QueueReceiveResponse>(() => new QueueReceiveResponse());
+    private static readonly pb::MessageParser<QueueDequeueResponse> _parser = new pb::MessageParser<QueueDequeueResponse>(() => new QueueDequeueResponse());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<QueueReceiveResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<QueueDequeueResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -677,57 +678,57 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueReceiveResponse() {
+    public QueueDequeueResponse() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueReceiveResponse(QueueReceiveResponse other) : this() {
-      tasks_ = other.tasks_.Clone();
+    public QueueDequeueResponse(QueueDequeueResponse other) : this() {
+      messages_ = other.messages_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueReceiveResponse Clone() {
-      return new QueueReceiveResponse(this);
+    public QueueDequeueResponse Clone() {
+      return new QueueDequeueResponse(this);
     }
 
-    /// <summary>Field number for the "tasks" field.</summary>
-    public const int TasksFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Nitric.Proto.Queues.v1.ReceivedTask> _repeated_tasks_codec
-        = pb::FieldCodec.ForMessage(10, global::Nitric.Proto.Queues.v1.ReceivedTask.Parser);
-    private readonly pbc::RepeatedField<global::Nitric.Proto.Queues.v1.ReceivedTask> tasks_ = new pbc::RepeatedField<global::Nitric.Proto.Queues.v1.ReceivedTask>();
+    /// <summary>Field number for the "messages" field.</summary>
+    public const int MessagesFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Nitric.Proto.Queues.v1.DequeuedMessage> _repeated_messages_codec
+        = pb::FieldCodec.ForMessage(10, global::Nitric.Proto.Queues.v1.DequeuedMessage.Parser);
+    private readonly pbc::RepeatedField<global::Nitric.Proto.Queues.v1.DequeuedMessage> messages_ = new pbc::RepeatedField<global::Nitric.Proto.Queues.v1.DequeuedMessage>();
     /// <summary>
-    /// Array of tasks popped off the queue
+    /// Array of messages popped off the queue
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Nitric.Proto.Queues.v1.ReceivedTask> Tasks {
-      get { return tasks_; }
+    public pbc::RepeatedField<global::Nitric.Proto.Queues.v1.DequeuedMessage> Messages {
+      get { return messages_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as QueueReceiveResponse);
+      return Equals(other as QueueDequeueResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(QueueReceiveResponse other) {
+    public bool Equals(QueueDequeueResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!tasks_.Equals(other.tasks_)) return false;
+      if(!messages_.Equals(other.messages_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= tasks_.GetHashCode();
+      hash ^= messages_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -744,7 +745,7 @@ namespace Nitric.Proto.Queues.v1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      tasks_.WriteTo(output, _repeated_tasks_codec);
+      messages_.WriteTo(output, _repeated_messages_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -754,7 +755,7 @@ namespace Nitric.Proto.Queues.v1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      tasks_.WriteTo(ref output, _repeated_tasks_codec);
+      messages_.WriteTo(ref output, _repeated_messages_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -764,7 +765,7 @@ namespace Nitric.Proto.Queues.v1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += tasks_.CalculateSize(_repeated_tasks_codec);
+      size += messages_.CalculateSize(_repeated_messages_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -772,11 +773,11 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(QueueReceiveResponse other) {
+    public void MergeFrom(QueueDequeueResponse other) {
       if (other == null) {
         return;
       }
-      tasks_.Add(other.tasks_);
+      messages_.Add(other.messages_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -792,7 +793,7 @@ namespace Nitric.Proto.Queues.v1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            tasks_.AddEntriesFrom(input, _repeated_tasks_codec);
+            messages_.AddEntriesFrom(input, _repeated_messages_codec);
             break;
           }
         }
@@ -810,7 +811,7 @@ namespace Nitric.Proto.Queues.v1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            tasks_.AddEntriesFrom(ref input, _repeated_tasks_codec);
+            messages_.AddEntriesFrom(ref input, _repeated_messages_codec);
             break;
           }
         }
@@ -878,7 +879,7 @@ namespace Nitric.Proto.Queues.v1 {
     public const int LeaseIdFieldNumber = 2;
     private string leaseId_ = "";
     /// <summary>
-    /// Lease id of the task to be completed
+    /// Lease id of the message to be completed
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string LeaseId {
@@ -1172,17 +1173,17 @@ namespace Nitric.Proto.Queues.v1 {
   }
 
   /// <summary>
-  /// A task to be sent to a queue.
+  /// An message to be sent to a queue.
   /// </summary>
-  public sealed partial class QueueSendRequest : pb::IMessage<QueueSendRequest>
+  public sealed partial class QueueMessage : pb::IMessage<QueueMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<QueueSendRequest> _parser = new pb::MessageParser<QueueSendRequest>(() => new QueueSendRequest());
+    private static readonly pb::MessageParser<QueueMessage> _parser = new pb::MessageParser<QueueMessage>(() => new QueueMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<QueueSendRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<QueueMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1195,58 +1196,80 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueSendRequest() {
+    public QueueMessage() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueSendRequest(QueueSendRequest other) : this() {
-      payload_ = other.payload_ != null ? other.payload_.Clone() : null;
+    public QueueMessage(QueueMessage other) : this() {
+      switch (other.ContentCase) {
+        case ContentOneofCase.StructPayload:
+          StructPayload = other.StructPayload.Clone();
+          break;
+      }
+
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public QueueSendRequest Clone() {
-      return new QueueSendRequest(this);
+    public QueueMessage Clone() {
+      return new QueueMessage(this);
     }
 
-    /// <summary>Field number for the "payload" field.</summary>
-    public const int PayloadFieldNumber = 1;
-    private global::Google.Protobuf.WellKnownTypes.Struct payload_;
-    /// <summary>
-    /// The payload of the task
-    /// </summary>
+    /// <summary>Field number for the "struct_payload" field.</summary>
+    public const int StructPayloadFieldNumber = 1;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Google.Protobuf.WellKnownTypes.Struct Payload {
-      get { return payload_; }
+    public global::Google.Protobuf.WellKnownTypes.Struct StructPayload {
+      get { return contentCase_ == ContentOneofCase.StructPayload ? (global::Google.Protobuf.WellKnownTypes.Struct) content_ : null; }
       set {
-        payload_ = value;
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.StructPayload;
       }
+    }
+
+    private object content_;
+    /// <summary>Enum of possible cases for the "content" oneof.</summary>
+    public enum ContentOneofCase {
+      None = 0,
+      StructPayload = 1,
+    }
+    private ContentOneofCase contentCase_ = ContentOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContentOneofCase ContentCase {
+      get { return contentCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearContent() {
+      contentCase_ = ContentOneofCase.None;
+      content_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as QueueSendRequest);
+      return Equals(other as QueueMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(QueueSendRequest other) {
+    public bool Equals(QueueMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Payload, other.Payload)) return false;
+      if (!object.Equals(StructPayload, other.StructPayload)) return false;
+      if (ContentCase != other.ContentCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (payload_ != null) hash ^= Payload.GetHashCode();
+      if (contentCase_ == ContentOneofCase.StructPayload) hash ^= StructPayload.GetHashCode();
+      hash ^= (int) contentCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1263,9 +1286,9 @@ namespace Nitric.Proto.Queues.v1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (payload_ != null) {
+      if (contentCase_ == ContentOneofCase.StructPayload) {
         output.WriteRawTag(10);
-        output.WriteMessage(Payload);
+        output.WriteMessage(StructPayload);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1276,9 +1299,9 @@ namespace Nitric.Proto.Queues.v1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (payload_ != null) {
+      if (contentCase_ == ContentOneofCase.StructPayload) {
         output.WriteRawTag(10);
-        output.WriteMessage(Payload);
+        output.WriteMessage(StructPayload);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1289,8 +1312,8 @@ namespace Nitric.Proto.Queues.v1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (payload_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Payload);
+      if (contentCase_ == ContentOneofCase.StructPayload) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(StructPayload);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1299,16 +1322,19 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(QueueSendRequest other) {
+    public void MergeFrom(QueueMessage other) {
       if (other == null) {
         return;
       }
-      if (other.payload_ != null) {
-        if (payload_ == null) {
-          Payload = new global::Google.Protobuf.WellKnownTypes.Struct();
-        }
-        Payload.MergeFrom(other.Payload);
+      switch (other.ContentCase) {
+        case ContentOneofCase.StructPayload:
+          if (StructPayload == null) {
+            StructPayload = new global::Google.Protobuf.WellKnownTypes.Struct();
+          }
+          StructPayload.MergeFrom(other.StructPayload);
+          break;
       }
+
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1324,10 +1350,12 @@ namespace Nitric.Proto.Queues.v1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (payload_ == null) {
-              Payload = new global::Google.Protobuf.WellKnownTypes.Struct();
+            global::Google.Protobuf.WellKnownTypes.Struct subBuilder = new global::Google.Protobuf.WellKnownTypes.Struct();
+            if (contentCase_ == ContentOneofCase.StructPayload) {
+              subBuilder.MergeFrom(StructPayload);
             }
-            input.ReadMessage(Payload);
+            input.ReadMessage(subBuilder);
+            StructPayload = subBuilder;
             break;
           }
         }
@@ -1345,10 +1373,12 @@ namespace Nitric.Proto.Queues.v1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            if (payload_ == null) {
-              Payload = new global::Google.Protobuf.WellKnownTypes.Struct();
+            global::Google.Protobuf.WellKnownTypes.Struct subBuilder = new global::Google.Protobuf.WellKnownTypes.Struct();
+            if (contentCase_ == ContentOneofCase.StructPayload) {
+              subBuilder.MergeFrom(StructPayload);
             }
-            input.ReadMessage(Payload);
+            input.ReadMessage(subBuilder);
+            StructPayload = subBuilder;
             break;
           }
         }
@@ -1358,15 +1388,15 @@ namespace Nitric.Proto.Queues.v1 {
 
   }
 
-  public sealed partial class ReceivedTask : pb::IMessage<ReceivedTask>
+  public sealed partial class DequeuedMessage : pb::IMessage<DequeuedMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<ReceivedTask> _parser = new pb::MessageParser<ReceivedTask>(() => new ReceivedTask());
+    private static readonly pb::MessageParser<DequeuedMessage> _parser = new pb::MessageParser<DequeuedMessage>(() => new DequeuedMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReceivedTask> Parser { get { return _parser; } }
+    public static pb::MessageParser<DequeuedMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1379,22 +1409,22 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReceivedTask() {
+    public DequeuedMessage() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReceivedTask(ReceivedTask other) : this() {
+    public DequeuedMessage(DequeuedMessage other) : this() {
       leaseId_ = other.leaseId_;
-      payload_ = other.payload_ != null ? other.payload_.Clone() : null;
+      message_ = other.message_ != null ? other.message_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReceivedTask Clone() {
-      return new ReceivedTask(this);
+    public DequeuedMessage Clone() {
+      return new DequeuedMessage(this);
     }
 
     /// <summary>Field number for the "lease_id" field.</summary>
@@ -1408,24 +1438,24 @@ namespace Nitric.Proto.Queues.v1 {
       }
     }
 
-    /// <summary>Field number for the "payload" field.</summary>
-    public const int PayloadFieldNumber = 2;
-    private global::Google.Protobuf.WellKnownTypes.Struct payload_;
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 2;
+    private global::Nitric.Proto.Queues.v1.QueueMessage message_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Google.Protobuf.WellKnownTypes.Struct Payload {
-      get { return payload_; }
+    public global::Nitric.Proto.Queues.v1.QueueMessage Message {
+      get { return message_; }
       set {
-        payload_ = value;
+        message_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as ReceivedTask);
+      return Equals(other as DequeuedMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReceivedTask other) {
+    public bool Equals(DequeuedMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1433,7 +1463,7 @@ namespace Nitric.Proto.Queues.v1 {
         return true;
       }
       if (LeaseId != other.LeaseId) return false;
-      if (!object.Equals(Payload, other.Payload)) return false;
+      if (!object.Equals(Message, other.Message)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1441,7 +1471,7 @@ namespace Nitric.Proto.Queues.v1 {
     public override int GetHashCode() {
       int hash = 1;
       if (LeaseId.Length != 0) hash ^= LeaseId.GetHashCode();
-      if (payload_ != null) hash ^= Payload.GetHashCode();
+      if (message_ != null) hash ^= Message.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1462,9 +1492,9 @@ namespace Nitric.Proto.Queues.v1 {
         output.WriteRawTag(10);
         output.WriteString(LeaseId);
       }
-      if (payload_ != null) {
+      if (message_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(Payload);
+        output.WriteMessage(Message);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1479,9 +1509,9 @@ namespace Nitric.Proto.Queues.v1 {
         output.WriteRawTag(10);
         output.WriteString(LeaseId);
       }
-      if (payload_ != null) {
+      if (message_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(Payload);
+        output.WriteMessage(Message);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1495,8 +1525,8 @@ namespace Nitric.Proto.Queues.v1 {
       if (LeaseId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(LeaseId);
       }
-      if (payload_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Payload);
+      if (message_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Message);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1505,18 +1535,18 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReceivedTask other) {
+    public void MergeFrom(DequeuedMessage other) {
       if (other == null) {
         return;
       }
       if (other.LeaseId.Length != 0) {
         LeaseId = other.LeaseId;
       }
-      if (other.payload_ != null) {
-        if (payload_ == null) {
-          Payload = new global::Google.Protobuf.WellKnownTypes.Struct();
+      if (other.message_ != null) {
+        if (message_ == null) {
+          Message = new global::Nitric.Proto.Queues.v1.QueueMessage();
         }
-        Payload.MergeFrom(other.Payload);
+        Message.MergeFrom(other.Message);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1537,10 +1567,10 @@ namespace Nitric.Proto.Queues.v1 {
             break;
           }
           case 18: {
-            if (payload_ == null) {
-              Payload = new global::Google.Protobuf.WellKnownTypes.Struct();
+            if (message_ == null) {
+              Message = new global::Nitric.Proto.Queues.v1.QueueMessage();
             }
-            input.ReadMessage(Payload);
+            input.ReadMessage(Message);
             break;
           }
         }
@@ -1562,10 +1592,10 @@ namespace Nitric.Proto.Queues.v1 {
             break;
           }
           case 18: {
-            if (payload_ == null) {
-              Payload = new global::Google.Protobuf.WellKnownTypes.Struct();
+            if (message_ == null) {
+              Message = new global::Nitric.Proto.Queues.v1.QueueMessage();
             }
-            input.ReadMessage(Payload);
+            input.ReadMessage(Message);
             break;
           }
         }
@@ -1575,15 +1605,15 @@ namespace Nitric.Proto.Queues.v1 {
 
   }
 
-  public sealed partial class FailedSendRequest : pb::IMessage<FailedSendRequest>
+  public sealed partial class FailedEnqueueMessage : pb::IMessage<FailedEnqueueMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<FailedSendRequest> _parser = new pb::MessageParser<FailedSendRequest>(() => new FailedSendRequest());
+    private static readonly pb::MessageParser<FailedEnqueueMessage> _parser = new pb::MessageParser<FailedEnqueueMessage>(() => new FailedEnqueueMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<FailedSendRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<FailedEnqueueMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1596,75 +1626,75 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FailedSendRequest() {
+    public FailedEnqueueMessage() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FailedSendRequest(FailedSendRequest other) : this() {
-      request_ = other.request_ != null ? other.request_.Clone() : null;
-      message_ = other.message_;
+    public FailedEnqueueMessage(FailedEnqueueMessage other) : this() {
+      message_ = other.message_ != null ? other.message_.Clone() : null;
+      details_ = other.details_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FailedSendRequest Clone() {
-      return new FailedSendRequest(this);
-    }
-
-    /// <summary>Field number for the "request" field.</summary>
-    public const int RequestFieldNumber = 1;
-    private global::Nitric.Proto.Queues.v1.QueueSendRequest request_;
-    /// <summary>
-    /// The task that failed to be pushed
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Nitric.Proto.Queues.v1.QueueSendRequest Request {
-      get { return request_; }
-      set {
-        request_ = value;
-      }
+    public FailedEnqueueMessage Clone() {
+      return new FailedEnqueueMessage(this);
     }
 
     /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 2;
-    private string message_ = "";
+    public const int MessageFieldNumber = 1;
+    private global::Nitric.Proto.Queues.v1.QueueMessage message_;
     /// <summary>
-    /// A message describing the failure
+    /// The message that failed to be pushed
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Message {
+    public global::Nitric.Proto.Queues.v1.QueueMessage Message {
       get { return message_; }
       set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        message_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "details" field.</summary>
+    public const int DetailsFieldNumber = 2;
+    private string details_ = "";
+    /// <summary>
+    /// A description of the failure
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Details {
+      get { return details_; }
+      set {
+        details_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as FailedSendRequest);
+      return Equals(other as FailedEnqueueMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(FailedSendRequest other) {
+    public bool Equals(FailedEnqueueMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Request, other.Request)) return false;
-      if (Message != other.Message) return false;
+      if (!object.Equals(Message, other.Message)) return false;
+      if (Details != other.Details) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (request_ != null) hash ^= Request.GetHashCode();
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (message_ != null) hash ^= Message.GetHashCode();
+      if (Details.Length != 0) hash ^= Details.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1681,13 +1711,13 @@ namespace Nitric.Proto.Queues.v1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (request_ != null) {
+      if (message_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(Request);
+        output.WriteMessage(Message);
       }
-      if (Message.Length != 0) {
+      if (Details.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(Message);
+        output.WriteString(Details);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1698,13 +1728,13 @@ namespace Nitric.Proto.Queues.v1 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (request_ != null) {
+      if (message_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(Request);
+        output.WriteMessage(Message);
       }
-      if (Message.Length != 0) {
+      if (Details.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(Message);
+        output.WriteString(Details);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1715,11 +1745,11 @@ namespace Nitric.Proto.Queues.v1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (request_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Request);
+      if (message_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Message);
       }
-      if (Message.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      if (Details.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Details);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1728,18 +1758,18 @@ namespace Nitric.Proto.Queues.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(FailedSendRequest other) {
+    public void MergeFrom(FailedEnqueueMessage other) {
       if (other == null) {
         return;
       }
-      if (other.request_ != null) {
-        if (request_ == null) {
-          Request = new global::Nitric.Proto.Queues.v1.QueueSendRequest();
+      if (other.message_ != null) {
+        if (message_ == null) {
+          Message = new global::Nitric.Proto.Queues.v1.QueueMessage();
         }
-        Request.MergeFrom(other.Request);
+        Message.MergeFrom(other.Message);
       }
-      if (other.Message.Length != 0) {
-        Message = other.Message;
+      if (other.Details.Length != 0) {
+        Details = other.Details;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1756,14 +1786,14 @@ namespace Nitric.Proto.Queues.v1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (request_ == null) {
-              Request = new global::Nitric.Proto.Queues.v1.QueueSendRequest();
+            if (message_ == null) {
+              Message = new global::Nitric.Proto.Queues.v1.QueueMessage();
             }
-            input.ReadMessage(Request);
+            input.ReadMessage(Message);
             break;
           }
           case 18: {
-            Message = input.ReadString();
+            Details = input.ReadString();
             break;
           }
         }
@@ -1781,14 +1811,14 @@ namespace Nitric.Proto.Queues.v1 {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            if (request_ == null) {
-              Request = new global::Nitric.Proto.Queues.v1.QueueSendRequest();
+            if (message_ == null) {
+              Message = new global::Nitric.Proto.Queues.v1.QueueMessage();
             }
-            input.ReadMessage(Request);
+            input.ReadMessage(Message);
             break;
           }
           case 18: {
-            Message = input.ReadString();
+            Details = input.ReadString();
             break;
           }
         }

@@ -1,23 +1,25 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Nitric.Sdk.Common;
-using Nitric.Proto.Schedules.v1;
-using GrpcClient = Nitric.Proto.Schedules.v1.Schedules.SchedulesClient;
+using Nitric.Proto.Storage.v1;
+using GrpcClient = Nitric.Proto.Storage.v1.StorageListener.StorageListenerClient;
 using Nitric.Sdk.Service;
+using Nitric.Sdk.Storage;
 using System;
 
 namespace Nitric.Sdk.Worker
 {
-    public class ScheduleWorker : AbstractWorker<IntervalContext>
+    public class StorageWorker : AbstractWorker<BlobEventContext>
     {
         readonly private RegistrationRequest RegistrationRequest;
+        readonly private Bucket bucket;
 
-        public ScheduleWorker(RegistrationRequest request, Func<IntervalContext, IntervalContext> middleware) : base(middleware)
+        public StorageWorker(RegistrationRequest request, Func<BlobEventContext, BlobEventContext> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
         }
 
-        public ScheduleWorker(RegistrationRequest request, params Middleware<IntervalContext>[] middlewares) : base(middlewares)
+        public StorageWorker(RegistrationRequest request, params Middleware<BlobEventContext>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
         }
@@ -26,7 +28,7 @@ namespace Nitric.Sdk.Worker
         {
             var client = new GrpcClient(GrpcChannelProvider.GetChannel());
 
-            var stream = client.Schedule();
+            var stream = client.Listen();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
@@ -36,11 +38,11 @@ namespace Nitric.Sdk.Worker
 
                 if (req.RegistrationResponse != null)
                 {
-                    // Schedule connected with Nitric server.
+                    // Bucket listener connected with Nitric server.
                 }
-                else if (req.IntervalRequest != null)
+                else if (req.BlobEventRequest != null)
                 {
-                    var ctx = IntervalContext.FromRequest(req);
+                    var ctx = BlobEventContext.FromRequest(req, bucket);
 
                     ctx = this.Middleware(ctx);
 

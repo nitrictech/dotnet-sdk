@@ -14,6 +14,8 @@
 
 using System;
 using Nitric.Proto.Storage.v1;
+using Nitric.Sdk.Storage;
+using ProtoBlobEventResponse = Nitric.Proto.Storage.v1.BlobEventResponse;
 
 namespace Nitric.Sdk.Service
 {
@@ -26,12 +28,12 @@ namespace Nitric.Sdk.Service
     /// <summary>
     /// Represents a bucket notification being created by a write or delete event in the bucket
     /// </summary>
-    public class BucketNotificationRequest : TriggerRequest
+    public class BlobEventRequest : TriggerRequest
     {
         /// <summary>
         /// A reference to the file that triggered this request
         /// </summary>
-        public string Key { get; private set; }
+        public File File { get; private set; }
 
         /// <summary>
         /// The type of event that triggered this request
@@ -46,9 +48,9 @@ namespace Nitric.Sdk.Service
         /// <param name="key">the file that triggered the notification</param>
         /// <param name="notificationType">the type of bucket notification</param>
         /// <param name="bucket">the bucket that triggered the notification</param>
-        public BucketNotificationRequest(string key, BucketNotificationType notificationType) : base()
+        public BlobEventRequest(string key, BucketNotificationType notificationType, Bucket bucket) : base()
         {
-            this.Key = key;
+            this.File = bucket.File(key);
             this.NotificationType = notificationType;
         }
     }
@@ -56,7 +58,7 @@ namespace Nitric.Sdk.Service
     /// <summary>
     /// Represents the results of processing a bucket notification.
     /// </summary>
-    public class BucketNotificationResponse : TriggerResponse
+    public class BlobEventResponse : TriggerResponse
     {
         /// <summary>
         /// Indicates whether the event was successfully processed.
@@ -68,8 +70,8 @@ namespace Nitric.Sdk.Service
         /// <summary>
         /// Construct a bucket notification response.
         /// </summary>
-        /// <param name="success">Indicates whether the event was successfully processed.</param>
-        public BucketNotificationResponse(bool success)
+        /// <param name="BlobEventResponse">Indicates whether the event was successfully processed.</param>
+        public BlobEventResponse(bool success)
         {
             this.Success = success;
         }
@@ -78,14 +80,14 @@ namespace Nitric.Sdk.Service
     /// <summary>
     /// Represents the request/response context for a bucket notification.
     /// </summary>
-    public class BucketNotificationContext : TriggerContext<BucketNotificationRequest, BucketNotificationResponse>
+    public class BlobEventContext : TriggerContext<BlobEventRequest, BlobEventResponse>
     {
         /// <summary>
         /// Construct a new BucketNotificationContext.
         /// </summary>
         /// <param name="req">The request object</param>
         /// <param name="res">The response object</param>
-        public BucketNotificationContext(string id, BucketNotificationRequest req, BucketNotificationResponse res) : base(id, req, res)
+        public BlobEventContext(string id, BlobEventRequest req, BlobEventResponse res) : base(id, req, res)
         {
         }
 
@@ -95,17 +97,18 @@ namespace Nitric.Sdk.Service
         /// <param name="trigger">The trigger to convert into a BucketNotificationContext.</param>
         /// <param name="options">The bucket notification worker options describing the worker options.</param>
         /// <returns>the new bucket notification context</returns>
-        public static BucketNotificationContext FromRequest(ServerMessage trigger)
+        public static BlobEventContext FromRequest(ServerMessage trigger, Bucket bucket)
         {
             var notificationType = FromGrpcBucketNotificationType(trigger.BlobEventRequest.BlobEvent.Type);
 
-            return new BucketNotificationContext(
+            return new BlobEventContext(
                 trigger.Id,
-                new BucketNotificationRequest(
+                new BlobEventRequest(
                     trigger.BlobEventRequest.BlobEvent.Key,
-                    notificationType
+                    notificationType,
+                    bucket
                 ),
-                new BucketNotificationResponse(true));
+                new BlobEventResponse(true));
         }
 
 
@@ -126,7 +129,7 @@ namespace Nitric.Sdk.Service
         /// <returns>the new trigger response</returns>
         public ClientMessage ToResponse()
         {
-            return new ClientMessage { Id = Id, BlobEventResponse = new BlobEventResponse { Success = this.Res.Success } };
+            return new ClientMessage { Id = Id, BlobEventResponse = new ProtoBlobEventResponse { Success = this.Res.Success } };
         }
     }
 }

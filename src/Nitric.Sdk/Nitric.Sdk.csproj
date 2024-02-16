@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>0.0.12</Version>
+    <Version>0.0.13</Version>
     <PackageId>Nitric.Sdk</PackageId>
     <Company>Nitric Pty Ltd</Company>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -22,17 +22,10 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Protobuf Include="../../nitric/proto/**/*.proto" ProtoRoot="../../" OutputDir="Proto" />
-  </ItemGroup>
+  <ItemGroup> 
+    <Protobuf Include="../../nitric/proto/**/*.proto" ProtoRoot="../../" OutputDir="Proto" /> 
+  </ItemGroup> 
 
-  <ItemGroup>
-    <Folder Include="../../nitric/" />
-    <Folder Include="Worker\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Worker\" />
-  </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
   </ItemGroup>

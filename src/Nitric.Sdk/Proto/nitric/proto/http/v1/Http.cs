@@ -408,7 +408,7 @@ namespace Nitric.Proto.Http.v1 {
     public const int HostFieldNumber = 1;
     private string host_ = "";
     /// <summary>
-    /// The local port the server can be accessed on
+    /// The address the server can be accessed on
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Host {

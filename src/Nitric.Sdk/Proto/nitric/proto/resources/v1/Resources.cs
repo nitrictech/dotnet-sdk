@@ -62,22 +62,20 @@ namespace Nitric.Proto.Resources.v1 {
             "BVRvcGljEAMSDAoIU2NoZWR1bGUQBBIQCgxTdWJzY3JpcHRpb24QBRIRCg1L",
             "ZXlWYWx1ZVN0b3JlEAYSCgoGUG9saWN5EAcSCgoGU2VjcmV0EAgSEgoOQnVj",
             "a2V0TGlzdGVuZXIQCRINCglXZWJzb2NrZXQQChIICgRIdHRwEAsSGQoVQXBp",
-            "U2VjdXJpdHlEZWZpbml0aW9uEAwSCQoFUXVldWUQDSrbAgoGQWN0aW9uEhIK",
+            "U2VjdXJpdHlEZWZpbml0aW9uEAwSCQoFUXVldWUQDSqVAgoGQWN0aW9uEhIK",
             "DkJ1Y2tldEZpbGVMaXN0EAASEQoNQnVja2V0RmlsZUdldBABEhEKDUJ1Y2tl",
-            "dEZpbGVQdXQQAhIUChBCdWNrZXRGaWxlRGVsZXRlEAMSDgoJVG9waWNMaXN0",
-            "EMgBEhAKC1RvcGljRGV0YWlsEMkBEhYKEVRvcGljRXZlbnRQdWJsaXNoEMoB",
-            "EhYKEUtleVZhbHVlU3RvcmVSZWFkEKwCEhcKEktleVZhbHVlU3RvcmVXcml0",
-            "ZRCtAhIYChNLZXlWYWx1ZVN0b3JlRGVsZXRlEK4CEg4KCVNlY3JldFB1dBCQ",
-            "AxIRCgxTZWNyZXRBY2Nlc3MQkQMSFAoPV2Vic29ja2V0TWFuYWdlEPQDEg4K",
-            "CVF1ZXVlU2VuZBDYBBIRCgxRdWV1ZVJlY2VpdmUQ2QQSDgoJUXVldWVMaXN0",
-            "ENoEEhAKC1F1ZXVlRGV0YWlsENsEMn0KCVJlc291cmNlcxJwCgdEZWNsYXJl",
-            "EjEubml0cmljLnByb3RvLnJlc291cmNlcy52MS5SZXNvdXJjZURlY2xhcmVS",
-            "ZXF1ZXN0GjIubml0cmljLnByb3RvLnJlc291cmNlcy52MS5SZXNvdXJjZURl",
-            "Y2xhcmVSZXNwb25zZUKpAQocaW8ubml0cmljLnByb3RvLnJlc291cmNlcy52",
-            "MUIJUmVzb3VyY2VzUAFaRGdpdGh1Yi5jb20vbml0cmljdGVjaC9uaXRyaWMv",
-            "Y29yZS9wa2cvcHJvdG8vcmVzb3VyY2VzL3YxO3Jlc291cmNlc3BiqgIZTml0",
-            "cmljLlByb3RvLlJlc291cmNlcy52McoCGU5pdHJpY1xQcm90b1xSZXNvdXJj",
-            "ZXNcVjFiBnByb3RvMw=="));
+            "dEZpbGVQdXQQAhIUChBCdWNrZXRGaWxlRGVsZXRlEAMSEQoMVG9waWNQdWJs",
+            "aXNoEMgBEhYKEUtleVZhbHVlU3RvcmVSZWFkEKwCEhcKEktleVZhbHVlU3Rv",
+            "cmVXcml0ZRCtAhIYChNLZXlWYWx1ZVN0b3JlRGVsZXRlEK4CEg4KCVNlY3Jl",
+            "dFB1dBCQAxIRCgxTZWNyZXRBY2Nlc3MQkQMSFAoPV2Vic29ja2V0TWFuYWdl",
+            "EPQDEhEKDFF1ZXVlRW5xdWV1ZRDYBBIRCgxRdWV1ZURlcXVldWUQ2QQyfQoJ",
+            "UmVzb3VyY2VzEnAKB0RlY2xhcmUSMS5uaXRyaWMucHJvdG8ucmVzb3VyY2Vz",
+            "LnYxLlJlc291cmNlRGVjbGFyZVJlcXVlc3QaMi5uaXRyaWMucHJvdG8ucmVz",
+            "b3VyY2VzLnYxLlJlc291cmNlRGVjbGFyZVJlc3BvbnNlQqkBChxpby5uaXRy",
+            "aWMucHJvdG8ucmVzb3VyY2VzLnYxQglSZXNvdXJjZXNQAVpEZ2l0aHViLmNv",
+            "bS9uaXRyaWN0ZWNoL25pdHJpYy9jb3JlL3BrZy9wcm90by9yZXNvdXJjZXMv",
+            "djE7cmVzb3VyY2VzcGKqAhlOaXRyaWMuUHJvdG8uUmVzb3VyY2VzLnYxygIZ",
+            "Tml0cmljXFByb3RvXFJlc291cmNlc1xWMWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Nitric.Proto.Resources.v1.ResourceType), typeof(global::Nitric.Proto.Resources.v1.Action), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -128,11 +126,9 @@ namespace Nitric.Proto.Resources.v1 {
     /// <summary>
     /// Topic Permissions: 2XX
     /// </summary>
-    [pbr::OriginalName("TopicList")] TopicList = 200,
-    [pbr::OriginalName("TopicDetail")] TopicDetail = 201,
-    [pbr::OriginalName("TopicEventPublish")] TopicEventPublish = 202,
+    [pbr::OriginalName("TopicPublish")] TopicPublish = 200,
     /// <summary>
-    /// Collection Permissions: 3XX
+    /// KeyValue Store Permissions: 3XX
     /// </summary>
     [pbr::OriginalName("KeyValueStoreRead")] KeyValueStoreRead = 300,
     [pbr::OriginalName("KeyValueStoreWrite")] KeyValueStoreWrite = 301,
@@ -149,10 +145,8 @@ namespace Nitric.Proto.Resources.v1 {
     /// <summary>
     /// Queue Permissions: 6XX
     /// </summary>
-    [pbr::OriginalName("QueueSend")] QueueSend = 600,
-    [pbr::OriginalName("QueueReceive")] QueueReceive = 601,
-    [pbr::OriginalName("QueueList")] QueueList = 602,
-    [pbr::OriginalName("QueueDetail")] QueueDetail = 603,
+    [pbr::OriginalName("QueueEnqueue")] QueueEnqueue = 600,
+    [pbr::OriginalName("QueueDequeue")] QueueDequeue = 601,
   }
 
   #endregion

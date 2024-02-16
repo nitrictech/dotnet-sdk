@@ -121,6 +121,9 @@ namespace Nitric.Proto.Storage.v1 {
   #endregion
 
   #region Messages
+  /// <summary>
+  /// ClientMessages are sent from the service to the nitric server
+  /// </summary>
   public sealed partial class ClientMessage : pb::IMessage<ClientMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -199,7 +202,7 @@ namespace Nitric.Proto.Storage.v1 {
     /// <summary>Field number for the "blob_event_response" field.</summary>
     public const int BlobEventResponseFieldNumber = 3;
     /// <summary>
-    /// Stop watching for changes on a bucket
+    /// Response to a blob event (change to a blob)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Nitric.Proto.Storage.v1.BlobEventResponse BlobEventResponse {
@@ -431,6 +434,9 @@ namespace Nitric.Proto.Storage.v1 {
 
   }
 
+  /// <summary>
+  /// ServerMessages are sent from the nitric server to the service
+  /// </summary>
   public sealed partial class ServerMessage : pb::IMessage<ServerMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -509,7 +515,7 @@ namespace Nitric.Proto.Storage.v1 {
     /// <summary>Field number for the "blob_event_request" field.</summary>
     public const int BlobEventRequestFieldNumber = 3;
     /// <summary>
-    /// Stop watching for changes on a bucket
+    /// Event for a blob in a bucket
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Nitric.Proto.Storage.v1.BlobEventRequest BlobEventRequest {

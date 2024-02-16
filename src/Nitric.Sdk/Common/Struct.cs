@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Google.Protobuf;
+using Newtonsoft.Json;
 using KindOneofCase = Google.Protobuf.WellKnownTypes.Value.KindOneofCase;
 using ProtoStruct = Google.Protobuf.WellKnownTypes.Struct;
 using ProtoValue = Google.Protobuf.WellKnownTypes.Value;
@@ -8,82 +10,28 @@ namespace Nitric.Sdk.Common
 {
     public class Struct
     {
-        public static Dictionary<string, object> ToDictionary(ProtoStruct @struct)
+        public static T ToJsonSerializable<T>(ProtoStruct @struct)
         {
-            var payload = new Dictionary<string, object>();
-
-            foreach (var kv in @struct.Fields)
+            T jsonSerializable = default;
+            if (@struct != null)
             {
-                payload.Add(kv.Key, GetValue(kv.Value));
+                JsonFormatter formatter = new JsonFormatter(JsonFormatter.Settings.Default);
+                jsonSerializable = JsonConvert.DeserializeObject<T>(formatter.Format(@struct));
             }
 
-            return payload;
+            return jsonSerializable;
         }
 
-        public static ProtoStruct FromDictionary(Dictionary<string, object> dictionary)
+        public static ProtoStruct FromJsonSerializable<T>(T jsonSerializable)
         {
-            ProtoStruct payload = new ProtoStruct();
-
-            foreach (KeyValuePair<string, object> kv in dictionary)
+            ProtoStruct structPayload = null;
+            if (jsonSerializable != null)
             {
-                payload.Fields.Add(kv.Key, Struct.ToValue(kv.Value));
+                var jsonPayload = JsonConvert.SerializeObject(jsonSerializable);
+                structPayload = JsonParser.Default.Parse<ProtoStruct>(jsonPayload);
             }
 
-            return payload;
-        }
-
-        private static ProtoValue ToValue(object val)
-        {
-            if (val is string str)
-            {
-                return ProtoValue.ForString(str);
-            }
-            else if (val is double num)
-            {
-                return ProtoValue.ForNumber(num);
-            }
-            else if (val is null)
-            {
-                return ProtoValue.ForNull();
-            }
-            else if (val is Dictionary<string, object> dictionary)
-            {
-                return ProtoValue.ForStruct(Struct.FromDictionary(dictionary));
-            }
-            else if (val is List<object> list)
-            {
-                return ProtoValue.ForList(list.ConvertAll(ToValue).ToArray());
-            }
-
-            return null;
-        }
-
-        private static object GetValue(ProtoValue val)
-        {
-            switch (val.KindCase)
-            {
-                case KindOneofCase.StringValue:
-                    return val.StringValue;
-                case KindOneofCase.NumberValue:
-                    return val.NumberValue;
-                case KindOneofCase.BoolValue:
-                    return val.BoolValue;
-                case KindOneofCase.NullValue:
-                    return val.NullValue;
-                case KindOneofCase.ListValue:
-                    var list = new List<object>();
-
-                    foreach (var listVal in val.ListValue.Values)
-                    {
-                        list.Add(Struct.GetValue(listVal));
-                    }
-
-                    return list;
-                case KindOneofCase.StructValue:
-                    return Struct.ToDictionary(val.StructValue);
-                default:
-                    return null;
-            }
+            return structPayload;
         }
     }
 }

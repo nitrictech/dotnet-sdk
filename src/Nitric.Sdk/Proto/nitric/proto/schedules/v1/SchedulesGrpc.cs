@@ -9,7 +9,7 @@ using grpc = global::Grpc.Core;
 
 namespace Nitric.Proto.Schedules.v1 {
   /// <summary>
-  /// Service for publishing asynchronous messages
+  /// Service for scheduling callbacks on a cadence
   /// </summary>
   public static partial class Schedules
   {

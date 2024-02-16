@@ -1,23 +1,23 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Nitric.Sdk.Common;
-using Nitric.Proto.Schedules.v1;
-using GrpcClient = Nitric.Proto.Schedules.v1.Schedules.SchedulesClient;
+using Nitric.Proto.Topics.v1;
+using GrpcClient = Nitric.Proto.Topics.v1.Subscriber.SubscriberClient;
 using Nitric.Sdk.Service;
 using System;
 
 namespace Nitric.Sdk.Worker
 {
-    public class ScheduleWorker : AbstractWorker<IntervalContext>
+    public class SubscriptionWorker<T> : AbstractWorker<MessageContext<T>>
     {
         readonly private RegistrationRequest RegistrationRequest;
 
-        public ScheduleWorker(RegistrationRequest request, Func<IntervalContext, IntervalContext> middleware) : base(middleware)
+        public SubscriptionWorker(RegistrationRequest request, Func<MessageContext<T>, MessageContext<T>> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
         }
 
-        public ScheduleWorker(RegistrationRequest request, params Middleware<IntervalContext>[] middlewares) : base(middlewares)
+        public SubscriptionWorker(RegistrationRequest request, params Middleware<MessageContext<T>>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
         }
@@ -26,9 +26,11 @@ namespace Nitric.Sdk.Worker
         {
             var client = new GrpcClient(GrpcChannelProvider.GetChannel());
 
-            var stream = client.Schedule();
+            var stream = client.Subscribe();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
+
+            Console.WriteLine(RegistrationRequest);
 
             while (await stream.ResponseStream.MoveNext(CancellationToken.None))
             {
@@ -36,11 +38,11 @@ namespace Nitric.Sdk.Worker
 
                 if (req.RegistrationResponse != null)
                 {
-                    // Schedule connected with Nitric server.
+                    // Topic connected with Nitric Server.
                 }
-                else if (req.IntervalRequest != null)
+                else if (req.MessageRequest != null)
                 {
-                    var ctx = IntervalContext.FromRequest(req);
+                    var ctx = MessageContext<T>.FromRequest(req);
 
                     ctx = this.Middleware(ctx);
 

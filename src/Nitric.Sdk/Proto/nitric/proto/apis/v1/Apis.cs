@@ -60,14 +60,14 @@ namespace Nitric.Proto.Apis.v1 {
             "clNjb3BlczoCOAEiegoTUmVnaXN0cmF0aW9uUmVxdWVzdBILCgNhcGkYASAB",
             "KAkSDAoEcGF0aBgCIAEoCRIPCgdtZXRob2RzGAMgAygJEjcKB29wdGlvbnMY",
             "BCABKAsyJi5uaXRyaWMucHJvdG8uYXBpcy52MS5BcGlXb3JrZXJPcHRpb25z",
-            "MroBCgNBcGkSVQoFU2VydmUSIy5uaXRyaWMucHJvdG8uYXBpcy52MS5DbGll",
+            "Mr0BCgNBcGkSVQoFU2VydmUSIy5uaXRyaWMucHJvdG8uYXBpcy52MS5DbGll",
             "bnRNZXNzYWdlGiMubml0cmljLnByb3RvLmFwaXMudjEuU2VydmVyTWVzc2Fn",
-            "ZSgBMAESXAoHRGV0YWlscxInLm5pdHJpYy5wcm90by5hcGlzLnYxLkFwaURl",
-            "dGFpbHNSZXF1ZXN0Gigubml0cmljLnByb3RvLmFwaXMudjEuQXBpRGV0YWls",
-            "c1Jlc3BvbnNlQosBChdpby5uaXRyaWMucHJvdG8uYXBpcy52MUIEQXBpc1AB",
-            "WjpnaXRodWIuY29tL25pdHJpY3RlY2gvbml0cmljL2NvcmUvcGtnL3Byb3Rv",
-            "L2FwaXMvdjE7YXBpc3BiqgIUTml0cmljLlByb3RvLkFwaXMudjHKAhROaXRy",
-            "aWNcUHJvdG9cQXBpc1xWMWIGcHJvdG8z"));
+            "ZSgBMAESXwoKQXBpRGV0YWlscxInLm5pdHJpYy5wcm90by5hcGlzLnYxLkFw",
+            "aURldGFpbHNSZXF1ZXN0Gigubml0cmljLnByb3RvLmFwaXMudjEuQXBpRGV0",
+            "YWlsc1Jlc3BvbnNlQosBChdpby5uaXRyaWMucHJvdG8uYXBpcy52MUIEQXBp",
+            "c1ABWjpnaXRodWIuY29tL25pdHJpY3RlY2gvbml0cmljL2NvcmUvcGtnL3By",
+            "b3RvL2FwaXMvdjE7YXBpc3BiqgIUTml0cmljLlByb3RvLkFwaXMudjHKAhRO",
+            "aXRyaWNcUHJvdG9cQXBpc1xWMWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -433,6 +433,9 @@ namespace Nitric.Proto.Apis.v1 {
 
   }
 
+  /// <summary>
+  /// ClientMessage sent by the service to the nitric server
+  /// </summary>
   public sealed partial class ClientMessage : pb::IMessage<ClientMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -497,7 +500,7 @@ namespace Nitric.Proto.Apis.v1 {
     /// <summary>Field number for the "registration_request" field.</summary>
     public const int RegistrationRequestFieldNumber = 2;
     /// <summary>
-    /// Register a subscription to a topic
+    /// Register an API route handler
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Nitric.Proto.Apis.v1.RegistrationRequest RegistrationRequest {
@@ -1449,7 +1452,7 @@ namespace Nitric.Proto.Apis.v1 {
     public const int StatusFieldNumber = 1;
     private int status_;
     /// <summary>
-    /// The HTTP status of the request
+    /// The HTTP response status code
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Status {
@@ -1647,6 +1650,9 @@ namespace Nitric.Proto.Apis.v1 {
 
   }
 
+  /// <summary>
+  /// ServerMessage sent by the nitric server to the service
+  /// </summary>
   public sealed partial class ServerMessage : pb::IMessage<ServerMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1711,7 +1717,7 @@ namespace Nitric.Proto.Apis.v1 {
     /// <summary>Field number for the "registration_response" field.</summary>
     public const int RegistrationResponseFieldNumber = 2;
     /// <summary>
-    /// Response to a topic subscription request
+    /// Response to an API serve request
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Nitric.Proto.Apis.v1.RegistrationResponse RegistrationResponse {
@@ -1725,7 +1731,7 @@ namespace Nitric.Proto.Apis.v1 {
     /// <summary>Field number for the "http_request" field.</summary>
     public const int HttpRequestFieldNumber = 3;
     /// <summary>
-    /// Response to a topic message request
+    /// HTTP request to be routed to the service (handler)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Nitric.Proto.Apis.v1.HttpRequest HttpRequest {

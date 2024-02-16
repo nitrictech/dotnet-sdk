@@ -70,15 +70,6 @@ enum ResourceDeploymentStatus {
     FAILED = 3;
 }
 
-/*
-
-hello : service : created
-| latest message goes here.
-|- Container Image : created
-|- ECR Repository : failed
-
-*/
-
 message ResourceUpdate {
     // The resource being updated, if this is nil the update applies to the stack
     nitric.proto.resources.v1.ResourceIdentifier id = 1;
@@ -135,11 +126,11 @@ message DownResult {}
 // An image source to be used for service deployment
 message ImageSource {
     // URI of the docker image
-    // TODO: May also need to provide auth information (although this should just be configured on the running client already)
+    // To support remote images this may also need to provide auth information
     string uri = 1;
 }
 
-// A unit of service (i.e. function/container)
+// A unit of compute (i.e. function/container)
 message Service {
     // Source of the service
     oneof source {
@@ -187,19 +178,14 @@ message Topic {
 
 message Queue {}
 
-message KeyValueStore {
+message KeyValueStore {}
 
-}
-
-message Secret {
-    
-}
+message Secret {}
 
 message SubscriptionTarget {
     oneof target {
         // The name of an service to target
         string service = 1;
-
         // Additional targets could potentially include
         // - HTTP/API Endpoints
         // - Queues
@@ -217,7 +203,7 @@ message HttpTarget {
     }
 }
 
-// A http resource
+// An http proxy resource
 message Http {
     HttpTarget target = 1;
 }
@@ -244,7 +230,6 @@ message WebsocketTarget {
     oneof target {
         // The name of an service to target
         string service = 1;
-
         // Additional targets could potentially include
         // - HTTP/API Endpoints
     }
@@ -254,7 +239,6 @@ message ScheduleTarget {
     oneof target {
         // The name of an service to target
         string service = 1;
-
         // Additional targets could potentially include
         // - HTTP/API Endpoints
     }
@@ -297,14 +281,10 @@ message Resource {
     }
 }
 
-// This is already defined in the resource contracts...
-// Need to determine if it's worth re-using
+// This is already defined in the resource contracts,
 // unfortunately there are parts we don't want to duplicate, such as API config
 message Policy {
     repeated Resource principals = 1;
-    // TODO: Split out discrete action definitions from resources
-    // Also need to allow custom action types as well
-    // Should incorporate action re-use here...
     repeated nitric.proto.resources.v1.Action actions = 2;
     repeated Resource resources = 3;
 }

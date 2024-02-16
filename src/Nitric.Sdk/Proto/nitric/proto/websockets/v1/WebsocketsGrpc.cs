@@ -44,29 +44,29 @@ namespace Nitric.Proto.Websockets.v1 {
 
     static readonly grpc::Marshaller<global::Nitric.Proto.Websockets.v1.WebsocketSendRequest> __Marshaller_nitric_proto_websockets_v1_WebsocketSendRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Websockets.v1.WebsocketSendRequest.Parser));
     static readonly grpc::Marshaller<global::Nitric.Proto.Websockets.v1.WebsocketSendResponse> __Marshaller_nitric_proto_websockets_v1_WebsocketSendResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Websockets.v1.WebsocketSendResponse.Parser));
-    static readonly grpc::Marshaller<global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest> __Marshaller_nitric_proto_websockets_v1_WebsocketCloseRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest.Parser));
-    static readonly grpc::Marshaller<global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse> __Marshaller_nitric_proto_websockets_v1_WebsocketCloseResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest> __Marshaller_nitric_proto_websockets_v1_WebsocketCloseConnectionRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse> __Marshaller_nitric_proto_websockets_v1_WebsocketCloseConnectionResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse.Parser));
     static readonly grpc::Marshaller<global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest> __Marshaller_nitric_proto_websockets_v1_WebsocketDetailsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest.Parser));
     static readonly grpc::Marshaller<global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse> __Marshaller_nitric_proto_websockets_v1_WebsocketDetailsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse.Parser));
 
-    static readonly grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketSendRequest, global::Nitric.Proto.Websockets.v1.WebsocketSendResponse> __Method_Send = new grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketSendRequest, global::Nitric.Proto.Websockets.v1.WebsocketSendResponse>(
+    static readonly grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketSendRequest, global::Nitric.Proto.Websockets.v1.WebsocketSendResponse> __Method_SendMessage = new grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketSendRequest, global::Nitric.Proto.Websockets.v1.WebsocketSendResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "Send",
+        "SendMessage",
         __Marshaller_nitric_proto_websockets_v1_WebsocketSendRequest,
         __Marshaller_nitric_proto_websockets_v1_WebsocketSendResponse);
 
-    static readonly grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest, global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse> __Method_Close = new grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest, global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse>(
+    static readonly grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest, global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse> __Method_CloseConnection = new grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest, global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "Close",
-        __Marshaller_nitric_proto_websockets_v1_WebsocketCloseRequest,
-        __Marshaller_nitric_proto_websockets_v1_WebsocketCloseResponse);
+        "CloseConnection",
+        __Marshaller_nitric_proto_websockets_v1_WebsocketCloseConnectionRequest,
+        __Marshaller_nitric_proto_websockets_v1_WebsocketCloseConnectionResponse);
 
-    static readonly grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest, global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse> __Method_Details = new grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest, global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse>(
+    static readonly grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest, global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse> __Method_SocketDetails = new grpc::Method<global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest, global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "Details",
+        "SocketDetails",
         __Marshaller_nitric_proto_websockets_v1_WebsocketDetailsRequest,
         __Marshaller_nitric_proto_websockets_v1_WebsocketDetailsResponse);
 
@@ -86,7 +86,7 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Websockets.v1.WebsocketSendResponse> Send(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Websockets.v1.WebsocketSendResponse> SendMessage(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -98,7 +98,7 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse> Close(global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse> CloseConnection(global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -109,7 +109,7 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse> Details(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse> SocketDetails(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -147,9 +147,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Websockets.v1.WebsocketSendResponse Send(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Nitric.Proto.Websockets.v1.WebsocketSendResponse SendMessage(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return Send(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return SendMessage(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Send a messages to a websocket
@@ -157,9 +157,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Websockets.v1.WebsocketSendResponse Send(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::CallOptions options)
+      public virtual global::Nitric.Proto.Websockets.v1.WebsocketSendResponse SendMessage(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_Send, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_SendMessage, null, options, request);
       }
       /// <summary>
       /// Send a messages to a websocket
@@ -169,9 +169,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketSendResponse> SendAsync(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketSendResponse> SendMessageAsync(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return SendAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return SendMessageAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Send a messages to a websocket
@@ -179,9 +179,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketSendResponse> SendAsync(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketSendResponse> SendMessageAsync(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_Send, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_SendMessage, null, options, request);
       }
       /// <summary>
       /// Close a websocket connection
@@ -192,9 +192,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse Close(global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse CloseConnection(global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return Close(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return CloseConnection(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Close a websocket connection
@@ -203,9 +203,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse Close(global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest request, grpc::CallOptions options)
+      public virtual global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse CloseConnection(global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_Close, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_CloseConnection, null, options, request);
       }
       /// <summary>
       /// Close a websocket connection
@@ -216,9 +216,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse> CloseAsync(global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse> CloseConnectionAsync(global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return CloseAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return CloseConnectionAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Close a websocket connection
@@ -227,9 +227,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse> CloseAsync(global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse> CloseConnectionAsync(global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_Close, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_CloseConnection, null, options, request);
       }
       /// <summary>
       /// Retrieve details about an API
@@ -239,9 +239,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse Details(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse SocketDetails(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return Details(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return SocketDetails(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Retrieve details about an API
@@ -249,9 +249,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse Details(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::CallOptions options)
+      public virtual global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse SocketDetails(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_Details, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_SocketDetails, null, options, request);
       }
       /// <summary>
       /// Retrieve details about an API
@@ -261,9 +261,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse> DetailsAsync(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse> SocketDetailsAsync(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return DetailsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return SocketDetailsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Retrieve details about an API
@@ -271,9 +271,9 @@ namespace Nitric.Proto.Websockets.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse> DetailsAsync(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse> SocketDetailsAsync(global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_Details, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_SocketDetails, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override WebsocketClient NewInstance(ClientBaseConfiguration configuration)
@@ -287,9 +287,9 @@ namespace Nitric.Proto.Websockets.v1 {
     public static grpc::ServerServiceDefinition BindService(WebsocketBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Send, serviceImpl.Send)
-          .AddMethod(__Method_Close, serviceImpl.Close)
-          .AddMethod(__Method_Details, serviceImpl.Details).Build();
+          .AddMethod(__Method_SendMessage, serviceImpl.SendMessage)
+          .AddMethod(__Method_CloseConnection, serviceImpl.CloseConnection)
+          .AddMethod(__Method_SocketDetails, serviceImpl.SocketDetails).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -298,9 +298,9 @@ namespace Nitric.Proto.Websockets.v1 {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, WebsocketBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_Send, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Websockets.v1.WebsocketSendRequest, global::Nitric.Proto.Websockets.v1.WebsocketSendResponse>(serviceImpl.Send));
-      serviceBinder.AddMethod(__Method_Close, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest, global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse>(serviceImpl.Close));
-      serviceBinder.AddMethod(__Method_Details, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest, global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse>(serviceImpl.Details));
+      serviceBinder.AddMethod(__Method_SendMessage, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Websockets.v1.WebsocketSendRequest, global::Nitric.Proto.Websockets.v1.WebsocketSendResponse>(serviceImpl.SendMessage));
+      serviceBinder.AddMethod(__Method_CloseConnection, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest, global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse>(serviceImpl.CloseConnection));
+      serviceBinder.AddMethod(__Method_SocketDetails, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Websockets.v1.WebsocketDetailsRequest, global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse>(serviceImpl.SocketDetails));
     }
 
   }

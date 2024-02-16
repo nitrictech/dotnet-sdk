@@ -9,7 +9,7 @@ using grpc = global::Grpc.Core;
 
 namespace Nitric.Proto.Http.v1 {
   /// <summary>
-  /// Service for publishing asynchronous messages
+  /// Service for proxying HTTP requests
   /// </summary>
   public static partial class Http
   {

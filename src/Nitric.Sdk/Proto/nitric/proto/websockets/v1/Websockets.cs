@@ -30,55 +30,57 @@ namespace Nitric.Proto.Websockets.v1 {
             "ZXRhaWxzUmVzcG9uc2USCwoDdXJsGAEgASgJIlAKFFdlYnNvY2tldFNlbmRS",
             "ZXF1ZXN0EhMKC3NvY2tldF9uYW1lGAEgASgJEhUKDWNvbm5lY3Rpb25faWQY",
             "AiABKAkSDAoEZGF0YRgDIAEoDCIXChVXZWJzb2NrZXRTZW5kUmVzcG9uc2Ui",
-            "QwoVV2Vic29ja2V0Q2xvc2VSZXF1ZXN0EhMKC3NvY2tldF9uYW1lGAEgASgJ",
-            "EhUKDWNvbm5lY3Rpb25faWQYAiABKAkiGAoWV2Vic29ja2V0Q2xvc2VSZXNw",
-            "b25zZSLPAQoNQ2xpZW50TWVzc2FnZRIKCgJpZBgBIAEoCRJPChRyZWdpc3Ry",
-            "YXRpb25fcmVxdWVzdBgCIAEoCzIvLm5pdHJpYy5wcm90by53ZWJzb2NrZXRz",
-            "LnYxLlJlZ2lzdHJhdGlvblJlcXVlc3RIABJWChh3ZWJzb2NrZXRfZXZlbnRf",
-            "cmVzcG9uc2UYAyABKAsyMi5uaXRyaWMucHJvdG8ud2Vic29ja2V0cy52MS5X",
-            "ZWJzb2NrZXRFdmVudFJlc3BvbnNlSABCCQoHY29udGVudCIWChRSZWdpc3Ry",
-            "YXRpb25SZXNwb25zZSJuChNSZWdpc3RyYXRpb25SZXF1ZXN0EhMKC3NvY2tl",
-            "dF9uYW1lGAEgASgJEkIKCmV2ZW50X3R5cGUYAiABKA4yLi5uaXRyaWMucHJv",
-            "dG8ud2Vic29ja2V0cy52MS5XZWJzb2NrZXRFdmVudFR5cGUiuQIKFVdlYnNv",
-            "Y2tldEV2ZW50UmVxdWVzdBITCgtzb2NrZXRfbmFtZRgBIAEoCRIUCgxjb25u",
-            "ZWN0aW9uSWQYAiABKAkSSgoKY29ubmVjdGlvbhgKIAEoCzI0Lm5pdHJpYy5w",
-            "cm90by53ZWJzb2NrZXRzLnYxLldlYnNvY2tldENvbm5lY3Rpb25FdmVudEgA",
-            "ElAKDWRpc2Nvbm5lY3Rpb24YCyABKAsyNy5uaXRyaWMucHJvdG8ud2Vic29j",
-            "a2V0cy52MS5XZWJzb2NrZXREaXNjb25uZWN0aW9uRXZlbnRIABJECgdtZXNz",
-            "YWdlGAwgASgLMjEubml0cmljLnByb3RvLndlYnNvY2tldHMudjEuV2Vic29j",
-            "a2V0TWVzc2FnZUV2ZW50SABCEQoPd2Vic29ja2V0X2V2ZW50IhsKClF1ZXJ5",
-            "VmFsdWUSDQoFdmFsdWUYASADKAkizwEKDVNlcnZlck1lc3NhZ2USCgoCaWQY",
-            "ASABKAkSUQoVcmVnaXN0cmF0aW9uX3Jlc3BvbnNlGAIgASgLMjAubml0cmlj",
-            "LnByb3RvLndlYnNvY2tldHMudjEuUmVnaXN0cmF0aW9uUmVzcG9uc2VIABJU",
-            "Chd3ZWJzb2NrZXRfZXZlbnRfcmVxdWVzdBgDIAEoCzIxLm5pdHJpYy5wcm90",
-            "by53ZWJzb2NrZXRzLnYxLldlYnNvY2tldEV2ZW50UmVxdWVzdEgAQgkKB2Nv",
-            "bnRlbnQihgEKFldlYnNvY2tldEV2ZW50UmVzcG9uc2USVgoTY29ubmVjdGlv",
-            "bl9yZXNwb25zZRgKIAEoCzI3Lm5pdHJpYy5wcm90by53ZWJzb2NrZXRzLnYx",
-            "LldlYnNvY2tldENvbm5lY3Rpb25SZXNwb25zZUgAQhQKEndlYnNvY2tldF9y",
-            "ZXNwb25zZSLTAQoYV2Vic29ja2V0Q29ubmVjdGlvbkV2ZW50ElsKDHF1ZXJ5",
-            "X3BhcmFtcxgBIAMoCzJFLm5pdHJpYy5wcm90by53ZWJzb2NrZXRzLnYxLldl",
-            "YnNvY2tldENvbm5lY3Rpb25FdmVudC5RdWVyeVBhcmFtc0VudHJ5GloKEFF1",
-            "ZXJ5UGFyYW1zRW50cnkSCwoDa2V5GAEgASgJEjUKBXZhbHVlGAIgASgLMiYu",
-            "bml0cmljLnByb3RvLndlYnNvY2tldHMudjEuUXVlcnlWYWx1ZToCOAEiLQob",
-            "V2Vic29ja2V0Q29ubmVjdGlvblJlc3BvbnNlEg4KBnJlamVjdBgBIAEoCCId",
-            "ChtXZWJzb2NrZXREaXNjb25uZWN0aW9uRXZlbnQiJQoVV2Vic29ja2V0TWVz",
-            "c2FnZUV2ZW50EgwKBGJvZHkYASABKAwqPgoSV2Vic29ja2V0RXZlbnRUeXBl",
-            "EgsKB0Nvbm5lY3QQABIOCgpEaXNjb25uZWN0EAESCwoHTWVzc2FnZRACMt4C",
-            "CglXZWJzb2NrZXQSawoEU2VuZBIwLm5pdHJpYy5wcm90by53ZWJzb2NrZXRz",
-            "LnYxLldlYnNvY2tldFNlbmRSZXF1ZXN0GjEubml0cmljLnByb3RvLndlYnNv",
-            "Y2tldHMudjEuV2Vic29ja2V0U2VuZFJlc3BvbnNlEm4KBUNsb3NlEjEubml0",
-            "cmljLnByb3RvLndlYnNvY2tldHMudjEuV2Vic29ja2V0Q2xvc2VSZXF1ZXN0",
-            "GjIubml0cmljLnByb3RvLndlYnNvY2tldHMudjEuV2Vic29ja2V0Q2xvc2VS",
-            "ZXNwb25zZRJ0CgdEZXRhaWxzEjMubml0cmljLnByb3RvLndlYnNvY2tldHMu",
-            "djEuV2Vic29ja2V0RGV0YWlsc1JlcXVlc3QaNC5uaXRyaWMucHJvdG8ud2Vi",
-            "c29ja2V0cy52MS5XZWJzb2NrZXREZXRhaWxzUmVzcG9uc2UyfAoQV2Vic29j",
-            "a2V0SGFuZGxlchJoCgxIYW5kbGVFdmVudHMSKS5uaXRyaWMucHJvdG8ud2Vi",
-            "c29ja2V0cy52MS5DbGllbnRNZXNzYWdlGikubml0cmljLnByb3RvLndlYnNv",
-            "Y2tldHMudjEuU2VydmVyTWVzc2FnZSgBMAFCtgEKHWlvLm5pdHJpYy5wcm90",
-            "by53ZWJzb2NrZXRzLnYxQhFXZWJzb2NrZXRzU2VydmljZVABWkZnaXRodWIu",
-            "Y29tL25pdHJpY3RlY2gvbml0cmljL2NvcmUvcGtnL3Byb3RvL3dlYnNvY2tl",
-            "dHMvdjE7d2Vic29ja2V0c3BiqgIaTml0cmljLlByb3RvLldlYnNvY2tldHMu",
-            "djHKAhpOaXRyaWNcUHJvdG9cV2Vic29ja2V0c1xWMWIGcHJvdG8z"));
+            "TQofV2Vic29ja2V0Q2xvc2VDb25uZWN0aW9uUmVxdWVzdBITCgtzb2NrZXRf",
+            "bmFtZRgBIAEoCRIVCg1jb25uZWN0aW9uX2lkGAIgASgJIiIKIFdlYnNvY2tl",
+            "dENsb3NlQ29ubmVjdGlvblJlc3BvbnNlIs8BCg1DbGllbnRNZXNzYWdlEgoK",
+            "AmlkGAEgASgJEk8KFHJlZ2lzdHJhdGlvbl9yZXF1ZXN0GAIgASgLMi8ubml0",
+            "cmljLnByb3RvLndlYnNvY2tldHMudjEuUmVnaXN0cmF0aW9uUmVxdWVzdEgA",
+            "ElYKGHdlYnNvY2tldF9ldmVudF9yZXNwb25zZRgDIAEoCzIyLm5pdHJpYy5w",
+            "cm90by53ZWJzb2NrZXRzLnYxLldlYnNvY2tldEV2ZW50UmVzcG9uc2VIAEIJ",
+            "Cgdjb250ZW50IhYKFFJlZ2lzdHJhdGlvblJlc3BvbnNlIm4KE1JlZ2lzdHJh",
+            "dGlvblJlcXVlc3QSEwoLc29ja2V0X25hbWUYASABKAkSQgoKZXZlbnRfdHlw",
+            "ZRgCIAEoDjIuLm5pdHJpYy5wcm90by53ZWJzb2NrZXRzLnYxLldlYnNvY2tl",
+            "dEV2ZW50VHlwZSK5AgoVV2Vic29ja2V0RXZlbnRSZXF1ZXN0EhMKC3NvY2tl",
+            "dF9uYW1lGAEgASgJEhQKDGNvbm5lY3Rpb25JZBgCIAEoCRJKCgpjb25uZWN0",
+            "aW9uGAogASgLMjQubml0cmljLnByb3RvLndlYnNvY2tldHMudjEuV2Vic29j",
+            "a2V0Q29ubmVjdGlvbkV2ZW50SAASUAoNZGlzY29ubmVjdGlvbhgLIAEoCzI3",
+            "Lm5pdHJpYy5wcm90by53ZWJzb2NrZXRzLnYxLldlYnNvY2tldERpc2Nvbm5l",
+            "Y3Rpb25FdmVudEgAEkQKB21lc3NhZ2UYDCABKAsyMS5uaXRyaWMucHJvdG8u",
+            "d2Vic29ja2V0cy52MS5XZWJzb2NrZXRNZXNzYWdlRXZlbnRIAEIRCg93ZWJz",
+            "b2NrZXRfZXZlbnQiGwoKUXVlcnlWYWx1ZRINCgV2YWx1ZRgBIAMoCSLPAQoN",
+            "U2VydmVyTWVzc2FnZRIKCgJpZBgBIAEoCRJRChVyZWdpc3RyYXRpb25fcmVz",
+            "cG9uc2UYAiABKAsyMC5uaXRyaWMucHJvdG8ud2Vic29ja2V0cy52MS5SZWdp",
+            "c3RyYXRpb25SZXNwb25zZUgAElQKF3dlYnNvY2tldF9ldmVudF9yZXF1ZXN0",
+            "GAMgASgLMjEubml0cmljLnByb3RvLndlYnNvY2tldHMudjEuV2Vic29ja2V0",
+            "RXZlbnRSZXF1ZXN0SABCCQoHY29udGVudCKGAQoWV2Vic29ja2V0RXZlbnRS",
+            "ZXNwb25zZRJWChNjb25uZWN0aW9uX3Jlc3BvbnNlGAogASgLMjcubml0cmlj",
+            "LnByb3RvLndlYnNvY2tldHMudjEuV2Vic29ja2V0Q29ubmVjdGlvblJlc3Bv",
+            "bnNlSABCFAoSd2Vic29ja2V0X3Jlc3BvbnNlItMBChhXZWJzb2NrZXRDb25u",
+            "ZWN0aW9uRXZlbnQSWwoMcXVlcnlfcGFyYW1zGAEgAygLMkUubml0cmljLnBy",
+            "b3RvLndlYnNvY2tldHMudjEuV2Vic29ja2V0Q29ubmVjdGlvbkV2ZW50LlF1",
+            "ZXJ5UGFyYW1zRW50cnkaWgoQUXVlcnlQYXJhbXNFbnRyeRILCgNrZXkYASAB",
+            "KAkSNQoFdmFsdWUYAiABKAsyJi5uaXRyaWMucHJvdG8ud2Vic29ja2V0cy52",
+            "MS5RdWVyeVZhbHVlOgI4ASItChtXZWJzb2NrZXRDb25uZWN0aW9uUmVzcG9u",
+            "c2USDgoGcmVqZWN0GAEgASgIIh0KG1dlYnNvY2tldERpc2Nvbm5lY3Rpb25F",
+            "dmVudCIlChVXZWJzb2NrZXRNZXNzYWdlRXZlbnQSDAoEYm9keRgBIAEoDCo+",
+            "ChJXZWJzb2NrZXRFdmVudFR5cGUSCwoHQ29ubmVjdBAAEg4KCkRpc2Nvbm5l",
+            "Y3QQARILCgdNZXNzYWdlEAIyigMKCVdlYnNvY2tldBJyCgtTZW5kTWVzc2Fn",
+            "ZRIwLm5pdHJpYy5wcm90by53ZWJzb2NrZXRzLnYxLldlYnNvY2tldFNlbmRS",
+            "ZXF1ZXN0GjEubml0cmljLnByb3RvLndlYnNvY2tldHMudjEuV2Vic29ja2V0",
+            "U2VuZFJlc3BvbnNlEowBCg9DbG9zZUNvbm5lY3Rpb24SOy5uaXRyaWMucHJv",
+            "dG8ud2Vic29ja2V0cy52MS5XZWJzb2NrZXRDbG9zZUNvbm5lY3Rpb25SZXF1",
+            "ZXN0Gjwubml0cmljLnByb3RvLndlYnNvY2tldHMudjEuV2Vic29ja2V0Q2xv",
+            "c2VDb25uZWN0aW9uUmVzcG9uc2USegoNU29ja2V0RGV0YWlscxIzLm5pdHJp",
+            "Yy5wcm90by53ZWJzb2NrZXRzLnYxLldlYnNvY2tldERldGFpbHNSZXF1ZXN0",
+            "GjQubml0cmljLnByb3RvLndlYnNvY2tldHMudjEuV2Vic29ja2V0RGV0YWls",
+            "c1Jlc3BvbnNlMnwKEFdlYnNvY2tldEhhbmRsZXISaAoMSGFuZGxlRXZlbnRz",
+            "Eikubml0cmljLnByb3RvLndlYnNvY2tldHMudjEuQ2xpZW50TWVzc2FnZRop",
+            "Lm5pdHJpYy5wcm90by53ZWJzb2NrZXRzLnYxLlNlcnZlck1lc3NhZ2UoATAB",
+            "QrYBCh1pby5uaXRyaWMucHJvdG8ud2Vic29ja2V0cy52MUIRV2Vic29ja2V0",
+            "c1NlcnZpY2VQAVpGZ2l0aHViLmNvbS9uaXRyaWN0ZWNoL25pdHJpYy9jb3Jl",
+            "L3BrZy9wcm90by93ZWJzb2NrZXRzL3YxO3dlYnNvY2tldHNwYqoCGk5pdHJp",
+            "Yy5Qcm90by5XZWJzb2NrZXRzLnYxygIaTml0cmljXFByb3RvXFdlYnNvY2tl",
+            "dHNcVjFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Nitric.Proto.Websockets.v1.WebsocketEventType), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -86,8 +88,8 @@ namespace Nitric.Proto.Websockets.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse), global::Nitric.Proto.Websockets.v1.WebsocketDetailsResponse.Parser, new[]{ "Url" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.WebsocketSendRequest), global::Nitric.Proto.Websockets.v1.WebsocketSendRequest.Parser, new[]{ "SocketName", "ConnectionId", "Data" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.WebsocketSendResponse), global::Nitric.Proto.Websockets.v1.WebsocketSendResponse.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest), global::Nitric.Proto.Websockets.v1.WebsocketCloseRequest.Parser, new[]{ "SocketName", "ConnectionId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse), global::Nitric.Proto.Websockets.v1.WebsocketCloseResponse.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest), global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionRequest.Parser, new[]{ "SocketName", "ConnectionId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse), global::Nitric.Proto.Websockets.v1.WebsocketCloseConnectionResponse.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.ClientMessage), global::Nitric.Proto.Websockets.v1.ClientMessage.Parser, new[]{ "Id", "RegistrationRequest", "WebsocketEventResponse" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.RegistrationResponse), global::Nitric.Proto.Websockets.v1.RegistrationResponse.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Websockets.v1.RegistrationRequest), global::Nitric.Proto.Websockets.v1.RegistrationRequest.Parser, new[]{ "SocketName", "EventType" }, null, null, null, null),
@@ -856,15 +858,15 @@ namespace Nitric.Proto.Websockets.v1 {
 
   }
 
-  public sealed partial class WebsocketCloseRequest : pb::IMessage<WebsocketCloseRequest>
+  public sealed partial class WebsocketCloseConnectionRequest : pb::IMessage<WebsocketCloseConnectionRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<WebsocketCloseRequest> _parser = new pb::MessageParser<WebsocketCloseRequest>(() => new WebsocketCloseRequest());
+    private static readonly pb::MessageParser<WebsocketCloseConnectionRequest> _parser = new pb::MessageParser<WebsocketCloseConnectionRequest>(() => new WebsocketCloseConnectionRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<WebsocketCloseRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<WebsocketCloseConnectionRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -877,22 +879,22 @@ namespace Nitric.Proto.Websockets.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public WebsocketCloseRequest() {
+    public WebsocketCloseConnectionRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public WebsocketCloseRequest(WebsocketCloseRequest other) : this() {
+    public WebsocketCloseConnectionRequest(WebsocketCloseConnectionRequest other) : this() {
       socketName_ = other.socketName_;
       connectionId_ = other.connectionId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public WebsocketCloseRequest Clone() {
-      return new WebsocketCloseRequest(this);
+    public WebsocketCloseConnectionRequest Clone() {
+      return new WebsocketCloseConnectionRequest(this);
     }
 
     /// <summary>Field number for the "socket_name" field.</summary>
@@ -925,11 +927,11 @@ namespace Nitric.Proto.Websockets.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as WebsocketCloseRequest);
+      return Equals(other as WebsocketCloseConnectionRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(WebsocketCloseRequest other) {
+    public bool Equals(WebsocketCloseConnectionRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1009,7 +1011,7 @@ namespace Nitric.Proto.Websockets.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(WebsocketCloseRequest other) {
+    public void MergeFrom(WebsocketCloseConnectionRequest other) {
       if (other == null) {
         return;
       }
@@ -1070,15 +1072,15 @@ namespace Nitric.Proto.Websockets.v1 {
 
   }
 
-  public sealed partial class WebsocketCloseResponse : pb::IMessage<WebsocketCloseResponse>
+  public sealed partial class WebsocketCloseConnectionResponse : pb::IMessage<WebsocketCloseConnectionResponse>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<WebsocketCloseResponse> _parser = new pb::MessageParser<WebsocketCloseResponse>(() => new WebsocketCloseResponse());
+    private static readonly pb::MessageParser<WebsocketCloseConnectionResponse> _parser = new pb::MessageParser<WebsocketCloseConnectionResponse>(() => new WebsocketCloseConnectionResponse());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<WebsocketCloseResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<WebsocketCloseConnectionResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1091,29 +1093,29 @@ namespace Nitric.Proto.Websockets.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public WebsocketCloseResponse() {
+    public WebsocketCloseConnectionResponse() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public WebsocketCloseResponse(WebsocketCloseResponse other) : this() {
+    public WebsocketCloseConnectionResponse(WebsocketCloseConnectionResponse other) : this() {
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public WebsocketCloseResponse Clone() {
-      return new WebsocketCloseResponse(this);
+    public WebsocketCloseConnectionResponse Clone() {
+      return new WebsocketCloseConnectionResponse(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as WebsocketCloseResponse);
+      return Equals(other as WebsocketCloseConnectionResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(WebsocketCloseResponse other) {
+    public bool Equals(WebsocketCloseConnectionResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1167,7 +1169,7 @@ namespace Nitric.Proto.Websockets.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(WebsocketCloseResponse other) {
+    public void MergeFrom(WebsocketCloseConnectionResponse other) {
       if (other == null) {
         return;
       }
@@ -1207,7 +1209,7 @@ namespace Nitric.Proto.Websockets.v1 {
   }
 
   /// <summary>
-  /// Messages the client is able to send to the server
+  /// ClientMessages are sent from the service to the nitric server
   /// </summary>
   public sealed partial class ClientMessage : pb::IMessage<ClientMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
@@ -1260,7 +1262,7 @@ namespace Nitric.Proto.Websockets.v1 {
     public const int IdFieldNumber = 1;
     private string id_ = "";
     /// <summary>
-    /// Client message ID, used to pair requests/responses
+    /// Globally unique id to pair requests/responses
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Id {
@@ -2431,7 +2433,7 @@ namespace Nitric.Proto.Websockets.v1 {
   }
 
   /// <summary>
-  /// Messages the server is able to send to the client
+  /// ServerMessages are sent from the nitric server to the service
   /// </summary>
   public sealed partial class ServerMessage : pb::IMessage<ServerMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE

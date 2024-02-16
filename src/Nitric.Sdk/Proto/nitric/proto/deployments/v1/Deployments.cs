@@ -2078,7 +2078,7 @@ namespace Nitric.Proto.Deployments.v1 {
     private string uri_ = "";
     /// <summary>
     /// URI of the docker image
-    /// TODO: May also need to provide auth information (although this should just be configured on the running client already)
+    /// To support remote images this may also need to provide auth information
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Uri {
@@ -2212,7 +2212,7 @@ namespace Nitric.Proto.Deployments.v1 {
   }
 
   /// <summary>
-  /// A unit of service (i.e. function/container)
+  /// A unit of compute (i.e. function/container)
   /// </summary>
   public sealed partial class Service : pb::IMessage<Service>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
@@ -4185,7 +4185,7 @@ namespace Nitric.Proto.Deployments.v1 {
   }
 
   /// <summary>
-  /// A http resource
+  /// An http proxy resource
   /// </summary>
   public sealed partial class Http : pb::IMessage<Http>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
@@ -6700,8 +6700,7 @@ namespace Nitric.Proto.Deployments.v1 {
   }
 
   /// <summary>
-  /// This is already defined in the resource contracts...
-  /// Need to determine if it's worth re-using
+  /// This is already defined in the resource contracts,
   /// unfortunately there are parts we don't want to duplicate, such as API config
   /// </summary>
   public sealed partial class Policy : pb::IMessage<Policy>
@@ -6759,11 +6758,6 @@ namespace Nitric.Proto.Deployments.v1 {
     private static readonly pb::FieldCodec<global::Nitric.Proto.Resources.v1.Action> _repeated_actions_codec
         = pb::FieldCodec.ForEnum(18, x => (int) x, x => (global::Nitric.Proto.Resources.v1.Action) x);
     private readonly pbc::RepeatedField<global::Nitric.Proto.Resources.v1.Action> actions_ = new pbc::RepeatedField<global::Nitric.Proto.Resources.v1.Action>();
-    /// <summary>
-    /// TODO: Split out discrete action definitions from resources
-    /// Also need to allow custom action types as well
-    /// Should incorporate action re-use here...
-    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Nitric.Proto.Resources.v1.Action> Actions {
       get { return actions_; }

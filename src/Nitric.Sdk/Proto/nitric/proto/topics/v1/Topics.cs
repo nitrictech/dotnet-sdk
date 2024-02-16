@@ -30,30 +30,30 @@ namespace Nitric.Proto.Topics.v1 {
             "ZXNzYWdlEgoKAmlkGAEgASgJEksKFHJlZ2lzdHJhdGlvbl9yZXF1ZXN0GAIg",
             "ASgLMisubml0cmljLnByb3RvLnRvcGljcy52MS5SZWdpc3RyYXRpb25SZXF1",
             "ZXN0SAASQwoQbWVzc2FnZV9yZXNwb25zZRgDIAEoCzInLm5pdHJpYy5wcm90",
-            "by50b3BpY3MudjEuTWVzc2FnZVJlc3BvbnNlSABCCQoHY29udGVudCJWCg5N",
-            "ZXNzYWdlUmVxdWVzdBISCgp0b3BpY19uYW1lGAEgASgJEjAKB21lc3NhZ2UY",
-            "AiABKAsyHy5uaXRyaWMucHJvdG8udG9waWNzLnYxLk1lc3NhZ2UiIgoPTWVz",
-            "c2FnZVJlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgiuAEKDVNlcnZlck1lc3Nh",
-            "Z2USCgoCaWQYASABKAkSTQoVcmVnaXN0cmF0aW9uX3Jlc3BvbnNlGAIgASgL",
-            "Miwubml0cmljLnByb3RvLnRvcGljcy52MS5SZWdpc3RyYXRpb25SZXNwb25z",
-            "ZUgAEkEKD21lc3NhZ2VfcmVxdWVzdBgDIAEoCzImLm5pdHJpYy5wcm90by50",
-            "b3BpY3MudjEuTWVzc2FnZVJlcXVlc3RIAEIJCgdjb250ZW50IikKE1JlZ2lz",
-            "dHJhdGlvblJlcXVlc3QSEgoKdG9waWNfbmFtZRgBIAEoCSIWChRSZWdpc3Ry",
-            "YXRpb25SZXNwb25zZSJHCgdNZXNzYWdlEjEKDnN0cnVjdF9wYXlsb2FkGAEg",
-            "ASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdEgAQgkKB2NvbnRlbnQihQEK",
-            "E1RvcGljUHVibGlzaFJlcXVlc3QSEgoKdG9waWNfbmFtZRgBIAEoCRIwCgdt",
-            "ZXNzYWdlGAIgASgLMh8ubml0cmljLnByb3RvLnRvcGljcy52MS5NZXNzYWdl",
-            "EigKBWRlbGF5GAMgASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uIhYK",
-            "FFRvcGljUHVibGlzaFJlc3BvbnNlMm4KBlRvcGljcxJkCgdQdWJsaXNoEisu",
-            "bml0cmljLnByb3RvLnRvcGljcy52MS5Ub3BpY1B1Ymxpc2hSZXF1ZXN0Giwu",
-            "bml0cmljLnByb3RvLnRvcGljcy52MS5Ub3BpY1B1Ymxpc2hSZXNwb25zZTJr",
-            "CgpTdWJzY3JpYmVyEl0KCVN1YnNjcmliZRIlLm5pdHJpYy5wcm90by50b3Bp",
-            "Y3MudjEuQ2xpZW50TWVzc2FnZRolLm5pdHJpYy5wcm90by50b3BpY3MudjEu",
-            "U2VydmVyTWVzc2FnZSgBMAFCngEKGWlvLm5pdHJpYy5wcm90by50b3BpY3Mu",
-            "djFCDVRvcGljc1NlcnZpY2VQAVo+Z2l0aHViLmNvbS9uaXRyaWN0ZWNoL25p",
-            "dHJpYy9jb3JlL3BrZy9wcm90by90b3BpY3MvdjE7dG9waWNzcGKqAhZOaXRy",
-            "aWMuUHJvdG8uVG9waWNzLnYxygIWTml0cmljXFByb3RvXFRvcGljc1xWMWIG",
-            "cHJvdG8z"));
+            "by50b3BpY3MudjEuTWVzc2FnZVJlc3BvbnNlSABCCQoHY29udGVudCJbCg5N",
+            "ZXNzYWdlUmVxdWVzdBISCgp0b3BpY19uYW1lGAEgASgJEjUKB21lc3NhZ2UY",
+            "AiABKAsyJC5uaXRyaWMucHJvdG8udG9waWNzLnYxLlRvcGljTWVzc2FnZSIi",
+            "Cg9NZXNzYWdlUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCCK4AQoNU2VydmVy",
+            "TWVzc2FnZRIKCgJpZBgBIAEoCRJNChVyZWdpc3RyYXRpb25fcmVzcG9uc2UY",
+            "AiABKAsyLC5uaXRyaWMucHJvdG8udG9waWNzLnYxLlJlZ2lzdHJhdGlvblJl",
+            "c3BvbnNlSAASQQoPbWVzc2FnZV9yZXF1ZXN0GAMgASgLMiYubml0cmljLnBy",
+            "b3RvLnRvcGljcy52MS5NZXNzYWdlUmVxdWVzdEgAQgkKB2NvbnRlbnQiKQoT",
+            "UmVnaXN0cmF0aW9uUmVxdWVzdBISCgp0b3BpY19uYW1lGAEgASgJIhYKFFJl",
+            "Z2lzdHJhdGlvblJlc3BvbnNlIkwKDFRvcGljTWVzc2FnZRIxCg5zdHJ1Y3Rf",
+            "cGF5bG9hZBgBIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3RIAEIJCgdj",
+            "b250ZW50IooBChNUb3BpY1B1Ymxpc2hSZXF1ZXN0EhIKCnRvcGljX25hbWUY",
+            "ASABKAkSNQoHbWVzc2FnZRgCIAEoCzIkLm5pdHJpYy5wcm90by50b3BpY3Mu",
+            "djEuVG9waWNNZXNzYWdlEigKBWRlbGF5GAMgASgLMhkuZ29vZ2xlLnByb3Rv",
+            "YnVmLkR1cmF0aW9uIhYKFFRvcGljUHVibGlzaFJlc3BvbnNlMm4KBlRvcGlj",
+            "cxJkCgdQdWJsaXNoEisubml0cmljLnByb3RvLnRvcGljcy52MS5Ub3BpY1B1",
+            "Ymxpc2hSZXF1ZXN0Giwubml0cmljLnByb3RvLnRvcGljcy52MS5Ub3BpY1B1",
+            "Ymxpc2hSZXNwb25zZTJrCgpTdWJzY3JpYmVyEl0KCVN1YnNjcmliZRIlLm5p",
+            "dHJpYy5wcm90by50b3BpY3MudjEuQ2xpZW50TWVzc2FnZRolLm5pdHJpYy5w",
+            "cm90by50b3BpY3MudjEuU2VydmVyTWVzc2FnZSgBMAFCngEKGWlvLm5pdHJp",
+            "Yy5wcm90by50b3BpY3MudjFCDVRvcGljc1NlcnZpY2VQAVo+Z2l0aHViLmNv",
+            "bS9uaXRyaWN0ZWNoL25pdHJpYy9jb3JlL3BrZy9wcm90by90b3BpY3MvdjE7",
+            "dG9waWNzcGKqAhZOaXRyaWMuUHJvdG8uVG9waWNzLnYxygIWTml0cmljXFBy",
+            "b3RvXFRvcGljc1xWMWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.StructReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.DurationReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -63,7 +63,7 @@ namespace Nitric.Proto.Topics.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Topics.v1.ServerMessage), global::Nitric.Proto.Topics.v1.ServerMessage.Parser, new[]{ "Id", "RegistrationResponse", "MessageRequest" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Topics.v1.RegistrationRequest), global::Nitric.Proto.Topics.v1.RegistrationRequest.Parser, new[]{ "TopicName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Topics.v1.RegistrationResponse), global::Nitric.Proto.Topics.v1.RegistrationResponse.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Topics.v1.Message), global::Nitric.Proto.Topics.v1.Message.Parser, new[]{ "StructPayload" }, new[]{ "Content" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Topics.v1.TopicMessage), global::Nitric.Proto.Topics.v1.TopicMessage.Parser, new[]{ "StructPayload" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Topics.v1.TopicPublishRequest), global::Nitric.Proto.Topics.v1.TopicPublishRequest.Parser, new[]{ "TopicName", "Message", "Delay" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Topics.v1.TopicPublishResponse), global::Nitric.Proto.Topics.v1.TopicPublishResponse.Parser, null, null, null, null, null)
           }));
@@ -72,6 +72,9 @@ namespace Nitric.Proto.Topics.v1 {
 
   }
   #region Messages
+  /// <summary>
+  /// ClientMessage is the message sent from the service to the nitric server
+  /// </summary>
   public sealed partial class ClientMessage : pb::IMessage<ClientMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -434,12 +437,12 @@ namespace Nitric.Proto.Topics.v1 {
 
     /// <summary>Field number for the "message" field.</summary>
     public const int MessageFieldNumber = 2;
-    private global::Nitric.Proto.Topics.v1.Message message_;
+    private global::Nitric.Proto.Topics.v1.TopicMessage message_;
     /// <summary>
     /// Message Type
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Nitric.Proto.Topics.v1.Message Message {
+    public global::Nitric.Proto.Topics.v1.TopicMessage Message {
       get { return message_; }
       set {
         message_ = value;
@@ -541,7 +544,7 @@ namespace Nitric.Proto.Topics.v1 {
       }
       if (other.message_ != null) {
         if (message_ == null) {
-          Message = new global::Nitric.Proto.Topics.v1.Message();
+          Message = new global::Nitric.Proto.Topics.v1.TopicMessage();
         }
         Message.MergeFrom(other.Message);
       }
@@ -565,7 +568,7 @@ namespace Nitric.Proto.Topics.v1 {
           }
           case 18: {
             if (message_ == null) {
-              Message = new global::Nitric.Proto.Topics.v1.Message();
+              Message = new global::Nitric.Proto.Topics.v1.TopicMessage();
             }
             input.ReadMessage(Message);
             break;
@@ -590,7 +593,7 @@ namespace Nitric.Proto.Topics.v1 {
           }
           case 18: {
             if (message_ == null) {
-              Message = new global::Nitric.Proto.Topics.v1.Message();
+              Message = new global::Nitric.Proto.Topics.v1.TopicMessage();
             }
             input.ReadMessage(Message);
             break;
@@ -774,6 +777,9 @@ namespace Nitric.Proto.Topics.v1 {
 
   }
 
+  /// <summary>
+  /// ServerMessage is the message sent from the nitric server to the service
+  /// </summary>
   public sealed partial class ServerMessage : pb::IMessage<ServerMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1392,15 +1398,15 @@ namespace Nitric.Proto.Topics.v1 {
 
   }
 
-  public sealed partial class Message : pb::IMessage<Message>
+  public sealed partial class TopicMessage : pb::IMessage<TopicMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<Message> _parser = new pb::MessageParser<Message>(() => new Message());
+    private static readonly pb::MessageParser<TopicMessage> _parser = new pb::MessageParser<TopicMessage>(() => new TopicMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Message> Parser { get { return _parser; } }
+    public static pb::MessageParser<TopicMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1413,14 +1419,14 @@ namespace Nitric.Proto.Topics.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Message() {
+    public TopicMessage() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Message(Message other) : this() {
+    public TopicMessage(TopicMessage other) : this() {
       switch (other.ContentCase) {
         case ContentOneofCase.StructPayload:
           StructPayload = other.StructPayload.Clone();
@@ -1431,8 +1437,8 @@ namespace Nitric.Proto.Topics.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Message Clone() {
-      return new Message(this);
+    public TopicMessage Clone() {
+      return new TopicMessage(this);
     }
 
     /// <summary>Field number for the "struct_payload" field.</summary>
@@ -1466,11 +1472,11 @@ namespace Nitric.Proto.Topics.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Message);
+      return Equals(other as TopicMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Message other) {
+    public bool Equals(TopicMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1539,7 +1545,7 @@ namespace Nitric.Proto.Topics.v1 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Message other) {
+    public void MergeFrom(TopicMessage other) {
       if (other == null) {
         return;
       }
@@ -1664,12 +1670,12 @@ namespace Nitric.Proto.Topics.v1 {
 
     /// <summary>Field number for the "message" field.</summary>
     public const int MessageFieldNumber = 2;
-    private global::Nitric.Proto.Topics.v1.Message message_;
+    private global::Nitric.Proto.Topics.v1.TopicMessage message_;
     /// <summary>
     /// The message to be published
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Nitric.Proto.Topics.v1.Message Message {
+    public global::Nitric.Proto.Topics.v1.TopicMessage Message {
       get { return message_; }
       set {
         message_ = value;
@@ -1798,7 +1804,7 @@ namespace Nitric.Proto.Topics.v1 {
       }
       if (other.message_ != null) {
         if (message_ == null) {
-          Message = new global::Nitric.Proto.Topics.v1.Message();
+          Message = new global::Nitric.Proto.Topics.v1.TopicMessage();
         }
         Message.MergeFrom(other.Message);
       }
@@ -1828,7 +1834,7 @@ namespace Nitric.Proto.Topics.v1 {
           }
           case 18: {
             if (message_ == null) {
-              Message = new global::Nitric.Proto.Topics.v1.Message();
+              Message = new global::Nitric.Proto.Topics.v1.TopicMessage();
             }
             input.ReadMessage(Message);
             break;
@@ -1860,7 +1866,7 @@ namespace Nitric.Proto.Topics.v1 {
           }
           case 18: {
             if (message_ == null) {
-              Message = new global::Nitric.Proto.Topics.v1.Message();
+              Message = new global::Nitric.Proto.Topics.v1.TopicMessage();
             }
             input.ReadMessage(Message);
             break;

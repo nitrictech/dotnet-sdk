@@ -45,26 +45,26 @@ namespace Nitric.Proto.Queues.v1 {
       return parser.ParseFrom(context.PayloadAsNewBuffer());
     }
 
-    static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueSendRequestBatch> __Marshaller_nitric_proto_queues_v1_QueueSendRequestBatch = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueSendRequestBatch.Parser));
-    static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueSendResponse> __Marshaller_nitric_proto_queues_v1_QueueSendResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueSendResponse.Parser));
-    static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueReceiveRequest> __Marshaller_nitric_proto_queues_v1_QueueReceiveRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueReceiveRequest.Parser));
-    static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueReceiveResponse> __Marshaller_nitric_proto_queues_v1_QueueReceiveResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueReceiveResponse.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueEnqueueRequest> __Marshaller_nitric_proto_queues_v1_QueueEnqueueRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueEnqueueRequest.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueEnqueueResponse> __Marshaller_nitric_proto_queues_v1_QueueEnqueueResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueEnqueueResponse.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueDequeueRequest> __Marshaller_nitric_proto_queues_v1_QueueDequeueRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueDequeueRequest.Parser));
+    static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueDequeueResponse> __Marshaller_nitric_proto_queues_v1_QueueDequeueResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueDequeueResponse.Parser));
     static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueCompleteRequest> __Marshaller_nitric_proto_queues_v1_QueueCompleteRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueCompleteRequest.Parser));
     static readonly grpc::Marshaller<global::Nitric.Proto.Queues.v1.QueueCompleteResponse> __Marshaller_nitric_proto_queues_v1_QueueCompleteResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Nitric.Proto.Queues.v1.QueueCompleteResponse.Parser));
 
-    static readonly grpc::Method<global::Nitric.Proto.Queues.v1.QueueSendRequestBatch, global::Nitric.Proto.Queues.v1.QueueSendResponse> __Method_Send = new grpc::Method<global::Nitric.Proto.Queues.v1.QueueSendRequestBatch, global::Nitric.Proto.Queues.v1.QueueSendResponse>(
+    static readonly grpc::Method<global::Nitric.Proto.Queues.v1.QueueEnqueueRequest, global::Nitric.Proto.Queues.v1.QueueEnqueueResponse> __Method_Enqueue = new grpc::Method<global::Nitric.Proto.Queues.v1.QueueEnqueueRequest, global::Nitric.Proto.Queues.v1.QueueEnqueueResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "Send",
-        __Marshaller_nitric_proto_queues_v1_QueueSendRequestBatch,
-        __Marshaller_nitric_proto_queues_v1_QueueSendResponse);
+        "Enqueue",
+        __Marshaller_nitric_proto_queues_v1_QueueEnqueueRequest,
+        __Marshaller_nitric_proto_queues_v1_QueueEnqueueResponse);
 
-    static readonly grpc::Method<global::Nitric.Proto.Queues.v1.QueueReceiveRequest, global::Nitric.Proto.Queues.v1.QueueReceiveResponse> __Method_Receive = new grpc::Method<global::Nitric.Proto.Queues.v1.QueueReceiveRequest, global::Nitric.Proto.Queues.v1.QueueReceiveResponse>(
+    static readonly grpc::Method<global::Nitric.Proto.Queues.v1.QueueDequeueRequest, global::Nitric.Proto.Queues.v1.QueueDequeueResponse> __Method_Dequeue = new grpc::Method<global::Nitric.Proto.Queues.v1.QueueDequeueRequest, global::Nitric.Proto.Queues.v1.QueueDequeueResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "Receive",
-        __Marshaller_nitric_proto_queues_v1_QueueReceiveRequest,
-        __Marshaller_nitric_proto_queues_v1_QueueReceiveResponse);
+        "Dequeue",
+        __Marshaller_nitric_proto_queues_v1_QueueDequeueRequest,
+        __Marshaller_nitric_proto_queues_v1_QueueDequeueResponse);
 
     static readonly grpc::Method<global::Nitric.Proto.Queues.v1.QueueCompleteRequest, global::Nitric.Proto.Queues.v1.QueueCompleteResponse> __Method_Complete = new grpc::Method<global::Nitric.Proto.Queues.v1.QueueCompleteRequest, global::Nitric.Proto.Queues.v1.QueueCompleteResponse>(
         grpc::MethodType.Unary,
@@ -84,12 +84,12 @@ namespace Nitric.Proto.Queues.v1 {
     public abstract partial class QueuesBase
     {
       /// <summary>
-      /// Send messages to a queue
+      /// Send message(s) to a queue
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Queues.v1.QueueSendResponse> Send(global::Nitric.Proto.Queues.v1.QueueSendRequestBatch request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Queues.v1.QueueEnqueueResponse> Enqueue(global::Nitric.Proto.Queues.v1.QueueEnqueueRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -100,13 +100,13 @@ namespace Nitric.Proto.Queues.v1 {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Queues.v1.QueueReceiveResponse> Receive(global::Nitric.Proto.Queues.v1.QueueReceiveRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Nitric.Proto.Queues.v1.QueueDequeueResponse> Dequeue(global::Nitric.Proto.Queues.v1.QueueDequeueRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       /// <summary>
-      /// Complete an item previously popped from a queue
+      /// Complete an message previously popped from a queue
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -142,48 +142,48 @@ namespace Nitric.Proto.Queues.v1 {
       }
 
       /// <summary>
-      /// Send messages to a queue
+      /// Send message(s) to a queue
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Queues.v1.QueueSendResponse Send(global::Nitric.Proto.Queues.v1.QueueSendRequestBatch request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Nitric.Proto.Queues.v1.QueueEnqueueResponse Enqueue(global::Nitric.Proto.Queues.v1.QueueEnqueueRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return Send(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return Enqueue(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Send messages to a queue
+      /// Send message(s) to a queue
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Queues.v1.QueueSendResponse Send(global::Nitric.Proto.Queues.v1.QueueSendRequestBatch request, grpc::CallOptions options)
+      public virtual global::Nitric.Proto.Queues.v1.QueueEnqueueResponse Enqueue(global::Nitric.Proto.Queues.v1.QueueEnqueueRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_Send, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_Enqueue, null, options, request);
       }
       /// <summary>
-      /// Send messages to a queue
+      /// Send message(s) to a queue
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queues.v1.QueueSendResponse> SendAsync(global::Nitric.Proto.Queues.v1.QueueSendRequestBatch request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queues.v1.QueueEnqueueResponse> EnqueueAsync(global::Nitric.Proto.Queues.v1.QueueEnqueueRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return SendAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return EnqueueAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Send messages to a queue
+      /// Send message(s) to a queue
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queues.v1.QueueSendResponse> SendAsync(global::Nitric.Proto.Queues.v1.QueueSendRequestBatch request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queues.v1.QueueEnqueueResponse> EnqueueAsync(global::Nitric.Proto.Queues.v1.QueueEnqueueRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_Send, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_Enqueue, null, options, request);
       }
       /// <summary>
       /// Receive message(s) from a queue
@@ -193,9 +193,9 @@ namespace Nitric.Proto.Queues.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Queues.v1.QueueReceiveResponse Receive(global::Nitric.Proto.Queues.v1.QueueReceiveRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Nitric.Proto.Queues.v1.QueueDequeueResponse Dequeue(global::Nitric.Proto.Queues.v1.QueueDequeueRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return Receive(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return Dequeue(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Receive message(s) from a queue
@@ -203,9 +203,9 @@ namespace Nitric.Proto.Queues.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Nitric.Proto.Queues.v1.QueueReceiveResponse Receive(global::Nitric.Proto.Queues.v1.QueueReceiveRequest request, grpc::CallOptions options)
+      public virtual global::Nitric.Proto.Queues.v1.QueueDequeueResponse Dequeue(global::Nitric.Proto.Queues.v1.QueueDequeueRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_Receive, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_Dequeue, null, options, request);
       }
       /// <summary>
       /// Receive message(s) from a queue
@@ -215,9 +215,9 @@ namespace Nitric.Proto.Queues.v1 {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queues.v1.QueueReceiveResponse> ReceiveAsync(global::Nitric.Proto.Queues.v1.QueueReceiveRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queues.v1.QueueDequeueResponse> DequeueAsync(global::Nitric.Proto.Queues.v1.QueueDequeueRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return ReceiveAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return DequeueAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
       /// Receive message(s) from a queue
@@ -225,12 +225,12 @@ namespace Nitric.Proto.Queues.v1 {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queues.v1.QueueReceiveResponse> ReceiveAsync(global::Nitric.Proto.Queues.v1.QueueReceiveRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Nitric.Proto.Queues.v1.QueueDequeueResponse> DequeueAsync(global::Nitric.Proto.Queues.v1.QueueDequeueRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_Receive, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_Dequeue, null, options, request);
       }
       /// <summary>
-      /// Complete an item previously popped from a queue
+      /// Complete an message previously popped from a queue
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -242,7 +242,7 @@ namespace Nitric.Proto.Queues.v1 {
         return Complete(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Complete an item previously popped from a queue
+      /// Complete an message previously popped from a queue
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -252,7 +252,7 @@ namespace Nitric.Proto.Queues.v1 {
         return CallInvoker.BlockingUnaryCall(__Method_Complete, null, options, request);
       }
       /// <summary>
-      /// Complete an item previously popped from a queue
+      /// Complete an message previously popped from a queue
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -264,7 +264,7 @@ namespace Nitric.Proto.Queues.v1 {
         return CompleteAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Complete an item previously popped from a queue
+      /// Complete an message previously popped from a queue
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -285,8 +285,8 @@ namespace Nitric.Proto.Queues.v1 {
     public static grpc::ServerServiceDefinition BindService(QueuesBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Send, serviceImpl.Send)
-          .AddMethod(__Method_Receive, serviceImpl.Receive)
+          .AddMethod(__Method_Enqueue, serviceImpl.Enqueue)
+          .AddMethod(__Method_Dequeue, serviceImpl.Dequeue)
           .AddMethod(__Method_Complete, serviceImpl.Complete).Build();
     }
 
@@ -296,8 +296,8 @@ namespace Nitric.Proto.Queues.v1 {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, QueuesBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_Send, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Queues.v1.QueueSendRequestBatch, global::Nitric.Proto.Queues.v1.QueueSendResponse>(serviceImpl.Send));
-      serviceBinder.AddMethod(__Method_Receive, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Queues.v1.QueueReceiveRequest, global::Nitric.Proto.Queues.v1.QueueReceiveResponse>(serviceImpl.Receive));
+      serviceBinder.AddMethod(__Method_Enqueue, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Queues.v1.QueueEnqueueRequest, global::Nitric.Proto.Queues.v1.QueueEnqueueResponse>(serviceImpl.Enqueue));
+      serviceBinder.AddMethod(__Method_Dequeue, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Queues.v1.QueueDequeueRequest, global::Nitric.Proto.Queues.v1.QueueDequeueResponse>(serviceImpl.Dequeue));
       serviceBinder.AddMethod(__Method_Complete, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Nitric.Proto.Queues.v1.QueueCompleteRequest, global::Nitric.Proto.Queues.v1.QueueCompleteResponse>(serviceImpl.Complete));
     }
 

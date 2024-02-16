@@ -157,7 +157,7 @@ namespace Nitric.Sdk.Service
         /// </summary>
         /// <param name="trigger"></param>
         /// <returns></returns>
-        public static HttpContext FromRequest(ServerMessage trigger)
+        internal static HttpContext FromRequest(ServerMessage trigger)
         {
             var headers = new Dictionary<string, IEnumerable<string>>();
             foreach (var kv in trigger.HttpRequest.Headers)
@@ -187,7 +187,7 @@ namespace Nitric.Sdk.Service
         /// Create a gRPC trigger response from this context.
         /// </summary>
         /// <returns></returns>
-        public ClientMessage ToResponse()
+        internal ClientMessage ToResponse()
         {
             var responseHeaders = new MapField<string, HeaderValue>
             {
