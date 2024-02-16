@@ -6,32 +6,42 @@ using System.Linq;
 
 namespace Nitric.Sdk.Worker
 {
-    public abstract class AbstractWorker
+    interface IWorker
     {
-        protected Func<TriggerContext<TriggerRequest, TriggerResponse>, TriggerContext<TriggerRequest, TriggerResponse>> Middleware;
+        public Task Start();
+    }
 
-        public AbstractWorker(params Middleware<TriggerContext<TriggerRequest, TriggerResponse>>[] middlewares)
+    public abstract class AbstractWorker<T> : IWorker
+    {
+        protected Func<T, T> Middleware;
+
+        public AbstractWorker(params Middleware<T>[] middlewares)
         {
             if (middlewares.Count() == 0)
             {
-                throw new ArgumentException("cannot create schedule worker with no handlers");
+                throw new ArgumentException("cannot create worker with no handlers");
             }
 
             // Convert the middleware array into a list
-            var middlewareList = new List<Middleware<TriggerContext<TriggerRequest, TriggerResponse>>>();
+            var middlewareList = new List<Middleware<T>>();
 
             middlewareList.AddRange(middlewares);
 
-            Func<TriggerContext<TriggerRequest, TriggerResponse>, TriggerContext<TriggerRequest, TriggerResponse>> lastCall = (context) => context;
+            Func<T, T> lastCall = (context) => context;
 
             middlewares.Reverse();
 
             this.Middleware = middlewares.Aggregate(lastCall, (next, handler) =>
             {
-                Func<TriggerContext<TriggerRequest, TriggerResponse>, TriggerContext<TriggerRequest, TriggerResponse>> nextFunc = (context) => handler(context, next) ?? context;
+                Func<T, T> nextFunc = (context) => handler(context, next) ?? context;
 
                 return nextFunc;
             });
+        }
+
+        public AbstractWorker(Func<T, T> middleware)
+        {
+            this.Middleware = middleware;
         }
 
         public abstract Task Start();

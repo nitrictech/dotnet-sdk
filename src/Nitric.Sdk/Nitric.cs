@@ -17,7 +17,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nitric.Sdk.Resource;
 using Nitric.Sdk.Worker;
-using Nitric.Sdk.Service;
 
 namespace Nitric.Sdk
 {
@@ -26,13 +25,18 @@ namespace Nitric.Sdk
     /// </summary>
     public class Nitric
     {
-        private static readonly List<AbstractWorker> Workers = new List<AbstractWorker>();
+        private static readonly List<IWorker> Workers = new List<IWorker>();
 
         private static readonly Dictionary<Type, Dictionary<string, BaseResource>> Cache =
             new Dictionary<Type, Dictionary<string, BaseResource>>();
 
-        internal static void RegisterWorker(AbstractWorker worker)
+        internal static void RegisterWorker(IWorker worker)
         {
+            if (worker == null)
+            {
+                throw new ArgumentNullException("Cannot register a null worker.");
+            }
+
             Nitric.Workers.Add(worker);
         }
 
@@ -54,10 +58,10 @@ namespace Nitric.Sdk
         /// </summary>
         /// <param name="name">The unique name of this API.</param>
         /// <returns></returns>
-        public static ApiResource Api(string name, ApiOptions options = null)
-        {
-            return new ApiResource(name, options);
-        }
+        //public static ApiResource Api(string name, ApiOptions options = null)
+        //{
+        //    return new ApiResource(name, options);
+        //}
 
         /// <summary>
         /// Declare a schedule.
@@ -93,7 +97,7 @@ namespace Nitric.Sdk
         /// </summary>
         /// <param name="name">The unique name of the bucket within this application.</param>
         /// <returns>A bucket resource, if the name has already been declared the same resource will be returned.</returns>
-        public static BucketResource Bucket(string name) => Cached(name, t => new BucketResource(t));
+        //public static BucketResource Bucket(string name) => Cached(name, t => new BucketResource(t));
 
 
         /// <summary>
@@ -102,8 +106,8 @@ namespace Nitric.Sdk
         /// <param name="name">The unique name of the collection within this application.</param>
         /// <typeparam name="T">The type of documents to be stored in the collection.</typeparam>
         /// <returns>A collection resource, if the name has already been declared the same resource will be returned.</returns>
-        public static CollectionResource<TDocument> Collection<TDocument>(string name) =>
-            Cached(name, t => new CollectionResource<TDocument>(t));
+        //public static CollectionResource<TDocument> Collection<TDocument>(string name) =>
+        //    Cached(name, t => new CollectionResource<TDocument>(t));
 
         /// <summary>
         /// Declare a secret resource for accessing and putting secret values.
@@ -117,20 +121,20 @@ namespace Nitric.Sdk
         /// </summary>
         /// <param name="name">The unique name of the queue within this application.</param>
         /// <returns>A queue resource, if the name has already been declared the same resource will be returned.</returns>
-        public static QueueResource<T> Queue<T>(string name) => Cached(name, n => new QueueResource<T>(n));
+        //public static QueueResource<T> Queue<T>(string name) => Cached(name, n => new QueueResource<T>(n));
 
         /// <summary>
         /// Declare a topic resource for push-based events and messaging.
         /// </summary>
         /// <param name="name">The unique name of the topic within this application.</param>
         /// <returns>A topic resource, if the name has already been declared the same resource will be returned.</returns>
-        public static TopicResource<T> Topic<T>(string name) => Cached(name, t => new TopicResource<T>(t));
+        //public static TopicResource<T> Topic<T>(string name) => Cached(name, t => new TopicResource<T>(t));
 
         /// <summary>
-        /// Declare a websocket resource for bidirectional HTTP communication.
+        /// Declare a websocket resource for bidirectional HxwTTP communication.
         /// </summary>
         /// <param name="name">The unique name of the websocket within this application.</param>
         /// <returns>A websocket resource, if the name has already been declared the same resource will be returned.</returns>
-        public static WebsocketResource Websocket(string name) => Cached(name, t => new WebsocketResource(t));
+        //public static WebsocketResource Websocket(string name) => Cached(name, t => new WebsocketResource(t));
     }
 }

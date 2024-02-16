@@ -4,7 +4,7 @@ using Nitric.Sdk.Common;
 using Nitric.Proto.Schedules.v1;
 using GrpcClient = Nitric.Proto.Schedules.v1.Schedules.SchedulesClient;
 using Nitric.Sdk.Service;
-using Nitric.Sdk.Resource;
+using System;
 
 namespace Nitric.Sdk.Worker
 {
@@ -12,36 +12,45 @@ namespace Nitric.Sdk.Worker
     {
         readonly private RegistrationRequest RegistrationRequest;
 
+        public ScheduleWorker(RegistrationRequest request, Func<IntervalContext, IntervalContext> middleware) : base(middleware)
+        {
+            this.RegistrationRequest = request;
+        }
+
         public ScheduleWorker(RegistrationRequest request, params Middleware<IntervalContext>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
         }
 
-        public override Task Start()
+        public override async Task Start()
         {
-            return Task.Run(async () =>
+            var client = new GrpcClient(GrpcChannelProvider.GetChannel());
+
+            var stream = client.Schedule();
+
+            await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
+
+            Console.WriteLine(RegistrationRequest);
+
+            while (await stream.ResponseStream.MoveNext(CancellationToken.None))
             {
-                var client = new GrpcClient(GrpcChannelProvider.GetChannel());
+                var req = stream.ResponseStream.Current;
 
-                var stream = client.Schedule();
-
-                await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
-
-                while (!stream.ResponseStream.Current.Equals(null))
+                if (req.RegistrationResponse != null)
                 {
-                    var req = stream.ResponseStream.Current;
-
+                    Console.WriteLine("Schedule connected with Nitric server.");
+                }
+                else if (req.IntervalRequest != null)
+                {
                     var ctx = IntervalContext.FromRequest(req);
 
                     ctx = this.Middleware(ctx);
 
                     await stream.RequestStream.WriteAsync(ctx.ToRequest());
-
-                    await stream.ResponseStream.MoveNext(CancellationToken.None);
                 }
+            }
 
-                await stream.RequestStream.CompleteAsync();
-            });
+            await stream.RequestStream.CompleteAsync();
         }
     }
 }
