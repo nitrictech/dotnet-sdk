@@ -14,14 +14,14 @@
 
 using System;
 using Nitric.Sdk.Common;
-using GrpcClient = Nitric.Proto.Storage.v1.StorageService.StorageServiceClient;
+using GrpcClient = Nitric.Proto.Storage.v1.Storage.StorageClient;
 
 namespace Nitric.Sdk.Storage
 {
     /// <summary>
     /// A storage client.
     /// </summary>
-    public class Storage
+    public class StorageClient
     {
         internal readonly GrpcClient Client;
 
@@ -29,7 +29,7 @@ namespace Nitric.Sdk.Storage
         /// Create a new storage client.
         /// </summary>
         /// <param name="client">Optional internal gRPC client to reuse.</param>
-        public Storage(GrpcClient client = null)
+        public StorageClient(GrpcClient client = null)
         {
             this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }

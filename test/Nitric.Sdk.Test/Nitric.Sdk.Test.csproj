@@ -25,13 +25,11 @@
     <ProjectReference Include="..\..\src\Nitric.Sdk\Nitric.Sdk.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Faas\" />
     <Folder Include="Api\" />
-    <Folder Include="Api\Event\" />
     <Folder Include="Api\Storage\" />
     <Folder Include="Api\Queue\" />
-    <Folder Include="Api\Document\" />
     <Folder Include="Api\Secret\" />
+    <Folder Include="Api\Topics\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="examples\**" />
@@ -41,5 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="examples\**" />
+    <None Remove="Api\Topics\" />
   </ItemGroup>
 </Project>

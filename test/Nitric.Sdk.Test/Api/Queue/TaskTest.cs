@@ -14,26 +14,41 @@
 
 using System.Collections.Generic;
 using Xunit;
+using Nitric.Sdk.Queue;
 
 namespace Nitric.Sdk.Test.Api.Queue
 {
     public class QueueItemTest
     {
         [Fact]
-        public void TestBuild()
+        public void TestBuildReceivedMessage()
         {
-            var payload = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" }};
-            var queueItem = new global::Nitric.Sdk.Queue.Task<TestProfile>
+            var payload = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
+            var queueItem = new ReceivedMessage<TestProfile>
             {
-                Id = "2",
-                PayloadType = "payload type",
-                Payload = payload
+                LeaseId = "1",
+                Message = payload,
             };
 
             Assert.NotNull(queueItem);
-            Assert.Equal("2", queueItem.Id);
-            Assert.Equal("payload type", queueItem.PayloadType);
-            Assert.Equal(payload, queueItem.Payload);
+            Assert.Equal("1", queueItem.LeaseId);
+            Assert.Equal(payload, queueItem.Message);
+        }
+
+        [Fact]
+        public void TestBuildFailedMessage()
+        {
+            var payload = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
+            var failedMessage = new FailedMessage<TestProfile>
+            {
+                Details = "The failed task failed successfully",
+                Message = payload,
+            };
+
+            Assert.NotNull(failedMessage);
+            Assert.Equal("The failed task failed successfully", failedMessage.Details);
+            Assert.Equal(payload, failedMessage.Message);
+            Assert.Equal("FailedMessage[details=The failed task failed successfully]", failedMessage.ToString());
         }
     }
 }

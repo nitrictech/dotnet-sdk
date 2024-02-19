@@ -1,19 +1,17 @@
 using System;
-using System.Text;
 using Google.Protobuf;
 using Grpc.Core;
 using Moq;
-using Nitric.Proto.Secret.v1;
-using Nitric.Proto.Websocket.v1;
+using Nitric.Proto.Websockets.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Resource;
-using Nitric.Sdk.Secret;
 using Nitric.Sdk.Websocket;
 using Xunit;
+using GrpcClient = Nitric.Proto.Websockets.v1.Websocket.WebsocketClient;
 
 namespace Nitric.Sdk.Test.Api.Websocket;
 
-public class WebsocketTest {
+public class WebsocketTest
+{
     [Fact]
     public void TestWebsocketBuild()
     {
@@ -22,7 +20,7 @@ public class WebsocketTest {
     }
 
     [Fact]
-    public void TestBuildSecretsWithNullClient()
+    public void TestBuildWebsocketsWithNullClient()
     {
         var websocket = new WebsocketClient(null);
         Assert.NotNull(websocket);
@@ -31,10 +29,10 @@ public class WebsocketTest {
     [Fact]
     public void TestBuildWebsocketWithIdAndSocket()
     {
-        var connection = new WebsocketClient().Connection("socket-name", "connection-id");
+        var connection = Nitric.Websocket("socket-name").Connection("connection-id");
         Assert.NotNull(connection);
         Assert.Equal("connection-id", connection.Id);
-        Assert.Equal("socket-name", connection.Socket);
+        Assert.Equal("socket-name", connection.SocketName);
     }
 
     [Fact]
@@ -56,22 +54,22 @@ public class WebsocketTest {
     {
         var websocketSendRequest = new WebsocketSendRequest
         {
-            Socket = "socket-name",
+            SocketName = "socket-name",
             ConnectionId = "connection-id",
             Data = ByteString.CopyFromUtf8("websocket-data")
         };
-        Mock<WebsocketService.WebsocketServiceClient> wc = new Mock<WebsocketService.WebsocketServiceClient>();
+        Mock<GrpcClient> wc = new Mock<GrpcClient>();
         wc.Setup(e =>
-                e.Send(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
+                e.SendMessage(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
             .Verifiable();
 
         var connection = new WebsocketClient(wc.Object)
             .Connection("socket-name", "connection-id");
 
-        connection.Send("websocket-data");
+        connection.SendMessage("websocket-data");
 
         wc.Verify(
-            t => t.Send(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()),
+            t => t.SendMessage(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()),
             Times.Once);
     }
 
@@ -80,64 +78,64 @@ public class WebsocketTest {
     {
         var websocketSendRequest = new WebsocketSendRequest
         {
-            Socket = "socket-name",
+            SocketName = "socket-name",
             ConnectionId = "connection-id",
             Data = ByteString.CopyFromUtf8("websocket-data")
         };
-        Mock<WebsocketService.WebsocketServiceClient> wc = new Mock<WebsocketService.WebsocketServiceClient>();
+        Mock<GrpcClient> wc = new Mock<GrpcClient>();
         wc.Setup(e =>
-                e.Send(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
+                e.SendMessage(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
             .Throws(new RpcException(Status.DefaultCancelled, "succeeded in failing"));
 
         var connection = new WebsocketClient(wc.Object)
             .Connection("socket-name", "connection-id");
 
         Assert.Throws<CancelledException>(() =>
-            connection.Send("websocket-data")
+            connection.SendMessage("websocket-data")
         );
     }
 
     [Fact]
     public void TestWebsocketClose()
     {
-        var websocketCloseRequest = new WebsocketCloseRequest
+        var websocketCloseRequest = new WebsocketCloseConnectionRequest
         {
-            Socket = "socket-name",
+            SocketName = "socket-name",
             ConnectionId = "connection-id",
         };
-        Mock<WebsocketService.WebsocketServiceClient> wc = new Mock<WebsocketService.WebsocketServiceClient>();
+        Mock<GrpcClient> wc = new Mock<GrpcClient>();
         wc.Setup(e =>
-                e.Close(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
+                e.CloseConnection(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
             .Verifiable();
 
         var connection = new WebsocketClient(wc.Object)
             .Connection("socket-name", "connection-id");
 
-        connection.Close();
+        connection.CloseConnection();
 
         wc.Verify(
-            t => t.Close(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()),
+            t => t.CloseConnection(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()),
             Times.Once);
     }
 
     [Fact]
     public void TestWebsocketCloseWithError()
     {
-        var websocketCloseRequest = new WebsocketCloseRequest
+        var websocketCloseRequest = new WebsocketCloseConnectionRequest
         {
-            Socket = "socket-name",
+            SocketName = "socket-name",
             ConnectionId = "connection-id",
         };
-        Mock<WebsocketService.WebsocketServiceClient> wc = new Mock<WebsocketService.WebsocketServiceClient>();
+        Mock<GrpcClient> wc = new Mock<GrpcClient>();
         wc.Setup(e =>
-                e.Close(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
+                e.CloseConnection(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
             .Throws(new RpcException(Status.DefaultCancelled, "succeeded in failing"));
 
         var connection = new WebsocketClient(wc.Object)
             .Connection("socket-name", "connection-id");
 
         Assert.Throws<CancelledException>(() =>
-            connection.Close()
+            connection.CloseConnection()
         );
     }
 }

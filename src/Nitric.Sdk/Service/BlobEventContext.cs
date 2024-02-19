@@ -16,12 +16,45 @@ using System;
 using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Storage;
 using ProtoBlobEventResponse = Nitric.Proto.Storage.v1.BlobEventResponse;
+using ProtoBlobEventType = Nitric.Proto.Storage.v1.BlobEventType;
 
 namespace Nitric.Sdk.Service
 {
-    public enum BucketNotificationType
+    /// <summary>
+    /// Extension class for methods converting blob event types to and from gRPC calls.
+    /// </summary>
+    internal static class BlobEventTypeExtension
     {
+        /// <summary>
+        /// Convert a SDK blob event type into a gRPC blob event type.
+        /// </summary>
+        /// <param name="blobEventType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        internal static ProtoBlobEventType ToGrpc(
+            this BlobEventType blobEventType)
+        {
+            return blobEventType switch
+            {
+                BlobEventType.Write => ProtoBlobEventType.Created,
+                BlobEventType.Delete => ProtoBlobEventType.Deleted,
+                _ => throw new ArgumentException("Unsupported blob event type")
+            };
+        }
+    }
+
+    ///<Summary>
+    /// Available blob event trigger types.
+    ///</Summary>
+    public enum BlobEventType
+    {
+        /// <summary>
+        /// Trigger a blob event on a write event.
+        /// </summary>
         Write,
+        /// <summary>
+        /// Trigger a blob event on a delete event.
+        /// </summary>
         Delete
     }
 
@@ -33,13 +66,13 @@ namespace Nitric.Sdk.Service
         /// <summary>
         /// A reference to the file that triggered this request
         /// </summary>
-        public File File { get; private set; }
+        public Storage.Blob File { get; private set; }
 
         /// <summary>
         /// The type of event that triggered this request
         /// </summary>
         /// <returns></returns>
-        public BucketNotificationType NotificationType { get; private set; }
+        public BlobEventType NotificationType { get; private set; }
 
         /// <summary>
         /// Construct a bucket notification request
@@ -48,7 +81,7 @@ namespace Nitric.Sdk.Service
         /// <param name="key">the file that triggered the notification</param>
         /// <param name="notificationType">the type of bucket notification</param>
         /// <param name="bucket">the bucket that triggered the notification</param>
-        public BlobEventRequest(string key, BucketNotificationType notificationType, Bucket bucket) : base()
+        public BlobEventRequest(string key, BlobEventType notificationType, Bucket bucket) : base()
         {
             this.File = bucket.File(key);
             this.NotificationType = notificationType;
@@ -99,7 +132,7 @@ namespace Nitric.Sdk.Service
         /// <returns>the new bucket notification context</returns>
         public static BlobEventContext FromRequest(ServerMessage trigger, Bucket bucket)
         {
-            var notificationType = FromGrpcBucketNotificationType(trigger.BlobEventRequest.BlobEvent.Type);
+            var notificationType = FromGrpcBlobEventType(trigger.BlobEventRequest.BlobEvent.Type);
 
             return new BlobEventContext(
                 trigger.Id,
@@ -111,15 +144,20 @@ namespace Nitric.Sdk.Service
                 new BlobEventResponse(true));
         }
 
-
-        private static BucketNotificationType FromGrpcBucketNotificationType(
-            BlobEventType notificationType)
+        /// <summary>
+        /// Convert a gRPC blob event type into a SDK blob event type.
+        /// </summary>
+        /// <param name="blobEventType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        private static BlobEventType FromGrpcBlobEventType(
+            ProtoBlobEventType blobEventType)
         {
-            return notificationType switch
+            return blobEventType switch
             {
-                BlobEventType.Created => BucketNotificationType.Write,
-                BlobEventType.Deleted => BucketNotificationType.Delete,
-                _ => throw new ArgumentException("Unsupported bucket notification type")
+                ProtoBlobEventType.Created => BlobEventType.Write,
+                ProtoBlobEventType.Deleted => BlobEventType.Delete,
+                _ => throw new ArgumentException("Unsupported blob event type")
             };
         }
 

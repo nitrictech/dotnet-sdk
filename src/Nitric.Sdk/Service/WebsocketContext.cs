@@ -19,9 +19,34 @@ using Newtonsoft.Json;
 using Nitric.Proto.Websockets.v1;
 using WebsocketEventTypeProto = Nitric.Proto.Websockets.v1.WebsocketEventRequest.WebsocketEventOneofCase;
 using Google.Protobuf.Collections;
+using ProtoWebsocketEventType = Nitric.Proto.Websockets.v1.WebsocketEventType;
 
 namespace Nitric.Sdk.Service
 {
+    /// <summary>
+    /// Extension class for methods converting blob event types to and from gRPC calls.
+    /// </summary>
+    internal static class WebsocketEventTypeExtension
+    {
+        /// <summary>
+        /// Convert a SDK websocket event type into a gRPC blob event type.
+        /// </summary>
+        /// <param name="websocketEventType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        internal static ProtoWebsocketEventType ToGrpc(
+            this WebsocketEventType websocketEventType)
+        {
+            return websocketEventType switch
+            {
+                WebsocketEventType.Connected => ProtoWebsocketEventType.Connect,
+                WebsocketEventType.Disconnected => ProtoWebsocketEventType.Disconnect,
+                WebsocketEventType.Message => ProtoWebsocketEventType.Message,
+                _ => throw new ArgumentException("Unsupported websocket event type")
+            };
+        }
+    }
+
     public enum WebsocketEventType
     {
         Connected,
@@ -112,7 +137,7 @@ namespace Nitric.Sdk.Service
         /// </summary>
         /// <param name="trigger">The trigger to convert into an EventContext.</param>
         /// <returns>the new event context</returns>
-        public static WebsocketContext ToRequest(ServerMessage trigger)
+        public static WebsocketContext FromRequest(ServerMessage trigger)
         {
             var type = FromGrpcWebsocketNotificationType(trigger.WebsocketEventRequest.WebsocketEventCase);
             var queryParams = GetQueryParams(trigger.WebsocketEventRequest.Connection.QueryParams);

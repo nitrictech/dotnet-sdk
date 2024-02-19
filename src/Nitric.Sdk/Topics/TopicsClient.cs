@@ -13,12 +13,10 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Nitric.Sdk.Common;
 using TopicsGrpcClient = Nitric.Proto.Topics.v1.Topics.TopicsClient;
 
-namespace Nitric.Sdk.Topic
+namespace Nitric.Sdk.Topics
 {
     /// <summary>
     /// Events service client.

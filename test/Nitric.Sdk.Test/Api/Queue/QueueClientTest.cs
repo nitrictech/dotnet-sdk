@@ -15,11 +15,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Moq;
-using Nitric.Proto.Queue.v1;
+using Nitric.Proto.Queues.v1;
+using GrpcClient = Nitric.Proto.Queues.v1.Queues.QueuesClient;
 using Nitric.Sdk.Queue;
 using Xunit;
 
@@ -56,9 +56,9 @@ namespace Nitric.Sdk.Test.Api.Queue
         [Fact]
         public void TestSendToNonExistentQueue()
         {
-            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
+            Mock<GrpcClient> qc = new Mock<GrpcClient>();
             qc.Setup(e =>
-                    e.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                    e.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
                 .Verifiable();
 
@@ -66,187 +66,185 @@ namespace Nitric.Sdk.Test.Api.Queue
 
             try
             {
-                queue.Send(new Task<TestProfile>());
+                queue.Enqueue(new TestProfile());
             }
-            catch (global::Nitric.Sdk.Common.NitricException ne)
+            catch (Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified queue does not exist\")",
                     ne.Message);
             }
 
             qc.Verify(
-                t => t.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                t => t.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
                 Times.Once);
         }
 
         [Fact]
         public void TestSendBatchWithFailedTasks()
         {
-            //Setting up failed tasks to then return later
-            NitricTask failedTaskTask = new NitricTask();
-            failedTaskTask.Id = "0";
-            failedTaskTask.LeaseId = "1";
-            failedTaskTask.Payload = new Struct();
-            failedTaskTask.PayloadType = "Dictionary";
+            FailedEnqueueMessage failedMessage = new FailedEnqueueMessage();
+            failedMessage.Details = "I am a failed task... I failed my task";
+            failedMessage.Message = new QueueMessage();
 
-            Proto.Queue.v1.FailedTask failedTask = new Proto.Queue.v1.FailedTask();
-            failedTask.Message = "I am a failed task... I failed my task";
-            failedTask.Task = failedTaskTask;
+            List<FailedEnqueueMessage> failedMessages = new List<FailedEnqueueMessage>
+            {
+                failedMessage,
+            };
 
-            List<Proto.Queue.v1.FailedTask> failedTasks = new List<Proto.Queue.v1.FailedTask>();
-            failedTasks.Add(failedTask);
+            var queueBatchResponse = new QueueEnqueueResponse();
+            queueBatchResponse.FailedMessages.AddRange(failedMessages);
 
-            var queueBatchResponse = new QueueSendBatchResponse();
-            queueBatchResponse.FailedTasks.AddRange(failedTasks);
-
-            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
-            qc.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null,
+            Mock<GrpcClient> qc = new Mock<GrpcClient>();
+            qc.Setup(e => e.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queueBatchResponse)
                 .Verifiable();
 
             var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
-            var failedTasksResp = queue.Send(new TestProfile {}, new TestProfile {});
+            var failedTasksResp = queue.Enqueue(new TestProfile { }, new TestProfile { });
 
-            Assert.Equal("I am a failed task... I failed my task", failedTasksResp[0].Message);
+            Assert.Equal("I am a failed task... I failed my task", failedTasksResp[0].Details);
 
             qc.Verify(
-                t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null,
+                t => t.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
 
         [Fact]
         public void TestSendBatchWithNoFailedTasks()
         {
-            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
-            qc.Setup(e => e.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null,
+            Mock<GrpcClient> qc = new Mock<GrpcClient>();
+            qc.Setup(e => e.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new QueueSendBatchResponse())
+                .Returns(new QueueEnqueueResponse())
                 .Verifiable();
 
             var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
-            var failedTasks = queue.Send(new TestProfile {}, new TestProfile {});
+            var failedTasks = queue.Enqueue(new TestProfile { }, new TestProfile { });
 
             Assert.Empty(failedTasks);
 
             qc.Verify(
-                t => t.SendBatch(It.IsAny<QueueSendBatchRequest>(), null, null,
+                t => t.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
 
         [Fact]
         public void TestReceiveTasks()
         {
-            NitricTask taskToReturn = new NitricTask();
-            taskToReturn.Id = "32";
-            taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = new Struct();
-            taskToReturn.PayloadType = "Dictionary";
+            var messagePayload = Common.Struct.FromJsonSerializable(new TestProfile { Name = "John Smith" });
+            var message = new DequeuedMessage
+            {
+                LeaseId = "1234",
+                Message = new QueueMessage { StructPayload = messagePayload },
+            };
 
-            RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();
-            tasks.Add(taskToReturn);
+            var messages = new List<DequeuedMessage>() { message };
 
-            var queueReceieveResponse = new QueueReceiveResponse();
-            queueReceieveResponse.Tasks.AddRange(tasks);
+            var queueReceieveResponse = new QueueDequeueResponse();
+            queueReceieveResponse.Messages.AddRange(messages);
 
-            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
-            qc.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null,
+            Mock<GrpcClient> qc = new Mock<GrpcClient>();
+            qc.Setup(e => e.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queueReceieveResponse)
                 .Verifiable();
 
             var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
-            var response = queue.Receive(3);
+            var response = queue.Dequeue(3);
 
-            Assert.Equal("32", response.ToList()[0].Id);
+            Assert.Equal("1234", response[0].LeaseId);
+            Assert.Equal("John Smith", response[0].Message.Name);
 
             qc.Verify(
-                t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null,
+                t => t.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
 
         [Fact]
         public void TestReceiveNoTasks()
         {
-            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
-            qc.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null,
+            Mock<GrpcClient> qc = new Mock<GrpcClient>();
+            qc.Setup(e => e.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new QueueReceiveResponse())
+                .Returns(new QueueDequeueResponse())
                 .Verifiable();
 
             var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
-            var response = queue.Receive(3);
+            var response = queue.Dequeue(3);
 
             Assert.Empty(response);
 
             qc.Verify(
-                t => t.Receive(It.IsAny<QueueReceiveRequest>(), null, null,
+                t => t.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
 
         [Fact]
         public void TestSend()
         {
-            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
+            Mock<GrpcClient> qc = new Mock<GrpcClient>();
             qc.Setup(e =>
-                    e.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                    e.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(new QueueEnqueueResponse())
                 .Verifiable();
 
             var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
-            queue.Send(new Task<TestProfile> { Id = "0", Payload = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" }}, PayloadType = "JSON" });
+            queue.Enqueue(new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } });
 
             qc.Verify(
-                t => t.Send(It.IsAny<QueueSendRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                t => t.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
                 Times.Once);
         }
 
         [Fact]
         public void TestComplete()
         {
-            var receivedTask = new ReceivedTask<TestProfile>
+            var receivedTask = new ReceivedMessage<TestProfile>
             {
-                Id = "32",
                 LeaseId = "1",
-                PayloadType = "profile",
-                Payload = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" }}
+                Message = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } }
             };
 
             var payload = new Struct();
             payload.Fields.Add("Name", Value.ForString("John Smith"));
             payload.Fields.Add("Age", Value.ForNumber(30.0));
-            payload.Fields.Add("Addresses", Value.ForList(new []{ Value.ForString("123 street st") }));
+            payload.Fields.Add("Addresses", Value.ForList(new[] { Value.ForString("123 street st") }));
 
-            NitricTask taskToReturn = new NitricTask();
-            taskToReturn.Id = "32";
-            taskToReturn.LeaseId = "1";
-            taskToReturn.Payload = payload;
-            taskToReturn.PayloadType = "profile";
+            var tasks = new List<DequeuedMessage>()
+            {
+                new DequeuedMessage
+                {
+                    Message = new QueueMessage
+                    {
+                        StructPayload = payload
+                    },
+                    LeaseId = "1"
+                }
+            };
 
-            RepeatedField<NitricTask> tasks = new RepeatedField<NitricTask>();
-            tasks.Add(taskToReturn);
+            var queueReceieveResponse = new QueueDequeueResponse();
+            queueReceieveResponse.Messages.AddRange(tasks);
 
-            var queueReceieveResponse = new QueueReceiveResponse();
-            queueReceieveResponse.Tasks.AddRange(tasks);
-
-            Mock<QueueService.QueueServiceClient> qc = new Mock<QueueService.QueueServiceClient>();
-            qc.Setup(e => e.Receive(It.IsAny<QueueReceiveRequest>(), null, null,
+            Mock<GrpcClient> qc = new Mock<GrpcClient>();
+            qc.Setup(e => e.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(queueReceieveResponse)
                 .Verifiable();
 
-            Mock<QueueService.QueueServiceClient> qcr = new Mock<QueueService.QueueServiceClient>();
+            Mock<GrpcClient> qcr = new Mock<GrpcClient>();
             qc.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
             var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
 
-            var response = queue.Receive(3);
+            var response = queue.Dequeue(3);
 
             response.ToList()[0].Complete();
 

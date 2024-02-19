@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.Threading.Tasks;
 using Nitric.Proto.Secrets.v1;
 using Nitric.Sdk.Common;
 
@@ -64,9 +65,43 @@ namespace Nitric.Sdk.Secret
                     Version = this.Id,
                 }
             };
+
             try
             {
-                var response = this.Secret.Client.Access(secret);
+                var response = this.Secret.Secrets.Client.Access(secret);
+                var value = response.Value.ToByteArray();
+                //Return a new secret value with a reference to this secret version
+                return new SecretValue(
+                    this,
+                    value.Length > 0 ? value : Array.Empty<byte>()
+                );
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw Common.NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Retrieve the value stored in this version.
+        /// </summary>
+        /// <returns>The secret value from the secrets store.</returns>
+        /// <exception cref="NitricException"></exception>
+        public async Task<SecretValue> AccessAsync()
+        {
+            var secret = new SecretAccessRequest
+            {
+                SecretVersion = new Proto.Secrets.v1.SecretVersion
+                {
+                    Secret = new Proto.Secrets.v1.Secret { Name = this.Secret.Name },
+                    Version = this.Id,
+                }
+            };
+
+            try
+            {
+                var response = await this.Secret.Secrets.Client.AccessAsync(secret);
+
                 var value = response.Value.ToByteArray();
                 //Return a new secret value with a reference to this secret version
                 return new SecretValue(

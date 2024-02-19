@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Threading.Tasks;
 using Nitric.Proto.Topics.v1;
 using Nitric.Sdk.Common;
 
-namespace Nitric.Sdk.Topic
+namespace Nitric.Sdk.Topics
 {
     /// <summary>
     /// Represents a reference to a topic.
@@ -43,11 +44,40 @@ namespace Nitric.Sdk.Topic
         {
             var structPayload = Struct.FromJsonSerializable(message);
 
-            var request = new TopicPublishRequest { TopicName = this.Name, Message = new TopicMessage { StructPayload = structPayload } };
+            var request = new TopicPublishRequest
+            {
+                TopicName = this.Name,
+                Message = new TopicMessage { StructPayload = structPayload }
+            };
 
             try
             {
                 this.TopicsClient.Client.Publish(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Publish a new message to this topic.
+        /// </summary>
+        /// <param name="message">The message to publish</param>
+        /// <exception cref="NitricException"></exception>
+        public async Task PublishAsync(T message)
+        {
+            var structPayload = Struct.FromJsonSerializable(message);
+
+            var request = new TopicPublishRequest
+            {
+                TopicName = this.Name,
+                Message = new TopicMessage { StructPayload = structPayload }
+            };
+
+            try
+            {
+                await this.TopicsClient.Client.PublishAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {

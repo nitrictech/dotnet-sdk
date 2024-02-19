@@ -32,23 +32,16 @@ namespace Nitric.Sdk.Test.Api.Queue
         public void TestBuild()
         {
             var payload = new TestProfile
-                { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st " } };
-            var failedTask = new global::Nitric.Sdk.Queue.FailedTask<TestProfile>
+            { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st " } };
+            var failedTask = new FailedMessage<TestProfile>
             {
-                Message = "message",
-                Task = new Task<TestProfile>
-                {
-                    Id = "1",
-                    PayloadType = "payload type",
-                    Payload = payload
-                }
+                Details = "message",
+                Message = payload,
             };
 
             Assert.NotNull(failedTask);
-            Assert.Equal("1", failedTask.Task.Id);
-            Assert.Equal("payload type", failedTask.Task.PayloadType);
-            Assert.Equal(payload, failedTask.Task.Payload);
-            Assert.Equal("message", failedTask.Message);
+            Assert.Equal(payload, failedTask.Message);
+            Assert.Equal("message", failedTask.Details);
         }
     }
 }

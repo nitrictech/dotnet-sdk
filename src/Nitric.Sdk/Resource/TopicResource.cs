@@ -17,7 +17,7 @@ using System.Linq;
 using Nitric.Proto.Resources.v1;
 using Nitric.Proto.Topics.v1;
 using Nitric.Sdk.Service;
-using Nitric.Sdk.Topic;
+using Nitric.Sdk.Topics;
 using Nitric.Sdk.Worker;
 using Action = Nitric.Proto.Resources.v1.Action;
 using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;

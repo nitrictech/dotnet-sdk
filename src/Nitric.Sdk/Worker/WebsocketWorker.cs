@@ -1,25 +1,23 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Nitric.Sdk.Common;
-using Nitric.Proto.Storage.v1;
-using GrpcClient = Nitric.Proto.Storage.v1.StorageListener.StorageListenerClient;
+using Nitric.Proto.Websockets.v1;
+using GrpcClient = Nitric.Proto.Websockets.v1.WebsocketHandler.WebsocketHandlerClient;
 using Nitric.Sdk.Service;
-using Nitric.Sdk.Storage;
 using System;
 
 namespace Nitric.Sdk.Worker
 {
-    public class BlobEventWorker : AbstractWorker<BlobEventContext>
+    public class WebsocketWorker : AbstractWorker<WebsocketContext>
     {
         readonly private RegistrationRequest RegistrationRequest;
-        readonly private Bucket bucket;
 
-        public BlobEventWorker(RegistrationRequest request, Func<BlobEventContext, BlobEventContext> middleware) : base(middleware)
+        public WebsocketWorker(RegistrationRequest request, Func<WebsocketContext, WebsocketContext> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
         }
 
-        public BlobEventWorker(RegistrationRequest request, params Middleware<BlobEventContext>[] middlewares) : base(middlewares)
+        public WebsocketWorker(RegistrationRequest request, params Middleware<WebsocketContext>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
         }
@@ -28,7 +26,7 @@ namespace Nitric.Sdk.Worker
         {
             var client = new GrpcClient(GrpcChannelProvider.GetChannel());
 
-            var stream = client.Listen();
+            var stream = client.HandleEvents();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
@@ -38,11 +36,11 @@ namespace Nitric.Sdk.Worker
 
                 if (req.RegistrationResponse != null)
                 {
-                    // Bucket listener connected with Nitric server.
+                    // Websocket connected with Nitric server.
                 }
-                else if (req.BlobEventRequest != null)
+                else if (req.WebsocketEventRequest != null)
                 {
-                    var ctx = BlobEventContext.FromRequest(req, bucket);
+                    var ctx = WebsocketContext.FromRequest(req);
 
                     ctx = this.Middleware(ctx);
 

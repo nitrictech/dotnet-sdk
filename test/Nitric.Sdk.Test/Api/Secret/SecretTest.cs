@@ -16,7 +16,8 @@ using System;
 using System.Text;
 using Grpc.Core;
 using Moq;
-using Nitric.Proto.Secret.v1;
+using Nitric.Proto.Secrets.v1;
+using GrpcClient = Nitric.Proto.Secrets.v1.SecretManager.SecretManagerClient;
 using Nitric.Sdk.Secret;
 using Xunit;
 
@@ -62,25 +63,25 @@ namespace Nitric.Sdk.Test.Api.Secret
         {
             var secretPutResponse = new SecretPutResponse
             {
-                SecretVersion = new Proto.Secret.v1.SecretVersion
+                SecretVersion = new Proto.Secrets.v1.SecretVersion
                 {
-                    Secret = new Proto.Secret.v1.Secret
+                    Secret = new Proto.Secrets.v1.Secret
                     {
                         Name = "test-secret",
                     },
                     Version = "test-version",
                 }
             };
-            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
+            Mock<GrpcClient> sc = new Mock<GrpcClient>();
             sc.Setup(e =>
                     e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(secretPutResponse)
                 .Verifiable();
 
-            var testBytes = Encoding.UTF8.GetBytes("Super secret message");
             var secret = new SecretsClient(sc.Object)
                 .Secret("test-secret");
-            var response = secret.Put(testBytes);
+
+            var response = secret.Put("Super secret message");
 
             Assert.Equal("test-version", response.Id);
             Assert.Equal(secret.Name, response.Secret.Name);
@@ -95,16 +96,16 @@ namespace Nitric.Sdk.Test.Api.Secret
         {
             var secretPutResponse = new SecretPutResponse
             {
-                SecretVersion = new Proto.Secret.v1.SecretVersion
+                SecretVersion = new Proto.Secrets.v1.SecretVersion
                 {
-                    Secret = new Proto.Secret.v1.Secret
+                    Secret = new Proto.Secrets.v1.Secret
                     {
                         Name = "test-secret",
                     },
                     Version = "test-version",
                 }
             };
-            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
+            Mock<GrpcClient> sc = new Mock<GrpcClient>();
             sc.Setup(e =>
                     e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(secretPutResponse)
@@ -124,22 +125,6 @@ namespace Nitric.Sdk.Test.Api.Secret
         }
 
         [Fact]
-        public void TestPutEmptySecretBytes()
-        {
-            var secret = new SecretsClient().Secret("test-secret");
-            Assert.Throws<ArgumentNullException>(
-                () => secret.Put(new byte[] { }));
-        }
-
-        [Fact]
-        public void TestPutNullSecretBytes()
-        {
-            var secret = new SecretsClient().Secret("test-secret");
-            Assert.Throws<ArgumentNullException>(
-                () => secret.Put((byte[])null));
-        }
-
-        [Fact]
         public void TestPutEmptySecretString()
         {
             var secret = new SecretsClient().Secret("test-secret");
@@ -148,17 +133,17 @@ namespace Nitric.Sdk.Test.Api.Secret
         }
 
         [Fact]
-        public void TestPutNullSecretString()
+        public void TestPutNullSecretBytes()
         {
             var secret = new SecretsClient().Secret("test-secret");
             Assert.Throws<ArgumentNullException>(
-                () => secret.Put((string)null));
+                () => secret.Put(null));
         }
 
         [Fact]
         public void TestPutNonExistentSecret()
         {
-            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
+            Mock<GrpcClient> sc = new Mock<GrpcClient>();
             sc.Setup(e =>
                     e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified secret does not exist")))
@@ -171,7 +156,7 @@ namespace Nitric.Sdk.Test.Api.Secret
             {
                 var response = secret.Put(testString);
             }
-            catch (global::Nitric.Sdk.Common.NitricException ne)
+            catch (Common.NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified secret does not exist\")",
                     ne.Message);
@@ -205,7 +190,7 @@ namespace Nitric.Sdk.Test.Api.Secret
         [Fact]
         public void TestAccessSecretWithoutPermission()
         {
-            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
+            Mock<GrpcClient> sc = new Mock<GrpcClient>();
             sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.PermissionDenied,
@@ -218,7 +203,7 @@ namespace Nitric.Sdk.Test.Api.Secret
             {
                 var response = secret.Version("test-secret").Access();
             }
-            catch (global::Nitric.Sdk.Common.NitricException ne)
+            catch (Common.NitricException ne)
             {
                 Assert.Equal(
                     "Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to access this secret\")",
@@ -255,9 +240,9 @@ namespace Nitric.Sdk.Test.Api.Secret
         {
             var secretPutResponse = new SecretAccessResponse
             {
-                SecretVersion = new Proto.Secret.v1.SecretVersion
+                SecretVersion = new Proto.Secrets.v1.SecretVersion
                 {
-                    Secret = new Proto.Secret.v1.Secret
+                    Secret = new Proto.Secrets.v1.Secret
                     {
                         Name = "test-secret",
                     },
@@ -265,7 +250,7 @@ namespace Nitric.Sdk.Test.Api.Secret
                 },
                 Value = Google.Protobuf.ByteString.CopyFromUtf8("Super secret message"),
             };
-            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
+            Mock<GrpcClient> sc = new Mock<GrpcClient>();
             sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(secretPutResponse)
@@ -301,9 +286,9 @@ namespace Nitric.Sdk.Test.Api.Secret
         {
             var secretPutResponse = new SecretAccessResponse
             {
-                SecretVersion = new Proto.Secret.v1.SecretVersion
+                SecretVersion = new Proto.Secrets.v1.SecretVersion
                 {
-                    Secret = new Proto.Secret.v1.Secret
+                    Secret = new Proto.Secrets.v1.Secret
                     {
                         Name = "test-secret",
                     },
@@ -311,7 +296,7 @@ namespace Nitric.Sdk.Test.Api.Secret
                 },
                 Value = Google.Protobuf.ByteString.CopyFromUtf8("Super secret message"),
             };
-            Mock<SecretService.SecretServiceClient> sc = new Mock<SecretService.SecretServiceClient>();
+            Mock<GrpcClient> sc = new Mock<GrpcClient>();
             sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(secretPutResponse)
