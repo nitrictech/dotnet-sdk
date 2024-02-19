@@ -30,6 +30,7 @@
     <Folder Include="Api\Queue\" />
     <Folder Include="Api\Secret\" />
     <Folder Include="Api\Topics\" />
+    <Folder Include="Api\KeyValueStore\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="examples\**" />
@@ -40,5 +41,6 @@
   <ItemGroup>
     <None Remove="examples\**" />
     <None Remove="Api\Topics\" />
+    <None Remove="Api\KeyValueStore\" />
   </ItemGroup>
 </Project>

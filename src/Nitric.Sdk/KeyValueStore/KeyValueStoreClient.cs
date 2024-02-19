@@ -12,7 +12,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// <param name="client">Optional gRPC client to reuse.</param>
         internal readonly GrpcClient Client;
 
-        internal KeyValueStoreClient(GrpcClient client = null)
+        public KeyValueStoreClient(GrpcClient client = null)
         {
             this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
