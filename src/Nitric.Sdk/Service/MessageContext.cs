@@ -28,7 +28,7 @@ namespace Nitric.Sdk.Service
         /// </summary>
         public string TopicName { get; private set; }
 
-        public T Payload { get; private set; }
+        public T Message { get; private set; }
 
         /// <summary>
         /// Construct an event request
@@ -38,7 +38,7 @@ namespace Nitric.Sdk.Service
         public MessageRequest(string topicName, TopicMessage message) : base()
         {
             this.TopicName = topicName;
-            this.Payload = Struct.ToJsonSerializable<T>(message.StructPayload);
+            this.Message = Struct.ToJsonSerializable<T>(message.StructPayload);
         }
     }
 

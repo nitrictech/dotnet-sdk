@@ -30,8 +30,6 @@ namespace Nitric.Sdk.Worker
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
-            Console.WriteLine(RegistrationRequest);
-
             while (await stream.ResponseStream.MoveNext(CancellationToken.None))
             {
                 var req = stream.ResponseStream.Current;
@@ -40,14 +38,20 @@ namespace Nitric.Sdk.Worker
                 {
                     // Topic connected with Nitric Server.
                 }
-                else if (req.MessageRequest != null)
+
+                var ctx = MessageContext<T>.FromRequest(req);
+
+                try
                 {
-                    var ctx = MessageContext<T>.FromRequest(req);
-
                     ctx = this.Middleware(ctx);
-
-                    await stream.RequestStream.WriteAsync(ctx.ToResponse());
                 }
+                catch (Exception err)
+                {
+                    Console.WriteLine("Unhandled application error: {0}", err.ToString());
+                    ctx.Res.Success = false;
+                }
+
+                await stream.RequestStream.WriteAsync(ctx.ToResponse());
             }
 
             await stream.RequestStream.CompleteAsync();

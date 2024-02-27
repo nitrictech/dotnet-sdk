@@ -49,8 +49,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Websocket };
-            var request = new ResourceDeclareRequest { Id = resource };
+            var request = new ResourceDeclareRequest { Id = this.AsProtoResource() };
             BaseResource.client.Declare(request);
             return this;
         }

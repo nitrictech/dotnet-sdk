@@ -51,28 +51,6 @@ namespace Nitric.Sdk
             Task.WaitAll(Workers.Select(worker => worker.Start()).ToArray());
         }
 
-        /// <summary>
-        /// Declare a REST/HTTP API resource.
-        ///
-        /// Used to register routes and handlers for HTTP requests.
-        /// </summary>
-        /// <param name="name">The unique name of this API.</param>
-        /// <returns></returns>
-        //public static ApiResource Api(string name, ApiOptions options = null)
-        //{
-        //    return new ApiResource(name, options);
-        //}
-
-        /// <summary>
-        /// Declare a schedule.
-        /// </summary>
-        /// <param name="description">A short description of the schedule</param>
-        /// <returns></returns>
-        public static ScheduleResource Schedule(string description)
-        {
-            return new ScheduleResource(description);
-        }
-
         private static T Cached<T>(string name, Func<string, T> make) where T : BaseResource
         {
             var typeMap = Cache.GetValueOrDefault(typeof(T), new Dictionary<string, BaseResource>());
@@ -85,12 +63,28 @@ namespace Nitric.Sdk
             }
             else
             {
+                resource.Register();
                 Cache.Add(typeof(T), typeMap);
-
             }
 
             return resource;
         }
+
+        /// <summary>
+        /// Declare a REST/HTTP API resource.
+        ///
+        /// Used to register routes and handlers for HTTP requests.
+        /// </summary>
+        /// <param name="name">The unique name of this API.</param>
+        /// <returns></returns>
+        public static ApiResource Api(string name, ApiOptions options = null) => Cached(name, s => new ApiResource(s, options));
+
+        /// <summary>
+        /// Declare a schedule.
+        /// </summary>
+        /// <param name="description">A short description of the schedule</param>
+        /// <returns></returns>
+        public static ScheduleResource Schedule(string description) => Cached(description, s => new ScheduleResource(s));
 
         /// <summary>
         /// Declare a bucket resources for file/blob storage.

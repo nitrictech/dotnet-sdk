@@ -28,7 +28,7 @@ namespace Nitric.Sdk.Resource
         {
             this.Name = name;
             this.type = type;
-            BaseResource.client = (BaseResource.client == null) ? new GrpcClient(GrpcChannelProvider.GetChannel()) : client;
+            client = (client == null) ? new GrpcClient(GrpcChannelProvider.GetChannel()) : client;
         }
 
         internal ProtoResource AsProtoResource()

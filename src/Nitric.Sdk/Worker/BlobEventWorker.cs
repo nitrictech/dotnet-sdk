@@ -12,7 +12,6 @@ namespace Nitric.Sdk.Worker
     public class BlobEventWorker : AbstractWorker<BlobEventContext>
     {
         readonly private RegistrationRequest RegistrationRequest;
-        readonly private Bucket bucket;
 
         public BlobEventWorker(RegistrationRequest request, Func<BlobEventContext, BlobEventContext> middleware) : base(middleware)
         {
@@ -40,14 +39,20 @@ namespace Nitric.Sdk.Worker
                 {
                     // Bucket listener connected with Nitric server.
                 }
-                else if (req.BlobEventRequest != null)
+
+                var ctx = BlobEventContext.FromRequest(req);
+
+                try
                 {
-                    var ctx = BlobEventContext.FromRequest(req, bucket);
-
                     ctx = this.Middleware(ctx);
-
-                    await stream.RequestStream.WriteAsync(ctx.ToResponse());
                 }
+                catch (Exception err)
+                {
+                    Console.WriteLine("Unhandled application error: {0}", err.ToString());
+                    ctx.Res.Success = false;
+                }
+
+                await stream.RequestStream.WriteAsync(ctx.ToResponse());
             }
 
             await stream.RequestStream.CompleteAsync();

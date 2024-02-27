@@ -38,14 +38,19 @@ namespace Nitric.Sdk.Worker
                 {
                     // Schedule connected with Nitric server.
                 }
-                else if (req.IntervalRequest != null)
+
+                var ctx = IntervalContext.FromRequest(req);
+
+                try
                 {
-                    var ctx = IntervalContext.FromRequest(req);
-
                     ctx = this.Middleware(ctx);
-
-                    await stream.RequestStream.WriteAsync(ctx.ToResponse());
                 }
+                catch (Exception err)
+                {
+                    Console.WriteLine("Unhandled application error: {0}", err.ToString());
+                }
+
+                await stream.RequestStream.WriteAsync(ctx.ToResponse());
             }
 
             await stream.RequestStream.CompleteAsync();

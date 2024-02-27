@@ -136,6 +136,13 @@ namespace Nitric.Sdk.Service
             this.Body = Encoding.UTF8.GetBytes(text);
             this.Headers["Content-Type"] = new List<string> { "text/plain" };
         }
+
+        public void WithError(System.Exception exception)
+        {
+            this.Status = 500;
+            this.Body = Encoding.UTF8.GetBytes(exception.ToString());
+            this.Headers["Content-Type"] = new List<string> { "text/plain" };
+        }
     }
 
     /// <summary>

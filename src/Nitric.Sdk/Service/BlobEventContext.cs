@@ -66,7 +66,7 @@ namespace Nitric.Sdk.Service
         /// <summary>
         /// A reference to the file that triggered this request
         /// </summary>
-        public Storage.Blob File { get; private set; }
+        public string Key { get; private set; }
 
         /// <summary>
         /// The type of event that triggered this request
@@ -77,13 +77,11 @@ namespace Nitric.Sdk.Service
         /// <summary>
         /// Construct a bucket notification request
         /// </summary>
-        /// <param name="data">the payload of the message</param>
         /// <param name="key">the file that triggered the notification</param>
         /// <param name="notificationType">the type of bucket notification</param>
-        /// <param name="bucket">the bucket that triggered the notification</param>
-        public BlobEventRequest(string key, BlobEventType notificationType, Bucket bucket) : base()
+        public BlobEventRequest(string key, BlobEventType notificationType) : base()
         {
-            this.File = bucket.File(key);
+            this.Key = key;
             this.NotificationType = notificationType;
         }
     }
@@ -130,7 +128,7 @@ namespace Nitric.Sdk.Service
         /// <param name="trigger">The trigger to convert into a BucketNotificationContext.</param>
         /// <param name="options">The bucket notification worker options describing the worker options.</param>
         /// <returns>the new bucket notification context</returns>
-        public static BlobEventContext FromRequest(ServerMessage trigger, Bucket bucket)
+        public static BlobEventContext FromRequest(ServerMessage trigger)
         {
             var notificationType = FromGrpcBlobEventType(trigger.BlobEventRequest.BlobEvent.Type);
 
@@ -138,8 +136,7 @@ namespace Nitric.Sdk.Service
                 trigger.Id,
                 new BlobEventRequest(
                     trigger.BlobEventRequest.BlobEvent.Key,
-                    notificationType,
-                    bucket
+                    notificationType
                 ),
                 new BlobEventResponse(true));
         }

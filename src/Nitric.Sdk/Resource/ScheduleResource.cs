@@ -15,16 +15,24 @@ using System;
 using Nitric.Sdk.Service;
 using Nitric.Sdk.Worker;
 using Nitric.Proto.Schedules.v1;
+using Nitric.Proto.Resources.v1;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
+using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
 
 namespace Nitric.Sdk.Resource
 {
-    public class ScheduleResource
+    public class ScheduleResource : BaseResource
     {
-        private string Name;
-
-        internal ScheduleResource(string name)
+        internal ScheduleResource(string name) : base(name, ResourceType.Schedule)
         {
-            this.Name = name;
+
+        }
+
+        internal override BaseResource Register()
+        {
+            var request = new ResourceDeclareRequest { Id = this.AsProtoResource() };
+            BaseResource.client.Declare(request);
+            return this;
         }
 
         /// <summary>

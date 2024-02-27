@@ -23,8 +23,6 @@ using ProtoApiResource = Nitric.Proto.Resources.v1.ApiResource;
 using ProtoSecurityDefinition = Nitric.Proto.Resources.v1.ApiSecurityDefinitionResource;
 using ProtoSecurityDefinitionJwt = Nitric.Proto.Resources.v1.ApiOpenIdConnectionDefinition;
 using System.Net.Http;
-using Google.Protobuf.Collections;
-using System.Runtime.InteropServices;
 
 namespace Nitric.Sdk.Resource
 {

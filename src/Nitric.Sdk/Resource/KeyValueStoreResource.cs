@@ -48,8 +48,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.KeyValueStore };
-            var request = new ResourceDeclareRequest { Id = resource };
+            var request = new ResourceDeclareRequest { Id = this.AsProtoResource() };
             client.Declare(request);
             return this;
         }
