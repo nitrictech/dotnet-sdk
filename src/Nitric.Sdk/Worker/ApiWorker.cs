@@ -34,24 +34,25 @@ namespace Nitric.Sdk.Worker
             {
                 var req = stream.ResponseStream.Current;
 
-
                 if (req.RegistrationResponse != null)
                 {
                     // Schedule connected with Nitric server.
-                }
-
-                var ctx = HttpContext.FromRequest(req);
-
-                try
+                } 
+                else if (req.HttpRequest != null)
                 {
-                    ctx = this.Middleware(ctx);
-                }
-                catch (Exception err)
-                {
-                    ctx.Res.WithError(err);
-                }
+                    var ctx = HttpContext.FromRequest(req);
 
-                await stream.RequestStream.WriteAsync(ctx.ToResponse());
+                    try
+                    {
+                        ctx = this.Middleware(ctx);
+                    }
+                    catch (Exception err)
+                    {
+                        ctx.Res.WithError(err);
+                    }
+
+                    await stream.RequestStream.WriteAsync(ctx.ToResponse());
+                }
             }
 
             await stream.RequestStream.CompleteAsync();

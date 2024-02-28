@@ -38,20 +38,22 @@ namespace Nitric.Sdk.Worker
                 {
                     // Websocket connected with Nitric server.
                 }
-
-                var ctx = WebsocketContext.FromRequest(req);
-
-                try
+                else if (req.WebsocketEventRequest != null)
                 {
-                    ctx = this.Middleware(ctx);
-                }
-                catch (Exception err)
-                {
-                    Console.WriteLine("Unhandled application error: {0}", err.ToString());
-                    ctx.Res.Success = false;
-                }
+                    var ctx = WebsocketContext.FromRequest(req);
 
-                await stream.RequestStream.WriteAsync(ctx.ToResponse());
+                    try
+                    {
+                        ctx = this.Middleware(ctx);
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine("Unhandled application error: {0}", err.ToString());
+                        ctx.Res.Success = false;
+                    }
+
+                    await stream.RequestStream.WriteAsync(ctx.ToResponse());
+                }
             }
 
             await stream.RequestStream.CompleteAsync();

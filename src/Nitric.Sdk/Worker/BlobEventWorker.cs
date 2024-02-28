@@ -39,20 +39,22 @@ namespace Nitric.Sdk.Worker
                 {
                     // Bucket listener connected with Nitric server.
                 }
-
-                var ctx = BlobEventContext.FromRequest(req);
-
-                try
+                else if (req.BlobEventRequest != null) 
                 {
-                    ctx = this.Middleware(ctx);
-                }
-                catch (Exception err)
-                {
-                    Console.WriteLine("Unhandled application error: {0}", err.ToString());
-                    ctx.Res.Success = false;
-                }
+                    var ctx = BlobEventContext.FromRequest(req);
 
-                await stream.RequestStream.WriteAsync(ctx.ToResponse());
+                    try
+                    {
+                        ctx = this.Middleware(ctx);
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine("Unhandled application error: {0}", err.ToString());
+                        ctx.Res.Success = false;
+                    }
+
+                    await stream.RequestStream.WriteAsync(ctx.ToResponse());
+                }
             }
 
             await stream.RequestStream.CompleteAsync();

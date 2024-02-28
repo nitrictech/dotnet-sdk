@@ -38,20 +38,22 @@ namespace Nitric.Sdk.Worker
                 {
                     // Topic connected with Nitric Server.
                 }
-
-                var ctx = MessageContext<T>.FromRequest(req);
-
-                try
+                else if (req.MessageRequest != null)
                 {
-                    ctx = this.Middleware(ctx);
-                }
-                catch (Exception err)
-                {
-                    Console.WriteLine("Unhandled application error: {0}", err.ToString());
-                    ctx.Res.Success = false;
-                }
+                    var ctx = MessageContext<T>.FromRequest(req);
 
-                await stream.RequestStream.WriteAsync(ctx.ToResponse());
+                    try
+                    {
+                        ctx = this.Middleware(ctx);
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine("Unhandled application error: {0}", err.ToString());
+                        ctx.Res.Success = false;
+                    }
+
+                    await stream.RequestStream.WriteAsync(ctx.ToResponse());
+                }
             }
 
             await stream.RequestStream.CompleteAsync();
