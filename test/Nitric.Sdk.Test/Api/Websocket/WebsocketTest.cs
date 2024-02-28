@@ -29,7 +29,7 @@ public class WebsocketTest
     [Fact]
     public void TestBuildWebsocketWithIdAndSocket()
     {
-        var connection = Nitric.Websocket("socket-name").Connection("connection-id");
+        var connection = new WebsocketClient(null).Connection("socket-name", "connection-id");
         Assert.NotNull(connection);
         Assert.Equal("connection-id", connection.Id);
         Assert.Equal("socket-name", connection.SocketName);
