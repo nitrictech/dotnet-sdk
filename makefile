@@ -9,6 +9,7 @@ test:
 build: 
 	@dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj
 	@mv src/Nitric.Sdk/Proto/nitric/proto/*  src/Nitric.Sdk/Proto/
+	@rm -rf nitric
 	@rm -rf src/Nitric.Sdk/Proto/nitric
 
 clean:
@@ -17,18 +18,9 @@ clean:
 	@rm -rf src/Nitric.Sdk/Proto
 
 download:
-	@curl -L https://github.com/nitrictech/nitric/releases/download/v${NITRIC_VERSION}/proto.tgz -o contracts.tgz
-	@tar xvzf contracts.tgz
-	@rm contracts.tgz
-
-download-local:
-	@rm -rf ./nitric
-	@mkdir ./nitric
-	@cp -r ${NITRIC_CORE_HOME}/nitric/proto ./nitric
-
-# /Users/rs/Development/nitric
-
-# "rm -r ./nitric && mkdir ./nitric && cp -r $NITRIC_CORE_HOME/nitric/proto ./nitric",
+	@curl -L https://github.com/nitrictech/nitric/releases/download/v${NITRIC_VERSION}/proto.tgz -o nitric.tgz
+	@tar xvzf nitric.tgz
+	@rm nitric.tgz
 
 pack: clean download
 	@dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj -c Release
