@@ -46,7 +46,7 @@ namespace Nitric.Sdk.Resource
         {
             this.Security = security ?? Array.Empty<OidcOptions>();
             this.BasePath = basePath;
-            this.Middleware = middleware ?? new Middleware<HttpContext>[] { };
+            this.Middleware = middleware ?? Array.Empty<Middleware<HttpContext>>();
         }
     }
 
@@ -321,12 +321,13 @@ namespace Nitric.Sdk.Resource
             this.api = api;
             this.Path = path;
 
-            var composedMiddleware = this.api.Opts.Middleware.Concat(opts.Middlewares).ToArray();
-            this.Opts = new RouteOptions
-            {
-                Middlewares = composedMiddleware,
-                Security = opts.Security
-            };
+            var composedMiddleware = (this.api.Opts.Middleware ?? Enumerable.Empty<Middleware<HttpContext>>())
+                .Concat(opts.Middlewares ?? Enumerable.Empty<Middleware<HttpContext>>())
+                .ToArray(); this.Opts = new RouteOptions
+                {
+                    Middlewares = composedMiddleware,
+                    Security = opts.Security
+                };
         }
 
         private Middleware<HttpContext>[] ConcatMiddleware(Func<HttpContext, HttpContext> handler)
