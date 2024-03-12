@@ -74,7 +74,7 @@ namespace Nitric.Sdk.Resource
             this.SecurityDefinitions = securityDefinitions ?? new Dictionary<string, SecurityDefinition>();
             this.Security = security ?? new Dictionary<string, string[]>();
             this.BasePath = basePath;
-            this.Middleware = middleware ?? new Middleware<HttpContext>[] { };
+            this.Middleware = middleware ?? Array.Empty<Middleware<HttpContext>>();
         }
     }
 
@@ -336,6 +336,13 @@ namespace Nitric.Sdk.Resource
 
         // Security rules to apply to this specific route
         public Dictionary<string, string[]> Security { get; set; }
+
+        public RouteOptions()
+        {
+            // Initialize Middlewares to an empty array to ensure it's never null
+            this.Middlewares = Array.Empty<Middleware<HttpContext>>();
+            this.Security = new Dictionary<string, string[]>();
+        }
     }
 
     public class ApiRoute
@@ -354,12 +361,13 @@ namespace Nitric.Sdk.Resource
             this.api = api;
             this.Path = path;
 
-            var composedMiddleware = this.api.Opts.Middleware.Concat(opts.Middlewares).ToArray();
-            this.Opts = new RouteOptions
-            {
-                Middlewares = composedMiddleware,
-                Security = opts.Security
-            };
+            var composedMiddleware = (this.api.Opts.Middleware ?? Enumerable.Empty<Middleware<HttpContext>>())
+                .Concat(opts.Middlewares ?? Enumerable.Empty<Middleware<HttpContext>>())
+                .ToArray(); this.Opts = new RouteOptions
+                {
+                    Middlewares = composedMiddleware,
+                    Security = opts.Security
+                };
         }
 
         private Middleware<HttpContext>[] ConcatMiddleware(Func<HttpContext, HttpContext> handler)
