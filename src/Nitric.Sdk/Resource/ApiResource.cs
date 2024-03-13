@@ -419,6 +419,16 @@ namespace Nitric.Sdk.Resource
         /// <param name="handlers"></param>
         public void Patch(params Middleware<HttpContext>[] handlers) => Method(new HttpMethod[] { HttpMethod.Patch }, ConcatMiddleware(handlers));
 
+        HttpMethod[] httpMethods = new HttpMethod[]
+        {
+            HttpMethod.Get,
+            HttpMethod.Post,
+            HttpMethod.Put,
+            HttpMethod.Delete,
+            HttpMethod.Head,
+            HttpMethod.Options,
+            HttpMethod.Patch
+        };
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
         /// </summary>
