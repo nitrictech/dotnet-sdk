@@ -41,7 +41,7 @@ namespace Nitric.Sdk.Resource
         internal string Issuer { get; private set; }
         internal string[] Audiences { get; private set; }
 
-        internal JwtSecurityDefinition(string Issuer, string[] Audiences) : base("jwt")
+        public JwtSecurityDefinition(string Issuer, string[] Audiences) : base("jwt")
         {
             this.Issuer = Issuer;
             this.Audiences = Audiences;
