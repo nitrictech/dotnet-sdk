@@ -376,17 +376,32 @@ namespace Nitric.Sdk.Resource
         /// <param name="handlers"></param>
         public void Patch(params Middleware<HttpContext>[] handlers) => Method(new HttpMethod[] { HttpMethod.Patch }, ConcatMiddleware(handlers));
 
+        HttpMethod[] httpMethods = new HttpMethod[]
+        {
+            HttpMethod.Get,
+            HttpMethod.Post,
+            HttpMethod.Put,
+            HttpMethod.Delete,
+            HttpMethod.Head,
+            HttpMethod.Options,
+            HttpMethod.Patch
+        };
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
         /// </summary>
         /// <param name="handler"></param>
-        public void All(Func<HttpContext, HttpContext> handler) => Method((HttpMethod[])Enum.GetValues(typeof(HttpMethod)), ConcatMiddleware(handler));
-
+        public void All(Func<HttpContext, HttpContext> handler)
+        {
+            Method(httpMethods, ConcatMiddleware(handler));
+        }
         /// <summary>
         /// Create a new chain of middleware on the specified route for every HTTP verb.
         /// </summary>
         /// <param name="handlers"></param>
-        public void All(params Middleware<HttpContext>[] handlers) => Method((HttpMethod[])Enum.GetValues(typeof(HttpMethod)), ConcatMiddleware(handlers));
+        public void All(params Middleware<HttpContext>[] handlers)
+        {
+            Method(httpMethods, ConcatMiddleware(handlers));
+        }
 
         internal void Method(HttpMethod[] methods, Func<HttpContext, HttpContext> handler)
         {
