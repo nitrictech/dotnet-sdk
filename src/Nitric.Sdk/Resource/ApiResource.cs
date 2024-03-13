@@ -56,7 +56,7 @@ namespace Nitric.Sdk.Resource
 
         internal ApiResource(string name, ApiOptions options = null) : base(name, ResourceType.Api)
         {
-            this.Opts = options ?? new ApiOptions();
+            Opts = options ?? new ApiOptions();
         }
 
         internal void AttachOidc(OidcOptions opts)
@@ -321,13 +321,15 @@ namespace Nitric.Sdk.Resource
             this.api = api;
             this.Path = path;
 
-            var composedMiddleware = (this.api.Opts.Middleware ?? Enumerable.Empty<Middleware<HttpContext>>())
-                .Concat(opts.Middlewares ?? Enumerable.Empty<Middleware<HttpContext>>())
-                .ToArray(); this.Opts = new RouteOptions
-                {
-                    Middlewares = composedMiddleware,
-                    Security = opts.Security
-                };
+            var composedMiddleware = this.api.Opts.Middleware
+                .Concat(opts.Middlewares)
+                .ToArray();
+
+            this.Opts = new RouteOptions
+            {
+                Middlewares = composedMiddleware,
+                Security = opts.Security
+            };
         }
 
         private Middleware<HttpContext>[] ConcatMiddleware(Func<HttpContext, HttpContext> handler)
@@ -404,6 +406,18 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="handlers">The handler to run.</param>
         public void Options(params Middleware<HttpContext>[] handlers) => Method(this.Path, new HttpMethod[] { HttpMethod.Options }, this.Opts, ConcatMiddleware(handlers));
+
+        /// <summary>
+        /// Create a new OPTIONS handler on the specified route.
+        /// </summary>
+        /// <param name="handler"></param>
+        public void Patch(Func<HttpContext, HttpContext> handler) => Method(new HttpMethod[] { HttpMethod.Patch }, ConcatMiddleware(handler));
+
+        /// <summary>
+        /// Create a new OPTIONS middleware chain on the specified route.
+        /// </summary>
+        /// <param name="handlers"></param>
+        public void Patch(params Middleware<HttpContext>[] handlers) => Method(new HttpMethod[] { HttpMethod.Patch }, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
