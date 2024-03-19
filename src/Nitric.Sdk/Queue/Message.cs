@@ -15,6 +15,7 @@
 using System;
 using Nitric.Sdk.Common;
 using Nitric.Proto.Queues.v1;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Queue
 {
@@ -48,11 +49,6 @@ namespace Nitric.Sdk.Queue
         /// <exception cref="NitricException"></exception>
         public void Complete()
         {
-            if (string.IsNullOrEmpty(this.LeaseId))
-            {
-                throw new ArgumentNullException(nameof(this.LeaseId));
-            }
-
             var request = new QueueCompleteRequest
             {
                 QueueName = this.Queue.Name,
@@ -62,6 +58,29 @@ namespace Nitric.Sdk.Queue
             try
             {
                 Queue.Queues.Client.Complete(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Complete this task and remove it from the source queue.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NitricException"></exception>
+        public async Task CompleteAsync()
+        {
+            var request = new QueueCompleteRequest
+            {
+                QueueName = this.Queue.Name,
+                LeaseId = this.LeaseId,
+            };
+
+            try
+            {
+                await Queue.Queues.Client.CompleteAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {

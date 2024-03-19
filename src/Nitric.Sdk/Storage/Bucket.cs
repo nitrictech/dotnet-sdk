@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Service;
 using Nitric.Sdk.Worker;
@@ -46,37 +47,78 @@ namespace Nitric.Sdk.Storage
         /// <param name="key">The blobs name/path</param>
         /// <returns>The blob reference.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public Blob File(string key)
+        public File File(string key)
         {
             if (string.IsNullOrEmpty(key))
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            return new Blob(this, key);
+            return new File(this, key);
         }
 
         /// <summary>
-        /// Get a list of blobs in a bucket.
+        /// Get a list of files in a bucket.
         /// </summary>
-        /// <returns>All the files in the bucket as Nitric blob references.</returns>
-        public List<Blob> Files()
+        /// <param name="prefix">The prefix to filter file names by.</param>
+        /// <returns>All the files in the bucket as Nitric file references.</returns>
+        public List<File> Files(string prefix = "")
         {
             var request = new StorageListBlobsRequest
             {
                 BucketName = this.Name,
+                Prefix = prefix,
             };
 
-            var resp = this.Storage.Client.ListBlobs(request);
-
-            List<Blob> files = new List<Blob>();
-
-            foreach (ProtoBlob file in resp.Blobs)
+            try
             {
-                files.Add(new Blob(this, file.Key));
-            }
+                var resp = this.Storage.Client.ListBlobs(request);
 
-            return files;
+                var files = new List<File>();
+
+                foreach (ProtoBlob file in resp.Blobs)
+                {
+                    files.Add(new File(this, file.Key));
+                }
+
+                return files;
+            }
+            catch (Grpc.Core.RpcException e)
+            {
+                throw Common.NitricException.FromRpcException(e);
+            }
+        }
+
+        /// <summary>
+        /// Get a list of files in a bucket.
+        /// </summary>
+        /// <param name="prefix">The prefix to filter file names by.</param>
+        /// <returns>All the files in the bucket as Nitric file references.</returns>
+        public async Task<List<File>> FilesAsync(string prefix = "")
+        {
+            var request = new StorageListBlobsRequest
+            {
+                BucketName = this.Name,
+                Prefix = prefix,
+            };
+
+            try
+            {
+                var resp = await this.Storage.Client.ListBlobsAsync(request);
+
+                var files = new List<File>();
+
+                foreach (ProtoBlob file in resp.Blobs)
+                {
+                    files.Add(new File(this, file.Key));
+                }
+
+                return files;
+            }
+            catch (Grpc.Core.RpcException e)
+            {
+                throw Common.NitricException.FromRpcException(e);
+            }
         }
 
         /// <summary>
@@ -121,6 +163,15 @@ namespace Nitric.Sdk.Storage
             var notificationWorker = new BlobEventWorker(request, handler);
 
             Nitric.RegisterWorker(notificationWorker);
+        }
+
+        /// <summary>
+        /// Return a string representation of the file. Will not contain the file contents.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return GetType().Name + "[name=" + Name + "]";
         }
     }
 }

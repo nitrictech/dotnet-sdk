@@ -14,7 +14,7 @@
 
 using System;
 using Nitric.Sdk.Common;
-using GrpcClient = Nitric.Proto.KeyValue.v1.KeyValue.KeyValueClient;
+using GrpcClient = Nitric.Proto.KvStore.v1.KvStore.KvStoreClient;
 
 namespace Nitric.Sdk.KeyValueStore
 {
@@ -38,7 +38,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// <typeparam name="T">The expected type for values in the key value store.</typeparam>
         /// <returns>The collection reference.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public KeyValueStore<T> Store<T>(string name)
+        public KeyValueStore<T> KV<T>(string name)
         {
             if (string.IsNullOrEmpty(name))
             {

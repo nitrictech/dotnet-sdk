@@ -64,7 +64,7 @@ namespace Nitric.Sdk.Resource
             return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x])).Distinct();
         }
 
-        public Secret.Secret With(SecretPermission permission, params SecretPermission[] permissions)
+        public Secret.Secret Allow(SecretPermission permission, params SecretPermission[] permissions)
         {
             var allPerms = new List<SecretPermission> { permission };
             allPerms.AddRange(permissions);

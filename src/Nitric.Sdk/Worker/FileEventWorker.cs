@@ -15,23 +15,26 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Nitric.Sdk.Common;
-using Nitric.Proto.Apis.v1;
-using GrpcClient = Nitric.Proto.Apis.v1.Api.ApiClient;
+using Nitric.Proto.Storage.v1;
+using GrpcClient = Nitric.Proto.Storage.v1.StorageListener.StorageListenerClient;
 using Nitric.Sdk.Service;
+using Nitric.Sdk.Storage;
 using System;
 
 namespace Nitric.Sdk.Worker
 {
-    public class ApiWorker : AbstractWorker<HttpContext>
+    public class FileEventWorker : AbstractWorker<FileEventContext>
     {
         readonly private RegistrationRequest RegistrationRequest;
+        readonly private Bucket bucket;
 
-        public ApiWorker(RegistrationRequest request, Func<HttpContext, HttpContext> middleware) : base(middleware)
+        public FileEventWorker(RegistrationRequest request, Bucket bucket, Func<FileEventContext, FileEventContext> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
+            this.bucket = bucket;
         }
 
-        public ApiWorker(RegistrationRequest request, params Middleware<HttpContext>[] middlewares) : base(middlewares)
+        public FileEventWorker(RegistrationRequest request, params Middleware<FileEventContext>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
         }
@@ -40,7 +43,7 @@ namespace Nitric.Sdk.Worker
         {
             var client = new GrpcClient(GrpcChannelProvider.GetChannel());
 
-            var stream = client.Serve();
+            var stream = client.Listen();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
@@ -50,11 +53,11 @@ namespace Nitric.Sdk.Worker
 
                 if (req.RegistrationResponse != null)
                 {
-                    // Schedule connected with Nitric server.
+                    // Bucket listener connected with Nitric server.
                 }
-                else if (req.HttpRequest != null)
+                else if (req.BlobEventRequest != null)
                 {
-                    var ctx = HttpContext.FromRequest(req);
+                    var ctx = FileEventContext.FromRequest(req, this.bucket);
 
                     try
                     {
@@ -62,7 +65,8 @@ namespace Nitric.Sdk.Worker
                     }
                     catch (Exception err)
                     {
-                        ctx.Res.WithError(err);
+                        Console.WriteLine("Unhandled application error: {0}", err.ToString());
+                        ctx.Res.Success = false;
                     }
 
                     await stream.RequestStream.WriteAsync(ctx.ToResponse());

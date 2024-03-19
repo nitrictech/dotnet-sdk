@@ -34,7 +34,7 @@ namespace Nitric.Sdk
         {
             if (worker == null)
             {
-                throw new ArgumentNullException("Cannot register a null worker.");
+                throw new ArgumentNullException(nameof(worker));
             }
 
             Workers.Add(worker);
@@ -100,7 +100,7 @@ namespace Nitric.Sdk
         /// <param name="name">The unique name of the key value store within this application.</param>
         /// <typeparam name="TValue">The type of values to be stored.</typeparam>
         /// <returns>A key value resource, if the name has already been declared the same resource will be returned.</returns>
-        public static KeyValueStoreResource<TValue> KeyValue<TValue>(string name) =>
+        public static KeyValueStoreResource<TValue> KV<TValue>(string name) =>
             Cached(name, t => new KeyValueStoreResource<TValue>(t));
 
         /// <summary>

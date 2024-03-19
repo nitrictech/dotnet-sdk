@@ -93,7 +93,7 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="permissions">The permissions that the function has to access the topic.</param>
         /// <returns>A reference to the topic.</returns>
-        public Topic<T> With(TopicPermission permission, params TopicPermission[] permissions)
+        public Topic<T> Allow(TopicPermission permission, params TopicPermission[] permissions)
         {
             var allPerms = new List<TopicPermission> { permission };
             allPerms.AddRange(permissions);

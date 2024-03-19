@@ -20,8 +20,10 @@ using GrpcClient = Nitric.Proto.Topics.v1.Topics.TopicsClient;
 using Nitric.Proto.Topics.v1;
 using Nitric.Sdk.Topics;
 using Xunit;
+using System.Threading.Tasks;
+using Nitric.Sdk.Common;
 
-namespace Nitric.Sdk.Test.Api.Event
+namespace Nitric.Sdk.Test.Event
 {
     public class TestProfile
     {
@@ -93,12 +95,57 @@ namespace Nitric.Sdk.Test.Api.Event
             {
                 topic.Publish(profile);
             }
-            catch (Common.NitricException ne)
+            catch (NitricException ne)
             {
                 Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified topic does not exist\")", ne.Message);
             }
 
             ec.Verify(t => t.Publish(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async void TestPublishAsync()
+        {
+            Mock<GrpcClient> ec = new Mock<GrpcClient>();
+
+            ec.Setup(e => e.PublishAsync(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Returns(new AsyncUnaryCall<TopicPublishResponse>(Task.FromResult(new TopicPublishResponse()), null, null, null, null))
+                .Verifiable();
+
+            var topic = new TopicsClient<TestProfile>(ec.Object).Topic("test-topic");
+
+            var profile = new TestProfile
+            { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
+
+            await topic.PublishAsync(profile);
+
+            ec.Verify(t => t.PublishAsync(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async void TestPublishAsyncToNonExistentTopic()
+        {
+            Mock<GrpcClient> ec = new Mock<GrpcClient>();
+
+            ec.Setup(e => e.PublishAsync(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified topic does not exist")))
+                .Verifiable();
+
+            var topic = new TopicsClient<TestProfile>(ec.Object).Topic("test-topic");
+
+            var profile = new TestProfile
+            { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
+
+            try
+            {
+                await topic.PublishAsync(profile);
+            }
+            catch (NitricException ne)
+            {
+                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified topic does not exist\")", ne.Message);
+            }
+
+            ec.Verify(t => t.PublishAsync(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     };
 }

@@ -76,11 +76,6 @@ namespace Nitric.Sdk.Secret
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("value");
-            }
-
-            if (value == null || value.Length == 0)
-            {
                 throw new ArgumentNullException(nameof(value));
             }
 
@@ -116,11 +111,6 @@ namespace Nitric.Sdk.Secret
         public async Task<SecretVersion> PutAsync(string value)
         {
             if (string.IsNullOrEmpty(value))
-            {
-                throw new ArgumentNullException("value");
-            }
-
-            if (value == null || value.Length == 0)
             {
                 throw new ArgumentNullException(nameof(value));
             }

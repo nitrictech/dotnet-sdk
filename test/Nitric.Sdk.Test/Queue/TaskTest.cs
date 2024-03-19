@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using Xunit;
 using Nitric.Sdk.Queue;
 
-namespace Nitric.Sdk.Test.Api.Queue
+namespace Nitric.Sdk.Test.Queue
 {
     public class QueueItemTest
     {

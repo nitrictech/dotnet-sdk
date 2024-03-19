@@ -16,7 +16,6 @@ using System.Linq;
 using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.KeyValueStore;
 using Action = Nitric.Proto.Resources.v1.Action;
-using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
 using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
 
 namespace Nitric.Sdk.Resource
@@ -74,13 +73,13 @@ namespace Nitric.Sdk.Resource
                 .Distinct();
         }
 
-        public KeyValueStore<TValue> With(KeyValueStorePermission permission, params KeyValueStorePermission[] permissions)
+        public KeyValueStore<TValue> Allow(KeyValueStorePermission permission, params KeyValueStorePermission[] permissions)
         {
             var allPerms = new List<KeyValueStorePermission> { permission };
             allPerms.AddRange(permissions);
 
             this.RegisterPolicy(allPerms);
-            return new KeyValueStoreClient().Store<TValue>(this.Name);
+            return new KeyValueStoreClient().KV<TValue>(this.Name);
         }
     }
 }

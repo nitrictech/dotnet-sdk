@@ -36,16 +36,6 @@ namespace Nitric.Sdk.Secret
 
         internal SecretVersion(Secret secret, string id)
         {
-            if (secret == null || string.IsNullOrEmpty(secret.Name))
-            {
-                throw new ArgumentNullException(nameof(secret));
-            }
-
-            if (string.IsNullOrEmpty(id))
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
             this.Secret = secret;
             this.Id = id;
         }

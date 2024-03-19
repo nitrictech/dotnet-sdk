@@ -17,7 +17,7 @@ using Google.Protobuf.WellKnownTypes;
 using Nitric.Sdk.Queue;
 using Xunit;
 
-namespace Nitric.Sdk.Test.Api.Queue
+namespace Nitric.Sdk.Test.Queue
 {
     public class TestProfile
     {

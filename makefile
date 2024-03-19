@@ -1,5 +1,5 @@
 # the version of of https://github.com/nitrictech/nitric to use in base client generation.
-NITRIC_VERSION := 1.0.0
+NITRIC_VERSION := 1.1.1
 
 generate: clean download build
 
@@ -26,3 +26,9 @@ pack: clean download
 	@dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj -c Release
 	@mkdir -p __out
 	@dotnet pack -c Release -o __out
+
+coverage:
+	@echo "Using dotcover tool... Install using: 'dotnet tool install --global JetBrains.dotCover.GlobalTool'"
+	@rm -f coverage.xml dotCover.Output.html
+	@dotnet dotcover test --dcReportType=HTML --dcFilters="+:Nitric.Sdk;-:type=Nitric.Proto.*"
+	@open dotCover.Output.html

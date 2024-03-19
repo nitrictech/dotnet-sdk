@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Threading;
 using System.Threading.Tasks;
-using Nitric.Proto.KeyValue.v1;
+using Nitric.Proto.KvStore.v1;
 using Nitric.Sdk.Common;
 
 namespace Nitric.Sdk.KeyValueStore
@@ -36,7 +37,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// <returns>The value that was referenced by the key.</returns>
         public T Get(string key)
         {
-            var request = new KeyValueGetRequest
+            var request = new KvStoreGetValueRequest
             {
                 Ref = new ValueRef
                 {
@@ -47,7 +48,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                var resp = KeyValueClient.Client.Get(request);
+                var resp = KeyValueClient.Client.GetValue(request);
 
                 return Struct.ToJsonSerializable<T>(resp.Value.Content);
             }
@@ -64,7 +65,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// <returns>The value that was referenced by the key.</returns>
         public async Task<T> GetAsync(string key)
         {
-            var request = new KeyValueGetRequest
+            var request = new KvStoreGetValueRequest
             {
                 Ref = new ValueRef
                 {
@@ -75,7 +76,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                var resp = await KeyValueClient.Client.GetAsync(request);
+                var resp = await KeyValueClient.Client.GetValueAsync(request);
 
                 return Struct.ToJsonSerializable<T>(resp.Value.Content);
             }
@@ -92,7 +93,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// <param name="value">The value to store.</param>
         public void Set(string key, T value)
         {
-            var request = new KeyValueSetRequest
+            var request = new KvStoreSetValueRequest
             {
                 Content = Struct.FromJsonSerializable(value),
                 Ref = new ValueRef
@@ -104,7 +105,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                KeyValueClient.Client.Set(request);
+                KeyValueClient.Client.SetValue(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -119,7 +120,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// <param name="value">The value to store.</param>
         public async Task SetAsync(string key, T value)
         {
-            var request = new KeyValueSetRequest
+            var request = new KvStoreSetValueRequest
             {
                 Content = Struct.FromJsonSerializable(value),
                 Ref = new ValueRef
@@ -131,7 +132,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                await KeyValueClient.Client.SetAsync(request);
+                await KeyValueClient.Client.SetValueAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -145,7 +146,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// <param name="key">The unique key that references the value.</param>
         public void Delete(string key)
         {
-            var request = new KeyValueDeleteRequest
+            var request = new KvStoreDeleteKeyRequest
             {
                 Ref = new ValueRef
                 {
@@ -156,7 +157,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                KeyValueClient.Client.Delete(request);
+                KeyValueClient.Client.DeleteKey(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -170,7 +171,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// <param name="key">The unique key that references the value.</param>
         public async Task DeleteAsync(string key)
         {
-            var request = new KeyValueDeleteRequest
+            var request = new KvStoreDeleteKeyRequest
             {
                 Ref = new ValueRef
                 {
@@ -181,13 +182,72 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                await KeyValueClient.Client.DeleteAsync(request);
+                await KeyValueClient.Client.DeleteKeyAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {
                 throw NitricException.FromRpcException(re);
             }
         }
+
+        public KeyValueKeysResponseStream Keys(string prefix = "")
+        {
+            var request = new KvStoreScanKeysRequest
+            {
+                Prefix = prefix,
+                Store = new Store
+                {
+                    Name = this.Name,
+                },
+            };
+
+            try
+            {
+                var resp = KeyValueClient.Client.ScanKeys(request);
+
+                return new KeyValueKeysResponseStream(resp.ResponseStream);
+
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
+        }
+    }
+
+    public class KeyValueKeysResponseStream
+    {
+        private Grpc.Core.IAsyncStreamReader<KvStoreScanKeysResponse> stream;
+
+        internal KeyValueKeysResponseStream(Grpc.Core.IAsyncStreamReader<KvStoreScanKeysResponse> stream)
+        {
+            this.stream = stream;
+        }
+
+        /// <summary>
+        /// Advances the reader to the next element in the sequence, returning the result asynchronously
+        /// </summary>
+        /// <returns>Task containing the result of the operation: true if the reader was successfully advanced to the next element; false if the reader has passed the end of the sequence.</returns>
+        public Task<bool> MoveNext()
+        {
+            return stream.MoveNext(CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Advances the reader to the next element in the sequence, returning the result asynchronously
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token that can be used to cancel the operation.</param>
+        /// <returns>Task containing the result of the operation: true if the reader was successfully advanced to the next element; false if the reader has passed the end of the sequence.</returns>
+        public Task<bool> MoveNext(CancellationToken cancellationToken)
+        {
+            return stream.MoveNext(cancellationToken);
+        }
+
+
+        /// <summary>
+        /// Gets the current key in the iteration.
+        /// </summary>
+        public string Current { get => stream.Current.Key; }
     }
 }
 

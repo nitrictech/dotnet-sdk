@@ -41,7 +41,7 @@ namespace Nitric.Proto.Deployments.v1 {
             "Y2VEZXBsb3ltZW50QWN0aW9uEkUKBnN0YXR1cxgEIAEoDjI1Lm5pdHJpYy5w",
             "cm90by5kZXBsb3ltZW50cy52MS5SZXNvdXJjZURlcGxveW1lbnRTdGF0dXMS",
             "FAoMc3ViX3Jlc291cmNlGAUgASgJEg8KB21lc3NhZ2UYBiABKAkiNgoIVXBS",
-            "ZXN1bHQSDwoHc3VjY2VzcxgBIAEoCBIOCgRUZXh0GAIgASgJSABCCQoHY29u",
+            "ZXN1bHQSDwoHc3VjY2VzcxgBIAEoCBIOCgR0ZXh0GAIgASgJSABCCQoHY29u",
             "dGVudCJZChVEZXBsb3ltZW50RG93blJlcXVlc3QSKwoKYXR0cmlidXRlcxgB",
             "IAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSEwoLaW50ZXJhY3RpdmUY",
             "AiABKAgirQEKE0RlcGxveW1lbnREb3duRXZlbnQSEQoHbWVzc2FnZRgBIAEo",
@@ -1180,7 +1180,7 @@ namespace Nitric.Proto.Deployments.v1 {
       }
     }
 
-    /// <summary>Field number for the "Text" field.</summary>
+    /// <summary>Field number for the "text" field.</summary>
     public const int TextFieldNumber = 2;
     /// <summary>
     /// Simple text output as result

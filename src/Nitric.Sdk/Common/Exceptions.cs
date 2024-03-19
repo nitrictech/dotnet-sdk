@@ -48,7 +48,7 @@ namespace Nitric.Sdk.Common
         {
         }
 
-        internal static NitricException FromRpcException(RpcException exception)
+        public static NitricException FromRpcException(RpcException exception)
         {
             return Exceptions.ContainsKey(exception.StatusCode)
                 ? Exceptions[exception.StatusCode](exception.Message)

@@ -27,32 +27,32 @@ namespace Nitric.Sdk.Storage
     public enum SignedMode
     {
         /// <summary>
-        /// Download a blob from a bucket.
+        /// Download a file from a bucket.
         /// </summary>
         Read,
         /// <summary>
-        /// Upload a blob to a bucket.
+        /// Upload a file to a bucket.
         /// </summary>
         Write,
     }
 
     /// <summary>
-    /// A reference to a specific blob in a bucket.
+    /// A reference to a specific file in a bucket.
     /// </summary>
-    public class Blob
+    public class File
     {
         private readonly Bucket Bucket;
         public string Name { get; private set; }
 
 
-        internal Blob(Bucket bucket, string key)
+        internal File(Bucket bucket, string key)
         {
             this.Bucket = bucket;
             this.Name = key;
         }
 
         /// <summary>
-        /// Create or update the contents of the blob.
+        /// Create or update the contents of the file.
         /// </summary>
         /// <param name="body">The contents to write.</param>
         /// <exception cref="NitricException"></exception>
@@ -75,7 +75,7 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Create or update the contents of the blob.
+        /// Create or update the contents of the file.
         /// </summary>
         /// <param name="body">The contents to write.</param>
         /// <exception cref="NitricException"></exception>
@@ -98,7 +98,7 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Create or update the contents of the blob.
+        /// Create or update the contents of the file.
         /// </summary>
         /// <param name="body">The contents to write.</param>
         /// <exception cref="NitricException"></exception>
@@ -121,7 +121,7 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Create or update the contents of the blob.
+        /// Create or update the contents of the file.
         /// </summary>
         /// <param name="body">The contents to write.</param>
         /// <exception cref="NitricException"></exception>
@@ -144,9 +144,9 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Retrieve the contents of a blob.
+        /// Retrieve the contents of a file.
         /// </summary>
-        /// <returns>The blob contents.</returns>
+        /// <returns>The file contents.</returns>
         /// <exception cref="NitricException"></exception>
         public byte[] Read()
         {
@@ -167,9 +167,9 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Retrieve the contents of a blob.
+        /// Retrieve the contents of a file.
         /// </summary>
-        /// <returns>The blob contents.</returns>
+        /// <returns>The file contents.</returns>
         /// <exception cref="NitricException"></exception>
         public async Task<byte[]> ReadAsync()
         {
@@ -190,7 +190,7 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Delete the blob.
+        /// Delete the file.
         /// </summary>
         /// <exception cref="NitricException"></exception>
         public void Delete()
@@ -211,7 +211,7 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Delete the blob.
+        /// Delete the file.
         /// </summary>
         /// <exception cref="NitricException"></exception>
         public async Task DeleteAsync()
@@ -232,9 +232,29 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Create a presigned URL for reading or writing for the given blob reference.
+        /// Create a presigned URL for writing to a given file reference.
         /// </summary>
-        /// <param name="mode">The mode the URL will access the blob with. E.g. reading or writing.</param>
+        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
+        /// <returns>The signed URL for writing.</returns>
+        public string GetUploadUrl(int expiry = 600)
+        {
+            return this.PreSignUrl(SignedMode.Write, expiry);
+        }
+
+        /// <summary>
+        /// Create a presigned URL for reading a given file reference.
+        /// </summary>
+        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
+        /// <returns>The signed URL for reading.</returns>
+        public string GetDownloadUrl(int expiry = 600)
+        {
+            return this.PreSignUrl(SignedMode.Read, expiry);
+        }
+
+        /// <summary>
+        /// Create a presigned URL for reading or writing for the given file reference.
+        /// </summary>
+        /// <param name="mode">The mode the URL will access the file with. E.g. reading or writing.</param>
         /// <param name="expiry">How long the URL should be valid for in seconds (max of 604800).</param>
         /// <returns>The signed URL for reading or writing</returns>
         internal string PreSignUrl(SignedMode mode, int expiry)
@@ -262,29 +282,30 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Create a presigned URL for reading a given blob reference.
+        /// Create a presigned URL for reading a given file reference.
         /// </summary>
         /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
         /// <returns>The signed URL for reading.</returns>
-        public string GetDownloadUrl(int expiry = 600)
+        public async Task<string> GetDownloadUrlAsync(int expiry = 600)
         {
-            return this.PreSignUrl(SignedMode.Write, expiry);
+            return await this.PreSignUrlAsync(SignedMode.Read, expiry);
         }
 
+
         /// <summary>
-        /// Create a presigned URL for writing to a given blob reference.
+        /// Create a presigned URL for writing to a given file reference.
         /// </summary>
         /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
         /// <returns>The signed URL for writing.</returns>
-        public string GetUploadUrl(int expiry = 600)
+        public async Task<string> GetUploadUrlAsync(int expiry = 600)
         {
-            return this.PreSignUrl(SignedMode.Read, expiry);
+            return await this.PreSignUrlAsync(SignedMode.Write, expiry);
         }
 
         /// <summary>
-        /// Create a presigned URL for reading or writing for the given blob reference.
+        /// Create a presigned URL for reading or writing for the given file reference.
         /// </summary>
-        /// <param name="mode">The mode the URL will access the blob with. E.g. reading or writing.</param>
+        /// <param name="mode">The mode the URL will access the file with. E.g. reading or writing.</param>
         /// <param name="expiry">How long the URL should be valid for in seconds (max of 604800).</param>
         /// <returns>The signed URL for reading or writing</returns>
         internal async Task<string> PreSignUrlAsync(SignedMode mode, int expiry)
@@ -312,27 +333,7 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Create a presigned URL for reading a given blob reference.
-        /// </summary>
-        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
-        /// <returns>The signed URL for reading.</returns>
-        public async Task<string> GetDownloadUrlAsync(int expiry = 600)
-        {
-            return await this.PreSignUrlAsync(SignedMode.Write, expiry);
-        }
-
-        /// <summary>
-        /// Create a presigned URL for writing to a given blob reference.
-        /// </summary>
-        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
-        /// <returns>The signed URL for writing.</returns>
-        public async Task<string> GetUploadUrlAsync(int expiry = 600)
-        {
-            return await this.PreSignUrlAsync(SignedMode.Read, expiry);
-        }
-
-        /// <summary>
-        /// Return a string representation of the blob. Will not contain the blob contents.
+        /// Return a string representation of the file. Will not contain the file contents.
         /// </summary>
         /// <returns></returns>
         public override string ToString()

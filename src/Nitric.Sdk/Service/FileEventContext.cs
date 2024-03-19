@@ -14,58 +14,21 @@
 
 using System;
 using Nitric.Proto.Storage.v1;
+using Nitric.Sdk.Storage;
 using ProtoBlobEventResponse = Nitric.Proto.Storage.v1.BlobEventResponse;
 using ProtoBlobEventType = Nitric.Proto.Storage.v1.BlobEventType;
 
 namespace Nitric.Sdk.Service
 {
     /// <summary>
-    /// Extension class for methods converting blob event types to and from gRPC calls.
-    /// </summary>
-    internal static class BlobEventTypeExtension
-    {
-        /// <summary>
-        /// Convert a SDK blob event type into a gRPC blob event type.
-        /// </summary>
-        /// <param name="blobEventType"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        internal static ProtoBlobEventType ToGrpc(
-            this BlobEventType blobEventType)
-        {
-            return blobEventType switch
-            {
-                BlobEventType.Write => ProtoBlobEventType.Created,
-                BlobEventType.Delete => ProtoBlobEventType.Deleted,
-                _ => throw new ArgumentException("Unsupported blob event type")
-            };
-        }
-    }
-
-    ///<Summary>
-    /// Available blob event trigger types.
-    ///</Summary>
-    public enum BlobEventType
-    {
-        /// <summary>
-        /// Trigger a blob event on a write event.
-        /// </summary>
-        Write,
-        /// <summary>
-        /// Trigger a blob event on a delete event.
-        /// </summary>
-        Delete
-    }
-
-    /// <summary>
     /// Represents a bucket notification being created by a write or delete event in the bucket
     /// </summary>
-    public class BlobEventRequest : TriggerRequest
+    public class FileEventRequest : TriggerRequest
     {
         /// <summary>
         /// A reference to the file that triggered this request
         /// </summary>
-        public string Key { get; private set; }
+        public File File { get; private set; }
 
         /// <summary>
         /// The type of event that triggered this request
@@ -78,9 +41,9 @@ namespace Nitric.Sdk.Service
         /// </summary>
         /// <param name="key">the file that triggered the notification</param>
         /// <param name="notificationType">the type of bucket notification</param>
-        public BlobEventRequest(string key, BlobEventType notificationType) : base()
+        public FileEventRequest(File file, BlobEventType notificationType) : base()
         {
-            this.Key = key;
+            this.File = file;
             this.NotificationType = notificationType;
         }
     }
@@ -88,7 +51,7 @@ namespace Nitric.Sdk.Service
     /// <summary>
     /// Represents the results of processing a bucket notification.
     /// </summary>
-    public class BlobEventResponse : TriggerResponse
+    public class FileEventResponse : TriggerResponse
     {
         /// <summary>
         /// Indicates whether the event was successfully processed.
@@ -101,23 +64,23 @@ namespace Nitric.Sdk.Service
         /// Construct a bucket notification response.
         /// </summary>
         /// <param name="BlobEventResponse">Indicates whether the event was successfully processed.</param>
-        public BlobEventResponse(bool success)
+        public FileEventResponse(bool success)
         {
             this.Success = success;
         }
     }
 
     /// <summary>
-    /// Represents the request/response context for a bucket notification.
+    /// Represents the request/response context for a permissioned bucket notification.
     /// </summary>
-    public class BlobEventContext : TriggerContext<BlobEventRequest, BlobEventResponse>
+    public class FileEventContext : TriggerContext<FileEventRequest, FileEventResponse>
     {
         /// <summary>
         /// Construct a new BucketNotificationContext.
         /// </summary>
         /// <param name="req">The request object</param>
         /// <param name="res">The response object</param>
-        public BlobEventContext(string id, BlobEventRequest req, BlobEventResponse res) : base(id, req, res)
+        public FileEventContext(string id, FileEventRequest req, FileEventResponse res) : base(id, req, res)
         {
         }
 
@@ -127,17 +90,17 @@ namespace Nitric.Sdk.Service
         /// <param name="trigger">The trigger to convert into a BucketNotificationContext.</param>
         /// <param name="options">The bucket notification worker options describing the worker options.</param>
         /// <returns>the new bucket notification context</returns>
-        public static BlobEventContext FromRequest(ServerMessage trigger)
+        public static FileEventContext FromRequest(ServerMessage trigger, Bucket bucket)
         {
             var notificationType = FromGrpcBlobEventType(trigger.BlobEventRequest.BlobEvent.Type);
 
-            return new BlobEventContext(
+            return new FileEventContext(
                 trigger.Id,
-                new BlobEventRequest(
-                    trigger.BlobEventRequest.BlobEvent.Key,
+                new FileEventRequest(
+                    bucket.File(trigger.BlobEventRequest.BlobEvent.Key),
                     notificationType
                 ),
-                new BlobEventResponse(true));
+                new FileEventResponse(true));
         }
 
         /// <summary>

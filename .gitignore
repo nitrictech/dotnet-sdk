@@ -331,3 +331,4 @@ ASALocalRun/
 **/bin/
 .idea
 .vs
+dotCover.*
