@@ -14,7 +14,7 @@
 
 using System;
 using Nitric.Sdk.Common;
-using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
+using GrpcClient = Nitric.Proto.Secrets.v1.SecretManager.SecretManagerClient;
 
 namespace Nitric.Sdk.Secret
 {
@@ -23,7 +23,7 @@ namespace Nitric.Sdk.Secret
     /// </summary>
     public class SecretsClient
     {
-        private readonly GrpcClient secretServiceClient;
+        internal readonly GrpcClient Client;
 
         /// <summary>
         /// Create a new secrets service client.
@@ -31,7 +31,7 @@ namespace Nitric.Sdk.Secret
         /// <param name="client"></param>
         public SecretsClient(GrpcClient client = null)
         {
-            this.secretServiceClient = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Nitric.Sdk.Secret
                 throw new ArgumentNullException(nameof(name));
             }
 
-            return new Secret(this.secretServiceClient, name);
+            return new Secret(this, name);
         }
     }
 }

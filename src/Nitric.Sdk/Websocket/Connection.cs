@@ -11,11 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+using System.Threading.Tasks;
 using Google.Protobuf;
 using Grpc.Core;
-using Nitric.Proto.Websocket.v1;
+using Nitric.Proto.Websockets.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Resource;
 
 namespace Nitric.Sdk.Websocket
 {
@@ -26,28 +26,32 @@ namespace Nitric.Sdk.Websocket
         /// </summary>
         public string Id { get; set; }
 
-        public string Socket { get; set; }
+        public string SocketName { get; set; }
 
-        private readonly WebsocketClient websocket;
+        private readonly WebsocketClient Websocket;
 
-        internal Connection(WebsocketClient websocket, string id, string socket)
+        internal Connection(WebsocketClient websocket, string connectionId, string socketName)
         {
-            this.websocket = websocket;
-            this.Id = id;
-            this.Socket = socket;
+            this.Websocket = websocket;
+            this.Id = connectionId;
+            this.SocketName = socketName;
         }
 
-        public void Send(string data)
+        /// <summary>
+        /// Send a message to the websocket.
+        /// </summary>
+        /// <param name="message">The message to be sent</param>
+        public void SendMessage(string message)
         {
             var request = new WebsocketSendRequest
             {
                 ConnectionId = this.Id,
-                Socket = this.Socket,
-                Data = ByteString.CopyFromUtf8(data)
+                SocketName = this.SocketName,
+                Data = ByteString.CopyFromUtf8(message)
             };
             try
             {
-                this.websocket.client.Send(request);
+                this.Websocket.Client.SendMessage(request);
             }
             catch (RpcException e)
             {
@@ -55,17 +59,63 @@ namespace Nitric.Sdk.Websocket
             }
         }
 
-        public void Close()
+        /// <summary>
+        /// Send a message to the websocket.
+        /// </summary>
+        /// <param name="message">The message to be sent</param>
+        public async Task SendMessageAsync(string message)
         {
-            var request = new WebsocketCloseRequest
+            var request = new WebsocketSendRequest
             {
                 ConnectionId = this.Id,
-                Socket = this.Socket,
+                SocketName = this.SocketName,
+                Data = ByteString.CopyFromUtf8(message)
+            };
+            try
+            {
+                await this.Websocket.Client.SendMessageAsync(request);
+            }
+            catch (RpcException e)
+            {
+                throw NitricException.FromRpcException(e);
+            }
+        }
+
+        /// <summary>
+        /// Close the connection to the websocket.
+        /// </summary>
+        public void CloseConnection()
+        {
+            var request = new WebsocketCloseConnectionRequest
+            {
+                ConnectionId = this.Id,
+                SocketName = this.SocketName,
             };
 
             try
             {
-                this.websocket.client.Close(request);
+                this.Websocket.Client.CloseConnection(request);
+            }
+            catch (RpcException e)
+            {
+                throw NitricException.FromRpcException(e);
+            }
+        }
+
+        /// <summary>
+        /// Close the connection to the websocket.
+        /// </summary>
+        public async Task CloseConnectionAsync()
+        {
+            var request = new WebsocketCloseConnectionRequest
+            {
+                ConnectionId = this.Id,
+                SocketName = this.SocketName,
+            };
+
+            try
+            {
+                await this.Websocket.Client.CloseConnectionAsync(request);
             }
             catch (RpcException e)
             {

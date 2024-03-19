@@ -13,10 +13,10 @@
 // limitations under the License.
 using System.Collections.Generic;
 using System.Linq;
-using Nitric.Proto.Resource.v1;
+using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.Queue;
-using Action = Nitric.Proto.Resource.v1.Action;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
+using Action = Nitric.Proto.Resources.v1.Action;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
 
 namespace Nitric.Sdk.Resource
 {
@@ -28,11 +28,11 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Enables pushing new tasks to the queue.
         /// </summary>
-        Sending,
+        Enqueue,
         /// <summary>
         /// Enables pulling and completing tasks on the queue.
         /// </summary>
-        Receiving
+        Dequeue
     }
 
     public class QueueResource<T> : SecureResource<QueuePermission>
@@ -43,8 +43,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Queue };
-            var request = new ResourceDeclareRequest { Resource = resource };
+            var request = new ResourceDeclareRequest { Id = this.AsProtoResource() };
             client.Declare(request);
             return this;
         }
@@ -54,12 +53,12 @@ namespace Nitric.Sdk.Resource
             var actionMap = new Dictionary<QueuePermission, List<Action>>
             {
                 {
-                    QueuePermission.Sending,
-                    new List<Action> { Action.QueueSend, Action.QueueDetail, Action.QueueList }
+                    QueuePermission.Enqueue,
+                    new List<Action> { Action.QueueEnqueue }
                 },
                 {
-                    QueuePermission.Receiving,
-                    new List<Action> { Action.QueueReceive, Action.QueueDetail, Action.QueueList }
+                    QueuePermission.Dequeue,
+                    new List<Action> { Action.QueueDequeue }
                 }
             };
             return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x])).Distinct();
@@ -70,7 +69,7 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="permissions">The permissions that the function has to access the queue.</param>
         /// <returns>A reference to the queue.</returns>
-        public Queue.Queue<T> With(QueuePermission permission, params QueuePermission[] permissions)
+        public Queue.Queue<T> Allow(QueuePermission permission, params QueuePermission[] permissions)
         {
             var allPerms = new List<QueuePermission> { permission };
             allPerms.AddRange(permissions);

@@ -13,19 +13,18 @@
 // limitations under the License.
 
 using System;
-using System.Text;
+using System.Threading.Tasks;
 using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
 using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Function;
-using ProtoFile = Nitric.Proto.Storage.v1.File;
 
 namespace Nitric.Sdk.Storage
 {
     ///<Summary>
     /// Available operations for signing a url.
     ///</Summary>
-    public enum FileMode
+    public enum SignedMode
     {
         /// <summary>
         /// Download a file from a bucket.
@@ -42,15 +41,13 @@ namespace Nitric.Sdk.Storage
     /// </summary>
     public class File
     {
-        private readonly Storage storage;
-        private readonly Bucket bucket;
+        private readonly Bucket Bucket;
         public string Name { get; private set; }
 
 
-        internal File(Storage storage, Bucket bucket, string key)
+        internal File(Bucket bucket, string key)
         {
-            this.storage = storage;
-            this.bucket = bucket;
+            this.Bucket = bucket;
             this.Name = key;
         }
 
@@ -63,13 +60,13 @@ namespace Nitric.Sdk.Storage
         {
             var request = new StorageWriteRequest
             {
-                BucketName = bucket.Name,
+                BucketName = Bucket.Name,
                 Key = this.Name,
                 Body = ByteString.CopyFrom(body)
             };
             try
             {
-                storage.Client.Write(request);
+                this.Bucket.Storage.Client.Write(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -86,13 +83,59 @@ namespace Nitric.Sdk.Storage
         {
             var request = new StorageWriteRequest
             {
-                BucketName = bucket.Name,
+                BucketName = Bucket.Name,
                 Key = this.Name,
                 Body = ByteString.CopyFromUtf8(body)
             };
             try
             {
-                storage.Client.Write(request);
+                this.Bucket.Storage.Client.Write(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Create or update the contents of the file.
+        /// </summary>
+        /// <param name="body">The contents to write.</param>
+        /// <exception cref="NitricException"></exception>
+        public async Task WriteAsync(byte[] body)
+        {
+            var request = new StorageWriteRequest
+            {
+                BucketName = Bucket.Name,
+                Key = this.Name,
+                Body = ByteString.CopyFrom(body)
+            };
+            try
+            {
+                await this.Bucket.Storage.Client.WriteAsync(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Create or update the contents of the file.
+        /// </summary>
+        /// <param name="body">The contents to write.</param>
+        /// <exception cref="NitricException"></exception>
+        public async Task WriteAsync(string body)
+        {
+            var request = new StorageWriteRequest
+            {
+                BucketName = Bucket.Name,
+                Key = this.Name,
+                Body = ByteString.CopyFromUtf8(body)
+            };
+            try
+            {
+                await this.Bucket.Storage.Client.WriteAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -109,12 +152,35 @@ namespace Nitric.Sdk.Storage
         {
             var request = new StorageReadRequest
             {
-                BucketName = bucket.Name,
+                BucketName = Bucket.Name,
                 Key = this.Name
             };
             try
             {
-                var response = storage.Client.Read(request);
+                var response = this.Bucket.Storage.Client.Read(request);
+                return response.Body.ToByteArray();
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Retrieve the contents of a file.
+        /// </summary>
+        /// <returns>The file contents.</returns>
+        /// <exception cref="NitricException"></exception>
+        public async Task<byte[]> ReadAsync()
+        {
+            var request = new StorageReadRequest
+            {
+                BucketName = Bucket.Name,
+                Key = this.Name
+            };
+            try
+            {
+                var response = await this.Bucket.Storage.Client.ReadAsync(request);
                 return response.Body.ToByteArray();
             }
             catch (Grpc.Core.RpcException re)
@@ -131,12 +197,12 @@ namespace Nitric.Sdk.Storage
         {
             var request = new StorageDeleteRequest
             {
-                BucketName = bucket.Name,
+                BucketName = Bucket.Name,
                 Key = this.Name
             };
             try
             {
-                storage.Client.Delete(request);
+                this.Bucket.Storage.Client.Delete(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -145,27 +211,71 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
+        /// Delete the file.
+        /// </summary>
+        /// <exception cref="NitricException"></exception>
+        public async Task DeleteAsync()
+        {
+            var request = new StorageDeleteRequest
+            {
+                BucketName = Bucket.Name,
+                Key = this.Name
+            };
+            try
+            {
+                await this.Bucket.Storage.Client.DeleteAsync(request);
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Create a presigned URL for writing to a given file reference.
+        /// </summary>
+        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
+        /// <returns>The signed URL for writing.</returns>
+        public string GetUploadUrl(int expiry = 600)
+        {
+            return this.PreSignUrl(SignedMode.Write, expiry);
+        }
+
+        /// <summary>
+        /// Create a presigned URL for reading a given file reference.
+        /// </summary>
+        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
+        /// <returns>The signed URL for reading.</returns>
+        public string GetDownloadUrl(int expiry = 600)
+        {
+            return this.PreSignUrl(SignedMode.Read, expiry);
+        }
+
+        /// <summary>
         /// Create a presigned URL for reading or writing for the given file reference.
         /// </summary>
         /// <param name="mode">The mode the URL will access the file with. E.g. reading or writing.</param>
-        /// <param name="expiry">How long the URL should be valid for in seconds.</param>
+        /// <param name="expiry">How long the URL should be valid for in seconds (max of 604800).</param>
         /// <returns>The signed URL for reading or writing</returns>
-        internal string PreSignUrl(FileMode mode, int expiry)
+        internal string PreSignUrl(SignedMode mode, int expiry)
         {
             var request = new StoragePreSignUrlRequest
             {
-                BucketName = this.bucket.Name,
+                BucketName = this.Bucket.Name,
                 Key = this.Name,
-                Operation = mode == FileMode.Read ? StoragePreSignUrlRequest.Types.Operation.Read : StoragePreSignUrlRequest.Types.Operation.Write,
-                Expiry = expiry < 0 ? 0 : (uint)expiry,
-
+                Operation = mode == SignedMode.Read ? StoragePreSignUrlRequest.Types.Operation.Read : StoragePreSignUrlRequest.Types.Operation.Write,
+                Expiry = new Duration
+                {
+                    Seconds = Math.Clamp(expiry, 0, 604800),
+                }
             };
 
             try
             {
-                var resp = storage.Client.PreSignUrl(request);
+                var resp = this.Bucket.Storage.Client.PreSignUrl(request);
                 return resp.Url;
-            } catch (Grpc.Core.RpcException re)
+            }
+            catch (Grpc.Core.RpcException re)
             {
                 throw NitricException.FromRpcException(re);
             }
@@ -176,19 +286,50 @@ namespace Nitric.Sdk.Storage
         /// </summary>
         /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
         /// <returns>The signed URL for reading.</returns>
-        public string GetDownloadUrl(int expiry = 600)
+        public async Task<string> GetDownloadUrlAsync(int expiry = 600)
         {
-            return this.PreSignUrl(FileMode.Write, expiry);
+            return await this.PreSignUrlAsync(SignedMode.Read, expiry);
         }
+
 
         /// <summary>
         /// Create a presigned URL for writing to a given file reference.
         /// </summary>
         /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
         /// <returns>The signed URL for writing.</returns>
-        public string GetUploadUrl(int expiry = 600)
+        public async Task<string> GetUploadUrlAsync(int expiry = 600)
         {
-            return this.PreSignUrl(FileMode.Read, expiry);
+            return await this.PreSignUrlAsync(SignedMode.Write, expiry);
+        }
+
+        /// <summary>
+        /// Create a presigned URL for reading or writing for the given file reference.
+        /// </summary>
+        /// <param name="mode">The mode the URL will access the file with. E.g. reading or writing.</param>
+        /// <param name="expiry">How long the URL should be valid for in seconds (max of 604800).</param>
+        /// <returns>The signed URL for reading or writing</returns>
+        internal async Task<string> PreSignUrlAsync(SignedMode mode, int expiry)
+        {
+            var request = new StoragePreSignUrlRequest
+            {
+                BucketName = this.Bucket.Name,
+                Key = this.Name,
+                Operation = mode == SignedMode.Read ? StoragePreSignUrlRequest.Types.Operation.Read : StoragePreSignUrlRequest.Types.Operation.Write,
+                Expiry = new Duration
+                {
+                    Seconds = Math.Clamp(expiry, 0, 604800),
+                }
+            };
+
+            try
+            {
+                var resp = await this.Bucket.Storage.Client.PreSignUrlAsync(request);
+                return resp.Url;
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
 
         /// <summary>
@@ -197,7 +338,7 @@ namespace Nitric.Sdk.Storage
         /// <returns></returns>
         public override string ToString()
         {
-            return GetType().Name + "[name=" + Name + "\nbucket=" + bucket.Name + "]";
+            return GetType().Name + "[name=" + Name + "\nbucket=" + Bucket.Name + "]";
         }
     }
 }

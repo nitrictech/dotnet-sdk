@@ -13,10 +13,10 @@
 // limitations under the License.
 using System.Collections.Generic;
 using System.Linq;
-using Nitric.Proto.Resource.v1;
+using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.Secret;
-using Action = Nitric.Proto.Resource.v1.Action;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
+using Action = Nitric.Proto.Resources.v1.Action;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
 
 namespace Nitric.Sdk.Resource
 {
@@ -43,8 +43,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Secret };
-            var request = new ResourceDeclareRequest { Resource = resource };
+            var request = new ResourceDeclareRequest { Id = this.AsProtoResource() };
             client.Declare(request);
             return this;
         }
@@ -65,7 +64,7 @@ namespace Nitric.Sdk.Resource
             return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x])).Distinct();
         }
 
-        public Secret.Secret With(SecretPermission permission, params SecretPermission[] permissions)
+        public Secret.Secret Allow(SecretPermission permission, params SecretPermission[] permissions)
         {
             var allPerms = new List<SecretPermission> { permission };
             allPerms.AddRange(permissions);

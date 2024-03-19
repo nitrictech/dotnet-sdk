@@ -14,11 +14,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nitric.Proto.Resource.v1;
-using Nitric.Sdk.Event;
-using Nitric.Sdk.Function;
-using Action = Nitric.Proto.Resource.v1.Action;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
+using Nitric.Proto.Resources.v1;
+using Nitric.Proto.Topics.v1;
+using Nitric.Sdk.Service;
+using Nitric.Sdk.Topics;
+using Nitric.Sdk.Worker;
+using Action = Nitric.Proto.Resources.v1.Action;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
+using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
 
 namespace Nitric.Sdk.Resource
 {
@@ -41,9 +44,8 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Topic };
-            var request = new ResourceDeclareRequest { Resource = resource };
-            BaseResource.client.Declare(request);
+            var request = new ResourceDeclareRequest { Id = this.AsProtoResource() };
+            client.Declare(request);
             return this;
         }
 
@@ -53,7 +55,7 @@ namespace Nitric.Sdk.Resource
             {
                 {
                     TopicPermission.Publishing,
-                    new List<Action> { Action.TopicEventPublish, Action.TopicList, Action.TopicDetail }
+                    new List<Action> { Action.TopicPublish }
                 }
             };
             return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x]))
@@ -64,11 +66,11 @@ namespace Nitric.Sdk.Resource
         /// Registers a chain of middleware to be called whenever a new event is published to this topic.
         /// </summary>
         /// <param name="middleware">The middleware to call to process events</param>
-        public void Subscribe(params Middleware<EventContext>[] middleware)
+        public void Subscribe(params Middleware<MessageContext<T>>[] middleware)
         {
-            var subWorker = new Faas(new SubscriptionWorkerOptions { Topic = this.Name });
+            var registrationRequest = new RegistrationRequest { TopicName = this.Name };
 
-            subWorker.Event(middleware);
+            var subWorker = new SubscriptionWorker<T>(registrationRequest, middleware);
 
             Nitric.RegisterWorker(subWorker);
         }
@@ -77,11 +79,12 @@ namespace Nitric.Sdk.Resource
         /// Registers a handler to be called whenever a new event is published to this topic.
         /// </summary>
         /// <param name="handler">The handler to call to process events</param>
-        public void Subscribe(Func<EventContext, EventContext> handler)
+        public void Subscribe(Func<MessageContext<T>, MessageContext<T>> handler)
         {
-            var subWorker = new Faas(new SubscriptionWorkerOptions { Topic = this.Name });
+            var registrationRequest = new RegistrationRequest { TopicName = this.Name };
 
-            subWorker.Event(handler);
+            var subWorker = new SubscriptionWorker<T>(registrationRequest, handler);
+
             Nitric.RegisterWorker(subWorker);
         }
 
@@ -90,13 +93,14 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="permissions">The permissions that the function has to access the topic.</param>
         /// <returns>A reference to the topic.</returns>
-        public Topic<T> With(TopicPermission permission, params TopicPermission[] permissions)
+        public Topic<T> Allow(TopicPermission permission, params TopicPermission[] permissions)
         {
             var allPerms = new List<TopicPermission> { permission };
             allPerms.AddRange(permissions);
 
             this.RegisterPolicy(allPerms);
-            return new EventsClient<T>().Topic(this.Name);
+
+            return new TopicsClient<T>().Topic(this.Name);
         }
     }
 }

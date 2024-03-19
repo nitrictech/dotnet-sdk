@@ -13,17 +13,17 @@
 // limitations under the License.
 using System;
 using Nitric.Sdk.Common;
-using GrpcClient = Nitric.Proto.Websocket.v1.WebsocketService.WebsocketServiceClient;
+using GrpcClient = Nitric.Proto.Websockets.v1.Websocket.WebsocketClient;
 
 namespace Nitric.Sdk.Websocket
 {
     public class WebsocketClient
     {
-        internal readonly GrpcClient client;
+        internal readonly GrpcClient Client;
 
         public WebsocketClient(GrpcClient client = null)
         {
-            this.client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         public Connection Connection(string socket, string connectionId)
@@ -37,6 +37,7 @@ namespace Nitric.Sdk.Websocket
             {
                 throw new ArgumentNullException(nameof(connectionId));
             }
+
             return new Connection(this, connectionId, socket);
         }
     }

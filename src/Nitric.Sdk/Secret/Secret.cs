@@ -14,9 +14,9 @@
 
 using System;
 using System.Text;
-using Nitric.Proto.Secret.v1;
+using System.Threading.Tasks;
+using Nitric.Proto.Secrets.v1;
 using Nitric.Sdk.Common;
-using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
 
 namespace Nitric.Sdk.Secret
 {
@@ -27,16 +27,16 @@ namespace Nitric.Sdk.Secret
     {
         private const string LATEST = "latest";
 
-        internal readonly GrpcClient Client;
+        internal readonly SecretsClient Secrets;
 
         /// <summary>
         /// The name of the secret.
         /// </summary>
         public readonly string Name;
 
-        internal Secret(GrpcClient client, string name)
+        internal Secret(SecretsClient client, string name)
         {
-            this.Client = client;
+            this.Secrets = client;
             this.Name = name;
         }
 
@@ -68,28 +68,28 @@ namespace Nitric.Sdk.Secret
         /// <summary>
         /// Create a new version of this secret containing the provided value and set it as the latest version.
         /// </summary>
-        /// <param name="value">The secret value to store from an array of bytes.</param>
+        /// <param name="value">The secret value to store from a string.</param>
         /// <returns>A reference to the specific version of the secret containing the provided value.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NitricException"></exception>
-        public SecretVersion Put(byte[] value)
+        public SecretVersion Put(string value)
         {
-            if (value == null || value.Length == 0)
+            if (string.IsNullOrEmpty(value))
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
             var request = new SecretPutRequest
             {
-                Secret = new Proto.Secret.v1.Secret { Name = this.Name },
-                Value = Google.Protobuf.ByteString.CopyFrom(value),
+                Secret = new Proto.Secrets.v1.Secret { Name = this.Name },
+                Value = Google.Protobuf.ByteString.CopyFrom(Encoding.UTF8.GetBytes(value)),
             };
             try
             {
-                var secretResponse = Client.Put(request);
+                var secretResponse = Secrets.Client.Put(request);
                 return new SecretVersion(
                     new Secret(
-                        this.Client,
+                        this.Secrets,
                         secretResponse.SecretVersion.Secret.Name
                     ),
                     secretResponse.SecretVersion.Version
@@ -97,7 +97,7 @@ namespace Nitric.Sdk.Secret
             }
             catch (Grpc.Core.RpcException re)
             {
-                throw Common.NitricException.FromRpcException(re);
+                throw NitricException.FromRpcException(re);
             }
         }
 
@@ -108,14 +108,33 @@ namespace Nitric.Sdk.Secret
         /// <returns>A reference to the specific version of the secret containing the provided value.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NitricException"></exception>
-        public SecretVersion Put(string value)
+        public async Task<SecretVersion> PutAsync(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
-            return Put(Encoding.UTF8.GetBytes(value));
+            var request = new SecretPutRequest
+            {
+                Secret = new Proto.Secrets.v1.Secret { Name = this.Name },
+                Value = Google.Protobuf.ByteString.CopyFrom(Encoding.UTF8.GetBytes(value)),
+            };
+            try
+            {
+                var secretResponse = await Secrets.Client.PutAsync(request);
+                return new SecretVersion(
+                    new Secret(
+                        this.Secrets,
+                        secretResponse.SecretVersion.Secret.Name
+                    ),
+                    secretResponse.SecretVersion.Version
+                );
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
 
         /// <summary>

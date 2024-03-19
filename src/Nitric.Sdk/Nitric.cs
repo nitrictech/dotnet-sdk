@@ -15,8 +15,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nitric.Sdk.Function;
 using Nitric.Sdk.Resource;
+using Nitric.Sdk.Worker;
 
 namespace Nitric.Sdk
 {
@@ -25,14 +25,19 @@ namespace Nitric.Sdk
     /// </summary>
     public class Nitric
     {
-        private static readonly List<Faas> Workers = new List<Faas>();
+        private static readonly List<IWorker> Workers = new List<IWorker>();
 
         private static readonly Dictionary<Type, Dictionary<string, BaseResource>> Cache =
             new Dictionary<Type, Dictionary<string, BaseResource>>();
 
-        internal static void RegisterWorker(Faas worker)
+        internal static void RegisterWorker(IWorker worker)
         {
-            Nitric.Workers.Add(worker);
+            if (worker == null)
+            {
+                throw new ArgumentNullException(nameof(worker));
+            }
+
+            Workers.Add(worker);
         }
 
         /// <summary>
@@ -44,28 +49,6 @@ namespace Nitric.Sdk
         {
             // Start each instance in a new thread and wait until they complete.
             Task.WaitAll(Workers.Select(worker => worker.Start()).ToArray());
-        }
-
-        /// <summary>
-        /// Declare a REST/HTTP API resource.
-        ///
-        /// Used to register routes and handlers for HTTP requests.
-        /// </summary>
-        /// <param name="name">The unique name of this API.</param>
-        /// <returns></returns>
-        public static ApiResource Api(string name, ApiOptions options = null)
-        {
-            return new ApiResource(name, options);
-        }
-
-        /// <summary>
-        /// Declare a schedule.
-        /// </summary>
-        /// <param name="description">A short description of the schedule</param>
-        /// <returns></returns>
-        public static ScheduleResource Schedule(string description)
-        {
-            return new ScheduleResource(description);
         }
 
         private static T Cached<T>(string name, Func<string, T> make) where T : BaseResource
@@ -80,12 +63,28 @@ namespace Nitric.Sdk
             }
             else
             {
+                resource.Register();
                 Cache.Add(typeof(T), typeMap);
-
             }
 
             return resource;
         }
+
+        /// <summary>
+        /// Declare a REST/HTTP API resource.
+        ///
+        /// Used to register routes and handlers for HTTP requests.
+        /// </summary>
+        /// <param name="name">The unique name of this API.</param>
+        /// <returns></returns>
+        public static ApiResource Api(string name, ApiOptions options = null) => Cached(name, s => new ApiResource(s, options));
+
+        /// <summary>
+        /// Declare a schedule.
+        /// </summary>
+        /// <param name="description">A short description of the schedule</param>
+        /// <returns></returns>
+        public static ScheduleResource Schedule(string description) => Cached(description, s => new ScheduleResource(s));
 
         /// <summary>
         /// Declare a bucket resources for file/blob storage.
@@ -96,13 +95,13 @@ namespace Nitric.Sdk
 
 
         /// <summary>
-        /// Declare a collection resource for document storage.
+        /// Declare a key value store resource for storing key value pairs.
         /// </summary>
-        /// <param name="name">The unique name of the collection within this application.</param>
-        /// <typeparam name="T">The type of documents to be stored in the collection.</typeparam>
-        /// <returns>A collection resource, if the name has already been declared the same resource will be returned.</returns>
-        public static CollectionResource<TDocument> Collection<TDocument>(string name) =>
-            Cached(name, t => new CollectionResource<TDocument>(t));
+        /// <param name="name">The unique name of the key value store within this application.</param>
+        /// <typeparam name="TValue">The type of values to be stored.</typeparam>
+        /// <returns>A key value resource, if the name has already been declared the same resource will be returned.</returns>
+        public static KeyValueStoreResource<TValue> KV<TValue>(string name) =>
+            Cached(name, t => new KeyValueStoreResource<TValue>(t));
 
         /// <summary>
         /// Declare a secret resource for accessing and putting secret values.

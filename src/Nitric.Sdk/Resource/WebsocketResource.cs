@@ -15,14 +15,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Nitric.Proto.Resource.v1;
+using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.Common;
-using Nitric.Sdk.Function;
+using Nitric.Sdk.Service;
 using Nitric.Sdk.Websocket;
-using Action = Nitric.Proto.Resource.v1.Action;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
-using GrpcClient = Nitric.Proto.Websocket.v1.WebsocketService.WebsocketServiceClient;
+using Action = Nitric.Proto.Resources.v1.Action;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
+using GrpcClient = Nitric.Proto.Websockets.v1.Websocket.WebsocketClient;
+using Nitric.Sdk.Worker;
+using Nitric.Proto.Websockets.v1;
 
 namespace Nitric.Sdk.Resource
 {
@@ -48,8 +49,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Websocket };
-            var request = new ResourceDeclareRequest { Resource = resource };
+            var request = new ResourceDeclareRequest { Id = this.AsProtoResource() };
             BaseResource.client.Declare(request);
             return this;
         }
@@ -70,13 +70,17 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Registers a chain of middleware to be called whenever a new event is published to this topic.
         /// </summary>
-        /// <param name="notificationType">The type of websocket event listener</param>
+        /// <param name="eventType">The type of websocket event listener</param>
         /// <param name="middleware">The middleware to call to process events</param>
-        public void On(WebsocketEventType notificationType, params Middleware<WebsocketContext>[] middleware)
+        public void On(Service.WebsocketEventType eventType, params Middleware<WebsocketContext>[] middlewares)
         {
-            var websocketWorker = new Faas(new WebsocketWorkerOptions(this.Name, notificationType));
+            var registrationRequest = new RegistrationRequest
+            {
+                SocketName = Name,
+                EventType = eventType.ToGrpc()
+            };
 
-            websocketWorker.Websocket(middleware);
+            var websocketWorker = new WebsocketWorker(registrationRequest, middlewares);
 
             Nitric.RegisterWorker(websocketWorker);
         }
@@ -84,13 +88,17 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Registers a handler to be called whenever a new event is published to this websocket.
         /// </summary>
-        /// <param name="notificationType">The type of websocket event</param>
+        /// <param name="eventType">The type of websocket event</param>
         /// <param name="handler">The handler to call to process websocket events</param>
-        public void On(WebsocketEventType notificationType, Func<WebsocketContext, WebsocketContext> handler)
+        public void On(Service.WebsocketEventType eventType, Func<WebsocketContext, WebsocketContext> handler)
         {
-            var websocketWorker = new Faas(new WebsocketWorkerOptions(this.Name, notificationType));
+            var registrationRequest = new RegistrationRequest
+            {
+                SocketName = Name,
+                EventType = eventType.ToGrpc()
+            };
 
-            websocketWorker.Websocket(handler);
+            var websocketWorker = new WebsocketWorker(registrationRequest, handler);
 
             Nitric.RegisterWorker(websocketWorker);
         }

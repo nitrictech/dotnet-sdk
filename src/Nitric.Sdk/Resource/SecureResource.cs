@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System.Collections.Generic;
-using Nitric.Proto.Resource.v1;
-using Action = Nitric.Proto.Resource.v1.Action;
-using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
+using Nitric.Proto.Resources.v1;
+using Action = Nitric.Proto.Resources.v1.Action;
 
 namespace Nitric.Sdk.Resource
 {
@@ -45,15 +44,15 @@ namespace Nitric.Sdk.Resource
         /// <param name="permissions">The permissions to include with the resource policy.</param>
         protected void RegisterPolicy(IEnumerable<T> permissions)
         {
-            var policyResource = new Proto.Resource.v1.Resource { Type = ResourceType.Policy };
-            var defaultPrincipal = new Proto.Resource.v1.Resource { Type = ResourceType.Function };
+            var policyResource = new ResourceIdentifier { Type = ResourceType.Policy };
+            var defaultPrincipal = new ResourceIdentifier { Type = ResourceType.Service };
 
             var actions = this.PermissionsToActions(permissions);
 
             var policy = new PolicyResource { Principals = { defaultPrincipal }, Actions = { actions } };
             policy.Resources.Add(this.AsProtoResource());
 
-            var request = new ResourceDeclareRequest { Resource = policyResource, Policy = policy };
+            var request = new ResourceDeclareRequest { Id = policyResource, Policy = policy };
             BaseResource.client.Declare(request);
         }
     }

@@ -14,10 +14,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Google.Protobuf.Collections;
-using Newtonsoft.Json;
-using Nitric.Proto.Queue.v1;
 using Nitric.Sdk.Common;
+using Nitric.Proto.Queues.v1;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Queue
 {
@@ -31,35 +30,51 @@ namespace Nitric.Sdk.Queue
         /// </summary>
         public string Name { get; internal set; }
 
-        internal readonly QueuesClient QueuesClient;
+        internal readonly QueuesClient Queues;
 
         internal Queue(QueuesClient client, string name)
         {
             this.Name = name;
-            this.QueuesClient = client;
+            this.Queues = client;
         }
 
         /// <summary>
         /// Send a task to this queue.
         /// </summary>
-        /// <param name="task">The task to send.</param>
+        /// <param name="tasks">The tasks to push to the queue.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NitricException"></exception>
-        public void Send(Task<T> task)
+        public List<FailedMessage<T>> Enqueue(T task, params T[] tasks)
         {
             if (task == null)
             {
                 throw new ArgumentNullException(nameof(task));
             }
+            var taskList = new List<T>() { task };
 
-            var request = new QueueSendRequest
+            taskList.AddRange(tasks);
+
+            var request = new QueueEnqueueRequest
             {
-                Queue = this.Name,
-                Task = task.ToWire()
+                QueueName = Name,
             };
+
+            var messages = taskList.Select(task => new QueueMessage
+            {
+                StructPayload = Struct.FromJsonSerializable(task)
+            });
+
+            request.Messages.AddRange(messages);
+
             try
             {
-                QueuesClient.Client.Send(request);
+                var response = Queues.Client.Enqueue(request);
+
+                return response.FailedMessages.Select(failedMessage => new FailedMessage<T>
+                {
+                    Details = failedMessage.Details,
+                    Message = Struct.ToJsonSerializable<T>(failedMessage.Message.StructPayload),
+                }).ToList();
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -70,21 +85,40 @@ namespace Nitric.Sdk.Queue
         /// <summary>
         /// Send a task to this queue.
         /// </summary>
-        /// <param name="payload">The payload of the task to send.</param>
+        /// <param name="tasks">The tasks to push to the queue.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NitricException"></exception>
-        public void Send(T payload)
+        public async Task<List<FailedMessage<T>>> EnqueueAsync(T task, params T[] tasks)
         {
-            var task = new Task<T> { Payload = payload };
-
-            var request = new QueueSendRequest
+            if (task == null)
             {
-                Queue = this.Name,
-                Task = task.ToWire()
+                throw new ArgumentNullException(nameof(task));
+            }
+            var taskList = new List<T>() { task };
+
+            taskList.AddRange(tasks);
+
+            var request = new QueueEnqueueRequest
+            {
+                QueueName = Name,
             };
+
+            var messages = taskList.Select(task => new QueueMessage
+            {
+                StructPayload = Struct.FromJsonSerializable(task)
+            });
+
+            request.Messages.AddRange(messages);
+
             try
             {
-                QueuesClient.Client.Send(request);
+                var response = await Queues.Client.EnqueueAsync(request);
+
+                return response.FailedMessages.Select(failedMessage => new FailedMessage<T>
+                {
+                    Details = failedMessage.Details,
+                    Message = Struct.ToJsonSerializable<T>(failedMessage.Message.StructPayload),
+                }).ToList();
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -93,83 +127,32 @@ namespace Nitric.Sdk.Queue
         }
 
         /// <summary>
-        /// Send multiple tasks to this queue.
-        /// </summary>
-        /// <param name="tasks">The tasks to send.</param>
-        /// <returns>Results of sending tasks to the queue, including any tasks that failed to be sent.</returns>
-        /// <exception cref="NitricException"></exception>
-        public List<FailedTask<T>> Send(params Task<T>[] tasks)
-        {
-            var wireEvents = new RepeatedField<NitricTask>();
-            foreach (var task in tasks)
-            {
-                wireEvents.Add(task.ToWire());
-            }
-
-            var request = new QueueSendBatchRequest { Queue = this.Name };
-            request.Tasks.AddRange(wireEvents);
-            try
-            {
-                var response = QueuesClient.Client.SendBatch(request);
-                var failedTasks = response.FailedTasks.Select(WireToFailedTask).ToList();
-                return failedTasks;
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Send multiple tasks to this queue.
-        /// </summary>
-        /// <param name="tasks">The tasks to send.</param>
-        /// <returns>Results of sending tasks to the queue, including any tasks that failed to be sent.</returns>
-        /// <exception cref="NitricException"></exception>
-        public List<FailedTask<T>> Send(params T[] payloads)
-        {
-            var wireEvents = new RepeatedField<NitricTask>();
-            foreach (var payload in payloads)
-            {
-                var task = new Task<T> { Payload = payload };
-                wireEvents.Add(task.ToWire());
-            }
-
-            var request = new QueueSendBatchRequest { Queue = this.Name };
-            request.Tasks.AddRange(wireEvents);
-            try
-            {
-                var response = QueuesClient.Client.SendBatch(request);
-                var failedTasks = response.FailedTasks.Select(WireToFailedTask).ToList();
-                return failedTasks;
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Request tasks from the queue to process.
+        /// Dequeue tasks from the queue to process.
         ///
         /// The number of tasks returned will be the same or less than the requested depth, based on the number of tasks
         /// available on the queue.
         /// </summary>
-        /// <param name="depth">The maximum number of tasks to receive.</param>
-        /// <returns>Tasks received from the queue.</returns>
+        /// <param name="depth">The maximum number of tasks to dequeue.</param>
+        /// <returns>Tasks dequeued from the queue.</returns>
         /// <exception cref="NitricException"></exception>
-        public List<ReceivedTask<T>> Receive(int depth = 1)
+        public List<ReceivedMessage<T>> Dequeue(int depth = 1)
         {
-            if (depth < 1)
+            var request = new QueueDequeueRequest
             {
-                depth = 1;
-            }
+                QueueName = this.Name,
+                Depth = Math.Max(depth, 1)
+            };
 
-            var request = new QueueReceiveRequest { Queue = this.Name, Depth = depth };
             try
             {
-                var response = this.QueuesClient.Client.Receive(request);
-                return response.Tasks.Select(WireToQueueItem).ToList();
+                var response = this.Queues.Client.Dequeue(request);
+
+                return response.Messages.Select(message => new ReceivedMessage<T>
+                {
+                    Queue = this,
+                    LeaseId = message.LeaseId,
+                    Message = Struct.ToJsonSerializable<T>(message.Message.StructPayload)
+                }).ToList();
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -177,34 +160,40 @@ namespace Nitric.Sdk.Queue
             }
         }
 
-        private ReceivedTask<T> WireToQueueItem(NitricTask nitricTask)
+        /// <summary>
+        /// Dequeue tasks from the queue to process.
+        ///
+        /// The number of tasks returned will be the same or less than the requested depth, based on the number of tasks
+        /// available on the queue.
+        /// </summary>
+        /// <param name="depth">The maximum number of tasks to dequeue.</param>
+        /// <returns>Tasks dequeued from the queue.</returns>
+        /// <exception cref="NitricException"></exception>
+        public async Task<List<ReceivedMessage<T>>> DequeueAsync(int depth = 1)
         {
-            var protoPayload = JsonConvert.SerializeObject(nitricTask.Payload);
-
-            return new ReceivedTask<T>
+            var request = new QueueDequeueRequest
             {
-                Id = nitricTask.Id,
-                PayloadType = nitricTask.PayloadType,
-                Payload = JsonConvert.DeserializeObject<T>(protoPayload),
-                LeaseId = nitricTask.LeaseId,
-                Queue = this,
+                QueueName = this.Name,
+                Depth = Math.Max(depth, 1)
             };
-        }
 
-        private static FailedTask<T> WireToFailedTask(Proto.Queue.v1.FailedTask protoFailedEvent)
-        {
-            var protoPayload = JsonConvert.SerializeObject(protoFailedEvent.Task.Payload);
-
-            return new FailedTask<T>
+            try
             {
-                Message = protoFailedEvent.Message,
-                Task = new Task<T>
+                var response = await this.Queues.Client.DequeueAsync(request);
+
+                return response.Messages.Select(message => new ReceivedMessage<T>
                 {
-                    Id = protoFailedEvent.Task.Id,
-                    PayloadType = protoFailedEvent.Task.PayloadType,
-                    Payload = JsonConvert.DeserializeObject<T>(protoPayload),
-                }
-            };
+                    Queue = this,
+                    LeaseId = message.LeaseId,
+                    Message = Struct.ToJsonSerializable<T>(message.Message.StructPayload)
+                }).ToList();
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw NitricException.FromRpcException(re);
+            }
         }
     }
 }
+
+

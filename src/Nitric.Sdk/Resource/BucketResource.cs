@@ -15,11 +15,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nitric.Proto.Resource.v1;
-using Nitric.Sdk.Function;
+using Nitric.Proto.Resources.v1;
+using Nitric.Sdk.Service;
 using Nitric.Sdk.Storage;
-using Action = Nitric.Proto.Resource.v1.Action;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
+using Nitric.Sdk.Worker;
+using Nitric.Proto.Storage.v1;
+using Action = Nitric.Proto.Resources.v1.Action;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
+using System.Runtime.InteropServices;
 
 namespace Nitric.Sdk.Resource
 {
@@ -50,8 +53,7 @@ namespace Nitric.Sdk.Resource
 
         internal override BaseResource Register()
         {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Bucket };
-            var request = new ResourceDeclareRequest { Resource = resource };
+            var request = new ResourceDeclareRequest { Id = this.AsProtoResource() };
             BaseResource.client.Declare(request);
             return this;
         }
@@ -79,21 +81,21 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Registers handlers to be called whenever a file triggers an event in the bucket
         /// </summary>
-        /// <param name="notificationType">The type of events that should trigger events, Write or Delete</param>
-        /// <param name="notificationPrefixFilter">The prefix of file names that should trigger events</param>
+        /// <param name="blobEventType">The type of events that should trigger events, Write or Delete</param>
+        /// <param name="keyPrefixFilter">The prefix of file names that should trigger events</param>
         /// <param name="middleware">The handlers to call to process notification events</param>
         public void On(
-            BucketNotificationType notificationType,
-            string notificationPrefixFilter,
-            params Middleware<BucketNotificationContext>[] middleware)
+            Service.BlobEventType blobEventType,
+            string keyPrefixFilter,
+            params Middleware<BlobEventContext>[] middlewares)
         {
-            var notificationWorker = new Faas(new BucketNotificationWorkerOptions(
-                this.Name,
-                notificationType,
-                notificationPrefixFilter
-            ));
-
-            notificationWorker.BucketNotification(middleware);
+            var request = new RegistrationRequest
+            {
+                BucketName = this.Name,
+                KeyPrefixFilter = keyPrefixFilter,
+                BlobEventType = blobEventType.ToGrpc(),
+            };
+            var notificationWorker = new BlobEventWorker(request, middlewares);
 
             Nitric.RegisterWorker(notificationWorker);
         }
@@ -101,21 +103,21 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Registers a handler to be called whenever a file triggers an event in the bucket
         /// </summary>
-        /// <param name="notificationType">The type of events that should trigger events, Write or Delete</param>
-        /// <param name="notificationPrefixFilter">The prefix of file names that should trigger events</param>
+        /// <param name="blobEventType">The type of events that should trigger events, Write or Delete</param>
+        /// <param name="keyPrefixFilter">The prefix of file names that should trigger events</param>
         /// <param name="handler">The handler to call to process notification events</param>
         public void On(
-            BucketNotificationType notificationType,
-            string notificationPrefixFilter,
-            Func<BucketNotificationContext, BucketNotificationContext> handler)
+            Service.BlobEventType blobEventType,
+            string keyPrefixFilter,
+            Func<BlobEventContext, BlobEventContext> handler)
         {
-            var notificationWorker = new Faas(new BucketNotificationWorkerOptions(
-                this.Name,
-                notificationType,
-                notificationPrefixFilter
-            ));
-
-            notificationWorker.BucketNotification(handler);
+            var request = new RegistrationRequest
+            {
+                BucketName = this.Name,
+                KeyPrefixFilter = keyPrefixFilter,
+                BlobEventType = blobEventType.ToGrpc(),
+            };
+            var notificationWorker = new BlobEventWorker(request, handler);
 
             Nitric.RegisterWorker(notificationWorker);
         }
@@ -125,13 +127,13 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="permissions">The permissions that the function has to access the bucket.</param>
         /// <returns>A reference to the bucket.</returns>
-        public Bucket With(BucketPermission permission, params BucketPermission[] permissions)
+        public Bucket Allow(BucketPermission permission, params BucketPermission[] permissions)
         {
             var allPerms = new List<BucketPermission> { permission };
             allPerms.AddRange(permissions);
 
             this.RegisterPolicy(allPerms);
-            return new Storage.Storage().Bucket(this.Name);
+            return new StorageClient().Bucket(this.Name);
         }
     }
 }

@@ -13,7 +13,8 @@
 // limitations under the License.
 
 using System;
-using Nitric.Proto.Secret.v1;
+using System.Threading.Tasks;
+using Nitric.Proto.Secrets.v1;
 using Nitric.Sdk.Common;
 
 namespace Nitric.Sdk.Secret
@@ -35,16 +36,6 @@ namespace Nitric.Sdk.Secret
 
         internal SecretVersion(Secret secret, string id)
         {
-            if (secret == null || string.IsNullOrEmpty(secret.Name))
-            {
-                throw new ArgumentNullException(nameof(secret));
-            }
-
-            if (string.IsNullOrEmpty(id))
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
             this.Secret = secret;
             this.Id = id;
         }
@@ -58,15 +49,49 @@ namespace Nitric.Sdk.Secret
         {
             var secret = new SecretAccessRequest
             {
-                SecretVersion = new Proto.Secret.v1.SecretVersion
+                SecretVersion = new Proto.Secrets.v1.SecretVersion
                 {
-                    Secret = new Proto.Secret.v1.Secret { Name = this.Secret.Name },
+                    Secret = new Proto.Secrets.v1.Secret { Name = this.Secret.Name },
                     Version = this.Id,
                 }
             };
+
             try
             {
-                var response = this.Secret.Client.Access(secret);
+                var response = this.Secret.Secrets.Client.Access(secret);
+                var value = response.Value.ToByteArray();
+                //Return a new secret value with a reference to this secret version
+                return new SecretValue(
+                    this,
+                    value.Length > 0 ? value : Array.Empty<byte>()
+                );
+            }
+            catch (Grpc.Core.RpcException re)
+            {
+                throw Common.NitricException.FromRpcException(re);
+            }
+        }
+
+        /// <summary>
+        /// Retrieve the value stored in this version.
+        /// </summary>
+        /// <returns>The secret value from the secrets store.</returns>
+        /// <exception cref="NitricException"></exception>
+        public async Task<SecretValue> AccessAsync()
+        {
+            var secret = new SecretAccessRequest
+            {
+                SecretVersion = new Proto.Secrets.v1.SecretVersion
+                {
+                    Secret = new Proto.Secrets.v1.Secret { Name = this.Secret.Name },
+                    Version = this.Id,
+                }
+            };
+
+            try
+            {
+                var response = await this.Secret.Secrets.Client.AccessAsync(secret);
+
                 var value = response.Value.ToByteArray();
                 //Return a new secret value with a reference to this secret version
                 return new SecretValue(

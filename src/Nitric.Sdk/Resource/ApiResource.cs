@@ -14,20 +14,20 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Google.Api;
-using Nitric.Proto.Resource.v1;
-using Nitric.Sdk.Function;
-using GrpcClient = Nitric.Proto.Secret.v1.SecretService.SecretServiceClient;
-using NitricResource = Nitric.Proto.Resource.v1.Resource;
-using ProtoApiResource = Nitric.Proto.Resource.v1.ApiResource;
-using ProtoSecurityDefinition = Nitric.Proto.Resource.v1.ApiSecurityDefinition;
-using ProtoSecurityDefinitionJwt = Nitric.Proto.Resource.v1.ApiSecurityDefinitionJwt;
-
+using Nitric.Proto.Resources.v1;
+using Nitric.Proto.Apis.v1;
+using Nitric.Sdk.Service;
+using Nitric.Sdk.Worker;
+using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
+using ProtoApiResource = Nitric.Proto.Resources.v1.ApiResource;
+using ProtoSecurityDefinition = Nitric.Proto.Resources.v1.ApiSecurityDefinitionResource;
+using ProtoSecurityDefinitionJwt = Nitric.Proto.Resources.v1.ApiOpenIdConnectionDefinition;
+using System.Net.Http;
 
 namespace Nitric.Sdk.Resource
 {
-    public abstract class SecurityDefinition {
+    public abstract class SecurityDefinition
+    {
         internal string Kind { get; private set; }
 
         internal SecurityDefinition(string kind)
@@ -48,7 +48,8 @@ namespace Nitric.Sdk.Resource
         }
     }
 
-    public class ApiDetails {
+    public class ApiDetails
+    {
         internal string ID { get; set; }
         internal string Provider { get; set; }
         internal string Service { get; set; }
@@ -89,49 +90,75 @@ namespace Nitric.Sdk.Resource
 
         internal ApiResource Method(string route, HttpMethod[] methods, Func<HttpContext, HttpContext> handler)
         {
-            var opts = new MethodOptions
+            var opts = new ApiWorkerOptions
             {
-                Security = this.Opts.Security,
-                SecurityDefs = this.Opts.SecurityDefinitions
+                SecurityDisabled = true,
             };
 
-            var faas = new Faas(new ApiWorkerOptions
+            if (this.Opts.Security.Count > 0)
+            {
+                var security = this.Opts.Security.ToDictionary((kv) => kv.Key, kv =>
+                {
+                    var scopes = new ApiWorkerScopes();
+                    scopes.Scopes.Add(kv.Value);
+
+                    return scopes;
+                });
+
+                opts.Security.Add(security);
+                opts.SecurityDisabled = false;
+            }
+
+            var registrationRequest = new RegistrationRequest
             {
                 Api = this.Name,
-                Route = this.Opts.BasePath + route,
-                Methods = methods.ToHashSet(),
-                Options = opts
-            });
+                Options = opts,
+                Path = route,
+            };
 
-            faas.Http(this.Opts.Middleware);
+            registrationRequest.Methods.AddRange(methods.Select((method) => method.Method).ToHashSet());
 
-            faas.Http(handler);
 
-            Nitric.RegisterWorker(faas);
+            var apiWorker = new ApiWorker(registrationRequest, handler);
+
+            Nitric.RegisterWorker(apiWorker);
             return this;
         }
 
         internal ApiResource Method(string route, HttpMethod[] methods, Middleware<HttpContext>[] middleware)
         {
-            var opts = new MethodOptions
+            var opts = new ApiWorkerOptions
             {
-                Security = this.Opts.Security,
-                SecurityDefs = this.Opts.SecurityDefinitions
+                SecurityDisabled = true,
             };
 
-            var faas = new Faas(new ApiWorkerOptions
+            if (this.Opts.Security.Count > 0)
+            {
+                var security = this.Opts.Security.ToDictionary((kv) => kv.Key, kv =>
+                {
+                    var scopes = new ApiWorkerScopes();
+                    scopes.Scopes.Add(kv.Value);
+
+                    return scopes;
+                });
+
+                opts.Security.Add(security);
+                opts.SecurityDisabled = false;
+            }
+
+            var registrationRequest = new RegistrationRequest
             {
                 Api = this.Name,
-                Route = this.Opts.BasePath + route,
-                Methods = methods.ToHashSet(),
-                Options = opts
-            });
+                Options = opts,
+                Path = route,
+            };
 
-            var combinedMiddleware = this.Opts.Middleware.Concat(middleware).ToArray();
+            registrationRequest.Methods.AddRange(methods.Select((method) => method.Method).ToHashSet());
 
-            faas.Http(combinedMiddleware);
 
-            Nitric.RegisterWorker(faas);
+            var apiWorker = new ApiWorker(registrationRequest, middleware);
+
+            Nitric.RegisterWorker(apiWorker);
             return this;
         }
 
@@ -140,70 +167,70 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handler"></param>
-        public ApiResource Get(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.GET }, handler);
+        public ApiResource Get(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Get }, handler);
 
         /// <summary>
         /// Create a new GET handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handlers"></param>
-        public ApiResource Get(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.GET }, handlers);
+        public ApiResource Get(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Get }, handlers);
 
         /// <summary>
         /// Create a new POST handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handler"></param>
-        public ApiResource Post(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.POST }, handler);
+        public ApiResource Post(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Post }, handler);
 
         /// <summary>
         /// Create a new POST handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handlers"></param>
-        public ApiResource Post(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.POST }, handlers);
+        public ApiResource Post(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Post }, handlers);
 
         /// <summary>
         /// Create a new PUT handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handler"></param>
-        public ApiResource Put(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.PUT }, handler);
+        public ApiResource Put(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Put }, handler);
 
         /// <summary>
         /// Create a new PUT handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handlers"></param>
-        public ApiResource Put(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.PUT }, handlers);
+        public ApiResource Put(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Put }, handlers);
 
         /// <summary>
         /// Create a new DELETE handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handler"></param>
-        public ApiResource Delete(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.DELETE }, handler);
+        public ApiResource Delete(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Delete }, handler);
 
         /// <summary>
         /// Create a new DELETE handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handlers"></param>
-        public ApiResource Delete(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.DELETE }, handlers);
+        public ApiResource Delete(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Delete }, handlers);
 
         /// <summary>
         /// Create a new OPTIONS handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handler"></param>
-        public ApiResource Options(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.OPTIONS }, handler);
+        public ApiResource Options(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Options }, handler);
 
         /// <summary>
         /// Create a new OPTIONS handler on the specified route.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handlers"></param>
-        public ApiResource Options(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.OPTIONS }, handlers);
+        public ApiResource Options(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Options }, handlers);
 
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
@@ -254,26 +281,25 @@ namespace Nitric.Sdk.Resource
                 apiResource.Security.Add(kv.Key, scopes);
             }
 
-            foreach (KeyValuePair<string, SecurityDefinition> kv in this.Opts.SecurityDefinitions) {
+            foreach (KeyValuePair<string, SecurityDefinition> kv in this.Opts.SecurityDefinitions)
+            {
                 var definition = new ProtoSecurityDefinition();
 
                 if (kv.Value.Kind == "jwt")
                 {
                     var jwtSecurityDefinition = kv.Value as JwtSecurityDefinition;
-                    var secDef = new ApiSecurityDefinitionJwt
+                    var secDef = new ProtoSecurityDefinitionJwt
                     {
                         Issuer = jwtSecurityDefinition.Issuer
                     };
 
                     secDef.Audiences.AddRange(jwtSecurityDefinition.Audiences);
 
-                    definition.Jwt = secDef;
+                    definition.Oidc = secDef;
                 }
-
-                apiResource.SecurityDefinitions.Add(kv.Key, definition);
             }
 
-            var request = new ResourceDeclareRequest { Resource = resource, Api = apiResource };
+            var request = new ResourceDeclareRequest { Id = resource, Api = apiResource };
             BaseResource.client.Declare(request);
 
             return this;
@@ -287,20 +313,20 @@ namespace Nitric.Sdk.Resource
         /// - URL: the url of the deployed API.
         /// </summary>
         /// <returns>The details of the API</returns>
-        public ApiDetails Details() {
-            var resource = new NitricResource { Name = this.Name, Type = ResourceType.Api };
+        // public ApiDetails Details() {
+        //     var resource = new NitricResource { Name = this.Name, Type = ResourceType.Api };
 
-            var request = new ResourceDetailsRequest { Resource = resource };
-            var response = client.Details(request);
+        //     var request = new ResourceDetailsRequest { Resource = resource };
+        //     var response = client.Details(request);
 
-            return new ApiDetails
-            {
-                ID = response.Id,
-                Provider = response.Provider,
-                Service = response.Service,
-                URL = response.Api.Url,
-            };
-        }
+        //     return new ApiDetails
+        //     {
+        //         ID = response.Id,
+        //         Provider = response.Provider,
+        //         Service = response.Service,
+        //         URL = response.Api.Url,
+        //     };
+        // }
     }
 
     public class RouteOptions
@@ -329,7 +355,8 @@ namespace Nitric.Sdk.Resource
             this.Path = path;
 
             var composedMiddleware = this.api.Opts.Middleware.Concat(opts.Middlewares).ToArray();
-            this.Opts = new RouteOptions {
+            this.Opts = new RouteOptions
+            {
                 Middlewares = composedMiddleware,
                 Security = opts.Security
             };
@@ -354,61 +381,61 @@ namespace Nitric.Sdk.Resource
         /// Create a new GET handler on the specified route.
         /// </summary>
         /// <param name="handler"></param>
-        public ApiResource Get(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.GET }, ConcatMiddleware(handler));
+        public ApiResource Get(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Get }, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new GET middleware chain on the specified route.
         /// </summary>
         /// <param name="handlers"></param>
-        public ApiResource Get(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.GET }, ConcatMiddleware(handlers));
+        public ApiResource Get(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Get }, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new POST handler on the specified route.
         /// </summary>
         /// <param name="handler"></param>
-        public ApiResource Post(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.POST }, ConcatMiddleware(handler));
+        public ApiResource Post(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Post }, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new POST middleware chain on the specified route.
         /// </summary>
         /// <param name="handlers"></param>
-        public ApiResource Post(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.POST}, ConcatMiddleware(handlers));
+        public ApiResource Post(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Post }, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new PUT handler on the specified route.
         /// </summary>
         /// <param name="handler"></param>
-        public ApiResource Put(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.PUT}, ConcatMiddleware(handler));
+        public ApiResource Put(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Put }, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new PUT middleware chain on the specified route.
         /// </summary>
         /// <param name="handlers"></param>
-        public ApiResource Put(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.POST }, ConcatMiddleware(handlers));
+        public ApiResource Put(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Post }, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new DELETE handler on the specified route.
         /// </summary>
         /// <param name="handler"></param>
-        public ApiResource Delete(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.DELETE }, ConcatMiddleware(handler));
+        public ApiResource Delete(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Delete }, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new DELETE middleware chain on the specified route.
         /// </summary>
         /// <param name="handlers"></param>
-        public ApiResource Delete(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.DELETE }, ConcatMiddleware(handlers));
+        public ApiResource Delete(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Delete }, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new OPTIONS handler on the specified route.
         /// </summary>
         /// <param name="handler"></param>
-        public ApiResource Options(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.OPTIONS }, ConcatMiddleware(handler));
+        public ApiResource Options(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Options }, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new OPTIONS middleware chain on the specified route.
         /// </summary>
         /// <param name="handlers"></param>
-        public ApiResource Options(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.OPTIONS }, ConcatMiddleware(handlers));
+        public ApiResource Options(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Options }, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.

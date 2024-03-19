@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>.net6.0</TargetFramework>
+    <TargetFramework>.net7.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -25,13 +25,13 @@
     <ProjectReference Include="..\..\src\Nitric.Sdk\Nitric.Sdk.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Faas\" />
-    <Folder Include="Api\" />
-    <Folder Include="Api\Event\" />
-    <Folder Include="Api\Storage\" />
-    <Folder Include="Api\Queue\" />
-    <Folder Include="Api\Document\" />
-    <Folder Include="Api\Secret\" />
+    <Folder Include="Common\" />
+    <Folder Include="KeyValueStore\" />
+    <Folder Include="Queue\" />
+    <Folder Include="Secret\" />
+    <Folder Include="Storage\" />
+    <Folder Include="Topics\" />
+    <Folder Include="Websocket\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="examples\**" />
@@ -41,5 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="examples\**" />
+    <None Remove="Common\" />
+    <None Remove="KeyValueStore\" />
+    <None Remove="Queue\" />
+    <None Remove="Secret\" />
+    <None Remove="Storage\" />
+    <None Remove="Topics\" />
+    <None Remove="Websocket\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
   </ItemGroup>
 </Project>
