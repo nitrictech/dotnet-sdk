@@ -27,35 +27,33 @@ namespace Nitric.Sdk.Worker
     {
         readonly private RegistrationRequest RegistrationRequest;
         readonly private Bucket bucket;
+        public GrpcClient GrpcClient { private get; set; }
 
         public FileEventWorker(RegistrationRequest request, Bucket bucket, Func<FileEventContext, FileEventContext> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
             this.bucket = bucket;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
-        public FileEventWorker(RegistrationRequest request, params Middleware<FileEventContext>[] middlewares) : base(middlewares)
+        public FileEventWorker(RegistrationRequest request, Bucket bucket, params Middleware<FileEventContext>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
+            this.bucket = bucket;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
-        public override async Task Start()
+        public override async Task Start(CancellationToken cancellationToken = default)
         {
-            var client = new GrpcClient(GrpcChannelProvider.GetChannel());
-
-            var stream = client.Listen();
+            var stream = this.GrpcClient.Listen();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
-            while (await stream.ResponseStream.MoveNext(CancellationToken.None))
+            while (await stream.ResponseStream.MoveNext(cancellationToken))
             {
                 var req = stream.ResponseStream.Current;
 
-                if (req.RegistrationResponse != null)
-                {
-                    // Bucket listener connected with Nitric server.
-                }
-                else if (req.BlobEventRequest != null)
+                if (req.BlobEventRequest != null)
                 {
                     var ctx = FileEventContext.FromRequest(req, this.bucket);
 
@@ -71,6 +69,8 @@ namespace Nitric.Sdk.Worker
 
                     await stream.RequestStream.WriteAsync(ctx.ToResponse());
                 }
+
+                cancellationToken.ThrowIfCancellationRequested();
             }
 
             await stream.RequestStream.CompleteAsync();

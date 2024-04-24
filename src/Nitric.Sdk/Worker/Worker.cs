@@ -17,12 +17,13 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Nitric.Sdk.Service;
 using System.Linq;
+using System.Threading;
 
 namespace Nitric.Sdk.Worker
 {
     interface IWorker
     {
-        public Task Start();
+        public Task Start(CancellationToken cancellationToken = default);
     }
 
     public abstract class AbstractWorker<T> : IWorker
@@ -58,7 +59,7 @@ namespace Nitric.Sdk.Worker
             this.Middleware = middleware;
         }
 
-        public abstract Task Start();
+        public abstract Task Start(CancellationToken cancellationToken = default);
     }
 }
 

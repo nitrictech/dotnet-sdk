@@ -12,33 +12,6 @@ using Nitric.Sdk.Common;
 
 namespace Nitric.Sdk.Test.KeyValueStore
 {
-    internal class FakeAsyncStreamReader<T> : IAsyncStreamReader<T>
-    {
-        private readonly List<T> results;
-        private int index;
-
-        public FakeAsyncStreamReader(List<T> results)
-        {
-            index = 0;
-            this.results = results;
-        }
-
-        public T Current => results[index];
-
-        public Task<bool> MoveNext(CancellationToken cancellationToken)
-        {
-            if (index == results.Count - 1)
-            {
-                return Task.FromResult(false);
-            }
-
-            index += 1;
-
-            return Task.FromResult(true);
-        }
-    }
-
-
     public class TestProfile
     {
         public string Name { get; set; }

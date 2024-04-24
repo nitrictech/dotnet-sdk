@@ -25,34 +25,31 @@ namespace Nitric.Sdk.Worker
     public class ApiWorker : AbstractWorker<HttpContext>
     {
         readonly private RegistrationRequest RegistrationRequest;
+        public GrpcClient GrpcClient { private get; set; }
 
         public ApiWorker(RegistrationRequest request, Func<HttpContext, HttpContext> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         public ApiWorker(RegistrationRequest request, params Middleware<HttpContext>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
-        public override async Task Start()
+        public override async Task Start(CancellationToken cancellationToken = default)
         {
-            var client = new GrpcClient(GrpcChannelProvider.GetChannel());
-
-            var stream = client.Serve();
+            var stream = this.GrpcClient.Serve();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
-            while (await stream.ResponseStream.MoveNext(CancellationToken.None))
+            while (await stream.ResponseStream.MoveNext(cancellationToken))
             {
                 var req = stream.ResponseStream.Current;
 
-                if (req.RegistrationResponse != null)
-                {
-                    // Schedule connected with Nitric server.
-                }
-                else if (req.HttpRequest != null)
+                if (req.HttpRequest != null)
                 {
                     var ctx = HttpContext.FromRequest(req);
 
@@ -67,6 +64,8 @@ namespace Nitric.Sdk.Worker
 
                     await stream.RequestStream.WriteAsync(ctx.ToResponse());
                 }
+
+                cancellationToken.ThrowIfCancellationRequested();
             }
 
             await stream.RequestStream.CompleteAsync();

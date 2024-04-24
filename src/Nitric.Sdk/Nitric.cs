@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Nitric.Sdk.Resource;
 using Nitric.Sdk.Worker;
@@ -51,7 +52,7 @@ namespace Nitric.Sdk
             Task.WaitAll(Workers.Select(worker => worker.Start()).ToArray());
         }
 
-        private static T Cached<T>(string name, Func<string, T> make) where T : BaseResource
+        internal static T Register<T>(string name, Func<string, T> make) where T : BaseResource
         {
             var typeMap = Cache.GetValueOrDefault(typeof(T), new Dictionary<string, BaseResource>());
             var resource = typeMap!.GetValueOrDefault(name, make(name)) as T;
@@ -77,21 +78,21 @@ namespace Nitric.Sdk
         /// </summary>
         /// <param name="name">The unique name of this API.</param>
         /// <returns></returns>
-        public static ApiResource Api(string name, ApiOptions options = null) => Cached(name, s => new ApiResource(s, options));
+        public static ApiResource Api(string name, ApiOptions options = null) => Register(name, s => new ApiResource(s, options));
 
         /// <summary>
         /// Declare a schedule.
         /// </summary>
         /// <param name="description">A short description of the schedule</param>
         /// <returns></returns>
-        public static ScheduleResource Schedule(string description) => Cached(description, s => new ScheduleResource(s));
+        public static ScheduleResource Schedule(string description) => Register(description, s => new ScheduleResource(s));
 
         /// <summary>
         /// Declare a bucket resources for file/blob storage.
         /// </summary>
         /// <param name="name">The unique name of the bucket within this application.</param>
         /// <returns>A bucket resource, if the name has already been declared the same resource will be returned.</returns>
-        public static BucketResource Bucket(string name) => Cached(name, t => new BucketResource(t));
+        public static BucketResource Bucket(string name) => Register(name, t => new BucketResource(t));
 
 
         /// <summary>
@@ -101,34 +102,49 @@ namespace Nitric.Sdk
         /// <typeparam name="TValue">The type of values to be stored.</typeparam>
         /// <returns>A key value resource, if the name has already been declared the same resource will be returned.</returns>
         public static KeyValueStoreResource<TValue> KV<TValue>(string name) =>
-            Cached(name, t => new KeyValueStoreResource<TValue>(t));
+            Register(name, t => new KeyValueStoreResource<TValue>(t));
 
         /// <summary>
         /// Declare a secret resource for accessing and putting secret values.
         /// </summary>
         /// <param name="name">The unique name of the secret within this application.</param>
         /// <returns>A secret resource, if the name has already been declared the same resource will be returned.</returns>
-        public static SecretResource Secret(string name) => Cached(name, t => new SecretResource(t));
+        public static SecretResource Secret(string name) => Register(name, t => new SecretResource(t));
 
         /// <summary>
         /// Declare a queue resources for pull-based tasks and batch workloads.
         /// </summary>
         /// <param name="name">The unique name of the queue within this application.</param>
         /// <returns>A queue resource, if the name has already been declared the same resource will be returned.</returns>
-        public static QueueResource<T> Queue<T>(string name) => Cached(name, n => new QueueResource<T>(n));
+        public static QueueResource<T> Queue<T>(string name) => Register(name, n => new QueueResource<T>(n));
 
         /// <summary>
         /// Declare a topic resource for push-based events and messaging.
         /// </summary>
         /// <param name="name">The unique name of the topic within this application.</param>
         /// <returns>A topic resource, if the name has already been declared the same resource will be returned.</returns>
-        public static TopicResource<T> Topic<T>(string name) => Cached(name, t => new TopicResource<T>(t));
+        public static TopicResource<T> Topic<T>(string name) => Register(name, t => new TopicResource<T>(t));
 
         /// <summary>
         /// Declare a websocket resource for bidirectional HTTP communication.
         /// </summary>
         /// <param name="name">The unique name of the websocket within this application.</param>
         /// <returns>A websocket resource, if the name has already been declared the same resource will be returned.</returns>
-        public static WebsocketResource Websocket(string name) => Cached(name, t => new WebsocketResource(t));
+        public static WebsocketResource Websocket(string name) => Register(name, t => new WebsocketResource(t));
+
+        /// <summary>
+        /// Declare a new Oidc rule for API security.
+        /// </summary>
+        /// <param name="name">The name of the rule.</param>
+        /// <param name="issuer">The OIDC issuer URI.</param>
+        /// <param name="audiences"></param>
+        /// <returns></returns>
+        public static OidcScopes OidcRule(string name, string issuer, string[] audiences)
+        {
+            return scopes =>
+            {
+                return new OidcOptions(name, issuer, audiences, scopes);
+            };
+        }
     }
 }

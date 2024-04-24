@@ -20,6 +20,7 @@ using Nitric.Proto.Websockets.v1;
 using WebsocketEventTypeProto = Nitric.Proto.Websockets.v1.WebsocketEventRequest.WebsocketEventOneofCase;
 using Google.Protobuf.Collections;
 using ProtoWebsocketEventType = Nitric.Proto.Websockets.v1.WebsocketEventType;
+using Google.Api;
 
 namespace Nitric.Sdk.Service
 {
@@ -141,11 +142,12 @@ namespace Nitric.Sdk.Service
         {
             var type = FromGrpcWebsocketNotificationType(trigger.WebsocketEventRequest.WebsocketEventCase);
             var queryParams = GetQueryParams(trigger.WebsocketEventRequest.Connection.QueryParams);
+            var body = trigger.WebsocketEventRequest.Message != null ? trigger.WebsocketEventRequest.Message.Body.ToByteArray() : new byte[0];
 
             return new WebsocketContext(
                 trigger.Id,
                 new WebsocketRequest(
-                    trigger.WebsocketEventRequest.Message.Body.ToByteArray(),
+                    body,
                     trigger.WebsocketEventRequest.SocketName,
                     type,
                     trigger.WebsocketEventRequest.ConnectionId,

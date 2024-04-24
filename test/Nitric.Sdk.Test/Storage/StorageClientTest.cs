@@ -19,6 +19,7 @@ using Grpc.Core;
 using Moq;
 using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Common;
+using Nitric.Sdk.Service;
 using Xunit;
 using GrpcClient = Nitric.Proto.Storage.v1.Storage.StorageClient;
 
@@ -1053,6 +1054,58 @@ namespace Nitric.Sdk.Test.Storage
             bc.Verify(
                 t => t.PreSignUrlAsync(It.IsAny<StoragePreSignUrlRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
                 Times.Once);
+        }
+
+        [Fact]
+        public void TestRegisterBlobEventWorkerOnWrite()
+        {
+            Func<BlobEventContext, BlobEventContext> middleware = (ctx) =>
+            {
+                return ctx;
+            };
+
+            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+
+            bucket.On(Service.BlobEventType.Write, "*", middleware);
+        }
+
+        [Fact]
+        public void TestRegisterBlobEventWorkerOnDelete()
+        {
+            Func<BlobEventContext, BlobEventContext> middleware = (ctx) =>
+            {
+                return ctx;
+            };
+
+            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+
+            bucket.On(Service.BlobEventType.Delete, "*", middleware);
+        }
+
+        [Fact]
+        public void TestRegisterBlobEventWorkerOnWriteWithMultipleMiddleware()
+        {
+            Middleware<BlobEventContext> middleware = (ctx, next) =>
+            {
+                return next(ctx);
+            };
+
+            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+
+            bucket.On(Service.BlobEventType.Write, "*", middleware, middleware);
+        }
+
+        [Fact]
+        public void TestRegisterBlobEventWorkerOnDeleteWithMultipleMiddleware()
+        {
+            Middleware<BlobEventContext> middleware = (ctx, next) =>
+            {
+                return next(ctx);
+            };
+
+            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+
+            bucket.On(Service.BlobEventType.Delete, "*", middleware, middleware);
         }
     }
 }

@@ -25,34 +25,31 @@ namespace Nitric.Sdk.Worker
     public class WebsocketWorker : AbstractWorker<WebsocketContext>
     {
         readonly private RegistrationRequest RegistrationRequest;
+        public GrpcClient GrpcClient { private get; set; }
 
         public WebsocketWorker(RegistrationRequest request, Func<WebsocketContext, WebsocketContext> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         public WebsocketWorker(RegistrationRequest request, params Middleware<WebsocketContext>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
-        public override async Task Start()
+        public override async Task Start(CancellationToken cancellationToken = default)
         {
-            var client = new GrpcClient(GrpcChannelProvider.GetChannel());
-
-            var stream = client.HandleEvents();
+            var stream = this.GrpcClient.HandleEvents();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
-            while (await stream.ResponseStream.MoveNext(CancellationToken.None))
+            while (await stream.ResponseStream.MoveNext(cancellationToken))
             {
                 var req = stream.ResponseStream.Current;
 
-                if (req.RegistrationResponse != null)
-                {
-                    // Websocket connected with Nitric server.
-                }
-                else if (req.WebsocketEventRequest != null)
+                if (req.WebsocketEventRequest != null)
                 {
                     var ctx = WebsocketContext.FromRequest(req);
 
@@ -68,6 +65,8 @@ namespace Nitric.Sdk.Worker
 
                     await stream.RequestStream.WriteAsync(ctx.ToResponse());
                 }
+
+                cancellationToken.ThrowIfCancellationRequested();
             }
 
             await stream.RequestStream.CompleteAsync();

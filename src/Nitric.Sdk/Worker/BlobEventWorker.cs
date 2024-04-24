@@ -18,7 +18,6 @@ using Nitric.Sdk.Common;
 using Nitric.Proto.Storage.v1;
 using GrpcClient = Nitric.Proto.Storage.v1.StorageListener.StorageListenerClient;
 using Nitric.Sdk.Service;
-using Nitric.Sdk.Storage;
 using System;
 
 namespace Nitric.Sdk.Worker
@@ -26,34 +25,31 @@ namespace Nitric.Sdk.Worker
     public class BlobEventWorker : AbstractWorker<BlobEventContext>
     {
         readonly private RegistrationRequest RegistrationRequest;
+        public GrpcClient GrpcClient { private get; set; }
 
         public BlobEventWorker(RegistrationRequest request, Func<BlobEventContext, BlobEventContext> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         public BlobEventWorker(RegistrationRequest request, params Middleware<BlobEventContext>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
-        public override async Task Start()
+        public override async Task Start(CancellationToken cancellationToken = default)
         {
-            var client = new GrpcClient(GrpcChannelProvider.GetChannel());
-
-            var stream = client.Listen();
+            var stream = this.GrpcClient.Listen();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
-            while (await stream.ResponseStream.MoveNext(CancellationToken.None))
+            while (await stream.ResponseStream.MoveNext(cancellationToken))
             {
                 var req = stream.ResponseStream.Current;
 
-                if (req.RegistrationResponse != null)
-                {
-                    // Bucket listener connected with Nitric server.
-                }
-                else if (req.BlobEventRequest != null) 
+                if (req.BlobEventRequest != null)
                 {
                     var ctx = BlobEventContext.FromRequest(req);
 
@@ -69,6 +65,8 @@ namespace Nitric.Sdk.Worker
 
                     await stream.RequestStream.WriteAsync(ctx.ToResponse());
                 }
+
+                cancellationToken.ThrowIfCancellationRequested();
             }
 
             await stream.RequestStream.CompleteAsync();

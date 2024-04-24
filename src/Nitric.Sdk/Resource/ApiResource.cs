@@ -13,41 +13,17 @@
 // limitations under the License.
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using Nitric.Proto.Resources.v1;
 using Nitric.Proto.Apis.v1;
 using Nitric.Sdk.Service;
 using Nitric.Sdk.Worker;
 using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
 using ProtoApiResource = Nitric.Proto.Resources.v1.ApiResource;
-using ProtoSecurityDefinition = Nitric.Proto.Resources.v1.ApiSecurityDefinitionResource;
-using ProtoSecurityDefinitionJwt = Nitric.Proto.Resources.v1.ApiOpenIdConnectionDefinition;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 
 namespace Nitric.Sdk.Resource
 {
-    public abstract class SecurityDefinition
-    {
-        internal string Kind { get; private set; }
-
-        internal SecurityDefinition(string kind)
-        {
-            this.Kind = kind;
-        }
-    }
-
-    public class JwtSecurityDefinition : SecurityDefinition
-    {
-        internal string Issuer { get; private set; }
-        internal string[] Audiences { get; private set; }
-
-        internal JwtSecurityDefinition(string Issuer, string[] Audiences) : base("jwt")
-        {
-            this.Issuer = Issuer;
-            this.Audiences = Audiences;
-        }
-    }
-
     public class ApiDetails
     {
         internal string ID { get; set; }
@@ -56,212 +32,235 @@ namespace Nitric.Sdk.Resource
         internal string URL { get; set; }
     }
 
-
     public class ApiOptions
     {
-        public Dictionary<string, SecurityDefinition> SecurityDefinitions { get; private set; }
-        public Dictionary<string, string[]> Security { get; private set; }
+        public OidcOptions[] Security { get; private set; }
         public string BasePath { get; private set; }
         public Middleware<HttpContext>[] Middleware { get; private set; }
 
         public ApiOptions(
-            Dictionary<string, SecurityDefinition> securityDefinitions = null,
-            Dictionary<string, string[]> security = null,
+            OidcOptions[] security = null,
             string basePath = "",
             Middleware<HttpContext>[] middleware = null
         )
         {
-            this.SecurityDefinitions = securityDefinitions ?? new Dictionary<string, SecurityDefinition>();
-            this.Security = security ?? new Dictionary<string, string[]>();
+            this.Security = security ?? Array.Empty<OidcOptions>();
             this.BasePath = basePath;
             this.Middleware = middleware ?? new Middleware<HttpContext>[] { };
         }
     }
 
-
     public class ApiResource : BaseResource
     {
-        internal readonly ApiOptions Opts;
+        public readonly ApiOptions Opts;
 
         internal ApiResource(string name, ApiOptions options = null) : base(name, ResourceType.Api)
         {
             this.Opts = options ?? new ApiOptions();
         }
 
-        internal ApiResource Method(string route, HttpMethod[] methods, Func<HttpContext, HttpContext> handler)
+        internal void AttachOidc(OidcOptions opts)
         {
-            var opts = new ApiWorkerOptions
-            {
-                SecurityDisabled = true,
-            };
-
-            if (this.Opts.Security.Count > 0)
-            {
-                var security = this.Opts.Security.ToDictionary((kv) => kv.Key, kv =>
-                {
-                    var scopes = new ApiWorkerScopes();
-                    scopes.Scopes.Add(kv.Value);
-
-                    return scopes;
-                });
-
-                opts.Security.Add(security);
-                opts.SecurityDisabled = false;
-            }
-
-            var registrationRequest = new RegistrationRequest
-            {
-                Api = this.Name,
-                Options = opts,
-                Path = route,
-            };
-
-            registrationRequest.Methods.AddRange(methods.Select((method) => method.Method).ToHashSet());
-
-
-            var apiWorker = new ApiWorker(registrationRequest, handler);
-
-            Nitric.RegisterWorker(apiWorker);
-            return this;
-        }
-
-        internal ApiResource Method(string route, HttpMethod[] methods, Middleware<HttpContext>[] middleware)
-        {
-            var opts = new ApiWorkerOptions
-            {
-                SecurityDisabled = true,
-            };
-
-            if (this.Opts.Security.Count > 0)
-            {
-                var security = this.Opts.Security.ToDictionary((kv) => kv.Key, kv =>
-                {
-                    var scopes = new ApiWorkerScopes();
-                    scopes.Scopes.Add(kv.Value);
-
-                    return scopes;
-                });
-
-                opts.Security.Add(security);
-                opts.SecurityDisabled = false;
-            }
-
-            var registrationRequest = new RegistrationRequest
-            {
-                Api = this.Name,
-                Options = opts,
-                Path = route,
-            };
-
-            registrationRequest.Methods.AddRange(methods.Select((method) => method.Method).ToHashSet());
-
-
-            var apiWorker = new ApiWorker(registrationRequest, middleware);
-
-            Nitric.RegisterWorker(apiWorker);
-            return this;
+            var oidcName = string.Format("{0}-{1}", opts.Name, this.Name);
+            Nitric.Register(oidcName, _ => new OidcResource(oidcName, this.Name, opts));
         }
 
         /// <summary>
         /// Create a new GET handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handler"></param>
-        public ApiResource Get(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Get }, handler);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        public void Get(string route, Func<HttpContext, HttpContext> handler) => Route(route).Get(handler);
 
         /// <summary>
         /// Create a new GET handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handlers"></param>
-        public ApiResource Get(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Get }, handlers);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        public void Get(string route, Middleware<HttpContext>[] handlers) => Route(route).Get(handlers);
+
+        /// <summary>
+        /// Create a new GET handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Get(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Get(handler);
+
+        /// <summary>
+        /// Create a new GET handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Get(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Get(handlers);
 
         /// <summary>
         /// Create a new POST handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handler"></param>
-        public ApiResource Post(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Post }, handler);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        public void Post(string route, Func<HttpContext, HttpContext> handler) => Route(route).Post(handler);
 
         /// <summary>
         /// Create a new POST handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handlers"></param>
-        public ApiResource Post(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Post }, handlers);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        public void Post(string route, Middleware<HttpContext>[] handlers) => Route(route).Post(handlers);
+
+        /// <summary>
+        /// Create a new POST handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Post(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Post(handler);
+
+        /// <summary>
+        /// Create a new POST handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Post(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Post(handlers);
 
         /// <summary>
         /// Create a new PUT handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handler"></param>
-        public ApiResource Put(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Put }, handler);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        public void Put(string route, Func<HttpContext, HttpContext> handler) => Route(route).Put(handler);
 
         /// <summary>
         /// Create a new PUT handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handlers"></param>
-        public ApiResource Put(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Put }, handlers);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        public void Put(string route, params Middleware<HttpContext>[] handlers) => Route(route).Put(handlers);
+
+        /// <summary>
+        /// Create a new PUT handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Put(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Put(handler);
+
+        /// <summary>
+        /// Create a new PUT handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Put(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Put(handlers);
 
         /// <summary>
         /// Create a new DELETE handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handler"></param>
-        public ApiResource Delete(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Delete }, handler);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        public void Delete(string route, Func<HttpContext, HttpContext> handler) => Route(route).Delete(handler);
 
         /// <summary>
         /// Create a new DELETE handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handlers"></param>
-        public ApiResource Delete(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Delete }, handlers);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        public void Delete(string route, params Middleware<HttpContext>[] handlers) => Route(route).Delete(handlers);
+
+        /// <summary>
+        /// Create a new DELETE handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Delete(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Delete(handler);
+
+        /// <summary>
+        /// Create a new DELETE handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Delete(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Delete(handlers);
 
         /// <summary>
         /// Create a new OPTIONS handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handler"></param>
-        public ApiResource Options(string route, Func<HttpContext, HttpContext> handler) => Method(route, new HttpMethod[] { HttpMethod.Options }, handler);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        public void Options(string route, Func<HttpContext, HttpContext> handler) => Route(route).Options(handler);
 
         /// <summary>
         /// Create a new OPTIONS handler on the specified route.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handlers"></param>
-        public ApiResource Options(string route, params Middleware<HttpContext>[] handlers) => Method(route, new HttpMethod[] { HttpMethod.Options }, handlers);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>        
+        public void Options(string route, params Middleware<HttpContext>[] handlers) => Route(route).Options(handlers);
+
+        /// <summary>
+        /// Create a new OPTIONS handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Options(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Options(handler);
+
+        /// <summary>
+        /// Create a new OPTIONS handler on the specified route.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void Options(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Options(handlers);
 
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handler"></param>
-        public ApiResource All(string route, Func<HttpContext, HttpContext> handler) => Method(route, (HttpMethod[])Enum.GetValues(typeof(HttpMethod)), handler);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        public void All(string route, Func<HttpContext, HttpContext> handler) => Route(route).All(handler);
 
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
         /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handlers"></param>
-        public ApiResource All(string route, params Middleware<HttpContext>[] handlers) => Method(route, (HttpMethod[])Enum.GetValues(typeof(HttpMethod)), handlers);
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        public void All(string route, params Middleware<HttpContext>[] handlers) => Route(route).All(handlers);
+
+        /// <summary>
+        /// Create a new handler on the specified route for every HTTP verb.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handler">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void All(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).All(handler);
+
+        /// <summary>
+        /// Create a new handler on the specified route for every HTTP verb.
+        /// </summary>
+        /// <param name="route">The path to match on.</param>
+        /// <param name="handlers">The handler to run.</param>
+        /// <param name="security">Security rules to override API-level security.</param>
+        public void All(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security)).All(handlers);
 
         /// <summary>
         /// Create a new route on a specified path.
         /// </summary>
         /// <returns>An ApiRoute that handlers can be added to.</returns>
-        /// <param name="path"></param>
+        /// <param name="path">The path to match on.</param>
         public ApiRoute Route(string path)
         {
-            return new ApiRoute(this, this.Opts.BasePath + path, new RouteOptions());
+            return new ApiRoute(this, this.Opts.BasePath + path, new RouteOptions(security: this.Opts.Security));
         }
 
         /// <summary>
         /// Create a new route on a specified path.
         /// </summary>
         /// <returns>An ApiRoute that handlers can be added to.</returns>
-        /// <param name="path"></param>
-        /// <param name="middleware"></param>
+        /// <param name="path">The path to match on.</param>
+        /// <param name="options">Optional middleware and security rules to apply to the route.</param>
         public ApiRoute Route(string path, RouteOptions options)
         {
             return new ApiRoute(this, this.Opts.BasePath + path, options);
@@ -272,61 +271,20 @@ namespace Nitric.Sdk.Resource
             var resource = new NitricResource { Name = this.Name, Type = ResourceType.Api };
             var apiResource = new ProtoApiResource();
 
-            foreach (KeyValuePair<string, string[]> kv in this.Opts.Security)
+            foreach (var oidcOption in this.Opts.Security)
             {
+                this.AttachOidc(oidcOption);
+
                 var scopes = new ApiScopes();
-
-                scopes.Scopes.Add(kv.Value);
-
-                apiResource.Security.Add(kv.Key, scopes);
-            }
-
-            foreach (KeyValuePair<string, SecurityDefinition> kv in this.Opts.SecurityDefinitions)
-            {
-                var definition = new ProtoSecurityDefinition();
-
-                if (kv.Value.Kind == "jwt")
-                {
-                    var jwtSecurityDefinition = kv.Value as JwtSecurityDefinition;
-                    var secDef = new ProtoSecurityDefinitionJwt
-                    {
-                        Issuer = jwtSecurityDefinition.Issuer
-                    };
-
-                    secDef.Audiences.AddRange(jwtSecurityDefinition.Audiences);
-
-                    definition.Oidc = secDef;
-                }
+                scopes.Scopes.Add(oidcOption.Scopes);
+                apiResource.Security.Add(oidcOption.Name, scopes);
             }
 
             var request = new ResourceDeclareRequest { Id = resource, Api = apiResource };
-            BaseResource.client.Declare(request);
+            client.Declare(request);
 
             return this;
         }
-
-        /// <summary>
-        /// Retrieve details about the deployed API at runtime. These details include:
-        /// - ID: the identifier for the resource.
-        /// - Provider: the cloud provider that this API is deployed to.
-        /// - Service: the cloud service that is running this API (i.e. AWS API Gateway).
-        /// - URL: the url of the deployed API.
-        /// </summary>
-        /// <returns>The details of the API</returns>
-        // public ApiDetails Details() {
-        //     var resource = new NitricResource { Name = this.Name, Type = ResourceType.Api };
-
-        //     var request = new ResourceDetailsRequest { Resource = resource };
-        //     var response = client.Details(request);
-
-        //     return new ApiDetails
-        //     {
-        //         ID = response.Id,
-        //         Provider = response.Provider,
-        //         Service = response.Service,
-        //         URL = response.Api.Url,
-        //     };
-        // }
     }
 
     public class RouteOptions
@@ -335,7 +293,16 @@ namespace Nitric.Sdk.Resource
         public Middleware<HttpContext>[] Middlewares { get; set; }
 
         // Security rules to apply to this specific route
-        public Dictionary<string, string[]> Security { get; set; }
+        public OidcOptions[] Security { get; set; }
+
+        public RouteOptions(
+            OidcOptions[] security = null,
+            Middleware<HttpContext>[] middleware = null
+        )
+        {
+            this.Security = security ?? Array.Empty<OidcOptions>();
+            this.Middlewares = middleware ?? new Middleware<HttpContext>[] { };
+        }
     }
 
     public class ApiRoute
@@ -380,73 +347,102 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Create a new GET handler on the specified route.
         /// </summary>
-        /// <param name="handler"></param>
-        public ApiResource Get(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Get }, ConcatMiddleware(handler));
+        /// <param name="handler">The handler to run.</param>
+        public void Get(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Get }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new GET middleware chain on the specified route.
         /// </summary>
-        /// <param name="handlers"></param>
-        public ApiResource Get(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Get }, ConcatMiddleware(handlers));
+        /// <param name="handlers">The handler to run.</param>
+        public void Get(params Middleware<HttpContext>[] handlers) => Method(this.Path, new HttpMethod[] { HttpMethod.Get }, this.Opts, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new POST handler on the specified route.
         /// </summary>
-        /// <param name="handler"></param>
-        public ApiResource Post(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Post }, ConcatMiddleware(handler));
+        /// <param name="handler">The handler to run.</param>
+        public void Post(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Post }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new POST middleware chain on the specified route.
         /// </summary>
-        /// <param name="handlers"></param>
-        public ApiResource Post(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Post }, ConcatMiddleware(handlers));
+        /// <param name="handlers">The handler to run.</param>
+        public void Post(params Middleware<HttpContext>[] handlers) => Method(this.Path, new HttpMethod[] { HttpMethod.Post }, this.Opts, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new PUT handler on the specified route.
         /// </summary>
-        /// <param name="handler"></param>
-        public ApiResource Put(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Put }, ConcatMiddleware(handler));
+        /// <param name="handler">The handler to run.</param>
+        public void Put(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Put }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new PUT middleware chain on the specified route.
         /// </summary>
-        /// <param name="handlers"></param>
-        public ApiResource Put(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Post }, ConcatMiddleware(handlers));
+        /// <param name="handlers">The handler to run.</param>
+        public void Put(params Middleware<HttpContext>[] handlers) => Method(this.Path, new HttpMethod[] { HttpMethod.Post }, this.Opts, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new DELETE handler on the specified route.
         /// </summary>
-        /// <param name="handler"></param>
-        public ApiResource Delete(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Delete }, ConcatMiddleware(handler));
+        /// <param name="handler">The handler to run.</param>
+        public void Delete(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Delete }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new DELETE middleware chain on the specified route.
         /// </summary>
-        /// <param name="handlers"></param>
-        public ApiResource Delete(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Delete }, ConcatMiddleware(handlers));
+        /// <param name="handlers">The handler to run.</param>
+        public void Delete(params Middleware<HttpContext>[] handlers) => Method(this.Path, new HttpMethod[] { HttpMethod.Delete }, this.Opts, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new OPTIONS handler on the specified route.
         /// </summary>
-        /// <param name="handler"></param>
-        public ApiResource Options(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Options }, ConcatMiddleware(handler));
+        /// <param name="handler">The handler to run.</param>
+        public void Options(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Options }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new OPTIONS middleware chain on the specified route.
         /// </summary>
-        /// <param name="handlers"></param>
-        public ApiResource Options(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, new HttpMethod[] { HttpMethod.Options }, ConcatMiddleware(handlers));
+        /// <param name="handlers">The handler to run.</param>
+        public void Options(params Middleware<HttpContext>[] handlers) => Method(this.Path, new HttpMethod[] { HttpMethod.Options }, this.Opts, ConcatMiddleware(handlers));
 
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
         /// </summary>
-        /// <param name="handler"></param>
-        public ApiResource All(Func<HttpContext, HttpContext> handler) => this.api.Method(this.Path, (HttpMethod[])Enum.GetValues(typeof(HttpMethod)), ConcatMiddleware(handler));
+        /// <param name="handler">The handler to run.</param>
+        public void All(Func<HttpContext, HttpContext> handler) => Method(this.Path, (HttpMethod[])Enum.GetValues(typeof(HttpMethod)), this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new chain of middleware on the specified route for every HTTP verb.
         /// </summary>
-        /// <param name="handlers"></param>
-        public ApiResource All(params Middleware<HttpContext>[] handlers) => this.api.Method(this.Path, (HttpMethod[])Enum.GetValues(typeof(HttpMethod)), ConcatMiddleware(handlers));
+        /// <param name="handlers">The handler to run.</param>
+        public void All(params Middleware<HttpContext>[] handlers) => Method(this.Path, (HttpMethod[])Enum.GetValues(typeof(HttpMethod)), this.Opts, ConcatMiddleware(handlers));
+
+        internal void Method(string route, HttpMethod[] methods, RouteOptions options, Middleware<HttpContext>[] middlewares)
+        {
+            var opts = new ApiWorkerOptions
+            {
+                SecurityDisabled = options.Security.Count() == 0
+            };
+
+            foreach (var oidcOption in options.Security)
+            {
+                var scopes = new ApiWorkerScopes();
+                scopes.Scopes.Add(oidcOption.Scopes);
+                opts.Security.Add(oidcOption.Name, scopes);
+                this.api.AttachOidc(oidcOption);
+            }
+
+            var registrationRequest = new RegistrationRequest
+            {
+                Api = this.api.Name,
+                Options = opts,
+                Path = route,
+            };
+
+            registrationRequest.Methods.AddRange(methods.Select((method) => method.Method).ToHashSet());
+
+            var apiWorker = new ApiWorker(registrationRequest, middlewares);
+
+            Nitric.RegisterWorker(apiWorker);
+        }
     }
 }

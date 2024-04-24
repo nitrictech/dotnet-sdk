@@ -25,34 +25,31 @@ namespace Nitric.Sdk.Worker
     public class SubscriptionWorker<T> : AbstractWorker<MessageContext<T>>
     {
         readonly private RegistrationRequest RegistrationRequest;
+        public GrpcClient GrpcClient { private get; set; }
 
         public SubscriptionWorker(RegistrationRequest request, Func<MessageContext<T>, MessageContext<T>> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         public SubscriptionWorker(RegistrationRequest request, params Middleware<MessageContext<T>>[] middlewares) : base(middlewares)
         {
             this.RegistrationRequest = request;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
-        public override async Task Start()
+        public override async Task Start(CancellationToken cancellationToken = default)
         {
-            var client = new GrpcClient(GrpcChannelProvider.GetChannel());
-
-            var stream = client.Subscribe();
+            var stream = this.GrpcClient.Subscribe();
 
             await stream.RequestStream.WriteAsync(new ClientMessage { RegistrationRequest = RegistrationRequest });
 
-            while (await stream.ResponseStream.MoveNext(CancellationToken.None))
+            while (await stream.ResponseStream.MoveNext(cancellationToken))
             {
                 var req = stream.ResponseStream.Current;
 
-                if (req.RegistrationResponse != null)
-                {
-                    // Topic connected with Nitric Server.
-                }
-                else if (req.MessageRequest != null)
+                if (req.MessageRequest != null)
                 {
                     var ctx = MessageContext<T>.FromRequest(req);
 
@@ -68,6 +65,8 @@ namespace Nitric.Sdk.Worker
 
                     await stream.RequestStream.WriteAsync(ctx.ToResponse());
                 }
+
+                cancellationToken.ThrowIfCancellationRequested();
             }
 
             await stream.RequestStream.CompleteAsync();

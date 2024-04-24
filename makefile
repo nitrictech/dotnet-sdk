@@ -1,10 +1,12 @@
+.PHONY: test
+
 # the version of of https://github.com/nitrictech/nitric to use in base client generation.
 NITRIC_VERSION := 1.1.1
 
 generate: clean download build
 
 test:
-	@dotnet test tests/Nitric.Sdk.Test
+	@dotnet test test/Nitric.Sdk.Test
 
 build: 
 	@dotnet build src/Nitric.Sdk/Nitric.Sdk.csproj
