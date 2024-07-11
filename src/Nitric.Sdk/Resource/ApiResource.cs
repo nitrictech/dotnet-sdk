@@ -46,7 +46,7 @@ namespace Nitric.Sdk.Resource
         {
             this.Security = security ?? Array.Empty<OidcOptions>();
             this.BasePath = basePath;
-            this.Middleware = middleware ?? new Middleware<HttpContext>[] { };
+            this.Middleware = middleware ?? Array.Empty<Middleware<HttpContext>>();
         }
     }
 
@@ -56,7 +56,7 @@ namespace Nitric.Sdk.Resource
 
         internal ApiResource(string name, ApiOptions options = null) : base(name, ResourceType.Api)
         {
-            this.Opts = options ?? new ApiOptions();
+            Opts = options ?? new ApiOptions();
         }
 
         internal void AttachOidc(OidcOptions opts)
@@ -321,7 +321,10 @@ namespace Nitric.Sdk.Resource
             this.api = api;
             this.Path = path;
 
-            var composedMiddleware = this.api.Opts.Middleware.Concat(opts.Middlewares).ToArray();
+            var composedMiddleware = this.api.Opts.Middleware
+                .Concat(opts.Middlewares)
+                .ToArray();
+
             this.Opts = new RouteOptions
             {
                 Middlewares = composedMiddleware,
@@ -404,6 +407,28 @@ namespace Nitric.Sdk.Resource
         /// <param name="handlers">The handler to run.</param>
         public void Options(params Middleware<HttpContext>[] handlers) => Method(this.Path, new HttpMethod[] { HttpMethod.Options }, this.Opts, ConcatMiddleware(handlers));
 
+        /// <summary>
+        /// Create a new OPTIONS handler on the specified route.
+        /// </summary>
+        /// <param name="handler"></param>
+        public void Patch(Func<HttpContext, HttpContext> handler) => Method(new HttpMethod[] { HttpMethod.Patch }, ConcatMiddleware(handler));
+
+        /// <summary>
+        /// Create a new OPTIONS middleware chain on the specified route.
+        /// </summary>
+        /// <param name="handlers"></param>
+        public void Patch(params Middleware<HttpContext>[] handlers) => Method(new HttpMethod[] { HttpMethod.Patch }, ConcatMiddleware(handlers));
+
+        HttpMethod[] httpMethods = new HttpMethod[]
+        {
+            HttpMethod.Get,
+            HttpMethod.Post,
+            HttpMethod.Put,
+            HttpMethod.Delete,
+            HttpMethod.Head,
+            HttpMethod.Options,
+            HttpMethod.Patch
+        };
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
         /// </summary>
