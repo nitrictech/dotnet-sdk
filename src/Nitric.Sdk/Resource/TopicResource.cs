@@ -20,7 +20,6 @@ using Nitric.Sdk.Service;
 using Nitric.Sdk.Topics;
 using Nitric.Sdk.Worker;
 using Action = Nitric.Proto.Resources.v1.Action;
-using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
 using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
 
 namespace Nitric.Sdk.Resource
@@ -31,9 +30,9 @@ namespace Nitric.Sdk.Resource
     public enum TopicPermission
     {
         /// <summary>
-        /// Enables pushing new events to the topic.
+        /// Enables publishing new events to the topic.
         /// </summary>
-        Publishing
+        Publish
     }
 
     public class TopicResource<T> : SecureResource<TopicPermission>
@@ -54,7 +53,7 @@ namespace Nitric.Sdk.Resource
             var actionMap = new Dictionary<TopicPermission, List<Action>>
             {
                 {
-                    TopicPermission.Publishing,
+                    TopicPermission.Publish,
                     new List<Action> { Action.TopicPublish }
                 }
             };

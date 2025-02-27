@@ -30,10 +30,10 @@ namespace Nitric.Proto.Http.v1 {
             "cnZlck1lc3NhZ2UiIAoQSHR0cFByb3h5UmVxdWVzdBIMCgRob3N0GAEgASgJ",
             "Ml0KBEh0dHASVQoFUHJveHkSIy5uaXRyaWMucHJvdG8uaHR0cC52MS5DbGll",
             "bnRNZXNzYWdlGiMubml0cmljLnByb3RvLmh0dHAudjEuU2VydmVyTWVzc2Fn",
-            "ZSgBMAFCjAEKF2lvLm5pdHJpYy5wcm90by5odHRwLnYxQgVIdHRwc1ABWjpn",
-            "aXRodWIuY29tL25pdHJpY3RlY2gvbml0cmljL2NvcmUvcGtnL3Byb3RvL2h0",
-            "dHAvdjE7aHR0cHBiqgIUTml0cmljLlByb3RvLkh0dHAudjHKAhROaXRyaWNc",
-            "UHJvdG9cSHR0cFxWMWIGcHJvdG8z"));
+            "ZSgBMAFCkgEKF2lvLm5pdHJpYy5wcm90by5odHRwLnYxQgtIdHRwU2Vydmlj",
+            "ZVABWjpnaXRodWIuY29tL25pdHJpY3RlY2gvbml0cmljL2NvcmUvcGtnL3By",
+            "b3RvL2h0dHAvdjE7aHR0cHBiqgIUTml0cmljLlByb3RvLkh0dHAudjHKAhRO",
+            "aXRyaWNcUHJvdG9cSHR0cFxWMWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {

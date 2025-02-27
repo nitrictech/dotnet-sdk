@@ -21,6 +21,7 @@ using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
 using ProtoApiResource = Nitric.Proto.Resources.v1.ApiResource;
 using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Resource
 {
@@ -411,13 +412,13 @@ namespace Nitric.Sdk.Resource
         /// Create a new OPTIONS handler on the specified route.
         /// </summary>
         /// <param name="handler"></param>
-        public void Patch(Func<HttpContext, HttpContext> handler) => Method(new HttpMethod[] { HttpMethod.Patch }, ConcatMiddleware(handler));
+        public void Patch(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Patch }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new OPTIONS middleware chain on the specified route.
         /// </summary>
         /// <param name="handlers"></param>
-        public void Patch(params Middleware<HttpContext>[] handlers) => Method(new HttpMethod[] { HttpMethod.Patch }, ConcatMiddleware(handlers));
+        public void Patch(params Middleware<HttpContext>[] handlers) => Method(this.Path, new HttpMethod[] { HttpMethod.Patch }, this.Opts, ConcatMiddleware(handlers));
 
         HttpMethod[] httpMethods = new HttpMethod[]
         {

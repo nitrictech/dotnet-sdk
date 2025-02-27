@@ -64,10 +64,10 @@ namespace Nitric.Proto.Apis.v1 {
             "bnRNZXNzYWdlGiMubml0cmljLnByb3RvLmFwaXMudjEuU2VydmVyTWVzc2Fn",
             "ZSgBMAESXwoKQXBpRGV0YWlscxInLm5pdHJpYy5wcm90by5hcGlzLnYxLkFw",
             "aURldGFpbHNSZXF1ZXN0Gigubml0cmljLnByb3RvLmFwaXMudjEuQXBpRGV0",
-            "YWlsc1Jlc3BvbnNlQosBChdpby5uaXRyaWMucHJvdG8uYXBpcy52MUIEQXBp",
-            "c1ABWjpnaXRodWIuY29tL25pdHJpY3RlY2gvbml0cmljL2NvcmUvcGtnL3By",
-            "b3RvL2FwaXMvdjE7YXBpc3BiqgIUTml0cmljLlByb3RvLkFwaXMudjHKAhRO",
-            "aXRyaWNcUHJvdG9cQXBpc1xWMWIGcHJvdG8z"));
+            "YWlsc1Jlc3BvbnNlQpIBChdpby5uaXRyaWMucHJvdG8uYXBpcy52MUILQXBp",
+            "c1NlcnZpY2VQAVo6Z2l0aHViLmNvbS9uaXRyaWN0ZWNoL25pdHJpYy9jb3Jl",
+            "L3BrZy9wcm90by9hcGlzL3YxO2FwaXNwYqoCFE5pdHJpYy5Qcm90by5BcGlz",
+            "LnYxygIUTml0cmljXFByb3RvXEFwaXNcVjFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {

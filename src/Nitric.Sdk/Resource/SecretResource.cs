@@ -16,7 +16,6 @@ using System.Linq;
 using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.Secret;
 using Action = Nitric.Proto.Resources.v1.Action;
-using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
 
 namespace Nitric.Sdk.Resource
 {
@@ -28,11 +27,11 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Enables putting secrets to the secret store.
         /// </summary>
-        Putting,
+        Put,
         /// <summary>
         /// Enables accessing secrets from the secret store.
         /// </summary>
-        Accessing
+        Access
     }
 
     public class SecretResource : SecureResource<SecretPermission>
@@ -53,11 +52,11 @@ namespace Nitric.Sdk.Resource
             var actionMap = new Dictionary<SecretPermission, List<Action>>
             {
                 {
-                    SecretPermission.Putting,
+                    SecretPermission.Put,
                     new List<Action> { Action.SecretPut }
                 },
                 {
-                    SecretPermission.Accessing,
+                    SecretPermission.Access,
                     new List<Action> { Action.SecretAccess }
                 }
             };

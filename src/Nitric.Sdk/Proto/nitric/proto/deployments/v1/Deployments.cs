@@ -26,98 +26,110 @@ namespace Nitric.Proto.Deployments.v1 {
           string.Concat(
             "Ci1uaXRyaWMvcHJvdG8vZGVwbG95bWVudHMvdjEvZGVwbG95bWVudHMucHJv",
             "dG8SG25pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MRocZ29vZ2xlL3Byb3Rv",
-            "YnVmL3N0cnVjdC5wcm90bxopbml0cmljL3Byb3RvL3Jlc291cmNlcy92MS9y",
-            "ZXNvdXJjZXMucHJvdG8aJW5pdHJpYy9wcm90by9zdG9yYWdlL3YxL3N0b3Jh",
-            "Z2UucHJvdG8iiAEKE0RlcGxveW1lbnRVcFJlcXVlc3QSLwoEc3BlYxgBIAEo",
-            "CzIhLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5TcGVjEisKCmF0dHJp",
-            "YnV0ZXMYAiABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0EhMKC2ludGVy",
-            "YWN0aXZlGAMgASgIIqkBChFEZXBsb3ltZW50VXBFdmVudBIRCgdtZXNzYWdl",
-            "GAEgASgJSAASPQoGdXBkYXRlGAIgASgLMisubml0cmljLnByb3RvLmRlcGxv",
-            "eW1lbnRzLnYxLlJlc291cmNlVXBkYXRlSAASNwoGcmVzdWx0GAMgASgLMiUu",
-            "bml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLlVwUmVzdWx0SABCCQoHY29u",
-            "dGVudCKAAgoOUmVzb3VyY2VVcGRhdGUSOQoCaWQYASABKAsyLS5uaXRyaWMu",
-            "cHJvdG8ucmVzb3VyY2VzLnYxLlJlc291cmNlSWRlbnRpZmllchJFCgZhY3Rp",
-            "b24YAyABKA4yNS5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuUmVzb3Vy",
-            "Y2VEZXBsb3ltZW50QWN0aW9uEkUKBnN0YXR1cxgEIAEoDjI1Lm5pdHJpYy5w",
-            "cm90by5kZXBsb3ltZW50cy52MS5SZXNvdXJjZURlcGxveW1lbnRTdGF0dXMS",
-            "FAoMc3ViX3Jlc291cmNlGAUgASgJEg8KB21lc3NhZ2UYBiABKAkiNgoIVXBS",
-            "ZXN1bHQSDwoHc3VjY2VzcxgBIAEoCBIOCgR0ZXh0GAIgASgJSABCCQoHY29u",
-            "dGVudCJZChVEZXBsb3ltZW50RG93blJlcXVlc3QSKwoKYXR0cmlidXRlcxgB",
-            "IAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSEwoLaW50ZXJhY3RpdmUY",
-            "AiABKAgirQEKE0RlcGxveW1lbnREb3duRXZlbnQSEQoHbWVzc2FnZRgBIAEo",
-            "CUgAEjkKBnJlc3VsdBgCIAEoCzInLm5pdHJpYy5wcm90by5kZXBsb3ltZW50",
-            "cy52MS5Eb3duUmVzdWx0SAASPQoGdXBkYXRlGAMgASgLMisubml0cmljLnBy",
-            "b3RvLmRlcGxveW1lbnRzLnYxLlJlc291cmNlVXBkYXRlSABCCQoHY29udGVu",
-            "dCIMCgpEb3duUmVzdWx0IhoKC0ltYWdlU291cmNlEgsKA3VyaRgBIAEoCSL+",
-            "AQoHU2VydmljZRI5CgVpbWFnZRgBIAEoCzIoLm5pdHJpYy5wcm90by5kZXBs",
-            "b3ltZW50cy52MS5JbWFnZVNvdXJjZUgAEg8KB3dvcmtlcnMYCiABKAUSEwoH",
-            "dGltZW91dBgLIAEoBUICGAESEgoGbWVtb3J5GAwgASgFQgIYARIMCgR0eXBl",
-            "GA0gASgJEjoKA2VudhgOIAMoCzItLm5pdHJpYy5wcm90by5kZXBsb3ltZW50",
-            "cy52MS5TZXJ2aWNlLkVudkVudHJ5GioKCEVudkVudHJ5EgsKA2tleRgBIAEo",
-            "CRINCgV2YWx1ZRgCIAEoCToCOAFCCAoGc291cmNlIkgKBkJ1Y2tldBI+Cgls",
-            "aXN0ZW5lcnMYASADKAsyKy5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEu",
-            "QnVja2V0TGlzdGVuZXIiawoOQnVja2V0TGlzdGVuZXISPAoGY29uZmlnGAEg",
-            "ASgLMiwubml0cmljLnByb3RvLnN0b3JhZ2UudjEuUmVnaXN0cmF0aW9uUmVx",
-            "dWVzdBIRCgdzZXJ2aWNlGAIgASgJSABCCAoGdGFyZ2V0Ik8KBVRvcGljEkYK",
-            "DXN1YnNjcmlwdGlvbnMYASADKAsyLy5uaXRyaWMucHJvdG8uZGVwbG95bWVu",
-            "dHMudjEuU3Vic2NyaXB0aW9uVGFyZ2V0IgcKBVF1ZXVlIg8KDUtleVZhbHVl",
-            "U3RvcmUiCAoGU2VjcmV0IjEKElN1YnNjcmlwdGlvblRhcmdldBIRCgdzZXJ2",
-            "aWNlGAEgASgJSABCCAoGdGFyZ2V0IlQKEVRvcGljU3Vic2NyaXB0aW9uEj8K",
-            "BnRhcmdldBgBIAEoCzIvLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5T",
-            "dWJzY3JpcHRpb25UYXJnZXQiKQoKSHR0cFRhcmdldBIRCgdzZXJ2aWNlGAEg",
-            "ASgJSABCCAoGdGFyZ2V0Ij8KBEh0dHASNwoGdGFyZ2V0GAEgASgLMicubml0",
-            "cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLkh0dHBUYXJnZXQiJAoDQXBpEhEK",
-            "B29wZW5hcGkYASABKAlIAEIKCghkb2N1bWVudCLgAQoJV2Vic29ja2V0EkQK",
-            "DmNvbm5lY3RfdGFyZ2V0GAEgASgLMiwubml0cmljLnByb3RvLmRlcGxveW1l",
-            "bnRzLnYxLldlYnNvY2tldFRhcmdldBJHChFkaXNjb25uZWN0X3RhcmdldBgC",
-            "IAEoCzIsLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5XZWJzb2NrZXRU",
-            "YXJnZXQSRAoObWVzc2FnZV90YXJnZXQYAyABKAsyLC5uaXRyaWMucHJvdG8u",
-            "ZGVwbG95bWVudHMudjEuV2Vic29ja2V0VGFyZ2V0Ii4KD1dlYnNvY2tldFRh",
-            "cmdldBIRCgdzZXJ2aWNlGAEgASgJSABCCAoGdGFyZ2V0Ii0KDlNjaGVkdWxl",
-            "VGFyZ2V0EhEKB3NlcnZpY2UYASABKAlIAEIICgZ0YXJnZXQiygEKCFNjaGVk",
-            "dWxlEjsKBnRhcmdldBgBIAEoCzIrLm5pdHJpYy5wcm90by5kZXBsb3ltZW50",
-            "cy52MS5TY2hlZHVsZVRhcmdldBI7CgVldmVyeRgKIAEoCzIqLm5pdHJpYy5w",
-            "cm90by5kZXBsb3ltZW50cy52MS5TY2hlZHVsZUV2ZXJ5SAASOQoEY3JvbhgL",
-            "IAEoCzIpLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5TY2hlZHVsZUNy",
-            "b25IAEIJCgdjYWRlbmNlIh0KDVNjaGVkdWxlRXZlcnkSDAoEcmF0ZRgBIAEo",
-            "CSIiCgxTY2hlZHVsZUNyb24SEgoKZXhwcmVzc2lvbhgBIAEoCSK6BQoIUmVz",
-            "b3VyY2USOQoCaWQYASABKAsyLS5uaXRyaWMucHJvdG8ucmVzb3VyY2VzLnYx",
-            "LlJlc291cmNlSWRlbnRpZmllchI3CgdzZXJ2aWNlGAogASgLMiQubml0cmlj",
-            "LnByb3RvLmRlcGxveW1lbnRzLnYxLlNlcnZpY2VIABI1CgZidWNrZXQYCyAB",
-            "KAsyIy5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuQnVja2V0SAASMwoF",
-            "dG9waWMYDCABKAsyIi5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuVG9w",
-            "aWNIABIvCgNhcGkYDSABKAsyIC5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMu",
-            "djEuQXBpSAASNQoGcG9saWN5GA4gASgLMiMubml0cmljLnByb3RvLmRlcGxv",
-            "eW1lbnRzLnYxLlBvbGljeUgAEjkKCHNjaGVkdWxlGA8gASgLMiUubml0cmlj",
-            "LnByb3RvLmRlcGxveW1lbnRzLnYxLlNjaGVkdWxlSAASRQoPa2V5X3ZhbHVl",
-            "X3N0b3JlGBAgASgLMioubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLktl",
-            "eVZhbHVlU3RvcmVIABI1CgZzZWNyZXQYESABKAsyIy5uaXRyaWMucHJvdG8u",
-            "ZGVwbG95bWVudHMudjEuU2VjcmV0SAASOwoJd2Vic29ja2V0GBIgASgLMiYu",
-            "bml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLldlYnNvY2tldEgAEjEKBGh0",
-            "dHAYEyABKAsyIS5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuSHR0cEgA",
-            "EjMKBXF1ZXVlGBQgASgLMiIubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYx",
-            "LlF1ZXVlSABCCAoGY29uZmlnIrEBCgZQb2xpY3kSOQoKcHJpbmNpcGFscxgB",
-            "IAMoCzIlLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5SZXNvdXJjZRIy",
-            "CgdhY3Rpb25zGAIgAygOMiEubml0cmljLnByb3RvLnJlc291cmNlcy52MS5B",
-            "Y3Rpb24SOAoJcmVzb3VyY2VzGAMgAygLMiUubml0cmljLnByb3RvLmRlcGxv",
-            "eW1lbnRzLnYxLlJlc291cmNlIkAKBFNwZWMSOAoJcmVzb3VyY2VzGAEgAygL",
-            "MiUubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLlJlc291cmNlKlUKGFJl",
-            "c291cmNlRGVwbG95bWVudEFjdGlvbhIKCgZDUkVBVEUQABIKCgZVUERBVEUQ",
-            "ARILCgdSRVBMQUNFEAISCAoEU0FNRRADEgoKBkRFTEVURRAEKlEKGFJlc291",
-            "cmNlRGVwbG95bWVudFN0YXR1cxILCgdQRU5ESU5HEAASDwoLSU5fUFJPR1JF",
-            "U1MQARILCgdTVUNDRVNTEAISCgoGRkFJTEVEEAMy5gEKCkRlcGxveW1lbnQS",
-            "aAoCVXASMC5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuRGVwbG95bWVu",
-            "dFVwUmVxdWVzdBouLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5EZXBs",
-            "b3ltZW50VXBFdmVudDABEm4KBERvd24SMi5uaXRyaWMucHJvdG8uZGVwbG95",
-            "bWVudHMudjEuRGVwbG95bWVudERvd25SZXF1ZXN0GjAubml0cmljLnByb3Rv",
-            "LmRlcGxveW1lbnRzLnYxLkRlcGxveW1lbnREb3duRXZlbnQwAUK1AQoeaW8u",
-            "bml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxQgtEZXBsb3ltZW50c1ABWkhn",
-            "aXRodWIuY29tL25pdHJpY3RlY2gvbml0cmljL2NvcmUvcGtnL3Byb3RvL2Rl",
-            "cGxveW1lbnRzL3YxO2RlcGxveW1lbnRzcGKqAhtOaXRyaWMuUHJvdG8uRGVw",
-            "bG95bWVudHMudjHKAhtOaXRyaWNcUHJvdG9cRGVwbG95bWVudHNcVjFiBnBy",
-            "b3RvMw=="));
+            "YnVmL3N0cnVjdC5wcm90bxohbml0cmljL3Byb3RvL2JhdGNoL3YxL2JhdGNo",
+            "LnByb3RvGiluaXRyaWMvcHJvdG8vcmVzb3VyY2VzL3YxL3Jlc291cmNlcy5w",
+            "cm90bxolbml0cmljL3Byb3RvL3N0b3JhZ2UvdjEvc3RvcmFnZS5wcm90byKI",
+            "AQoTRGVwbG95bWVudFVwUmVxdWVzdBIvCgRzcGVjGAEgASgLMiEubml0cmlj",
+            "LnByb3RvLmRlcGxveW1lbnRzLnYxLlNwZWMSKwoKYXR0cmlidXRlcxgCIAEo",
+            "CzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSEwoLaW50ZXJhY3RpdmUYAyAB",
+            "KAgiqQEKEURlcGxveW1lbnRVcEV2ZW50EhEKB21lc3NhZ2UYASABKAlIABI9",
+            "CgZ1cGRhdGUYAiABKAsyKy5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEu",
+            "UmVzb3VyY2VVcGRhdGVIABI3CgZyZXN1bHQYAyABKAsyJS5uaXRyaWMucHJv",
+            "dG8uZGVwbG95bWVudHMudjEuVXBSZXN1bHRIAEIJCgdjb250ZW50IoACCg5S",
+            "ZXNvdXJjZVVwZGF0ZRI5CgJpZBgBIAEoCzItLm5pdHJpYy5wcm90by5yZXNv",
+            "dXJjZXMudjEuUmVzb3VyY2VJZGVudGlmaWVyEkUKBmFjdGlvbhgDIAEoDjI1",
+            "Lm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5SZXNvdXJjZURlcGxveW1l",
+            "bnRBY3Rpb24SRQoGc3RhdHVzGAQgASgOMjUubml0cmljLnByb3RvLmRlcGxv",
+            "eW1lbnRzLnYxLlJlc291cmNlRGVwbG95bWVudFN0YXR1cxIUCgxzdWJfcmVz",
+            "b3VyY2UYBSABKAkSDwoHbWVzc2FnZRgGIAEoCSI2CghVcFJlc3VsdBIPCgdz",
+            "dWNjZXNzGAEgASgIEg4KBHRleHQYAiABKAlIAEIJCgdjb250ZW50IlkKFURl",
+            "cGxveW1lbnREb3duUmVxdWVzdBIrCgphdHRyaWJ1dGVzGAEgASgLMhcuZ29v",
+            "Z2xlLnByb3RvYnVmLlN0cnVjdBITCgtpbnRlcmFjdGl2ZRgCIAEoCCKtAQoT",
+            "RGVwbG95bWVudERvd25FdmVudBIRCgdtZXNzYWdlGAEgASgJSAASOQoGcmVz",
+            "dWx0GAIgASgLMicubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLkRvd25S",
+            "ZXN1bHRIABI9CgZ1cGRhdGUYAyABKAsyKy5uaXRyaWMucHJvdG8uZGVwbG95",
+            "bWVudHMudjEuUmVzb3VyY2VVcGRhdGVIAEIJCgdjb250ZW50IgwKCkRvd25S",
+            "ZXN1bHQiGgoLSW1hZ2VTb3VyY2USCwoDdXJpGAEgASgJIv4BCgdTZXJ2aWNl",
+            "EjkKBWltYWdlGAEgASgLMigubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYx",
+            "LkltYWdlU291cmNlSAASDwoHd29ya2VycxgKIAEoBRITCgd0aW1lb3V0GAsg",
+            "ASgFQgIYARISCgZtZW1vcnkYDCABKAVCAhgBEgwKBHR5cGUYDSABKAkSOgoD",
+            "ZW52GA4gAygLMi0ubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLlNlcnZp",
+            "Y2UuRW52RW50cnkaKgoIRW52RW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVl",
+            "GAIgASgJOgI4AUIICgZzb3VyY2UiWQoDSm9iEgwKBG5hbWUYASABKAkSRAoM",
+            "cmVxdWlyZW1lbnRzGAIgASgLMi4ubml0cmljLnByb3RvLmJhdGNoLnYxLkpv",
+            "YlJlc291cmNlUmVxdWlyZW1lbnRzIvABCgVCYXRjaBI5CgVpbWFnZRgBIAEo",
+            "CzIoLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5JbWFnZVNvdXJjZUgA",
+            "EgwKBHR5cGUYCiABKAkSOAoDZW52GAsgAygLMisubml0cmljLnByb3RvLmRl",
+            "cGxveW1lbnRzLnYxLkJhdGNoLkVudkVudHJ5Ei4KBGpvYnMYDCADKAsyIC5u",
+            "aXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuSm9iGioKCEVudkVudHJ5EgsK",
+            "A2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFCCAoGc291cmNlIkgKBkJ1",
+            "Y2tldBI+CglsaXN0ZW5lcnMYASADKAsyKy5uaXRyaWMucHJvdG8uZGVwbG95",
+            "bWVudHMudjEuQnVja2V0TGlzdGVuZXIiawoOQnVja2V0TGlzdGVuZXISPAoG",
+            "Y29uZmlnGAEgASgLMiwubml0cmljLnByb3RvLnN0b3JhZ2UudjEuUmVnaXN0",
+            "cmF0aW9uUmVxdWVzdBIRCgdzZXJ2aWNlGAIgASgJSABCCAoGdGFyZ2V0Ik8K",
+            "BVRvcGljEkYKDXN1YnNjcmlwdGlvbnMYASADKAsyLy5uaXRyaWMucHJvdG8u",
+            "ZGVwbG95bWVudHMudjEuU3Vic2NyaXB0aW9uVGFyZ2V0IgcKBVF1ZXVlIg8K",
+            "DUtleVZhbHVlU3RvcmUiCAoGU2VjcmV0IjEKElN1YnNjcmlwdGlvblRhcmdl",
+            "dBIRCgdzZXJ2aWNlGAEgASgJSABCCAoGdGFyZ2V0IlQKEVRvcGljU3Vic2Ny",
+            "aXB0aW9uEj8KBnRhcmdldBgBIAEoCzIvLm5pdHJpYy5wcm90by5kZXBsb3lt",
+            "ZW50cy52MS5TdWJzY3JpcHRpb25UYXJnZXQiKQoKSHR0cFRhcmdldBIRCgdz",
+            "ZXJ2aWNlGAEgASgJSABCCAoGdGFyZ2V0Ij8KBEh0dHASNwoGdGFyZ2V0GAEg",
+            "ASgLMicubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLkh0dHBUYXJnZXQi",
+            "JAoDQXBpEhEKB29wZW5hcGkYASABKAlIAEIKCghkb2N1bWVudCLgAQoJV2Vi",
+            "c29ja2V0EkQKDmNvbm5lY3RfdGFyZ2V0GAEgASgLMiwubml0cmljLnByb3Rv",
+            "LmRlcGxveW1lbnRzLnYxLldlYnNvY2tldFRhcmdldBJHChFkaXNjb25uZWN0",
+            "X3RhcmdldBgCIAEoCzIsLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5X",
+            "ZWJzb2NrZXRUYXJnZXQSRAoObWVzc2FnZV90YXJnZXQYAyABKAsyLC5uaXRy",
+            "aWMucHJvdG8uZGVwbG95bWVudHMudjEuV2Vic29ja2V0VGFyZ2V0Ii4KD1dl",
+            "YnNvY2tldFRhcmdldBIRCgdzZXJ2aWNlGAEgASgJSABCCAoGdGFyZ2V0Ii0K",
+            "DlNjaGVkdWxlVGFyZ2V0EhEKB3NlcnZpY2UYASABKAlIAEIICgZ0YXJnZXQi",
+            "ygEKCFNjaGVkdWxlEjsKBnRhcmdldBgBIAEoCzIrLm5pdHJpYy5wcm90by5k",
+            "ZXBsb3ltZW50cy52MS5TY2hlZHVsZVRhcmdldBI7CgVldmVyeRgKIAEoCzIq",
+            "Lm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5TY2hlZHVsZUV2ZXJ5SAAS",
+            "OQoEY3JvbhgLIAEoCzIpLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5T",
+            "Y2hlZHVsZUNyb25IAEIJCgdjYWRlbmNlIjAKC1NxbERhdGFiYXNlEhMKCWlt",
+            "YWdlX3VyaRgBIAEoCUgAQgwKCm1pZ3JhdGlvbnMiHQoNU2NoZWR1bGVFdmVy",
+            "eRIMCgRyYXRlGAEgASgJIiIKDFNjaGVkdWxlQ3JvbhISCgpleHByZXNzaW9u",
+            "GAEgASgJIrEGCghSZXNvdXJjZRI5CgJpZBgBIAEoCzItLm5pdHJpYy5wcm90",
+            "by5yZXNvdXJjZXMudjEuUmVzb3VyY2VJZGVudGlmaWVyEjcKB3NlcnZpY2UY",
+            "CiABKAsyJC5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuU2VydmljZUgA",
+            "EjUKBmJ1Y2tldBgLIAEoCzIjLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52",
+            "MS5CdWNrZXRIABIzCgV0b3BpYxgMIAEoCzIiLm5pdHJpYy5wcm90by5kZXBs",
+            "b3ltZW50cy52MS5Ub3BpY0gAEi8KA2FwaRgNIAEoCzIgLm5pdHJpYy5wcm90",
+            "by5kZXBsb3ltZW50cy52MS5BcGlIABI1CgZwb2xpY3kYDiABKAsyIy5uaXRy",
+            "aWMucHJvdG8uZGVwbG95bWVudHMudjEuUG9saWN5SAASOQoIc2NoZWR1bGUY",
+            "DyABKAsyJS5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuU2NoZWR1bGVI",
+            "ABJFCg9rZXlfdmFsdWVfc3RvcmUYECABKAsyKi5uaXRyaWMucHJvdG8uZGVw",
+            "bG95bWVudHMudjEuS2V5VmFsdWVTdG9yZUgAEjUKBnNlY3JldBgRIAEoCzIj",
+            "Lm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5TZWNyZXRIABI7Cgl3ZWJz",
+            "b2NrZXQYEiABKAsyJi5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuV2Vi",
+            "c29ja2V0SAASMQoEaHR0cBgTIAEoCzIhLm5pdHJpYy5wcm90by5kZXBsb3lt",
+            "ZW50cy52MS5IdHRwSAASMwoFcXVldWUYFCABKAsyIi5uaXRyaWMucHJvdG8u",
+            "ZGVwbG95bWVudHMudjEuUXVldWVIABJACgxzcWxfZGF0YWJhc2UYFSABKAsy",
+            "KC5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuU3FsRGF0YWJhc2VIABIz",
+            "CgViYXRjaBgWIAEoCzIiLm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5C",
+            "YXRjaEgAQggKBmNvbmZpZyKxAQoGUG9saWN5EjkKCnByaW5jaXBhbHMYASAD",
+            "KAsyJS5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuUmVzb3VyY2USMgoH",
+            "YWN0aW9ucxgCIAMoDjIhLm5pdHJpYy5wcm90by5yZXNvdXJjZXMudjEuQWN0",
+            "aW9uEjgKCXJlc291cmNlcxgDIAMoCzIlLm5pdHJpYy5wcm90by5kZXBsb3lt",
+            "ZW50cy52MS5SZXNvdXJjZSJACgRTcGVjEjgKCXJlc291cmNlcxgBIAMoCzIl",
+            "Lm5pdHJpYy5wcm90by5kZXBsb3ltZW50cy52MS5SZXNvdXJjZSpVChhSZXNv",
+            "dXJjZURlcGxveW1lbnRBY3Rpb24SCgoGQ1JFQVRFEAASCgoGVVBEQVRFEAES",
+            "CwoHUkVQTEFDRRACEggKBFNBTUUQAxIKCgZERUxFVEUQBCpRChhSZXNvdXJj",
+            "ZURlcGxveW1lbnRTdGF0dXMSCwoHUEVORElORxAAEg8KC0lOX1BST0dSRVNT",
+            "EAESCwoHU1VDQ0VTUxACEgoKBkZBSUxFRBADMuYBCgpEZXBsb3ltZW50EmgK",
+            "AlVwEjAubml0cmljLnByb3RvLmRlcGxveW1lbnRzLnYxLkRlcGxveW1lbnRV",
+            "cFJlcXVlc3QaLi5uaXRyaWMucHJvdG8uZGVwbG95bWVudHMudjEuRGVwbG95",
+            "bWVudFVwRXZlbnQwARJuCgREb3duEjIubml0cmljLnByb3RvLmRlcGxveW1l",
+            "bnRzLnYxLkRlcGxveW1lbnREb3duUmVxdWVzdBowLm5pdHJpYy5wcm90by5k",
+            "ZXBsb3ltZW50cy52MS5EZXBsb3ltZW50RG93bkV2ZW50MAFCvAEKHmlvLm5p",
+            "dHJpYy5wcm90by5kZXBsb3ltZW50cy52MUISRGVwbG95bWVudHNTZXJ2aWNl",
+            "UAFaSGdpdGh1Yi5jb20vbml0cmljdGVjaC9uaXRyaWMvY29yZS9wa2cvcHJv",
+            "dG8vZGVwbG95bWVudHMvdjE7ZGVwbG95bWVudHNwYqoCG05pdHJpYy5Qcm90",
+            "by5EZXBsb3ltZW50cy52McoCG05pdHJpY1xQcm90b1xEZXBsb3ltZW50c1xW",
+            "MWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.StructReflection.Descriptor, global::Nitric.Proto.Resources.v1.ResourcesReflection.Descriptor, global::Nitric.Proto.Storage.v1.StorageReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.StructReflection.Descriptor, global::Nitric.Proto.Batch.v1.BatchReflection.Descriptor, global::Nitric.Proto.Resources.v1.ResourcesReflection.Descriptor, global::Nitric.Proto.Storage.v1.StorageReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Nitric.Proto.Deployments.v1.ResourceDeploymentAction), typeof(global::Nitric.Proto.Deployments.v1.ResourceDeploymentStatus), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.DeploymentUpRequest), global::Nitric.Proto.Deployments.v1.DeploymentUpRequest.Parser, new[]{ "Spec", "Attributes", "Interactive" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.DeploymentUpEvent), global::Nitric.Proto.Deployments.v1.DeploymentUpEvent.Parser, new[]{ "Message", "Update", "Result" }, new[]{ "Content" }, null, null, null),
@@ -128,6 +140,8 @@ namespace Nitric.Proto.Deployments.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.DownResult), global::Nitric.Proto.Deployments.v1.DownResult.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.ImageSource), global::Nitric.Proto.Deployments.v1.ImageSource.Parser, new[]{ "Uri" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Service), global::Nitric.Proto.Deployments.v1.Service.Parser, new[]{ "Image", "Workers", "Timeout", "Memory", "Type", "Env" }, new[]{ "Source" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Job), global::Nitric.Proto.Deployments.v1.Job.Parser, new[]{ "Name", "Requirements" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Batch), global::Nitric.Proto.Deployments.v1.Batch.Parser, new[]{ "Image", "Type", "Env", "Jobs" }, new[]{ "Source" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Bucket), global::Nitric.Proto.Deployments.v1.Bucket.Parser, new[]{ "Listeners" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.BucketListener), global::Nitric.Proto.Deployments.v1.BucketListener.Parser, new[]{ "Config", "Service" }, new[]{ "Target" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Topic), global::Nitric.Proto.Deployments.v1.Topic.Parser, new[]{ "Subscriptions" }, null, null, null, null),
@@ -143,9 +157,10 @@ namespace Nitric.Proto.Deployments.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.WebsocketTarget), global::Nitric.Proto.Deployments.v1.WebsocketTarget.Parser, new[]{ "Service" }, new[]{ "Target" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.ScheduleTarget), global::Nitric.Proto.Deployments.v1.ScheduleTarget.Parser, new[]{ "Service" }, new[]{ "Target" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Schedule), global::Nitric.Proto.Deployments.v1.Schedule.Parser, new[]{ "Target", "Every", "Cron" }, new[]{ "Cadence" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.SqlDatabase), global::Nitric.Proto.Deployments.v1.SqlDatabase.Parser, new[]{ "ImageUri" }, new[]{ "Migrations" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.ScheduleEvery), global::Nitric.Proto.Deployments.v1.ScheduleEvery.Parser, new[]{ "Rate" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.ScheduleCron), global::Nitric.Proto.Deployments.v1.ScheduleCron.Parser, new[]{ "Expression" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Resource), global::Nitric.Proto.Deployments.v1.Resource.Parser, new[]{ "Id", "Service", "Bucket", "Topic", "Api", "Policy", "Schedule", "KeyValueStore", "Secret", "Websocket", "Http", "Queue" }, new[]{ "Config" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Resource), global::Nitric.Proto.Deployments.v1.Resource.Parser, new[]{ "Id", "Service", "Bucket", "Topic", "Api", "Policy", "Schedule", "KeyValueStore", "Secret", "Websocket", "Http", "Queue", "SqlDatabase", "Batch" }, new[]{ "Config" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Policy), global::Nitric.Proto.Deployments.v1.Policy.Parser, new[]{ "Principals", "Actions", "Resources" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Nitric.Proto.Deployments.v1.Spec), global::Nitric.Proto.Deployments.v1.Spec.Parser, new[]{ "Resources" }, null, null, null, null)
           }));
@@ -183,7 +198,7 @@ namespace Nitric.Proto.Deployments.v1 {
     /// </summary>
     [pbr::OriginalName("PENDING")] Pending = 0,
     /// <summary>
-    /// The action in currently in-flight, e.g. waiting for cloud provder to provision a resource
+    /// The action in currently in-flight, e.g. waiting for cloud provider to provision a resource
     /// </summary>
     [pbr::OriginalName("IN_PROGRESS")] InProgress = 1,
     /// <summary>
@@ -2619,6 +2634,543 @@ namespace Nitric.Proto.Deployments.v1 {
 
   }
 
+  public sealed partial class Job : pb::IMessage<Job>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Job> _parser = new pb::MessageParser<Job>(() => new Job());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Job> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Job() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Job(Job other) : this() {
+      name_ = other.name_;
+      requirements_ = other.requirements_ != null ? other.requirements_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Job Clone() {
+      return new Job(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
+    /// <summary>
+    /// The name of the job to create
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "requirements" field.</summary>
+    public const int RequirementsFieldNumber = 2;
+    private global::Nitric.Proto.Batch.v1.JobResourceRequirements requirements_;
+    /// <summary>
+    /// The default resource requirements of the job
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Batch.v1.JobResourceRequirements Requirements {
+      get { return requirements_; }
+      set {
+        requirements_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Job);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Job other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (!object.Equals(Requirements, other.Requirements)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (requirements_ != null) hash ^= Requirements.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (requirements_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Requirements);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (requirements_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Requirements);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (requirements_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Requirements);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Job other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.requirements_ != null) {
+        if (requirements_ == null) {
+          Requirements = new global::Nitric.Proto.Batch.v1.JobResourceRequirements();
+        }
+        Requirements.MergeFrom(other.Requirements);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (requirements_ == null) {
+              Requirements = new global::Nitric.Proto.Batch.v1.JobResourceRequirements();
+            }
+            input.ReadMessage(Requirements);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (requirements_ == null) {
+              Requirements = new global::Nitric.Proto.Batch.v1.JobResourceRequirements();
+            }
+            input.ReadMessage(Requirements);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class Batch : pb::IMessage<Batch>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Batch> _parser = new pb::MessageParser<Batch>(() => new Batch());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Batch> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Batch() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Batch(Batch other) : this() {
+      type_ = other.type_;
+      env_ = other.env_.Clone();
+      jobs_ = other.jobs_.Clone();
+      switch (other.SourceCase) {
+        case SourceOneofCase.Image:
+          Image = other.Image.Clone();
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Batch Clone() {
+      return new Batch(this);
+    }
+
+    /// <summary>Field number for the "image" field.</summary>
+    public const int ImageFieldNumber = 1;
+    /// <summary>
+    /// Image URI for this batch service
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Deployments.v1.ImageSource Image {
+      get { return sourceCase_ == SourceOneofCase.Image ? (global::Nitric.Proto.Deployments.v1.ImageSource) source_ : null; }
+      set {
+        source_ = value;
+        sourceCase_ = value == null ? SourceOneofCase.None : SourceOneofCase.Image;
+      }
+    }
+
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 10;
+    private string type_ = "";
+    /// <summary>
+    /// A simple type property
+    /// describes the requested type of batch that this should be
+    /// for this project, a provider can implement how this request is satisfied
+    /// in any way
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Type {
+      get { return type_; }
+      set {
+        type_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "env" field.</summary>
+    public const int EnvFieldNumber = 11;
+    private static readonly pbc::MapField<string, string>.Codec _map_env_codec
+        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForString(18, ""), 90);
+    private readonly pbc::MapField<string, string> env_ = new pbc::MapField<string, string>();
+    /// <summary>
+    /// Environment variables for this Batch
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<string, string> Env {
+      get { return env_; }
+    }
+
+    /// <summary>Field number for the "jobs" field.</summary>
+    public const int JobsFieldNumber = 12;
+    private static readonly pb::FieldCodec<global::Nitric.Proto.Deployments.v1.Job> _repeated_jobs_codec
+        = pb::FieldCodec.ForMessage(98, global::Nitric.Proto.Deployments.v1.Job.Parser);
+    private readonly pbc::RepeatedField<global::Nitric.Proto.Deployments.v1.Job> jobs_ = new pbc::RepeatedField<global::Nitric.Proto.Deployments.v1.Job>();
+    /// <summary>
+    /// Jobs that are defined in this Batch
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Nitric.Proto.Deployments.v1.Job> Jobs {
+      get { return jobs_; }
+    }
+
+    private object source_;
+    /// <summary>Enum of possible cases for the "source" oneof.</summary>
+    public enum SourceOneofCase {
+      None = 0,
+      Image = 1,
+    }
+    private SourceOneofCase sourceCase_ = SourceOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SourceOneofCase SourceCase {
+      get { return sourceCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearSource() {
+      sourceCase_ = SourceOneofCase.None;
+      source_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Batch);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Batch other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Image, other.Image)) return false;
+      if (Type != other.Type) return false;
+      if (!Env.Equals(other.Env)) return false;
+      if(!jobs_.Equals(other.jobs_)) return false;
+      if (SourceCase != other.SourceCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (sourceCase_ == SourceOneofCase.Image) hash ^= Image.GetHashCode();
+      if (Type.Length != 0) hash ^= Type.GetHashCode();
+      hash ^= Env.GetHashCode();
+      hash ^= jobs_.GetHashCode();
+      hash ^= (int) sourceCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (sourceCase_ == SourceOneofCase.Image) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Image);
+      }
+      if (Type.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteString(Type);
+      }
+      env_.WriteTo(output, _map_env_codec);
+      jobs_.WriteTo(output, _repeated_jobs_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (sourceCase_ == SourceOneofCase.Image) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Image);
+      }
+      if (Type.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteString(Type);
+      }
+      env_.WriteTo(ref output, _map_env_codec);
+      jobs_.WriteTo(ref output, _repeated_jobs_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (sourceCase_ == SourceOneofCase.Image) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Image);
+      }
+      if (Type.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Type);
+      }
+      size += env_.CalculateSize(_map_env_codec);
+      size += jobs_.CalculateSize(_repeated_jobs_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Batch other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Type.Length != 0) {
+        Type = other.Type;
+      }
+      env_.Add(other.env_);
+      jobs_.Add(other.jobs_);
+      switch (other.SourceCase) {
+        case SourceOneofCase.Image:
+          if (Image == null) {
+            Image = new global::Nitric.Proto.Deployments.v1.ImageSource();
+          }
+          Image.MergeFrom(other.Image);
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            global::Nitric.Proto.Deployments.v1.ImageSource subBuilder = new global::Nitric.Proto.Deployments.v1.ImageSource();
+            if (sourceCase_ == SourceOneofCase.Image) {
+              subBuilder.MergeFrom(Image);
+            }
+            input.ReadMessage(subBuilder);
+            Image = subBuilder;
+            break;
+          }
+          case 82: {
+            Type = input.ReadString();
+            break;
+          }
+          case 90: {
+            env_.AddEntriesFrom(input, _map_env_codec);
+            break;
+          }
+          case 98: {
+            jobs_.AddEntriesFrom(input, _repeated_jobs_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            global::Nitric.Proto.Deployments.v1.ImageSource subBuilder = new global::Nitric.Proto.Deployments.v1.ImageSource();
+            if (sourceCase_ == SourceOneofCase.Image) {
+              subBuilder.MergeFrom(Image);
+            }
+            input.ReadMessage(subBuilder);
+            Image = subBuilder;
+            break;
+          }
+          case 82: {
+            Type = input.ReadString();
+            break;
+          }
+          case 90: {
+            env_.AddEntriesFrom(ref input, _map_env_codec);
+            break;
+          }
+          case 98: {
+            jobs_.AddEntriesFrom(ref input, _repeated_jobs_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class Bucket : pb::IMessage<Bucket>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -2631,7 +3183,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2792,7 +3344,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3040,7 +3592,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3201,7 +3753,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3337,7 +3889,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3473,7 +4025,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3609,7 +4161,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3812,7 +4364,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3993,7 +4545,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4199,7 +4751,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4380,7 +4932,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4587,7 +5139,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4867,7 +5419,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5070,7 +5622,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5273,7 +5825,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[23]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5571,6 +6123,209 @@ namespace Nitric.Proto.Deployments.v1 {
 
   }
 
+  public sealed partial class SqlDatabase : pb::IMessage<SqlDatabase>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SqlDatabase> _parser = new pb::MessageParser<SqlDatabase>(() => new SqlDatabase());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SqlDatabase> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[26]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SqlDatabase() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SqlDatabase(SqlDatabase other) : this() {
+      switch (other.MigrationsCase) {
+        case MigrationsOneofCase.ImageUri:
+          ImageUri = other.ImageUri;
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SqlDatabase Clone() {
+      return new SqlDatabase(this);
+    }
+
+    /// <summary>Field number for the "image_uri" field.</summary>
+    public const int ImageUriFieldNumber = 1;
+    /// <summary>
+    /// The URI of a docker image to use to execute the migrations for this database
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ImageUri {
+      get { return migrationsCase_ == MigrationsOneofCase.ImageUri ? (string) migrations_ : ""; }
+      set {
+        migrations_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        migrationsCase_ = MigrationsOneofCase.ImageUri;
+      }
+    }
+
+    private object migrations_;
+    /// <summary>Enum of possible cases for the "migrations" oneof.</summary>
+    public enum MigrationsOneofCase {
+      None = 0,
+      ImageUri = 1,
+    }
+    private MigrationsOneofCase migrationsCase_ = MigrationsOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MigrationsOneofCase MigrationsCase {
+      get { return migrationsCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearMigrations() {
+      migrationsCase_ = MigrationsOneofCase.None;
+      migrations_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SqlDatabase);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SqlDatabase other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ImageUri != other.ImageUri) return false;
+      if (MigrationsCase != other.MigrationsCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (migrationsCase_ == MigrationsOneofCase.ImageUri) hash ^= ImageUri.GetHashCode();
+      hash ^= (int) migrationsCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (migrationsCase_ == MigrationsOneofCase.ImageUri) {
+        output.WriteRawTag(10);
+        output.WriteString(ImageUri);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (migrationsCase_ == MigrationsOneofCase.ImageUri) {
+        output.WriteRawTag(10);
+        output.WriteString(ImageUri);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (migrationsCase_ == MigrationsOneofCase.ImageUri) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ImageUri);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SqlDatabase other) {
+      if (other == null) {
+        return;
+      }
+      switch (other.MigrationsCase) {
+        case MigrationsOneofCase.ImageUri:
+          ImageUri = other.ImageUri;
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            ImageUri = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            ImageUri = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class ScheduleEvery : pb::IMessage<ScheduleEvery>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -5583,7 +6338,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[24]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5758,7 +6513,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[25]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[28]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5933,7 +6688,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[26]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[29]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5984,6 +6739,12 @@ namespace Nitric.Proto.Deployments.v1 {
           break;
         case ConfigOneofCase.Queue:
           Queue = other.Queue.Clone();
+          break;
+        case ConfigOneofCase.SqlDatabase:
+          SqlDatabase = other.SqlDatabase.Clone();
+          break;
+        case ConfigOneofCase.Batch:
+          Batch = other.Batch.Clone();
           break;
       }
 
@@ -6127,6 +6888,28 @@ namespace Nitric.Proto.Deployments.v1 {
       }
     }
 
+    /// <summary>Field number for the "sql_database" field.</summary>
+    public const int SqlDatabaseFieldNumber = 21;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Deployments.v1.SqlDatabase SqlDatabase {
+      get { return configCase_ == ConfigOneofCase.SqlDatabase ? (global::Nitric.Proto.Deployments.v1.SqlDatabase) config_ : null; }
+      set {
+        config_ = value;
+        configCase_ = value == null ? ConfigOneofCase.None : ConfigOneofCase.SqlDatabase;
+      }
+    }
+
+    /// <summary>Field number for the "batch" field.</summary>
+    public const int BatchFieldNumber = 22;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Nitric.Proto.Deployments.v1.Batch Batch {
+      get { return configCase_ == ConfigOneofCase.Batch ? (global::Nitric.Proto.Deployments.v1.Batch) config_ : null; }
+      set {
+        config_ = value;
+        configCase_ = value == null ? ConfigOneofCase.None : ConfigOneofCase.Batch;
+      }
+    }
+
     private object config_;
     /// <summary>Enum of possible cases for the "config" oneof.</summary>
     public enum ConfigOneofCase {
@@ -6142,6 +6925,8 @@ namespace Nitric.Proto.Deployments.v1 {
       Websocket = 18,
       Http = 19,
       Queue = 20,
+      SqlDatabase = 21,
+      Batch = 22,
     }
     private ConfigOneofCase configCase_ = ConfigOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6180,6 +6965,8 @@ namespace Nitric.Proto.Deployments.v1 {
       if (!object.Equals(Websocket, other.Websocket)) return false;
       if (!object.Equals(Http, other.Http)) return false;
       if (!object.Equals(Queue, other.Queue)) return false;
+      if (!object.Equals(SqlDatabase, other.SqlDatabase)) return false;
+      if (!object.Equals(Batch, other.Batch)) return false;
       if (ConfigCase != other.ConfigCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -6199,6 +6986,8 @@ namespace Nitric.Proto.Deployments.v1 {
       if (configCase_ == ConfigOneofCase.Websocket) hash ^= Websocket.GetHashCode();
       if (configCase_ == ConfigOneofCase.Http) hash ^= Http.GetHashCode();
       if (configCase_ == ConfigOneofCase.Queue) hash ^= Queue.GetHashCode();
+      if (configCase_ == ConfigOneofCase.SqlDatabase) hash ^= SqlDatabase.GetHashCode();
+      if (configCase_ == ConfigOneofCase.Batch) hash ^= Batch.GetHashCode();
       hash ^= (int) configCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -6264,6 +7053,14 @@ namespace Nitric.Proto.Deployments.v1 {
         output.WriteRawTag(162, 1);
         output.WriteMessage(Queue);
       }
+      if (configCase_ == ConfigOneofCase.SqlDatabase) {
+        output.WriteRawTag(170, 1);
+        output.WriteMessage(SqlDatabase);
+      }
+      if (configCase_ == ConfigOneofCase.Batch) {
+        output.WriteRawTag(178, 1);
+        output.WriteMessage(Batch);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -6321,6 +7118,14 @@ namespace Nitric.Proto.Deployments.v1 {
         output.WriteRawTag(162, 1);
         output.WriteMessage(Queue);
       }
+      if (configCase_ == ConfigOneofCase.SqlDatabase) {
+        output.WriteRawTag(170, 1);
+        output.WriteMessage(SqlDatabase);
+      }
+      if (configCase_ == ConfigOneofCase.Batch) {
+        output.WriteRawTag(178, 1);
+        output.WriteMessage(Batch);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -6365,6 +7170,12 @@ namespace Nitric.Proto.Deployments.v1 {
       }
       if (configCase_ == ConfigOneofCase.Queue) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(Queue);
+      }
+      if (configCase_ == ConfigOneofCase.SqlDatabase) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(SqlDatabase);
+      }
+      if (configCase_ == ConfigOneofCase.Batch) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Batch);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -6449,6 +7260,18 @@ namespace Nitric.Proto.Deployments.v1 {
             Queue = new global::Nitric.Proto.Deployments.v1.Queue();
           }
           Queue.MergeFrom(other.Queue);
+          break;
+        case ConfigOneofCase.SqlDatabase:
+          if (SqlDatabase == null) {
+            SqlDatabase = new global::Nitric.Proto.Deployments.v1.SqlDatabase();
+          }
+          SqlDatabase.MergeFrom(other.SqlDatabase);
+          break;
+        case ConfigOneofCase.Batch:
+          if (Batch == null) {
+            Batch = new global::Nitric.Proto.Deployments.v1.Batch();
+          }
+          Batch.MergeFrom(other.Batch);
           break;
       }
 
@@ -6572,6 +7395,24 @@ namespace Nitric.Proto.Deployments.v1 {
             Queue = subBuilder;
             break;
           }
+          case 170: {
+            global::Nitric.Proto.Deployments.v1.SqlDatabase subBuilder = new global::Nitric.Proto.Deployments.v1.SqlDatabase();
+            if (configCase_ == ConfigOneofCase.SqlDatabase) {
+              subBuilder.MergeFrom(SqlDatabase);
+            }
+            input.ReadMessage(subBuilder);
+            SqlDatabase = subBuilder;
+            break;
+          }
+          case 178: {
+            global::Nitric.Proto.Deployments.v1.Batch subBuilder = new global::Nitric.Proto.Deployments.v1.Batch();
+            if (configCase_ == ConfigOneofCase.Batch) {
+              subBuilder.MergeFrom(Batch);
+            }
+            input.ReadMessage(subBuilder);
+            Batch = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -6692,6 +7533,24 @@ namespace Nitric.Proto.Deployments.v1 {
             Queue = subBuilder;
             break;
           }
+          case 170: {
+            global::Nitric.Proto.Deployments.v1.SqlDatabase subBuilder = new global::Nitric.Proto.Deployments.v1.SqlDatabase();
+            if (configCase_ == ConfigOneofCase.SqlDatabase) {
+              subBuilder.MergeFrom(SqlDatabase);
+            }
+            input.ReadMessage(subBuilder);
+            SqlDatabase = subBuilder;
+            break;
+          }
+          case 178: {
+            global::Nitric.Proto.Deployments.v1.Batch subBuilder = new global::Nitric.Proto.Deployments.v1.Batch();
+            if (configCase_ == ConfigOneofCase.Batch) {
+              subBuilder.MergeFrom(Batch);
+            }
+            input.ReadMessage(subBuilder);
+            Batch = subBuilder;
+            break;
+          }
         }
       }
     }
@@ -6715,7 +7574,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[27]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[30]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6928,7 +7787,7 @@ namespace Nitric.Proto.Deployments.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[28]; }
+      get { return global::Nitric.Proto.Deployments.v1.DeploymentsReflection.Descriptor.MessageTypes[31]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

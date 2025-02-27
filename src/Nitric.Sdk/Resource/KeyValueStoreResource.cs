@@ -28,15 +28,15 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Enables setting values to the key value store,.
         /// </summary>
-        Setting,
+        Set,
         /// <summary>
         /// Enables getting values from the key value store.
         /// </summary>
-        Getting,
+        Get,
         /// <summary>
         /// Enables deleting values from the key value store.
         /// </summary>
-        Deleting,
+        Delete,
     }
 
     public class KeyValueStoreResource<TValue> : SecureResource<KeyValueStorePermission>
@@ -57,15 +57,15 @@ namespace Nitric.Sdk.Resource
             var actionMap = new Dictionary<KeyValueStorePermission, List<Action>>
             {
                 {
-                    KeyValueStorePermission.Setting,
+                    KeyValueStorePermission.Set,
                     new List<Action> { Action.KeyValueStoreWrite }
                 },
                 {
-                    KeyValueStorePermission.Getting,
+                    KeyValueStorePermission.Get,
                     new List<Action> { Action.KeyValueStoreRead }
                 },
                 {
-                    KeyValueStorePermission.Deleting,
+                    KeyValueStorePermission.Delete,
                     new List<Action> { Action.KeyValueStoreDelete }
                 }
             };

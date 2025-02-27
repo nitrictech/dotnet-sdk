@@ -1,7 +1,7 @@
 .PHONY: test
 
 # the version of of https://github.com/nitrictech/nitric to use in base client generation.
-NITRIC_VERSION := 1.1.1
+NITRIC_VERSION := 1.17.0
 
 generate: clean download build
 

@@ -14,7 +14,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Nitric.Sdk.Resource;
 using Nitric.Sdk.Worker;
@@ -146,5 +145,12 @@ namespace Nitric.Sdk
                 return new OidcOptions(name, issuer, audiences, scopes);
             };
         }
+
+        /// <summary>
+        /// Declare a SQL resource to access a relational database.
+        /// </summary>
+        /// <param name="name">The unique name of the database within this application.</param>
+        /// <returns>A SQL resource, if the name has already been declared the same resource will be returned.</returns>
+        public static SqlResource Sql(string name, string migrations = "") => Register(name, t => new SqlResource(t, migrations));
     }
 }

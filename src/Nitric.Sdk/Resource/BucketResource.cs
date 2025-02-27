@@ -34,15 +34,15 @@ namespace Nitric.Sdk.Resource
         /// <summary>
         /// Enables listing and reading files in the bucket.
         /// </summary>
-        Reading,
+        Read,
         /// <summary>
         /// Enables adding or updating files in the bucket.
         /// </summary>
-        Writing,
+        Write,
         /// <summary>
         /// Enables deleting files from the bucket.
         /// </summary>
-        Deleting
+        Delete
     }
 
     public class BucketResource : SecureResource<BucketPermission>
@@ -63,15 +63,15 @@ namespace Nitric.Sdk.Resource
             var actionMap = new Dictionary<BucketPermission, List<Action>>
             {
                 {
-                    BucketPermission.Reading,
+                    BucketPermission.Read,
                     new List<Action> { Action.BucketFileList, Action.BucketFileGet }
                 },
                 {
-                    BucketPermission.Writing,
+                    BucketPermission.Write,
                     new List<Action> { Action.BucketFilePut }
                 },
                 {
-                    BucketPermission.Deleting,
+                    BucketPermission.Delete,
                     new List<Action> { Action.BucketFileDelete }
                 }
             };

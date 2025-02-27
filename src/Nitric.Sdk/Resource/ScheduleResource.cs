@@ -16,7 +16,6 @@ using Nitric.Sdk.Service;
 using Nitric.Sdk.Worker;
 using Nitric.Proto.Schedules.v1;
 using Nitric.Proto.Resources.v1;
-using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
 using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
 
 namespace Nitric.Sdk.Resource
