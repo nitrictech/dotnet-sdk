@@ -152,5 +152,12 @@ namespace Nitric.Sdk
         /// <param name="name">The unique name of the database within this application.</param>
         /// <returns>A SQL resource, if the name has already been declared the same resource will be returned.</returns>
         public static SqlResource Sql(string name, string migrations = "") => Register(name, t => new SqlResource(t, migrations));
+
+        /// <summary>
+        /// Declare a websocket resource for bidirectional HTTP communication.
+        /// </summary>
+        /// <param name="name">The unique name of the websocket within this application.</param>
+        /// <returns>A websocket resource, if the name has already been declared the same resource will be returned.</returns>
+        public static JobResource Job(string name) => Register(name, t => new JobResource(t));
     }
 }

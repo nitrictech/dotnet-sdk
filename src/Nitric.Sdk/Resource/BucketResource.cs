@@ -21,8 +21,6 @@ using Nitric.Sdk.Storage;
 using Nitric.Sdk.Worker;
 using Nitric.Proto.Storage.v1;
 using Action = Nitric.Proto.Resources.v1.Action;
-using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
-using System.Runtime.InteropServices;
 
 namespace Nitric.Sdk.Resource
 {
