@@ -339,7 +339,7 @@ namespace Nitric.Sdk.Resource
             {
                 context = handler(context);
                 return next(context);
-            };
+            }
             return this.Opts.Middlewares.Append(ComposedMiddleware).ToArray();
         }
 

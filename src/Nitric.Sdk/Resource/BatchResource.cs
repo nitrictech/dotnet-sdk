@@ -121,7 +121,7 @@ namespace Nitric.Sdk.Resource
 
             this.RegisterPolicy(allPerms);
 
-            return BatchClient.Job<T>(this.Name);
+            return new BatchClient().Job<T>(this.Name);
         }
     }
 }
