@@ -23,6 +23,7 @@ using Action = Nitric.Proto.Resources.v1.Action;
 using GrpcClient = Nitric.Proto.Websockets.v1.Websocket.WebsocketClient;
 using Nitric.Sdk.Worker;
 using Nitric.Proto.Websockets.v1;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Resource
 {

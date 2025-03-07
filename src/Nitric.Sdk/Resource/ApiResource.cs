@@ -71,22 +71,8 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
-        public void Get(string route, Func<HttpContext, HttpContext> handler) => Route(route).Get(handler);
-
-        /// <summary>
-        /// Create a new GET handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handlers">The handler to run.</param>
-        public void Get(string route, Middleware<HttpContext>[] handlers) => Route(route).Get(handlers);
-
-        /// <summary>
-        /// Create a new GET handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Get(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Get(handler);
+        public void Get(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Get(handler);
 
         /// <summary>
         /// Create a new GET handler on the specified route.
@@ -94,21 +80,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handlers">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Get(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Get(handlers);
-
-        /// <summary>
-        /// Create a new POST handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handler">The handler to run.</param>
-        public void Post(string route, Func<HttpContext, HttpContext> handler) => Route(route).Post(handler);
-
-        /// <summary>
-        /// Create a new POST handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handlers">The handler to run.</param>
-        public void Post(string route, Middleware<HttpContext>[] handlers) => Route(route).Post(handlers);
+        public void Get(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Get(handlers);
 
         /// <summary>
         /// Create a new POST handler on the specified route.
@@ -116,7 +88,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Post(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Post(handler);
+        public void Post(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Post(handler);
 
         /// <summary>
         /// Create a new POST handler on the specified route.
@@ -124,21 +96,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handlers">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Post(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Post(handlers);
-
-        /// <summary>
-        /// Create a new PUT handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handler">The handler to run.</param>
-        public void Put(string route, Func<HttpContext, HttpContext> handler) => Route(route).Put(handler);
-
-        /// <summary>
-        /// Create a new PUT handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handlers">The handler to run.</param>
-        public void Put(string route, params Middleware<HttpContext>[] handlers) => Route(route).Put(handlers);
+        public void Post(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Post(handlers);
 
         /// <summary>
         /// Create a new PUT handler on the specified route.
@@ -146,7 +104,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Put(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Put(handler);
+        public void Put(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Put(handler);
 
         /// <summary>
         /// Create a new PUT handler on the specified route.
@@ -154,21 +112,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handlers">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Put(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Put(handlers);
-
-        /// <summary>
-        /// Create a new DELETE handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handler">The handler to run.</param>
-        public void Delete(string route, Func<HttpContext, HttpContext> handler) => Route(route).Delete(handler);
-
-        /// <summary>
-        /// Create a new DELETE handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handlers">The handler to run.</param>
-        public void Delete(string route, params Middleware<HttpContext>[] handlers) => Route(route).Delete(handlers);
+        public void Put(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Put(handlers);
 
         /// <summary>
         /// Create a new DELETE handler on the specified route.
@@ -191,22 +135,8 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
-        public void Options(string route, Func<HttpContext, HttpContext> handler) => Route(route).Options(handler);
-
-        /// <summary>
-        /// Create a new OPTIONS handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handlers">The handler to run.</param>        
-        public void Options(string route, params Middleware<HttpContext>[] handlers) => Route(route).Options(handlers);
-
-        /// <summary>
-        /// Create a new OPTIONS handler on the specified route.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Options(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Options(handler);
+        public void Options(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Options(handler);
 
         /// <summary>
         /// Create a new OPTIONS handler on the specified route.
@@ -214,21 +144,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handlers">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Options(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).Options(handlers);
-
-        /// <summary>
-        /// Create a new handler on the specified route for every HTTP verb.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handler">The handler to run.</param>
-        public void All(string route, Func<HttpContext, HttpContext> handler) => Route(route).All(handler);
-
-        /// <summary>
-        /// Create a new handler on the specified route for every HTTP verb.
-        /// </summary>
-        /// <param name="route">The path to match on.</param>
-        /// <param name="handlers">The handler to run.</param>
-        public void All(string route, params Middleware<HttpContext>[] handlers) => Route(route).All(handlers);
+        public void Options(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Options(handlers);
 
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
@@ -236,7 +152,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void All(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security) => Route(route, new RouteOptions(security: security)).All(handler);
+        public void All(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).All(handler);
 
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
@@ -244,7 +160,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handlers">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void All(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security) => Route(route, new RouteOptions(security)).All(handlers);
+        public void All(string route, Middleware<HttpContext>[] handlers, OidcOptions[] security = null) => Route(route, new RouteOptions(security)).All(handlers);
 
         /// <summary>
         /// Create a new route on a specified path.
