@@ -382,7 +382,9 @@ namespace Nitric.Sdk.Resource
 
             registrationRequest.Methods.AddRange(methods.Select((method) => method.Method).ToHashSet());
 
-            var apiWorker = new ApiWorker(registrationRequest, middlewares);
+            var orderedMiddlewares = middlewares.Reverse().ToArray();
+
+            var apiWorker = new ApiWorker(registrationRequest, orderedMiddlewares);
 
             Nitric.RegisterWorker(apiWorker);
         }
