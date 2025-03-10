@@ -350,13 +350,13 @@ namespace Nitric.Sdk.Resource
         /// Create a new handler on the specified route for every HTTP verb.
         /// </summary>
         /// <param name="handler">The handler to run.</param>
-        public void All(Func<HttpContext, HttpContext> handler) => Method(this.Path, (HttpMethod[])Enum.GetValues(typeof(HttpMethod)), this.Opts, ConcatMiddleware(handler));
+        public void All(Func<HttpContext, HttpContext> handler) => Method(this.Path, httpMethods, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new chain of middleware on the specified route for every HTTP verb.
         /// </summary>
         /// <param name="handlers">The handler to run.</param>
-        public void All(params Middleware<HttpContext>[] handlers) => Method(this.Path, (HttpMethod[])Enum.GetValues(typeof(HttpMethod)), this.Opts, ConcatMiddleware(handlers));
+        public void All(params Middleware<HttpContext>[] handlers) => Method(this.Path, httpMethods, this.Opts, ConcatMiddleware(handlers));
 
         internal void Method(string route, HttpMethod[] methods, RouteOptions options, Middleware<HttpContext>[] middlewares)
         {
