@@ -19,7 +19,7 @@ using Nitric.Proto.Storage.v1;
 using Nitric.Sdk.Service;
 using Nitric.Sdk.Worker;
 using ProtoBlob = Nitric.Proto.Storage.v1.Blob;
-
+using GrpcClient = Nitric.Proto.Storage.v1.Storage.StorageClient;
 
 namespace Nitric.Sdk.Storage
 {
@@ -28,16 +28,16 @@ namespace Nitric.Sdk.Storage
     /// </summary>
     public class Bucket
     {
-        internal readonly StorageClient Storage;
+        internal readonly GrpcClient Client;
 
         /// <summary>
         /// The name of the bucket.
         /// </summary>
         public string Name { get; private set; }
 
-        internal Bucket(StorageClient storage, string name)
+        internal Bucket(GrpcClient client, string name)
         {
-            this.Storage = storage;
+            this.Client = client;
             this.Name = name;
         }
 
@@ -72,7 +72,7 @@ namespace Nitric.Sdk.Storage
 
             try
             {
-                var resp = this.Storage.Client.ListBlobs(request);
+                var resp = this.Client.ListBlobs(request);
 
                 var files = new List<File>();
 
@@ -104,7 +104,7 @@ namespace Nitric.Sdk.Storage
 
             try
             {
-                var resp = await this.Storage.Client.ListBlobsAsync(request);
+                var resp = await this.Client.ListBlobsAsync(request);
 
                 var files = new List<File>();
 

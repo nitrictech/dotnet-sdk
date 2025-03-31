@@ -16,6 +16,7 @@ using Google.Protobuf;
 using Grpc.Core;
 using Nitric.Proto.Websockets.v1;
 using Nitric.Sdk.Common;
+using GrpcClient = Nitric.Proto.Websockets.v1.Websocket.WebsocketClient;
 
 namespace Nitric.Sdk.Websocket
 {
@@ -28,11 +29,11 @@ namespace Nitric.Sdk.Websocket
 
         public string SocketName { get; set; }
 
-        private readonly WebsocketClient Websocket;
+        private readonly GrpcClient Client;
 
-        internal Connection(WebsocketClient websocket, string connectionId, string socketName)
+        internal Connection(GrpcClient client, string connectionId, string socketName)
         {
-            this.Websocket = websocket;
+            this.Client = client;
             this.Id = connectionId;
             this.SocketName = socketName;
         }
@@ -51,7 +52,7 @@ namespace Nitric.Sdk.Websocket
             };
             try
             {
-                this.Websocket.Client.SendMessage(request);
+                this.Client.SendMessage(request);
             }
             catch (RpcException e)
             {
@@ -73,7 +74,7 @@ namespace Nitric.Sdk.Websocket
             };
             try
             {
-                await this.Websocket.Client.SendMessageAsync(request);
+                await this.Client.SendMessageAsync(request);
             }
             catch (RpcException e)
             {
@@ -94,7 +95,7 @@ namespace Nitric.Sdk.Websocket
 
             try
             {
-                this.Websocket.Client.CloseConnection(request);
+                this.Client.CloseConnection(request);
             }
             catch (RpcException e)
             {
@@ -115,7 +116,7 @@ namespace Nitric.Sdk.Websocket
 
             try
             {
-                await this.Websocket.Client.CloseConnectionAsync(request);
+                await this.Client.CloseConnectionAsync(request);
             }
             catch (RpcException e)
             {

@@ -57,7 +57,7 @@ namespace Nitric.Sdk.Queue
 
             try
             {
-                Queue.Queues.Client.Complete(request);
+                Queue.Client.Complete(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -80,7 +80,7 @@ namespace Nitric.Sdk.Queue
 
             try
             {
-                await Queue.Queues.Client.CompleteAsync(request);
+                await Queue.Client.CompleteAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {

@@ -16,17 +16,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using Nitric.Proto.KvStore.v1;
 using Nitric.Sdk.Common;
+using GrpcClient = Nitric.Proto.KvStore.v1.KvStore.KvStoreClient;
 
 namespace Nitric.Sdk.KeyValueStore
 {
     public class KeyValueStore<T>
     {
         public string Name;
-        private readonly KeyValueStoreClient KeyValueClient;
+        private readonly GrpcClient Client;
 
-        public KeyValueStore(KeyValueStoreClient client, string name)
+        public KeyValueStore(GrpcClient client, string name)
         {
-            this.KeyValueClient = client;
+            this.Client = client;
             this.Name = name;
         }
 
@@ -48,7 +49,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                var resp = KeyValueClient.Client.GetValue(request);
+                var resp = this.Client.GetValue(request);
 
                 return Struct.ToJsonSerializable<T>(resp.Value.Content);
             }
@@ -76,7 +77,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                var resp = await KeyValueClient.Client.GetValueAsync(request);
+                var resp = await this.Client.GetValueAsync(request);
 
                 return Struct.ToJsonSerializable<T>(resp.Value.Content);
             }
@@ -105,7 +106,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                KeyValueClient.Client.SetValue(request);
+                this.Client.SetValue(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -132,7 +133,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                await KeyValueClient.Client.SetValueAsync(request);
+                await this.Client.SetValueAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -157,7 +158,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                KeyValueClient.Client.DeleteKey(request);
+                this.Client.DeleteKey(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -182,7 +183,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                await KeyValueClient.Client.DeleteKeyAsync(request);
+                await this.Client.DeleteKeyAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -203,7 +204,7 @@ namespace Nitric.Sdk.KeyValueStore
 
             try
             {
-                var resp = KeyValueClient.Client.ScanKeys(request);
+                var resp = this.Client.ScanKeys(request);
 
                 return new KeyValueKeysResponseStream(resp.ResponseStream);
 

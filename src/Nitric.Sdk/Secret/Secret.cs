@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nitric.Proto.Secrets.v1;
 using Nitric.Sdk.Common;
+using GrpcClient = Nitric.Proto.Secrets.v1.SecretManager.SecretManagerClient;
 
 namespace Nitric.Sdk.Secret
 {
@@ -27,16 +28,16 @@ namespace Nitric.Sdk.Secret
     {
         private const string LATEST = "latest";
 
-        internal readonly SecretsClient Secrets;
+        internal readonly GrpcClient Client;
 
         /// <summary>
         /// The name of the secret.
         /// </summary>
         public readonly string Name;
 
-        internal Secret(SecretsClient client, string name)
+        internal Secret(GrpcClient client, string name)
         {
-            this.Secrets = client;
+            this.Client = client;
             this.Name = name;
         }
 
@@ -86,10 +87,10 @@ namespace Nitric.Sdk.Secret
             };
             try
             {
-                var secretResponse = Secrets.Client.Put(request);
+                var secretResponse = this.Client.Put(request);
                 return new SecretVersion(
                     new Secret(
-                        this.Secrets,
+                        this.Client,
                         secretResponse.SecretVersion.Secret.Name
                     ),
                     secretResponse.SecretVersion.Version
@@ -120,12 +121,13 @@ namespace Nitric.Sdk.Secret
                 Secret = new Proto.Secrets.v1.Secret { Name = this.Name },
                 Value = Google.Protobuf.ByteString.CopyFrom(Encoding.UTF8.GetBytes(value)),
             };
+
             try
             {
-                var secretResponse = await Secrets.Client.PutAsync(request);
+                var secretResponse = await Client.PutAsync(request);
                 return new SecretVersion(
                     new Secret(
-                        this.Secrets,
+                        this.Client,
                         secretResponse.SecretVersion.Secret.Name
                     ),
                     secretResponse.SecretVersion.Version

@@ -16,11 +16,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Nitric.Proto.Resources.v1;
 using Nitric.Proto.Topics.v1;
+using Nitric.Sdk.Common;
 using Nitric.Sdk.Service;
 using Nitric.Sdk.Topics;
 using Nitric.Sdk.Worker;
 using Action = Nitric.Proto.Resources.v1.Action;
 using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
+using GrpcClient = Nitric.Proto.Topics.v1.Topics.TopicsClient;
 
 namespace Nitric.Sdk.Resource
 {
@@ -37,8 +39,11 @@ namespace Nitric.Sdk.Resource
 
     public class TopicResource<T> : SecureResource<TopicPermission>
     {
-        internal TopicResource(string name) : base(name, ResourceType.Topic)
+        internal readonly GrpcClient Client;
+
+        internal TopicResource(string name, GrpcClient client = null) : base(name, ResourceType.Topic)
         {
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         internal override BaseResource Register()
@@ -99,7 +104,7 @@ namespace Nitric.Sdk.Resource
 
             this.RegisterPolicy(allPerms);
 
-            return new TopicsClient<T>().Topic(this.Name);
+            return new Topic<T>(this.Client, this.Name);
         }
     }
 }

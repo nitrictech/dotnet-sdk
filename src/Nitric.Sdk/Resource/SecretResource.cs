@@ -11,11 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Nitric.Proto.Resources.v1;
-using Nitric.Sdk.Secret;
+using NitricSecret = Nitric.Sdk.Secret.Secret;
 using Action = Nitric.Proto.Resources.v1.Action;
+using GrpcClient = Nitric.Proto.Secrets.v1.SecretManager.SecretManagerClient;
+using Nitric.Sdk.Common;
 
 namespace Nitric.Sdk.Resource
 {
@@ -36,8 +39,11 @@ namespace Nitric.Sdk.Resource
 
     public class SecretResource : SecureResource<SecretPermission>
     {
-        internal SecretResource(string name) : base(name, ResourceType.Secret)
+        internal readonly GrpcClient Client;
+
+        internal SecretResource(string name, GrpcClient client = null) : base(name, ResourceType.Secret)
         {
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         internal override BaseResource Register()
@@ -63,13 +69,14 @@ namespace Nitric.Sdk.Resource
             return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x])).Distinct();
         }
 
-        public Secret.Secret Allow(SecretPermission permission, params SecretPermission[] permissions)
+        public NitricSecret Allow(SecretPermission permission, params SecretPermission[] permissions)
         {
             var allPerms = new List<SecretPermission> { permission };
             allPerms.AddRange(permissions);
 
             this.RegisterPolicy(allPerms);
-            return new SecretsClient().Secret(this.Name);
+
+            return new NitricSecret(this.Client, this.Name);
         }
     }
 }

@@ -23,7 +23,6 @@ using Action = Nitric.Proto.Resources.v1.Action;
 using GrpcClient = Nitric.Proto.Websockets.v1.Websocket.WebsocketClient;
 using Nitric.Sdk.Worker;
 using Nitric.Proto.Websockets.v1;
-using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Resource
 {
@@ -40,11 +39,11 @@ namespace Nitric.Sdk.Resource
 
     public class WebsocketResource : SecureResource<WebsocketPermission>
     {
-        private readonly WebsocketClient wsClient;
+        private readonly GrpcClient Client;
 
-        internal WebsocketResource(string name) : base(name, ResourceType.Websocket)
+        internal WebsocketResource(string name, GrpcClient client = null) : base(name, ResourceType.Websocket)
         {
-            this.wsClient = new WebsocketClient(new GrpcClient(GrpcChannelProvider.GetChannel()));
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         internal override BaseResource Register()
@@ -103,9 +102,19 @@ namespace Nitric.Sdk.Resource
             Nitric.RegisterWorker(websocketWorker);
         }
 
-        public Connection Connection(string connectionId)
+        public Connection Connection(string socket, string connectionId)
         {
-            return this.wsClient.Connection(this.Name, connectionId);
+            if (string.IsNullOrEmpty(socket))
+            {
+                throw new ArgumentNullException(nameof(socket));
+            }
+
+            if (string.IsNullOrEmpty(connectionId))
+            {
+                throw new ArgumentNullException(nameof(connectionId));
+            }
+
+            return new Connection(this.Client, connectionId, socket);
         }
     }
 }

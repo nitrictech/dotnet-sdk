@@ -14,6 +14,7 @@
 
 using Nitric.Proto.Batch.v1;
 using Nitric.Sdk.Common;
+using GrpcClient = Nitric.Proto.Batch.v1.Batch.BatchClient;
 
 namespace Nitric.Sdk.Job
 {
@@ -22,16 +23,16 @@ namespace Nitric.Sdk.Job
     /// </summary>
     public class Job<T>
     {
-        internal readonly BatchClient Batch;
+        internal readonly GrpcClient Client;
 
         /// <summary>
         /// The name of the job.
         /// </summary>
         public string Name { get; private set; }
 
-        internal Job(BatchClient batch, string name)
+        internal Job(GrpcClient batchClient, string name)
         {
-            this.Batch = batch;
+            this.Client = batchClient;
             this.Name = name;
         }
 
@@ -50,7 +51,7 @@ namespace Nitric.Sdk.Job
                 },
             };
 
-            this.Batch.Client.SubmitJob(request);
+            this.Client.SubmitJob(request);
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace Nitric.Sdk.Job
                 },
             };
 
-            await this.Batch.Client.SubmitJobAsync(request);
+            await this.Client.SubmitJobAsync(request);
         }
 
         /// <summary>

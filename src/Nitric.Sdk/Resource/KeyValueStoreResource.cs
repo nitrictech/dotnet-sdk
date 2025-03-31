@@ -17,6 +17,9 @@ using Nitric.Proto.Resources.v1;
 using Nitric.Sdk.KeyValueStore;
 using Action = Nitric.Proto.Resources.v1.Action;
 using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
+using GrpcClient = Nitric.Proto.KvStore.v1.KvStore.KvStoreClient;
+using Nitric.Sdk.Common;
+using System;
 
 namespace Nitric.Sdk.Resource
 {
@@ -39,10 +42,13 @@ namespace Nitric.Sdk.Resource
         Delete,
     }
 
-    public class KeyValueStoreResource<TValue> : SecureResource<KeyValueStorePermission>
+    public class KeyValueStoreResource<T> : SecureResource<KeyValueStorePermission>
     {
-        internal KeyValueStoreResource(string name) : base(name, ResourceType.KeyValueStore)
+        internal readonly GrpcClient Client;
+
+        internal KeyValueStoreResource(string name, GrpcClient client = null) : base(name, ResourceType.KeyValueStore)
         {
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         internal override BaseResource Register()
@@ -73,13 +79,14 @@ namespace Nitric.Sdk.Resource
                 .Distinct();
         }
 
-        public KeyValueStore<TValue> Allow(KeyValueStorePermission permission, params KeyValueStorePermission[] permissions)
+        public KeyValueStore<T> Allow(KeyValueStorePermission permission, params KeyValueStorePermission[] permissions)
         {
             var allPerms = new List<KeyValueStorePermission> { permission };
             allPerms.AddRange(permissions);
 
             this.RegisterPolicy(allPerms);
-            return new KeyValueStoreClient().KV<TValue>(this.Name);
+
+            return new KeyValueStore<T>(this.Client, this.Name);
         }
     }
 }

@@ -11,12 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Nitric.Proto.Resources.v1;
-using Nitric.Sdk.Queue;
+using Nitric.Sdk.Common;
 using Action = Nitric.Proto.Resources.v1.Action;
-using NitricResource = Nitric.Proto.Resources.v1.ResourceIdentifier;
+using GrpcClient = Nitric.Proto.Queues.v1.Queues.QueuesClient;
 
 namespace Nitric.Sdk.Resource
 {
@@ -37,8 +38,10 @@ namespace Nitric.Sdk.Resource
 
     public class QueueResource<T> : SecureResource<QueuePermission>
     {
-        internal QueueResource(string name) : base(name, ResourceType.Queue)
+        internal readonly GrpcClient Client;
+        internal QueueResource(string name, GrpcClient client = null) : base(name, ResourceType.Queue)
         {
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         internal override BaseResource Register()
@@ -75,7 +78,8 @@ namespace Nitric.Sdk.Resource
             allPerms.AddRange(permissions);
 
             this.RegisterPolicy(allPerms);
-            return new QueuesClient().Queue<T>(this.Name);
+
+            return new Queue.Queue<T>(this.Client, this.Name);
         }
     }
 }

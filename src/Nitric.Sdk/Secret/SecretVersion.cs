@@ -58,7 +58,7 @@ namespace Nitric.Sdk.Secret
 
             try
             {
-                var response = this.Secret.Secrets.Client.Access(secret);
+                var response = this.Secret.Client.Access(secret);
                 var value = response.Value.ToByteArray();
                 //Return a new secret value with a reference to this secret version
                 return new SecretValue(
@@ -90,7 +90,7 @@ namespace Nitric.Sdk.Secret
 
             try
             {
-                var response = await this.Secret.Secrets.Client.AccessAsync(secret);
+                var response = await this.Secret.Client.AccessAsync(secret);
 
                 var value = response.Value.ToByteArray();
                 //Return a new secret value with a reference to this secret version

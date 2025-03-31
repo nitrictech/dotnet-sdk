@@ -21,6 +21,8 @@ using Nitric.Sdk.Storage;
 using Nitric.Sdk.Worker;
 using Nitric.Proto.Storage.v1;
 using Action = Nitric.Proto.Resources.v1.Action;
+using Nitric.Sdk.Common;
+using GrpcClient = Nitric.Proto.Storage.v1.Storage.StorageClient;
 
 namespace Nitric.Sdk.Resource
 {
@@ -45,8 +47,11 @@ namespace Nitric.Sdk.Resource
 
     public class BucketResource : SecureResource<BucketPermission>
     {
-        internal BucketResource(string name) : base(name, ResourceType.Bucket)
+        internal readonly GrpcClient Client;
+
+        internal BucketResource(string name, GrpcClient client = null) : base(name, ResourceType.Bucket)
         {
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         internal override BaseResource Register()
@@ -131,7 +136,8 @@ namespace Nitric.Sdk.Resource
             allPerms.AddRange(permissions);
 
             this.RegisterPolicy(allPerms);
-            return new StorageClient().Bucket(this.Name);
+
+            return new Bucket(this.Client, this.Name);
         }
     }
 }

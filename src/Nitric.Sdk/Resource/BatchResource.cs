@@ -21,6 +21,8 @@ using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
 using System.Collections.Generic;
 using Action = Nitric.Proto.Resources.v1.Action;
 using System.Linq;
+using GrpcClient = Nitric.Proto.Batch.v1.Batch.BatchClient;
+using Nitric.Sdk.Common;
 
 namespace Nitric.Sdk.Resource
 {
@@ -64,9 +66,11 @@ namespace Nitric.Sdk.Resource
 
     public class JobResource<T> : SecureResource<JobPermission>
     {
-        internal JobResource(string name) : base(name, ResourceType.Batch)
-        {
+        internal readonly GrpcClient Client;
 
+        internal JobResource(string name, GrpcClient client = null) : base(name, ResourceType.Batch)
+        {
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
         internal override BaseResource Register()
@@ -121,7 +125,7 @@ namespace Nitric.Sdk.Resource
 
             this.RegisterPolicy(allPerms);
 
-            return new BatchClient().Job<T>(this.Name);
+            return new Job<T>(this.Client, this.Name);
         }
     }
 }

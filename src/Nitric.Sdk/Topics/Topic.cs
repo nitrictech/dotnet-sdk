@@ -15,6 +15,7 @@
 using System.Threading.Tasks;
 using Nitric.Proto.Topics.v1;
 using Nitric.Sdk.Common;
+using GrpcClient = Nitric.Proto.Topics.v1.Topics.TopicsClient;
 
 namespace Nitric.Sdk.Topics
 {
@@ -23,15 +24,15 @@ namespace Nitric.Sdk.Topics
     /// </summary>
     public class Topic<T>
     {
-        private readonly TopicsClient<T> TopicsClient;
+        private readonly GrpcClient Client;
         /// <summary>
         /// The name of topic.
         /// </summary>
         public string Name { get; private set; }
 
-        internal Topic(TopicsClient<T> TopicsClient, string name)
+        internal Topic(GrpcClient client, string name)
         {
-            this.TopicsClient = TopicsClient;
+            this.Client = client;
             this.Name = name;
         }
 
@@ -52,7 +53,7 @@ namespace Nitric.Sdk.Topics
 
             try
             {
-                this.TopicsClient.Client.Publish(request);
+                this.Client.Publish(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -77,7 +78,7 @@ namespace Nitric.Sdk.Topics
 
             try
             {
-                await this.TopicsClient.Client.PublishAsync(request);
+                await this.Client.PublishAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {

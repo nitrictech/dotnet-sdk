@@ -66,7 +66,7 @@ namespace Nitric.Sdk.Storage
             };
             try
             {
-                this.Bucket.Storage.Client.Write(request);
+                this.Bucket.Client.Write(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -89,7 +89,7 @@ namespace Nitric.Sdk.Storage
             };
             try
             {
-                this.Bucket.Storage.Client.Write(request);
+                this.Bucket.Client.Write(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -112,7 +112,7 @@ namespace Nitric.Sdk.Storage
             };
             try
             {
-                await this.Bucket.Storage.Client.WriteAsync(request);
+                await this.Bucket.Client.WriteAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -135,7 +135,7 @@ namespace Nitric.Sdk.Storage
             };
             try
             {
-                await this.Bucket.Storage.Client.WriteAsync(request);
+                await this.Bucket.Client.WriteAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -157,7 +157,7 @@ namespace Nitric.Sdk.Storage
             };
             try
             {
-                var response = this.Bucket.Storage.Client.Read(request);
+                var response = this.Bucket.Client.Read(request);
                 return response.Body.ToByteArray();
             }
             catch (Grpc.Core.RpcException re)
@@ -180,7 +180,7 @@ namespace Nitric.Sdk.Storage
             };
             try
             {
-                var response = await this.Bucket.Storage.Client.ReadAsync(request);
+                var response = await this.Bucket.Client.ReadAsync(request);
                 return response.Body.ToByteArray();
             }
             catch (Grpc.Core.RpcException re)
@@ -202,7 +202,7 @@ namespace Nitric.Sdk.Storage
             };
             try
             {
-                this.Bucket.Storage.Client.Delete(request);
+                this.Bucket.Client.Delete(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -223,7 +223,7 @@ namespace Nitric.Sdk.Storage
             };
             try
             {
-                await this.Bucket.Storage.Client.DeleteAsync(request);
+                await this.Bucket.Client.DeleteAsync(request);
             }
             catch (Grpc.Core.RpcException re)
             {
@@ -272,7 +272,7 @@ namespace Nitric.Sdk.Storage
 
             try
             {
-                var resp = this.Bucket.Storage.Client.PreSignUrl(request);
+                var resp = this.Bucket.Client.PreSignUrl(request);
                 return resp.Url;
             }
             catch (Grpc.Core.RpcException re)
@@ -323,7 +323,7 @@ namespace Nitric.Sdk.Storage
 
             try
             {
-                var resp = await this.Bucket.Storage.Client.PreSignUrlAsync(request);
+                var resp = await this.Bucket.Client.PreSignUrlAsync(request);
                 return resp.Url;
             }
             catch (Grpc.Core.RpcException re)

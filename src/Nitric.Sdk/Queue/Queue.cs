@@ -17,6 +17,7 @@ using System.Linq;
 using Nitric.Sdk.Common;
 using Nitric.Proto.Queues.v1;
 using System.Threading.Tasks;
+using GrpcClient = Nitric.Proto.Queues.v1.Queues.QueuesClient;
 
 namespace Nitric.Sdk.Queue
 {
@@ -30,12 +31,12 @@ namespace Nitric.Sdk.Queue
         /// </summary>
         public string Name { get; internal set; }
 
-        internal readonly QueuesClient Queues;
+        internal readonly GrpcClient Client;
 
-        internal Queue(QueuesClient client, string name)
+        internal Queue(GrpcClient client, string name)
         {
             this.Name = name;
-            this.Queues = client;
+            this.Client = client;
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace Nitric.Sdk.Queue
 
             try
             {
-                var response = Queues.Client.Enqueue(request);
+                var response = this.Client.Enqueue(request);
 
                 return response.FailedMessages.Select(failedMessage => new FailedMessage<T>
                 {
@@ -112,7 +113,7 @@ namespace Nitric.Sdk.Queue
 
             try
             {
-                var response = await Queues.Client.EnqueueAsync(request);
+                var response = await this.Client.EnqueueAsync(request);
 
                 return response.FailedMessages.Select(failedMessage => new FailedMessage<T>
                 {
@@ -145,7 +146,7 @@ namespace Nitric.Sdk.Queue
 
             try
             {
-                var response = this.Queues.Client.Dequeue(request);
+                var response = this.Client.Dequeue(request);
 
                 return response.Messages.Select(message => new ReceivedMessage<T>
                 {
@@ -179,7 +180,7 @@ namespace Nitric.Sdk.Queue
 
             try
             {
-                var response = await this.Queues.Client.DequeueAsync(request);
+                var response = await this.Client.DequeueAsync(request);
 
                 return response.Messages.Select(message => new ReceivedMessage<T>
                 {

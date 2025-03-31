@@ -29,8 +29,8 @@ namespace Nitric.Sdk.Resource
 
         internal SqlResource(string name, string migrations, GrpcClient client = null) : base(name, ResourceType.SqlDatabase)
         {
-          this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
-          this.Migrations = migrations;
+            this.Client = client ?? new GrpcClient(GrpcChannelProvider.GetChannel());
+            this.Migrations = migrations;
         }
 
         internal override BaseResource Register()
@@ -56,11 +56,11 @@ namespace Nitric.Sdk.Resource
         /// <returns>The connection string of this SQL Database</returns>        
         public string ConnectionString()
         {
-          var request = new SqlConnectionStringRequest { DatabaseName = this.Name };
+            var request = new SqlConnectionStringRequest { DatabaseName = this.Name };
 
-          var resp = this.Client.ConnectionString(request);
+            var resp = this.Client.ConnectionString(request);
 
-          return resp.ConnectionString;
+            return resp.ConnectionString;
         }
 
         /// <summary>
@@ -69,11 +69,11 @@ namespace Nitric.Sdk.Resource
         /// <returns>The connection string of this SQL Database</returns>  
         public async Task<string> ConnectionStringAsync()
         {
-          var request = new SqlConnectionStringRequest { DatabaseName = this.Name };
+            var request = new SqlConnectionStringRequest { DatabaseName = this.Name };
 
-          var resp = await this.Client.ConnectionStringAsync(request);
+            var resp = await this.Client.ConnectionStringAsync(request);
 
-          return resp.ConnectionString;
+            return resp.ConnectionString;
         }
     }
 }
