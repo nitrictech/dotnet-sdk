@@ -33,7 +33,7 @@ namespace Nitric.Sdk.Test
 
     internal class FakeClientStreamWriter<T> : IClientStreamWriter<T>
     {
-        WriteOptions IAsyncStreamWriter<T>.WriteOptions { get => WriteOptions.Default; set {} }
+        WriteOptions IAsyncStreamWriter<T>.WriteOptions { get => WriteOptions.Default; set { } }
 
         public Task CompleteAsync()
         {

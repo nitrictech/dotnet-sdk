@@ -159,7 +159,7 @@ namespace Nitric.Sdk.Test.Worker
                             TopicName = "schedule-name",
                             Message = new TopicMessage
                             {
-                                StructPayload = Struct.FromJsonSerializable(new TestProfile 
+                                StructPayload = Struct.FromJsonSerializable(new TestProfile
                                 {
                                     Name = "John Smith",
                                     Age = 21,

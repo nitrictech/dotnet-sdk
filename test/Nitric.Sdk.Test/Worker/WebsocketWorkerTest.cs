@@ -90,7 +90,7 @@ namespace Nitric.Sdk.Test.Worker
                 new List<ServerMessage>
                 {
                     new ServerMessage { Id = "id-1", RegistrationResponse = new RegistrationResponse { }},
-                    new ServerMessage 
+                    new ServerMessage
                     {
                       Id = "id-2",
                       WebsocketEventRequest = new WebsocketEventRequest
