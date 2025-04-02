@@ -18,7 +18,7 @@ using Nitric.Sdk.Queue;
 
 namespace Nitric.Sdk.Test.Queue
 {
-    public class QueueItemTest
+    public class ReceivedMessageTest
     {
         [Fact]
         public void TestBuildReceivedMessage()
@@ -36,6 +36,18 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
+        public void TestReceivedMessageToString()
+        {
+            var queueItem = new ReceivedMessage<TestProfile>
+            {
+                LeaseId = "1",
+                Message = null,
+            };
+
+            Assert.Equal("ReceivedMessage`1[leaseId=1]", queueItem.ToString());
+        }
+
+        [Fact]
         public void TestBuildFailedMessage()
         {
             var payload = new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
@@ -48,7 +60,18 @@ namespace Nitric.Sdk.Test.Queue
             Assert.NotNull(failedMessage);
             Assert.Equal("The failed task failed successfully", failedMessage.Details);
             Assert.Equal(payload, failedMessage.Message);
-            Assert.Equal("FailedMessage[details=The failed task failed successfully]", failedMessage.ToString());
+        }
+
+        [Fact]
+        public void TestFailedMessageToString()
+        {
+            var failedMessage = new FailedMessage<TestProfile>
+            {
+                Details = "The failed task failed successfully",
+                Message = null,
+            };
+
+            Assert.Equal("FailedMessage`1[details=The failed task failed successfully]", failedMessage.ToString());
         }
     }
 }

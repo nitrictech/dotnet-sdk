@@ -132,5 +132,14 @@ namespace Nitric.Sdk.Websocket
                 throw NitricException.FromRpcException(e);
             }
         }
+
+        /// <summary>
+        /// Return a string representation of the connection
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return GetType().Name + "[socketName=" + SocketName + ",connectionId=" + Id + "]";
+        }
     }
 }

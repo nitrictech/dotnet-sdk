@@ -145,12 +145,12 @@ namespace Nitric.Sdk.Secret
         }
 
         /// <summary>
-        /// A string representing this secret. Will not contain the value of the secret.
+        /// Return a string representation of this secret. Will not contain the secret contents.
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return "[name=" + this.Name + "]";
+            return GetType().Name + "[name=" + Name + "]";
         }
     }
 }

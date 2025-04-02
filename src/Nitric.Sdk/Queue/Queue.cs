@@ -198,6 +198,15 @@ namespace Nitric.Sdk.Queue
                 throw NitricException.FromRpcException(re);
             }
         }
+
+        /// <summary>
+        /// Return a string representation of the queue.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return GetType().Name + "[name=" + Name + "]";
+        }
     }
 }
 

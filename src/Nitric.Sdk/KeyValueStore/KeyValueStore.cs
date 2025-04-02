@@ -32,7 +32,7 @@ namespace Nitric.Sdk.KeyValueStore
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            
+
             this.Client = client;
             this.Name = name;
         }
@@ -219,6 +219,15 @@ namespace Nitric.Sdk.KeyValueStore
             {
                 throw NitricException.FromRpcException(re);
             }
+        }
+
+        /// <summary>
+        /// Return a string representation of the key value store. Will not contain the key value store contents.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return GetType().Name + "[name=" + Name + "]";
         }
     }
 

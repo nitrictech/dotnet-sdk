@@ -54,6 +54,14 @@ namespace Nitric.Sdk.Test.Event
         }
 
         [Fact]
+        public void TestTopicToString()
+        {
+            var topic = new Topic<TestProfile>("test-topic");
+
+            Assert.Equal("Topic`1[name=test-topic]", topic.ToString());
+        }
+
+        [Fact]
         public void TestPublish()
         {
             Mock<GrpcClient> ec = new Mock<GrpcClient>();

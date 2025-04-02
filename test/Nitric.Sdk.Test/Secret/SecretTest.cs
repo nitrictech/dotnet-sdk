@@ -27,6 +27,7 @@ namespace Nitric.Sdk.Test.Secret
 {
     public class SecretTest
     {
+
         [Fact]
         public void TestBuildSecretWithName()
         {
@@ -291,7 +292,7 @@ namespace Nitric.Sdk.Test.Secret
         public void TestSecretToString()
         {
             var secretString = new Sdk.Secret.Secret("test-secret").ToString();
-            Assert.Equal("[name=test-secret]", secretString);
+            Assert.Equal("Secret[name=test-secret]", secretString);
         }
 
         //Testing Secret Version Methods
@@ -428,7 +429,7 @@ namespace Nitric.Sdk.Test.Secret
             var secretVersionString = new Sdk.Secret.Secret("test-secret")
                 .Version("test-version")
                 .ToString();
-            Assert.Equal("SecretVersion[secret=[name=test-secret], version=test-version]", secretVersionString);
+            Assert.Equal("SecretVersion[secret=Secret[name=test-secret], version=test-version]", secretVersionString);
         }
 
         [Fact]
@@ -458,7 +459,7 @@ namespace Nitric.Sdk.Test.Secret
             var response = version.Access();
 
             Assert.Equal(
-                "SecretValue[secretVersion=SecretVersion[secret=[name=test-secret], version=test-version], value.length=20]",
+                "SecretValue[secretVersion=SecretVersion[secret=Secret[name=test-secret], version=test-version], value.length=20]",
                 response.ToString());
 
             sc.Verify(

@@ -171,7 +171,7 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Return a string representation of the file. Will not contain the file contents.
+        /// Return a string representation of the bucket.
         /// </summary>
         /// <returns></returns>
         public override string ToString()

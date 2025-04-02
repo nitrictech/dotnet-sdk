@@ -87,6 +87,15 @@ namespace Nitric.Sdk.Queue
                 throw NitricException.FromRpcException(re);
             }
         }
+
+        /// <summary>
+        /// Return a string representation of the message.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return GetType().Name + "[leaseId=" + LeaseId + "]";
+        }
     }
 
     /// <summary>
@@ -105,12 +114,12 @@ namespace Nitric.Sdk.Queue
         public T Message { get; set; }
 
         /// <summary>
-        /// Return a string representation of the failed task.
+        /// Return a string representation of the failed message.
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return "FailedMessage[details=" + Details + "]";
+            return GetType().Name + "[details=" + Details + "]";
         }
     }
 }

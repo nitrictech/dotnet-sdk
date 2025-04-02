@@ -15,7 +15,7 @@ namespace Nitric.Sdk.Test.Websocket
     public class WebsocketTest
     {
         [Fact]
-        public void TestBuildWebsocketWithIdAndSocket()
+        public void TestBuildConnectionWithIdAndSocket()
         {
             var connection = new Connection("connection-id", "socket-name");
             Assert.NotNull(connection);
@@ -24,7 +24,7 @@ namespace Nitric.Sdk.Test.Websocket
         }
 
         [Fact]
-        public void TestBuildWebsocketWithoutIdOrSocket()
+        public void TestBuildConnectionWithoutIdOrSocket()
         {
             Assert.Throws<ArgumentNullException>(
                 () => new Connection("", "connection-id"));
@@ -34,6 +34,14 @@ namespace Nitric.Sdk.Test.Websocket
                 () => new Connection("socket-name", ""));
             Assert.Throws<ArgumentNullException>(
                 () => new Connection("socket-name", null));
+        }
+
+        [Fact]
+        public void TestConnectionToString()
+        {
+            var connection = new Connection("connection-id", "socket-name");
+
+            Assert.Equal("Connection[socketName=socket-name,connectionId=connection-id]", connection.ToString());
         }
 
         //Testing Websocket Methods
@@ -61,7 +69,7 @@ namespace Nitric.Sdk.Test.Websocket
         }
 
         [Fact]
-        public void TestWebsocketSendWithError()
+        public void TestConnectionSendWithError()
         {
             var websocketSendRequest = new WebsocketSendRequest
             {

@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.Threading.Tasks;
 using Nitric.Proto.Batch.v1;
 using Nitric.Sdk.Common;
 using GrpcClient = Nitric.Proto.Batch.v1.Batch.BatchClient;
@@ -31,7 +32,7 @@ namespace Nitric.Sdk.Job
         /// </summary>
         public string Name { get; private set; }
 
-        internal Job(string name, GrpcClient client = null)
+        public Job(string name, GrpcClient client = null)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -51,11 +52,15 @@ namespace Nitric.Sdk.Job
             var request = new JobSubmitRequest
             {
                 JobName = this.Name,
-                Data = new JobData
+            };
+
+            if (data != null)
+            {
+                request.Data = new JobData
                 {
                     Struct = Struct.FromJsonSerializable(data),
-                },
-            };
+                };
+            }
 
             this.Client.SubmitJob(request);
         }
@@ -64,16 +69,20 @@ namespace Nitric.Sdk.Job
         /// Submit a job to the batch service asynchronously
         /// </summary>
         /// <param name="data">Data to submit to the job</param>
-        public async void SubmitAsync(T data)
+        public async Task SubmitAsync(T data)
         {
             var request = new JobSubmitRequest
             {
                 JobName = this.Name,
-                Data = new JobData
+            };
+
+            if (data != null)
+            {
+                request.Data = new JobData
                 {
                     Struct = Struct.FromJsonSerializable(data),
-                },
-            };
+                };
+            }
 
             await this.Client.SubmitJobAsync(request);
         }

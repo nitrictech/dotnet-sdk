@@ -33,6 +33,12 @@ namespace Nitric.Sdk.Worker
             this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
         }
 
+        public JobWorker(RegistrationRequest request, params Middleware<JobContext<T>>[] middlewares) : base(middlewares)
+        {
+            this.RegistrationRequest = request;
+            this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
+        }
+
         public override async Task Start(CancellationToken cancellationToken = default)
         {
             var stream = this.GrpcClient.HandleJob();

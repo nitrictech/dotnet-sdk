@@ -27,6 +27,13 @@ using Nitric.Sdk.Common;
 
 namespace Nitric.Sdk.Test.Queue
 {
+    public class TestProfile
+    {
+        public string Name;
+        public double Age;
+        public List<string> Addresses;
+    }
+
     public class QueueClientTest
     {
         [Fact]
@@ -46,6 +53,13 @@ namespace Nitric.Sdk.Test.Queue
             Assert.Throws<ArgumentNullException>(
                 () => new Sdk.Queue.Queue<TestProfile>(null)
             );
+        }
+
+        [Fact]
+        public void TestQueueToString()
+        {
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue");
+            Assert.Equal("Queue`1[name=test-queue]", queue.ToString());
         }
 
         [Fact]

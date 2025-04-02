@@ -41,6 +41,14 @@ namespace Nitric.Sdk.Test.KeyValueStore
         }
 
         [Fact]
+        public void TestKeyValueStoreToString()
+        {
+            var job = new KeyValueStore<TestProfile>("test-store");
+
+            Assert.Equal("KeyValueStore`1[name=test-store]", job.ToString());
+        }
+
+        [Fact]
         public void TestSetToKeyValueStore()
         {
             var testProfile = new TestProfile
