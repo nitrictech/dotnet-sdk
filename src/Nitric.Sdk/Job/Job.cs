@@ -30,9 +30,9 @@ namespace Nitric.Sdk.Job
         /// </summary>
         public string Name { get; private set; }
 
-        internal Job(GrpcClient batchClient, string name)
+        internal Job(GrpcClient client, string name)
         {
-            this.Client = batchClient;
+            this.Client = client;
             this.Name = name;
         }
 

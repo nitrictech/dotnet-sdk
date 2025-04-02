@@ -11,7 +11,7 @@ namespace Nitric.Sdk.Resource
         public string[] Audiences { get; set; }
         public string[] Scopes { get; set; }
 
-        public OidcOptions(string name, string issuer, string[] audiences, string[] scopes) 
+        public OidcOptions(string name, string issuer, string[] audiences, string[] scopes)
         {
             this.Name = name;
             this.Issuer = issuer;

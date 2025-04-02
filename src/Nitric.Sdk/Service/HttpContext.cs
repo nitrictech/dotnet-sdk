@@ -70,7 +70,8 @@ namespace Nitric.Sdk.Service
         ///
         /// The object is converted from a JSON string to a type T.
         /// </summary>
-        public T Json<T>() {
+        public T Json<T>()
+        {
             return JsonConvert.DeserializeObject<T>(Encoding.Default.GetString(this.data));
         }
 
@@ -108,7 +109,7 @@ namespace Nitric.Sdk.Service
         /// <summary>
         /// The HTTP body data to be returned.ß
         /// </summary>
-        public byte[] Body { get; set; } = {};
+        public byte[] Body { get; set; } = { };
 
         /// <summary>
         /// The HTTP header to be included in the response.
@@ -206,7 +207,8 @@ namespace Nitric.Sdk.Service
                 })
             };
 
-            var triggerResponse = new ClientMessage {
+            var triggerResponse = new ClientMessage
+            {
                 Id = Id,
                 HttpResponse = new Proto.Apis.v1.HttpResponse
                 {
