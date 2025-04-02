@@ -6,6 +6,7 @@
     ".github/",
     "properties/**/*",
     "Scripts/",
+    "nitric/proto/**/*",
     "src/Nitric.Sdk/Proto/**/*",
     "test/**/*",
     "tools/",
