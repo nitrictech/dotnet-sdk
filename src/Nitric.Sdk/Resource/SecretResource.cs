@@ -76,7 +76,7 @@ namespace Nitric.Sdk.Resource
 
             this.RegisterPolicy(allPerms);
 
-            return new NitricSecret(this.Client, this.Name);
+            return new NitricSecret(this.Name, this.Client);
         }
     }
 }

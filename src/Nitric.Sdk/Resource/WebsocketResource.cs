@@ -114,7 +114,7 @@ namespace Nitric.Sdk.Resource
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            return new Connection(this.Client, connectionId, socket);
+            return new Connection(connectionId, socket, this.Client);
         }
     }
 }

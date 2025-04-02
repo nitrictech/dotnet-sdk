@@ -29,7 +29,7 @@ namespace Nitric.Sdk.Test.Worker
                 BlobEventType = Proto.Storage.v1.BlobEventType.Created,
             };
 
-            var bucket = new StorageClient().Bucket("bucket-name");
+            var bucket = new Bucket("bucket-name");
 
             var worker = new FileEventWorker(registration, bucket, middleware);
 
@@ -50,7 +50,7 @@ namespace Nitric.Sdk.Test.Worker
                 BlobEventType = Proto.Storage.v1.BlobEventType.Created,
             };
 
-            var bucket = new StorageClient().Bucket("bucket-name");
+            var bucket = new Bucket("bucket-name");
 
             var worker = new FileEventWorker(registration, bucket, middleware, middleware);
 
@@ -71,7 +71,7 @@ namespace Nitric.Sdk.Test.Worker
                 BlobEventType = Proto.Storage.v1.BlobEventType.Created,
             };
 
-            var bucket = new StorageClient().Bucket("bucket-name");
+            var bucket = new Bucket("bucket-name");
 
             Assert.Throws<ArgumentException>(() =>
             {
@@ -111,7 +111,7 @@ namespace Nitric.Sdk.Test.Worker
                     e.Listen(null, null, It.IsAny<CancellationToken>()))
                 .Returns(resp);
 
-            var bucket = new StorageClient().Bucket("bucket-name");
+            var bucket = new Bucket("bucket-name");
 
             var worker = new FileEventWorker(registration, bucket, middleware)
             {
@@ -156,7 +156,7 @@ namespace Nitric.Sdk.Test.Worker
                     e.Listen(null, null, It.IsAny<CancellationToken>()))
                 .Returns(resp);
 
-            var bucket = new StorageClient().Bucket("bucket-name");
+            var bucket = new Bucket("bucket-name");
 
             var worker = new FileEventWorker(registration, bucket, middleware)
             {
@@ -199,7 +199,7 @@ namespace Nitric.Sdk.Test.Worker
                     e.Listen(null, null, It.IsAny<CancellationToken>()))
                 .Returns(resp);
 
-            var bucket = new StorageClient().Bucket("bucket-name");
+            var bucket = new Bucket("bucket-name");
 
             var worker = new FileEventWorker(registration, bucket, middleware)
             {

@@ -137,7 +137,7 @@ namespace Nitric.Sdk.Resource
 
             this.RegisterPolicy(allPerms);
 
-            return new Bucket(this.Client, this.Name);
+            return new Bucket(this.Name, this.Client);
         }
     }
 }

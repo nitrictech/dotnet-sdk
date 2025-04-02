@@ -44,7 +44,6 @@ namespace Nitric.Sdk.Storage
         private readonly Bucket Bucket;
         public string Name { get; private set; }
 
-
         internal File(Bucket bucket, string key)
         {
             this.Bucket = bucket;

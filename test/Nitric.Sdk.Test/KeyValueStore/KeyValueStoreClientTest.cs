@@ -22,16 +22,9 @@ namespace Nitric.Sdk.Test.KeyValueStore
     public class KeyValueStoreClientTest
     {
         [Fact]
-        public void TestBuildKeyValueClient()
-        {
-            var storage = new KeyValueStoreClient();
-            Assert.NotNull(storage);
-        }
-
-        [Fact]
         public void TestBuildKeyValueStoreWithName()
         {
-            var store = new KeyValueStoreClient().KV<TestProfile>("test-store");
+            var store = new KeyValueStore<TestProfile>("test-store");
             Assert.NotNull(store);
             Assert.Equal("test-store", store.Name);
         }
@@ -40,10 +33,10 @@ namespace Nitric.Sdk.Test.KeyValueStore
         public void TestBuildKeyValueStoreWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new KeyValueStoreClient().KV<TestProfile>("")
+                () => new KeyValueStore<TestProfile>("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new KeyValueStoreClient().KV<TestProfile>(null)
+                () => new KeyValueStore<TestProfile>(null)
             );
         }
 
@@ -75,7 +68,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(new KvStoreSetValueResponse())
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             kv.Set("test-key", testProfile);
 
@@ -102,7 +95,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(new KvStoreSetValueResponse())
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             kv.Set("test-key", null);
 
@@ -138,7 +131,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             try
             {
@@ -185,7 +178,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(new AsyncUnaryCall<KvStoreSetValueResponse>(Task.FromResult(resp), null, null, null, null, null))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             await kv.SetAsync("test-key", testProfile);
 
@@ -214,7 +207,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(new AsyncUnaryCall<KvStoreSetValueResponse>(Task.FromResult(resp), null, null, null, null, null))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             await kv.SetAsync("test-key", null);
 
@@ -241,7 +234,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             try
             {
@@ -298,7 +291,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(resp)
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             var profile = kv.Get("test-key");
 
@@ -337,7 +330,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             try
             {
@@ -394,7 +387,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(new AsyncUnaryCall<KvStoreGetValueResponse>(Task.FromResult(resp), null, null, null, null, null))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             var profile = await kv.GetAsync("test-key");
 
@@ -433,7 +426,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             try
             {
@@ -468,7 +461,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(new KvStoreDeleteKeyResponse())
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             kv.Delete("test-key");
 
@@ -494,7 +487,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             try
             {
@@ -531,7 +524,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(new AsyncUnaryCall<KvStoreDeleteKeyResponse>(Task.FromResult(resp), null, null, null, null, null))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             await kv.DeleteAsync("test-key");
 
@@ -557,7 +550,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             try
             {
@@ -604,7 +597,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(resp)
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             var keys = kv.Keys();
 
@@ -649,7 +642,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Returns(resp)
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             var keys = kv.Keys("key-");
 
@@ -683,7 +676,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
                 .Verifiable();
 
-            var kv = new KeyValueStoreClient(gc.Object).KV<TestProfile>("test-store");
+            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
             try
             {

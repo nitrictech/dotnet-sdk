@@ -29,16 +29,9 @@ namespace Nitric.Sdk.Test.Storage
     public class StorageClientTest
     {
         [Fact]
-        public void TestBuildStorage()
-        {
-            var storage = new Sdk.Storage.StorageClient();
-            Assert.NotNull(storage);
-        }
-
-        [Fact]
         public void TestBuildBucketWithName()
         {
-            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+            var bucket = new Sdk.Storage.Bucket("test-bucket");
             Assert.NotNull(bucket);
             Assert.Equal("test-bucket", bucket.Name);
         }
@@ -47,17 +40,17 @@ namespace Nitric.Sdk.Test.Storage
         public void TestBuildBucketWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Sdk.Storage.StorageClient().Bucket("")
+                () => new Sdk.Storage.Bucket("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new Sdk.Storage.StorageClient().Bucket(null)
+                () => new Sdk.Storage.Bucket(null)
             );
         }
 
         [Fact]
         public void TestBuildFileWithName()
         {
-            var file = new Sdk.Storage.StorageClient().Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket").File("test-file");
             Assert.NotNull(file);
             Assert.Equal("test-file", file.Name);
         }
@@ -66,24 +59,24 @@ namespace Nitric.Sdk.Test.Storage
         public void TestBuildFileWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Sdk.Storage.StorageClient().Bucket("test-bucket").File("")
+                () => new Sdk.Storage.Bucket("test-bucket").File("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new Sdk.Storage.StorageClient().Bucket("test-bucket").File(null)
+                () => new Sdk.Storage.Bucket("test-bucket").File(null)
             );
         }
 
         [Fact]
         public void TestBucketToString()
         {
-            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+            var bucket = new Sdk.Storage.Bucket("test-bucket");
             Assert.Equal("Bucket[name=test-bucket]", bucket.ToString());
         }
 
         [Fact]
         public void TestFileToString()
         {
-            var file = new Sdk.Storage.StorageClient().Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket").File("test-file");
             Assert.Equal("File[name=test-file\nbucket=test-bucket]", file.ToString());
         }
 
@@ -111,7 +104,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(response)
                 .Verifiable();
 
-            var files = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").Files();
+            var files = new Sdk.Storage.Bucket("test-bucket", bc.Object).Files();
 
             bc.Verify(
                 t => t.ListBlobs(request, null, null,
@@ -146,7 +139,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(response)
                 .Verifiable();
 
-            var files = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").Files("key-");
+            var files = new Sdk.Storage.Bucket("test-bucket", bc.Object).Files("key-");
 
             bc.Verify(
                 t => t.ListBlobs(request, null, null,
@@ -168,7 +161,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").Files("key-1");
+                new Sdk.Storage.Bucket("test-bucket", bc.Object).Files("key-1");
                 Assert.Fail();
             }
             catch (NitricException e)
@@ -206,7 +199,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StorageListBlobsResponse>(Task.FromResult(response), null, null, null, null))
                 .Verifiable();
 
-            var files = await new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").FilesAsync();
+            var files = await new Sdk.Storage.Bucket("test-bucket", bc.Object).FilesAsync();
 
             bc.Verify(
                 t => t.ListBlobsAsync(request, null, null,
@@ -241,7 +234,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StorageListBlobsResponse>(Task.FromResult(response), null, null, null, null))
                 .Verifiable();
 
-            var files = await new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").FilesAsync("key-");
+            var files = await new Sdk.Storage.Bucket("test-bucket", bc.Object).FilesAsync("key-");
 
             bc.Verify(
                 t => t.ListBlobsAsync(request, null, null,
@@ -263,7 +256,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                await new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").FilesAsync();
+                await new Sdk.Storage.Bucket("test-bucket", bc.Object).FilesAsync();
                 Assert.Fail();
             }
             catch (NitricException e)
@@ -294,7 +287,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new StorageWriteResponse())
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             file.Write(System.Text.Encoding.UTF8.GetBytes("Hello World"));
 
@@ -320,7 +313,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new StorageWriteResponse())
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             file.Write("Hello World");
 
@@ -346,7 +339,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified bucket does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -381,7 +374,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified bucket does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -416,7 +409,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StorageWriteResponse>(Task.FromResult(new StorageWriteResponse()), null, null, null, null))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             await file.WriteAsync(System.Text.Encoding.UTF8.GetBytes("Hello World"));
 
@@ -434,7 +427,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified bucket does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -461,7 +454,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified bucket does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -496,7 +489,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StorageWriteResponse>(Task.FromResult(new StorageWriteResponse()), null, null, null, null))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             await file.WriteAsync("Hello World");
 
@@ -514,7 +507,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified bucket does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -545,7 +538,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(storageResponse)
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var response = file.Read();
 
@@ -565,7 +558,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -596,7 +589,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StorageReadResponse>(Task.FromResult(storageResponse), null, null, null, null))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var response = await file.ReadAsync();
 
@@ -616,7 +609,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -643,7 +636,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new StorageDeleteResponse())
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             file.Delete();
 
@@ -661,7 +654,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -688,7 +681,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StorageDeleteResponse>(Task.FromResult(new StorageDeleteResponse()), null, null, null, null))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             await file.DeleteAsync();
 
@@ -706,7 +699,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -741,7 +734,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new StoragePreSignUrlResponse { Url = "https://example.com" })
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var url = file.GetUploadUrl();
 
@@ -769,7 +762,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new StoragePreSignUrlResponse { Url = "https://example.com" })
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var url = file.GetUploadUrl(300);
 
@@ -789,7 +782,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -824,7 +817,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StoragePreSignUrlResponse>(Task.FromResult(new StoragePreSignUrlResponse { Url = "https://example.com" }), null, null, null, null))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var url = await file.GetUploadUrlAsync();
 
@@ -852,7 +845,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StoragePreSignUrlResponse>(Task.FromResult(new StoragePreSignUrlResponse { Url = "https://example.com" }), null, null, null, null))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var url = await file.GetUploadUrlAsync(300);
 
@@ -872,7 +865,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -907,7 +900,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new StoragePreSignUrlResponse { Url = "https://example.com" })
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var url = file.GetDownloadUrl();
 
@@ -935,7 +928,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new StoragePreSignUrlResponse { Url = "https://example.com" })
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var url = file.GetDownloadUrl(300);
 
@@ -955,7 +948,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -990,7 +983,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StoragePreSignUrlResponse>(Task.FromResult(new StoragePreSignUrlResponse { Url = "https://example.com" }), null, null, null, null))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var url = await file.GetDownloadUrlAsync();
 
@@ -1018,7 +1011,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StoragePreSignUrlResponse>(Task.FromResult(new StoragePreSignUrlResponse { Url = "https://example.com" }), null, null, null, null))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             var url = await file.GetDownloadUrlAsync(300);
 
@@ -1038,7 +1031,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
                 .Verifiable();
 
-            var file = new Sdk.Storage.StorageClient(bc.Object).Bucket("test-bucket").File("test-file");
+            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
             try
             {
@@ -1064,7 +1057,7 @@ namespace Nitric.Sdk.Test.Storage
                 return ctx;
             };
 
-            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+            var bucket = new Sdk.Storage.Bucket("test-bucket");
 
             bucket.On(Service.BlobEventType.Write, "*", middleware);
         }
@@ -1077,7 +1070,7 @@ namespace Nitric.Sdk.Test.Storage
                 return ctx;
             };
 
-            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+            var bucket = new Sdk.Storage.Bucket("test-bucket");
 
             bucket.On(Service.BlobEventType.Delete, "*", middleware);
         }
@@ -1090,7 +1083,7 @@ namespace Nitric.Sdk.Test.Storage
                 return next(ctx);
             };
 
-            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+            var bucket = new Sdk.Storage.Bucket("test-bucket");
 
             bucket.On(Service.BlobEventType.Write, "*", middleware, middleware);
         }
@@ -1103,7 +1096,7 @@ namespace Nitric.Sdk.Test.Storage
                 return next(ctx);
             };
 
-            var bucket = new Sdk.Storage.StorageClient().Bucket("test-bucket");
+            var bucket = new Sdk.Storage.Bucket("test-bucket");
 
             bucket.On(Service.BlobEventType.Delete, "*", middleware, middleware);
         }

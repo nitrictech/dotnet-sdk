@@ -104,7 +104,7 @@ namespace Nitric.Sdk.Resource
 
             this.RegisterPolicy(allPerms);
 
-            return new Topic<T>(this.Client, this.Name);
+            return new Topic<T>(this.Name, this.Client);
         }
     }
 }

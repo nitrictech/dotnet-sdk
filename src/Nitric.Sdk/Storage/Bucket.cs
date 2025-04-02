@@ -35,8 +35,13 @@ namespace Nitric.Sdk.Storage
         /// </summary>
         public string Name { get; private set; }
 
-        internal Bucket(GrpcClient client, string name)
+        public Bucket(string name, GrpcClient client = null)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             this.Client = client;
             this.Name = name;
         }

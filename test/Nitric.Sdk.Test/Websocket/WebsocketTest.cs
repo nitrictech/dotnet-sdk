@@ -15,23 +15,9 @@ namespace Nitric.Sdk.Test.Websocket
     public class WebsocketTest
     {
         [Fact]
-        public void TestWebsocketBuild()
-        {
-            var websocket = new WebsocketClient();
-            Assert.NotNull(websocket);
-        }
-
-        [Fact]
-        public void TestBuildWebsocketsWithNullClient()
-        {
-            var websocket = new WebsocketClient(null);
-            Assert.NotNull(websocket);
-        }
-
-        [Fact]
         public void TestBuildWebsocketWithIdAndSocket()
         {
-            var connection = new WebsocketClient(null).Connection("socket-name", "connection-id");
+            var connection = new Connection("connection-id", "socket-name");
             Assert.NotNull(connection);
             Assert.Equal("connection-id", connection.Id);
             Assert.Equal("socket-name", connection.SocketName);
@@ -41,13 +27,13 @@ namespace Nitric.Sdk.Test.Websocket
         public void TestBuildWebsocketWithoutIdOrSocket()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new WebsocketClient().Connection("", "connection-id"));
+                () => new Connection("", "connection-id"));
             Assert.Throws<ArgumentNullException>(
-                () => new WebsocketClient().Connection(null, "connection-id"));
+                () => new Connection(null, "connection-id"));
             Assert.Throws<ArgumentNullException>(
-                () => new WebsocketClient().Connection("socket-name", ""));
+                () => new Connection("socket-name", ""));
             Assert.Throws<ArgumentNullException>(
-                () => new WebsocketClient().Connection("socket-name", null));
+                () => new Connection("socket-name", null));
         }
 
         //Testing Websocket Methods
@@ -65,8 +51,7 @@ namespace Nitric.Sdk.Test.Websocket
                     e.SendMessage(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
-            var connection = new WebsocketClient(wc.Object)
-                .Connection("socket-name", "connection-id");
+            var connection = new Connection("connection-id", "socket-name", wc.Object);
 
             connection.SendMessage("websocket-data");
 
@@ -89,8 +74,7 @@ namespace Nitric.Sdk.Test.Websocket
                     e.SendMessage(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(Status.DefaultCancelled, "succeeded in failing"));
 
-            var connection = new WebsocketClient(wc.Object)
-                .Connection("socket-name", "connection-id");
+            var connection = new Connection("connection-id", "socket-name", wc.Object);
 
             Assert.Throws<CancelledException>(() =>
                 connection.SendMessage("websocket-data")
@@ -112,8 +96,7 @@ namespace Nitric.Sdk.Test.Websocket
                 .Returns(new AsyncUnaryCall<WebsocketSendResponse>(Task.FromResult(new WebsocketSendResponse()), null, null, null, null))
                 .Verifiable();
 
-            var connection = new WebsocketClient(wc.Object)
-                .Connection("socket-name", "connection-id");
+            var connection = new Connection("connection-id", "socket-name", wc.Object);
 
             await connection.SendMessageAsync("websocket-data");
 
@@ -136,8 +119,7 @@ namespace Nitric.Sdk.Test.Websocket
                     e.SendMessageAsync(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(Status.DefaultCancelled, "succeeded in failing"));
 
-            var connection = new WebsocketClient(wc.Object)
-                .Connection("socket-name", "connection-id");
+            var connection = new Connection("connection-id", "socket-name", wc.Object);
 
             Assert.ThrowsAsync<CancelledException>(() =>
                 connection.SendMessageAsync("websocket-data")
@@ -157,8 +139,7 @@ namespace Nitric.Sdk.Test.Websocket
                     e.CloseConnection(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
-            var connection = new WebsocketClient(wc.Object)
-                .Connection("socket-name", "connection-id");
+            var connection = new Connection("connection-id", "socket-name", wc.Object);
 
             connection.CloseConnection();
 
@@ -180,8 +161,7 @@ namespace Nitric.Sdk.Test.Websocket
                     e.CloseConnection(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(Status.DefaultCancelled, "succeeded in failing"));
 
-            var connection = new WebsocketClient(wc.Object)
-                .Connection("socket-name", "connection-id");
+            var connection = new Connection("connection-id", "socket-name", wc.Object);
 
             Assert.Throws<CancelledException>(() =>
                 connection.CloseConnection()
@@ -202,8 +182,7 @@ namespace Nitric.Sdk.Test.Websocket
                 .Returns(new AsyncUnaryCall<WebsocketCloseConnectionResponse>(Task.FromResult(new WebsocketCloseConnectionResponse()), null, null, null, null))
                 .Verifiable();
 
-            var connection = new WebsocketClient(wc.Object)
-                .Connection("socket-name", "connection-id");
+            var connection = new Connection("connection-id", "socket-name", wc.Object);
 
             await connection.CloseConnectionAsync();
 
@@ -225,8 +204,7 @@ namespace Nitric.Sdk.Test.Websocket
                     e.CloseConnectionAsync(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(Status.DefaultCancelled, "succeeded in failing"));
 
-            var connection = new WebsocketClient(wc.Object)
-                .Connection("socket-name", "connection-id");
+            var connection = new Connection("connection-id", "socket-name", wc.Object);
 
             Assert.ThrowsAsync<CancelledException>(() =>
                 connection.CloseConnectionAsync()

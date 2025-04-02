@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using Nitric.Proto.Batch.v1;
 using Nitric.Sdk.Common;
 using GrpcClient = Nitric.Proto.Batch.v1.Batch.BatchClient;
@@ -30,8 +31,13 @@ namespace Nitric.Sdk.Job
         /// </summary>
         public string Name { get; private set; }
 
-        internal Job(GrpcClient client, string name)
+        internal Job(string name, GrpcClient client = null)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             this.Client = client;
             this.Name = name;
         }

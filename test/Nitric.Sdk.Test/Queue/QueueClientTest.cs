@@ -30,16 +30,9 @@ namespace Nitric.Sdk.Test.Queue
     public class QueueClientTest
     {
         [Fact]
-        public void TestBuildQueues()
-        {
-            var queues = new QueuesClient();
-            Assert.NotNull(queues);
-        }
-
-        [Fact]
         public void TestBuildQueueWithName()
         {
-            var queue = new QueuesClient().Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue");
             Assert.NotNull(queue);
             Assert.Equal("test-queue", queue.Name);
         }
@@ -48,10 +41,10 @@ namespace Nitric.Sdk.Test.Queue
         public void TestBuildQueueWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new QueuesClient().Queue<TestProfile>("")
+                () => new Sdk.Queue.Queue<TestProfile>("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new QueuesClient().Queue<TestProfile>(null)
+                () => new Sdk.Queue.Queue<TestProfile>(null)
             );
         }
 
@@ -64,7 +57,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new AsyncUnaryCall<QueueEnqueueResponse>(Task.FromResult(new QueueEnqueueResponse()), null, null, null, null))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             await queue.EnqueueAsync(new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } });
 
@@ -76,7 +69,7 @@ namespace Nitric.Sdk.Test.Queue
         [Fact]
         public void TestEnqueueNullMessageAsync()
         {
-            var queue = new QueuesClient().Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue");
 
             Assert.ThrowsAsync<ArgumentNullException>(() => queue.EnqueueAsync(null));
         }
@@ -102,7 +95,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new AsyncUnaryCall<QueueEnqueueResponse>(Task.FromResult(queueBatchResponse), null, null, null, null))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var failedMessagesResp = await queue.EnqueueAsync(new TestProfile { }, new TestProfile { });
 
@@ -122,7 +115,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new AsyncUnaryCall<QueueEnqueueResponse>(Task.FromResult(new QueueEnqueueResponse()), null, null, null, null))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var failedMessages = await queue.EnqueueAsync(new TestProfile { }, new TestProfile { });
 
@@ -142,7 +135,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             try
             {
@@ -168,7 +161,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new QueueEnqueueResponse())
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             queue.Enqueue(new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } });
 
@@ -186,7 +179,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             try
             {
@@ -206,7 +199,7 @@ namespace Nitric.Sdk.Test.Queue
         [Fact]
         public void TestEnqueueNullMessage()
         {
-            var queue = new QueuesClient().Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue");
 
             Assert.Throws<ArgumentNullException>(() => queue.Enqueue(null));
         }
@@ -232,7 +225,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(queueBatchResponse)
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var failedMessagesResp = queue.Enqueue(new TestProfile { }, new TestProfile { });
 
@@ -252,7 +245,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new QueueEnqueueResponse())
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var failedMessages = queue.Enqueue(new TestProfile { }, new TestProfile { });
 
@@ -284,7 +277,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(queueReceieveResponse)
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var response = queue.Dequeue(3);
 
@@ -305,7 +298,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new QueueDequeueResponse())
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var response = queue.Dequeue(3);
 
@@ -325,7 +318,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             try
             {
@@ -364,7 +357,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new AsyncUnaryCall<QueueDequeueResponse>(Task.FromResult(queueReceieveResponse), null, null, null, null))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var response = await queue.DequeueAsync(3);
 
@@ -385,7 +378,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new AsyncUnaryCall<QueueDequeueResponse>(Task.FromResult(new QueueDequeueResponse()), null, null, null, null))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var response = await queue.DequeueAsync(3);
 
@@ -405,7 +398,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             try
             {
@@ -457,7 +450,7 @@ namespace Nitric.Sdk.Test.Queue
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var response = queue.Dequeue(3);
 
@@ -503,7 +496,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new AsyncUnaryCall<QueueCompleteResponse>(Task.FromResult(new QueueCompleteResponse()), null, null, null, null))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var response = await queue.DequeueAsync(3);
 
@@ -549,7 +542,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var response = queue.Dequeue(3);
 
@@ -604,7 +597,7 @@ namespace Nitric.Sdk.Test.Queue
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
                 .Verifiable();
 
-            var queue = new QueuesClient(qc.Object).Queue<TestProfile>("test-queue");
+            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
             var response = await queue.DequeueAsync(3);
 

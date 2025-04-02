@@ -35,15 +35,9 @@ namespace Nitric.Sdk.Test.Event
     public class EventClientTest
     {
         [Fact]
-        public void TestBuildEvents()
-        {
-            var evt = new TopicsClient<TestProfile>();
-            Assert.NotNull(evt);
-        }
-        [Fact]
         public void TestBuildTopicWithName()
         {
-            var topic = new TopicsClient<TestProfile>().Topic("test-topic");
+            var topic = new Topic<TestProfile>("test-topic");
             Assert.NotNull(topic);
             Assert.Equal("test-topic", topic.Name);
         }
@@ -52,10 +46,10 @@ namespace Nitric.Sdk.Test.Event
         public void TestBuildTopicWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new TopicsClient<TestProfile>().Topic("")
+                () => new Topic<TestProfile>("")
             );
             Assert.Throws<ArgumentNullException>(
-                () => new TopicsClient<TestProfile>().Topic(null)
+                () => new Topic<TestProfile>(null)
             );
         }
 
@@ -67,7 +61,7 @@ namespace Nitric.Sdk.Test.Event
             ec.Setup(e => e.Publish(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Verifiable();
 
-            var topic = new TopicsClient<TestProfile>(ec.Object).Topic("test-topic");
+            var topic = new Topic<TestProfile>("test-topic", ec.Object);
 
             var profile = new TestProfile
             { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
@@ -86,7 +80,7 @@ namespace Nitric.Sdk.Test.Event
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified topic does not exist")))
                 .Verifiable();
 
-            var topic = new TopicsClient<TestProfile>(ec.Object).Topic("test-topic");
+            var topic = new Topic<TestProfile>("test-topic", ec.Object);
 
             var profile = new TestProfile
             { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
@@ -112,7 +106,7 @@ namespace Nitric.Sdk.Test.Event
                 .Returns(new AsyncUnaryCall<TopicPublishResponse>(Task.FromResult(new TopicPublishResponse()), null, null, null, null))
                 .Verifiable();
 
-            var topic = new TopicsClient<TestProfile>(ec.Object).Topic("test-topic");
+            var topic = new Topic<TestProfile>("test-topic", ec.Object);
 
             var profile = new TestProfile
             { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
@@ -131,7 +125,7 @@ namespace Nitric.Sdk.Test.Event
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified topic does not exist")))
                 .Verifiable();
 
-            var topic = new TopicsClient<TestProfile>(ec.Object).Topic("test-topic");
+            var topic = new Topic<TestProfile>("test-topic", ec.Object);
 
             var profile = new TestProfile
             { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };

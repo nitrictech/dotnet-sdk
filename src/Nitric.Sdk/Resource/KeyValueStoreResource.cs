@@ -86,7 +86,7 @@ namespace Nitric.Sdk.Resource
 
             this.RegisterPolicy(allPerms);
 
-            return new KeyValueStore<T>(this.Client, this.Name);
+            return new KeyValueStore<T>(this.Name, this.Client);
         }
     }
 }

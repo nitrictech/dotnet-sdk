@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+using System;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Grpc.Core;
@@ -31,8 +32,16 @@ namespace Nitric.Sdk.Websocket
 
         private readonly GrpcClient Client;
 
-        internal Connection(GrpcClient client, string connectionId, string socketName)
+        public Connection(string connectionId, string socketName, GrpcClient client = null)
         {
+            if (string.IsNullOrEmpty(connectionId))
+            {
+                throw new ArgumentNullException(nameof(connectionId));
+            }
+            if (string.IsNullOrEmpty(socketName))
+            {
+                throw new ArgumentNullException(nameof(socketName));
+            }
             this.Client = client;
             this.Id = connectionId;
             this.SocketName = socketName;

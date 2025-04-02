@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Threading.Tasks;
 using Nitric.Proto.Topics.v1;
 using Nitric.Sdk.Common;
@@ -30,8 +31,13 @@ namespace Nitric.Sdk.Topics
         /// </summary>
         public string Name { get; private set; }
 
-        internal Topic(GrpcClient client, string name)
+        public Topic(string name, GrpcClient client = null)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             this.Client = client;
             this.Name = name;
         }

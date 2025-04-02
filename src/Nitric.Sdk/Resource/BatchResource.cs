@@ -125,7 +125,7 @@ namespace Nitric.Sdk.Resource
 
             this.RegisterPolicy(allPerms);
 
-            return new Job<T>(this.Client, this.Name);
+            return new Job<T>(this.Name, this.Client);
         }
     }
 }

@@ -79,7 +79,7 @@ namespace Nitric.Sdk.Resource
 
             this.RegisterPolicy(allPerms);
 
-            return new Queue.Queue<T>(this.Client, this.Name);
+            return new Queue.Queue<T>(this.Name, this.Client);
         }
     }
 }

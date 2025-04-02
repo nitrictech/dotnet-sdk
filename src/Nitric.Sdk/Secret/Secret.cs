@@ -35,8 +35,13 @@ namespace Nitric.Sdk.Secret
         /// </summary>
         public readonly string Name;
 
-        internal Secret(GrpcClient client, string name)
+        public Secret(string name, GrpcClient client = null)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             this.Client = client;
             this.Name = name;
         }
@@ -90,8 +95,8 @@ namespace Nitric.Sdk.Secret
                 var secretResponse = this.Client.Put(request);
                 return new SecretVersion(
                     new Secret(
-                        this.Client,
-                        secretResponse.SecretVersion.Secret.Name
+                        secretResponse.SecretVersion.Secret.Name,
+                        this.Client
                     ),
                     secretResponse.SecretVersion.Version
                 );
@@ -127,8 +132,8 @@ namespace Nitric.Sdk.Secret
                 var secretResponse = await Client.PutAsync(request);
                 return new SecretVersion(
                     new Secret(
-                        this.Client,
-                        secretResponse.SecretVersion.Secret.Name
+                        secretResponse.SecretVersion.Secret.Name,
+                        this.Client
                     ),
                     secretResponse.SecretVersion.Version
                 );

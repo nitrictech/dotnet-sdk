@@ -28,23 +28,9 @@ namespace Nitric.Sdk.Test.Secret
     public class SecretTest
     {
         [Fact]
-        public void TestBuildSecrets()
-        {
-            var secrets = new SecretsClient();
-            Assert.NotNull(secrets);
-        }
-
-        [Fact]
-        public void TestBuildSecretsWithNullClient()
-        {
-            var secrets = new SecretsClient(null);
-            Assert.NotNull(secrets);
-        }
-
-        [Fact]
         public void TestBuildSecretWithName()
         {
-            var secret = new SecretsClient().Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret");
             Assert.NotNull(secret);
             Assert.Equal("test-secret", secret.Name);
         }
@@ -53,9 +39,9 @@ namespace Nitric.Sdk.Test.Secret
         public void TestBuildSecretWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new SecretsClient().Secret(""));
+                () => new Sdk.Secret.Secret(""));
             Assert.Throws<ArgumentNullException>(
-                () => new SecretsClient().Secret(null));
+                () => new Sdk.Secret.Secret(null));
         }
 
         //Testing Secret Methods
@@ -79,8 +65,7 @@ namespace Nitric.Sdk.Test.Secret
                 .Returns(new AsyncUnaryCall<SecretPutResponse>(Task.FromResult(secretPutResponse), null, null, null, null))
                 .Verifiable();
 
-            var secret = new SecretsClient(sc.Object)
-                .Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
 
             var response = await secret.PutAsync("Super secret message");
 
@@ -113,8 +98,7 @@ namespace Nitric.Sdk.Test.Secret
                 .Verifiable();
 
             var testString = "Super secret message";
-            var secret = new SecretsClient(sc.Object)
-                .Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
             var response = await secret.PutAsync(testString);
 
             Assert.Equal("test-version", response.Id);
@@ -128,7 +112,7 @@ namespace Nitric.Sdk.Test.Secret
         [Fact]
         public void TestPutEmptySecretStringAsync()
         {
-            var secret = new SecretsClient().Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret");
             Assert.ThrowsAsync<ArgumentNullException>(
                 () => secret.PutAsync(""));
         }
@@ -136,7 +120,7 @@ namespace Nitric.Sdk.Test.Secret
         [Fact]
         public void TestPutNullSecretBytesAsync()
         {
-            var secret = new SecretsClient().Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret");
             Assert.ThrowsAsync<ArgumentNullException>(
                 () => secret.PutAsync(null));
         }
@@ -151,8 +135,7 @@ namespace Nitric.Sdk.Test.Secret
                 .Verifiable();
 
             var testString = "Super secret message";
-            var secret = new SecretsClient(sc.Object)
-                .Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
             try
             {
                 var response = await secret.PutAsync(testString);
@@ -190,8 +173,7 @@ namespace Nitric.Sdk.Test.Secret
                 .Returns(secretPutResponse)
                 .Verifiable();
 
-            var secret = new SecretsClient(sc.Object)
-                .Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
 
             var response = secret.Put("Super secret message");
 
@@ -224,8 +206,7 @@ namespace Nitric.Sdk.Test.Secret
                 .Verifiable();
 
             var testString = "Super secret message";
-            var secret = new SecretsClient(sc.Object)
-                .Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
             var response = secret.Put(testString);
 
             Assert.Equal("test-version", response.Id);
@@ -239,7 +220,7 @@ namespace Nitric.Sdk.Test.Secret
         [Fact]
         public void TestPutEmptySecretString()
         {
-            var secret = new SecretsClient().Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret");
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put(""));
         }
@@ -247,7 +228,7 @@ namespace Nitric.Sdk.Test.Secret
         [Fact]
         public void TestPutNullSecretBytes()
         {
-            var secret = new SecretsClient().Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret");
             Assert.Throws<ArgumentNullException>(
                 () => secret.Put(null));
         }
@@ -262,8 +243,7 @@ namespace Nitric.Sdk.Test.Secret
                 .Verifiable();
 
             var testString = "Super secret message";
-            var secret = new SecretsClient(sc.Object)
-                .Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
             try
             {
                 var response = secret.Put(testString);
@@ -284,7 +264,7 @@ namespace Nitric.Sdk.Test.Secret
         [Fact]
         public void TestGetSecretVersion()
         {
-            var secret = new SecretsClient().Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret");
             var secretVersion = secret.Version("test-version");
             Assert.NotNull(secretVersion);
             Assert.Equal("test-version", secretVersion.Id);
@@ -295,26 +275,22 @@ namespace Nitric.Sdk.Test.Secret
         public void TestGetSecretVersionWithoutName()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new SecretsClient().Secret("test-secret").Version(""));
+                () => new Sdk.Secret.Secret("test-secret").Version(""));
             Assert.Throws<ArgumentNullException>(
-                () => new SecretsClient().Secret("test-secret").Version(null));
+                () => new Sdk.Secret.Secret("test-secret").Version(null));
         }
 
         [Fact]
         public void TestGetLatestSecretVersion()
         {
-            var secretVersion = new SecretsClient()
-                .Secret("test-secret")
-                .Latest();
+            var secretVersion = new Sdk.Secret.Secret("test-secret").Latest();
             Assert.Equal("latest", secretVersion.Id);
         }
 
         [Fact]
         public void TestSecretToString()
         {
-            var secretString = new SecretsClient()
-                .Secret("test-secret")
-                .ToString();
+            var secretString = new Sdk.Secret.Secret("test-secret").ToString();
             Assert.Equal("[name=test-secret]", secretString);
         }
 
@@ -340,8 +316,7 @@ namespace Nitric.Sdk.Test.Secret
                 .Returns(secretPutResponse)
                 .Verifiable();
 
-            var version = new SecretsClient(sc.Object)
-                .Secret("test-secret")
+            var version = new Sdk.Secret.Secret("test-secret", sc.Object)
                 .Version("test-version");
             var response = version.Access();
 
@@ -365,8 +340,7 @@ namespace Nitric.Sdk.Test.Secret
                     "You do not have permission to access this secret")))
                 .Verifiable();
 
-            var secret = new SecretsClient(sc.Object)
-                .Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
             try
             {
                 var response = secret.Version("test-secret").Access();
@@ -405,8 +379,7 @@ namespace Nitric.Sdk.Test.Secret
                 .Returns(new AsyncUnaryCall<SecretAccessResponse>(Task.FromResult(secretPutResponse), null, null, null, null))
                 .Verifiable();
 
-            var version = new SecretsClient(sc.Object)
-                .Secret("test-secret")
+            var version = new Sdk.Secret.Secret("test-secret", sc.Object)
                 .Version("test-version");
             var response = await version.AccessAsync();
 
@@ -430,8 +403,7 @@ namespace Nitric.Sdk.Test.Secret
                     "You do not have permission to access this secret")))
                 .Verifiable();
 
-            var secret = new SecretsClient(sc.Object)
-                .Secret("test-secret");
+            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
             try
             {
                 var response = await secret.Version("test-secret").AccessAsync();
@@ -453,8 +425,7 @@ namespace Nitric.Sdk.Test.Secret
         [Fact]
         public void TestSecretVersionToString()
         {
-            var secretVersionString = new SecretsClient()
-                .Secret("test-secret")
+            var secretVersionString = new Sdk.Secret.Secret("test-secret")
                 .Version("test-version")
                 .ToString();
             Assert.Equal("SecretVersion[secret=[name=test-secret], version=test-version]", secretVersionString);
@@ -481,8 +452,7 @@ namespace Nitric.Sdk.Test.Secret
                 .Returns(secretPutResponse)
                 .Verifiable();
 
-            var version = new SecretsClient(sc.Object)
-                .Secret("test-secret")
+            var version = new Sdk.Secret.Secret("test-secret", sc.Object)
                 .Version("test-version");
 
             var response = version.Access();
