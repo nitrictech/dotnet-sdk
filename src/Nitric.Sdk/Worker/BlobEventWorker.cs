@@ -27,7 +27,7 @@ namespace Nitric.Sdk.Worker
         readonly private RegistrationRequest RegistrationRequest;
         public GrpcClient GrpcClient { private get; set; }
 
-        public BlobEventWorker(RegistrationRequest request, Func<BlobEventContext, BlobEventContext> middleware) : base(middleware)
+        public BlobEventWorker(RegistrationRequest request, Func<BlobEventContext, Task<BlobEventContext>> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
             this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
@@ -55,7 +55,7 @@ namespace Nitric.Sdk.Worker
 
                     try
                     {
-                        ctx = this.Middleware(ctx);
+                        ctx = await this.Middleware(ctx);
                     }
                     catch (Exception err)
                     {

@@ -47,30 +47,7 @@ namespace Nitric.Sdk.Queue
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NitricException"></exception>
-        public void Complete()
-        {
-            var request = new QueueCompleteRequest
-            {
-                QueueName = this.Queue.Name,
-                LeaseId = this.LeaseId,
-            };
-
-            try
-            {
-                Queue.Client.Complete(request);
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Complete this task and remove it from the source queue.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="NitricException"></exception>
-        public async Task CompleteAsync()
+        public async void Complete()
         {
             var request = new QueueCompleteRequest
             {

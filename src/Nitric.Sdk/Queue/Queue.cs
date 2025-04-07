@@ -49,51 +49,7 @@ namespace Nitric.Sdk.Queue
         /// <param name="tasks">The tasks to push to the queue.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NitricException"></exception>
-        public List<FailedMessage<T>> Enqueue(T task, params T[] tasks)
-        {
-            if (task == null)
-            {
-                throw new ArgumentNullException(nameof(task));
-            }
-            var taskList = new List<T>() { task };
-
-            taskList.AddRange(tasks);
-
-            var request = new QueueEnqueueRequest
-            {
-                QueueName = Name,
-            };
-
-            var messages = taskList.Select(task => new QueueMessage
-            {
-                StructPayload = Struct.FromJsonSerializable(task)
-            });
-
-            request.Messages.AddRange(messages);
-
-            try
-            {
-                var response = this.Client.Enqueue(request);
-
-                return response.FailedMessages.Select(failedMessage => new FailedMessage<T>
-                {
-                    Details = failedMessage.Details,
-                    Message = Struct.ToJsonSerializable<T>(failedMessage.Message.StructPayload),
-                }).ToList();
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Send a task to this queue.
-        /// </summary>
-        /// <param name="tasks">The tasks to push to the queue.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="NitricException"></exception>
-        public async Task<List<FailedMessage<T>>> EnqueueAsync(T task, params T[] tasks)
+        public async Task<List<FailedMessage<T>>> Enqueue(T task, params T[] tasks)
         {
             if (task == null)
             {
@@ -140,41 +96,7 @@ namespace Nitric.Sdk.Queue
         /// <param name="depth">The maximum number of tasks to dequeue.</param>
         /// <returns>Tasks dequeued from the queue.</returns>
         /// <exception cref="NitricException"></exception>
-        public List<ReceivedMessage<T>> Dequeue(int depth = 1)
-        {
-            var request = new QueueDequeueRequest
-            {
-                QueueName = this.Name,
-                Depth = Math.Max(depth, 1)
-            };
-
-            try
-            {
-                var response = this.Client.Dequeue(request);
-
-                return response.Messages.Select(message => new ReceivedMessage<T>
-                {
-                    Queue = this,
-                    LeaseId = message.LeaseId,
-                    Message = Struct.ToJsonSerializable<T>(message.Message.StructPayload)
-                }).ToList();
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Dequeue tasks from the queue to process.
-        ///
-        /// The number of tasks returned will be the same or less than the requested depth, based on the number of tasks
-        /// available on the queue.
-        /// </summary>
-        /// <param name="depth">The maximum number of tasks to dequeue.</param>
-        /// <returns>Tasks dequeued from the queue.</returns>
-        /// <exception cref="NitricException"></exception>
-        public async Task<List<ReceivedMessage<T>>> DequeueAsync(int depth = 1)
+        public async Task<List<ReceivedMessage<T>>> Dequeue(int depth = 1)
         {
             var request = new QueueDequeueRequest
             {

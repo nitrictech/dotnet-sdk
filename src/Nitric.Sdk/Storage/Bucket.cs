@@ -67,39 +67,7 @@ namespace Nitric.Sdk.Storage
         /// </summary>
         /// <param name="prefix">The prefix to filter file names by.</param>
         /// <returns>All the files in the bucket as Nitric file references.</returns>
-        public List<File> Files(string prefix = "")
-        {
-            var request = new StorageListBlobsRequest
-            {
-                BucketName = this.Name,
-                Prefix = prefix,
-            };
-
-            try
-            {
-                var resp = this.Client.ListBlobs(request);
-
-                var files = new List<File>();
-
-                foreach (ProtoBlob file in resp.Blobs)
-                {
-                    files.Add(new File(this, file.Key));
-                }
-
-                return files;
-            }
-            catch (Grpc.Core.RpcException e)
-            {
-                throw Common.NitricException.FromRpcException(e);
-            }
-        }
-
-        /// <summary>
-        /// Get a list of files in a bucket.
-        /// </summary>
-        /// <param name="prefix">The prefix to filter file names by.</param>
-        /// <returns>All the files in the bucket as Nitric file references.</returns>
-        public async Task<List<File>> FilesAsync(string prefix = "")
+        public async Task<List<File>> Files(string prefix = "")
         {
             var request = new StorageListBlobsRequest
             {
@@ -157,7 +125,7 @@ namespace Nitric.Sdk.Storage
         public void On(
             Service.BlobEventType blobEventType,
             string keyPrefixFilter,
-            Func<BlobEventContext, BlobEventContext> handler)
+            Func<BlobEventContext, Task<BlobEventContext>> handler)
         {
             var request = new RegistrationRequest
             {

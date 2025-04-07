@@ -28,7 +28,7 @@ namespace Nitric.Sdk.Worker
 
     public abstract class AbstractWorker<T> : IWorker
     {
-        protected Func<T, T> Middleware;
+        protected Func<T, Task<T>> Middleware;
 
         public AbstractWorker(params Middleware<T>[] middlewares)
         {
@@ -42,19 +42,22 @@ namespace Nitric.Sdk.Worker
 
             middlewareList.AddRange(middlewares);
 
-            Func<T, T> lastCall = (context) => context;
+            Func<T, Task<T>> lastCall = (context) =>
+            {
+                return Task.FromResult(context);
+            };
 
             middlewares.Reverse();
 
             this.Middleware = middlewares.Aggregate(lastCall, (next, handler) =>
             {
-                Func<T, T> nextFunc = (context) => handler(context, next) ?? context;
+                Func<T, Task<T>> nextFunc = async (context) => await handler(context, next) ?? context;
 
                 return nextFunc;
             });
         }
 
-        public AbstractWorker(Func<T, T> middleware)
+        public AbstractWorker(Func<T, Task<T>> middleware)
         {
             this.Middleware = middleware;
         }

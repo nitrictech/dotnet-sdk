@@ -23,6 +23,7 @@ using Action = Nitric.Proto.Resources.v1.Action;
 using GrpcClient = Nitric.Proto.Websockets.v1.Websocket.WebsocketClient;
 using Nitric.Sdk.Worker;
 using Nitric.Proto.Websockets.v1;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Resource
 {
@@ -85,16 +86,49 @@ namespace Nitric.Sdk.Resource
         }
 
         /// <summary>
-        /// Registers a handler to be called whenever a new event is published to this websocket.
+        /// Registers a handler to be called whenever a connection event is published to this websocket.
         /// </summary>
-        /// <param name="eventType">The type of websocket event</param>
         /// <param name="handler">The handler to call to process websocket events</param>
-        public void On(Service.WebsocketEventType eventType, Func<WebsocketContext, WebsocketContext> handler)
+        public void OnConnect(Func<WebsocketContext, Task<WebsocketContext>> handler)
         {
             var registrationRequest = new RegistrationRequest
             {
                 SocketName = Name,
-                EventType = eventType.ToGrpc()
+                EventType = Service.WebsocketEventType.Connected.ToGrpc()
+            };
+
+            var websocketWorker = new WebsocketWorker(registrationRequest, handler);
+
+            Nitric.RegisterWorker(websocketWorker);
+        }
+
+        /// <summary>
+        /// Registers a handler to be called whenever a disconnection event is published to this websocket.
+        /// </summary>
+        /// <param name="handler">The handler to call to process websocket events</param>
+        public void OnDisconnect(Func<WebsocketContext, Task<WebsocketContext>> handler)
+        {
+            var registrationRequest = new RegistrationRequest
+            {
+                SocketName = Name,
+                EventType = Service.WebsocketEventType.Disconnected.ToGrpc()
+            };
+
+            var websocketWorker = new WebsocketWorker(registrationRequest, handler);
+
+            Nitric.RegisterWorker(websocketWorker);
+        }
+
+        /// <summary>
+        /// Registers a handler to be called whenever a message event is published to this websocket.
+        /// </summary>
+        /// <param name="handler">The handler to call to process websocket events</param>
+        public void OnMessage(Func<WebsocketContext, Task<WebsocketContext>> handler)
+        {
+            var registrationRequest = new RegistrationRequest
+            {
+                SocketName = Name,
+                EventType = Service.WebsocketEventType.Message.ToGrpc()
             };
 
             var websocketWorker = new WebsocketWorker(registrationRequest, handler);

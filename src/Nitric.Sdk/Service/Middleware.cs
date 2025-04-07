@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Service
 {
@@ -20,5 +21,5 @@ namespace Nitric.Sdk.Service
     /// Represents a chainable handler for incoming requests. Useful for decorating existing handlers.
     /// </summary>
     /// <typeparam name="TCtx">The request context.</typeparam>
-    public delegate TCtx Middleware<TCtx>(TCtx ctx, Func<TCtx, TCtx> next);
+    public delegate Task<TCtx> Middleware<TCtx>(TCtx ctx, Func<TCtx, Task<TCtx>> next);
 }

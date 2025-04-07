@@ -51,29 +51,7 @@ namespace Nitric.Sdk.Websocket
         /// Send a message to the websocket.
         /// </summary>
         /// <param name="message">The message to be sent</param>
-        public void SendMessage(string message)
-        {
-            var request = new WebsocketSendRequest
-            {
-                ConnectionId = this.Id,
-                SocketName = this.SocketName,
-                Data = ByteString.CopyFromUtf8(message)
-            };
-            try
-            {
-                this.Client.SendMessage(request);
-            }
-            catch (RpcException e)
-            {
-                throw NitricException.FromRpcException(e);
-            }
-        }
-
-        /// <summary>
-        /// Send a message to the websocket.
-        /// </summary>
-        /// <param name="message">The message to be sent</param>
-        public async Task SendMessageAsync(string message)
+        public async void SendMessage(string message)
         {
             var request = new WebsocketSendRequest
             {
@@ -94,28 +72,7 @@ namespace Nitric.Sdk.Websocket
         /// <summary>
         /// Close the connection to the websocket.
         /// </summary>
-        public void CloseConnection()
-        {
-            var request = new WebsocketCloseConnectionRequest
-            {
-                ConnectionId = this.Id,
-                SocketName = this.SocketName,
-            };
-
-            try
-            {
-                this.Client.CloseConnection(request);
-            }
-            catch (RpcException e)
-            {
-                throw NitricException.FromRpcException(e);
-            }
-        }
-
-        /// <summary>
-        /// Close the connection to the websocket.
-        /// </summary>
-        public async Task CloseConnectionAsync()
+        public async void CloseConnection()
         {
             var request = new WebsocketCloseConnectionRequest
             {

@@ -42,35 +42,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// </summary>
         /// <param name="key">The unique key that references the value.</param>
         /// <returns>The value that was referenced by the key.</returns>
-        public T Get(string key)
-        {
-            var request = new KvStoreGetValueRequest
-            {
-                Ref = new ValueRef
-                {
-                    Store = Name,
-                    Key = key,
-                }
-            };
-
-            try
-            {
-                var resp = this.Client.GetValue(request);
-
-                return Struct.ToJsonSerializable<T>(resp.Value.Content);
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Get a value from the key value store by referencing the key.
-        /// </summary>
-        /// <param name="key">The unique key that references the value.</param>
-        /// <returns>The value that was referenced by the key.</returns>
-        public async Task<T> GetAsync(string key)
+        public async Task<T> Get(string key)
         {
             var request = new KvStoreGetValueRequest
             {
@@ -98,34 +70,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// </summary>
         /// <param name="key">A unique key that will reference the value.</param>
         /// <param name="value">The value to store.</param>
-        public void Set(string key, T value)
-        {
-            var request = new KvStoreSetValueRequest
-            {
-                Content = Struct.FromJsonSerializable(value),
-                Ref = new ValueRef
-                {
-                    Store = Name,
-                    Key = key,
-                }
-            };
-
-            try
-            {
-                this.Client.SetValue(request);
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Set a key value pair in the key value store.
-        /// </summary>
-        /// <param name="key">A unique key that will reference the value.</param>
-        /// <param name="value">The value to store.</param>
-        public async Task SetAsync(string key, T value)
+        public async Task Set(string key, T value)
         {
             var request = new KvStoreSetValueRequest
             {
@@ -151,32 +96,7 @@ namespace Nitric.Sdk.KeyValueStore
         /// Delete a value from the key value store.
         /// </summary>
         /// <param name="key">The unique key that references the value.</param>
-        public void Delete(string key)
-        {
-            var request = new KvStoreDeleteKeyRequest
-            {
-                Ref = new ValueRef
-                {
-                    Store = Name,
-                    Key = key,
-                }
-            };
-
-            try
-            {
-                this.Client.DeleteKey(request);
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Delete a value from the key value store.
-        /// </summary>
-        /// <param name="key">The unique key that references the value.</param>
-        public async Task DeleteAsync(string key)
+        public async Task Delete(string key)
         {
             var request = new KvStoreDeleteKeyRequest
             {

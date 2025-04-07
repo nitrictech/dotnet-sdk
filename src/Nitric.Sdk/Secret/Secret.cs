@@ -78,43 +78,7 @@ namespace Nitric.Sdk.Secret
         /// <returns>A reference to the specific version of the secret containing the provided value.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NitricException"></exception>
-        public SecretVersion Put(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            var request = new SecretPutRequest
-            {
-                Secret = new Proto.Secrets.v1.Secret { Name = this.Name },
-                Value = Google.Protobuf.ByteString.CopyFrom(Encoding.UTF8.GetBytes(value)),
-            };
-            try
-            {
-                var secretResponse = this.Client.Put(request);
-                return new SecretVersion(
-                    new Secret(
-                        secretResponse.SecretVersion.Secret.Name,
-                        this.Client
-                    ),
-                    secretResponse.SecretVersion.Version
-                );
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Create a new version of this secret containing the provided value and set it as the latest version.
-        /// </summary>
-        /// <param name="value">The secret value to store from a string.</param>
-        /// <returns>A reference to the specific version of the secret containing the provided value.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="NitricException"></exception>
-        public async Task<SecretVersion> PutAsync(string value)
+        public async Task<SecretVersion> Put(string value)
         {
             if (string.IsNullOrEmpty(value))
             {

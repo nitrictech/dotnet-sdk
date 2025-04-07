@@ -23,6 +23,7 @@ using Nitric.Sdk.Worker;
 using Action = Nitric.Proto.Resources.v1.Action;
 using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
 using GrpcClient = Nitric.Proto.Topics.v1.Topics.TopicsClient;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Resource
 {
@@ -83,7 +84,7 @@ namespace Nitric.Sdk.Resource
         /// Registers a handler to be called whenever a new event is published to this topic.
         /// </summary>
         /// <param name="handler">The handler to call to process events</param>
-        public void Subscribe(Func<MessageContext<T>, MessageContext<T>> handler)
+        public void Subscribe(Func<MessageContext<T>, Task<MessageContext<T>>> handler)
         {
             var registrationRequest = new RegistrationRequest { TopicName = this.Name };
 

@@ -72,7 +72,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Get(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Get(handler);
+        public void Get(string route, Func<HttpContext, Task<HttpContext>> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Get(handler);
 
         /// <summary>
         /// Create a new GET handler on the specified route.
@@ -88,7 +88,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Post(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Post(handler);
+        public void Post(string route, Func<HttpContext, Task<HttpContext>> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Post(handler);
 
         /// <summary>
         /// Create a new POST handler on the specified route.
@@ -104,7 +104,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Put(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Put(handler);
+        public void Put(string route, Func<HttpContext, Task<HttpContext>> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Put(handler);
 
         /// <summary>
         /// Create a new PUT handler on the specified route.
@@ -120,7 +120,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Delete(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Delete(handler);
+        public void Delete(string route, Func<HttpContext, Task<HttpContext>> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Delete(handler);
 
         /// <summary>
         /// Create a new DELETE handler on the specified route.
@@ -136,7 +136,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void Options(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Options(handler);
+        public void Options(string route, Func<HttpContext, Task<HttpContext>> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).Options(handler);
 
         /// <summary>
         /// Create a new OPTIONS handler on the specified route.
@@ -152,7 +152,7 @@ namespace Nitric.Sdk.Resource
         /// <param name="route">The path to match on.</param>
         /// <param name="handler">The handler to run.</param>
         /// <param name="security">Security rules to override API-level security.</param>
-        public void All(string route, Func<HttpContext, HttpContext> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).All(handler);
+        public void All(string route, Func<HttpContext, Task<HttpContext>> handler, OidcOptions[] security = null) => Route(route, new RouteOptions(security: security)).All(handler);
 
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
@@ -249,12 +249,12 @@ namespace Nitric.Sdk.Resource
             };
         }
 
-        private Middleware<HttpContext>[] ConcatMiddleware(Func<HttpContext, HttpContext> handler)
+        private Middleware<HttpContext>[] ConcatMiddleware(Func<HttpContext, Task<HttpContext>> handler)
         {
-            HttpContext ComposedMiddleware(HttpContext context, Func<HttpContext, HttpContext> next)
+            async Task<HttpContext> ComposedMiddleware(HttpContext context, Func<HttpContext, Task<HttpContext>> next)
             {
-                context = handler(context);
-                return next(context);
+                context = await handler(context);
+                return await next(context);
             }
             return this.Opts.Middlewares.Append(ComposedMiddleware).ToArray();
         }
@@ -268,7 +268,7 @@ namespace Nitric.Sdk.Resource
         /// Create a new GET handler on the specified route.
         /// </summary>
         /// <param name="handler">The handler to run.</param>
-        public void Get(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Get }, this.Opts, ConcatMiddleware(handler));
+        public void Get(Func<HttpContext, Task<HttpContext>> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Get }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new GET middleware chain on the specified route.
@@ -280,7 +280,7 @@ namespace Nitric.Sdk.Resource
         /// Create a new POST handler on the specified route.
         /// </summary>
         /// <param name="handler">The handler to run.</param>
-        public void Post(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Post }, this.Opts, ConcatMiddleware(handler));
+        public void Post(Func<HttpContext, Task<HttpContext>> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Post }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new POST middleware chain on the specified route.
@@ -292,7 +292,7 @@ namespace Nitric.Sdk.Resource
         /// Create a new PUT handler on the specified route.
         /// </summary>
         /// <param name="handler">The handler to run.</param>
-        public void Put(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Put }, this.Opts, ConcatMiddleware(handler));
+        public void Put(Func<HttpContext, Task<HttpContext>> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Put }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new PUT middleware chain on the specified route.
@@ -304,7 +304,7 @@ namespace Nitric.Sdk.Resource
         /// Create a new DELETE handler on the specified route.
         /// </summary>
         /// <param name="handler">The handler to run.</param>
-        public void Delete(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Delete }, this.Opts, ConcatMiddleware(handler));
+        public void Delete(Func<HttpContext, Task<HttpContext>> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Delete }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new DELETE middleware chain on the specified route.
@@ -316,7 +316,7 @@ namespace Nitric.Sdk.Resource
         /// Create a new OPTIONS handler on the specified route.
         /// </summary>
         /// <param name="handler">The handler to run.</param>
-        public void Options(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Options }, this.Opts, ConcatMiddleware(handler));
+        public void Options(Func<HttpContext, Task<HttpContext>> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Options }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new OPTIONS middleware chain on the specified route.
@@ -328,7 +328,7 @@ namespace Nitric.Sdk.Resource
         /// Create a new OPTIONS handler on the specified route.
         /// </summary>
         /// <param name="handler"></param>
-        public void Patch(Func<HttpContext, HttpContext> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Patch }, this.Opts, ConcatMiddleware(handler));
+        public void Patch(Func<HttpContext, Task<HttpContext>> handler) => Method(this.Path, new HttpMethod[] { HttpMethod.Patch }, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new OPTIONS middleware chain on the specified route.
@@ -346,11 +346,12 @@ namespace Nitric.Sdk.Resource
             HttpMethod.Options,
             HttpMethod.Patch
         };
+
         /// <summary>
         /// Create a new handler on the specified route for every HTTP verb.
         /// </summary>
         /// <param name="handler">The handler to run.</param>
-        public void All(Func<HttpContext, HttpContext> handler) => Method(this.Path, httpMethods, this.Opts, ConcatMiddleware(handler));
+        public void All(Func<HttpContext, Task<HttpContext>> handler) => Method(this.Path, httpMethods, this.Opts, ConcatMiddleware(handler));
 
         /// <summary>
         /// Create a new chain of middleware on the specified route for every HTTP verb.

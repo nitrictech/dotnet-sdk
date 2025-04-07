@@ -55,53 +55,7 @@ namespace Nitric.Sdk.Storage
         /// </summary>
         /// <param name="body">The contents to write.</param>
         /// <exception cref="NitricException"></exception>
-        public void Write(byte[] body)
-        {
-            var request = new StorageWriteRequest
-            {
-                BucketName = Bucket.Name,
-                Key = this.Name,
-                Body = ByteString.CopyFrom(body)
-            };
-            try
-            {
-                this.Bucket.Client.Write(request);
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Create or update the contents of the file.
-        /// </summary>
-        /// <param name="body">The contents to write.</param>
-        /// <exception cref="NitricException"></exception>
-        public void Write(string body)
-        {
-            var request = new StorageWriteRequest
-            {
-                BucketName = Bucket.Name,
-                Key = this.Name,
-                Body = ByteString.CopyFromUtf8(body)
-            };
-            try
-            {
-                this.Bucket.Client.Write(request);
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Create or update the contents of the file.
-        /// </summary>
-        /// <param name="body">The contents to write.</param>
-        /// <exception cref="NitricException"></exception>
-        public async Task WriteAsync(byte[] body)
+        public async void Write(byte[] body)
         {
             var request = new StorageWriteRequest
             {
@@ -124,7 +78,7 @@ namespace Nitric.Sdk.Storage
         /// </summary>
         /// <param name="body">The contents to write.</param>
         /// <exception cref="NitricException"></exception>
-        public async Task WriteAsync(string body)
+        public async void Write(string body)
         {
             var request = new StorageWriteRequest
             {
@@ -147,30 +101,7 @@ namespace Nitric.Sdk.Storage
         /// </summary>
         /// <returns>The file contents.</returns>
         /// <exception cref="NitricException"></exception>
-        public byte[] Read()
-        {
-            var request = new StorageReadRequest
-            {
-                BucketName = Bucket.Name,
-                Key = this.Name
-            };
-            try
-            {
-                var response = this.Bucket.Client.Read(request);
-                return response.Body.ToByteArray();
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Retrieve the contents of a file.
-        /// </summary>
-        /// <returns>The file contents.</returns>
-        /// <exception cref="NitricException"></exception>
-        public async Task<byte[]> ReadAsync()
+        public async Task<byte[]> Read()
         {
             var request = new StorageReadRequest
             {
@@ -192,28 +123,7 @@ namespace Nitric.Sdk.Storage
         /// Delete the file.
         /// </summary>
         /// <exception cref="NitricException"></exception>
-        public void Delete()
-        {
-            var request = new StorageDeleteRequest
-            {
-                BucketName = Bucket.Name,
-                Key = this.Name
-            };
-            try
-            {
-                this.Bucket.Client.Delete(request);
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Delete the file.
-        /// </summary>
-        /// <exception cref="NitricException"></exception>
-        public async Task DeleteAsync()
+        public async Task Delete()
         {
             var request = new StorageDeleteRequest
             {
@@ -231,63 +141,13 @@ namespace Nitric.Sdk.Storage
         }
 
         /// <summary>
-        /// Create a presigned URL for writing to a given file reference.
-        /// </summary>
-        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
-        /// <returns>The signed URL for writing.</returns>
-        public string GetUploadUrl(int expiry = 600)
-        {
-            return this.PreSignUrl(SignedMode.Write, expiry);
-        }
-
-        /// <summary>
         /// Create a presigned URL for reading a given file reference.
         /// </summary>
         /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
         /// <returns>The signed URL for reading.</returns>
-        public string GetDownloadUrl(int expiry = 600)
+        public async Task<string> GetDownloadUrl(int expiry = 600)
         {
-            return this.PreSignUrl(SignedMode.Read, expiry);
-        }
-
-        /// <summary>
-        /// Create a presigned URL for reading or writing for the given file reference.
-        /// </summary>
-        /// <param name="mode">The mode the URL will access the file with. E.g. reading or writing.</param>
-        /// <param name="expiry">How long the URL should be valid for in seconds (max of 604800).</param>
-        /// <returns>The signed URL for reading or writing</returns>
-        internal string PreSignUrl(SignedMode mode, int expiry)
-        {
-            var request = new StoragePreSignUrlRequest
-            {
-                BucketName = this.Bucket.Name,
-                Key = this.Name,
-                Operation = mode == SignedMode.Read ? StoragePreSignUrlRequest.Types.Operation.Read : StoragePreSignUrlRequest.Types.Operation.Write,
-                Expiry = new Duration
-                {
-                    Seconds = Math.Clamp(expiry, 0, 604800),
-                }
-            };
-
-            try
-            {
-                var resp = this.Bucket.Client.PreSignUrl(request);
-                return resp.Url;
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Create a presigned URL for reading a given file reference.
-        /// </summary>
-        /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
-        /// <returns>The signed URL for reading.</returns>
-        public async Task<string> GetDownloadUrlAsync(int expiry = 600)
-        {
-            return await this.PreSignUrlAsync(SignedMode.Read, expiry);
+            return await this.PreSignUrl(SignedMode.Read, expiry);
         }
 
 
@@ -296,9 +156,9 @@ namespace Nitric.Sdk.Storage
         /// </summary>
         /// <param name="expiry">How long the URL should be valid for in seconds. Defaults to 600 seconds (10 minutes).</param>
         /// <returns>The signed URL for writing.</returns>
-        public async Task<string> GetUploadUrlAsync(int expiry = 600)
+        public async Task<string> GetUploadUrl(int expiry = 600)
         {
-            return await this.PreSignUrlAsync(SignedMode.Write, expiry);
+            return await this.PreSignUrl(SignedMode.Write, expiry);
         }
 
         /// <summary>
@@ -307,7 +167,7 @@ namespace Nitric.Sdk.Storage
         /// <param name="mode">The mode the URL will access the file with. E.g. reading or writing.</param>
         /// <param name="expiry">How long the URL should be valid for in seconds (max of 604800).</param>
         /// <returns>The signed URL for reading or writing</returns>
-        internal async Task<string> PreSignUrlAsync(SignedMode mode, int expiry)
+        internal async Task<string> PreSignUrl(SignedMode mode, int expiry)
         {
             var request = new StoragePreSignUrlRequest
             {

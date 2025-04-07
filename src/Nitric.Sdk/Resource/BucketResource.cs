@@ -23,6 +23,7 @@ using Nitric.Proto.Storage.v1;
 using Action = Nitric.Proto.Resources.v1.Action;
 using Nitric.Sdk.Common;
 using GrpcClient = Nitric.Proto.Storage.v1.Storage.StorageClient;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Resource
 {
@@ -112,7 +113,7 @@ namespace Nitric.Sdk.Resource
         public void On(
             Service.BlobEventType blobEventType,
             string keyPrefixFilter,
-            Func<BlobEventContext, BlobEventContext> handler)
+            Func<BlobEventContext, Task<BlobEventContext>> handler)
         {
             var request = new RegistrationRequest
             {

@@ -18,6 +18,7 @@ clean:
 	@rm -rf src/Nitric.Sdk/bin
 	@rm -rf src/Nitric.Sdk/obj
 	@rm -rf src/Nitric.Sdk/Proto
+	@dotnet clean
 
 download:
 	@curl -L https://github.com/nitrictech/nitric/releases/download/v${NITRIC_VERSION}/proto.tgz -o nitric.tgz

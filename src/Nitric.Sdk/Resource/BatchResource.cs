@@ -23,6 +23,7 @@ using Action = Nitric.Proto.Resources.v1.Action;
 using System.Linq;
 using GrpcClient = Nitric.Proto.Batch.v1.Batch.BatchClient;
 using Nitric.Sdk.Common;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Resource
 {
@@ -93,7 +94,7 @@ namespace Nitric.Sdk.Resource
             return permissions.Aggregate((IEnumerable<Action>)new List<Action>(), (acc, x) => acc.Concat(actionMap[x])).Distinct();
         }
 
-        public void Handler(Func<JobContext<T>, JobContext<T>> middlewares, JobResourceRequirements requirements = null)
+        public void Handler(Func<JobContext<T>, Task<JobContext<T>>> middlewares, JobResourceRequirements requirements = null)
         {
             requirements ??= new JobResourceRequirements();
 

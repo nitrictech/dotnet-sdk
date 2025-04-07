@@ -27,7 +27,7 @@ namespace Nitric.Sdk.Worker
         readonly private RegistrationRequest RegistrationRequest;
         public GrpcClient GrpcClient { private get; set; }
 
-        public SubscriptionWorker(RegistrationRequest request, Func<MessageContext<T>, MessageContext<T>> middleware) : base(middleware)
+        public SubscriptionWorker(RegistrationRequest request, Func<MessageContext<T>, Task<MessageContext<T>>> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
             this.GrpcClient = new GrpcClient(GrpcChannelProvider.GetChannel());
@@ -55,7 +55,7 @@ namespace Nitric.Sdk.Worker
 
                     try
                     {
-                        ctx = this.Middleware(ctx);
+                        ctx = await this.Middleware(ctx);
                     }
                     catch (Exception err)
                     {

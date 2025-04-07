@@ -47,32 +47,7 @@ namespace Nitric.Sdk.Topics
         /// </summary>
         /// <param name="message">The message to publish</param>
         /// <exception cref="NitricException"></exception>
-        public void Publish(T message)
-        {
-            var structPayload = Struct.FromJsonSerializable(message);
-
-            var request = new TopicPublishRequest
-            {
-                TopicName = this.Name,
-                Message = new TopicMessage { StructPayload = structPayload }
-            };
-
-            try
-            {
-                this.Client.Publish(request);
-            }
-            catch (Grpc.Core.RpcException re)
-            {
-                throw NitricException.FromRpcException(re);
-            }
-        }
-
-        /// <summary>
-        /// Publish a new message to this topic.
-        /// </summary>
-        /// <param name="message">The message to publish</param>
-        /// <exception cref="NitricException"></exception>
-        public async Task PublishAsync(T message)
+        public async void Publish(T message)
         {
             var structPayload = Struct.FromJsonSerializable(message);
 

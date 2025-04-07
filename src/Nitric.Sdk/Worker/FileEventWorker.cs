@@ -29,7 +29,7 @@ namespace Nitric.Sdk.Worker
         readonly private Bucket bucket;
         public GrpcClient GrpcClient { private get; set; }
 
-        public FileEventWorker(RegistrationRequest request, Bucket bucket, Func<FileEventContext, FileEventContext> middleware) : base(middleware)
+        public FileEventWorker(RegistrationRequest request, Bucket bucket, Func<FileEventContext, Task<FileEventContext>> middleware) : base(middleware)
         {
             this.RegistrationRequest = request;
             this.bucket = bucket;
@@ -59,7 +59,7 @@ namespace Nitric.Sdk.Worker
 
                     try
                     {
-                        ctx = this.Middleware(ctx);
+                        ctx = await this.Middleware(ctx);
                     }
                     catch (Exception err)
                     {

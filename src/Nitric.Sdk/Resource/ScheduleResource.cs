@@ -17,6 +17,7 @@ using Nitric.Sdk.Worker;
 using Nitric.Proto.Schedules.v1;
 using Nitric.Proto.Resources.v1;
 using ResourceType = Nitric.Proto.Resources.v1.ResourceType;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Resource
 {
@@ -39,7 +40,7 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="rate">The interval for the schedule running. e.g. '7 days', '1 hour', '5 minutes'</param>
         /// <param name="middleware">The middleware (code) to run on a schedule.</param>
-        public void Every(string rate, Func<IntervalContext, IntervalContext> middleware)
+        public void Every(string rate, Func<IntervalContext, Task<IntervalContext>> middleware)
         {
             var registration = new RegistrationRequest
             {
@@ -74,7 +75,7 @@ namespace Nitric.Sdk.Resource
         /// </summary>
         /// <param name="expression">The cron expression representing when the schedule should run.</param>
         /// <param name="middleware">The middleware (code) to run on a schedule.</param>
-        public void Cron(string expression, Func<IntervalContext, IntervalContext> middleware)
+        public void Cron(string expression, Func<IntervalContext, Task<IntervalContext>> middleware)
         {
             var registration = new RegistrationRequest
             {

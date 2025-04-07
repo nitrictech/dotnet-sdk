@@ -44,32 +44,10 @@ namespace Nitric.Sdk.Job
         }
 
         /// <summary>
-        /// Submit a job to the batch service
-        /// </summary>
-        /// <param name="data">Data to submit to the job</param>
-        public void Submit(T data)
-        {
-            var request = new JobSubmitRequest
-            {
-                JobName = this.Name,
-            };
-
-            if (data != null)
-            {
-                request.Data = new JobData
-                {
-                    Struct = Struct.FromJsonSerializable(data),
-                };
-            }
-
-            this.Client.SubmitJob(request);
-        }
-
-        /// <summary>
         /// Submit a job to the batch service asynchronously
         /// </summary>
         /// <param name="data">Data to submit to the job</param>
-        public async Task SubmitAsync(T data)
+        public async void Submit(T data)
         {
             var request = new JobSubmitRequest
             {
