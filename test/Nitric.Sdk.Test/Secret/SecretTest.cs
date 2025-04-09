@@ -47,7 +47,7 @@ namespace Nitric.Sdk.Test.Secret
 
         //Testing Secret Methods
         [Fact]
-        public async void TestPutSecretBytesAsync()
+        public async void TestPutSecretBytes()
         {
             var secretPutResponse = new SecretPutResponse
             {
@@ -68,7 +68,7 @@ namespace Nitric.Sdk.Test.Secret
 
             var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
 
-            var response = await secret.PutAsync("Super secret message");
+            var response = await secret.Put("Super secret message");
 
             Assert.Equal("test-version", response.Id);
             Assert.Equal(secret.Name, response.Secret.Name);
@@ -79,7 +79,7 @@ namespace Nitric.Sdk.Test.Secret
         }
 
         [Fact]
-        public async void TestPutSecretStringAsync()
+        public async void TestPutSecretString()
         {
             var secretPutResponse = new SecretPutResponse
             {
@@ -100,121 +100,13 @@ namespace Nitric.Sdk.Test.Secret
 
             var testString = "Super secret message";
             var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
-            var response = await secret.PutAsync(testString);
+            var response = await secret.Put(testString);
 
             Assert.Equal("test-version", response.Id);
             Assert.Equal(secret.Name, response.Secret.Name);
 
             sc.Verify(
                 t => t.PutAsync(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public void TestPutEmptySecretStringAsync()
-        {
-            var secret = new Sdk.Secret.Secret("test-secret");
-            Assert.ThrowsAsync<ArgumentNullException>(
-                () => secret.PutAsync(""));
-        }
-
-        [Fact]
-        public void TestPutNullSecretBytesAsync()
-        {
-            var secret = new Sdk.Secret.Secret("test-secret");
-            Assert.ThrowsAsync<ArgumentNullException>(
-                () => secret.PutAsync(null));
-        }
-
-        [Fact]
-        public async void TestPutNonExistentSecretAsync()
-        {
-            Mock<GrpcClient> sc = new Mock<GrpcClient>();
-            sc.Setup(e =>
-                    e.PutAsync(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified secret does not exist")))
-                .Verifiable();
-
-            var testString = "Super secret message";
-            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
-            try
-            {
-                var response = await secret.PutAsync(testString);
-                Assert.Fail();
-            }
-            catch (NitricException ne)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified secret does not exist\")",
-                    ne.Message);
-            }
-
-
-            sc.Verify(
-                t => t.PutAsync(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public void TestPutSecretBytes()
-        {
-            var secretPutResponse = new SecretPutResponse
-            {
-                SecretVersion = new Proto.Secrets.v1.SecretVersion
-                {
-                    Secret = new Proto.Secrets.v1.Secret
-                    {
-                        Name = "test-secret",
-                    },
-                    Version = "test-version",
-                }
-            };
-            Mock<GrpcClient> sc = new Mock<GrpcClient>();
-            sc.Setup(e =>
-                    e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(secretPutResponse)
-                .Verifiable();
-
-            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
-
-            var response = secret.Put("Super secret message");
-
-            Assert.Equal("test-version", response.Id);
-            Assert.Equal(secret.Name, response.Secret.Name);
-
-            sc.Verify(
-                t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public void TestPutSecretString()
-        {
-            var secretPutResponse = new SecretPutResponse
-            {
-                SecretVersion = new Proto.Secrets.v1.SecretVersion
-                {
-                    Secret = new Proto.Secrets.v1.Secret
-                    {
-                        Name = "test-secret",
-                    },
-                    Version = "test-version",
-                }
-            };
-            Mock<GrpcClient> sc = new Mock<GrpcClient>();
-            sc.Setup(e =>
-                    e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(secretPutResponse)
-                .Verifiable();
-
-            var testString = "Super secret message";
-            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
-            var response = secret.Put(testString);
-
-            Assert.Equal("test-version", response.Id);
-            Assert.Equal(secret.Name, response.Secret.Name);
-
-            sc.Verify(
-                t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
                 Times.Once);
         }
 
@@ -222,24 +114,24 @@ namespace Nitric.Sdk.Test.Secret
         public void TestPutEmptySecretString()
         {
             var secret = new Sdk.Secret.Secret("test-secret");
-            Assert.Throws<ArgumentNullException>(
-                () => secret.Put(""));
+            Assert.ThrowsAsync<ArgumentNullException>(
+                async () => await secret.Put(""));
         }
 
         [Fact]
         public void TestPutNullSecretBytes()
         {
             var secret = new Sdk.Secret.Secret("test-secret");
-            Assert.Throws<ArgumentNullException>(
-                () => secret.Put(null));
+            Assert.ThrowsAsync<ArgumentNullException>(
+                async () => await secret.Put(null));
         }
 
         [Fact]
-        public void TestPutNonExistentSecret()
+        public async void TestPutNonExistentSecret()
         {
             Mock<GrpcClient> sc = new Mock<GrpcClient>();
             sc.Setup(e =>
-                    e.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
+                    e.PutAsync(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
                 .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified secret does not exist")))
                 .Verifiable();
 
@@ -247,7 +139,7 @@ namespace Nitric.Sdk.Test.Secret
             var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
             try
             {
-                var response = secret.Put(testString);
+                var response = await secret.Put(testString);
                 Assert.Fail();
             }
             catch (NitricException ne)
@@ -258,7 +150,7 @@ namespace Nitric.Sdk.Test.Secret
 
 
             sc.Verify(
-                t => t.Put(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
+                t => t.PutAsync(It.IsAny<SecretPutRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
                 Times.Once);
         }
 
@@ -295,72 +187,8 @@ namespace Nitric.Sdk.Test.Secret
             Assert.Equal("Secret[name=test-secret]", secretString);
         }
 
-        //Testing Secret Version Methods
         [Fact]
-        public void TestAccess()
-        {
-            var secretPutResponse = new SecretAccessResponse
-            {
-                SecretVersion = new Proto.Secrets.v1.SecretVersion
-                {
-                    Secret = new Proto.Secrets.v1.Secret
-                    {
-                        Name = "test-secret",
-                    },
-                    Version = "test-version",
-                },
-                Value = Google.Protobuf.ByteString.CopyFromUtf8("Super secret message"),
-            };
-            Mock<GrpcClient> sc = new Mock<GrpcClient>();
-            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(secretPutResponse)
-                .Verifiable();
-
-            var version = new Sdk.Secret.Secret("test-secret", sc.Object)
-                .Version("test-version");
-            var response = version.Access();
-
-            Assert.Equal("test-version", response.SecretVersion.Id);
-            Assert.Equal("test-secret", response.SecretVersion.Secret.Name);
-            Assert.Equal("Super secret message", Encoding.UTF8.GetString(response.ValueBytes));
-            Assert.Equal("Super secret message", response.Value);
-
-            sc.Verify(
-                t => t.Access(It.IsAny<SecretAccessRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestAccessSecretWithoutPermission()
-        {
-            Mock<GrpcClient> sc = new Mock<GrpcClient>();
-            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.PermissionDenied,
-                    "You do not have permission to access this secret")))
-                .Verifiable();
-
-            var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
-            try
-            {
-                var response = secret.Version("test-secret").Access();
-            }
-            catch (NitricException ne)
-            {
-                Assert.Equal(
-                    "Status(StatusCode=\"PermissionDenied\", Detail=\"You do not have permission to access this secret\")",
-                    ne.Message);
-            }
-
-
-            sc.Verify(
-                t => t.Access(It.IsAny<SecretAccessRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestAccessAsync()
+        public async void TestAccess()
         {
             var secretPutResponse = new SecretAccessResponse
             {
@@ -382,7 +210,7 @@ namespace Nitric.Sdk.Test.Secret
 
             var version = new Sdk.Secret.Secret("test-secret", sc.Object)
                 .Version("test-version");
-            var response = await version.AccessAsync();
+            var response = await version.Access();
 
             Assert.Equal("test-version", response.SecretVersion.Id);
             Assert.Equal("test-secret", response.SecretVersion.Secret.Name);
@@ -395,7 +223,7 @@ namespace Nitric.Sdk.Test.Secret
         }
 
         [Fact]
-        public async void TestAccessSecretWithoutPermissionAsync()
+        public async void TestAccessSecretWithoutPermission()
         {
             Mock<GrpcClient> sc = new Mock<GrpcClient>();
             sc.Setup(e => e.AccessAsync(It.IsAny<SecretAccessRequest>(), null, null,
@@ -407,7 +235,7 @@ namespace Nitric.Sdk.Test.Secret
             var secret = new Sdk.Secret.Secret("test-secret", sc.Object);
             try
             {
-                var response = await secret.Version("test-secret").AccessAsync();
+                var response = await secret.Version("test-secret").Access();
             }
             catch (NitricException ne)
             {
@@ -433,7 +261,7 @@ namespace Nitric.Sdk.Test.Secret
         }
 
         [Fact]
-        public void TestSecretValueToString()
+        public async Task TestSecretValueToString()
         {
             var secretPutResponse = new SecretAccessResponse
             {
@@ -448,22 +276,22 @@ namespace Nitric.Sdk.Test.Secret
                 Value = Google.Protobuf.ByteString.CopyFromUtf8("Super secret message"),
             };
             Mock<GrpcClient> sc = new Mock<GrpcClient>();
-            sc.Setup(e => e.Access(It.IsAny<SecretAccessRequest>(), null, null,
+            sc.Setup(e => e.AccessAsync(It.IsAny<SecretAccessRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(secretPutResponse)
+                .Returns(new AsyncUnaryCall<SecretAccessResponse>(Task.FromResult(secretPutResponse), null, null, null, null))
                 .Verifiable();
 
             var version = new Sdk.Secret.Secret("test-secret", sc.Object)
                 .Version("test-version");
 
-            var response = version.Access();
+            var response = await version.Access();
 
             Assert.Equal(
                 "SecretValue[secretVersion=SecretVersion[secret=Secret[name=test-secret], version=test-version], value.length=20]",
                 response.ToString());
 
             sc.Verify(
-                t => t.Access(It.IsAny<SecretAccessRequest>(), null, null,
+                t => t.AccessAsync(It.IsAny<SecretAccessRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
     }

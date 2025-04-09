@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
 using Grpc.Core;
 using Moq;
 using Nitric.Proto.Topics.v1;
@@ -26,9 +27,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestSubscriptionWorkerBuildWithMiddleware()
         {
-            Func<MessageContext<TestProfile>, MessageContext<TestProfile>> middleware = (ctx) =>
+            Func<MessageContext<TestProfile>, Task<MessageContext<TestProfile>>> middleware = async (ctx) =>
             {
-                return ctx;
+                return await Task.FromResult(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -44,9 +45,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestSubscriptionWorkerBuildWithMultipleMiddleware()
         {
-            Middleware<MessageContext<TestProfile>> middleware = (ctx, next) =>
+            Middleware<MessageContext<TestProfile>> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -76,13 +77,13 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public async void TestSubscriptionWorkerStart()
         {
-            Middleware<MessageContext<TestProfile>> middleware = (ctx, next) =>
+            Middleware<MessageContext<TestProfile>> middleware = async (ctx, next) =>
             {
                 Assert.Equal("topic-name", ctx.Req.TopicName);
                 Assert.Equal("John Smith", ctx.Req.Message.Name);
                 Assert.Equal(21, ctx.Req.Message.Age);
                 Assert.Equal("john.smith@email.com", ctx.Req.Message.Contacts[0]);
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Google.Protobuf;
 using Grpc.Core;
 using Moq;
@@ -18,9 +19,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestApiWorkerBuildWithMiddleware()
         {
-            Func<HttpContext, HttpContext> middleware = (ctx) =>
+            Func<HttpContext, Task<HttpContext>> middleware = async (ctx) =>
             {
-                return ctx;
+                return await Task.FromResult(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -37,9 +38,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestApiWorkerBuildWithMultipleMiddleware()
         {
-            Middleware<HttpContext> middleware = (ctx, next) =>
+            Middleware<HttpContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -56,9 +57,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestApiWorkerBuildWithNoMiddleware()
         {
-            Middleware<HttpContext> middleware = (ctx, next) =>
+            Middleware<HttpContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -76,13 +77,13 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public async void TestApiWorkerStart()
         {
-            Middleware<HttpContext> middleware = (ctx, next) =>
+            Middleware<HttpContext> middleware = async (ctx, next) =>
             {
                 var profile = ctx.Req.Json<TestProfile>();
                 Assert.Equal("John Smith", profile.Name);
                 Assert.Equal(21, profile.Age);
                 Assert.Equal("john.smith@email.com", profile.Contacts[0]);
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest

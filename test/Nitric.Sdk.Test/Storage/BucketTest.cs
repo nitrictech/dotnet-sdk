@@ -81,102 +81,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public void TestListBlobsWithNoPrefix()
-        {
-            var request = new StorageListBlobsRequest
-            {
-                BucketName = "test-bucket",
-                Prefix = "",
-            };
-
-            var blobs = new List<Blob>
-            {
-                new Blob { Key = "key-1" },
-                new Blob { Key = "key-2" },
-                new Blob { Key = "key-3" },
-            };
-            var response = new StorageListBlobsResponse();
-            response.Blobs.AddRange(blobs);
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.ListBlobs(It.IsAny<StorageListBlobsRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(response)
-                .Verifiable();
-
-            var files = new Sdk.Storage.Bucket("test-bucket", bc.Object).Files();
-
-            bc.Verify(
-                t => t.ListBlobs(request, null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-
-            Assert.Equal("key-1", files[0].Name);
-            Assert.Equal("key-2", files[1].Name);
-            Assert.Equal("key-3", files[2].Name);
-        }
-
-        [Fact]
-        public void TestListBlobsWithPrefix()
-        {
-            var request = new StorageListBlobsRequest
-            {
-                BucketName = "test-bucket",
-                Prefix = "key-",
-            };
-
-            var blobs = new List<Blob>
-            {
-                new Blob { Key = "key-1" },
-                new Blob { Key = "key-2" },
-                new Blob { Key = "key-3" },
-            };
-            var response = new StorageListBlobsResponse();
-            response.Blobs.AddRange(blobs);
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.ListBlobs(It.IsAny<StorageListBlobsRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(response)
-                .Verifiable();
-
-            var files = new Sdk.Storage.Bucket("test-bucket", bc.Object).Files("key-");
-
-            bc.Verify(
-                t => t.ListBlobs(request, null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-
-            Assert.Equal("key-1", files[0].Name);
-            Assert.Equal("key-2", files[1].Name);
-            Assert.Equal("key-3", files[2].Name);
-        }
-
-        [Fact]
-        public void TestListBlobsToNonExistentBucket()
-        {
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.ListBlobs(It.IsAny<StorageListBlobsRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified bucket does not exist")))
-                .Verifiable();
-
-            try
-            {
-                new Sdk.Storage.Bucket("test-bucket", bc.Object).Files("key-1");
-                Assert.Fail();
-            }
-            catch (NitricException e)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified bucket does not exist\")",
-                    e.Message);
-            }
-
-            bc.Verify(
-                t => t.ListBlobs(It.IsAny<StorageListBlobsRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestListBlobsWithNoPrefixAsync()
+        public async void TestListBlobsWithNoPrefix()
         {
             var request = new StorageListBlobsRequest
             {
@@ -199,7 +104,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StorageListBlobsResponse>(Task.FromResult(response), null, null, null, null))
                 .Verifiable();
 
-            var files = await new Sdk.Storage.Bucket("test-bucket", bc.Object).FilesAsync();
+            var files = await new Sdk.Storage.Bucket("test-bucket", bc.Object).Files();
 
             bc.Verify(
                 t => t.ListBlobsAsync(request, null, null,
@@ -211,7 +116,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestListBlobsWithPrefixAsync()
+        public async void TestListBlobsWithPrefix()
         {
             var request = new StorageListBlobsRequest
             {
@@ -234,7 +139,7 @@ namespace Nitric.Sdk.Test.Storage
                 .Returns(new AsyncUnaryCall<StorageListBlobsResponse>(Task.FromResult(response), null, null, null, null))
                 .Verifiable();
 
-            var files = await new Sdk.Storage.Bucket("test-bucket", bc.Object).FilesAsync("key-");
+            var files = await new Sdk.Storage.Bucket("test-bucket", bc.Object).Files("key-");
 
             bc.Verify(
                 t => t.ListBlobsAsync(request, null, null,
@@ -246,7 +151,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestListBlobsToNonExistentBucketAsync()
+        public async void TestListBlobsToNonExistentBucket()
         {
             Mock<GrpcClient> bc = new Mock<GrpcClient>();
             bc.Setup(e => e.ListBlobsAsync(It.IsAny<StorageListBlobsRequest>(), null, null,
@@ -256,7 +161,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                await new Sdk.Storage.Bucket("test-bucket", bc.Object).FilesAsync();
+                await new Sdk.Storage.Bucket("test-bucket", bc.Object).Files();
                 Assert.Fail();
             }
             catch (NitricException e)
@@ -271,129 +176,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public void TestWrite()
-        {
-            var request = new StorageWriteRequest
-            {
-                BucketName = "test-bucket",
-                Key = "test-file",
-                Body = Google.Protobuf.ByteString.CopyFrom(
-                    System.Text.Encoding.UTF8.GetBytes("Body"))
-            };
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.Write(It.IsAny<StorageWriteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new StorageWriteResponse())
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            file.Write(System.Text.Encoding.UTF8.GetBytes("Hello World"));
-
-            bc.Verify(
-                t => t.Write(It.IsAny<StorageWriteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestWriteString()
-        {
-            var request = new StorageWriteRequest
-            {
-                BucketName = "test-bucket",
-                Key = "test-file",
-                Body = Google.Protobuf.ByteString.CopyFrom(
-                    System.Text.Encoding.UTF8.GetBytes("Body"))
-            };
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.Write(It.IsAny<StorageWriteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new StorageWriteResponse())
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            file.Write("Hello World");
-
-            bc.Verify(
-                t => t.Write(It.IsAny<StorageWriteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestWriteToNonExistentBucket()
-        {
-            var request = new StorageWriteRequest
-            {
-                BucketName = "test-bucket",
-                Key = "test-file",
-                Body = Google.Protobuf.ByteString.CopyFrom(
-                    System.Text.Encoding.UTF8.GetBytes("Body"))
-            };
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.Write(It.IsAny<StorageWriteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified bucket does not exist")))
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            try
-            {
-                file.Write("Hello World");
-                Assert.Fail();
-            }
-            catch (NitricException e)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified bucket does not exist\")",
-                    e.Message);
-            }
-
-            bc.Verify(
-                t => t.Write(It.IsAny<StorageWriteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestWriteBytesToNonExistentBucket()
-        {
-            var request = new StorageWriteRequest
-            {
-                BucketName = "test-bucket",
-                Key = "test-file",
-                Body = Google.Protobuf.ByteString.CopyFrom(
-                    System.Text.Encoding.UTF8.GetBytes("Hello World"))
-            };
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.Write(It.IsAny<StorageWriteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified bucket does not exist")))
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            try
-            {
-                file.Write(System.Text.Encoding.UTF8.GetBytes("Hello World"));
-                Assert.Fail();
-            }
-            catch (NitricException e)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified bucket does not exist\")",
-                    e.Message);
-            }
-
-            bc.Verify(
-                t => t.Write(It.IsAny<StorageWriteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestWriteAsync()
+        public async void TestWrite()
         {
             var request = new StorageWriteRequest
             {
@@ -411,7 +194,7 @@ namespace Nitric.Sdk.Test.Storage
 
             var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
-            await file.WriteAsync(System.Text.Encoding.UTF8.GetBytes("Hello World"));
+            await file.Write(System.Text.Encoding.UTF8.GetBytes("Hello World"));
 
             bc.Verify(
                 t => t.WriteAsync(It.IsAny<StorageWriteRequest>(), null, null,
@@ -419,8 +202,16 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestWriteBytesToNonExistentBucketAsync()
+        public async void TestWriteBytesToNonExistentBucket()
         {
+            var request = new StorageWriteRequest
+            {
+                BucketName = "test-bucket",
+                Key = "test-file",
+                Body = Google.Protobuf.ByteString.CopyFrom(
+                    System.Text.Encoding.UTF8.GetBytes("Body"))
+            };
+
             Mock<GrpcClient> bc = new Mock<GrpcClient>();
             bc.Setup(e => e.WriteAsync(It.IsAny<StorageWriteRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
@@ -431,7 +222,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                await file.WriteAsync(System.Text.Encoding.UTF8.GetBytes("Hello World"));
+                await file.Write(System.Text.Encoding.UTF8.GetBytes("Hello World"));
                 Assert.Fail();
             }
             catch (NitricException e)
@@ -446,7 +237,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestWriteToNonExistentBucketAsync()
+        public async void TestWriteToNonExistentBucket()
         {
             Mock<GrpcClient> bc = new Mock<GrpcClient>();
             bc.Setup(e => e.WriteAsync(It.IsAny<StorageWriteRequest>(), null, null,
@@ -458,7 +249,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                await file.WriteAsync("Hello World");
+                await file.Write("Hello World");
                 Assert.Fail();
             }
             catch (NitricException e)
@@ -473,7 +264,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestWriteStringAsync()
+        public async void TestWriteString()
         {
             var request = new StorageWriteRequest
             {
@@ -491,7 +282,7 @@ namespace Nitric.Sdk.Test.Storage
 
             var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
-            await file.WriteAsync("Hello World");
+            await file.Write("Hello World");
 
             bc.Verify(
                 t => t.WriteAsync(It.IsAny<StorageWriteRequest>(), null, null,
@@ -499,8 +290,16 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestWriteStringToNonExistentBucketAsync()
+        public async void TestWriteStringToNonExistentBucket()
         {
+            var request = new StorageWriteRequest
+            {
+                BucketName = "test-bucket",
+                Key = "test-file",
+                Body = Google.Protobuf.ByteString.CopyFrom(
+                    System.Text.Encoding.UTF8.GetBytes("Body"))
+            };
+
             Mock<GrpcClient> bc = new Mock<GrpcClient>();
             bc.Setup(e => e.WriteAsync(It.IsAny<StorageWriteRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
@@ -511,7 +310,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                await file.WriteAsync("Hello World");
+                await file.Write("Hello World");
                 Assert.Fail();
             }
             catch (NitricException e)
@@ -526,58 +325,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public void TestReadExistingKey()
-        {
-            var storageResponse = new StorageReadResponse();
-            storageResponse.Body =
-                Google.Protobuf.ByteString.CopyFrom(System.Text.Encoding.UTF8.GetBytes("Hello World"));
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(storageResponse)
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            var response = file.Read();
-
-            Assert.Equal("Hello World", System.Text.Encoding.UTF8.GetString(response));
-
-            bc.Verify(
-                t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public void TestReadNonExistingKey()
-        {
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.Read(It.IsAny<StorageReadRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            try
-            {
-                file.Read();
-                Assert.True(false);
-            }
-            catch (NitricException ne)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")",
-                    ne.Message);
-            }
-
-            bc.Verify(
-                t => t.Read(It.IsAny<StorageReadRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public async void TestReadExistingKeyAsync()
+        public async void TestReadExistingKey()
         {
             var storageResponse = new StorageReadResponse();
             storageResponse.Body =
@@ -591,7 +339,7 @@ namespace Nitric.Sdk.Test.Storage
 
             var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
-            var response = await file.ReadAsync();
+            var response = await file.Read();
 
             Assert.Equal("Hello World", System.Text.Encoding.UTF8.GetString(response));
 
@@ -601,7 +349,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestReadNonExistingKeyAsync()
+        public async void TestReadNonExistingKey()
         {
             Mock<GrpcClient> bc = new Mock<GrpcClient>();
             bc.Setup(e => e.ReadAsync(It.IsAny<StorageReadRequest>(), null, null,
@@ -613,7 +361,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                await file.ReadAsync();
+                await file.Read();
                 Assert.Fail();
             }
             catch (NitricException ne)
@@ -628,52 +376,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public void TestDeleteExistingKey()
-        {
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.Delete(It.IsAny<StorageDeleteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new StorageDeleteResponse())
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            file.Delete();
-
-            bc.Verify(
-                t => t.Delete(It.IsAny<StorageDeleteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestDeleteNonExistingKey()
-        {
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.Delete(It.IsAny<StorageDeleteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            try
-            {
-                file.Delete();
-                Assert.Fail();
-            }
-            catch (NitricException ne)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")",
-                    ne.Message);
-            }
-
-            bc.Verify(
-                t => t.Delete(It.IsAny<StorageDeleteRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public async void TestDeleteExistingKeyAsync()
+        public async void TestDeleteExistingKey()
         {
             Mock<GrpcClient> bc = new Mock<GrpcClient>();
             bc.Setup(e => e.DeleteAsync(It.IsAny<StorageDeleteRequest>(), null, null,
@@ -683,7 +386,7 @@ namespace Nitric.Sdk.Test.Storage
 
             var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
-            await file.DeleteAsync();
+            await file.Delete();
 
             bc.Verify(
                 t => t.DeleteAsync(It.IsAny<StorageDeleteRequest>(), null, null,
@@ -691,7 +394,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestDeleteNonExistingKeyAsync()
+        public async void TestDeleteNonExistingKey()
         {
             Mock<GrpcClient> bc = new Mock<GrpcClient>();
             bc.Setup(e => e.DeleteAsync(It.IsAny<StorageDeleteRequest>(), null, null,
@@ -703,7 +406,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                await file.DeleteAsync();
+                await file.Delete();
                 Assert.Fail();
             }
             catch (NitricException ne)
@@ -718,90 +421,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public void TestGetUploadUrlWithDefaultExpiry()
-        {
-            var request = new StoragePreSignUrlRequest
-            {
-                BucketName = "test-bucket",
-                Key = "test-file",
-                Operation = StoragePreSignUrlRequest.Types.Operation.Write,
-                Expiry = new Google.Protobuf.WellKnownTypes.Duration { Seconds = 600 },
-            };
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.PreSignUrl(It.IsAny<StoragePreSignUrlRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new StoragePreSignUrlResponse { Url = "https://example.com" })
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            var url = file.GetUploadUrl();
-
-            bc.Verify(
-                t => t.PreSignUrl(request, null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-
-            Assert.Equal("https://example.com", url);
-        }
-
-        [Fact]
-        public void TestGetUploadUrlWithSpecificExpiry()
-        {
-            var request = new StoragePreSignUrlRequest
-            {
-                BucketName = "test-bucket",
-                Key = "test-file",
-                Operation = StoragePreSignUrlRequest.Types.Operation.Write,
-                Expiry = new Google.Protobuf.WellKnownTypes.Duration { Seconds = 300 },
-            };
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.PreSignUrl(It.IsAny<StoragePreSignUrlRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new StoragePreSignUrlResponse { Url = "https://example.com" })
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            var url = file.GetUploadUrl(300);
-
-            bc.Verify(
-                t => t.PreSignUrl(request, null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-
-            Assert.Equal("https://example.com", url);
-        }
-
-        [Fact]
-        public void TestGetUploadUrlNonExistingKey()
-        {
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.PreSignUrl(It.IsAny<StoragePreSignUrlRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            try
-            {
-                file.GetUploadUrl();
-                Assert.Fail();
-            }
-            catch (NitricException ne)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")",
-                    ne.Message);
-            }
-
-            bc.Verify(
-                t => t.PreSignUrl(It.IsAny<StoragePreSignUrlRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public async void TestGetUploadUrlWithDefaultExpiryAsync()
+        public async void TestGetUploadUrlWithDefaultExpiry()
         {
             var request = new StoragePreSignUrlRequest
             {
@@ -819,7 +439,7 @@ namespace Nitric.Sdk.Test.Storage
 
             var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
-            var url = await file.GetUploadUrlAsync();
+            var url = await file.GetUploadUrl();
 
             bc.Verify(
                 t => t.PreSignUrlAsync(request, null, null,
@@ -829,7 +449,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestGetUploadUrlWithSpecificExpiryAsync()
+        public async void TestGetUploadUrlWithSpecificExpiry()
         {
             var request = new StoragePreSignUrlRequest
             {
@@ -847,7 +467,7 @@ namespace Nitric.Sdk.Test.Storage
 
             var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
-            var url = await file.GetUploadUrlAsync(300);
+            var url = await file.GetUploadUrl(300);
 
             bc.Verify(
                 t => t.PreSignUrlAsync(request, null, null,
@@ -857,8 +477,16 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestGetUploadUrlNonExistingKeyAsync()
+        public async void TestGetUploadUrlNonExistingKey()
         {
+            var request = new StoragePreSignUrlRequest
+            {
+                BucketName = "test-bucket",
+                Key = "test-file",
+                Operation = StoragePreSignUrlRequest.Types.Operation.Write,
+                Expiry = new Google.Protobuf.WellKnownTypes.Duration { Seconds = 600 },
+            };
+
             Mock<GrpcClient> bc = new Mock<GrpcClient>();
             bc.Setup(e => e.PreSignUrlAsync(It.IsAny<StoragePreSignUrlRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
@@ -869,7 +497,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                await file.GetUploadUrlAsync();
+                await file.GetUploadUrl();
                 Assert.Fail();
             }
             catch (NitricException ne)
@@ -879,95 +507,12 @@ namespace Nitric.Sdk.Test.Storage
             }
 
             bc.Verify(
-                t => t.PreSignUrlAsync(It.IsAny<StoragePreSignUrlRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public void TestGetDownloadUrlWithDefaultExpiry()
-        {
-            var request = new StoragePreSignUrlRequest
-            {
-                BucketName = "test-bucket",
-                Key = "test-file",
-                Operation = StoragePreSignUrlRequest.Types.Operation.Read,
-                Expiry = new Google.Protobuf.WellKnownTypes.Duration { Seconds = 600 },
-            };
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.PreSignUrl(It.IsAny<StoragePreSignUrlRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new StoragePreSignUrlResponse { Url = "https://example.com" })
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            var url = file.GetDownloadUrl();
-
-            bc.Verify(
-                t => t.PreSignUrl(request, null, null,
+                t => t.PreSignUrlAsync(It.IsAny<StoragePreSignUrlRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-
-            Assert.Equal("https://example.com", url);
         }
 
         [Fact]
-        public void TestGetDownloadUrlWithSpecificExpiry()
-        {
-            var request = new StoragePreSignUrlRequest
-            {
-                BucketName = "test-bucket",
-                Key = "test-file",
-                Operation = StoragePreSignUrlRequest.Types.Operation.Read,
-                Expiry = new Google.Protobuf.WellKnownTypes.Duration { Seconds = 300 },
-            };
-
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.PreSignUrl(It.IsAny<StoragePreSignUrlRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new StoragePreSignUrlResponse { Url = "https://example.com" })
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            var url = file.GetDownloadUrl(300);
-
-            bc.Verify(
-                t => t.PreSignUrl(request, null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-
-            Assert.Equal("https://example.com", url);
-        }
-
-        [Fact]
-        public void TestGetDownloadUrlNonExistingKey()
-        {
-            Mock<GrpcClient> bc = new Mock<GrpcClient>();
-            bc.Setup(e => e.PreSignUrl(It.IsAny<StoragePreSignUrlRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key does not exist")))
-                .Verifiable();
-
-            var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
-
-            try
-            {
-                file.GetDownloadUrl();
-                Assert.Fail();
-            }
-            catch (NitricException ne)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key does not exist\")",
-                    ne.Message);
-            }
-
-            bc.Verify(
-                t => t.PreSignUrl(It.IsAny<StoragePreSignUrlRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public async void TestGetDownloadUrlWithDefaultExpiryAsync()
+        public async void TestGetDownloadUrlWithDefaultExpiry()
         {
             var request = new StoragePreSignUrlRequest
             {
@@ -985,7 +530,7 @@ namespace Nitric.Sdk.Test.Storage
 
             var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
-            var url = await file.GetDownloadUrlAsync();
+            var url = await file.GetDownloadUrl();
 
             bc.Verify(
                 t => t.PreSignUrlAsync(request, null, null,
@@ -995,7 +540,7 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestGetDownloadUrlWithSpecificExpiryAsync()
+        public async void TestGetDownloadUrlWithSpecificExpiry()
         {
             var request = new StoragePreSignUrlRequest
             {
@@ -1013,7 +558,7 @@ namespace Nitric.Sdk.Test.Storage
 
             var file = new Sdk.Storage.Bucket("test-bucket", bc.Object).File("test-file");
 
-            var url = await file.GetDownloadUrlAsync(300);
+            var url = await file.GetDownloadUrl(300);
 
             bc.Verify(
                 t => t.PreSignUrlAsync(request, null, null,
@@ -1023,8 +568,16 @@ namespace Nitric.Sdk.Test.Storage
         }
 
         [Fact]
-        public async void TestGetDownloadUrlNonExistingKeyAsync()
+        public async void TestGetDownloadUrlNonExistingKey()
         {
+            var request = new StoragePreSignUrlRequest
+            {
+                BucketName = "test-bucket",
+                Key = "test-file",
+                Operation = StoragePreSignUrlRequest.Types.Operation.Read,
+                Expiry = new Google.Protobuf.WellKnownTypes.Duration { Seconds = 600 },
+            };
+
             Mock<GrpcClient> bc = new Mock<GrpcClient>();
             bc.Setup(e => e.PreSignUrlAsync(It.IsAny<StoragePreSignUrlRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
@@ -1035,7 +588,7 @@ namespace Nitric.Sdk.Test.Storage
 
             try
             {
-                await file.GetDownloadUrlAsync();
+                await file.GetDownloadUrl();
                 Assert.Fail();
             }
             catch (NitricException ne)
@@ -1045,16 +598,16 @@ namespace Nitric.Sdk.Test.Storage
             }
 
             bc.Verify(
-                t => t.PreSignUrlAsync(It.IsAny<StoragePreSignUrlRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
+                t => t.PreSignUrlAsync(It.IsAny<StoragePreSignUrlRequest>(), null, null,
+                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
 
         [Fact]
         public void TestRegisterBlobEventWorkerOnWrite()
         {
-            Func<BlobEventContext, BlobEventContext> middleware = (ctx) =>
+            Func<BlobEventContext, Task<BlobEventContext>> middleware = async (ctx) =>
             {
-                return ctx;
+                return await Task.FromResult(ctx);
             };
 
             var bucket = new Sdk.Storage.Bucket("test-bucket");
@@ -1065,9 +618,9 @@ namespace Nitric.Sdk.Test.Storage
         [Fact]
         public void TestRegisterBlobEventWorkerOnDelete()
         {
-            Func<BlobEventContext, BlobEventContext> middleware = (ctx) =>
+            Func<BlobEventContext, Task<BlobEventContext>> middleware = async (ctx) =>
             {
-                return ctx;
+                return await Task.FromResult(ctx);
             };
 
             var bucket = new Sdk.Storage.Bucket("test-bucket");
@@ -1078,9 +631,9 @@ namespace Nitric.Sdk.Test.Storage
         [Fact]
         public void TestRegisterBlobEventWorkerOnWriteWithMultipleMiddleware()
         {
-            Middleware<BlobEventContext> middleware = (ctx, next) =>
+            Middleware<BlobEventContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var bucket = new Sdk.Storage.Bucket("test-bucket");
@@ -1091,9 +644,9 @@ namespace Nitric.Sdk.Test.Storage
         [Fact]
         public void TestRegisterBlobEventWorkerOnDeleteWithMultipleMiddleware()
         {
-            Middleware<BlobEventContext> middleware = (ctx, next) =>
+            Middleware<BlobEventContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var bucket = new Sdk.Storage.Bucket("test-bucket");

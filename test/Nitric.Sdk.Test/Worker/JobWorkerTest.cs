@@ -10,6 +10,7 @@ using Xunit;
 
 using GrpcClient = Nitric.Proto.Batch.v1.Job.JobClient;
 using Nitric.Sdk.Common;
+using System.Threading.Tasks;
 
 namespace Nitric.Sdk.Test.Worker
 {
@@ -25,9 +26,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestJobWorkerBuildWithMiddleware()
         {
-            Func<JobContext<TestSubmission>, JobContext<TestSubmission>> middleware = (ctx) =>
+            Func<JobContext<TestSubmission>, Task<JobContext<TestSubmission>>> middleware = async (ctx) =>
             {
-                return ctx;
+                return await Task.FromResult(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -43,9 +44,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestJobWorkerBuildWithMultipleMiddleware()
         {
-            Middleware<JobContext<TestSubmission>> middleware = (ctx, next) =>
+            Middleware<JobContext<TestSubmission>> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -61,9 +62,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestJobWorkerBuildWithNoMiddleware()
         {
-            Middleware<JobContext<TestSubmission>> middleware = (ctx, next) =>
+            Middleware<JobContext<TestSubmission>> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -139,7 +140,7 @@ namespace Nitric.Sdk.Test.Worker
         }
 
         [Fact]
-        public async void TestScheduleWorkerStartsWithErrors()
+        public async void TestJobWorkerStartsWithErrors()
         {
             var testSubmission = new TestSubmission
             {

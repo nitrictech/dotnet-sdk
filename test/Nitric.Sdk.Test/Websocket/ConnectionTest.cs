@@ -58,53 +58,8 @@ namespace Nitric.Sdk.Test.Websocket
             Assert.Equal("Connection[socketName=socket-name,connectionId=connection-id]", connection.ToString());
         }
 
-        //Testing Websocket Methods
         [Fact]
-        public void TestWebsocketSend()
-        {
-            var websocketSendRequest = new WebsocketSendRequest
-            {
-                SocketName = "socket-name",
-                ConnectionId = "connection-id",
-                Data = ByteString.CopyFromUtf8("websocket-data")
-            };
-            Mock<GrpcClient> wc = new Mock<GrpcClient>();
-            wc.Setup(e =>
-                    e.SendMessage(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Verifiable();
-
-            var connection = new Connection("connection-id", "socket-name", wc.Object);
-
-            connection.SendMessage("websocket-data");
-
-            wc.Verify(
-                t => t.SendMessage(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public void TestConnectionSendWithError()
-        {
-            var websocketSendRequest = new WebsocketSendRequest
-            {
-                SocketName = "socket-name",
-                ConnectionId = "connection-id",
-                Data = ByteString.CopyFromUtf8("websocket-data")
-            };
-            Mock<GrpcClient> wc = new Mock<GrpcClient>();
-            wc.Setup(e =>
-                    e.SendMessage(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(Status.DefaultCancelled, "succeeded in failing"));
-
-            var connection = new Connection("connection-id", "socket-name", wc.Object);
-
-            Assert.Throws<CancelledException>(() =>
-                connection.SendMessage("websocket-data")
-            );
-        }
-
-        [Fact]
-        public async void TestWebsocketSendAsync()
+        public async void TestWebsocketSend()
         {
             var websocketSendRequest = new WebsocketSendRequest
             {
@@ -120,7 +75,7 @@ namespace Nitric.Sdk.Test.Websocket
 
             var connection = new Connection("connection-id", "socket-name", wc.Object);
 
-            await connection.SendMessageAsync("websocket-data");
+            await connection.SendMessage("websocket-data");
 
             wc.Verify(
                 t => t.SendMessageAsync(websocketSendRequest, null, null, It.IsAny<System.Threading.CancellationToken>()),
@@ -128,7 +83,7 @@ namespace Nitric.Sdk.Test.Websocket
         }
 
         [Fact]
-        public void TestWebsocketSendWithErrorAsync()
+        public void TestWebsocketSendWithError()
         {
             var websocketSendRequest = new WebsocketSendRequest
             {
@@ -143,55 +98,13 @@ namespace Nitric.Sdk.Test.Websocket
 
             var connection = new Connection("connection-id", "socket-name", wc.Object);
 
-            Assert.ThrowsAsync<CancelledException>(() =>
-                connection.SendMessageAsync("websocket-data")
+            Assert.ThrowsAsync<CancelledException>(async () =>
+                await connection.SendMessage("websocket-data")
             );
         }
 
         [Fact]
-        public void TestWebsocketClose()
-        {
-            var websocketCloseRequest = new WebsocketCloseConnectionRequest
-            {
-                SocketName = "socket-name",
-                ConnectionId = "connection-id",
-            };
-            Mock<GrpcClient> wc = new Mock<GrpcClient>();
-            wc.Setup(e =>
-                    e.CloseConnection(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Verifiable();
-
-            var connection = new Connection("connection-id", "socket-name", wc.Object);
-
-            connection.CloseConnection();
-
-            wc.Verify(
-                t => t.CloseConnection(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public void TestWebsocketCloseWithError()
-        {
-            var websocketCloseRequest = new WebsocketCloseConnectionRequest
-            {
-                SocketName = "socket-name",
-                ConnectionId = "connection-id",
-            };
-            Mock<GrpcClient> wc = new Mock<GrpcClient>();
-            wc.Setup(e =>
-                    e.CloseConnection(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(Status.DefaultCancelled, "succeeded in failing"));
-
-            var connection = new Connection("connection-id", "socket-name", wc.Object);
-
-            Assert.Throws<CancelledException>(() =>
-                connection.CloseConnection()
-            );
-        }
-
-        [Fact]
-        public async void TestWebsocketCloseAsync()
+        public async void TestWebsocketClose()
         {
             var websocketCloseRequest = new WebsocketCloseConnectionRequest
             {
@@ -206,7 +119,7 @@ namespace Nitric.Sdk.Test.Websocket
 
             var connection = new Connection("connection-id", "socket-name", wc.Object);
 
-            await connection.CloseConnectionAsync();
+            await connection.CloseConnection();
 
             wc.Verify(
                 t => t.CloseConnectionAsync(websocketCloseRequest, null, null, It.IsAny<System.Threading.CancellationToken>()),
@@ -214,7 +127,7 @@ namespace Nitric.Sdk.Test.Websocket
         }
 
         [Fact]
-        public void TestWebsocketCloseWithErrorAsync()
+        public void TestWebsocketCloseWithError()
         {
             var websocketCloseRequest = new WebsocketCloseConnectionRequest
             {
@@ -228,9 +141,7 @@ namespace Nitric.Sdk.Test.Websocket
 
             var connection = new Connection("connection-id", "socket-name", wc.Object);
 
-            Assert.ThrowsAsync<CancelledException>(() =>
-                connection.CloseConnectionAsync()
-            );
+            Assert.ThrowsAsync<CancelledException>(connection.CloseConnection);
         }
     }
 }

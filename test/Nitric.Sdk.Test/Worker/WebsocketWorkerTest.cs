@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Grpc.Core;
 using Moq;
 using Nitric.Proto.Websockets.v1;
@@ -17,9 +18,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestWebsocketWorkerBuildWithMiddleware()
         {
-            Func<WebsocketContext, WebsocketContext> middleware = (ctx) =>
+            Func<WebsocketContext, Task<WebsocketContext>> middleware = async (ctx) =>
             {
-                return ctx;
+                return await Task.FromResult(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -35,9 +36,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestWebsocketWorkerBuildWithMultipleMiddleware()
         {
-            Middleware<WebsocketContext> middleware = (ctx, next) =>
+            Middleware<WebsocketContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -53,9 +54,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestWebsocketWorkerBuildWithNoMiddleware()
         {
-            Middleware<WebsocketContext> middleware = (ctx, next) =>
+            Middleware<WebsocketContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -72,11 +73,11 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public async void TestWebsocketWorkerStart()
         {
-            Middleware<WebsocketContext> middleware = (ctx, next) =>
+            Middleware<WebsocketContext> middleware = async (ctx, next) =>
             {
                 Assert.Equal("websocket-name", ctx.Req.SocketName);
                 Assert.Equal("connection-1234", ctx.Req.ConnectionId);
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest

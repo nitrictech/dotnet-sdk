@@ -47,7 +47,7 @@ namespace Nitric.Sdk.Topics
         /// </summary>
         /// <param name="message">The message to publish</param>
         /// <exception cref="NitricException"></exception>
-        public async void Publish(T message)
+        public async Task Publish(T message)
         {
             var structPayload = Struct.FromJsonSerializable(message);
 

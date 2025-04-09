@@ -51,7 +51,7 @@ namespace Nitric.Sdk.Websocket
         /// Send a message to the websocket.
         /// </summary>
         /// <param name="message">The message to be sent</param>
-        public async void SendMessage(string message)
+        public async Task SendMessage(string message)
         {
             var request = new WebsocketSendRequest
             {
@@ -72,7 +72,7 @@ namespace Nitric.Sdk.Websocket
         /// <summary>
         /// Close the connection to the websocket.
         /// </summary>
-        public async void CloseConnection()
+        public async Task CloseConnection()
         {
             var request = new WebsocketCloseConnectionRequest
             {

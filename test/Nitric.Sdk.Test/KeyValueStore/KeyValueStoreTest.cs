@@ -63,115 +63,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
         }
 
         [Fact]
-        public void TestSetToKeyValueStore()
-        {
-            var testProfile = new TestProfile
-            {
-                Name = "John Smith",
-                Age = 21,
-                Addresses = new List<string> { "123 address street" }
-            };
-
-            var payload = Sdk.Common.Struct.FromJsonSerializable(testProfile);
-
-            var request = new KvStoreSetValueRequest
-            {
-                Content = payload,
-                Ref = new ValueRef
-                {
-                    Key = "test-key",
-                    Store = "test-store"
-                }
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.SetValue(It.IsAny<KvStoreSetValueRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Returns(new KvStoreSetValueResponse())
-                .Verifiable();
-
-            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
-
-            kv.Set("test-key", testProfile);
-
-            gc.Verify(
-                t => t.SetValue(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestSetNullToKeyValueStore()
-        {
-            var request = new KvStoreSetValueRequest
-            {
-                Content = null,
-                Ref = new ValueRef
-                {
-                    Key = "test-key",
-                    Store = "test-store"
-                }
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.SetValue(It.IsAny<KvStoreSetValueRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Returns(new KvStoreSetValueResponse())
-                .Verifiable();
-
-            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
-
-            kv.Set("test-key", null);
-
-            gc.Verify(
-                t => t.SetValue(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestSetToKeyValueStoreWithError()
-        {
-            var testProfile = new TestProfile
-            {
-                Name = "John Smith",
-                Age = 21,
-                Addresses = new List<string> { "123 address street" }
-            };
-
-            var payload = Sdk.Common.Struct.FromJsonSerializable(testProfile);
-
-            var request = new KvStoreSetValueRequest
-            {
-                Content = payload,
-                Ref = new ValueRef
-                {
-                    Key = "test-key",
-                    Store = "test-store"
-                }
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.SetValue(It.IsAny<KvStoreSetValueRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
-                .Verifiable();
-
-            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
-
-            try
-            {
-                kv.Set("test-key", testProfile);
-                Assert.Fail();
-            }
-            catch (NitricException e)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key value store does not exist\")",
-                    e.Message);
-            }
-
-            gc.Verify(
-                t => t.SetValue(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestSetToKeyValueStoreAsync()
+        public async void TestSetToKeyValueStore()
         {
             var testProfile = new TestProfile
             {
@@ -202,14 +94,14 @@ namespace Nitric.Sdk.Test.KeyValueStore
 
             var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
-            await kv.SetAsync("test-key", testProfile);
+            await kv.Set("test-key", testProfile);
 
             gc.Verify(
                 t => t.SetValueAsync(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
-        public async void TestSetNullToKeyValueStoreAsync()
+        public async void TestSetNullToKeyValueStore()
         {
             var request = new KvStoreSetValueRequest
             {
@@ -231,14 +123,14 @@ namespace Nitric.Sdk.Test.KeyValueStore
 
             var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
-            await kv.SetAsync("test-key", null);
+            await kv.Set("test-key", null);
 
             gc.Verify(
                 t => t.SetValueAsync(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
-        public async void TestSetNullToKeyValueStoreAsyncWithError()
+        public async void TestSetNullToKeyValueStoreWithError()
         {
             var request = new KvStoreSetValueRequest
             {
@@ -260,7 +152,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
 
             try
             {
-                await kv.SetAsync("test-key", null);
+                await kv.Set("test-key", null);
                 Assert.Fail();
             }
             catch (NitricException e)
@@ -274,103 +166,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
         }
 
         [Fact]
-        public void TestGetToKeyValueStore()
-        {
-            var testProfile = new TestProfile
-            {
-                Name = "John Smith",
-                Age = 21,
-                Addresses = new List<string> { "123 address street" }
-            };
-
-            var payload = Sdk.Common.Struct.FromJsonSerializable(testProfile);
-
-            var request = new KvStoreGetValueRequest
-            {
-                Ref = new ValueRef
-                {
-                    Key = "test-key",
-                    Store = "test-store"
-                }
-            };
-
-            var resp = new KvStoreGetValueResponse
-            {
-                Value = new Value
-                {
-                    Content = payload,
-                    Ref = new ValueRef
-                    {
-                        Key = "test-key",
-                        Store = "test-store"
-                    }
-                }
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.GetValue(It.IsAny<KvStoreGetValueRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Returns(resp)
-                .Verifiable();
-
-            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
-
-            var profile = kv.Get("test-key");
-
-            Assert.Equal("John Smith", profile.Name);
-            Assert.Equal(21, profile.Age);
-            Assert.Equal("123 address street", profile.Addresses[0]);
-
-            gc.Verify(
-                t => t.GetValue(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestGetToKeyValueStoreWithError()
-        {
-            var testProfile = new TestProfile
-            {
-                Name = "John Smith",
-                Age = 21,
-                Addresses = new List<string> { "123 address street" }
-            };
-
-            var payload = Sdk.Common.Struct.FromJsonSerializable(testProfile);
-
-            var request = new KvStoreGetValueRequest
-            {
-                Ref = new ValueRef
-                {
-                    Key = "test-key",
-                    Store = "test-store"
-                }
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.GetValue(It.IsAny<KvStoreGetValueRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
-                .Verifiable();
-
-            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
-
-            try
-            {
-                kv.Get("test-key");
-                Assert.Fail();
-            }
-            catch (NitricException e)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key value store does not exist\")",
-                    e.Message);
-            }
-
-            gc.Verify(
-                t => t.GetValue(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestGetToKeyValueStoreAsync()
+        public async void TestGetToKeyValueStore()
         {
             var testProfile = new TestProfile
             {
@@ -411,7 +207,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
 
             var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
-            var profile = await kv.GetAsync("test-key");
+            var profile = await kv.Get("test-key");
 
             Assert.Equal("John Smith", profile.Name);
             Assert.Equal(21, profile.Age);
@@ -422,7 +218,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
         }
 
         [Fact]
-        public async void TestGetToKeyValueStoreAsyncWithError()
+        public async void TestGetToKeyValueStoreWithError()
         {
             var testProfile = new TestProfile
             {
@@ -452,7 +248,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
 
             try
             {
-                await kv.GetAsync("test-key");
+                await kv.Get("test-key");
                 Assert.Fail();
             }
             catch (NitricException e)
@@ -466,68 +262,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
         }
 
         [Fact]
-        public void TestDeleteKeyValuePair()
-        {
-            var request = new KvStoreDeleteKeyRequest
-            {
-                Ref = new ValueRef
-                {
-                    Key = "test-key",
-                    Store = "test-store"
-                }
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.DeleteKey(It.IsAny<KvStoreDeleteKeyRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Returns(new KvStoreDeleteKeyResponse())
-                .Verifiable();
-
-            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
-
-            kv.Delete("test-key");
-
-            gc.Verify(
-                t => t.DeleteKey(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestDeleteKeyValuePairWithError()
-        {
-            var request = new KvStoreDeleteKeyRequest
-            {
-                Ref = new ValueRef
-                {
-                    Key = "test-key",
-                    Store = "test-store"
-                }
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.DeleteKey(It.IsAny<KvStoreDeleteKeyRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified key value store does not exist")))
-                .Verifiable();
-
-            var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
-
-            try
-            {
-                kv.Delete("test-key");
-                Assert.Fail();
-            }
-            catch (NitricException e)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified key value store does not exist\")",
-                    e.Message);
-            }
-
-            gc.Verify(
-                t => t.DeleteKey(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestDeleteKeyValuePairAsync()
+        public async void TestDeleteKeyValuePair()
         {
             var request = new KvStoreDeleteKeyRequest
             {
@@ -548,14 +283,14 @@ namespace Nitric.Sdk.Test.KeyValueStore
 
             var kv = new KeyValueStore<TestProfile>("test-store", gc.Object);
 
-            await kv.DeleteAsync("test-key");
+            await kv.Delete("test-key");
 
             gc.Verify(
                 t => t.DeleteKeyAsync(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
-        public async void TestDeleteKeyValuePairAsyncWithError()
+        public async void TestDeleteKeyValuePairWithError()
         {
             var request = new KvStoreDeleteKeyRequest
             {
@@ -576,7 +311,7 @@ namespace Nitric.Sdk.Test.KeyValueStore
 
             try
             {
-                await kv.DeleteAsync("test-key");
+                await kv.Delete("test-key");
                 Assert.Fail();
             }
             catch (NitricException e)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Grpc.Core;
 using Moq;
 using Nitric.Proto.Schedules.v1;
@@ -17,9 +18,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestScheduleWorkerBuildWithMiddleware()
         {
-            Func<IntervalContext, IntervalContext> middleware = (ctx) =>
+            Func<IntervalContext, Task<IntervalContext>> middleware = async (ctx) =>
             {
-                return ctx;
+                return await Task.FromResult(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -36,9 +37,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestScheduleWorkerBuildWithMultipleMiddleware()
         {
-            Middleware<IntervalContext> middleware = (ctx, next) =>
+            Middleware<IntervalContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -55,9 +56,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestScheduleWorkerBuildWithNoMiddleware()
         {
-            Middleware<IntervalContext> middleware = (ctx, next) =>
+            Middleware<IntervalContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -75,10 +76,10 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public async void TestScheduleWorkerStart()
         {
-            Middleware<IntervalContext> middleware = (ctx, next) =>
+            Middleware<IntervalContext> middleware = async (ctx, next) =>
             {
                 Assert.Equal("schedule-name", ctx.Req.ScheduleName);
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest

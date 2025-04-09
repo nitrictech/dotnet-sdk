@@ -55,7 +55,7 @@ namespace Nitric.Sdk.Storage
         /// </summary>
         /// <param name="body">The contents to write.</param>
         /// <exception cref="NitricException"></exception>
-        public async void Write(byte[] body)
+        public async Task Write(byte[] body)
         {
             var request = new StorageWriteRequest
             {
@@ -78,7 +78,7 @@ namespace Nitric.Sdk.Storage
         /// </summary>
         /// <param name="body">The contents to write.</param>
         /// <exception cref="NitricException"></exception>
-        public async void Write(string body)
+        public async Task Write(string body)
         {
             var request = new StorageWriteRequest
             {

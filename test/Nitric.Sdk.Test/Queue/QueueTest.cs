@@ -20,7 +20,6 @@ using Grpc.Core;
 using Moq;
 using Nitric.Proto.Queues.v1;
 using GrpcClient = Nitric.Proto.Queues.v1.Queues.QueuesClient;
-using Nitric.Sdk.Queue;
 using Xunit;
 using System.Threading.Tasks;
 using Nitric.Sdk.Common;
@@ -63,7 +62,7 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
-        public async void TestEnqueueAsync()
+        public async void TestEnqueue()
         {
             Mock<GrpcClient> qc = new Mock<GrpcClient>();
             qc.Setup(e =>
@@ -73,7 +72,7 @@ namespace Nitric.Sdk.Test.Queue
 
             var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
-            await queue.EnqueueAsync(new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } });
+            await queue.Enqueue(new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } });
 
             qc.Verify(
                 t => t.EnqueueAsync(It.IsAny<QueueEnqueueRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
@@ -81,15 +80,15 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
-        public void TestEnqueueNullMessageAsync()
+        public void TestEnqueueNullMessage()
         {
             var queue = new Sdk.Queue.Queue<TestProfile>("test-queue");
 
-            Assert.ThrowsAsync<ArgumentNullException>(() => queue.EnqueueAsync(null));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await queue.Enqueue(null));
         }
 
         [Fact]
-        public async void TestEnqueueMultipleMessagesWithFailedMessagesAsync()
+        public async void TestEnqueueMultipleMessagesWithFailedMessages()
         {
             FailedEnqueueMessage failedMessage = new FailedEnqueueMessage();
             failedMessage.Details = "I am a failed message... I failed my message";
@@ -111,7 +110,7 @@ namespace Nitric.Sdk.Test.Queue
 
             var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
-            var failedMessagesResp = await queue.EnqueueAsync(new TestProfile { }, new TestProfile { });
+            var failedMessagesResp = await queue.Enqueue(new TestProfile { }, new TestProfile { });
 
             Assert.Equal("I am a failed message... I failed my message", failedMessagesResp[0].Details);
 
@@ -121,7 +120,7 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
-        public async void TestEnqueueMultipleMessagesWithNoFailedMessagesAsync()
+        public async void TestEnqueueMultipleMessagesWithNoFailedMessages()
         {
             Mock<GrpcClient> qc = new Mock<GrpcClient>();
             qc.Setup(e => e.EnqueueAsync(It.IsAny<QueueEnqueueRequest>(), null, null,
@@ -131,7 +130,7 @@ namespace Nitric.Sdk.Test.Queue
 
             var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
-            var failedMessages = await queue.EnqueueAsync(new TestProfile { }, new TestProfile { });
+            var failedMessages = await queue.Enqueue(new TestProfile { }, new TestProfile { });
 
             Assert.Empty(failedMessages);
 
@@ -141,7 +140,7 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
-        public async void TestEnqueueToNonExistentQueueAsync()
+        public async void TestEnqueueToNonExistentQueue()
         {
             Mock<GrpcClient> qc = new Mock<GrpcClient>();
             qc.Setup(e =>
@@ -153,7 +152,7 @@ namespace Nitric.Sdk.Test.Queue
 
             try
             {
-                await queue.EnqueueAsync(new TestProfile());
+                await queue.Enqueue(new TestProfile());
             }
             catch (NitricException ne)
             {
@@ -167,200 +166,24 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
-        public void TestEnqueue()
+        public async void TestDequeueMessages()
         {
-            Mock<GrpcClient> qc = new Mock<GrpcClient>();
-            qc.Setup(e =>
-                    e.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new QueueEnqueueResponse())
-                .Verifiable();
+            var payload = new Google.Protobuf.WellKnownTypes.Struct();
+            payload.Fields.Add("Name", Value.ForString("John Smith"));
+            payload.Fields.Add("Age", Value.ForNumber(30.0));
+            payload.Fields.Add("Addresses", Value.ForList(new[] { Value.ForString("123 street st") }));
 
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
-
-            queue.Enqueue(new TestProfile { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } });
-
-            qc.Verify(
-                t => t.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public void TestEnqueueToNonExistentQueue()
-        {
-            Mock<GrpcClient> qc = new Mock<GrpcClient>();
-            qc.Setup(e =>
-                    e.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
-                .Verifiable();
-
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
-
-            try
+            var messages = new List<DequeuedMessage>()
             {
-                queue.Enqueue(new TestProfile());
-            }
-            catch (NitricException ne)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified queue does not exist\")",
-                    ne.Message);
-            }
-
-            qc.Verify(
-                t => t.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public void TestEnqueueNullMessage()
-        {
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue");
-
-            Assert.Throws<ArgumentNullException>(() => queue.Enqueue(null));
-        }
-
-        [Fact]
-        public void TestEnqueueMultipleMessagesWithFailedMessages()
-        {
-            FailedEnqueueMessage failedMessage = new FailedEnqueueMessage();
-            failedMessage.Details = "I am a failed message... I failed my message";
-            failedMessage.Message = new QueueMessage();
-
-            List<FailedEnqueueMessage> failedMessages = new List<FailedEnqueueMessage>
-            {
-                failedMessage,
+                new DequeuedMessage
+                {
+                    Message = new QueueMessage
+                    {
+                        StructPayload = payload
+                    },
+                    LeaseId = "1"
+                }
             };
-
-            var queueBatchResponse = new QueueEnqueueResponse();
-            queueBatchResponse.FailedMessages.AddRange(failedMessages);
-
-            Mock<GrpcClient> qc = new Mock<GrpcClient>();
-            qc.Setup(e => e.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(queueBatchResponse)
-                .Verifiable();
-
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
-
-            var failedMessagesResp = queue.Enqueue(new TestProfile { }, new TestProfile { });
-
-            Assert.Equal("I am a failed message... I failed my message", failedMessagesResp[0].Details);
-
-            qc.Verify(
-                t => t.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestEnqueueMultipleMessagesWithNoFailedMessages()
-        {
-            Mock<GrpcClient> qc = new Mock<GrpcClient>();
-            qc.Setup(e => e.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new QueueEnqueueResponse())
-                .Verifiable();
-
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
-
-            var failedMessages = queue.Enqueue(new TestProfile { }, new TestProfile { });
-
-            Assert.Empty(failedMessages);
-
-            qc.Verify(
-                t => t.Enqueue(It.IsAny<QueueEnqueueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestDequeueMessages()
-        {
-            var messagePayload = Sdk.Common.Struct.FromJsonSerializable(new TestProfile { Name = "John Smith" });
-            var message = new DequeuedMessage
-            {
-                LeaseId = "1234",
-                Message = new QueueMessage { StructPayload = messagePayload },
-            };
-
-            var messages = new List<DequeuedMessage>() { message };
-
-            var queueReceieveResponse = new QueueDequeueResponse();
-            queueReceieveResponse.Messages.AddRange(messages);
-
-            Mock<GrpcClient> qc = new Mock<GrpcClient>();
-            qc.Setup(e => e.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(queueReceieveResponse)
-                .Verifiable();
-
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
-
-            var response = queue.Dequeue(3);
-
-            Assert.Equal("1234", response[0].LeaseId);
-            Assert.Equal("John Smith", response[0].Message.Name);
-
-            qc.Verify(
-                t => t.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestDequeueNoMessages()
-        {
-            Mock<GrpcClient> qc = new Mock<GrpcClient>();
-            qc.Setup(e => e.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(new QueueDequeueResponse())
-                .Verifiable();
-
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
-
-            var response = queue.Dequeue(3);
-
-            Assert.Empty(response);
-
-            qc.Verify(
-                t => t.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestDequeueToNonExistentQueue()
-        {
-            Mock<GrpcClient> qc = new Mock<GrpcClient>();
-            qc.Setup(e => e.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
-                .Verifiable();
-
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
-
-            try
-            {
-                queue.Dequeue(3);
-                Assert.Fail();
-            }
-            catch (NitricException e)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified queue does not exist\")",
-                    e.Message);
-            }
-
-            qc.Verify(
-                t => t.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestDequeueMessagesAsync()
-        {
-            var messagePayload = Sdk.Common.Struct.FromJsonSerializable(new TestProfile { Name = "John Smith" });
-            var message = new DequeuedMessage
-            {
-                LeaseId = "1234",
-                Message = new QueueMessage { StructPayload = messagePayload },
-            };
-
-            var messages = new List<DequeuedMessage>() { message };
 
             var queueReceieveResponse = new QueueDequeueResponse();
             queueReceieveResponse.Messages.AddRange(messages);
@@ -373,10 +196,11 @@ namespace Nitric.Sdk.Test.Queue
 
             var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
-            var response = await queue.DequeueAsync(3);
+            var response = await queue.Dequeue(3);
 
-            Assert.Equal("1234", response[0].LeaseId);
             Assert.Equal("John Smith", response[0].Message.Name);
+            Assert.Equal(30.0, response[0].Message.Age);
+            Assert.Equal("123 street st", response[0].Message.Addresses[0]);
 
             qc.Verify(
                 t => t.DequeueAsync(It.IsAny<QueueDequeueRequest>(), null, null,
@@ -384,7 +208,7 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
-        public async void TestDequeueNoMessagesAsync()
+        public async void TestDequeueNoMessages()
         {
             Mock<GrpcClient> qc = new Mock<GrpcClient>();
             qc.Setup(e => e.DequeueAsync(It.IsAny<QueueDequeueRequest>(), null, null,
@@ -394,7 +218,7 @@ namespace Nitric.Sdk.Test.Queue
 
             var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
-            var response = await queue.DequeueAsync(3);
+            var response = await queue.Dequeue(3);
 
             Assert.Empty(response);
 
@@ -404,7 +228,7 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
-        public async void TestDequeueToNonExistentQueueAsync()
+        public async void TestDequeueToNonExistentQueue()
         {
             Mock<GrpcClient> qc = new Mock<GrpcClient>();
             qc.Setup(e => e.DequeueAsync(It.IsAny<QueueDequeueRequest>(), null, null,
@@ -416,7 +240,7 @@ namespace Nitric.Sdk.Test.Queue
 
             try
             {
-                await queue.DequeueAsync(3);
+                await queue.Dequeue(3);
                 Assert.Fail();
             }
             catch (NitricException e)
@@ -431,52 +255,7 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
-        public void TestComplete()
-        {
-            var payload = new Google.Protobuf.WellKnownTypes.Struct();
-            payload.Fields.Add("Name", Value.ForString("John Smith"));
-            payload.Fields.Add("Age", Value.ForNumber(30.0));
-            payload.Fields.Add("Addresses", Value.ForList(new[] { Value.ForString("123 street st") }));
-
-            var messages = new List<DequeuedMessage>()
-            {
-                new DequeuedMessage
-                {
-                    Message = new QueueMessage
-                    {
-                        StructPayload = payload
-                    },
-                    LeaseId = "1"
-                }
-            };
-
-            var queueReceieveResponse = new QueueDequeueResponse();
-            queueReceieveResponse.Messages.AddRange(messages);
-
-            Mock<GrpcClient> qc = new Mock<GrpcClient>();
-            qc.Setup(e => e.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(queueReceieveResponse)
-                .Verifiable();
-
-            Mock<GrpcClient> qcr = new Mock<GrpcClient>();
-            qc.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Verifiable();
-
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
-
-            var response = queue.Dequeue(3);
-
-            response.ToList()[0].Complete();
-
-            qc.Verify(
-                t => t.Complete(It.IsAny<QueueCompleteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestCompleteAsync()
+        public async void TestComplete()
         {
             var payload = new Google.Protobuf.WellKnownTypes.Struct();
             payload.Fields.Add("Name", Value.ForString("John Smith"));
@@ -504,7 +283,6 @@ namespace Nitric.Sdk.Test.Queue
                 .Returns(new AsyncUnaryCall<QueueDequeueResponse>(Task.FromResult(queueReceieveResponse), null, null, null, null))
                 .Verifiable();
 
-            Mock<GrpcClient> qcr = new Mock<GrpcClient>();
             qc.Setup(e => e.CompleteAsync(It.IsAny<QueueCompleteRequest>(), null, null,
                     It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(new AsyncUnaryCall<QueueCompleteResponse>(Task.FromResult(new QueueCompleteResponse()), null, null, null, null))
@@ -512,9 +290,9 @@ namespace Nitric.Sdk.Test.Queue
 
             var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
-            var response = await queue.DequeueAsync(3);
+            var response = await queue.Dequeue(3);
 
-            await response.ToList()[0].CompleteAsync();
+            await response.ToList()[0].Complete();
 
             qc.Verify(
                 t => t.CompleteAsync(It.IsAny<QueueCompleteRequest>(), null, null,
@@ -522,62 +300,7 @@ namespace Nitric.Sdk.Test.Queue
         }
 
         [Fact]
-        public void TestCompleteToNonExistentQueue()
-        {
-            var payload = new Google.Protobuf.WellKnownTypes.Struct();
-            payload.Fields.Add("Name", Value.ForString("John Smith"));
-            payload.Fields.Add("Age", Value.ForNumber(30.0));
-            payload.Fields.Add("Addresses", Value.ForList(new[] { Value.ForString("123 street st") }));
-
-            var messages = new List<DequeuedMessage>()
-            {
-                new DequeuedMessage
-                {
-                    Message = new QueueMessage
-                    {
-                        StructPayload = payload
-                    },
-                    LeaseId = "1"
-                }
-            };
-
-            var queueReceieveResponse = new QueueDequeueResponse();
-            queueReceieveResponse.Messages.AddRange(messages);
-
-            Mock<GrpcClient> qc = new Mock<GrpcClient>();
-            qc.Setup(e => e.Dequeue(It.IsAny<QueueDequeueRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Returns(queueReceieveResponse)
-                .Verifiable();
-
-            Mock<GrpcClient> qcr = new Mock<GrpcClient>();
-            qc.Setup(e => e.Complete(It.IsAny<QueueCompleteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified queue does not exist")))
-                .Verifiable();
-
-            var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
-
-            var response = queue.Dequeue(3);
-
-            try
-            {
-                response.ToList()[0].Complete();
-                Assert.Fail();
-            }
-            catch (NitricException e)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified queue does not exist\")",
-                    e.Message);
-            }
-
-            qc.Verify(
-                t => t.Complete(It.IsAny<QueueCompleteRequest>(), null, null,
-                    It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestCompleteToNonExistentQueueAsync()
+        public async void TestCompleteToNonExistentQueue()
         {
             var payload = new Google.Protobuf.WellKnownTypes.Struct();
             payload.Fields.Add("Name", Value.ForString("John Smith"));
@@ -613,11 +336,11 @@ namespace Nitric.Sdk.Test.Queue
 
             var queue = new Sdk.Queue.Queue<TestProfile>("test-queue", qc.Object);
 
-            var response = await queue.DequeueAsync(3);
+            var response = await queue.Dequeue(3);
 
             try
             {
-                await response.ToList()[0].CompleteAsync();
+                await response.ToList()[0].Complete();
                 Assert.Fail();
             }
             catch (NitricException e)

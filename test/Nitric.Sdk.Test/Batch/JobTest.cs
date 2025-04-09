@@ -49,108 +49,7 @@ namespace Nitric.Sdk.Test.Job
         }
 
         [Fact]
-        public void TestSubmitJob()
-        {
-            var testProfile = new TestSubmission
-            {
-                Id = 1234,
-                Message = "This seems like a good test string?",
-                Tags = new List<string> { "message", "test" }
-            };
-
-            var payload = Sdk.Common.Struct.FromJsonSerializable(testProfile);
-
-            var request = new JobSubmitRequest
-            {
-                JobName = "job-name",
-                Data = new JobData
-                {
-                    Struct = payload
-                }
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.SubmitJob(It.IsAny<JobSubmitRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Returns(new JobSubmitResponse())
-                .Verifiable();
-
-            var kv = new Sdk.Job.Job<TestSubmission>("job-name", gc.Object);
-
-            kv.Submit(testProfile);
-
-            gc.Verify(
-                t => t.SubmitJob(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestSubmitJobWithNullPayload()
-        {
-            var request = new JobSubmitRequest
-            {
-                JobName = "job-name",
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.SubmitJob(It.IsAny<JobSubmitRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Returns(new JobSubmitResponse())
-                .Verifiable();
-
-            var kv = new Sdk.Job.Job<TestSubmission>("job-name", gc.Object);
-
-            kv.Submit(null);
-
-            gc.Verify(
-                t => t.SubmitJob(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestSubmitJobWithError()
-        {
-            var testSubmission = new TestSubmission
-            {
-                Id = 1234,
-                Message = "This seems like a good test string?",
-                Tags = new List<string> { "message", "test" }
-            };
-
-            var payload = Sdk.Common.Struct.FromJsonSerializable(testSubmission);
-
-            var request = new JobSubmitRequest
-            {
-                JobName = "job-name",
-                Data = new JobData
-                {
-                    Struct = payload
-                }
-            };
-
-            Mock<GrpcClient> gc = new Mock<GrpcClient>();
-            gc.Setup(e =>
-                e.SubmitJob(It.IsAny<JobSubmitRequest>(), null, null, It.IsAny<CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified job does not exist")))
-                .Verifiable();
-
-            var job = new Sdk.Job.Job<TestSubmission>("job-name", gc.Object);
-
-            try
-            {
-                job.Submit(testSubmission);
-                Assert.Fail();
-            }
-            catch (RpcException e)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified job does not exist\")",
-                    e.Message);
-            }
-
-            gc.Verify(
-                t => t.SubmitJob(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async Task TestSubmitJobAsync()
+        public async Task TestSubmitJob()
         {
             var testSubmission = new TestSubmission
             {
@@ -178,14 +77,14 @@ namespace Nitric.Sdk.Test.Job
 
             var job = new Sdk.Job.Job<TestSubmission>("job-name", gc.Object);
 
-            await job.SubmitAsync(testSubmission);
+            await job.Submit(testSubmission);
 
             gc.Verify(
                 t => t.SubmitJobAsync(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
-        public async Task TestSubmitJobAsyncWithNullPayload()
+        public async Task TestSubmitJobWithNullPayload()
         {
             var request = new JobSubmitRequest
             {
@@ -200,14 +99,14 @@ namespace Nitric.Sdk.Test.Job
 
             var kv = new Sdk.Job.Job<TestSubmission>("job-name", gc.Object);
 
-            await kv.SubmitAsync(null);
+            await kv.Submit(null);
 
             gc.Verify(
                 t => t.SubmitJobAsync(request, null, null, It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
-        public async Task TestSubmitJobAsyncWithError()
+        public async Task TestSubmitJobWithError()
         {
             var testSubmission = new TestSubmission
             {
@@ -237,7 +136,7 @@ namespace Nitric.Sdk.Test.Job
 
             try
             {
-                await job.SubmitAsync(testSubmission);
+                await job.Submit(testSubmission);
                 Assert.Fail();
             }
             catch (RpcException e)

@@ -47,7 +47,7 @@ namespace Nitric.Sdk.Job
         /// Submit a job to the batch service asynchronously
         /// </summary>
         /// <param name="data">Data to submit to the job</param>
-        public async void Submit(T data)
+        public async Task Submit(T data)
         {
             var request = new JobSubmitRequest
             {

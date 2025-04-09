@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Grpc.Core;
 using Moq;
 using Nitric.Proto.Storage.v1;
@@ -18,9 +19,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestFileEventWorkerBuildWithMiddleware()
         {
-            Func<FileEventContext, FileEventContext> middleware = (ctx) =>
+            Func<FileEventContext, Task<FileEventContext>> middleware = async (ctx) =>
             {
-                return ctx;
+                return await Task.FromResult(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -39,9 +40,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestFileEventWorkerBuildWithMultipleMiddleware()
         {
-            Middleware<FileEventContext> middleware = (ctx, next) =>
+            Middleware<FileEventContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -60,9 +61,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestFileEventWorkerBuildWithNoMiddleware()
         {
-            Middleware<FileEventContext> middleware = (ctx, next) =>
+            Middleware<FileEventContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -82,11 +83,11 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public async void TestFileEventWorkerStartCreated()
         {
-            Middleware<FileEventContext> middleware = (ctx, next) =>
+            Middleware<FileEventContext> middleware = async (ctx, next) =>
             {
                 Assert.Equal("test-file", ctx.Req.File.Name);
                 Assert.Equal(Service.BlobEventType.Write, ctx.Req.NotificationType);
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -127,11 +128,11 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public async void TestFileEventWorkerStartDeleted()
         {
-            Middleware<FileEventContext> middleware = (ctx, next) =>
+            Middleware<FileEventContext> middleware = async (ctx, next) =>
             {
                 Assert.Equal("test-file", ctx.Req.File.Name);
                 Assert.Equal(Service.BlobEventType.Delete, ctx.Req.NotificationType);
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest

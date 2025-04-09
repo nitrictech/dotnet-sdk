@@ -47,7 +47,7 @@ namespace Nitric.Sdk.Queue
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NitricException"></exception>
-        public async void Complete()
+        public async Task Complete()
         {
             var request = new QueueCompleteRequest
             {

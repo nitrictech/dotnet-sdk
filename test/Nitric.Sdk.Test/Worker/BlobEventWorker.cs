@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Grpc.Core;
 using Moq;
 using Nitric.Proto.Storage.v1;
@@ -17,9 +18,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestBlobEventWorkerBuildWithMiddleware()
         {
-            Func<BlobEventContext, BlobEventContext> middleware = (ctx) =>
+            Func<BlobEventContext, Task<BlobEventContext>> middleware = async (ctx) =>
             {
-                return ctx;
+                return await Task.FromResult(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -36,9 +37,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestBlobEventWorkerBuildWithMultipleMiddleware()
         {
-            Middleware<BlobEventContext> middleware = (ctx, next) =>
+            Middleware<BlobEventContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -55,9 +56,9 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public void TestBlobEventWorkerBuildWithNoMiddleware()
         {
-            Middleware<BlobEventContext> middleware = (ctx, next) =>
+            Middleware<BlobEventContext> middleware = async (ctx, next) =>
             {
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -75,11 +76,11 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public async void TestBlobEventWorkerStartCreated()
         {
-            Middleware<BlobEventContext> middleware = (ctx, next) =>
+            Middleware<BlobEventContext> middleware = async (ctx, next) =>
             {
                 Assert.Equal("test-file", ctx.Req.Key);
                 Assert.Equal(Service.BlobEventType.Write, ctx.Req.NotificationType);
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest
@@ -118,11 +119,11 @@ namespace Nitric.Sdk.Test.Worker
         [Fact]
         public async void TestBlobEventWorkerStartDeleted()
         {
-            Middleware<BlobEventContext> middleware = (ctx, next) =>
+            Middleware<BlobEventContext> middleware = async (ctx, next) =>
             {
                 Assert.Equal("test-file", ctx.Req.Key);
                 Assert.Equal(Service.BlobEventType.Delete, ctx.Req.NotificationType);
-                return next(ctx);
+                return await next(ctx);
             };
 
             var registration = new RegistrationRequest

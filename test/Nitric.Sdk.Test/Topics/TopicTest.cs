@@ -62,51 +62,7 @@ namespace Nitric.Sdk.Test.Event
         }
 
         [Fact]
-        public void TestPublish()
-        {
-            Mock<GrpcClient> ec = new Mock<GrpcClient>();
-
-            ec.Setup(e => e.Publish(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Verifiable();
-
-            var topic = new Topic<TestProfile>("test-topic", ec.Object);
-
-            var profile = new TestProfile
-            { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
-
-            topic.Publish(profile);
-
-            ec.Verify(t => t.Publish(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public void TestPublishToNonExistentTopic()
-        {
-            Mock<GrpcClient> ec = new Mock<GrpcClient>();
-
-            ec.Setup(e => e.Publish(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()))
-                .Throws(new RpcException(new Status(StatusCode.NotFound, "The specified topic does not exist")))
-                .Verifiable();
-
-            var topic = new Topic<TestProfile>("test-topic", ec.Object);
-
-            var profile = new TestProfile
-            { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
-
-            try
-            {
-                topic.Publish(profile);
-            }
-            catch (NitricException ne)
-            {
-                Assert.Equal("Status(StatusCode=\"NotFound\", Detail=\"The specified topic does not exist\")", ne.Message);
-            }
-
-            ec.Verify(t => t.Publish(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
-        }
-
-        [Fact]
-        public async void TestPublishAsync()
+        public async void TestPublish()
         {
             Mock<GrpcClient> ec = new Mock<GrpcClient>();
 
@@ -119,13 +75,13 @@ namespace Nitric.Sdk.Test.Event
             var profile = new TestProfile
             { Name = "John Smith", Age = 30, Addresses = new List<string> { "123 street st" } };
 
-            await topic.PublishAsync(profile);
+            await topic.Publish(profile);
 
             ec.Verify(t => t.PublishAsync(It.IsAny<TopicPublishRequest>(), null, null, It.IsAny<System.Threading.CancellationToken>()), Times.Once);
         }
 
         [Fact]
-        public async void TestPublishAsyncToNonExistentTopic()
+        public async void TestPublishToNonExistentTopic()
         {
             Mock<GrpcClient> ec = new Mock<GrpcClient>();
 
@@ -140,7 +96,7 @@ namespace Nitric.Sdk.Test.Event
 
             try
             {
-                await topic.PublishAsync(profile);
+                await topic.Publish(profile);
             }
             catch (NitricException ne)
             {
